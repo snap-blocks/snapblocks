@@ -292,7 +292,14 @@ class BlockView {
     if (this.isRing) {
       const child = this.children[0]
       // We use isStack for InputView; isBlock for BlockView; isScript for ScriptView.
-      if (child && (child.isStack || child.isBlock || child.isScript || child.isRound || child.isBoolean)) {
+      if (
+        child &&
+        (child.isStack ||
+          child.isBlock ||
+          child.isScript ||
+          child.isRound ||
+          child.isBoolean)
+      ) {
         const shape = child.shape
         return SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
           class: `sb-${this.info.category} sb-bevel`,

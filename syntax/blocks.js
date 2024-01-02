@@ -32,7 +32,7 @@ const overrideShapes = [
 ]
 
 const aliasShapes = {
-  predicate: "boolean"
+  predicate: "boolean",
 }
 
 // languages that should be displayed right to left
