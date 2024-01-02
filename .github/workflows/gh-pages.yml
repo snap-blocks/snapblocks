@@ -21,6 +21,13 @@ jobs:
     
     - name: Build
       run: npm run build
+
+    - name: Setup files
+      run: mkdir pages &&
+           cp index.html pages/ &&
+           cp index.css pages/ &&
+           cp -r build/ pages/ &&
+           rm pages/build/.noignore
     
     - name: Check folders
       run: ls
@@ -29,5 +36,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_TOKEN }}
-        publish_dir: ./
+        publish_dir: ./pages
         exclude_assets: ''
