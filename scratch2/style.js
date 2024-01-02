@@ -155,15 +155,12 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("polygon", {
-          points:
-            "0.483,0.4725 " +
-            "16.585,9.2925 " +
-            "0.483,18.585 ",
+          points: "0.483,0.4725 " + "16.585,9.2925 " + "0.483,18.585 ",
           fill: "black",
         }),
         {
           id: "play",
-        }
+        },
       ),
     ]
   }
