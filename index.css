@@ -155,13 +155,16 @@ button:active, button.pressed, .button:active, .button.pressed {
 
 /* editor */
 
+main {
+  display: grid;
+}
+
 #lang-status {
   font-size: 0.6rem;
   line-height: 1em;
 }
 
 #editor {
-  position: relative;
   overflow: hidden;
   margin: 1em 0;
   border: 1px solid #bbb;
@@ -194,7 +197,6 @@ button:active, button.pressed, .button:active, .button.pressed {
 }
 
 #preview {
-  position: relative;
 }
 
 .export-link {
@@ -208,7 +210,11 @@ button:active, button.pressed, .button:active, .button.pressed {
 @media screen and (min-width: 62em) {
   body {
     padding: 1em 2em;
-    max-width: none;
+  }
+
+  main {
+    grid-template-columns: auto auto;
+    justify-content: space-around;
   }
 
   h1 {
@@ -216,20 +222,13 @@ button:active, button.pressed, .button:active, .button.pressed {
   }
   h1 span {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 45%;
     margin-left: 2rem;
   }
 
   #preview, #side {
-    position: absolute;
-    bottom: 2em; left: 2em; right: 2em;
   }
 
   #editor {
-    position: absolute;
-    top: 3.25em; bottom: 0; left: 2em; right: 0;
     margin: 0;
     height: 30em;
   }
@@ -241,8 +240,6 @@ button:active, button.pressed, .button:active, .button.pressed {
   }
 
   #preview {
-    top: 8em;
-    right: 55%;
   }
 
   .export-link {
@@ -253,6 +250,10 @@ button:active, button.pressed, .button:active, .button.pressed {
 }
 
 @media screen and (max-width: 32em) {
+  main {
+    grid-template-columns: auto;
+  }
+
   h1 span {
     display: block;
     margin: 1.5rem 0 1rem;
