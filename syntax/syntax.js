@@ -445,20 +445,26 @@ function parseLines(code, languages) {
         first.value === ""
       ) {
         block.children[0] = new Input(
-          first.isCommand ? "stack" :
-          first.isBoolean ? "boolean" :
-          first.isRound ? "reporter" :
-          "stack",
+          first.isCommand
+            ? "stack"
+            : first.isBoolean
+            ? "boolean"
+            : first.isRound
+            ? "reporter"
+            : "stack",
         )
       } else if (
         (first && first.isScript && first.isEmpty) ||
         (first && first.isBlock && !first.children.length)
       ) {
         block.children[0] = new Input(
-          first.isCommand ? "stack" :
-          first.isBoolean ? "boolean" :
-          first.isRound ? "reporter" :
-          "stack",
+          first.isCommand
+            ? "stack"
+            : first.isBoolean
+            ? "boolean"
+            : first.isRound
+            ? "reporter"
+            : "stack",
         )
       }
     }
