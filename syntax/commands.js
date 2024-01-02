@@ -1208,7 +1208,7 @@ export default [
     spec: "if %1",
     inputs: ["%b"],
     shape: "c-block",
-    category: "obsolete",
+    category: "control",
   },
   {
     selector: "doForeverIf",
