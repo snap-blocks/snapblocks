@@ -1,0 +1,19 @@
+// green
+(length of [world])
+(length of (var))
+(length of (4))
+
+([sqrt v] of (9))
+([sqrt v] of [4])
+([sqrt v] of (var))
+
+([e^ v] of (9))
+([e ^ v] of (9))
+
+// blue
+([x position v] of [Sprite1 v])
+([x position v] of (var))
+
+// red
+(length of [list v])
+

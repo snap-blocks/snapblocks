@@ -1,0 +1,22 @@
+{
+  "exclude": "node_modules/**",
+  "plugins": [
+    "@babel/plugin-transform-object-assign",
+    "@babel/plugin-syntax-import-assertions"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "modules": false
+      }
+    ]
+  ],
+  "assumptions": {
+    "constantSuper": true,
+    "ignoreToPrimitiveHint": true,
+    "noClassCalls": true,
+    "noDocumentAll": true,
+    "noNewArrows": true,
+    "objectRestNoSymbols": true
+  }
+}
