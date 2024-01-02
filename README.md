@@ -1,8 +1,18 @@
-Make pictures of Scratch blocks from text.
+Make pictures of Snap<i>!</i> blocks from text.
 
 [![Screenshot](https://scratchblocks.github.io/screenshot.png)](https://scratchblocks.github.io/#when%20flag%20clicked%0Aclear%0Aforever%0Apen%20down%0Aif%20%3C%3Cmouse%20down%3F%3E%20and%20%3Ctouching%20%5Bmouse-pointer%20v%5D%3F%3E%3E%20then%0Aswitch%20costume%20to%20%5Bbutton%20v%5D%0Aelse%0Aadd%20(x%20position)%20to%20%5Blist%20v%5D%0Aend%0Amove%20(foo)%20steps%0Aturn%20ccw%20(9)%20degrees)
 
-**[Try it out!](https://scratchblocks.github.io/)**
+**[Try it out!](https://ego-lay-atman-bay.github.io/snapblocks)**
+
+---
+
+**snapblocks** is a fork of **scratchblocks** which aims to be more catered towards Snap<i>!</i>. These changes include, adding Snap<i>!</i> blocks, inputs, icons, and eventually a way to convert to Snap<i>!</i> xml.
+
+Since Snap<i>!</i> is more advanced than scratch, scratchblocks has to be modified to add support for Snap<i>!</i> exclusive features. Scratchblocks does already have a bit of Snap<i>!</i> support, with the grey rings and `@list` icon, but there are still many features in Snap<i>!</i> that require modification. These include, multiline blocks / inputs, more input types (which can be represented by icons), and just generally a ton of icons.
+
+The define block also has to be changed, specifically because Snap<i>!</i> does not have the same representation as Scratch. Most notably, Snap<i>!</i> uses a regular control hat block with the colored block in the hat block. Ok, the word "define" isn't even used in the custom block definition, it's just the block. Another thing is, + is used between words, but there is an option to turn that off, so I don't see this as a necessity. We also need to remove the define custom formatting, because, as far as I can tell, there's no way to remove the block outline (in regular scratchblocks anyway). This absolutely needs to be fixed, because there's a Snap<i>!</i> block named "define ((block)) [] (() :: grey ring)", which cannot be replicated correctly in scratchblocks without modification.
+
+Oh yeah, I also fixed the grey ring rendering because tjvr is not doing anything about it.
 
 ---
 
