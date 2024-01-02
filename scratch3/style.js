@@ -53,12 +53,12 @@ export default class Style {
       ),
 
       SVG.el("path", {
-        d: "M0 0L4 4L0 8Z",
+        d: "M 0 2 L 7 8 L 0 14 Z",
         fill: "#111",
         id: "sb3-addInput",
       }),
       SVG.el("path", {
-        d: "M4 0L4 8L0 4Z",
+        d: "M 7 2 L 7 14 L 0 8 Z",
         fill: "#111",
         id: "sb3-delInput",
       }),
@@ -97,6 +97,18 @@ export default class Style {
         {
           id: "sb3-list",
         },
+      ),
+      SVG.setProps(
+        SVG.el("polygon", {
+          points:
+            "0.483,0.4725 " +
+            "16.585,9.2925 " +
+            "0.483,18.585 ",
+          fill: "black",
+        }),
+        {
+          id: "sb3-play",
+        }
       ),
 
       SVG.el("image", {

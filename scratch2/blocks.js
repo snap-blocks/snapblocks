@@ -112,9 +112,10 @@ class IconView {
       turnLeft: { width: 15, height: 12, dy: +1 },
       turnRight: { width: 15, height: 12, dy: +1 },
       loopArrow: { width: 14, height: 11 },
-      addInput: { width: 4, height: 8 },
-      delInput: { width: 4, height: 8 },
+      addInput: { width: 8, height: 16 },
+      delInput: { width: 8, height: 16 },
       list: { width: 12, height: 14 },
+      play: { width: 20, height: 20 },
     }
   }
 }

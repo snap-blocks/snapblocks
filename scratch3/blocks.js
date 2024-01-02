@@ -106,9 +106,11 @@ export class IconView {
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
       loopArrow: { width: 24, height: 24 },
-      addInput: { width: 4, height: 8 },
-      delInput: { width: 4, height: 8 },
+      addInput: { width: 8, height: 16 },
+      delInput: { width: 8, height: 16 },
       list: { width: 15, height: 18 },
+      play: { width: 20, height: 20 },
+
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
       videoBlock: { width: 40, height: 40, dy: 10 },
