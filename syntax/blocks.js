@@ -31,6 +31,10 @@ const overrideShapes = [
   "cat",
 ]
 
+const aliasShapes = {
+  predicate: "boolean"
+}
+
 // languages that should be displayed right to left
 export const rtlLanguages = ["ar", "ckb", "fa", "he"]
 
@@ -442,6 +446,8 @@ export function applyOverrides(info, overrides) {
       info.categoryIsDefault = false
     } else if (overrideShapes.includes(name)) {
       info.shape = name
+    } else if (aliasShapes[name]) {
+      info.shape = aliasShapes[name]
     } else if (name === "loop") {
       info.hasLoopArrow = true
     } else if (name === "+" || name === "-") {
