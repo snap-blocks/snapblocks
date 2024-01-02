@@ -444,12 +444,22 @@ function parseLines(code, languages) {
         first.shape === "number" &&
         first.value === ""
       ) {
-        block.children[0] = new Input("reporter")
+        block.children[0] = new Input(
+          first.isCommand ? "stack" :
+          first.isBoolean ? "boolean" :
+          first.isRound ? "reporter" :
+          "stack",
+        )
       } else if (
         (first && first.isScript && first.isEmpty) ||
         (first && first.isBlock && !first.children.length)
       ) {
-        block.children[0] = new Input("stack")
+        block.children[0] = new Input(
+          first.isCommand ? "stack" :
+          first.isBoolean ? "boolean" :
+          first.isRound ? "reporter" :
+          "stack",
+        )
       }
     }
 

@@ -78,7 +78,7 @@ export class Input {
     this.value = value
     this.menu = menu || null
 
-    this.isRound = shape === "number" || shape === "number-dropdown"
+    this.isRound = shape === "number" || shape === "number-dropdown" || shape === "reporter"
     this.isBoolean = shape === "boolean"
     this.isStack = shape === "stack"
     this.isInset =
