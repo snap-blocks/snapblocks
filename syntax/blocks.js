@@ -332,6 +332,16 @@ disambig("DATA_LENGTHOFLIST", "OPERATORS_LENGTH", (children, _lang) => {
   return last.shape === "dropdown"
 })
 
+disambig("makeymakey.whenKeyPressed", "EVENT_WHENKEYPRESSED", (children, _lang) => {
+  // List block if dropdown, otherwise operators
+  const first = children[1]
+  console.log('when key pressed', children)
+  if (!first.isInput) {
+    return
+  }
+  return first.shape === "number-dropdown"
+})
+
 disambig("DATA_LISTCONTAINSITEM", "OPERATORS_CONTAINS", (children, _lang) => {
   // List block if dropdown, otherwise operators
   const first = children[0]
