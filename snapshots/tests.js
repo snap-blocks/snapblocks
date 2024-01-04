@@ -776,7 +776,8 @@ set voice to [alto v]
 (language)
 
 // Makey Makey
-when [left up right v] pressed in order
+when (left up right v) pressed in order
+when (space v) key pressed
 
 // micro:bit
 when [A v] button pressed
