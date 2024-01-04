@@ -1183,7 +1183,7 @@ export default [
     category: "control",
   },
   {
-    id: "CONTROL_ELSE_IF",
+    selector: "elseIf",
     spec: "else if %1",
     inputs: ["%b"],
     shape: "celse",
