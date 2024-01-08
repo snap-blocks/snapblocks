@@ -249,13 +249,19 @@
           style: "scratch2",
           scale: 1
         });
+        var docViewSnap = scratchblocks.newView(doc, {
+          style: "snap",
+          scale: 1
+        });
         var svg3HighContrast = docView3HighContrast.render();
         var svg3 = docView3.render();
         var svg2 = docView2.render();
+        var svgSnap = docViewSnap.render();
         preview.innerHTML = "";
         preview.appendChild(svg3HighContrast);
         preview.appendChild(svg3);
         preview.appendChild(svg2);
+        preview.appendChild(svgSnap);
         svg3HighContrast.classList.add("scratch3");
         svg3.classList.add("scratch3")
         // Need to add manually if calling View#render (folks, this is why you shouldn't use private API!)
@@ -268,6 +274,8 @@
               return docView3HighContrast;
             case "2":
               return docView2;
+            case "snap":
+              return docViewSnap
             default:
               return docView3;
           }
@@ -301,6 +309,10 @@
             exportDropdown.appendChild(Object.assign(document.createElement("option"), {
               label: "2.0",
               value: "2",
+            }));
+            exportDropdown.appendChild(Object.assign(document.createElement("option"), {
+              label: "Snap",
+              value: "snap",
             }));
             exportDropdown.className = 'export-link';
           }
