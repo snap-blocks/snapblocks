@@ -98,12 +98,12 @@ export default `
 }
 
 .snap-comment {
-  fill: #ffffa5;
+  fill: rgb(255 255 180);
   stroke: #d0d1d2;
   stroke-width: 1;
 }
 .snap-comment-line {
-  fill: #ffff80;
+  fill: rgb(255 255 180);
 }
 .snap-comment-label {
   font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
