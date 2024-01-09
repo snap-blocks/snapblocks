@@ -8,6 +8,15 @@ export default `
   word-spacing: +1px;
 }
 
+.snap-label-shadow {
+  font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
+  font-weight: bold;
+  fill: #000;
+  font-size: 10px;
+  word-spacing: +1px;
+  opacity: 0.4;
+}
+
 .snap-obsolete {
   fill: rgb(200 0 20);
 }
@@ -55,11 +64,11 @@ export default `
 }
 
 .snap-bevel {
-  filter: url(#bevelFilter);
+  filter: url(#snapBevelFilter);
 }
 
 .snap-input {
-  filter: url(#inputBevelFilter);
+  filter: url(#snapInputBevelFilter);
 }
 .snap-input-number,
 .snap-input-string,

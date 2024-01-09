@@ -49,9 +49,24 @@ export class LabelView {
   measure() {
     const value = this.value
     const cls = `snap-${this.cls}`
-    this.el = SVG.text(0, 10, value, {
-      class: `snap-label ${cls}`,
-    })
+
+    let group = [
+      SVG.text(0, 10, value, {
+        class: `snap-label ${cls}`,
+      })
+    ]
+
+    if (this.cls === '') {
+      group.splice(
+        0,
+        0,
+        SVG.text(-0.5, 10 - 0.5, value, {
+          class: `snap-label-shadow ${cls}`,
+        })
+      )
+    }
+
+    this.el = SVG.group(group)
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -707,8 +722,8 @@ class DocumentView {
     const svg = SVG.newSVG(width, height, this.scale)
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
-        bevelFilter("bevelFilter", false),
-        bevelFilter("inputBevelFilter", true),
+        bevelFilter("snapBevelFilter", false),
+        bevelFilter("snapInputBevelFilter", true),
         darkFilter("inputDarkFilter"),
         ...makeIcons(),
       ])),
