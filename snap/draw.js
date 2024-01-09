@@ -207,14 +207,14 @@ export default class SVG {
   }
 
   static getTop(w) {
-    return `M 0 3
-      L 3 0
+    return `M 0 5
+      C 0 2 2 0 5 0
       L 13 0
       L 16 3
       L 24 3
       L 27 0
-      L ${w - 3} 0
-      L ${w} 3`
+      L ${w - 5} 0
+      C ${w - 2} 0 ${w} 2 ${w} 5`
   }
 
   static getRingTop(w) {
@@ -232,7 +232,7 @@ export default class SVG {
     if (typeof inset === "undefined") {
       inset = 0
     }
-    let arr = ["L", w, y - 3, "L", w - 3, y]
+    let arr = ["L", w, y - 5, "C", w, y - 2, w - 2, y, w - 5, y]
     if (hasNotch) {
       arr = arr.concat([
         "L",
@@ -252,8 +252,17 @@ export default class SVG {
     if (inset > 0) {
       arr = arr.concat(["L", inset + 2, y, "L", inset, y + 2])
     } else {
-      arr = arr.concat(["L", inset + 3, y, "L", 0, y - 3])
+      arr = arr.concat(["L", inset + 5, y,])
     }
+    arr = arr.concat([
+      "C",
+      inset + 2,
+      y,
+      inset,
+      y - 2,
+      inset,
+      y - 5,
+    ])
     return arr.join(" ")
   }
 
