@@ -114,7 +114,7 @@ class IconView {
   }
 
   draw() {
-    return SVG.symbol(`#${this.name}`, {
+    return SVG.symbol(`#snap-${this.name}`, {
       width: this.width,
       height: this.height,
     })
@@ -124,8 +124,8 @@ class IconView {
     return {
       greenFlag: { width: 20, height: 21, dy: -2 },
       stopSign: { width: 20, height: 20 },
-      turnLeft: { width: 15, height: 12, dy: +1 },
-      turnRight: { width: 15, height: 12, dy: +1 },
+      turnLeft: { width: 10, height: 12, dy: +1 },
+      turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 14, height: 11 },
       addInput: { width: 8, height: 16 },
       delInput: { width: 8, height: 16 },

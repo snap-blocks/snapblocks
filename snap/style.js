@@ -12,33 +12,33 @@ export default class Style {
       SVG.el("path", {
         d: "M1.504 21L0 19.493 4.567 0h1.948l-.5 2.418s1.002-.502 3.006 0c2.006.503 3.008 2.01 6.517 2.01 3.508 0 4.463-.545 4.463-.545l-.823 9.892s-2.137 1.005-5.144.696c-3.007-.307-3.007-2.007-6.014-2.51-3.008-.502-4.512.503-4.512.503L1.504 21z",
         fill: "#3f8d15",
-        id: "greenFlag",
+        id: "snap-greenFlag",
       }),
       SVG.el("polygon", {
         points:
           "6.3,0.4725 12.516,0.4725 18.585,6.3 18.585,12.495 12.495,18.585 6.3,18.585 0.483,12.495 0.483,6.3  ",
         fill: "#bb0010",
-        id: "stopSign",
+        id: "snap-stopSign",
       }),
       SVG.el("path", {
-        d: "M6.724 0C3.01 0 0 2.91 0 6.5c0 2.316 1.253 4.35 3.14 5.5H5.17v-1.256C3.364 10.126 2.07 8.46 2.07 6.5 2.07 4.015 4.152 2 6.723 2c1.14 0 2.184.396 2.993 1.053L8.31 4.13c-.45.344-.398.826.11 1.08L15 8.5 13.858.992c-.083-.547-.514-.714-.963-.37l-1.532 1.172A6.825 6.825 0 0 0 6.723 0z",
+        d: "M 5 3 a 5 5 0 1 0 5 5 L 9 8 A 4 4 0 1 1 5 4 M 10 3 L 5 -2 L 5 8",
         fill: "#fff",
-        id: "turnRight",
+        id: "snap-turnRight",
       }),
       SVG.el("path", {
-        d: "M3.637 1.794A6.825 6.825 0 0 1 8.277 0C11.99 0 15 2.91 15 6.5c0 2.316-1.253 4.35-3.14 5.5H9.83v-1.256c1.808-.618 3.103-2.285 3.103-4.244 0-2.485-2.083-4.5-4.654-4.5-1.14 0-2.184.396-2.993 1.053L6.69 4.13c.45.344.398.826-.11 1.08L0 8.5 1.142.992c.083-.547.514-.714.963-.37l1.532 1.172z",
+        d: "M 5 3 a 5 5 90 1 1 -5 5 L 1 8 A 4 4 90 1 0 5 4 M 0 3 L 5 -2 L 5 8",
         fill: "#fff",
-        id: "turnLeft",
+        id: "snap-turnLeft",
       }),
       SVG.el("path", {
         d: "M 0 2 L 7 8 L 0 14 Z",
         fill: "#111",
-        id: "addInput",
+        id: "snap-addInput",
       }),
       SVG.el("path", {
         d: "M 7 2 L 7 14 L 0 8 Z",
         fill: "#111",
-        id: "delInput",
+        id: "snap-delInput",
       }),
       SVG.setProps(
         SVG.group([
@@ -58,7 +58,7 @@ export default class Style {
           ),
         ]),
         {
-          id: "loopArrow",
+          id: "snap-loopArrow",
         },
       ),
       SVG.setProps(
@@ -150,7 +150,7 @@ export default class Style {
           }),
         ]),
         {
-          id: "list",
+          id: "snap-list",
         },
       ),
       SVG.setProps(
@@ -159,7 +159,7 @@ export default class Style {
           fill: "black",
         }),
         {
-          id: "play",
+          id: "snap-play",
         },
       ),
     ]
