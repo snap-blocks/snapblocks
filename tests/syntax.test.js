@@ -777,16 +777,16 @@ describe("define hats", () => {
   }
 
   test("empty", () => {
-    const b = parseBlock("define")
+    const b = parseBlock("define {}")
     expect(b.info).toMatchObject(defineHat)
   })
 
   test("en", () => {
-    expect(parseBlock("define foo (bar) quxx").info).toMatchObject(defineHat)
+    expect(parseBlock("define {foo (bar) quxx}").info).toMatchObject(defineHat)
   })
 
   test("translate en -> de", () => {
-    const b = parseBlock("define foo (bar) quxx")
+    const b = parseBlock("define {foo (bar) quxx}")
     b.translate(allLanguages.de)
     // TODO omit custom-arg here
     expect(b.stringify()).toEqual("Definiere foo (bar :: custom-arg) quxx")
@@ -794,7 +794,7 @@ describe("define hats", () => {
 
   test("de", () => {
     expect(
-      parseBlock("Definiere foo (bar) quxx", optionsFor("de")).info,
+      parseBlock("Definiere {foo (bar) quxx}", optionsFor("de")).info,
     ).toMatchObject(defineHat)
   })
 
@@ -815,19 +815,19 @@ describe("define hats", () => {
       selector: "setSizeTo:",
     })
     expect(
-      parseBlock("defina foo (bar) quxx", optionsFor("pt_br")).info,
+      parseBlock("defina {foo (bar) quxx}", optionsFor("pt_br")).info,
     ).toMatchObject(defineHat)
   })
 
   test("rap: three-word define prefix", () => {
     expect(
-      parseBlock("haka tano te foo (bar) quxx", optionsFor("rap")).info,
+      parseBlock("haka tano te {foo (bar) quxx}", optionsFor("rap")).info,
     ).toMatchObject(defineHat)
   })
 
   test("uz: two-word define suffix", () => {
     expect(
-      parseBlock("foo (bar) quxx ni belgilash", optionsFor("uz")).info,
+      parseBlock("{foo (bar) quxx} ni belgilash", optionsFor("uz")).info,
     ).toMatchObject(defineHat)
   })
 })
