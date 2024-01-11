@@ -171,6 +171,12 @@ export default class Style {
     return style
   }
 
+  static dropShadowFilter(id) {
+    const f = new Filter(id)
+    f.dropShadow(-0.5, -0.5, 0, 'black', 0.2)
+    return f.el
+  }
+
   static bevelFilter(id, inset) {
     const f = new Filter(id)
 

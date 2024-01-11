@@ -22,6 +22,7 @@ const {
   darkRect,
   bevelFilter,
   darkFilter,
+  dropShadowFilter,
 } = style
 
 export class LabelView {
@@ -55,16 +56,6 @@ export class LabelView {
         class: `snap-label ${cls}`,
       })
     ]
-
-    if (this.cls === '') {
-      group.splice(
-        0,
-        0,
-        SVG.text(-0.5, 10 - 0.5, value, {
-          class: `snap-label-shadow ${cls}`,
-        })
-      )
-    }
 
     this.el = SVG.group(group)
 
@@ -114,10 +105,13 @@ class IconView {
   }
 
   draw() {
-    return SVG.symbol(`#snap-${this.name}`, {
+    let symbol = SVG.symbol(`#snap-${this.name}`, {
       width: this.width,
       height: this.height,
     })
+    console.log('symbol', symbol)
+    symbol.classList.add('snap-icon')
+    return symbol
   }
 
   static get icons() {
@@ -725,6 +719,7 @@ class DocumentView {
         bevelFilter("snapBevelFilter", false),
         bevelFilter("snapInputBevelFilter", true),
         darkFilter("inputDarkFilter"),
+        dropShadowFilter('snapDropShadow'),
         ...makeIcons(),
       ])),
     )

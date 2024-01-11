@@ -6,15 +6,16 @@ export default `
   fill: #fff;
   font-size: 10px;
   word-spacing: +1px;
+  filter: url(#snapDropShadow);
 }
 
-.snap-label-shadow {
-  font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
-  font-weight: bold;
-  fill: #000;
-  font-size: 10px;
-  word-spacing: +1px;
-  opacity: 0.4;
+.snap-label.snap-literal-string,
+.snap-label.snap-literal-number {
+  filter: none !important;
+}
+
+.snap-icon {
+  filter: url(#snapDropShadow)
 }
 
 .snap-obsolete {

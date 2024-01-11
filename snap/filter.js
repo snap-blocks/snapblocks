@@ -56,6 +56,16 @@ export default class Filter {
     })
   }
 
+  dropShadow(dx, dy, blur, color, opacity) {
+    return this.fe("DropShadow", {
+      dx: dx,
+      dy: dy,
+      stdDeviation: blur,
+      'flood-color': color,
+      'flood-opacity': opacity,
+    })
+  }
+
   colorMatrix(in1, values) {
     return this.fe("ColorMatrix", {
       in: in1,
