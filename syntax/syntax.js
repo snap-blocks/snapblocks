@@ -84,16 +84,42 @@ function paintBlock(info, children, languages) {
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
     for (const lang of languages) {
-      if (!isDefineBlock(children, lang)) {
-        continue
+      console.log('define')
+      if (!overrides.includes('define')) {
+        if (!isDefineBlock(children, lang)) {
+          continue
+        }
+  
+        // Setting the shape also triggers some logic in recogniseStuff.
+        if (overrides.includes('stack')) {
+          continue
+        }
+        
+        applyOverrides(info, overrides)
+        if (info.shape != 'stack') {
+          continue
+        }
       }
-
-      // Setting the shape also triggers some logic in recogniseStuff.
-      info.shape = "define-hat"
+      
       info.category = "custom"
+
+      console.log('info', info.category)
+      info.shape = "define-hat"
 
       // Move the children of the define block into an "outline", transforming
       // () and [] shapes as we go.
+
+      let outlineShape = 'stack'
+
+      if (children.length > 0 && !children[1].isLabel) {
+        console.log('shape', children[1])
+        if (children[1] instanceof Input) {
+          // outlineShape = children[1].shape
+        } else {
+          outlineShape = children[1].info.shape
+          children = [children[0], ...children[1].children]
+        }
+      }
       const outlineChildren = children
         .splice(
           lang.definePrefix.length,
@@ -137,7 +163,7 @@ function paintBlock(info, children, languages) {
         })
 
       const outlineInfo = {
-        shape: "outline",
+        shape: `outline-${outlineShape}`,
         category: "custom",
         categoryIsDefault: true,
         hasLoopArrow: false,
@@ -196,6 +222,17 @@ function isDefineBlock(children, lang) {
     }
   }
 
+  if (children.length != 2) {
+    return false
+  }
+
+  if (children[1].isLabel) {
+    return false
+  }
+  if (!children[1].isCommand) {
+    return false
+  }
+
   return true
 }
 
@@ -231,7 +268,7 @@ function parseLines(code, languages) {
       categoryIsDefault: true,
       hasLoopArrow: false,
     }
-
+    console.log('children', children)
     return paintBlock(info, children, languages)
   }
 
@@ -255,7 +292,7 @@ function parseLines(code, languages) {
       ) {
         const c = peekNonWs()
         // The next token starts some kind of input.
-        if (c === "[" || c === "(" || c === "<" || c === "{") {
+        if (c === "[" || c === "(" || c === "<" || c == "{") {
           label = null
           children.push(new Label(tok))
           next()
@@ -325,6 +362,7 @@ function parseLines(code, languages) {
           }
         // fallthrough
         default:
+          console.log('label', label)
           if (!label) {
             children.push((label = new Label("")))
           }
@@ -385,7 +423,6 @@ function parseLines(code, languages) {
         return child
       }
     }
-
     return makeBlock("stack", children)
   }
 
@@ -801,7 +838,6 @@ function recogniseStuff(scripts) {
         block.info.selector = "procDef"
         block.info.call = info.spec
         block.info.names = info.names
-        block.info.category = "custom"
 
         // custom arguments
       } else if (

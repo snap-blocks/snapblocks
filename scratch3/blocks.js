@@ -347,10 +347,20 @@ class BlockView {
     }
 
     // outlines
-    if (this.info.shape === "outline") {
-      return SVG.setProps(SVG.stackRect(w, h), {
-        class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
-      })
+    if (/outline-\w+/.test(this.info.shape)) {
+      if (this.info.shape === 'outline-stack') {
+        return SVG.setProps(SVG.stackRect(w, h), {
+          class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
+        })
+      } else if (this.info.shape === 'outline-reporter') {
+        return SVG.setProps(SVG.pillRect(w, h), {
+          class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
+        })
+      } else if (this.info.shape === 'outline-boolean') {
+        return SVG.setProps(SVG.pointedRect(w, h), {
+          class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
+        })
+      }
     }
 
     // rings

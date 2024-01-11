@@ -283,10 +283,20 @@ class BlockView {
     }
 
     // outlines
-    if (this.info.shape === "outline") {
-      return SVG.setProps(SVG.stackRect(w, h), {
-        class: "sb-outline",
-      })
+    if (/outline-\w+/.test(this.info.shape)) {
+      if (this.info.shape === 'outline-stack') {
+        return SVG.setProps(SVG.stackRect(w, h), {
+          class: "sb-outline",
+        })
+      } else if (this.info.shape === 'outline-reporter') {
+        return SVG.setProps(SVG.roundedRect(w, h), {
+          class: "sb-outline",
+        })
+      } else if (this.info.shape === 'outline-boolean') {
+        return SVG.setProps(SVG.pointedRect(w, h), {
+          class: "sb-outline",
+        })
+      }
     }
 
     // rings
