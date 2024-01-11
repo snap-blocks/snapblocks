@@ -284,15 +284,15 @@ class BlockView {
 
     // outlines
     if (/outline-\w+/.test(this.info.shape)) {
-      if (this.info.shape === 'outline-stack') {
+      if (this.info.shape === "outline-stack") {
         return SVG.setProps(SVG.stackRect(w, h), {
           class: "sb-outline",
         })
-      } else if (this.info.shape === 'outline-reporter') {
+      } else if (this.info.shape === "outline-reporter") {
         return SVG.setProps(SVG.roundedRect(w, h), {
           class: "sb-outline",
         })
-      } else if (this.info.shape === 'outline-boolean') {
+      } else if (this.info.shape === "outline-boolean") {
         return SVG.setProps(SVG.pointedRect(w, h), {
           class: "sb-outline",
         })

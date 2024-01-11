@@ -84,43 +84,43 @@ function paintBlock(info, children, languages) {
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
     for (const lang of languages) {
-      console.log('define')
-      console.log('lang', lang.definePrefix, lang.defineSuffix)
-      if (!isDefineBlock(children, lang, !overrides.includes('define'))) {
+      console.log("define")
+      console.log("lang", lang.definePrefix, lang.defineSuffix)
+      if (!isDefineBlock(children, lang, !overrides.includes("define"))) {
         continue
       }
-      
-      if (!overrides.includes('define')) {
+
+      if (!overrides.includes("define")) {
         // Setting the shape also triggers some logic in recogniseStuff.
-        if (overrides.includes('stack')) {
+        if (overrides.includes("stack")) {
           continue
         }
-        
+
         applyOverrides(info, overrides)
-        if (info.shape != 'stack') {
+        if (info.shape != "stack") {
           continue
         }
       }
-      
+
       info.category = "custom"
 
-      console.log('info', info.category)
+      console.log("info", info.category)
       info.shape = "define-hat"
 
       // Move the children of the define block into an "outline", transforming
       // () and [] shapes as we go.
 
-      let outlineShape = 'stack'
+      let outlineShape = "stack"
 
       let blockChildren = children.slice(
         lang.definePrefix.length,
         children.length - lang.defineSuffix.length,
       )
 
-      console.log('outlineChildren', structuredClone(blockChildren))
+      console.log("outlineChildren", structuredClone(blockChildren))
 
       if (blockChildren.length == 1 && !blockChildren[0].isLabel) {
-        console.log('shape', blockChildren[1])
+        console.log("shape", blockChildren[1])
         if (blockChildren[0] instanceof Input) {
           // outlineShape = children[1].shape
         } else {
@@ -131,10 +131,11 @@ function paintBlock(info, children, languages) {
             ...blockChildren,
             ...children.slice(children.length - lang.defineSuffix.length),
           ]
-          console.log('cloned children', children)
+          console.log("cloned children", children)
         }
       }
-      const outlineChildren = children.splice(
+      const outlineChildren = children
+        .splice(
           lang.definePrefix.length,
           children.length - lang.defineSuffix.length,
         )
@@ -239,7 +240,10 @@ function isDefineBlock(children, lang, testBlock = true) {
     return true
   }
 
-  if (children.length != lang.definePrefix.length + lang.defineSuffix.length + 1) {
+  if (
+    children.length !=
+    lang.definePrefix.length + lang.defineSuffix.length + 1
+  ) {
     return false
   }
 
@@ -291,7 +295,7 @@ function parseLines(code, languages) {
       categoryIsDefault: true,
       hasLoopArrow: false,
     }
-    console.log('children', children)
+    console.log("children", children)
     return paintBlock(info, children, languages)
   }
 
@@ -385,7 +389,7 @@ function parseLines(code, languages) {
           }
         // fallthrough
         default:
-          console.log('label', label)
+          console.log("label", label)
           if (!label) {
             children.push((label = new Label("")))
           }
