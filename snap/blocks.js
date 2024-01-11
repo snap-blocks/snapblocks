@@ -454,7 +454,9 @@ class BlockView {
 
     innerWidth = Math.max(
       innerWidth + px * 2,
-      this.isHat || this.hasScript
+      this.isHat
+        ? 110
+        : this.hasScript
         ? 83
         : this.isCommand || this.isOutline || this.isRing
         ? 39
