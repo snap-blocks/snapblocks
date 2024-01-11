@@ -151,7 +151,7 @@ export class Block {
       shape === "c-block"
     this.isFinal = /cap/.test(shape)
     this.isCommand = shape === "stack" || shape === "cap" || /block/.test(shape)
-    this.isOutline = shape === "outline"
+    this.isOutline = /outline-\w+/.test(shape)
     this.isReporter = shape === "reporter"
     this.isBoolean = shape === "boolean"
 
