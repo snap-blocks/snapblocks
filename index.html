@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf8">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <title>scratchblocks dev</title>
+    <title>snapblocks dev</title>
   
-    <meta name=description content="Use scratchblocks to write pictures of Scratch scripts in forum posts.">
+    <meta name=description content="Use snapblocks to write pictures of Snap scripts in forum posts.">
   
     <!--
     <link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700">
@@ -17,33 +17,7 @@
         display: block;
         margin-bottom: 20px;
       }
-  
-      #preview:before {
-        position: relative;
-        left: 1px;
-        min-width: 695px;
-        min-height: 842px;
-        z-index: 1;
-        transform: scale(0.66666);
-        transform-origin: 0 0;
-      }
-  
-      .cmp #preview:before,
-      .diff #preview:before {
-        position: absolute;
-        display: block;
-        content: "";
-        background: url(screenshot.png) no-repeat -2px -3px;
-      }
-  
-      .cmp.diff #preview:before {
-        -webkit-filter: invert(100%) opacity(50%);
-      }
-  
-      .diff #preview:before {
-        -webkit-filter: opacity(50%);
-      }
-  
+    
       .cmp img {
         display: none;
       }
@@ -86,7 +60,7 @@
   
     <!---------------------------------------------------------------------------->
   
-    <script src="build/scratchblocks.min.js"></script>
+    <script src="build/snapblocks.min.js"></script>
     <script src="build/translations-all.js"></script>
   
     <script>
@@ -284,15 +258,15 @@
         // add export link
         setTimeout(function () {
           if (!exportSVGLink) exportSVGLink = document.createElement('a');
-          exportSVGLink.onclick = () => download("scratchblocks.svg", getSelectedView().exportSVG());
-          exportSVGLink.textContent = "Export SVG";
-          exportSVGLink.className = 'export-link';
+            exportSVGLink.onclick = () => download("scratchblocks.svg", getSelectedView().exportSVG());
+            exportSVGLink.textContent = "Export SVG";
+            exportSVGLink.className = 'export-link';
           if (!exportSVGLink.isConnected) document.querySelector('#export-options').appendChild(exportSVGLink);
   
           if (!exportPNGLink) exportPNGLink = document.createElement('a');
-          exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("scratchblocks.png", url));
-          exportPNGLink.textContent = "Export PNG";
-          exportPNGLink.className = 'export-link';
+            exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("scratchblocks.png", url), 2);
+            exportPNGLink.textContent = "Export PNG";
+            exportPNGLink.className = 'export-link';
           if (!exportPNGLink.isConnected) document.querySelector('#export-options').appendChild(exportPNGLink);
   
           if (!exportDropdown) {
