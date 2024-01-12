@@ -1,20 +1,20 @@
 {
-  "name": "scratchblocks",
-  "version": "3.6.4",
-  "description": "Make pictures of Scratch blocks from text.",
+  "name": "snapblocks",
+  "version": "1.0.0",
+  "description": "Make pictures of Snap blocks from text. This is a fork of Scratchblocks.",
   "license": "MIT",
-  "author": "Tim Radvan",
-  "homepage": "https://scratchblocks.github.io/",
+  "author": "ego-lay-atman-bay",
+  "homepage": "https://ego-lay-atman-bay.github.io/snapblocks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/scratchblocks/scratchblocks.git"
+    "url": "git+https://github.com/ego-lay-atman-bay/snapblocks.git"
   },
   "bugs": {
-    "url": "https://github.com/scratchblocks/scratchblocks/issues"
+    "url": "https://github.com/ego-lay-atman-bay/snapblocks/issues"
   },
   "type": "module",
-  "main": "build/scratchblocks.min.js",
-  "module": "build/scratchblocks.min.es.js",
+  "main": "build/snapblocks.min.js",
+  "module": "build/snapblocks.min.es.js",
   "directories": {
     "test": "tests"
   },
@@ -55,7 +55,8 @@
     "scratch-l10n": "^3.16.20231024152916"
   },
   "keywords": [
-    "scratch"
+    "scratch",
+    "snap"
   ],
   "lint-staged": {
     "package.json": [
