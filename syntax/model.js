@@ -143,7 +143,11 @@ export class Block {
     this.diff = null
 
     const shape = this.info.shape
-    this.isHat = shape === "hat" || shape === "cat" || shape === "define-hat" || shape === "snap-define"
+    this.isHat =
+      shape === "hat" ||
+      shape === "cat" ||
+      shape === "define-hat" ||
+      shape === "snap-define"
     this.hasPuzzle =
       shape === "stack" ||
       shape === "hat" ||
@@ -161,12 +165,13 @@ export class Block {
     this.isElse = shape === "celse"
     this.isEnd = shape === "cend"
 
-    this.isSnapDefine = shape === 'snap-define'
+    this.isSnapDefine = shape === "snap-define"
 
-    this.isUpvar = this.isReporter &&
-                  info.categoryIsDefault &&
-                  children.length == 1 &&
-                  children[0].isReporter
+    this.isUpvar =
+      this.isReporter &&
+      info.categoryIsDefault &&
+      children.length == 1 &&
+      children[0].isReporter
   }
   get isBlock() {
     return true

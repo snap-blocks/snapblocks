@@ -87,23 +87,26 @@ function paintBlock(info, children, languages) {
       console.log("define")
       console.log("lang", lang.definePrefix, lang.defineSuffix)
 
-      if (overrides.includes("define") && !isDefineBlock(children, lang, !overrides.includes("define"))) {
+      if (
+        overrides.includes("define") &&
+        !isDefineBlock(children, lang, !overrides.includes("define"))
+      ) {
         if (children.length == 0) {
           continue
         }
         if (children[0].isLabel || !children[0].isBlock) {
           continue
         }
-        info.category = 'events'
-        info.shape = 'snap-define'
-        console.log('info', info)
-        console.log('snap define')
+        info.category = "events"
+        info.shape = "snap-define"
+        console.log("info", info)
+        console.log("snap define")
 
         let block = children[0]
-        console.log('block', block)
-        console.log('overrides', structuredClone(overrides))
+        console.log("block", block)
+        console.log("overrides", structuredClone(overrides))
         if (block.info.categoryIsDefault) {
-          block.info.category = 'custom'
+          block.info.category = "custom"
         }
         continue
       }
@@ -231,14 +234,13 @@ function paintBlock(info, children, languages) {
   }
   block.diff = info.diff
 
-
   // upvars
   for (const child of children) {
     if (child.isUpvar) {
-          child.info.category = info.category
+      child.info.category = info.category
     }
   }
-  
+
   return block
 }
 
@@ -911,7 +913,7 @@ function recogniseStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-        console.log('snap')
+        console.log("snap")
 
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
@@ -925,7 +927,7 @@ function recogniseStuff(scripts) {
         for (const child of customBlock.children) {
           if (child.isLabel) {
             // so we can format custom blocks with + between segments like snap
-            if (child.value != '+') {
+            if (child.value != "+") {
               parts.push(child.value)
             }
           } else if (child.isBlock) {
@@ -933,20 +935,26 @@ function recogniseStuff(scripts) {
               return
             }
 
-            let argument = 'string'
+            let argument = "string"
             let argVar = child.children[0]
 
             // detect argument type from argVar name
             if (argVar.children.length > 1) {
-              const containsEq = argVar.children.find((child) => child.value == '=')
-              console.log('containsEq', containsEq)
+              const containsEq = argVar.children.find(
+                child => child.value == "=",
+              )
+              console.log("containsEq", containsEq)
 
               var typePosition = argVar.children.length - 1
               if (containsEq) {
-                for (typePosition = argVar.children.length - 1; typePosition > 0; typePosition--) {
-                  const argChild = argVar.children[typePosition];
-                  console.log('argChild', argChild)
-                  if (argChild.isLabel && argChild.value == '=') {
+                for (
+                  typePosition = argVar.children.length - 1;
+                  typePosition > 0;
+                  typePosition--
+                ) {
+                  const argChild = argVar.children[typePosition]
+                  console.log("argChild", argChild)
+                  if (argChild.isLabel && argChild.value == "=") {
                     typePosition -= 1
                     break
                   }
@@ -955,19 +963,19 @@ function recogniseStuff(scripts) {
             }
 
             const types = {
-              '\u2191': 'upvar',
-              '...': 'multi',
-              '\u03BB': 'ring',
-              '?': 'boolean',
-              '\uFE19': 'list',
-              '#': 'number',
+              "\u2191": "upvar",
+              "...": "multi",
+              "\u03BB": "ring",
+              "?": "boolean",
+              "\uFE19": "list",
+              "#": "number",
             }
 
             if (argVar.children[typePosition]) {
               argument = types[argVar.children[typePosition].value]
               console.log(argument)
               if (!argument) {
-                argument = 'string'
+                argument = "string"
               }
             }
 
@@ -976,9 +984,9 @@ function recogniseStuff(scripts) {
                 number: "%n",
                 string: "%s",
                 boolean: "%b",
-              }[argument] || '%s',
+              }[argument] || "%s",
             )
-            console.log('part', parts[parts.length - 1])
+            console.log("part", parts[parts.length - 1])
 
             const name = blockName(child)
             names.push(name)
@@ -987,7 +995,7 @@ function recogniseStuff(scripts) {
         }
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
-        
+
         let info = {
           spec: spec,
           names: names,
