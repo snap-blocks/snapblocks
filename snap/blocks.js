@@ -278,7 +278,7 @@ class BlockView {
       boolean: SVG.pointedRect,
       hat: SVG.hatRect,
       cat: SVG.hatRect,
-      "define-hat": SVG.procHatRect,
+      "define-hat": SVG.hatRect,
       ring: SVG.roundedRect,
     }
   }
