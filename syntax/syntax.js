@@ -387,6 +387,7 @@ function parseLines(code, languages) {
           next() // Skip over whitespace.
           label = null
           break
+        case "➤":
         case "◂":
         case "▸":
           children.push(pIcon())
@@ -616,6 +617,8 @@ function parseLines(code, languages) {
         return new Icon("addInput")
       case "◂":
         return new Icon("delInput")
+      case "➤":
+        return new Icon("turtle")
       default:
         return
     }

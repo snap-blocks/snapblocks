@@ -120,6 +120,7 @@ export const unicodeIcons = {
   "@turnLeft": "↺",
   "@addInput": "▸",
   "@delInput": "◂",
+  "@turtle": "➤",
 }
 
 export const allLanguages = {}
