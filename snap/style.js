@@ -162,6 +162,15 @@ export default class Style {
           id: "snap-play",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6",
+          fill: "white",
+        }),
+        {
+          id: "snap-turtle",
+        }
+      ),
     ]
   }
 

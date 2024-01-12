@@ -125,6 +125,7 @@ class IconView {
       delInput: { width: 8, height: 16 },
       list: { width: 12, height: 14 },
       play: { width: 20, height: 20 },
+      turtle: { width: 18, height: 12 },
     }
   }
 }

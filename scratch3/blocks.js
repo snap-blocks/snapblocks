@@ -110,6 +110,7 @@ export class IconView {
       delInput: { width: 8, height: 16 },
       list: { width: 15, height: 18 },
       play: { width: 20, height: 20 },
+      turtle: { width: 18, height: 12 },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },

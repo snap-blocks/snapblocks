@@ -477,6 +477,15 @@ export default class Style {
           id: "sb3-loopArrow",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6",
+          fill: "white",
+        }),
+        {
+          id: "snap-turtle",
+        }
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -660,6 +669,15 @@ export default class Style {
         {
           id: "sb3-loopArrow-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6",
+          fill: "white",
+        }),
+        {
+          id: "sb3-turtle",
+        }
       ),
 
       // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/extensions
