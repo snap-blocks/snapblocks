@@ -279,6 +279,7 @@ class BlockView {
       hat: SVG.hatRect,
       cat: SVG.hatRect,
       "define-hat": SVG.hatRect,
+      "snap-define": SVG.hatRect,
       ring: SVG.roundedRect,
     }
   }
@@ -362,6 +363,7 @@ class BlockView {
       hat: [15, 6, 2],
       cat: [15, 6, 2],
       "define-hat": [21, 8, 9],
+      "snap-define": [15, 6, 5],
       reporter: [3, 4, 1],
       boolean: [3, 4, 2],
       cap: [6, 6, 2],

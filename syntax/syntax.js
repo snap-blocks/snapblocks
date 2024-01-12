@@ -86,6 +86,28 @@ function paintBlock(info, children, languages) {
     for (const lang of languages) {
       console.log("define")
       console.log("lang", lang.definePrefix, lang.defineSuffix)
+
+      if (overrides.includes("define") && !isDefineBlock(children, lang, !overrides.includes("define"))) {
+        if (children.length == 0) {
+          continue
+        }
+        if (children[0].isLabel || !children[0].isBlock) {
+          continue
+        }
+        info.category = 'events'
+        info.shape = 'snap-define'
+        console.log('info', info)
+        console.log('snap define')
+
+        let block = children[0]
+        console.log('block', block)
+        console.log('overrides', structuredClone(overrides))
+        if (block.info.categoryIsDefault) {
+          block.info.category = 'custom'
+        }
+        continue
+      }
+
       if (!isDefineBlock(children, lang, !overrides.includes("define"))) {
         continue
       }
@@ -209,6 +231,14 @@ function paintBlock(info, children, languages) {
   }
   block.diff = info.diff
 
+
+  // upvars
+  for (const child of children) {
+    if (child.isUpvar) {
+          child.info.category = info.category
+    }
+  }
+  
   return block
 }
 
@@ -857,6 +887,7 @@ function recogniseStuff(scripts) {
         const info = {
           spec: spec,
           names: names,
+          category: block.info.category,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
@@ -877,6 +908,98 @@ function recogniseStuff(scripts) {
           block.info.categoryIsDefault = false
           block.info.selector = "getParam"
         }
+
+        // snap custom blocks
+      } else if (block.isSnapDefine) {
+        console.log('snap')
+
+        // custom blocks will always be the first child. Anything after doesn't matter
+        if (!block.children[0].isBlock) {
+          return
+        }
+
+        let customBlock = block.children[0]
+
+        const names = []
+        const parts = []
+        for (const child of customBlock.children) {
+          if (child.isLabel) {
+            // so we can format custom blocks with + between segments like snap
+            if (child.value != '+') {
+              parts.push(child.value)
+            }
+          } else if (child.isBlock) {
+            if (!child.isUpvar) {
+              return
+            }
+
+            let argument = 'string'
+            let argVar = child.children[0]
+
+            // detect argument type from argVar name
+            if (argVar.children.length > 1) {
+              const containsEq = argVar.children.find((child) => child.value == '=')
+              console.log('containsEq', containsEq)
+
+              var typePosition = argVar.children.length - 1
+              if (containsEq) {
+                for (typePosition = argVar.children.length - 1; typePosition > 0; typePosition--) {
+                  const argChild = argVar.children[typePosition];
+                  console.log('argChild', argChild)
+                  if (argChild.isLabel && argChild.value == '=') {
+                    typePosition -= 1
+                    break
+                  }
+                }
+              }
+            }
+
+            const types = {
+              '\u2191': 'upvar',
+              '...': 'multi',
+              '\u03BB': 'ring',
+              '?': 'boolean',
+              '\uFE19': 'list',
+              '#': 'number',
+            }
+
+            if (argVar.children[typePosition]) {
+              argument = types[argVar.children[typePosition].value]
+              console.log(argument)
+              if (!argument) {
+                argument = 'string'
+              }
+            }
+
+            parts.push(
+              {
+                number: "%n",
+                string: "%s",
+                boolean: "%b",
+              }[argument] || '%s',
+            )
+            console.log('part', parts[parts.length - 1])
+
+            const name = blockName(child)
+            names.push(name)
+            customArgs.add(name)
+          }
+        }
+        const spec = parts.join(" ")
+        const hash = hashSpec(spec)
+        
+        let info = {
+          spec: spec,
+          names: names,
+          category: customBlock.info.category,
+        }
+        if (!customBlocksByHash[hash]) {
+          customBlocksByHash[hash] = info
+        }
+        block.info.id = "PROCEDURES_DEFINITION"
+        block.info.selector = "procDef"
+        block.info.call = info.spec
+        block.info.names = info.names
 
         // list names
       } else if (
@@ -905,7 +1028,7 @@ function recogniseStuff(scripts) {
           block.info.selector = "call"
           block.info.call = info.spec
           block.info.names = info.names
-          block.info.category = "custom"
+          block.info.category = info.category
         }
         return
       }

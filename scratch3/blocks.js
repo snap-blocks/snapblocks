@@ -334,6 +334,7 @@ class BlockView {
       hat: SVG.hatRect,
       cat: SVG.catHat,
       "define-hat": SVG.procHatRect,
+      "snap-define": SVG.hatRect,
       ring: SVG.pillRect,
     }
   }
@@ -387,6 +388,7 @@ class BlockView {
       hat: [24, 8],
       cat: [24, 8],
       "define-hat": [20, 16],
+      "snap-define": [24, 12],
       null: [4, 4],
     }
   }
