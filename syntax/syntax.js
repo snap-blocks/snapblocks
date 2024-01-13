@@ -234,13 +234,6 @@ function paintBlock(info, children, languages) {
   }
   block.diff = info.diff
 
-  // upvars
-  for (const child of children) {
-    if (child.isUpvar) {
-      child.info.category = info.category
-    }
-  }
-
   return block
 }
 
@@ -884,6 +877,8 @@ function recogniseStuff(scripts) {
             const name = blockName(child)
             names.push(name)
             customArgs.add(name)
+          } else if (child.isIcon) {
+            parts.push(`@${child.name}`)
           }
         }
         const spec = parts.join(" ")
@@ -893,6 +888,7 @@ function recogniseStuff(scripts) {
           spec: spec,
           names: names,
           category: block.info.category,
+          shape: block.info.shape,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
@@ -928,6 +924,7 @@ function recogniseStuff(scripts) {
         const names = []
         const parts = []
         for (const child of customBlock.children) {
+          console.log('value', child)
           if (child.isLabel) {
             // so we can format custom blocks with + between segments like snap
             if (child.value != "+") {
@@ -991,22 +988,27 @@ function recogniseStuff(scripts) {
             )
             console.log("part", parts[parts.length - 1])
 
-            const name = blockName(child)
+            const name = blockName(argVar)
             names.push(name)
             customArgs.add(name)
+          } else if (child.isIcon) {
+            parts.push(`@${child.name}`)
           }
         }
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
 
+        console.log('names', names)
         let info = {
           spec: spec,
           names: names,
           category: customBlock.info.category,
+          shape: customBlock.info.shape,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
         }
+        console.log('hash', hash)
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
         block.info.call = info.spec
@@ -1034,19 +1036,22 @@ function recogniseStuff(scripts) {
         block.info.category === "obsolete"
       ) {
         // custom blocks
+        console.log('block hash', block.info.hash)
         const info = customBlocksByHash[block.info.hash]
         if (info) {
           block.info.selector = "call"
           block.info.call = info.spec
           block.info.names = info.names
           block.info.category = info.category
+          // block.info.shape = info.shape
+          block.info.isCustom = true
         }
-        return
       }
 
       let name, info
       if (
         block.isReporter &&
+        !block.info.isCustom &&
         block.info.category === "variables" &&
         block.info.categoryIsDefault
       ) {
@@ -1055,6 +1060,19 @@ function recogniseStuff(scripts) {
         name = blockName(block)
         info = block.info
       }
+
+      // upvars
+      if (block.isBlock) {
+        console.log('block', block.info.isCustom)
+        for (const child of block.children) {
+          console.log('upvar', child.isUpvar)
+          if (child.isUpvar) {
+            console.log('category', block.info.category)
+            child.info.category = block.info.category
+          }
+        }
+      }
+
       if (!name) {
         return
       }
