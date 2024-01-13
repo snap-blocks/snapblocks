@@ -117,7 +117,7 @@ class IconView {
   static get icons() {
     return {
       greenFlag: { width: 20, height: 21, dy: -2 },
-      stopSign: { width: 20, height: 20 },
+      stopSign: { width: 21, height: 21 },
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 14, height: 11 },
@@ -126,6 +126,7 @@ class IconView {
       list: { width: 12, height: 14 },
       play: { width: 20, height: 20 },
       turtle: { width: 18, height: 12 },
+      turtleOutline: { width: 18, height: 12 },
     }
   }
 }

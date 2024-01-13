@@ -479,12 +479,23 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          d: "M 0 0 L 18 6 L 0 12 L 6 6",
+          d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "white",
         }),
         {
-          id: "snap-turtle",
+          id: "sb3-turtle",
         },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
+          fill: "none",
+          stroke: "white",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-turtleOutline",
+        }
       ),
 
       SVG.setProps(

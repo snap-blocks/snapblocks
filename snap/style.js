@@ -14,10 +14,10 @@ export default class Style {
         fill: "rgb(0 200 0)",
         id: "snap-greenFlag",
       }),
-      SVG.el("polygon", {
-        points:
-          "6.3,0.4725 12.516,0.4725 18.585,6.3 18.585,12.495 12.495,18.585 6.3,18.585 0.483,12.495 0.483,6.3  ",
-        fill: "#bb0010",
+      SVG.el("path", {
+        d:
+          "M 6.17 0 L 13.83 0 L 20 6.14 L 20 13.83 L 13.83 20 L 6.17 20 L 0 13.83 L 0 6.17 Z",
+        fill: "rgb(200 0 0)",
         id: "snap-stopSign",
       }),
       SVG.el("path", {
@@ -164,11 +164,22 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          d: "M 0 0 L 18 6 L 0 12 L 6 6",
+          d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "white",
         }),
         {
           id: "snap-turtle",
+        }
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
+          fill: "none",
+          stroke: "white",
+          "stroke-width": 1,
+        }),
+        {
+          id: "snap-turtleOutline",
         }
       ),
     ]

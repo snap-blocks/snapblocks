@@ -66,6 +66,7 @@ export class Icon {
       list: true,
       play: true,
       turtle: true,
+      turtleOutline: true,
     }
   }
 
