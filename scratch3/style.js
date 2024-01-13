@@ -484,7 +484,7 @@ export default class Style {
         }),
         {
           id: "snap-turtle",
-        }
+        },
       ),
 
       SVG.setProps(
@@ -677,7 +677,7 @@ export default class Style {
         }),
         {
           id: "sb3-turtle",
-        }
+        },
       ),
 
       // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/extensions

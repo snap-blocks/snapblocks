@@ -169,7 +169,7 @@ export default class Style {
         }),
         {
           id: "turtle",
-        }
+        },
       ),
     ]
   }
