@@ -497,6 +497,24 @@ export default class Style {
           id: "sb3-turtleOutline",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('rect', {
+              width: (20 / 5) * 2,
+              height: 20,
+              fill: "rgb(255 220 0)",
+          }),
+          SVG.el("rect", {
+            width: (20 / 5) * 2,
+            height: 20,
+            x: (20 / 5) * 3,
+            fill: "rgb(255 220 0)",
+          })
+        ]),
+        {
+          id: "sb3-pause"
+        }
+      ),
 
       SVG.setProps(
         SVG.group([

@@ -118,6 +118,7 @@ class IconView {
       play: { width: 20, height: 20 },
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12 },
+      pause: { width: 12, height: 12, dy: +1 },
     }
   }
 }

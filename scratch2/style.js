@@ -182,6 +182,24 @@ export default class Style {
           id: "turtleOutline",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('rect', {
+              width: (12 / 5) * 2,
+              height: 12,
+              fill: "rgb(255 220 0)",
+          }),
+          SVG.el("rect", {
+            width: (12 / 5) * 2,
+            height: 12,
+            x: (12 / 5) * 3,
+            fill: "rgb(255 220 0)",
+          })
+        ]),
+        {
+          id: "pause"
+        }
+      ),
     ]
   }
 
