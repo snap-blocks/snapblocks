@@ -604,7 +604,7 @@ function parseLines(code, languages) {
     next()
     switch (c) {
       case "☁":
-        return new Icon('cloud')
+        return new Icon("cloud")
       case "▸":
         return new Icon("addInput")
       case "◂":
@@ -923,7 +923,7 @@ function recogniseStuff(scripts) {
         const names = []
         const parts = []
         for (const child of customBlock.children) {
-          console.log('value', child)
+          console.log("value", child)
           if (child.isLabel) {
             // so we can format custom blocks with + between segments like snap
             if (child.value != "+") {
@@ -997,7 +997,7 @@ function recogniseStuff(scripts) {
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
 
-        console.log('names', names)
+        console.log("names", names)
         let info = {
           spec: spec,
           names: names,
@@ -1007,7 +1007,7 @@ function recogniseStuff(scripts) {
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
         }
-        console.log('hash', hash)
+        console.log("hash", hash)
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
         block.info.call = info.spec
@@ -1035,7 +1035,7 @@ function recogniseStuff(scripts) {
         block.info.category === "obsolete"
       ) {
         // custom blocks
-        console.log('block hash', block.info.hash)
+        console.log("block hash", block.info.hash)
         const info = customBlocksByHash[block.info.hash]
         if (info) {
           block.info.selector = "call"
@@ -1062,11 +1062,11 @@ function recogniseStuff(scripts) {
 
       // upvars
       if (block.isBlock) {
-        console.log('block', block.info.isCustom)
+        console.log("block", block.info.isCustom)
         for (const child of block.children) {
-          console.log('upvar', child.isUpvar)
+          console.log("upvar", child.isUpvar)
           if (child.isUpvar) {
-            console.log('category', block.info.category)
+            console.log("category", block.info.category)
             child.info.category = block.info.category
           }
         }

@@ -180,48 +180,48 @@ export default class Style {
         }),
         {
           id: "turtleOutline",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('rect', {
-              width: (12 / 5) * 2,
-              height: 12,
-              fill: "rgb(255 220 0)",
+          SVG.el("rect", {
+            width: (12 / 5) * 2,
+            height: 12,
+            fill: "rgb(255 220 0)",
           }),
           SVG.el("rect", {
             width: (12 / 5) * 2,
             height: 12,
             x: (12 / 5) * 3,
             fill: "rgb(255 220 0)",
-          })
+          }),
         ]),
         {
-          id: "pause"
-        }
+          id: "pause",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 3 12
             A 3 3 0 0 1 2.4275730138703637 6.055118449657009
             A 2.4 2.4 0 0 1 6.000000000000001 3.2548723642506805
             A 4.8 4.8 0 0 1 15.353421766821956 4.548787410033867
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
-          fill: 'white',
+          fill: "white",
         }),
         {
-          id: 'cloud'
-        }
+          id: "cloud",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
           fill: "white",
         }),
         {
-          id: "flash"
-        }
+          id: "flash",
+        },
       ),
     ]
   }

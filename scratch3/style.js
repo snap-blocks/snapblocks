@@ -499,35 +499,35 @@ export default class Style {
         }),
         {
           id: "sb3-turtleOutline",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('rect', {
-              width: (20 / 5) * 2,
-              height: 20,
-              fill: "rgb(255 220 0)",
+          SVG.el("rect", {
+            width: (20 / 5) * 2,
+            height: 20,
+            fill: "rgb(255 220 0)",
           }),
           SVG.el("rect", {
             width: (20 / 5) * 2,
             height: 20,
             x: (20 / 5) * 3,
             fill: "rgb(255 220 0)",
-          })
+          }),
         ]),
         {
-          id: "sb3-pause"
-        }
+          id: "sb3-pause",
+        },
       ),
-      
+
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
           fill: "white",
         }),
         {
-          id: "sb3-flash"
-        }
+          id: "sb3-flash",
+        },
       ),
 
       SVG.setProps(
@@ -731,16 +731,16 @@ export default class Style {
         }),
         {
           id: "sb3-turtleOutline-high-contrast",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
           fill: "black",
         }),
         {
-          id: "sb3-flash-high-contrast"
-        }
+          id: "sb3-flash-high-contrast",
+        },
       ),
 
       // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/extensions
