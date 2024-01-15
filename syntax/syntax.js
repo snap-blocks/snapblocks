@@ -380,6 +380,7 @@ function parseLines(code, languages) {
           next() // Skip over whitespace.
           label = null
           break
+        case "☁":
         case "➤":
         case "◂":
         case "▸":
@@ -393,15 +394,11 @@ function parseLines(code, languages) {
             name += tok
             next()
           }
-          if (name === "cloud") {
-            children.push(new Label("☁"))
-          } else {
-            children.push(
-              Object.prototype.hasOwnProperty.call(Icon.icons, name)
-                ? new Icon(name)
-                : new Label(`@${name}`),
-            )
-          }
+          children.push(
+            Object.prototype.hasOwnProperty.call(Icon.icons, name)
+              ? new Icon(name)
+              : new Label(`@${name}`),
+          )
           label = null
           break
         }
@@ -606,6 +603,8 @@ function parseLines(code, languages) {
     const c = tok
     next()
     switch (c) {
+      case "☁":
+        return new Icon('cloud')
       case "▸":
         return new Icon("addInput")
       case "◂":
