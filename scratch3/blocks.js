@@ -22,9 +22,20 @@ const {
   iconName,
 } = style
 
+const unicodeIcons = {
+  'cloud': '☁',
+  'cloudOutline': '☁',
+}
+
 export class LabelView {
   constructor(label) {
-    Object.assign(this, label)
+    if (label.isIcon &&
+        unicodeIcons[label.name]) {
+          Object.assign(this, {value: unicodeIcons[label.name]})
+        }
+    else {
+      Object.assign(this, label)
+    }
 
     this.el = null
     this.height = 12
@@ -113,6 +124,7 @@ export class IconView {
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12 },
       pause: { width: 20, height: 20 },
+      flash: { width: 10, height: 12},
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
@@ -905,6 +917,11 @@ class DocumentView {
 }
 
 const viewFor = node => {
+  if (node instanceof Icon &&
+      unicodeIcons[node.name]) {
+        return LabelView
+      }
+  
   switch (node.constructor) {
     case Label:
       return LabelView

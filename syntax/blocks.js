@@ -121,6 +121,7 @@ export const unicodeIcons = {
   "@addInput": "▸",
   "@delInput": "◂",
   "@turtle": "➤",
+  "@cloud": "☁",
 }
 
 export const allLanguages = {}

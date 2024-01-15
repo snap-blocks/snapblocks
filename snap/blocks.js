@@ -128,6 +128,9 @@ class IconView {
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12 },
       pause: { width: 12, height: 12, dy: +1 },
+      cloud: { width: 20, height: 12},
+      cloudOutline: { width: 20, height: 12},
+      flash: { width: 10, height: 12},
     }
   }
 }

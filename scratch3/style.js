@@ -13,6 +13,10 @@ const highContrastIcons = new Set([
   "videoBlock",
   "ttsBlock",
   "translationBlock",
+  "cloud",
+  "turtle",
+  "turtleOutline",
+  "flash",
 ])
 
 export default class Style {
@@ -515,6 +519,16 @@ export default class Style {
           id: "sb3-pause"
         }
       ),
+      
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
+          fill: "white",
+        }),
+        {
+          id: "sb3-flash"
+        }
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -702,11 +716,31 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6",
-          fill: "white",
+          fill: "black",
         }),
         {
-          id: "sb3-turtle",
+          id: "sb3-turtle-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
+          fill: "none",
+          stroke: "black",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-turtleOutline-high-contrast",
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
+          fill: "black",
+        }),
+        {
+          id: "sb3-flash-high-contrast"
+        }
       ),
 
       // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/extensions

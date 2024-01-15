@@ -68,6 +68,9 @@ export class Icon {
       turtle: true,
       turtleOutline: true,
       pause: true,
+      cloud: true,
+      cloudOutline: true,
+      flash: true,
     }
   }
 

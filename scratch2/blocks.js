@@ -24,9 +24,20 @@ const {
   darkFilter,
 } = style
 
+const unicodeIcons = {
+  'cloud': '☁',
+  'cloudOutline': '☁',
+}
+
 export class LabelView {
   constructor(label) {
-    Object.assign(this, label)
+    if (label.isIcon &&
+        unicodeIcons[label.name]) {
+          Object.assign(this, {value: unicodeIcons[label.name]})
+        }
+    else {
+      Object.assign(this, label)
+    }
 
     this.el = null
     this.height = 12
@@ -119,6 +130,8 @@ class IconView {
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12 },
       pause: { width: 12, height: 12, dy: +1 },
+      cloud: { width: 20, height: 12},
+      flash: { width: 10, height: 12},
     }
   }
 }
@@ -787,6 +800,11 @@ class DocumentView {
 }
 
 const viewFor = node => {
+  if (node instanceof Icon &&
+      unicodeIcons[node.name]) {
+        return LabelView
+      }
+  
   switch (node.constructor) {
     case Label:
       return LabelView
