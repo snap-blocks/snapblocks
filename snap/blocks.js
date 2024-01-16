@@ -306,13 +306,23 @@ class BlockView {
   drawSelf(w, h, lines) {
     // mouths
     console.log('lines', lines)
+    console.log('height', this.height)
     if (lines.length > 1) {
       let y = lines[0].height
-      const p = [SVG.getTop(w)]
+      const p = []
+      console.log('shape', this.info.shape)
+      if (this.info.shape === 'stack') {
+        p.push(SVG.getTop(w))
+      } else if (this.info.shape === "boolean") {
+        p.push(SVG.getPointedTop(w, h))
+      } else if (this.info.shape === "reporter") {
+        p.push(SVG.getRoundedTop(w,h))
+      }
       let addBottom = true
       let hasNotch = true
       let inset = 0
       let isLast = false
+      let showBooleanRight = true
       for (let i = 1; i < lines.length; i += 1) {
         isLast = i + 2 === lines.length
 
@@ -325,13 +335,22 @@ class BlockView {
           inset = isLast ? 0 : 15
           y += lines[i + 1].height + 3
           addBottom = false
+          showBooleanRight = false
           i++
         } else {
           y += lines[i].height
           addBottom = true
         }
       }
-      p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
+      if (this.info.shape === "stack") {
+        p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
+      } else if (this.info.shape === "boolean") {
+        p.push(SVG.getPointedBottom(w, y, showBooleanRight))
+      } else if (this.info.shape === "reporter") {
+        p.push(SVG.getRoundedBottom(w, y))
+      } else {
+        p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
+      }
       return SVG.path({
         class: `snap-${this.info.category} snap-bevel`,
         path: p
@@ -476,12 +495,13 @@ class BlockView {
       const child = children[i]
       child.el = child.draw(this)
 
-      if (child.isScript && this.isCommand) {
+      if (child.isScript) {
         this.hasScript = true
         pushLine()
         child.y = y
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
+        console.log('script height', child.height)
         child.height = Math.max(12, child.height) + 3
         y += child.height
         line = new Line(y)
@@ -491,8 +511,8 @@ class BlockView {
                  child.value === "\n") {
         pushLine()
         child.y = y
-        scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
-        child.height = Math.max(12, child.height)
+        console.log('height', child.height)
+        child.height = Math.max(12, child.height / 2) + 3
         // y += child.height
         line = new Line(y)
       } else {
@@ -503,7 +523,7 @@ class BlockView {
             ? cmw
             : 0
           : md
-        if (mw && !lines.length && line.width < mw - px) {
+        if (mw && line.width < mw - px) {
           line.width = mw - px
         }
         child.x = line.width
