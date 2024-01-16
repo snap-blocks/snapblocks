@@ -51,11 +51,18 @@ export class LabelView {
     const value = this.value
     const cls = `snap-${this.cls}`
 
-    let group = [
-      SVG.text(0, 10, value, {
-        class: `snap-label ${cls}`,
-      })
-    ]
+    let lines = value.split("\n")
+    let group = []
+
+    let y = 0
+    for (let line of lines) {
+      y += 10
+      group.push(
+        SVG.text(0, y, line, {
+          class: `snap-label ${cls}`,
+        }))
+    }
+    this.height = y + 2
 
     this.el = SVG.group(group)
 
@@ -80,8 +87,14 @@ export class LabelView {
   static measure(value, font) {
     const context = LabelView.measuring
     context.font = font
-    const textMetrics = context.measureText(value)
-    const width = (textMetrics.width + 0.5) | 0
+    let lines = value.split("\n")
+    let width = 0
+    for (let line of lines) {
+      const textMetrics = context.measureText(line)
+      width = Math.max(width, textMetrics.width)
+    }
+
+    width = (width + 3) | 0
     return { width: width }
   }
 }
@@ -184,7 +197,7 @@ class InputView {
     }
     this.width = w
 
-    const h = (this.height = this.isRound || this.isColor ? 13 : 14)
+    const h = (this.height = this.isRound || this.isColor ? this.label.height + 1 : this.label.height + 2)
 
     let el = InputView.shapes[this.shape](w, h)
     if (this.isColor) {
@@ -292,9 +305,36 @@ class BlockView {
 
   drawSelf(w, h, lines) {
     // mouths
+    console.log('lines', lines)
     if (lines.length > 1) {
-      return SVG.mouthRect(w, h, this.isFinal, lines, {
+      let y = lines[0].height
+      const p = [SVG.getTop(w)]
+      let addBottom = true
+      let hasNotch = true
+      let inset = 0
+      let isLast = false
+      for (let i = 1; i < lines.length; i += 1) {
+        isLast = i + 2 === lines.length
+
+        if (lines[i] instanceof ScriptView) {
+          p.push(SVG.getRightAndBottom(w, y,  true, 15))
+          y += lines[i].height - 3
+          p.push(SVG.getArm(w, y))
+          
+          hasNotch = !(isLast && this.isFinal)
+          inset = isLast ? 0 : 15
+          y += lines[i + 1].height + 3
+          addBottom = false
+          i++
+        } else {
+          y += lines[i].height
+          addBottom = true
+        }
+      }
+      p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
+      return SVG.path({
         class: `snap-${this.info.category} snap-bevel`,
+        path: p
       })
     }
 
@@ -447,6 +487,14 @@ class BlockView {
         line = new Line(y)
       } else if (child.isArrow) {
         line.children.push(child)
+      } else if (child.isLabel &&
+                 child.value === "\n") {
+        pushLine()
+        child.y = y
+        scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
+        child.height = Math.max(12, child.height)
+        // y += child.height
+        line = new Line(y)
       } else {
         const cmw = i > 0 ? 30 : 0 // 27
         const md = this.isCommand ? 0 : this.minDistance(child)

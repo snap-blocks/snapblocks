@@ -403,6 +403,13 @@ function parseLines(code, languages) {
           break
         }
         case "\\":
+          if (tok === "\\" && peek() === "n") {
+            label = null
+            children.push(new Label("\n"))
+            next()
+            next()
+            break
+          }
           next() // escape character
         // fallthrough
         case ":":
@@ -427,11 +434,15 @@ function parseLines(code, languages) {
     next() // '['
     let s = ""
     let escapeV = false
-    while (tok && tok !== "]" && tok !== "\n") {
+    while (tok && tok !== "]") {
       if (tok === "\\") {
         next()
         if (tok === "v") {
           escapeV = true
+        }
+        if (tok === "n") {
+          s += "\n"
+          next()
         }
         if (!tok) {
           break

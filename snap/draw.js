@@ -250,27 +250,36 @@ export default class SVG {
       ])
     }
     if (inset > 0) {
-      arr = arr.concat(["L", inset + 2, y, "L", inset, y + 2])
+      arr = arr.concat(["L", inset + 5, y,])
+      arr = arr.concat([
+        "C",
+        inset + 2,
+        y,
+        inset,
+        y + 2,
+        inset,
+        y + 5,
+      ])
     } else {
       arr = arr.concat(["L", inset + 5, y,])
+      arr = arr.concat([
+        "C",
+        inset + 2,
+        y,
+        inset,
+        y - 2,
+        inset,
+        y - 5,
+      ])
     }
-    arr = arr.concat([
-      "C",
-      inset + 2,
-      y,
-      inset,
-      y - 2,
-      inset,
-      y - 5,
-    ])
     return arr.join(" ")
   }
 
   static getArm(w, armTop) {
-    return `L 15 ${armTop - 2}
-      L 17 ${armTop}
-      L ${w - 3} ${armTop}
-      L ${w} ${armTop + 3}`
+    return `L 15 ${armTop - 5}
+      C 15 ${armTop - 2} 17 ${armTop} 20 ${armTop}
+      L ${w - 5} ${armTop}
+      C ${w - 2} ${armTop} ${w} ${armTop + 2} ${w} ${armTop + 5}`
   }
 
   static stackRect(w, h, props) {
