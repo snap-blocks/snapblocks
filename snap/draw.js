@@ -218,21 +218,24 @@ export default class SVG {
 
   static getPointedTop(w, h) {
     const r = 8
-    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w} 0`
+    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
   }
 
   static getPointedBottom(w, h, showRight) {
     const r = 8
     let path = ``
     if (showRight) {
-      path += `L ${w + r} ${h / 2} L ${w} ${h}`
+      path += `L ${w} ${h / 2} `
     }
-    path += `L ${w} ${h}`
+    path += `L ${w - r} ${h}`
     return path
   }
 
   static pointedRect(w, h, props) {
-    return SVG.path({ ...props, path: SVG.pointedPath(w, h) })
+    return SVG.path({
+      ...props,
+      path: [SVG.getPointedTop(w,h), SVG.getPointedBottom(w,h,true)]
+    })
   }
 
   static getTop(w) {

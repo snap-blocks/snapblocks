@@ -327,9 +327,9 @@ class BlockView {
         isLast = i + 2 === lines.length
 
         if (lines[i] instanceof ScriptView) {
-          p.push(SVG.getRightAndBottom(w, y,  true, 15))
+          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 8, y,  true, 15))
           y += lines[i].height - 3
-          p.push(SVG.getArm(w, y))
+          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y))
           
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 15

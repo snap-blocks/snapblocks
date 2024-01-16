@@ -332,7 +332,7 @@ function parseLines(code, languages) {
   function pParts(end) {
     const children = []
     let label
-    while (tok && tok !== "\n") {
+    while (tok) {
       // So that comparison operators `<()<()>` and `<()>()>` don't need the
       // central <> escaped, we interpret it as a label if particular
       // conditions are met.
@@ -402,6 +402,11 @@ function parseLines(code, languages) {
           label = null
           break
         }
+        case "\n":
+          console.log('end', end)
+          if (end) {
+            break
+          }
         case "\\":
           if (tok === "\\" && peek() === "n") {
             label = null
@@ -425,6 +430,15 @@ function parseLines(code, languages) {
           }
           label.value += tok
           next()
+      }
+      if (tok === '\n') {
+        if (end && end !== "}") {
+          label = null
+          children.push(new Label("\n"))
+          next()
+        } else {
+          break
+        }
       }
     }
     return children
