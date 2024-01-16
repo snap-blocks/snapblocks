@@ -403,7 +403,7 @@ function parseLines(code, languages) {
           break
         }
         case "\n":
-          console.log('end', end)
+          console.log("end", end)
           if (end) {
             break
           }
@@ -431,7 +431,7 @@ function parseLines(code, languages) {
           label.value += tok
           next()
       }
-      if (tok === '\n') {
+      if (tok === "\n") {
         if (end && end !== "}") {
           label = null
           children.push(new Label("\n"))
