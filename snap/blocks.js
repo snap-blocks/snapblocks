@@ -155,6 +155,8 @@ class InputView {
       this.label = newView(input.label)
     }
 
+    console.log('input', this)
+
     this.x = 0
   }
 
@@ -197,7 +199,7 @@ class InputView {
     }
     this.width = w
 
-    const h = (this.height = this.isRound || this.isColor ? this.label.height + 1 : this.label.height + 2)
+    const h = (this.height = this.isRound || this.isColor ? 13 : 14)
 
     let el = InputView.shapes[this.shape](w, h)
     if (this.isColor) {

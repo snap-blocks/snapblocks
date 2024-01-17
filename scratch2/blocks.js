@@ -141,6 +141,8 @@ class InputView {
       this.label = newView(input.label)
     }
 
+    console.log('sb2 input', this)
+
     this.x = 0
   }
 
