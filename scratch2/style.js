@@ -223,6 +223,135 @@ export default class Style {
           id: "flash",
         },
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "white",
+        }),
+        {
+          id: "arrowUp"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "arrowUpOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "arrowUpThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUp",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "arrowDown"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpOutline",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "arrowDownOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpThin",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "arrowDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUp",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "arrowLeft"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpOutline",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "arrowLeftOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpThin",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "arrowLeftThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUp",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "arrowRight"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpOutline",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "arrowRightOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "arrowRightThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "arrowUpDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#arrowUpDownThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "arrowLeftRightThin"
+        }
+      ),
     ]
   }
 

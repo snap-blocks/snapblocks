@@ -71,6 +71,21 @@ export class Icon {
       cloud: true,
       cloudOutline: true,
       flash: true,
+
+      arrowUp: true,
+      arrowUpOutline: true,
+      arrowUpThin: true,
+      arrowDown: true,
+      arrowDownOutline: true,
+      arrowDownThin: true,
+      arrowLeft: true,
+      arrowLeftOutline: true,
+      arrowLeftThin: true,
+      arrowRight: true,
+      arrowRightOutline: true,
+      arrowRightThin: true,
+      arrowUpDownThin: true,
+      arrowLeftRightThin: true,
     }
   }
 

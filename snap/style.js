@@ -252,6 +252,136 @@ export default class Style {
           id: "snap-flash"
         }
       ),
+
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "white",
+        }),
+        {
+          id: "snap-arrowUp"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "snap-arrowUpOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "snap-arrowUpThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUp",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "snap-arrowDown"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpOutline",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "snap-arrowDownOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpThin",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "snap-arrowDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUp",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "snap-arrowLeft"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpOutline",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "snap-arrowLeftOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpThin",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "snap-arrowLeftThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUp",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "snap-arrowRight"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpOutline",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "snap-arrowRightOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "snap-arrowRightThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "snap-arrowUpDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#snap-arrowUpDownThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "snap-arrowLeftRightThin"
+        }
+      ),
     ]
   }
 

@@ -17,6 +17,20 @@ const highContrastIcons = new Set([
   "turtle",
   "turtleOutline",
   "flash",
+  "arrowUp",
+  "arrowUpOutline",
+  "arrowUpThin",
+  "arrowDown",
+  "arrowDownOutline",
+  "arrowDownThin",
+  "arrowLeft",
+  "arrowLeftOutline",
+  "arrowLeftThin",
+  "arrowRight",
+  "arrowRightOutline",
+  "arrowRightThin",
+  "arrowUpDownThin",
+  "arrowLeftRightThin",
 ])
 
 export default class Style {
@@ -529,6 +543,135 @@ export default class Style {
           id: "sb3-flash",
         },
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "white",
+        }),
+        {
+          id: "sb3-arrowUp"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "sb3-arrowUpOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "sb3-arrowUpThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDown"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDownOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeft"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRight"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRightOutline"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRightThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
+          fill: "none",
+          stroke: "white",
+        }),
+        {
+          id: "sb3-arrowUpDownThin"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpDownThin",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftRightThin"
+        }
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -741,6 +884,135 @@ export default class Style {
         {
           id: "sb3-flash-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "black",
+        }),
+        {
+          id: "sb3-arrowUp-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
+          fill: "none",
+          stroke: "black",
+        }),
+        {
+          id: "sb3-arrowUpOutline-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          fill: "none",
+          stroke: "black",
+        }),
+        {
+          id: "sb3-arrowUpThin-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp-high-contrast",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDown-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline-high-contrast",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDownOutline-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin-high-contrast",
+          transform: "rotate(180 6 6)"
+        }),
+        {
+          id: "sb3-arrowDownThin-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp-high-contrast",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeft-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline-high-contrast",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftOutline-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin-high-contrast",
+          transform: "rotate(-90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftThin-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUp-high-contrast",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRight-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpOutline-high-contrast",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRightOutline-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpThin-high-contrast",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowRightThin-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
+          fill: "none",
+          stroke: "black",
+        }),
+        {
+          id: "sb3-arrowUpDownThin-high-contrast"
+        }
+      ),
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-arrowUpDownThin-high-contrast",
+          transform: "rotate(90 6 6)"
+        }),
+        {
+          id: "sb3-arrowLeftRightThin-high-contrast"
+        }
       ),
 
       // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/extensions
