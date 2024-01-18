@@ -131,20 +131,20 @@ class IconView {
       cloud: { width: 20, height: 12 },
       flash: { width: 10, height: 12 },
 
-      arrowUp: { width: 12, height: 12},
-      arrowUpOutline: { width: 12, height: 12},
-      arrowUpThin: { width: 12, height: 12},
-      arrowDown: { width: 12, height: 12},
-      arrowDownOutline: { width: 12, height: 12},
-      arrowDownThin: { width: 12, height: 12},
-      arrowLeft: { width: 12, height: 12},
-      arrowLeftOutline: { width: 12, height: 12},
-      arrowLeftThin: { width: 12, height: 12},
-      arrowRight: { width: 12, height: 12},
-      arrowRightOutline: { width: 12, height: 12},
-      arrowRightThin: { width: 12, height: 12},
-      arrowUpDownThin: { width: 12, height: 12},
-      arrowLeftRightThin: { width: 12, height: 12},
+      arrowUp: { width: 12, height: 12 },
+      arrowUpOutline: { width: 12, height: 12 },
+      arrowUpThin: { width: 12, height: 12 },
+      arrowDown: { width: 12, height: 12 },
+      arrowDownOutline: { width: 12, height: 12 },
+      arrowDownThin: { width: 12, height: 12 },
+      arrowLeft: { width: 12, height: 12 },
+      arrowLeftOutline: { width: 12, height: 12 },
+      arrowLeftThin: { width: 12, height: 12 },
+      arrowRight: { width: 12, height: 12 },
+      arrowRightOutline: { width: 12, height: 12 },
+      arrowRightThin: { width: 12, height: 12 },
+      arrowUpDownThin: { width: 12, height: 12 },
+      arrowLeftRightThin: { width: 12, height: 12 },
     }
   }
 }
@@ -156,7 +156,7 @@ class InputView {
       this.label = newView(input.label)
     }
 
-    console.log('sb2 input', this)
+    console.log("sb2 input", this)
 
     this.x = 0
   }

@@ -332,7 +332,7 @@ function parseLines(code, languages) {
   function pParts(end) {
     const children = []
     let label
-    while (tok && tok !== '\n') {
+    while (tok && tok !== "\n") {
       // So that comparison operators `<()<()>` and `<()>()>` don't need the
       // central <> escaped, we interpret it as a label if particular
       // conditions are met.
@@ -432,17 +432,17 @@ function parseLines(code, languages) {
           next()
       }
       if (tok === "\n") {
-        console.log('end', end)
+        console.log("end", end)
         if (end && end !== "}") {
           label = null
-          while (tok && tok !== end && tok === '\n') {
+          while (tok && tok !== end && tok === "\n") {
             children.push(new Label("\n"))
             next()
           }
         }
         // } else {
-          // next()
-          // break
+        // next()
+        // break
         // }
       }
     }
@@ -1090,7 +1090,8 @@ function recogniseStuff(scripts) {
         info = block.info
       }
 
-      if (block.info &&
+      if (
+        block.info &&
         block.info.categoryIsDefault &&
         block.info.category === "obsolete" &&
         block.info.shape === "ring"
