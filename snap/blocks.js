@@ -1,3 +1,4 @@
+import { types } from "@babel/core"
 import {
   Label,
   Icon,
@@ -138,8 +139,8 @@ class IconView {
       delInput: { width: 8, height: 16 },
       list: { width: 12, height: 14 },
       play: { width: 20, height: 20 },
-      turtle: { width: 18, height: 12 },
-      turtleOutline: { width: 18, height: 12 },
+      turtle: { width: 18, height: 12, dy: +1 },
+      turtleOutline: { width: 18, height: 12, dy: +1 },
       pause: { width: 12, height: 12, dy: +1 },
       cloud: { width: 20, height: 12},
       cloudOutline: { width: 20, height: 12},
@@ -469,18 +470,21 @@ class BlockView {
     const Line = function (y) {
       this.y = y
       this.width = 0
-      this.height = y ? 13 : 16
+      this.height = 12
       this.children = []
     }
 
     let innerWidth = 0
     let scriptWidth = 0
     let line = new Line(y)
-    const pushLine = isLast => {
-      if (lines.length === 0) {
+    const pushLine = (type) => {
+      if (([0, null]).includes(type)) {
+        console.log('0')
         line.height += pt + pb
       } else {
-        line.height += isLast ? 0 : +2
+        console.log('1')
+
+        line.height += (type === 1) ? 0 : +2
         line.y -= 1
       }
       y += line.height
@@ -508,13 +512,14 @@ class BlockView {
     }
 
     const lines = []
+    console.log('before line', line.height)
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       child.el = child.draw(this)
 
       if (child.isScript) {
         this.hasScript = true
-        pushLine()
+        pushLine(2)
         child.y = y
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
@@ -526,11 +531,10 @@ class BlockView {
         line.children.push(child)
       } else if (child.isLabel &&
                  child.value === "\n") {
-        pushLine()
-        child.y = y
+        // child.y = y
+        console.log('line', line.height)
+        pushLine(2)
         console.log('height', child.height)
-        child.height = Math.max(12, child.height / 2) + 3
-        // y += child.height
         line = new Line(y)
       } else {
         const cmw = i > 0 ? 30 : 0 // 27
@@ -553,7 +557,14 @@ class BlockView {
         line.children.push(child)
       }
     }
-    pushLine(true)
+    if (lines.length === 0) {
+      console.log('0 before height', line.height)
+      // line.height = Math.max(line.height, 16)
+      console.log('0 after height', line.height)
+      pushLine(0)
+    } else {
+      pushLine(1)
+    }
 
     innerWidth = Math.max(
       innerWidth + px * 2,

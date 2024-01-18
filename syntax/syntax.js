@@ -390,13 +390,29 @@ function parseLines(code, languages) {
         case "@": {
           next()
           let name = ""
+          let modifiers = null
           while (tok && /[a-zA-Z]/.test(tok)) {
             name += tok
             next()
           }
+          if (tok === '-') {
+            modifiers = ["", "", "", ""]
+            let modifier = 0
+            modifiers[modifier] = ""
+            next() // "-"
+            while (tok && /[0-9a-z-A-Z\-\.]/.test(tok)) {
+              if (tok === "-") {
+                modifier += 1
+                modifiers[modifier] = ""
+              } else {
+                modifiers[modifier] += tok
+              }
+              next()
+            }
+          }
           children.push(
             Object.prototype.hasOwnProperty.call(Icon.icons, name)
-              ? new Icon(name)
+              ? new Icon(name, modifiers)
               : new Label(`@${name}`),
           )
           label = null
@@ -408,7 +424,7 @@ function parseLines(code, languages) {
             break
           }
         case "\\":
-          if (tok === "\\" && peek() === "n") {
+          if (tok === "\\" && (["n", "\n"]).includes(peek())) {
             label = null
             children.push(new Label("\n"))
             next()
@@ -459,7 +475,7 @@ function parseLines(code, languages) {
         if (tok === "v") {
           escapeV = true
         }
-        if (tok === "n") {
+        if (tok === (["n", "\n"]).includes(peek())) {
           s += "\n"
           next()
         }
@@ -957,7 +973,11 @@ function recogniseStuff(scripts) {
           if (child.isLabel) {
             // so we can format custom blocks with + between segments like snap
             if (child.value != "+") {
-              parts.push(child.value)
+              if (child.value === "$nl") {
+                parts.push('\n')
+              } else {
+                parts.push(child.value)
+              }
             }
           } else if (child.isBlock) {
             if (!child.isUpvar) {
@@ -1027,7 +1047,7 @@ function recogniseStuff(scripts) {
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
 
-        console.log("names", names)
+        console.log("spec", spec)
         let info = {
           spec: spec,
           names: names,
