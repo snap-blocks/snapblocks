@@ -124,7 +124,7 @@ class IconView {
       addInput: { width: 8, height: 16 },
       delInput: { width: 8, height: 16 },
       list: { width: 12, height: 14 },
-      play: { width: 20, height: 20 },
+      pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12 },
       pause: { width: 12, height: 12, dy: +1 },

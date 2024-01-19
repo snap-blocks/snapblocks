@@ -47,6 +47,7 @@ export class Icon {
   constructor(name, modifiers) {
     this.name = name
     this.isArrow = name === "loopArrow"
+    this.isLoop = false
     this.modifiers = modifiers || null
 
     this.scale = this.modifiers ? (parseFloat(this.modifiers[0])) : null
@@ -70,7 +71,7 @@ export class Icon {
       addInput: true,
       delInput: true,
       list: true,
-      play: true,
+      pointRight: true,
       turtle: true,
       turtleOutline: true,
       pause: true,

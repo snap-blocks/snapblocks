@@ -1717,4 +1717,14 @@ export default [
     shape: "stack",
     category: "boost",
   },
+  {
+    snap: "moveSteps",
+    spec: "map %1 over %2",
+    aliases: [
+      "map %1 over @list",
+    ],
+    inputs: ["%n", "%s"],
+    shape: "reporter",
+    category: "list",
+  }
 ]

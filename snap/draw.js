@@ -90,9 +90,17 @@ export default class SVG {
   }
 
   static move(dx, dy, el) {
-    SVG.setProps(el, {
-      transform: `translate(${dx} ${dy})`,
-    })
+    
+    let currentValue = el.getAttributeNS(null, 'transform')
+    if (!currentValue) {
+      SVG.setProps(el, {
+        transform: `translate(${dx} ${dy})`,
+      })
+    } else {
+      SVG.setProps(el, {
+        transform: `translate(${dx} ${dy}) ${currentValue}`,
+      })
+    }
     return el
   }
 

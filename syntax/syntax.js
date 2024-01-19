@@ -218,7 +218,10 @@ function paintBlock(info, children, languages) {
 
   // loop arrows
   if (info.hasLoopArrow) {
-    children.push(new Icon("loopArrow"))
+    let arrow = new Icon("loopArrow")
+    arrow.isLoop = true
+    arrow.scale = 0.5
+    children.push(arrow)
   }
 
   const block = new Block(info, children)
@@ -1110,6 +1113,7 @@ function recogniseStuff(scripts) {
         info = block.info
       }
 
+      // ring
       if (
         block.info &&
         block.info.categoryIsDefault &&

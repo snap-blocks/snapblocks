@@ -112,6 +112,31 @@ class IconView {
       throw new Error(`no info for icon: ${this.name}`)
     }
     Object.assign(this, info)
+
+    if (isNaN(this.scale) ||
+        this.scale <= 0) {
+          this.scale = 1
+        }
+
+    this.scale = !isNaN(icon.scale) && icon.scale !== null ? icon.scale : (isNaN(this.scale) || this.scale == null) ? 1 : this.scale
+    this.r = !isNaN(icon.r) && icon.r !== null ? icon.r : (isNaN(this.r) || this.r == null) ? 255 : this.r
+    this.g = !isNaN(icon.g) && icon.g !== null ? icon.g : (isNaN(this.g) || this.g == null) ? 255 : this.g
+    this.b = !isNaN(icon.b) && icon.b !== null ? icon.b : (isNaN(this.b) || this.b == null) ? 255 : this.b
+    
+    if (this.scale <= 0) {
+      this.scale = 1
+    }
+
+    if (isNaN(this.r) || this.r == null) {
+      this.r = 255
+    }
+
+    this.width = this.width * this.scale
+    this.height = this.height * this.scale
+
+    if (!this.fillAttribute) {
+      this.fillAttribute = "fill"
+    }
   }
 
   get isIcon() {
@@ -119,10 +144,19 @@ class IconView {
   }
 
   draw() {
-    let symbol = SVG.symbol(`#snap-${this.name}`, {
+    let props = {
       width: this.width,
       height: this.height,
-    })
+      transform: `scale(${this.scale})`,
+    }
+    if (Array.isArray(this.fillAttribute)) {
+      for (const fillAttribute of this.fillAttribute) {
+        props[fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+      }
+    } else {
+      props[this.fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+    }
+    let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
     console.log('symbol', symbol)
     symbol.classList.add('snap-icon')
     return symbol
@@ -130,36 +164,36 @@ class IconView {
 
   static get icons() {
     return {
-      greenFlag: { width: 20, height: 21, dy: -2 },
-      stopSign: { width: 21, height: 21 },
+      greenFlag: { width: 12, height: 12, dy: -2, scale: 1.5, r: 0, g: 200, b: 0, fillAttribute: "stroke" },
+      stopSign: { width: 21, height: 21, r: 200, g: 0, b: 0 },
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
-      loopArrow: { width: 14, height: 11 },
-      addInput: { width: 8, height: 16 },
-      delInput: { width: 8, height: 16 },
+      loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
+      addInput: { width: 8, height: 16, r: 0, g: 0, b: 0 },
+      delInput: { width: 8, height: 16, r: 0, g: 0, b: 0 },
       list: { width: 12, height: 14 },
-      play: { width: 20, height: 20 },
+      pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
-      turtleOutline: { width: 18, height: 12, dy: +1 },
-      pause: { width: 12, height: 12, dy: +1 },
+      turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
+      pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
       cloud: { width: 20, height: 12},
-      cloudOutline: { width: 20, height: 12},
+      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke"},
       flash: { width: 10, height: 12},
 
-      arrowUp: { width: 12, height: 12},
-      arrowUpOutline: { width: 12, height: 12},
-      arrowUpThin: { width: 12, height: 12},
-      arrowDown: { width: 12, height: 12},
-      arrowDownOutline: { width: 12, height: 12},
-      arrowDownThin: { width: 12, height: 12},
-      arrowLeft: { width: 12, height: 12},
-      arrowLeftOutline: { width: 12, height: 12},
-      arrowLeftThin: { width: 12, height: 12},
-      arrowRight: { width: 12, height: 12},
-      arrowRightOutline: { width: 12, height: 12},
-      arrowRightThin: { width: 12, height: 12},
-      arrowUpDownThin: { width: 12, height: 12},
-      arrowLeftRightThin: { width: 12, height: 12},
+      arrowUp:            { width: 12, height: 12},
+      arrowUpOutline:     { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowUpThin:        { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowDown:          { width: 12, height: 12},
+      arrowDownOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowDownThin:      { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowLeft:          { width: 12, height: 12},
+      arrowLeftOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowLeftThin:      { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowRight:         { width: 12, height: 12},
+      arrowRightOutline:  { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowRightThin:     { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowUpDownThin:    { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke"},
     }
   }
 }
@@ -335,6 +369,8 @@ class BlockView {
         p.push(SVG.getPointedTop(w, h))
       } else if (this.info.shape === "reporter") {
         p.push(SVG.getRoundedTop(w,h))
+      } else {
+        p.push(SVG.getTop(w))
       }
       let addBottom = true
       let hasNotch = true
@@ -527,8 +563,8 @@ class BlockView {
         child.height = Math.max(12, child.height) + 3
         y += child.height
         line = new Line(y)
-      } else if (child.isArrow) {
-        line.children.push(child)
+      // } else if (child.isArrow) {
+      //   line.children.push(child)
       } else if (child.isLabel &&
                  child.value === "\n") {
         // child.y = y
@@ -549,7 +585,7 @@ class BlockView {
         }
         child.x = line.width
         line.width += child.width
-        innerWidth = Math.max(innerWidth, line.width + Math.max(0, md - px))
+        innerWidth = Math.max(innerWidth, line.width + Math.max(1, md - px))
         line.width += 4
         if (!child.isLabel) {
           line.height = Math.max(line.height, child.height)
@@ -559,7 +595,7 @@ class BlockView {
     }
     if (lines.length === 0) {
       console.log('0 before height', line.height)
-      // line.height = Math.max(line.height, 16)
+      line.height = Math.max(line.height, 16)
       console.log('0 after height', line.height)
       pushLine(0)
     } else {
@@ -599,8 +635,10 @@ class BlockView {
       const h = line.height
 
       for (const child of line.children) {
-        if (child.isArrow) {
-          objects.push(SVG.move(innerWidth - 15, this.height - 3, child.el))
+        if (child.isLoop) {
+          objects.push(SVG.move(innerWidth - child.width - 3 - ((this.info.shape === 'boolean') * 6), this.height - child.height - 3, child.el))
+          console.log('innerWidth', innerWidth)
+          console.log('arrow width', child.width)
           continue
         }
 

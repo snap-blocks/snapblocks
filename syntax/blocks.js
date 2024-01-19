@@ -88,10 +88,15 @@ export function minifyHash(hash) {
 export const blocksById = {}
 const allBlocks = scratchCommands.map(def => {
   if (!def.id) {
-    if (!def.selector) {
+    if (!def.selector && !def.snap) {
       throw new Error(`Missing ID: ${def.spec}`)
     }
-    def.id = `sb2:${def.selector}`
+    if (def.selector) {
+      def.id = `sb2:${def.selector}`
+    }
+    if (def.snap) {
+      def.id = `snap:${def.snap}`
+    }
   }
   if (!def.spec) {
     throw new Error(`Missing spec: ${def.id}`)
@@ -106,6 +111,7 @@ const allBlocks = scratchCommands.map(def => {
     shape: def.shape,
     category: def.category,
     hasLoopArrow: !!def.hasLoopArrow,
+    aliases: def.aliases || []
   }
   if (blocksById[info.id]) {
     throw new Error(`Duplicate ID: ${info.id}`)
@@ -174,7 +180,8 @@ function loadLanguage(code, language) {
   Object.keys(language.renamedBlocks || {}).forEach(alt => {
     const id = language.renamedBlocks[alt]
     if (!blocksById[id]) {
-      throw new Error(`Unknown ID: ${id}`)
+      console.error(`Unknown ID: ${id}`)
+      return
     }
     const block = blocksById[id]
     const hash = hashSpec(alt)
@@ -255,6 +262,12 @@ export const english = {
 }
 allBlocks.forEach(info => {
   english.commands[info.id] = info.spec
+  
+  if (info.aliases) {
+    for (const alias of info.aliases) {
+      english.aliases[alias] = info.id
+    }
+  }
 })
 loadLanguages({
   en: english,
@@ -413,6 +426,7 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
 })
 
 export function lookupHash(hash, info, children, languages) {
+  console.log('info', structuredClone(info))
   for (const lang of languages) {
     if (Object.prototype.hasOwnProperty.call(lang.blocksByHash, hash)) {
       const collisions = lang.blocksByHash[hash]
