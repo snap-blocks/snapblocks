@@ -555,7 +555,11 @@ class BlockView {
 
       if (child.isScript) {
         this.hasScript = true
-        pushLine(2)
+        if (lines.length === 0) {
+          pushLine(0)
+        } else {
+          pushLine(2)
+        }
         child.y = y
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
@@ -569,7 +573,12 @@ class BlockView {
                  child.value === "\n") {
         // child.y = y
         console.log('line', line.height)
-        pushLine(2)
+        console.log('previous line', lines[lines.length - 1] instanceof ScriptView)
+        if (lines.length === 0) {
+          pushLine(0)
+        } else {
+          pushLine(2)
+        }
         console.log('height', child.height)
         line = new Line(y)
       } else {
