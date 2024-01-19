@@ -50,10 +50,10 @@ export class Icon {
     this.isLoop = false
     this.modifiers = modifiers || null
 
-    this.scale = this.modifiers ? (parseFloat(this.modifiers[0])) : null
-    this.r = this.modifiers ? (parseFloat(this.modifiers[1])) : null
-    this.g = this.modifiers ? (parseFloat(this.modifiers[2])) : null
-    this.b = this.modifiers ? (parseFloat(this.modifiers[3])) : null
+    this.scale = this.modifiers ? parseFloat(this.modifiers[0]) : null
+    this.r = this.modifiers ? parseFloat(this.modifiers[1]) : null
+    this.g = this.modifiers ? parseFloat(this.modifiers[2]) : null
+    this.b = this.modifiers ? parseFloat(this.modifiers[3]) : null
 
     assert(Icon.icons[name], `no info for icon ${name}`)
   }
