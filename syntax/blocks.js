@@ -111,7 +111,7 @@ const allBlocks = scratchCommands.map(def => {
     shape: def.shape,
     category: def.category,
     hasLoopArrow: !!def.hasLoopArrow,
-    aliases: def.aliases || []
+    aliases: def.aliases || [],
   }
   if (blocksById[info.id]) {
     throw new Error(`Duplicate ID: ${info.id}`)
@@ -262,7 +262,7 @@ export const english = {
 }
 allBlocks.forEach(info => {
   english.commands[info.id] = info.spec
-  
+
   if (info.aliases) {
     for (const alias of info.aliases) {
       english.aliases[alias] = info.id
@@ -426,7 +426,7 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
 })
 
 export function lookupHash(hash, info, children, languages) {
-  console.log('info', structuredClone(info))
+  console.log("info", structuredClone(info))
   for (const lang of languages) {
     if (Object.prototype.hasOwnProperty.call(lang.blocksByHash, hash)) {
       const collisions = lang.blocksByHash[hash]

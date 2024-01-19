@@ -398,7 +398,7 @@ function parseLines(code, languages) {
             name += tok
             next()
           }
-          if (tok === '-') {
+          if (tok === "-") {
             modifiers = ["", "", "", ""]
             let modifier = 0
             modifiers[modifier] = ""
@@ -427,7 +427,7 @@ function parseLines(code, languages) {
             break
           }
         case "\\":
-          if (tok === "\\" && (["n", "\n"]).includes(peek())) {
+          if (tok === "\\" && ["n", "\n"].includes(peek())) {
             label = null
             children.push(new Label("\n"))
             next()
@@ -478,7 +478,7 @@ function parseLines(code, languages) {
         if (tok === "v") {
           escapeV = true
         }
-        if (tok === (["n", "\n"]).includes(peek())) {
+        if (tok === ["n", "\n"].includes(peek())) {
           s += "\n"
           next()
         }
@@ -977,7 +977,7 @@ function recogniseStuff(scripts) {
             // so we can format custom blocks with + between segments like snap
             if (child.value != "+") {
               if (child.value === "$nl") {
-                parts.push('\n')
+                parts.push("\n")
               } else {
                 parts.push(child.value)
               }
