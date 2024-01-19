@@ -70,6 +70,7 @@ export class Icon {
       loopArrow: true,
       addInput: true,
       delInput: true,
+      verticalEllipsis: true,
       list: true,
       pointRight: true,
       turtle: true,

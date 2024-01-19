@@ -90,9 +90,16 @@ export default class SVG {
   }
 
   static move(dx, dy, el) {
-    SVG.setProps(el, {
-      transform: `translate(${dx} ${dy})`,
-    })
+    let currentValue = el.getAttributeNS(null, 'transform')
+    if (!currentValue) {
+      SVG.setProps(el, {
+        transform: `translate(${dx} ${dy})`,
+      })
+    } else {
+      SVG.setProps(el, {
+        transform: `translate(${dx} ${dy}) ${currentValue}`,
+      })
+    }
     return el
   }
 
@@ -172,6 +179,19 @@ export default class SVG {
     return SVG.path({ ...props, path: SVG.roundedPath(w, h) })
   }
 
+  static getRoundedTop(w, h) {
+    return `M 0 10
+      C 0 5 5 0 10 0
+      L ${w - 10} 0
+      C ${w - 5} 0 ${w} 5 ${w} 10`
+  }
+
+  static getRoundedBottom(w, h) {
+    return `L ${w} ${h - 10}
+      C ${w} ${h - 5} ${w - 5} ${h} ${w - 10} ${h}
+      L 10 ${h}
+      C 5 ${h} 0 ${h - 5} 0 ${h - 10}`
+  }
   static pointedPath(w, h) {
     const r = h / 2
     return [
@@ -202,8 +222,27 @@ export default class SVG {
     ]
   }
 
+  
+  static getPointedTop(w, h) {
+    const r = 8
+    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
+  }
+
+  static getPointedBottom(w, h, showRight) {
+    const r = 8
+    let path = ``
+    if (showRight) {
+      path += `L ${w} ${h / 2} `
+    }
+    path += `L ${w - r} ${h}`
+    return path
+  }
+
   static pointedRect(w, h, props) {
-    return SVG.path({ ...props, path: SVG.pointedPath(w, h) })
+    return SVG.path({
+      ...props,
+      path: [SVG.getPointedTop(w,h), SVG.getPointedBottom(w,h,true)]
+    })
   }
 
   static getTop(w) {

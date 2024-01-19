@@ -10,14 +10,12 @@ export default class Style {
   static makeIcons() {
     return [
       SVG.el("path", {
-        d: "M1.504 21L0 19.493 4.567 0h1.948l-.5 2.418s1.002-.502 3.006 0c2.006.503 3.008 2.01 6.517 2.01 3.508 0 4.463-.545 4.463-.545l-.823 9.892s-2.137 1.005-5.144.696c-3.007-.307-3.007-2.007-6.014-2.51-3.008-.502-4.512.503-4.512.503L1.504 21z",
-        fill: "#3f8d15",
+        d: "M 1.0027 14 L 0 12.9953 L 3.0447 0 h 1.2987 l -0.3333 1.612 s 0.668 -0.3347 2.004 0 c 1.3373 0.3353 2.0053 1.34 4.3447 1.34 c 2.3387 0 2.9753 -0.3633 2.9753 -0.3633 l -0.5487 6.5947 s -1.4247 0.67 -3.4293 0.464 c -2.0047 -0.2047 -2.0047 -1.338 -4.0093 -1.6733 c -2.0053 -0.3347 -3.008 0.3353 -3.008 0.3353 L 1.0027 14 z",
         id: "greenFlag",
       }),
       SVG.el("polygon", {
         points:
           "6.3,0.4725 12.516,0.4725 18.585,6.3 18.585,12.495 12.495,18.585 6.3,18.585 0.483,12.495 0.483,6.3  ",
-        fill: "#bb0010",
         id: "stopSign",
       }),
       SVG.el("path", {
@@ -31,19 +29,27 @@ export default class Style {
         id: "turnLeft",
       }),
       SVG.el("path", {
-        d: "M 0 2 L 7 8 L 0 14 Z",
-        fill: "#111",
+        d: "M 0 0 L 6 6 L 0 12 Z",
         id: "addInput",
       }),
       SVG.el("path", {
-        d: "M 7 2 L 7 14 L 0 8 Z",
-        fill: "#111",
+        d: "M 0 6 L 6 0 L 6 12 Z",
         id: "delInput",
       }),
       SVG.setProps(
+        SVG.el("path", {
+          d: `M 2.4000000000000004 1.2000000000000002 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 1.1988000001999994 Z
+              M 2.4000000000000004 6.000000000000001 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 5.9988000002 Z
+              M 2.4000000000000004 10.8 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 10.7988000002 Z`
+        }),
+        {
+          id: "verticalEllipsis"
+        }
+      ),
+      SVG.setProps(
         SVG.group([
           SVG.el("path", {
-            d: "M8 0l2 -2l0 -3l3 0l-4 -5l-4 5l3 0l0 3l-8 0l0 2",
+            d: "M 16 20 l 4 -4 l 0 -6 l 6 0 l -8 -10 l -8 10 l 6 0 l 0 6 l -16 0 l 0 4",
             fill: "#000",
             opacity: "0.3",
           }),
@@ -51,8 +57,7 @@ export default class Style {
             -1,
             -1,
             SVG.el("path", {
-              d: "M8 0l2 -2l0 -3l3 0l-4 -5l-4 5l3 0l0 3l-8 0l0 2",
-              fill: "#fff",
+              d: "M 16 20 l 4 -4 l 0 -6 l 6 0 l -8 -10 l -8 10 l 6 0 l 0 6 l -16 0 l 0 4",
               opacity: "0.9",
             }),
           ),
@@ -156,7 +161,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 10.392304845413264 6 L 0 12 Z",
-          fill: "black",
         }),
         {
           id: "pointRight",
@@ -165,7 +169,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
-          fill: "white",
         }),
         {
           id: "turtle",
@@ -175,7 +178,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "none",
-          stroke: "white",
           "stroke-width": 1,
         }),
         {
@@ -187,13 +189,11 @@ export default class Style {
           SVG.el("rect", {
             width: (12 / 5) * 2,
             height: 12,
-            fill: "rgb(255 220 0)",
           }),
           SVG.el("rect", {
             width: (12 / 5) * 2,
             height: 12,
             x: (12 / 5) * 3,
-            fill: "rgb(255 220 0)",
           }),
         ]),
         {
@@ -208,7 +208,6 @@ export default class Style {
             A 4.8 4.8 0 0 1 15.353421766821956 4.548787410033867
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
-          fill: "white",
         }),
         {
           id: "cloud",
@@ -217,7 +216,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
-          fill: "white",
         }),
         {
           id: "flash",
@@ -226,7 +224,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
-          fill: "white",
         }),
         {
           id: "arrowUp",
@@ -236,7 +233,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "arrowUpOutline",
@@ -244,9 +240,8 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          d: "M 8 4 L 6 1.2 L 4 4 M 6 1.2 L 6 11.4",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "arrowUpThin",
@@ -337,7 +332,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "arrowUpDownThin",

@@ -63,6 +63,7 @@ export class LabelView {
         }))
     }
     this.height = y + 2
+    console.log('label height', this.height)
 
     this.el = SVG.group(group)
 
@@ -81,6 +82,7 @@ export class LabelView {
         : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
+      // TODO: add some way of making monospaced
     }
   }
 
@@ -168,8 +170,9 @@ class IconView {
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 8, height: 16, r: 0, g: 0, b: 0 },
-      delInput: { width: 8, height: 16, r: 0, g: 0, b: 0 },
+      addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
+      delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
+      verticalEllipsis: { width: 2, height: 12, scale: 0.833333333, r: 0, g: 0, b: 0 },
       list: { width: 12, height: 14 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
@@ -236,7 +239,7 @@ class InputView {
     if (this.hasLabel) {
       label = this.label.draw()
       w = Math.max(
-        14,
+        (this.shape === "string" ? 5 : 14),
         this.label.width +
           (this.shape === "string" || this.shape === "number-dropdown" ? 6 : 9),
       )
@@ -248,7 +251,13 @@ class InputView {
     }
     this.width = w
 
-    const h = (this.height = this.isRound || this.isColor ? 13 : 14)
+    let h = this.hasLabel ? this.label.height : 13
+
+    if (this.isRound || this.isColor) {
+      h += 1
+    }
+
+    this.height = h
 
     let el = InputView.shapes[this.shape](w, h)
     if (this.isColor) {
