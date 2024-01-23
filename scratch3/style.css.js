@@ -45,14 +45,14 @@ const commonOverride = `
 }`
 
 const createRule = (category, name, style) => `
-svg${name} .sb3-${category} {
+${name} .sb3-${category} {
   fill: ${style[category + "Primary"]};
   stroke: ${style[category + "Tertiary"]};
 }
-svg${name} .sb3-${category}-alt {
+${name} .sb3-${category}-alt {
   fill: ${style[category + "Secondary"]};
 }
-svg${name} .sb3-${category}-dark {
+${name} .sb3-${category}-dark {
   fill: ${style[category + "Tertiary"]};
 }
 `
