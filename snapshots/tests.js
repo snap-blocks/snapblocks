@@ -424,6 +424,14 @@ when Sprite1 clicked
 ...
 …
 
+(. . .)
+(...)
+
+<. . .>
+<...>
+<…>
+
+
 `,
 )
 
@@ -633,7 +641,7 @@ test(
 (() * ())
 (() / ())
 
-(pick random (1) to (10)
+(pick random (1) to (10))
 
 <() > (50)>
 <() < (50)>
@@ -700,7 +708,7 @@ test(
 
 foo () if <>
 
-define foo (num) if <bool>
+define {foo (num) if <bool>}
 
 `,
 )
@@ -1083,7 +1091,7 @@ test(
 (() * ())
 (() / ())
 
-(Zufallszahl von (1) bis (10)
+(Zufallszahl von (1) bis (10))
 
 <() > (50)>
 <() < (50)>
@@ -1153,7 +1161,7 @@ test(
 
 foo () if <>
 
-Definiere foo (num) if <bool>
+Definiere {foo (num) if <bool>}
 
 `,
   "de",
