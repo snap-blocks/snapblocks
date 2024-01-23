@@ -150,12 +150,14 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
+    console.log('hex', SVG.rgbToHex(this.r, this.g, this.b))
+    console.log('rgb', this.r, this.g, this.b)
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
-        props[fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+        props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
       }
     } else {
-      props[this.fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+      props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
     console.log('symbol', symbol)
@@ -373,10 +375,10 @@ class BlockView {
       console.log('shape', this.info.shape)
       if (this.info.shape === 'stack') {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "boolean") {
-        p.push(SVG.getPointedTop(w, h))
       } else if (this.info.shape === "reporter") {
         p.push(SVG.getRoundedTop(w,h))
+      } else if (this.info.shape === "boolean") {
+        p.push(SVG.getPointedTop(w, h))
       } else {
         p.push(SVG.getTop(w))
       }
@@ -406,10 +408,10 @@ class BlockView {
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
-      } else if (this.info.shape === "boolean") {
-        p.push(SVG.getPointedBottom(w, y, showBooleanRight))
       } else if (this.info.shape === "reporter") {
         p.push(SVG.getRoundedBottom(w, y))
+      } else if (this.info.shape === "boolean") {
+        p.push(SVG.getPointedBottom(w, y, showBooleanRight))
       } else {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       }

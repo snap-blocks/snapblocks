@@ -19,49 +19,49 @@ export default `
 }
 
 .snap-obsolete {
-  fill: rgb(200 0 20);
+  fill: #c80014;
 }
 .snap-motion {
-  fill: rgb(74 108 212);
+  fill: #4a6cd4;
 }
 .snap-looks {
-  fill: rgb(143 86 227);
+  fill: #8f56e3;
 }
 .snap-sound {
-  fill: rgb(207 74 217);
+  fill: #cf4ad9;
 }
 .snap-pen {
-  fill: rgb(0 161 120);
+  fill: #00a178;
 }
 .snap-events {
-  fill: rgb(230 168 34);
+  fill: #e6a822;
 }
 .snap-control {
-  fill: rgb(230 168 34);
+  fill: #e6a822;
 }
 .snap-sensing {
-  fill: rgb(4 148 220);
+  fill: #0494dc;
 }
 .snap-operators {
-  fill: rgb(98 194 19);
+  fill: #62c213;
 }
 .snap-variables {
-  fill: rgb(243 118 29);
+  fill: #f3761d;
 }
 .snap-list {
-  fill: rgb(217 77 17);
+  fill: #d94d11;
 }
 .snap-custom {
-  fill: rgb(150 150 150);
+  fill: #969696;
 }
 .snap-custom-arg {
-  fill: rgb(243 118 29);
+  fill: #f3761d;
 }
 .snap-extension {
   fill: #4b4a60;
 }
 .snap-grey {
-  fill: rgb(150 150 150);
+  fill: #969696;
 }
 
 .snap-bevel {
