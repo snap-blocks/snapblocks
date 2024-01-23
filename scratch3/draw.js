@@ -100,8 +100,22 @@ export default class SVG {
     return SVG.rect(w, h, { ...props, rx: 4, ry: 4 })
   }
 
+  static getRoundedTop(w, h, r) {
+    if (!r && r !== 0) {
+      r = r / 2
+    }
+    return `M 0 ${r} A ${r} ${r} 0 0 1 ${r} 0 L ${w - r} 0 A ${r} ${r} 0 0 1 ${w} ${r}`
+  }
+
+  static getRoundedBottom(w, h, r) {
+    if (!r && r !== 0) {
+      r = h / 2
+    }
+    return `L ${w} ${h - r} A ${r} ${r} 0 0 1 ${w - r} ${h} L ${r} ${h} A ${r} ${r} 0 0 1 0 ${h - r} Z`
+  }
+
   static pillRect(w, h, props) {
-    const r = h / 2
+    const r = Math.min(h / 2, 20)
     return SVG.rect(w, h, { ...props, rx: r, ry: r })
   }
 
@@ -115,6 +129,21 @@ export default class SVG {
       `L 0 ${r} ${r} 0`,
       "Z",
     ]
+  }
+  
+  static getPointedTop(w, h) {
+    const r = 20
+    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
+  }
+
+  static getPointedBottom(w, h, showRight) {
+    const r = 20
+    let path = ``
+    if (showRight) {
+      path += `L ${w} ${h / 2} `
+    }
+    path += `L ${w - r} ${h}`
+    return path
   }
 
   static pointedRect(w, h, props) {
@@ -330,5 +359,16 @@ export default class SVG {
       path: ["M", 0, 0, "L", w, 0],
       class: "sb3-diff sb3-diff-del",
     })
+  }
+
+  static rgbToHex (r, g, b) {
+    if (r > 255) r = 255; else if (r < 0) r = 0;
+    if (g > 255) g = 255; else if (g < 0) g = 0;
+    if (b > 255) b = 255; else if (b < 0) b = 0;
+    return `#${[r, g, b]
+      .map((n) =>
+        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16)
+      )
+      .join("")}`;
   }
 }

@@ -48,7 +48,6 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M20.6 4.8l-.1 9.1v.1c-2.5 2-6.1 2-8.6 0-1.1-.9-2.5-1.4-4-1.4-1.2.1-2.3.5-3.4 1.1V4c2.5-1.4 5.5-1.1 7.7.6 2.4 1.9 5.7 1.9 8.1 0h.2c0 .1.1.1.1.2z",
-            fill: "#4cbf56",
           }),
         ]),
         {
@@ -60,7 +59,6 @@ export default class Style {
         SVG.el("polygon", {
           points:
             "6.6,0.5 13.12,0.5 19.5,6.6 19.5,13.12 13.12,19.5 6.6,19.5 0.5,13.12 0.5,6.6 ",
-          fill: "#ec5959",
           stroke: "#b84848",
           "stroke-linejoin": "round",
           "stroke-linecap": "round",
@@ -122,15 +120,6 @@ export default class Style {
         ]),
         {
           id: "sb3-list",
-        },
-      ),
-      SVG.setProps(
-        SVG.el("path", {
-          d: "M 0 0 L 10.392304845413264 6 L 0 12 Z",
-          fill: "black",
-        }),
-        {
-          id: "sb3-pointRight",
         },
       ),
 
@@ -464,7 +453,6 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M21.38 11.83h-7.61a.59.59 0 0 1-.43-1l1.75-2.19a5.9 5.9 0 0 0-4.7-1.58 5.07 5.07 0 0 0-4.11 3.17A6 6 0 0 0 7 15.77a6.51 6.51 0 0 0 5 2.92 1.31 1.31 0 0 1-.08 2.62 9.3 9.3 0 0 1-7.35-3.82 9.16 9.16 0 0 1-1.4-8.37A8.51 8.51 0 0 1 5.71 5.4a8.76 8.76 0 0 1 4.11-1.92 9.71 9.71 0 0 1 7.75 2.07l1.67-2.1a.59.59 0 0 1 1 .21L22 11.08a.59.59 0 0 1-.62.75z",
-            fill: "#fff",
           }),
         ]),
         {
@@ -480,7 +468,6 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M19.56 17.65a9.29 9.29 0 0 1-7.35 3.83 1.31 1.31 0 0 1-.08-2.62 6.53 6.53 0 0 0 5-2.92 6.05 6.05 0 0 0 .67-5.51 5.32 5.32 0 0 0-1.64-2.16 5.21 5.21 0 0 0-2.48-1A5.86 5.86 0 0 0 9 8.84L10.74 11a.59.59 0 0 1-.43 1H2.7a.6.6 0 0 1-.6-.75l1.71-7.42a.59.59 0 0 1 1-.21l1.67 2.1a9.71 9.71 0 0 1 7.75-2.07 8.84 8.84 0 0 1 4.12 1.92 8.68 8.68 0 0 1 2.54 3.72 9.14 9.14 0 0 1-1.33 8.36z",
-            fill: "#fff",
           }),
         ]),
         {
@@ -495,8 +482,7 @@ export default class Style {
             fill: "#cf8b17",
           }),
           SVG.el("path", {
-            d: "M21.8 11h-2.6c0 1.5-.3 2.9-1 4.2-.8 1.6-2.1 2.8-3.7 3.6-1.5.8-3.3 1.1-4.9.8-1.6-.2-3.2-1-4.4-2.1-.4-.3-.4-.9-.1-1.2.3-.4.9-.4 1.2-.1 1 .7 2.2 1.1 3.4 1.1s2.3-.3 3.3-1c.9-.6 1.6-1.5 2-2.6.3-.9.4-1.8.2-2.8h-2.4c-.4 0-.7-.3-.7-.7 0-.2.1-.3.2-.4l4.4-4.4c.3-.3.7-.3.9 0L22 9.8c.3.3.4.6.3.9s-.3.3-.5.3z",
-            fill: "#fff",
+            d: "M 43.6 22 h -5.2 c 0 3 -0.6 5.8 -2 8.4 c -1.6 3.2 -4.2 5.6 -7.4 7.2 c -3 1.6 -6.6 2.2 -9.8 1.6 c -3.2 -0.4 -6.4 -2 -8.8 -4.2 c -0.8 -0.6 -0.8 -1.8 -0.2 -2.4 c 0.6 -0.8 1.8 -0.8 2.4 -0.2 c 2 1.4 4.4 2.2 6.8 2.2 s 4.6 -0.6 6.6 -2 c 1.8 -1.2 3.2 -3 4 -5.2 c 0.6 -1.8 0.8 -3.6 0.4 -5.6 h -4.8 c -0.8 0 -1.4 -0.6 -1.4 -1.4 c 0 -0.4 0.2 -0.6 0.4 -0.8 l 8.8 -8.8 c 0.6 -0.6 1.4 -0.6 1.8 0 L 44 19.6 c 0.6 0.6 0.8 1.2 0.6 1.8 s -0.6 0.6 -1 0.6 z",
           }),
         ]),
         {
@@ -506,7 +492,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
-          fill: "white",
         }),
         {
           id: "sb3-turtle",
@@ -516,7 +501,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "none",
-          stroke: "white",
           "stroke-width": 1,
         }),
         {
@@ -528,13 +512,11 @@ export default class Style {
           SVG.el("rect", {
             width: (20 / 5) * 2,
             height: 20,
-            fill: "rgb(255 220 0)",
           }),
           SVG.el("rect", {
             width: (20 / 5) * 2,
             height: 20,
             x: (20 / 5) * 3,
-            fill: "rgb(255 220 0)",
           }),
         ]),
         {
@@ -545,7 +527,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
-          fill: "white",
         }),
         {
           id: "sb3-flash",
@@ -554,7 +535,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
-          fill: "white",
         }),
         {
           id: "sb3-arrowUp",
@@ -564,7 +544,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "sb3-arrowUpOutline",
@@ -572,9 +551,8 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          d: "M 8 4 L 6 1.2 L 4 4 M 6 1.2 L 6 11.4",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "sb3-arrowUpThin",
@@ -665,7 +643,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
           fill: "none",
-          stroke: "white",
         }),
         {
           id: "sb3-arrowUpDownThin",
@@ -827,7 +804,6 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M21.38 11.83h-7.61a.59.59 0 0 1-.43-1l1.75-2.19a5.9 5.9 0 0 0-4.7-1.58 5.07 5.07 0 0 0-4.11 3.17A6 6 0 0 0 7 15.77a6.51 6.51 0 0 0 5 2.92 1.31 1.31 0 0 1-.08 2.62 9.3 9.3 0 0 1-7.35-3.82 9.16 9.16 0 0 1-1.4-8.37A8.51 8.51 0 0 1 5.71 5.4a8.76 8.76 0 0 1 4.11-1.92 9.71 9.71 0 0 1 7.75 2.07l1.67-2.1a.59.59 0 0 1 1 .21L22 11.08a.59.59 0 0 1-.62.75z",
-            fill: "#000",
           }),
         ]),
         {
@@ -842,7 +818,6 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M19.56 17.65a9.29 9.29 0 0 1-7.35 3.83 1.31 1.31 0 0 1-.08-2.62 6.53 6.53 0 0 0 5-2.92 6.05 6.05 0 0 0 .67-5.51 5.32 5.32 0 0 0-1.64-2.16 5.21 5.21 0 0 0-2.48-1A5.86 5.86 0 0 0 9 8.84L10.74 11a.59.59 0 0 1-.43 1H2.7a.6.6 0 0 1-.6-.75l1.71-7.42a.59.59 0 0 1 1-.21l1.67 2.1a9.71 9.71 0 0 1 7.75-2.07 8.84 8.84 0 0 1 4.12 1.92 8.68 8.68 0 0 1 2.54 3.72 9.14 9.14 0 0 1-1.33 8.36z",
-            fill: "#000",
           }),
         ]),
         {
@@ -856,8 +831,7 @@ export default class Style {
             fill: "#000",
           }),
           SVG.el("path", {
-            d: "M21.8 11h-2.6c0 1.5-.3 2.9-1 4.2-.8 1.6-2.1 2.8-3.7 3.6-1.5.8-3.3 1.1-4.9.8-1.6-.2-3.2-1-4.4-2.1-.4-.3-.4-.9-.1-1.2.3-.4.9-.4 1.2-.1 1 .7 2.2 1.1 3.4 1.1s2.3-.3 3.3-1c.9-.6 1.6-1.5 2-2.6.3-.9.4-1.8.2-2.8h-2.4c-.4 0-.7-.3-.7-.7 0-.2.1-.3.2-.4l4.4-4.4c.3-.3.7-.3.9 0L22 9.8c.3.3.4.6.3.9s-.3.3-.5.3z",
-            fill: "#000",
+            d: "M 43.6 22 h -5.2 c 0 3 -0.6 5.8 -2 8.4 c -1.6 3.2 -4.2 5.6 -7.4 7.2 c -3 1.6 -6.6 2.2 -9.8 1.6 c -3.2 -0.4 -6.4 -2 -8.8 -4.2 c -0.8 -0.6 -0.8 -1.8 -0.2 -2.4 c 0.6 -0.8 1.8 -0.8 2.4 -0.2 c 2 1.4 4.4 2.2 6.8 2.2 s 4.6 -0.6 6.6 -2 c 1.8 -1.2 3.2 -3 4 -5.2 c 0.6 -1.8 0.8 -3.6 0.4 -5.6 h -4.8 c -0.8 0 -1.4 -0.6 -1.4 -1.4 c 0 -0.4 0.2 -0.6 0.4 -0.8 l 8.8 -8.8 c 0.6 -0.6 1.4 -0.6 1.8 0 L 44 19.6 c 0.6 0.6 0.8 1.2 0.6 1.8 s -0.6 0.6 -1 0.6 z",
           }),
         ]),
         {
@@ -867,7 +841,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6",
-          fill: "black",
         }),
         {
           id: "sb3-turtle-high-contrast",
@@ -877,7 +850,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "none",
-          stroke: "black",
           "stroke-width": 1,
         }),
         {
@@ -887,7 +859,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
-          fill: "black",
         }),
         {
           id: "sb3-flash-high-contrast",
@@ -896,7 +867,6 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
-          fill: "black",
         }),
         {
           id: "sb3-arrowUp-high-contrast",
@@ -906,7 +876,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
           fill: "none",
-          stroke: "black",
         }),
         {
           id: "sb3-arrowUpOutline-high-contrast",
@@ -914,9 +883,8 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          d: "M 8 4 L 6 1.2 L 4 4 L 6 1.2 L 6 11.4",
+          d: "M 8 4 L 6 1.2 L 4 4 M 6 1.2 L 6 11.4",
           fill: "none",
-          stroke: "black",
         }),
         {
           id: "sb3-arrowUpThin-high-contrast",
@@ -1007,7 +975,6 @@ export default class Style {
         SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
           fill: "none",
-          stroke: "black",
         }),
         {
           id: "sb3-arrowUpDownThin-high-contrast",
