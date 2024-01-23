@@ -66,7 +66,7 @@ export class LabelView {
       y += 10
       group.push(
         SVG.text(0, y, line, {
-          class: `snap-label ${cls}`,
+          class: `sb-label ${cls}`,
         }))
     }
     this.height = y + 2
@@ -577,8 +577,8 @@ class BlockView {
         child.height = Math.max(12, child.height) + 3
         y += child.height
         line = new Line(y)
-      // } else if (child.isArrow) {
-      //   line.children.push(child)
+      } else if (child.isLoop) {
+        line.children.push(child)
       } else if (child.isLabel &&
                  child.value === "\n") {
         // child.y = y
