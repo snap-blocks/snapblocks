@@ -169,7 +169,7 @@ export class IconView {
       stopSign: { width: 20, height: 20, r: 236, g: 89, b: 89 },
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
-      loopArrow: { width: 24, height: 24 },
+      loopArrow: { width: 47, height: 47, scale: 0.5 },
       addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
       delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
       verticalEllipsis: { width: 2, height: 12, scale: 0.833333333, r: 0, g: 0, b: 0 },
