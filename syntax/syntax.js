@@ -72,6 +72,9 @@ function paintBlock(info, children, languages) {
     if (type.id) {
       info.id = type.id
     }
+    if (type.snap) {
+      info.snap = type.snap
+    }
     info.hasLoopArrow = type.hasLoopArrow
 
     // ellipsis block

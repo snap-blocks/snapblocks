@@ -105,13 +105,14 @@ const allBlocks = scratchCommands.map(def => {
   const info = {
     id: def.id, // Used for Scratch 3 translations
     spec: def.spec, // Used for Scratch 2 translations
+    snap: def.snap, // Used for Snap! translations
     parts: def.spec.split(splitPat).filter(x => x),
     selector: def.selector || `sb3:${def.id}`, // Used for JSON marshalling
     inputs: def.inputs == null ? [] : def.inputs,
     shape: def.shape,
     category: def.category,
     hasLoopArrow: !!def.hasLoopArrow,
-    aliases: def.aliases || [],
+    aliases: def.aliases == null ? [] : def.aliases,
   }
   if (blocksById[info.id]) {
     throw new Error(`Duplicate ID: ${info.id}`)
@@ -427,6 +428,7 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
 
 export function lookupHash(hash, info, children, languages) {
   console.log("info", structuredClone(info))
+  console.log("lookupHash hash", hash)
   for (const lang of languages) {
     if (Object.prototype.hasOwnProperty.call(lang.blocksByHash, hash)) {
       const collisions = lang.blocksByHash[hash]
