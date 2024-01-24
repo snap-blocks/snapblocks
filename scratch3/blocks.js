@@ -631,23 +631,26 @@ class BlockView {
 
       if (child.isScript) {
         this.hasScript = true
+        line.height += 12
+        line.y -= 3
         if (lines.length === 0) {
+          line.height += 12
+          line.y += 5
           if (line.height <= 21) {
             console.log('sb3 greater', line)
-            if (isCommand) {
-              line.height += 7
-            }
             line.height += pt + pb
-            // line.y += isCommand ? 6 : 3
+            line.y += isCommand ? 7 : 3
           }
         }
-        pushLine(0)
+        pushLine(1)
         child.y = y - 1
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
         child.height = Math.max(29, child.height + 3) - 2
-        y += child.height + 4
+        y += child.height
         line = new Line(y)
+        line.height += 5
+        line.y += 3
         previousChild = null
       } else if (child.isLoop) {
         line.children.push(child)
@@ -658,11 +661,10 @@ class BlockView {
         console.log('line', line.height)
         console.log('sb3 previous', previousChild)
         if (lines.length === 0) {
+          line.height += 12
+          line.y += 5
           if (line.height <= 21) {
             console.log('sb3 greater', line)
-            if (isCommand) {
-              line.height += 7
-            }
             line.height += pt + pb
             line.y += isCommand ? 7 : 3
           }
