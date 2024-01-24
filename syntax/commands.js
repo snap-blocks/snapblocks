@@ -911,7 +911,7 @@ export default [
     spec: "position",
     inputs: [],
     shape: "reporter",
-    category: "motion"
+    category: "motion",
   },
   {
     id: "SENSING_OF_XPOSITION",

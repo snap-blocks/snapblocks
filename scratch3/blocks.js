@@ -67,12 +67,13 @@ export class LabelView {
       group.push(
         SVG.text(0, y - this.lineHeight, line, {
           class: `sb3-label ${cls}`,
-        }))
+        }),
+      )
     }
     this.height = Math.max(12, y - (this.lineHeight + 1))
-    
+
     this.el = SVG.group(group)
-    
+
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
       cache = LabelView.metricsCache[cls] = Object.create(null)
@@ -114,17 +115,36 @@ export class IconView {
       throw new Error(`no info for icon: ${this.name}`)
     }
     Object.assign(this, info)
-    
-    if (isNaN(this.scale) ||
-        this.scale <= 0) {
-          this.scale = 1
-        }
 
-    this.scale = !isNaN(icon.scale) && icon.scale !== null ? icon.scale : (isNaN(this.scale) || this.scale == null) ? 1 : this.scale
-    this.r = !isNaN(icon.r) && icon.r !== null ? icon.r : (isNaN(this.r) || this.r == null) ? null : this.r
-    this.g = !isNaN(icon.g) && icon.g !== null ? icon.g : (isNaN(this.g) || this.g == null) ? null : this.g
-    this.b = !isNaN(icon.b) && icon.b !== null ? icon.b : (isNaN(this.b) || this.b == null) ? null : this.b
-    
+    if (isNaN(this.scale) || this.scale <= 0) {
+      this.scale = 1
+    }
+
+    this.scale =
+      !isNaN(icon.scale) && icon.scale !== null
+        ? icon.scale
+        : isNaN(this.scale) || this.scale == null
+        ? 1
+        : this.scale
+    this.r =
+      !isNaN(icon.r) && icon.r !== null
+        ? icon.r
+        : isNaN(this.r) || this.r == null
+        ? null
+        : this.r
+    this.g =
+      !isNaN(icon.g) && icon.g !== null
+        ? icon.g
+        : isNaN(this.g) || this.g == null
+        ? null
+        : this.g
+    this.b =
+      !isNaN(icon.b) && icon.b !== null
+        ? icon.b
+        : isNaN(this.b) || this.b == null
+        ? null
+        : this.b
+
     if (this.scale <= 0) {
       this.scale = 1
     }
@@ -142,9 +162,24 @@ export class IconView {
   }
 
   draw(iconStyle) {
-    this.r = this.r === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.r
-    this.g = this.g === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.g
-    this.b = this.b === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.b
+    this.r =
+      this.r === null
+        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+          ? 0
+          : 255
+        : this.r
+    this.g =
+      this.g === null
+        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+          ? 0
+          : 255
+        : this.g
+    this.b =
+      this.b === null
+        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+          ? 0
+          : 255
+        : this.b
 
     let props = {
       width: this.width,
@@ -158,8 +193,11 @@ export class IconView {
     } else {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
-    let symbol = SVG.setProps(SVG.symbol(`#sb3-${iconName(this.name, iconStyle)}`), props)
-    console.log('symbol', symbol)
+    let symbol = SVG.setProps(
+      SVG.symbol(`#sb3-${iconName(this.name, iconStyle)}`),
+      props,
+    )
+    console.log("symbol", symbol)
     return symbol
   }
 
@@ -172,28 +210,35 @@ export class IconView {
       loopArrow: { width: 47, height: 47, scale: 0.5 },
       addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
       delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
-      verticalEllipsis: { width: 2, height: 12, scale: 0.833333333, r: 0, g: 0, b: 0 },
+      verticalEllipsis: {
+        width: 2,
+        height: 12,
+        scale: 0.833333333,
+        r: 0,
+        g: 0,
+        b: 0,
+      },
       list: { width: 15, height: 18 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12, fillAttribute: "stroke" },
       pause: { width: 20, height: 20, r: 255, g: 220, b: 0 },
       flash: { width: 10, height: 12 },
-      
-      arrowUp:            { width: 12, height: 12},
-      arrowUpOutline:     { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowUpThin:        { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowDown:          { width: 12, height: 12},
-      arrowDownOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowDownThin:      { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeft:          { width: 12, height: 12},
-      arrowLeftOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeftThin:      { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowRight:         { width: 12, height: 12},
-      arrowRightOutline:  { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowRightThin:     { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowUpDownThin:    { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke"},
+
+      arrowUp: { width: 12, height: 12 },
+      arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUpThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowDown: { width: 12, height: 12 },
+      arrowDownOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeft: { width: 12, height: 12 },
+      arrowLeftOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeftThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowRight: { width: 12, height: 12 },
+      arrowRightOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
@@ -434,11 +479,17 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].height
       const p = []
-      console.log('shape', this.info.shape)
-      if (this.info.shape === 'stack') {
+      console.log("shape", this.info.shape)
+      if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter") {
-        p.push(SVG.getRoundedTop(w, h, Math.max(lines[0].height, lines[lines.length - 1].height) / 2))
+        p.push(
+          SVG.getRoundedTop(
+            w,
+            h,
+            Math.max(lines[0].height, lines[lines.length - 1].height) / 2,
+          ),
+        )
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
       } else {
@@ -453,10 +504,17 @@ class BlockView {
         isLast = i + 2 === lines.length
 
         if (lines[i] instanceof ScriptView) {
-          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 20, y,  true, 15))
+          p.push(
+            SVG.getRightAndBottom(
+              w - (this.info.shape === "boolean") * 20,
+              y,
+              true,
+              15,
+            ),
+          )
           y += lines[i].height - 3
           p.push(SVG.getArm(w - (this.info.shape === "boolean") * 20, y))
-          
+
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 15
           y += lines[i + 1].height + 3
@@ -471,8 +529,14 @@ class BlockView {
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       } else if (this.info.shape === "reporter") {
-        console.log('sb3 lines', lines)
-        p.push(SVG.getRoundedBottom(w, y, Math.max(lines[0].height, lines[lines.length - 1].height) / 2))
+        console.log("sb3 lines", lines)
+        p.push(
+          SVG.getRoundedBottom(
+            w,
+            y,
+            Math.max(lines[0].height, lines[lines.length - 1].height) / 2,
+          ),
+        )
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
       } else {
@@ -480,7 +544,7 @@ class BlockView {
       }
       return SVG.path({
         class: `sb3-${this.info.category}`,
-        path: p
+        path: p,
       })
     }
 
@@ -591,8 +655,8 @@ class BlockView {
     let innerWidth = 0
     let scriptWidth = 0
     let line = new Line(y)
-    const pushLine = (type) => {
-      if (([0, null]).includes(type)) {
+    const pushLine = type => {
+      if ([0, null].includes(type)) {
         line.height += pt + pb
       } else {
         // line.height -= 11
@@ -637,7 +701,7 @@ class BlockView {
           line.height += 12
           line.y += 5
           if (line.height <= 21) {
-            console.log('sb3 greater', line)
+            console.log("sb3 greater", line)
             line.height += pt + pb
             line.y += isCommand ? 7 : 3
           }
@@ -655,16 +719,15 @@ class BlockView {
       } else if (child.isLoop) {
         line.children.push(child)
         previousChild = child
-      } else if (child.isLabel &&
-        child.value === "\n") {
+      } else if (child.isLabel && child.value === "\n") {
         // child.y = y
-        console.log('line', line.height)
-        console.log('sb3 previous', previousChild)
+        console.log("line", line.height)
+        console.log("sb3 previous", previousChild)
         if (lines.length === 0) {
           line.height += 12
           line.y += 5
           if (line.height <= 21) {
-            console.log('sb3 greater', line)
+            console.log("sb3 greater", line)
             line.height += pt + pb
             line.y += isCommand ? 7 : 3
           }
@@ -711,13 +774,13 @@ class BlockView {
       }
     }
     if (lines.length === 0) {
-      console.log('0 before height', line.height)
+      console.log("0 before height", line.height)
       line.height = Math.max(line.height, isCommand ? 40 : 32)
-      console.log('0 after height', line.height)
+      console.log("0 after height", line.height)
       pushLine(0)
     } else {
       line.height += pt + pb
-      console.log('pt + pb', pt + pb)
+      console.log("pt + pb", pt + pb)
       line.y -= pt
       pushLine(1)
     }

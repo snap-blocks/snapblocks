@@ -90,7 +90,7 @@ export default class SVG {
   }
 
   static move(dx, dy, el) {
-    let currentValue = el.getAttributeNS(null, 'transform')
+    let currentValue = el.getAttributeNS(null, "transform")
     if (!currentValue) {
       SVG.setProps(el, {
         transform: `translate(${dx} ${dy})`,
@@ -222,10 +222,9 @@ export default class SVG {
     ]
   }
 
-  
   static getPointedTop(w, h) {
     const r = 8
-    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
+    return `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
   }
 
   static getPointedBottom(w, h, showRight) {
@@ -241,7 +240,7 @@ export default class SVG {
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getPointedTop(w,h), SVG.getPointedBottom(w,h,true)]
+      path: [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)],
     })
   }
 
@@ -489,14 +488,17 @@ export default class SVG {
     })
   }
 
-  static rgbToHex (r, g, b) {
-    if (r > 255) r = 255; else if (r < 0) r = 0;
-    if (g > 255) g = 255; else if (g < 0) g = 0;
-    if (b > 255) b = 255; else if (b < 0) b = 0;
+  static rgbToHex(r, g, b) {
+    if (r > 255) r = 255
+    else if (r < 0) r = 0
+    if (g > 255) g = 255
+    else if (g < 0) g = 0
+    if (b > 255) b = 255
+    else if (b < 0) b = 0
     return `#${[r, g, b]
-      .map((n) =>
-        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16)
+      .map(n =>
+        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16),
       )
-      .join("")}`;
+      .join("")}`
   }
 }
