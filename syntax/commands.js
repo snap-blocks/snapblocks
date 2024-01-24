@@ -2,6 +2,7 @@ export default [
   {
     id: "MOTION_MOVESTEPS",
     selector: "forward:",
+    snap: "forward",
     spec: "move %1 steps",
     inputs: ["%n"],
     shape: "stack",
@@ -9,6 +10,7 @@ export default [
   },
   {
     id: "MOTION_TURNRIGHT",
+    snap: "turn",
     selector: "turnRight:",
     spec: "turn @turnRight %1 degrees",
     inputs: ["%n"],
@@ -17,6 +19,7 @@ export default [
   },
   {
     id: "MOTION_TURNLEFT",
+    snap: "turnLeft",
     selector: "turnLeft:",
     spec: "turn @turnLeft %1 degrees",
     inputs: ["%n"],
@@ -25,6 +28,7 @@ export default [
   },
   {
     id: "MOTION_POINTINDIRECTION",
+    snap: "setHeading",
     selector: "heading:",
     spec: "point in direction %1",
     inputs: ["%d.direction"],
@@ -33,6 +37,7 @@ export default [
   },
   {
     id: "MOTION_POINTTOWARDS",
+    snap: "doFaceTowards",
     selector: "pointTowards:",
     spec: "point towards %1",
     inputs: ["%m.spriteOrMouse"],
@@ -41,6 +46,7 @@ export default [
   },
   {
     id: "MOTION_GOTOXY",
+    snap: "gotoXY",
     selector: "gotoX:y:",
     spec: "go to x:%1 y:%2",
     inputs: ["%n", "%n"],
@@ -49,6 +55,7 @@ export default [
   },
   {
     id: "MOTION_GOTO",
+    snap: "doGotoObject",
     selector: "gotoSpriteOrMouse:",
     spec: "go to %1",
     inputs: ["%m.location"],
@@ -57,6 +64,7 @@ export default [
   },
   {
     id: "MOTION_GLIDESECSTOXY",
+    snap: "doGlide",
     selector: "glideSecs:toX:y:elapsed:from:",
     spec: "glide %1 secs to x:%2 y:%3",
     inputs: ["%n", "%n", "%n"],
@@ -72,6 +80,7 @@ export default [
   },
   {
     id: "MOTION_CHANGEXBY",
+    snap: "changeXPosition",
     selector: "changeXposBy:",
     spec: "change x by %1",
     inputs: ["%n"],
@@ -80,6 +89,7 @@ export default [
   },
   {
     id: "MOTION_SETX",
+    snap: "setXPosition",
     selector: "xpos:",
     spec: "set x to %1",
     inputs: ["%n"],
@@ -88,6 +98,7 @@ export default [
   },
   {
     id: "MOTION_CHANGEYBY",
+    snap: "changeYPosition",
     selector: "changeYposBy:",
     spec: "change y by %1",
     inputs: ["%n"],
@@ -96,6 +107,7 @@ export default [
   },
   {
     id: "MOTION_SETY",
+    snap: "setYPosition",
     selector: "ypos:",
     spec: "set y to %1",
     inputs: ["%n"],
@@ -112,6 +124,7 @@ export default [
   },
   {
     id: "LOOKS_SAYFORSECS",
+    snap: "doSayFor",
     selector: "say:duration:elapsed:from:",
     spec: "say %1 for %2 seconds",
     inputs: ["%s", "%n"],
@@ -120,6 +133,7 @@ export default [
   },
   {
     id: "LOOKS_SAY",
+    snap: "bubble",
     selector: "say:",
     spec: "say %1",
     inputs: ["%s"],
@@ -128,6 +142,7 @@ export default [
   },
   {
     id: "LOOKS_THINKFORSECS",
+    snap: "doThinkFor",
     selector: "think:duration:elapsed:from:",
     spec: "think %1 for %2 seconds",
     inputs: ["%s", "%n"],
@@ -136,6 +151,7 @@ export default [
   },
   {
     id: "LOOKS_THINK",
+    snap: "doThink",
     selector: "think:",
     spec: "think %1",
     inputs: ["%s"],
@@ -143,8 +159,38 @@ export default [
     category: "looks",
   },
   {
+    snap: "reportGetImageAttribute",
+    spec: "%1 of costume %2",
+    inputs: ["%s", "%m.costume"],
+    shape: "reporter",
+    category: "looks",
+  },
+  {
+    snap: "reportNewCostumeStretched",
+    spec: "stretch %1 x: %2 y: %3 %",
+    inputs: ["%m.costume", "%n", "%n"],
+    shape: "reporter",
+    category: "looks",
+  },
+  {
+    snap: "reportNewCostumeSkewed",
+    spec: "skew %1 to %2 degrees %3 %",
+    inputs: ["%m.costume", "%n", "%n"],
+    shape: "reporter",
+    category: "looks",
+  },
+  {
+    snap: "reportNewCostume",
+    spec: "new costume %1 width %2 height %3",
+    aliases: ["new costume @list width %1 height %2"],
+    inputs: ["%s", "%n", "%n"],
+    shape: "reporter",
+    category: "looks",
+  },
+  {
     id: "LOOKS_SHOW",
     selector: "show",
+    snap: "show",
     spec: "show",
     inputs: [],
     shape: "stack",
@@ -153,9 +199,16 @@ export default [
   {
     id: "LOOKS_HIDE",
     selector: "hide",
+    snap: "hide",
     spec: "hide",
     inputs: [],
     shape: "stack",
+    category: "looks",
+  },
+  {
+    snap: "reportShown",
+    spec: "shown?",
+    shape: "boolean",
     category: "looks",
   },
   {
@@ -168,6 +221,7 @@ export default [
   },
   {
     id: "LOOKS_NEXTCOSTUME",
+    snap: "doWearNextCostume",
     selector: "nextCostume",
     spec: "next costume",
     inputs: [],
@@ -200,6 +254,7 @@ export default [
   },
   {
     id: "LOOKS_CHANGEEFFECTBY",
+    snap: "changeEffect",
     selector: "changeGraphicEffect:by:",
     spec: "change %1 effect by %2",
     inputs: ["%m.effect", "%n"],
@@ -208,6 +263,7 @@ export default [
   },
   {
     id: "LOOKS_SETEFFECTTO",
+    snap: "setEffect",
     selector: "setGraphicEffect:to:",
     spec: "set %1 effect to %2",
     inputs: ["%m.effect", "%n"],
@@ -216,6 +272,7 @@ export default [
   },
   {
     id: "LOOKS_CLEARGRAPHICEFFECTS",
+    snap: "clearEffects",
     selector: "filterReset",
     spec: "clear graphic effects",
     inputs: [],
@@ -223,7 +280,15 @@ export default [
     category: "looks",
   },
   {
+    snap: "getEffect",
+    spec: "%1 effect",
+    inputs: ["%m.effect"],
+    shape: "reporter",
+    category: "looks",
+  },
+  {
     id: "LOOKS_CHANGESIZEBY",
+    snap: "changeScale",
     selector: "changeSizeBy:",
     spec: "change size by %1",
     inputs: ["%n"],
@@ -232,6 +297,7 @@ export default [
   },
   {
     id: "LOOKS_SETSIZETO",
+    snap: "setScale",
     selector: "setSizeTo:",
     spec: "set size to %1%",
     inputs: ["%n"],
@@ -247,6 +313,7 @@ export default [
   },
   {
     id: "LOOKS_GOTOFRONTBACK",
+    snap: "goToLayer",
     spec: "go to %1 layer",
     inputs: ["%m"],
     shape: "stack",
@@ -254,6 +321,7 @@ export default [
   },
   {
     selector: "goBackByLayers:",
+    snap: "goBack",
     spec: "go back %1 layers",
     inputs: ["%n"],
     shape: "stack",
@@ -267,8 +335,42 @@ export default [
     category: "looks",
   },
   {
+    snap: "log",
+    spec: "console log %1",
+    aliases: [
+      "console log %1 @delInput @addInput",
+      "console log %1 @delInput @verticalEllipsis @addInput",
+      "console log @addInput",
+      "console log @verticalEllipsis @addInput",
+    ],
+    inputs: ["%s"],
+    shape: "stack",
+    category: "looks",
+  },
+  {
+    snap: "alert",
+    spec: "alert %1",
+    aliases: [
+      "alert %1 @delInput @addInput",
+      "alert %1 @delInput @verticalEllipsis @addInput",
+      "alert @addInput",
+      "alert @verticalEllipsis @addInput",
+    ],
+    inputs: ["%s"],
+    shape: "stack",
+    category: "looks",
+  },
+  {
+    snap: "doScreenshot",
+    spec: "save %1 as costume named %2",
+    inputs: ["%m", "%s"],
+    shape: "stack",
+    category: "looks",
+  },
+  {
     id: "SOUND_PLAY",
     selector: "playSound:",
+    snap: "playSound",
     spec: "start sound %1",
     inputs: ["%m.sound"],
     shape: "stack",
@@ -298,6 +400,7 @@ export default [
   {
     id: "SOUND_PLAYUNTILDONE",
     selector: "doPlaySoundAndWait",
+    snap: "doPlaySoundUntilDone",
     spec: "play sound %1 until done",
     inputs: ["%m.sound"],
     shape: "stack",
@@ -306,9 +409,32 @@ export default [
   {
     id: "SOUND_STOPALLSOUNDS",
     selector: "stopAllSounds",
+    snap: "doStopAllSounds",
     spec: "stop all sounds",
     inputs: [],
     shape: "stack",
+    category: "sound",
+  },
+  {
+    snap: "doPlaySoundAtRate",
+    spec: "play sound %1 at %2 Hz",
+    inputs: ["%m.sound", "%n"],
+    shape: "stack",
+    category: "sound",
+  },
+  {
+    snap: "reportGetSoundAttribute",
+    spec: "%1 of sound %2",
+    inputs: ["%s", "%m.sound"],
+    shape: "reporter",
+    category: "sound",
+  },
+  {
+    snap: "reportNewSoundFromSamples",
+    spec: "new sound %1 rate %2 Hz",
+    aliases: ["new sound @list rate %2 Hz"],
+    inputs: ["%s", "%n"],
+    shape: "reporter",
     category: "sound",
   },
   {
@@ -322,6 +448,7 @@ export default [
   {
     id: "music.restForBeats",
     selector: "rest:elapsed:from:",
+    snap: "doRest",
     spec: "rest for %1 beats",
     inputs: ["%n"],
     shape: "stack",
@@ -330,6 +457,7 @@ export default [
   {
     id: "music.playNoteForBeats",
     selector: "noteOn:duration:elapsed:from:",
+    snap: "doPlayNote",
     spec: "play note %1 for %2 beats",
     inputs: ["%d.note", "%n"],
     shape: "stack",
@@ -338,6 +466,7 @@ export default [
   {
     id: "music.setInstrument",
     selector: "instrument:",
+    snap: "doSetInstrument",
     spec: "set instrument to %1",
     inputs: ["%d.instrument"],
     shape: "stack",
@@ -346,6 +475,7 @@ export default [
   {
     id: "SOUND_CHANGEVOLUMEBY",
     selector: "changeVolumeBy:",
+    snap: "changeVolume",
     spec: "change volume by %1",
     inputs: ["%n"],
     shape: "stack",
@@ -354,6 +484,7 @@ export default [
   {
     id: "SOUND_SETVOLUMETO",
     selector: "setVolumeTo:",
+    snap: "setVolume",
     spec: "set volume to %1%",
     inputs: ["%n"],
     shape: "stack",
@@ -362,6 +493,7 @@ export default [
   {
     id: "music.changeTempo",
     selector: "changeTempoBy:",
+    snap: "doChangeTempo",
     spec: "change tempo by %1",
     inputs: ["%n"],
     shape: "stack",
@@ -370,6 +502,7 @@ export default [
   {
     selector: "setTempoTo:",
     spec: "set tempo to %1 bpm",
+    snap: "doSetTempo",
     inputs: ["%n"],
     shape: "stack",
     category: "sound",
@@ -734,6 +867,7 @@ export default [
   },
   {
     id: "MOTION_IFONEDGEBOUNCE",
+    snap: "bounceOffEdge",
     selector: "bounceOffEdge",
     spec: "if on edge, bounce",
     inputs: [],
@@ -773,7 +907,15 @@ export default [
     category: "list",
   },
   {
+    snap: "getPosition",
+    spec: "position",
+    inputs: [],
+    shape: "reporter",
+    category: "motion"
+  },
+  {
     id: "SENSING_OF_XPOSITION",
+    snap: "xPosition",
     selector: "xpos",
     spec: "x position",
     inputs: [],
@@ -782,6 +924,7 @@ export default [
   },
   {
     id: "SENSING_OF_YPOSITION",
+    snap: "yPosition",
     selector: "ypos",
     spec: "y position",
     inputs: [],
@@ -790,6 +933,7 @@ export default [
   },
   {
     id: "SENSING_OF_DIRECTION",
+    snap: "direction",
     selector: "heading",
     spec: "direction",
     inputs: [],
@@ -798,6 +942,7 @@ export default [
   },
   {
     id: "SENSING_OF_COSTUMENUMBER",
+    snap: "getCostumeIdx",
     selector: "costumeIndex",
     spec: "costume #",
     inputs: [],
@@ -814,6 +959,7 @@ export default [
   },
   {
     id: "SENSING_OF_SIZE",
+    snap: "getScale",
     selector: "scale",
     spec: "size",
     inputs: [],
@@ -847,6 +993,7 @@ export default [
     id: "SOUND_VOLUME",
     selector: "volume",
     spec: "volume",
+    snap: "volume",
     inputs: [],
     shape: "reporter",
     category: "sound",
@@ -855,6 +1002,7 @@ export default [
     id: "music.getTempo",
     selector: "tempo",
     spec: "tempo",
+    snap: "tempo",
     inputs: [],
     shape: "reporter",
     category: "music",
@@ -1260,6 +1408,7 @@ export default [
     category: "obsolete",
   },
   {
+    snap: "doSwitchToCostume",
     selector: "lookLike:",
     spec: "switch to costume %1",
     inputs: ["%m.costume"],
@@ -1718,7 +1867,7 @@ export default [
     category: "boost",
   },
   {
-    snap: "moveSteps",
+    snap: "reportMap",
     spec: "map %1 over %2",
     aliases: ["map %1 over @list"],
     inputs: ["%n", "%s"],
