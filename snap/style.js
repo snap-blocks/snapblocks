@@ -412,7 +412,7 @@ export default class Style {
       f.comp(
         "in",
         f.flood("#000", (inset ? 0.8: 0.99)),
-        f.subtract(alpha, f.offset(inset ? 1 : -1, inset ? 1 : -1, blur)),
+        f.subtract(alpha, f.offset(inset ? 0.8 : -0.8, inset ? 0.8 : -0.8, blur)),
       ),
     ])
 
