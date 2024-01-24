@@ -20,6 +20,7 @@ const {
   makeOriginalIcons,
   makeHighContrastIcons,
   iconName,
+  highContrastIcons,
 } = style
 
 const unicodeIcons = {
@@ -120,16 +121,12 @@ export class IconView {
         }
 
     this.scale = !isNaN(icon.scale) && icon.scale !== null ? icon.scale : (isNaN(this.scale) || this.scale == null) ? 1 : this.scale
-    this.r = !isNaN(icon.r) && icon.r !== null ? icon.r : (isNaN(this.r) || this.r == null) ? 255 : this.r
-    this.g = !isNaN(icon.g) && icon.g !== null ? icon.g : (isNaN(this.g) || this.g == null) ? 255 : this.g
-    this.b = !isNaN(icon.b) && icon.b !== null ? icon.b : (isNaN(this.b) || this.b == null) ? 255 : this.b
+    this.r = !isNaN(icon.r) && icon.r !== null ? icon.r : (isNaN(this.r) || this.r == null) ? null : this.r
+    this.g = !isNaN(icon.g) && icon.g !== null ? icon.g : (isNaN(this.g) || this.g == null) ? null : this.g
+    this.b = !isNaN(icon.b) && icon.b !== null ? icon.b : (isNaN(this.b) || this.b == null) ? null : this.b
     
     if (this.scale <= 0) {
       this.scale = 1
-    }
-
-    if (isNaN(this.r) || this.r == null) {
-      this.r = 255
     }
 
     this.width = this.width * this.scale
@@ -145,6 +142,10 @@ export class IconView {
   }
 
   draw(iconStyle) {
+    this.r = this.r === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.r
+    this.g = this.g === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.g
+    this.b = this.b === null ? (iconStyle === "high-contrast" && highContrastIcons.has(this.name) ? 0 : 255) : this.b
+
     let props = {
       width: this.width,
       height: this.height,

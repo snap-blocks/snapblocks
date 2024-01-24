@@ -31,9 +31,12 @@ const highContrastIcons = new Set([
   "arrowRightThin",
   "arrowUpDownThin",
   "arrowLeftRightThin",
+  "pointRight",
 ])
 
 export default class Style {
+  static highContrastIcons = highContrastIcons
+
   static get cssContent() {
     return cssContent
   }
@@ -657,6 +660,14 @@ export default class Style {
           id: "sb3-arrowLeftRightThin",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 10.392304845413264 6 L 0 12 Z",
+        }),
+        {
+          id: "sb3-pointRight",
+        },
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -987,6 +998,14 @@ export default class Style {
         }),
         {
           id: "sb3-arrowLeftRightThin-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 0 L 10.392304845413264 6 L 0 12 Z",
+        }),
+        {
+          id: "sb3-pointRight-high-contrast",
         },
       ),
 
