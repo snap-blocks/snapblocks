@@ -157,10 +157,10 @@ class IconView {
     }
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
-        props[fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+        props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
       }
     } else {
-      props[this.fillAttribute] = `rgb(${this.r} ${this.g} ${this.b})`
+      props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(SVG.symbol(`#${this.name}`), props)
     console.log('symbol', symbol)
@@ -182,8 +182,6 @@ class IconView {
       turtle: { width: 18, height: 12, dy: +1 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
       pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
-      cloud: { width: 20, height: 12},
-      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke"},
       flash: { width: 10, height: 12},
 
       arrowUp:            { width: 12, height: 12},
@@ -528,8 +526,6 @@ class BlockView {
         console.log('0')
         line.height += pt + pb
       } else {
-        console.log('1')
-
         line.height += (type === 1) ? 0 : +2
         line.y -= 1
       }
