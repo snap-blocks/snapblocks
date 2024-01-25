@@ -315,9 +315,12 @@ export default class SVG {
     return arr.join(" ")
   }
 
-  static getArm(w, armTop) {
-    return `L 15 ${armTop - 5}
-      C 15 ${armTop - 2} 17 ${armTop} 20 ${armTop}
+  static getArm(w, armTop, inset) {
+    if (!inset && inset !== 0) {
+      inset = 10
+    }
+    return `L ${inset} ${armTop - 5}
+      C ${inset} ${armTop - 2} ${inset + 2} ${armTop} ${inset + 5} ${armTop}
       L ${w - 5} ${armTop}
       C ${w - 2} ${armTop} ${w} ${armTop + 2} ${w} ${armTop + 5}`
   }

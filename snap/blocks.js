@@ -391,12 +391,12 @@ class BlockView {
         isLast = i + 2 === lines.length
 
         if (lines[i] instanceof ScriptView) {
-          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 8, y,  true, 15))
+          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 8, y,  true, 8))
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y))
+          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y, 8))
           
           hasNotch = !(isLast && this.isFinal)
-          inset = isLast ? 0 : 15
+          inset = isLast ? 0 : 2
           y += lines[i + 1].height + 3
           addBottom = false
           showBooleanRight = false
@@ -626,7 +626,7 @@ class BlockView {
       this.isHat
         ? 110
         : this.hasScript
-        ? 83
+        ? 39
         : this.isCommand || this.isOutline || this.isRing
         ? 39
         : 20,
@@ -647,7 +647,7 @@ class BlockView {
 
     for (const line of lines) {
       if (line.isScript) {
-        objects.push(SVG.move(15, line.y, line.el))
+        objects.push(SVG.move(8, line.y, line.el))
         continue
       }
 
