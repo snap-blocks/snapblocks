@@ -396,13 +396,13 @@ function parseLines(code, languages) {
         case "@": {
           next()
           let name = ""
-          let modifiers = null
+          let modifiers = []
           while (tok && /[a-zA-Z]/.test(tok)) {
             name += tok
             next()
           }
           if (tok === "-") {
-            modifiers = ["", "", "", ""]
+            modifiers = []
             let modifier = 0
             modifiers[modifier] = ""
             next() // "-"
@@ -419,7 +419,7 @@ function parseLines(code, languages) {
           children.push(
             Object.prototype.hasOwnProperty.call(Icon.icons, name)
               ? new Icon(name, modifiers)
-              : new Label(`@${name}`),
+              : new Label(`@${name}${modifiers.length ? '-' : ''}${modifiers.join('-')}`),
           )
           label = null
           break
