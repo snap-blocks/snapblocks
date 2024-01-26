@@ -71,6 +71,7 @@ ${createRule("custom", name, style)}
 ${createRule("extension", name, style)}
 ${createRule("obsolete", name, style)}
 ${createRule("grey", name, style)}
+${createRule("other", name, style)}
 
 svg${name} .sb3-label {
   fill: ${style.label};
@@ -157,6 +158,10 @@ const originalStyle = {
   greyPrimary: "#bfbfbf",
   greySecondary: "#b2b2b2",
   greyTertiary: "#909090",
+  
+  otherPrimary: "#bfbfbf",
+  otherSecondary: "#b2b2b2",
+  otherTertiary: "#909090",
 }
 
 const highContrastStyle = {
@@ -218,6 +223,11 @@ const highContrastStyle = {
   greySecondary: "#b2b2b2",
   /* Changed to be AAA against #000000, was AA */
   greyTertiary: "#959595",
+  
+  otherPrimary: "#bfbfbf",
+  otherSecondary: "#b2b2b2",
+  /* Changed to be AAA against #000000, was AA */
+  otherTertiary: "#959595",
 }
 
 export default common +

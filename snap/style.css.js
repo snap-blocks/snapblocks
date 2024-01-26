@@ -63,6 +63,9 @@ export default `
 .snap-grey {
   fill: #969696;
 }
+.snap-other {
+  fill: #969696;
+}
 
 .snap-bevel {
   filter: url(#snapBevelFilter);

@@ -53,6 +53,9 @@ export default `
 .sb-grey {
   fill: #969696;
 }
+.sb-other {
+  fill: #969696;
+}
 
 .sb-bevel {
   filter: url(#bevelFilter);
