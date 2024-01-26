@@ -83,7 +83,7 @@ const translateKey = (raw, key) => {
   const result = raw.mappings[key] || raw.extensionMappings[key]
   const englishResult = english.mappings[key] || english.extensionMappings[key]
   if (!englishResult) {
-    throw new Error(`Unknown key: '${key}'`)
+    // throw new Error(`Unknown key: '${key}'`) // remove error
   }
   if (!result) {
     return
@@ -127,6 +127,7 @@ const buildLocale = (code, rawLocale) => {
 
   const locale = {
     commands: {},
+    fullBlocks: [],
     dropdowns: {},
     ignorelt: [],
     soundEffects: listFor(soundEffects),
@@ -164,6 +165,7 @@ const buildLocale = (code, rawLocale) => {
       continue
     }
     locale.commands[command.id] = result
+    // locale.fullBlocks.push(structuredClone(command))
   }
 
   const commandCount = Object.keys(locale.commands).length
