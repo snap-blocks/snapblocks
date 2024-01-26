@@ -695,10 +695,11 @@ class BlockView {
 
       if (child.isScript) {
         this.hasScript = true
-        line.height += 12
-        line.y -= 3
+        line.height = Math.max(27, line.height + 5)
+        console.log('sb3 height', line.height)
+        line.y -= 2
         if (lines.length === 0) {
-          line.height += 12
+          line.height = Math.max(50, line.height + 10)
           line.y += 5
           if (line.height <= 21) {
             console.log("sb3 greater", line)
