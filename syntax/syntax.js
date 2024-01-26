@@ -52,6 +52,7 @@ function paintBlock(info, children, languages) {
   const o = lookupHash(shortHash, info, children, languages)
   let lang
   let type
+
   if (o) {
     lang = o.lang
     type = o.type
@@ -231,7 +232,7 @@ function paintBlock(info, children, languages) {
 
   // image replacement
   if (type && iconPat.test(type.spec)) {
-    block.translate(lang, true)
+    // block.translate(lang, true)
   }
 
   // diffs

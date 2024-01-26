@@ -16,6 +16,7 @@ const overrideCategories = [
   "custom-arg",
   "extension",
   "grey",
+  "other",
   "obsolete",
   ...Object.keys(extensions),
   ...Object.keys(aliasExtensions),
@@ -105,6 +106,7 @@ const allBlocks = scratchCommands.map(def => {
   const info = {
     id: def.id, // Used for Scratch 3 translations
     spec: def.spec, // Used for Scratch 2 translations
+    specDefs: def.specDefs,
     snap: def.snap, // Used for Snap! translations
     parts: def.spec.split(splitPat).filter(x => x),
     selector: def.selector || `sb3:${def.id}`, // Used for JSON marshalling
@@ -260,8 +262,11 @@ export const english = {
   dropdowns: {},
 
   commands: {},
+
+  fullBlocks: [],
 }
 allBlocks.forEach(info => {
+  english.fullBlocks.push(structuredClone(info))
   english.commands[info.id] = info.spec
 
   if (info.aliases) {
@@ -426,10 +431,124 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
   }
 })
 
+function fillSpecDef(part, defs) {
+  if (/^{[^ {}]+}$/gm.test(part)) {
+    let defName = part.slice(1, part.length - 1)
+    if (defs[defName]) {
+      let parts = []
+      for (const replacement of defs[defName]) {
+        let replacementHash = hashSpec(replacement)
+        let replacementParts = replacementHash.split(' ')
+        let filledParts = fillSpecDef(replacementParts[0], defs)
+        for (const part of filledParts) {
+          parts.push([part, ...replacementParts.slice(1)].join(' '))
+        }
+      }
+      return parts
+    }
+  }
+  return [part]
+}
+
+function findAbstractBlocks(partialHashParts, fullHash, commands) {
+  let partialCommands = []
+  let fullCommands = []
+
+  // partials
+  console.log('full spec', fullHash)
+  for (let command of commands) {
+    // console.log('abstract: command', command)
+    // console.log('abstract: partialHashParts', partialHashParts)
+    let originalSpec = hashSpec(command.spec)
+    let splitSpec = originalSpec.split(' ')
+    let specs = []
+    if (command.specDefs) {
+      let filledParts = fillSpecDef(splitSpec[partialHashParts.length - 1], command.specDefs)
+      // console.log('')
+      // console.log('abstract: filled spec parts', filledParts)
+      for (const filled of filledParts) {
+        // console.log('abstract: partialHashParts length', partialHashParts.length)
+        // console.log('abstract: old spec', splitSpec)
+        // console.log('abstract: before current', splitSpec.slice(0, partialHashParts.length - 1))
+        // console.log('abstract: after current', splitSpec.slice(partialHashParts.length, splitSpec.length + 1))
+        let newSpec = [
+          ...splitSpec.slice(0, partialHashParts.length - 1),
+          filled,
+          ...splitSpec.slice(partialHashParts.length, splitSpec.length + 1),
+        ].join(' ')
+        console.log('abstract: new spec', newSpec)
+        specs.push(
+          newSpec
+        )
+      }
+    } else {
+      specs.push(originalSpec)
+    }
+    for (const spec of specs) {
+      // console.log('abstract: spec starts with spec', spec)
+      // console.log('abstract: spec starts with', spec.startsWith(partialHashParts.join(' ')))
+      if (spec.startsWith(partialHashParts.join(' '))) {
+        partialCommands.push({
+          ...command,
+          spec: spec,
+          parts: spec.split(' '),
+        })
+      }
+    }
+  }
+
+  // full
+  for (const command of partialCommands) {
+    if (command.spec === fullHash) {
+      fullCommands.push(command)
+    }
+  }
+
+  if (fullCommands.length > 0) {
+    return {
+      commands: fullCommands,
+      full: true,
+    }
+  }
+
+  return {
+    commands: partialCommands,
+    full: false,
+  }
+}
+
 export function lookupHash(hash, info, children, languages) {
   console.log("info", structuredClone(info))
   console.log("lookupHash hash", hash)
+
+  let allCommands = []
+
   for (const lang of languages) {
+    allCommands = [...allCommands, ...lang.fullBlocks]
+  }
+  let full = false
+
+  let splitHash = hash.split(' ')
+  for (let partIndex = 0; partIndex < splitHash.length; partIndex++) {
+    const part = splitHash[partIndex];
+    console.log('abstract: part number', partIndex)
+    let newCommands = findAbstractBlocks(splitHash.slice(0, partIndex + 1), hash, allCommands)
+    allCommands = newCommands.commands
+    full = newCommands.full
+    console.log('new commands', allCommands)
+
+    if (full || allCommands.length === 0) {
+      break
+    }
+  }
+
+  console.log('allCommands', allCommands)
+  if (full && allCommands.length > 0) {
+    return {type: allCommands[0], lang: languages[0]}
+  }
+
+  for (const lang of languages) {
+    console.log('commands', lang.commands)
     if (Object.prototype.hasOwnProperty.call(lang.blocksByHash, hash)) {
       const collisions = lang.blocksByHash[hash]
       for (let block of collisions) {

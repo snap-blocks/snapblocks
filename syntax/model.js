@@ -218,7 +218,9 @@ export class Block {
           firstInput = child
         }
         return child.isScript
-          ? `\n${indent(child.stringify())}\n`
+          ? `{\n${indent(child.stringify())}\n} `
+          : child.isCommand
+          ? `{${child.stringify()}}`
           : child.stringify().trim() + " "
       })
       .join("")
