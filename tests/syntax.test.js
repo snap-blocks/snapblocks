@@ -727,7 +727,7 @@ describe("translate", () => {
     const b = parseBlock("forever\nmove (10) steps\nend")
     b.translate(allLanguages.de)
     expect(b.stringify()).toEqual(
-      "wiederhole fortlaufend \n  gehe (10) er Schritt\nend",
+      "wiederhole fortlaufend {\n  gehe (10) er Schritt\n}\nend",
     )
   })
 
@@ -735,7 +735,7 @@ describe("translate", () => {
     const b = parseBlock("if <> then\n  stamp\nelse\n  clear\nend")
     b.translate(allLanguages.de)
     expect(b.stringify()).toEqual(
-      "falls <> , dann \n  hinterlasse Abdruck\nsonst \n  lösche alles\nend",
+      "falls <> , dann {\n  hinterlasse Abdruck\n} sonst {\n  lösche alles\n}\nend",
     )
   })
 
@@ -755,7 +755,7 @@ describe("translate", () => {
     const b = parseBlock("if <mouse down?> then")
     b.translate(allLanguages.ko)
     expect(b.stringify()).toEqual(
-      "만약 <마우스를 클릭했는가?> \\(이\\)라면\nend",
+      "만약 <마우스를 클릭했는가?> \\(이\\)라면 {\n  \n}\nend",
     )
   })
 
