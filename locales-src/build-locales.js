@@ -121,7 +121,7 @@ const buildLocale = (code, rawLocale) => {
   const listFor = lookupEachIn(rawLocale)
   const dictionaryWith = translateEachIn(rawLocale)
 
-  const aliases = extraAliases[code]
+  const extra = extraAliases[code]
 
   const procDef = translateKey(rawLocale, "PROCEDURES_DEFINITION")
 
@@ -145,7 +145,7 @@ const buildLocale = (code, rawLocale) => {
       .filter(x => !!x),
     palette: dictionaryWith(palette), // used for forum menu
     math: listFor(mathFuncs),
-    aliases: aliases || {},
+    aliases: extra?.aliases || {},
 
     name: localeNames[code].name,
   }
@@ -160,12 +160,21 @@ const buildLocale = (code, rawLocale) => {
     if (/^scratchblocks:/.test(command.id)) {
       continue
     }
+    if (extra &&
+        extra.blocks &&
+        extra.blocks[command.id]) {
+      // console.log(aliases.blocks[command.id])
+      let fullBlock = extra.blocks[command.id]
+      fullBlock.id = command.id
+      locale.fullBlocks.push(fullBlock)
+    }
     const result = translateKey(rawLocale, command.id)
+    // console.log('id', command.id)
+    // console.log('result', result)
     if (!result) {
       continue
     }
     locale.commands[command.id] = result
-    // locale.fullBlocks.push(structuredClone(command))
   }
 
   const commandCount = Object.keys(locale.commands).length

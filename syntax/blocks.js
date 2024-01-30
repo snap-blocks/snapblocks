@@ -136,6 +136,10 @@ export const unicodeIcons = {
 export const allLanguages = {}
 function loadLanguage(code, language) {
   const blocksByHash = (language.blocksByHash = {})
+  language.blocksById = {}
+  if (!language.fullBlocks) {
+    language.fullBlocks = []
+  }
 
   Object.keys(language.commands).forEach(blockId => {
     const nativeSpec = language.commands[blockId]
@@ -199,6 +203,35 @@ function loadLanguage(code, language) {
     const nativeName = language.dropdowns[name]
     language.nativeDropdowns[nativeName] = name
   })
+
+  
+  Object.keys(language.aliases).forEach(alias => {
+    let blockId = language.aliases[alias]
+    let block = {
+      id: blockId,
+      spec: alias,
+      isAlias: true,
+    }
+    language.fullBlocks.push(block)
+  })
+  Object.keys(language.commands).forEach(blockId => {
+    let spec = language.commands[blockId]
+    let block = {
+      id: blockId,
+      spec: spec,
+    }
+    language.fullBlocks.push(block)
+  })
+  if (language.renamedBlocks) {
+    Object.keys(language.renamedBlocks).forEach(spec => {
+      let blockId = language.renamedBlocks[spec]
+      let block = {
+        id: blockId,
+        spec: spec,
+      }
+      language.fullBlocks.push(block)
+    })
+  }
 
   language.code = code
   allLanguages[code] = language
@@ -359,7 +392,7 @@ disambig(
   (children, _lang) => {
     // List block if dropdown, otherwise operators
     const first = children[1]
-    console.log("when key pressed", children)
+    // console.log("when key pressed", children)
     if (!first.isInput) {
       return
     }
@@ -431,8 +464,8 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
   }
 })
 
-function fillSpecDef(part, defs) {
-  if (/^{[^ {}]+}$/gm.test(part)) {
+export function fillSpecDef(part, defs) {
+  if (/^{[^ {}\\]+}$/gm.test(part)) {
     let defName = part.slice(1, part.length - 1)
     if (defs[defName]) {
       let parts = []
@@ -450,12 +483,12 @@ function fillSpecDef(part, defs) {
   return [part]
 }
 
-function findAbstractBlocks(partialHashParts, fullHash, commands) {
+export function findAbstractBlocks(partialHashParts, fullHash, commands, onlyCheckInputs = false) {
   let partialCommands = []
   let fullCommands = []
 
   // partials
-  console.log('full spec', fullHash)
+  // console.log('full spec', fullHash)
   for (let command of commands) {
     // console.log('abstract: command', command)
     // console.log('abstract: partialHashParts', partialHashParts)
@@ -471,12 +504,13 @@ function findAbstractBlocks(partialHashParts, fullHash, commands) {
         // console.log('abstract: old spec', splitSpec)
         // console.log('abstract: before current', splitSpec.slice(0, partialHashParts.length - 1))
         // console.log('abstract: after current', splitSpec.slice(partialHashParts.length, splitSpec.length + 1))
-        let newSpec = [
+        splitSpec = [
           ...splitSpec.slice(0, partialHashParts.length - 1),
           filled,
           ...splitSpec.slice(partialHashParts.length, splitSpec.length + 1),
-        ].join(' ')
-        console.log('abstract: new spec', newSpec)
+        ]
+        let newSpec = splitSpec.join(' ')
+        // console.log('abstract: new spec', newSpec)
         specs.push(
           newSpec
         )
@@ -487,6 +521,7 @@ function findAbstractBlocks(partialHashParts, fullHash, commands) {
     for (const spec of specs) {
       // console.log('abstract: spec starts with spec', spec)
       // console.log('abstract: spec starts with', spec.startsWith(partialHashParts.join(' ')))
+      
       if (spec.startsWith(partialHashParts.join(' '))) {
         partialCommands.push({
           ...command,
@@ -518,37 +553,74 @@ function findAbstractBlocks(partialHashParts, fullHash, commands) {
 }
 
 export function lookupHash(hash, info, children, languages) {
-  console.log("info", structuredClone(info))
-  console.log("lookupHash hash", hash)
+  // console.log("info", structuredClone(info))
+  // console.log("lookupHash hash", hash)
 
   let allCommands = []
 
   for (const lang of languages) {
-    allCommands = [...allCommands, ...lang.fullBlocks]
-  }
-  let full = false
+    allCommands = structuredClone(lang.fullBlocks)
+    // console.log('lang', lang)
+    // console.log('lang: blocks', allCommands)
+    // console.log('lang: blocksById', blocksById)
+    let full = false
 
-  let splitHash = hash.split(' ')
-  for (let partIndex = 0; partIndex < splitHash.length; partIndex++) {
-    const part = splitHash[partIndex];
-    console.log('abstract: part number', partIndex)
-    let newCommands = findAbstractBlocks(splitHash.slice(0, partIndex + 1), hash, allCommands)
-    allCommands = newCommands.commands
-    full = newCommands.full
-    console.log('new commands', allCommands)
+    let splitHash = hash.split(' ')
+    for (let partIndex = 0; partIndex < splitHash.length; partIndex++) {
+      const part = splitHash[partIndex];
+      // console.log('abstract: part number', partIndex)
+      let newCommands = findAbstractBlocks(splitHash.slice(0, partIndex + 1), hash, allCommands)
+      allCommands = newCommands.commands
+      full = newCommands.full
+      // console.log('new commands', allCommands)
 
-    if (full || allCommands.length === 0) {
-      break
+      if (full || allCommands.length === 0) {
+        break
+      }
+    }
+
+    // console.log('allCommands', allCommands)
+    if (full && allCommands.length > 0) {
+      for (let block of allCommands) {
+        let blockById = blocksById[block.id]
+        // console.log('blocksById', lang.blocksById[block.id])
+        if (
+          info.shape === "reporter" &&
+          block.shape !== "reporter" &&
+          block.shape !== "ring"
+        ) {
+          continue
+        }
+        if (info.shape === "boolean" && block.shape !== "boolean") {
+          continue
+        }
+        if (allCommands.length > 1) {
+          // Only check in case of collision;
+          // perform "disambiguation"
+          if (blockById.accepts && !blockById.accepts(info, children, lang)) {
+            continue
+          }
+        }
+
+        block.category = blockById.category
+        block.selector = blockById.selector
+        block.snap = blockById.snap
+        block.spec = block.spec.replace(/((?<=^| )_(?= |$))/gm, '%s')
+        block.shape = blockById.shape
+
+        if (blockById.specialCase) {
+          block = blockById.specialCase(info, children, lang) || block
+        }
+        let specInfo = parseSpec(block.spec)
+        block.inputs = specInfo.inputs
+        block.parts = specInfo.parts
+        return { type: block, lang: lang }
+      }
     }
   }
 
-  console.log('allCommands', allCommands)
-  if (full && allCommands.length > 0) {
-    return {type: allCommands[0], lang: languages[0]}
-  }
-
+  return // I don't know if I want to use the old method as a fallback
   for (const lang of languages) {
-    console.log('commands', lang.commands)
     if (Object.prototype.hasOwnProperty.call(lang.blocksByHash, hash)) {
       const collisions = lang.blocksByHash[hash]
       for (let block of collisions) {

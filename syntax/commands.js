@@ -335,27 +335,39 @@ export default [
     category: "looks",
   },
   {
+    id: "snap:log",
     snap: "log",
-    spec: "console log %1",
-    aliases: [
-      "console log %1 @delInput @addInput",
-      "console log %1 @delInput @verticalEllipsis @addInput",
-      "console log @addInput",
-      "console log @verticalEllipsis @addInput",
-    ],
+    spec: "console log {closed}",
+    specDefs: {
+      "closed": [
+        "@addInput",
+        "{info}"
+      ],
+      "info": [
+        "%1 {info}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ]
+    },
     inputs: ["%s"],
     shape: "stack",
     category: "looks",
   },
   {
+    id: "snap:alert",
     snap: "alert",
-    spec: "alert %1",
-    aliases: [
-      "alert %1 @delInput @addInput",
-      "alert %1 @delInput @verticalEllipsis @addInput",
-      "alert @addInput",
-      "alert @verticalEllipsis @addInput",
-    ],
+    spec: "alert {closed}",
+    specDefs: {
+      "closed": [
+        "@addInput",
+        "{info}"
+      ],
+      "info": [
+        "%1 {info}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ]
+    },
     inputs: ["%s"],
     shape: "stack",
     category: "looks",
@@ -1503,6 +1515,7 @@ export default [
     category: "sensing",
   },
   {
+    id: "snap:doIf",
     selector: "doIf",
     snap: "doIf",
     spec: "{if}",

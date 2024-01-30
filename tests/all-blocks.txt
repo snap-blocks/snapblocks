@@ -262,7 +262,7 @@ when [button pressed v]
 
 when [slider v] [> v] (50)
 
-<sensor [button pressed v]?
+<sensor [button pressed v]?>
 
 ([slider v] sensor value)
 

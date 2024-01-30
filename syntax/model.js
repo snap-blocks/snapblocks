@@ -309,6 +309,8 @@ export class Block {
     const oldInputOrder = oldParts
       .map(part => parseInputNumber(part))
       .filter(x => x)
+    // console.log('translate: oldParts', oldParts)
+    // console.log('translate: oldInputOrder', oldInputOrder)
 
     let highestNumber = 0
     const args = oldInputOrder.map(number => {
@@ -316,8 +318,10 @@ export class Block {
       return rawArgs[number - 1]
     })
     const remainingArgs = rawArgs.slice(highestNumber)
+    // console.log('translate: remainingArgs', remainingArgs)
 
     // Get new children by index
+    // console.log('translate: children', this.children)
     this.children = nativeInfo.parts
       .map(part => {
         part = part.trim()
@@ -331,6 +335,7 @@ export class Block {
         return iconPat.test(part) ? new Icon(part.slice(1)) : new Label(part)
       })
       .filter(x => x)
+    // console.log('translate: children', this.children)
 
     // Push any remaining children, so we pick up C block bodies
     remainingArgs.forEach((arg, index) => {

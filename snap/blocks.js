@@ -63,7 +63,7 @@ export class LabelView {
         }))
     }
     this.height = y + 2
-    console.log('label height', this.height)
+    // console.log('label height', this.height)
 
     this.el = SVG.group(group)
 
@@ -150,8 +150,8 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
-    console.log('hex', SVG.rgbToHex(this.r, this.g, this.b))
-    console.log('rgb', this.r, this.g, this.b)
+    // console.log('hex', SVG.rgbToHex(this.r, this.g, this.b))
+    // console.log('rgb', this.r, this.g, this.b)
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
@@ -160,7 +160,7 @@ class IconView {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
-    console.log('symbol', symbol)
+    // console.log('symbol', symbol)
     symbol.classList.add('snap-icon')
     return symbol
   }
@@ -209,7 +209,7 @@ class InputView {
       this.label = newView(input.label)
     }
 
-    console.log('input', this)
+    // console.log('input', this)
 
     this.x = 0
   }
@@ -367,12 +367,12 @@ class BlockView {
 
   drawSelf(w, h, lines) {
     // mouths
-    console.log('lines', lines)
-    console.log('height', this.height)
+    // console.log('lines', lines)
+    // console.log('height', this.height)
     if (lines.length > 1) {
       let y = lines[0].height
       const p = []
-      console.log('shape', this.info.shape)
+      // console.log('shape', this.info.shape)
       if (this.info.shape === 'stack') {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter") {
@@ -525,10 +525,10 @@ class BlockView {
     let line = new Line(y)
     const pushLine = (type) => {
       if (([0, null]).includes(type)) {
-        console.log('0')
+        // console.log('0')
         line.height += pt + pb
       } else {
-        console.log('1')
+        // console.log('1')
 
         line.height += (type === 1) ? 0 : +2
         line.y -= 1
@@ -558,7 +558,7 @@ class BlockView {
     }
 
     const lines = []
-    console.log('before line', line.height)
+    // console.log('before line', line.height)
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       child.el = child.draw(this)
@@ -573,7 +573,7 @@ class BlockView {
         child.y = y
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
-        console.log('script height', child.height)
+        // console.log('script height', child.height)
         child.height = Math.max(12, child.height) + 3
         y += child.height
         line = new Line(y)
@@ -582,14 +582,14 @@ class BlockView {
       } else if (child.isLabel &&
                  child.value === "\n") {
         // child.y = y
-        console.log('line', line.height)
-        console.log('previous line', lines[lines.length - 1] instanceof ScriptView)
+        // console.log('line', line.height)
+        // console.log('previous line', lines[lines.length - 1] instanceof ScriptView)
         if (lines.length === 0) {
           pushLine(0)
         } else {
           pushLine(2)
         }
-        console.log('height', child.height)
+        // console.log('height', child.height)
         line = new Line(y)
       } else {
         const cmw = i > 0 ? 30 : 0 // 27
@@ -613,9 +613,9 @@ class BlockView {
       }
     }
     if (lines.length === 0) {
-      console.log('0 before height', line.height)
+      // console.log('0 before height', line.height)
       line.height = Math.max(line.height, 16)
-      console.log('0 after height', line.height)
+      // console.log('0 after height', line.height)
       pushLine(0)
     } else {
       pushLine(1)
@@ -656,8 +656,8 @@ class BlockView {
       for (const child of line.children) {
         if (child.isLoop) {
           objects.push(SVG.move(innerWidth - child.width - 3 - ((this.info.shape === 'boolean') * 6), this.height - child.height - 3, child.el))
-          console.log('innerWidth', innerWidth)
-          console.log('arrow width', child.width)
+          // console.log('innerWidth', innerWidth)
+          // console.log('arrow width', child.width)
           continue
         }
 

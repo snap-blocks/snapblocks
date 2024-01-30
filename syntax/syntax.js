@@ -26,6 +26,8 @@ import {
   rtlLanguages,
   iconPat,
   blockName,
+  parseSpec,
+  unicodeIcons,
 } from "./blocks.js"
 
 function paintBlock(info, children, languages) {
@@ -88,8 +90,8 @@ function paintBlock(info, children, languages) {
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
     for (const lang of languages) {
-      console.log("define")
-      console.log("lang", lang.definePrefix, lang.defineSuffix)
+      // console.log("define")
+      // console.log("lang", lang.definePrefix, lang.defineSuffix)
 
       if (
         overrides.includes("define") &&
@@ -103,12 +105,12 @@ function paintBlock(info, children, languages) {
         }
         info.category = "events"
         info.shape = "snap-define"
-        console.log("info", info)
-        console.log("snap define")
+        // console.log("info", info)
+        // console.log("snap define")
 
         let block = children[0]
-        console.log("block", block)
-        console.log("overrides", structuredClone(overrides))
+        // console.log("block", block)
+        // console.log("overrides", structuredClone(overrides))
         if (block.info.categoryIsDefault) {
           block.info.category = "custom"
         }
@@ -133,7 +135,7 @@ function paintBlock(info, children, languages) {
 
       info.category = "custom"
 
-      console.log("info", info.category)
+      // console.log("info", info.category)
       info.shape = "define-hat"
 
       // Move the children of the define block into an "outline", transforming
@@ -146,10 +148,10 @@ function paintBlock(info, children, languages) {
         children.length - lang.defineSuffix.length,
       )
 
-      console.log("outlineChildren", structuredClone(blockChildren))
+      // console.log("outlineChildren", structuredClone(blockChildren))
 
       if (blockChildren.length == 1 && !blockChildren[0].isLabel) {
-        console.log("shape", blockChildren[1])
+        // console.log("shape", blockChildren[1])
         if (blockChildren[0] instanceof Input) {
           // outlineShape = children[1].shape
         } else {
@@ -160,7 +162,7 @@ function paintBlock(info, children, languages) {
             ...blockChildren,
             ...children.slice(children.length - lang.defineSuffix.length),
           ]
-          console.log("cloned children", children)
+          // console.log("cloned children", children)
         }
       }
       const outlineChildren = children
@@ -231,8 +233,8 @@ function paintBlock(info, children, languages) {
   const block = new Block(info, children)
 
   // image replacement
-  if (type && iconPat.test(type.spec)) {
-    // block.translate(lang, true)
+  if (type && type.isAlias) {
+    block.translate(lang, true)
   }
 
   // diffs
@@ -327,7 +329,7 @@ function parseLines(code, languages) {
       categoryIsDefault: true,
       hasLoopArrow: false,
     }
-    console.log("children", children)
+    // console.log("children", children)
     return paintBlock(info, children, languages)
   }
 
@@ -364,98 +366,101 @@ function parseLines(code, languages) {
       if (tok === "/" && peek() === "/" && !end) {
         break
       }
-
-      switch (tok) {
-        case "[":
-          label = null
-          children.push(pString())
-          break
-        case "(":
-          label = null
-          children.push(pReporter())
-          break
-        case "<":
-          label = null
-          children.push(pPredicate())
-          break
-        case "{":
-          label = null
-          children.push(pEmbedded())
-          break
-        case " ":
-        case "\t":
-          next() // Skip over whitespace.
-          label = null
-          break
-        case "☁":
-        case "➤":
-        case "◂":
-        case "▸":
-          children.push(pIcon())
-          label = null
-          break
-        case "@": {
-          next()
-          let name = ""
-          let modifiers = []
-          while (tok && /[a-zA-Z]/.test(tok)) {
-            name += tok
+      
+      // allow all unicode icons, not just exceptions
+      let unicodeIcon = Object.keys(unicodeIcons).find(name => unicodeIcons[name] === tok)
+      if (unicodeIcon) {
+        next()
+        let icon = unicodeIcon.slice(1, unicodeIcon.length)
+        children.push(new Icon(icon))
+        label = null
+      } else {
+        switch (tok) {
+          case "[":
+            label = null
+            children.push(pString())
+            break
+          case "(":
+            label = null
+            children.push(pReporter())
+            break
+          case "<":
+            label = null
+            children.push(pPredicate())
+            break
+          case "{":
+            label = null
+            children.push(pEmbedded())
+            break
+          case " ":
+          case "\t":
+            next() // Skip over whitespace.
+            label = null
+            break
+          case "@": {
             next()
-          }
-          if (tok === "-") {
-            modifiers = []
-            let modifier = 0
-            modifiers[modifier] = ""
-            next() // "-"
-            while (tok && /[0-9a-z-A-Z\-\.]/.test(tok)) {
-              if (tok === "-") {
-                modifier += 1
-                modifiers[modifier] = ""
-              } else {
-                modifiers[modifier] += tok
-              }
+            let name = ""
+            let modifiers = []
+            while (tok && /[a-zA-Z]/.test(tok)) {
+              name += tok
               next()
             }
-          }
-          children.push(
-            Object.prototype.hasOwnProperty.call(Icon.icons, name)
-              ? new Icon(name, modifiers)
-              : new Label(`@${name}${modifiers.length ? '-' : ''}${modifiers.join('-')}`),
-          )
-          label = null
-          break
-        }
-        case "\n":
-          console.log("end", end)
-          if (end) {
-            break
-          }
-        case "\\":
-          if (tok === "\\" && ["n", "\n"].includes(peek())) {
+            if (tok === "-") {
+              modifiers = []
+              let modifier = 0
+              modifiers[modifier] = ""
+              next() // "-"
+              while (tok && /[0-9a-z-A-Z\-\.]/.test(tok)) {
+                if (tok === "-") {
+                  modifier += 1
+                  modifiers[modifier] = ""
+                } else {
+                  modifiers[modifier] += tok
+                }
+                next()
+              }
+            }
+            children.push(
+              Object.prototype.hasOwnProperty.call(Icon.icons, name)
+                ? new Icon(name, modifiers)
+                : new Label(`@${name}${modifiers.length ? '-' : ''}${modifiers.join('-')}`),
+            )
             label = null
-            children.push(new Label("\n"))
-            next()
-            next()
             break
           }
-          next() // escape character
-        // fallthrough
-        case ":":
-          if (tok === ":" && peek() === ":") {
-            children.push(pOverrides(end))
-            return children
-          }
-        // fallthrough
-        default:
-          console.log("label", label)
-          if (!label) {
-            children.push((label = new Label("")))
-          }
-          label.value += tok
-          next()
+          case "\n":
+            // console.log("end", end)
+            if (end) {
+              break
+            }
+          case "\\":
+            if (tok === "\\" && ["n", "\n"].includes(peek())) {
+              label = null
+              children.push(new Label("\n"))
+              next()
+              next()
+              break
+            }
+            next() // escape character
+          // fallthrough
+          case ":":
+            if (tok === ":" && peek() === ":") {
+              children.push(pOverrides(end))
+              return children
+            }
+          // fallthrough
+          default:
+            // console.log("label", label)
+            if (!label) {
+              children.push((label = new Label("")))
+            }
+            label.value += tok
+            next()
+        }
       }
+
       if (tok === "\n") {
-        console.log("end", end)
+        // console.log("end", end)
         if (end && end !== "}") {
           label = null
           while (tok && tok !== end && tok === "\n") {
@@ -964,7 +969,7 @@ function recogniseStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-        console.log("snap")
+        // console.log("snap")
 
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
@@ -976,7 +981,7 @@ function recogniseStuff(scripts) {
         const names = []
         const parts = []
         for (const child of customBlock.children) {
-          console.log("value", child)
+          // console.log("value", child)
           if (child.isLabel) {
             // so we can format custom blocks with + between segments like snap
             if (child.value != "+") {
@@ -999,7 +1004,7 @@ function recogniseStuff(scripts) {
               const containsEq = argVar.children.find(
                 child => child.value == "=",
               )
-              console.log("containsEq", containsEq)
+              // console.log("containsEq", containsEq)
 
               var typePosition = argVar.children.length - 1
               if (containsEq) {
@@ -1009,7 +1014,7 @@ function recogniseStuff(scripts) {
                   typePosition--
                 ) {
                   const argChild = argVar.children[typePosition]
-                  console.log("argChild", argChild)
+                  // console.log("argChild", argChild)
                   if (argChild.isLabel && argChild.value == "=") {
                     typePosition -= 1
                     break
@@ -1029,7 +1034,7 @@ function recogniseStuff(scripts) {
 
             if (argVar.children[typePosition]) {
               argument = types[argVar.children[typePosition].value]
-              console.log(argument)
+              // console.log(argument)
               if (!argument) {
                 argument = "string"
               }
@@ -1042,7 +1047,7 @@ function recogniseStuff(scripts) {
                 boolean: "%b",
               }[argument] || "%s",
             )
-            console.log("part", parts[parts.length - 1])
+            // console.log("part", parts[parts.length - 1])
 
             const name = blockName(argVar)
             names.push(name)
@@ -1054,7 +1059,7 @@ function recogniseStuff(scripts) {
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
 
-        console.log("spec", spec)
+        // console.log("spec", spec)
         let info = {
           spec: spec,
           names: names,
@@ -1064,7 +1069,7 @@ function recogniseStuff(scripts) {
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
         }
-        console.log("hash", hash)
+        // console.log("hash", hash)
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
         block.info.call = info.spec
@@ -1092,7 +1097,7 @@ function recogniseStuff(scripts) {
         block.info.category === "obsolete"
       ) {
         // custom blocks
-        console.log("block hash", block.info.hash)
+        // console.log("block hash", block.info.hash)
         const info = customBlocksByHash[block.info.hash]
         if (info) {
           block.info.selector = "call"
@@ -1129,11 +1134,11 @@ function recogniseStuff(scripts) {
 
       // upvars
       if (block.isBlock) {
-        console.log("block", block.info.isCustom)
+        // console.log("block", block.info.isCustom)
         for (const child of block.children) {
-          console.log("upvar", child.isUpvar)
+          // console.log("upvar", child.isUpvar)
           if (child.isUpvar) {
-            console.log("category", block.info.category)
+            // console.log("category", block.info.category)
             child.info.category = block.info.category
           }
         }

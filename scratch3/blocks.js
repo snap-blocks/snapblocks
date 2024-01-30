@@ -197,7 +197,7 @@ export class IconView {
       SVG.symbol(`#sb3-${iconName(this.name, iconStyle)}`),
       props,
     )
-    console.log("symbol", symbol)
+    // console.log("symbol", symbol)
     return symbol
   }
 
@@ -479,7 +479,7 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].height
       const p = []
-      console.log("shape", this.info.shape)
+      // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter") {
@@ -529,7 +529,7 @@ class BlockView {
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       } else if (this.info.shape === "reporter") {
-        console.log("sb3 lines", lines)
+        // console.log("sb3 lines", lines)
         p.push(
           SVG.getRoundedBottom(
             w,
@@ -696,13 +696,13 @@ class BlockView {
       if (child.isScript) {
         this.hasScript = true
         line.height = Math.max(27, line.height + 5)
-        console.log('sb3 height', line.height)
+        // console.log('sb3 height', line.height)
         line.y -= 2
         if (lines.length === 0) {
           line.height = Math.max(50, line.height + 10)
           line.y += 5
           if (line.height <= 21) {
-            console.log("sb3 greater", line)
+            // console.log("sb3 greater", line)
             line.height += pt + pb
             line.y += isCommand ? 7 : 3
           }
@@ -722,13 +722,13 @@ class BlockView {
         previousChild = child
       } else if (child.isLabel && child.value === "\n") {
         // child.y = y
-        console.log("line", line.height)
-        console.log("sb3 previous", previousChild)
+        // console.log("line", line.height)
+        // console.log("sb3 previous", previousChild)
         if (lines.length === 0) {
           line.height += 12
           line.y += 5
           if (line.height <= 21) {
-            console.log("sb3 greater", line)
+            // console.log("sb3 greater", line)
             line.height += pt + pb
             line.y += isCommand ? 7 : 3
           }
@@ -775,13 +775,13 @@ class BlockView {
       }
     }
     if (lines.length === 0) {
-      console.log("0 before height", line.height)
+      // console.log("0 before height", line.height)
       line.height = Math.max(line.height, isCommand ? 40 : 32)
-      console.log("0 after height", line.height)
+      // console.log("0 after height", line.height)
       pushLine(0)
     } else {
       line.height += pt + pb
-      console.log("pt + pb", pt + pb)
+      // console.log("pt + pb", pt + pb)
       line.y -= pt
       pushLine(1)
     }
