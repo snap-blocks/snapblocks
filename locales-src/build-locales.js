@@ -160,9 +160,7 @@ const buildLocale = (code, rawLocale) => {
     if (/^scratchblocks:/.test(command.id)) {
       continue
     }
-    if (extra &&
-        extra.blocks &&
-        extra.blocks[command.id]) {
+    if (extra && extra.blocks && extra.blocks[command.id]) {
       // console.log(aliases.blocks[command.id])
       let fullBlock = extra.blocks[command.id]
       fullBlock.id = command.id

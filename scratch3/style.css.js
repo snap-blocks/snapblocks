@@ -158,7 +158,7 @@ const originalStyle = {
   greyPrimary: "#bfbfbf",
   greySecondary: "#b2b2b2",
   greyTertiary: "#909090",
-  
+
   otherPrimary: "#bfbfbf",
   otherSecondary: "#b2b2b2",
   otherTertiary: "#909090",
@@ -223,7 +223,7 @@ const highContrastStyle = {
   greySecondary: "#b2b2b2",
   /* Changed to be AAA against #000000, was AA */
   greyTertiary: "#959595",
-  
+
   otherPrimary: "#bfbfbf",
   otherSecondary: "#b2b2b2",
   /* Changed to be AAA against #000000, was AA */

@@ -366,9 +366,11 @@ function parseLines(code, languages) {
       if (tok === "/" && peek() === "/" && !end) {
         break
       }
-      
+
       // allow all unicode icons, not just exceptions
-      let unicodeIcon = Object.keys(unicodeIcons).find(name => unicodeIcons[name] === tok)
+      let unicodeIcon = Object.keys(unicodeIcons).find(
+        name => unicodeIcons[name] === tok,
+      )
       if (unicodeIcon) {
         next()
         let icon = unicodeIcon.slice(1, unicodeIcon.length)
@@ -423,7 +425,11 @@ function parseLines(code, languages) {
             children.push(
               Object.prototype.hasOwnProperty.call(Icon.icons, name)
                 ? new Icon(name, modifiers)
-                : new Label(`@${name}${modifiers.length ? '-' : ''}${modifiers.join('-')}`),
+                : new Label(
+                    `@${name}${modifiers.length ? "-" : ""}${modifiers.join(
+                      "-",
+                    )}`,
+                  ),
             )
             label = null
             break

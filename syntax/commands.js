@@ -339,15 +339,12 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      "closed": [
-        "@addInput",
-        "{info}"
-      ],
-      "info": [
+      closed: ["@addInput", "{info}"],
+      info: [
         "%1 {info}",
         "%1 @delInput @addInput",
         "%1 @delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s"],
     shape: "stack",
@@ -358,15 +355,12 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      "closed": [
-        "@addInput",
-        "{info}"
-      ],
-      "info": [
+      closed: ["@addInput", "{info}"],
+      info: [
         "%1 {info}",
         "%1 @delInput @addInput",
         "%1 @delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s"],
     shape: "stack",
@@ -1520,15 +1514,8 @@ export default [
     snap: "doIf",
     spec: "{if}",
     specDefs: {
-      "if": [
-        "if %1 %2",
-        "if %1 %2 {else}",
-      ],
-      "else": [
-        "@addInput",
-        "@delInput @addInput",
-        "else {if}",
-      ]
+      if: ["if %1 %2", "if %1 %2 {else}"],
+      else: ["@addInput", "@delInput @addInput", "else {if}"],
     },
     inputs: ["%b", "%cs"],
     shape: "stack",

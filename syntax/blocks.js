@@ -204,7 +204,6 @@ function loadLanguage(code, language) {
     language.nativeDropdowns[nativeName] = name
   })
 
-  
   Object.keys(language.aliases).forEach(alias => {
     let blockId = language.aliases[alias]
     let block = {
@@ -471,10 +470,10 @@ export function fillSpecDef(part, defs) {
       let parts = []
       for (const replacement of defs[defName]) {
         let replacementHash = hashSpec(replacement)
-        let replacementParts = replacementHash.split(' ')
+        let replacementParts = replacementHash.split(" ")
         let filledParts = fillSpecDef(replacementParts[0], defs)
         for (const part of filledParts) {
-          parts.push([part, ...replacementParts.slice(1)].join(' '))
+          parts.push([part, ...replacementParts.slice(1)].join(" "))
         }
       }
       return parts
@@ -483,7 +482,12 @@ export function fillSpecDef(part, defs) {
   return [part]
 }
 
-export function findAbstractBlocks(partialHashParts, fullHash, commands, onlyCheckInputs = false) {
+export function findAbstractBlocks(
+  partialHashParts,
+  fullHash,
+  commands,
+  onlyCheckInputs = false,
+) {
   let partialCommands = []
   let fullCommands = []
 
@@ -493,10 +497,13 @@ export function findAbstractBlocks(partialHashParts, fullHash, commands, onlyChe
     // console.log('abstract: command', command)
     // console.log('abstract: partialHashParts', partialHashParts)
     let originalSpec = hashSpec(command.spec)
-    let splitSpec = originalSpec.split(' ')
+    let splitSpec = originalSpec.split(" ")
     let specs = []
     if (command.specDefs) {
-      let filledParts = fillSpecDef(splitSpec[partialHashParts.length - 1], command.specDefs)
+      let filledParts = fillSpecDef(
+        splitSpec[partialHashParts.length - 1],
+        command.specDefs,
+      )
       // console.log('')
       // console.log('abstract: filled spec parts', filledParts)
       for (const filled of filledParts) {
@@ -509,11 +516,9 @@ export function findAbstractBlocks(partialHashParts, fullHash, commands, onlyChe
           filled,
           ...splitSpec.slice(partialHashParts.length, splitSpec.length + 1),
         ]
-        let newSpec = splitSpec.join(' ')
+        let newSpec = splitSpec.join(" ")
         // console.log('abstract: new spec', newSpec)
-        specs.push(
-          newSpec
-        )
+        specs.push(newSpec)
       }
     } else {
       specs.push(originalSpec)
@@ -521,12 +526,12 @@ export function findAbstractBlocks(partialHashParts, fullHash, commands, onlyChe
     for (const spec of specs) {
       // console.log('abstract: spec starts with spec', spec)
       // console.log('abstract: spec starts with', spec.startsWith(partialHashParts.join(' ')))
-      
-      if (spec.startsWith(partialHashParts.join(' '))) {
+
+      if (spec.startsWith(partialHashParts.join(" "))) {
         partialCommands.push({
           ...command,
           spec: spec,
-          parts: spec.split(' '),
+          parts: spec.split(" "),
         })
       }
     }
@@ -565,11 +570,15 @@ export function lookupHash(hash, info, children, languages) {
     // console.log('lang: blocksById', blocksById)
     let full = false
 
-    let splitHash = hash.split(' ')
+    let splitHash = hash.split(" ")
     for (let partIndex = 0; partIndex < splitHash.length; partIndex++) {
-      const part = splitHash[partIndex];
+      const part = splitHash[partIndex]
       // console.log('abstract: part number', partIndex)
-      let newCommands = findAbstractBlocks(splitHash.slice(0, partIndex + 1), hash, allCommands)
+      let newCommands = findAbstractBlocks(
+        splitHash.slice(0, partIndex + 1),
+        hash,
+        allCommands,
+      )
       allCommands = newCommands.commands
       full = newCommands.full
       // console.log('new commands', allCommands)
@@ -605,7 +614,7 @@ export function lookupHash(hash, info, children, languages) {
         block.category = blockById.category
         block.selector = blockById.selector
         block.snap = blockById.snap
-        block.spec = block.spec.replace(/((?<=^| )_(?= |$))/gm, '%s')
+        block.spec = block.spec.replace(/((?<=^| )_(?= |$))/gm, "%s")
         block.shape = blockById.shape
 
         if (blockById.specialCase) {

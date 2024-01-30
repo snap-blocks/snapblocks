@@ -21,18 +21,11 @@ export default {
       "snap:doIf": {
         spec: "{if}",
         specDefs: {
-          "if": [
-            "falls %1 %2",
-            "falls %1 %2 {else}",
-          ],
-          "else": [
-            "@addInput",
-            "@delInput @addInput",
-            "sonst {if}",
-          ]
+          if: ["falls %1 %2", "falls %1 %2 {else}"],
+          else: ["@addInput", "@delInput @addInput", "sonst {if}"],
         },
-      }
-    }
+      },
+    },
   },
 
   pt: {
@@ -42,7 +35,7 @@ export default {
       "gira para a direita %1 º": "MOTION_TURNRIGHT",
       "Quando alguém clicar na bandeira verde": "EVENT_WHENFLAGCLICKED",
       fim: "scratchblocks:end",
-    }
+    },
   },
 
   it: {
@@ -52,7 +45,7 @@ export default {
       "ruota in senso orario di %1 gradi": "MOTION_TURNRIGHT",
       "quando si clicca sulla bandiera verde": "EVENT_WHENFLAGCLICKED",
       fine: "scratchblocks:end",
-    }
+    },
   },
 
   fr: {
@@ -62,7 +55,7 @@ export default {
       "tourner droite de %1 degrés": "MOTION_TURNRIGHT",
       "quand le drapeau vert pressé": "EVENT_WHENFLAGCLICKED",
       fin: "scratchblocks:end",
-    }
+    },
   },
 
   gd: {
@@ -72,7 +65,7 @@ export default {
       "cuairtich @turnRight le %1 ceum": "MOTION_TURNRIGHT",
       "le briogadh air @greenFlag": "EVENT_WHENFLAGCLICKED",
       deireadh: "scratchblocks:end",
-    }
+    },
   },
 
   es: {
@@ -82,7 +75,7 @@ export default {
       "girar a la derecha %1 grados": "MOTION_TURNRIGHT",
       "al presionar bandera verde": "EVENT_WHENFLAGCLICKED",
       fin: "scratchblocks:end",
-    }
+    },
   },
 
   nl: {
@@ -92,7 +85,7 @@ export default {
       "draai %1 graden naar rechts": "MOTION_TURNRIGHT",
       "wanneer groene vlag wordt aangeklikt": "EVENT_WHENFLAGCLICKED",
       einde: "scratchblocks:end",
-    }
+    },
   },
 
   "zh-cn": {
@@ -102,7 +95,7 @@ export default {
       "右转 %1 度": "MOTION_TURNRIGHT",
       点击绿旗时: "EVENT_WHENFLAGCLICKED",
       结束: "scratchblocks:end",
-    }
+    },
   },
 
   "zh-tw": {
@@ -112,7 +105,7 @@ export default {
       "右轉 %1 度": "MOTION_TURNRIGHT",
       當綠旗被點擊時: "EVENT_WHENFLAGCLICKED",
       結束: "scratchblocks:end",
-    }
+    },
   },
 
   he: {
@@ -122,7 +115,7 @@ export default {
       "הסתובב ימינה %1 מעלות": "MOTION_TURNRIGHT",
       "כאשר לוחצים על דגל ירוק": "EVENT_WHENFLAGCLICKED",
       סוף: "scratchblocks:end",
-    }
+    },
   },
 
   pl: {
@@ -132,7 +125,7 @@ export default {
       "obróć w prawo o %1 stopni": "MOTION_TURNRIGHT",
       "kiedy kliknięto zieloną flagę": "EVENT_WHENFLAGCLICKED",
       koniec: "scratchblocks:end",
-    }
+    },
   },
 
   nb: {
@@ -142,7 +135,7 @@ export default {
       "vend høyre %1 grader": "MOTION_TURNRIGHT",
       "når grønt flagg klikkes": "EVENT_WHENFLAGCLICKED",
       slutt: "scratchblocks:end",
-    }
+    },
   },
 
   ru: {
@@ -152,7 +145,7 @@ export default {
       "повернуть вправо на %1 градусов": "MOTION_TURNRIGHT",
       "когда щёлкнут по зелёному флагу": "EVENT_WHENFLAGCLICKED",
       конец: "scratchblocks:end",
-    }
+    },
   },
 
   ca: {
@@ -163,7 +156,7 @@ export default {
       "quan la bandera verda es cliqui": "EVENT_WHENFLAGCLICKED",
       "quan la bandera verda es premi": "EVENT_WHENFLAGCLICKED",
       fi: "scratchblocks:end",
-    }
+    },
   },
 
   tr: {
@@ -175,7 +168,7 @@ export default {
       "%1 derece saat yönünde dön": "MOTION_TURNRIGHT",
       "yeşil bayrak tıklandığında": "EVENT_WHENFLAGCLICKED",
       son: "scratchblocks:end",
-    }
+    },
   },
 
   el: {
@@ -187,7 +180,7 @@ export default {
       "στρίψε δεξιόστροφα %1 μοίρες": "MOTION_TURNRIGHT",
       "Όταν στην πράσινη σημαία γίνει κλικ": "EVENT_WHENFLAGCLICKED",
       τέλος: "scratchblocks:end",
-    }
+    },
   },
 
   cy: {
@@ -197,7 +190,7 @@ export default {
       "troi %1 gradd i'r dde": "MOTION_TURNRIGHT",
       "pan fo'r flag werdd yn cael ei glicio": "EVENT_WHENFLAGCLICKED",
       diwedd: "scratchblocks:end",
-    }
+    },
   },
 
   hi: {
@@ -207,7 +200,7 @@ export default {
       "%1 डिग्री से दाएं घूम जाए": "MOTION_TURNRIGHT",
       "जब झंडे को क्लिक किया गया हो": "EVENT_WHENFLAGCLICKED",
       अंत: "scratchblocks:end",
-    }
+    },
   },
 
   hu: {
@@ -218,7 +211,7 @@ export default {
       "zászlóra kattintáskor": "EVENT_WHENFLAGCLICKED",
       "a zászlóra kattintáskor": "EVENT_WHENFLAGCLICKED",
       vége: "scratchblocks:end",
-    }
+    },
   },
 
   ro: {
@@ -228,7 +221,7 @@ export default {
       "rotește la dreapta %1 grade": "MOTION_TURNRIGHT",
       "când se face click pe stegulețul verde": "EVENT_WHENFLAGCLICKED",
       terminare: "scratchblocks:end",
-    }
+    },
   },
 
   id: {
@@ -238,7 +231,7 @@ export default {
       "putar ke kanan %1 derajat": "MOTION_TURNRIGHT",
       "ketika bendera hijau diklik": "EVENT_WHENFLAGCLICKED",
       selesai: "scratchblocks:end",
-    }
+    },
   },
 
   hr: {
@@ -248,7 +241,7 @@ export default {
       "skreni desno %1 stupnjeva": "MOTION_TURNRIGHT",
       "kada je zelena zastava kliknut": "EVENT_WHENFLAGCLICKED",
       kraj: "scratchblocks:end",
-    }
+    },
   },
 
   cs: {
@@ -258,7 +251,7 @@ export default {
       "otoč se o %1 stupňů doprava": "MOTION_TURNRIGHT",
       "po kliknutí na zelenou vlajku": "EVENT_WHENFLAGCLICKED",
       konec: "scratchblocks:end",
-    }
+    },
   },
 
   sl: {
@@ -268,7 +261,7 @@ export default {
       "obrni se za %1 stopinj v desno": "MOTION_TURNRIGHT",
       "ko je kliknjena zelena zastavica": "EVENT_WHENFLAGCLICKED",
       ustavi: "scratchblocks:end",
-    }
+    },
   },
 
   fa: {
@@ -278,7 +271,7 @@ export default {
       "به اندازه %1 درجه به راست بچرخ": "MOTION_TURNRIGHT",
       "وقتی که پرچم کلیک شد": "EVENT_WHENFLAGCLICKED",
       آخر: "scratchblocks:end",
-    }
+    },
   },
 
   ja: {
@@ -290,7 +283,7 @@ export default {
       "時計回りに %1 度回す": "MOTION_TURNRIGHT",
       緑の旗が押されたとき: "EVENT_WHENFLAGCLICKED",
       緑の旗がクリックされたとき: "EVENT_WHENFLAGCLICKED",
-    }
+    },
   },
 
   "ja-Hira": {
@@ -302,7 +295,7 @@ export default {
       "とけいまわりに %1 どまわす": "MOTION_TURNRIGHT",
       みどりのはたがおされたとき: "EVENT_WHENFLAGCLICKED",
       みどりのはたがクリックされたとき: "EVENT_WHENFLAGCLICKED",
-    }
+    },
   },
 
   // : { // template
