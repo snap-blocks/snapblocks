@@ -339,7 +339,7 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      closed: ["@addInput", "{info}"],
+      closed: ["%1", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -355,7 +355,7 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      closed: ["@addInput", "{info}"],
+      closed: ["%1", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -771,14 +771,18 @@ export default [
     id: "EVENT_BROADCAST",
     selector: "broadcast:",
     snap: "doBroadcast",
-    spec: "broadcast %1",
-    aliases: [
-      "broadcast %1 @addInput",
-      "broadcast %1 to %2",
-      "broadcast %1 to %2 @delInput @addInput",
-      "broadcast %1 to %2 with data %3",
-      "broadcast %1 to %2 with data %3 @delInput",
-    ],
+    spec: "broadcast %1 {reciever}",
+    specDefs: {
+      "receiver": [
+        "",
+        "@addInput",
+        "to %2 {data}",
+      ],
+      "data": [
+        "@delInput @addInput",
+        "with data %3 @delInput",
+      ],
+    },
     inputs: ["%m.broadcast", "%m.sprite", "%s"],
     shape: "stack",
     category: "events",
@@ -801,8 +805,9 @@ export default [
   },
   {
     snap: "doWarp",
-    spec: "warp",
-    shape: "c-block",
+    spec: "warp %1",
+    inputs: ["%cs"],
+    shape: "stack",
     category: "other",
   },
   {
@@ -818,9 +823,9 @@ export default [
     id: "CONTROL_REPEAT",
     selector: "doRepeat",
     snap: "doRepeat",
-    spec: "repeat %1",
-    inputs: ["%n"],
-    shape: "c-block",
+    spec: "repeat %1 %2",
+    inputs: ["%n", "%cs"],
+    shape: "stack",
     category: "control",
     hasLoopArrow: true,
   },
@@ -828,18 +833,41 @@ export default [
     id: "CONTROL_FOREVER",
     selector: "doForever",
     snap: "doForever",
-    spec: "forever",
-    inputs: [],
-    shape: "c-block cap",
+    spec: "forever %1",
+    inputs: ["%cs"],
+    shape: "stack cap",
     category: "control",
     hasLoopArrow: true,
   },
   {
     id: "CONTROL_IF",
     selector: "doIf",
-    spec: "if %1 then",
-    inputs: ["%b"],
-    shape: "c-block",
+    spec: "if %1 then %2",
+    inputs: ["%b", "%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "CONTROL_ELSE",
+    spec: "if %1 then %2 else %3",
+    inputs: ["%b", "%cs", "%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:doIfElse",
+    snap: "doIfElse",
+    spec: "if %1 %2 else %3",
+    inputs: ["%b", "%cs", "%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:reportIfElse",
+    snap: "reportIfElse",
+    spec: "if %1 then %2 else %3",
+    inputs: ["%b", "%s", "%s"],
+    shape: "reporter",
     category: "control",
   },
   {
@@ -855,17 +883,25 @@ export default [
     id: "CONTROL_REPEATUNTIL",
     selector: "doUntil",
     snap: "doUntil",
-    spec: "repeat until %1",
-    inputs: ["%b"],
-    shape: "c-block",
+    spec: "repeat until %1 %2",
+    inputs: ["%b", "%cs"],
+    shape: "stack",
     category: "control",
     hasLoopArrow: true,
   },
   {
+    id: "snap:doFor",
     snap: "doFor",
-    spec: "for %1 = %2 to %3",
-    inputs: ["%s", "%n", "%n"],
-    shape: "c-block",
+    spec: "for %1 = %2 to %3 %4",
+    inputs: ["%s", "%n", "%n", "%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:doReport",
+    spec: "report %1",
+    inputs: ["%s"],
+    shape: "cap",
     category: "control",
   },
   {
@@ -874,6 +910,132 @@ export default [
     spec: "stop %1",
     inputs: ["%m.stop"],
     shape: "cap",
+    category: "control",
+  },
+  {
+    id: "snap:doRun",
+    snap: "doRun",
+    spec: "run %1 {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "with inputs %2 {inputs}"
+      ],
+      "inputs": [
+        "%2 {inputs}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:fork",
+    snap: "fork",
+    spec: "launch %1 {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "with inputs %2 {inputs}"
+      ],
+      "inputs": [
+        "%2 {inputs}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:evaluate",
+    snap: "evaluate",
+    spec: "call %1 {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "with inputs %2 {inputs}"
+      ],
+      "inputs": [
+        "%2 {inputs}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    id: "snap:reportPipe",
+    snap: "reportPipe",
+    spec: "pipe %1 @arrowRight {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "%2 {expanded}"
+      ],
+      "expanded": [
+        "%2 {expanded}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "reporter",
+    category: "control"
+  },
+  {
+    id: "snap:doTellTo",
+    snap: "doTellTo",
+    spec: "tell %1 to %2 {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "with inputs %3 {inputs}"
+      ],
+      "inputs": [
+        "%3 {inputs}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%m.sprites", "%s", "%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:reportAskFor",
+    snap: "reportAskFor",
+    spec: "ask %1 for %2 {closed}",
+    specDefs: {
+      "closed": [
+        "%2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "with inputs %3 {inputs}"
+      ],
+      "inputs": [
+        "%3 {inputs}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%m.sprites", "%s", "%s"],
+    shape: "reporter",
     category: "control",
   },
   {
@@ -886,6 +1048,7 @@ export default [
   },
   {
     id: "CONTROL_CREATECLONEOF",
+    snap: "createClone",
     selector: "createCloneOf",
     spec: "create clone of %1",
     inputs: ["%m.spriteOnly"],
@@ -893,16 +1056,137 @@ export default [
     category: "control",
   },
   {
+    id: "snap:newClone",
+    snap: "newClone",
+    spec: "a new clone of %1",
+    inputs: ["%m.spriteOnly"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
     id: "CONTROL_DELETETHISCLONE",
     selector: "deleteClone",
+    snap: "removeClone",
     spec: "delete this clone",
     inputs: [],
     shape: "cap",
     category: "control",
   },
   {
+    id: "snap:doPauseAll",
+    snap: "doPauseAll",
+    spec: "pause all @pause",
+    inputs: [],
+    shape: "cap",
+    category: "control",
+  },
+  {
+    id: "snap:doSwitchToScene",
+    snap: "doSwitchToScene",
+    spec: "switch to scene %1 {message}",
+    specDefs: {
+      "message": [
+        "@addInput",
+        "and send %2 {data}",
+      ],
+      "data": [
+        "@delInput @addInput",
+        "with data %3 @delInput",
+      ]
+    },
+    inputs: ["%m", "%m.messages", "%s"],
+    shape: "cap",
+    category: "control",
+  },
+  {
+    id: "snap:receiveUserEdit",
+    snap: "receiveUserEdit",
+    spec: "when %1 is edited {data}",
+    specDefs: {
+      "data": [
+        "@addInput",
+        "%2 @delInput",
+      ]
+    },
+    inputs: ["%m", "%s"],
+    shape: "hat",
+    category: "events",
+  },
+  {
+    id: "snap:doDefineBlock",
+    snap: "doDefineBlock",
+    spec: "define %1 %2 %3",
+    inputs: ["%s", "%s", "%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:doDeleteBlock",
+    snap: "doDeleteBlock",
+    spec: "delete block %1",
+    inputs: ["%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:doSetBlockAttribute",
+    snap: "doSetBlockAttribute",
+    spec: "set %1 of block %2 to %3",
+    inputs: ["%m", "%s", "%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:reportBlockAttribute",
+    snap: "reportBlockAttribute",
+    spec: "%1 of block %2",
+    inputs: ["%m", "%s"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    id: "snap:reportEnvironment",
+    snap: "reportEnvironment",
+    spec: "this %1",
+    inputs: ["%m"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    id: "snap:getLastMessage",
+    snap: "getLastMessage",
+    spec: "message",
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    id: "snap:reportHyperZip",
+    snap: "reportHyperZip",
+    spec: "zip %1 inputs: \n %2 leaf-rank %3 \n %4 leaf-rank %5",
+    inputs: ["%s", "%s", "%n", "%s", "%n"],
+    shape: "reporter",
+    category: "control"
+  },
+  {
+    id: "snap:doCallCC",
+    snap: "doCallCC",
+    spec: "run %1 w/continuation",
+    inputs: ["%s"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "snap:reportCallCC",
+    snap: "reportCallCC",
+    spec: "call %1 w/continuation",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
     id: "SENSING_ASKANDWAIT",
     selector: "doAsk",
+    snap: "doAsk",
     spec: "ask %1 and wait",
     inputs: ["%s"],
     shape: "stack",
@@ -919,10 +1203,27 @@ export default [
   {
     id: "videoSensing.setVideoTransparency",
     selector: "setVideoTransparency",
+    snap: "doSetVideoTransparency",
     spec: "set video transparency to %1%",
     inputs: ["%n"],
     shape: "stack",
     category: "video",
+  },
+  {
+    id: "snap:reportGlobalFlag",
+    snap: "reportGlobalFlag",
+    spec: "is %1 on?",
+    inputs: ["%m"],
+    shape: "boolean",
+    category: "sensing",
+  },
+  {
+    id: "snap:doSetGlobalFlag",
+    snap: "doSetGlobalFlag",
+    spec: "set %1 to %2",
+    inputs: ["%m", "%b"],
+    shape: "stack",
+    category: "sensing",
   },
   {
     id: "videoSensing.whenMotionGreaterThan",
@@ -934,6 +1235,7 @@ export default [
   {
     id: "SENSING_RESETTIMER",
     selector: "timerReset",
+    snap: "doResetTimer",
     spec: "reset timer",
     inputs: [],
     shape: "stack",
@@ -1139,6 +1441,7 @@ export default [
   {
     id: "SENSING_TOUCHINGOBJECT",
     selector: "touching:",
+    snap: "reportTouchingObject",
     spec: "touching %1?",
     inputs: ["%m.touching"],
     shape: "boolean",
@@ -1147,6 +1450,7 @@ export default [
   {
     id: "SENSING_TOUCHINGCOLOR",
     selector: "touchingColor:",
+    snap: "reportTouchingColor",
     spec: "touching color %1?",
     inputs: ["%c"],
     shape: "boolean",
@@ -1155,6 +1459,7 @@ export default [
   {
     id: "SENSING_COLORISTOUCHINGCOLOR",
     selector: "color:sees:",
+    snap: "reportColorIsTouchingColor",
     spec: "color %1 is touching %2?",
     inputs: ["%c", "%c"],
     shape: "boolean",
@@ -1171,6 +1476,7 @@ export default [
   {
     id: "SENSING_ANSWER",
     selector: "answer",
+    snap: "getLastAnswer",
     spec: "answer",
     inputs: [],
     shape: "reporter",
@@ -1179,22 +1485,48 @@ export default [
   {
     id: "SENSING_KEYPRESSED",
     selector: "keyPressed:",
+    snap: "reportKeyPressed",
     spec: "key %1 pressed?",
     inputs: ["%m.key"],
     shape: "boolean",
     category: "sensing",
   },
   {
+    id: "snap:reportRelationTo",
+    snap: "reportRelationTo",
+    spec: "%1 to %2",
+    inputs: ["%m", "%m.spriteOrMouse"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportAspect",
+    snap: "reportAspect",
+    spec: "%1 at %2",
+    inputs: ["%m", "%m.spriteOrMouse"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "SENSING_MOUSEDOWN",
     selector: "mousePressed",
+    snap: "reportMouseDown",
     spec: "mouse down?",
     inputs: [],
     shape: "boolean",
     category: "sensing",
   },
   {
+    id: "snap:reportMousePosition",
+    snap: "reportMousePosition",
+    spec: "mouse position",
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "SENSING_MOUSEX",
     selector: "mouseX",
+    snap: "reportMouseX",
     spec: "mouse x",
     inputs: [],
     shape: "reporter",
@@ -1203,6 +1535,7 @@ export default [
   {
     id: "SENSING_MOUSEY",
     selector: "mouseY",
+    snap: "reportMouseY",
     spec: "mouse y",
     inputs: [],
     shape: "reporter",
@@ -1226,6 +1559,7 @@ export default [
   {
     id: "videoSensing.videoOn",
     selector: "senseVideoMotion",
+    snap: "reportVideo",
     spec: "video %1 on %2",
     inputs: ["%m.videoMotionType", "%m.stageOrThis"],
     shape: "reporter",
@@ -1234,6 +1568,7 @@ export default [
   {
     id: "SENSING_TIMER",
     selector: "timer",
+    snap: "getTimer",
     spec: "timer",
     inputs: [],
     shape: "reporter",
@@ -1242,14 +1577,48 @@ export default [
   {
     id: "SENSING_OF",
     selector: "getAttribute:of:",
+    snap: "reportAttributeOf",
     spec: "%1 of %2",
     inputs: ["%m.attribute", "%m.spriteOrStage"],
     shape: "reporter",
     category: "sensing",
   },
   {
+    id: "snap:reportGet",
+    snap: "reportGet",
+    spec: "my %1",
+    inputs: ["%m"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportObject",
+    snap: "reportObject",
+    spec: "object %1",
+    inputs: ["%m.spriteOrStage"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportURL",
+    snap: "reportURL",
+    spec: "url %1",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportAudio",
+    snap: "reportAudio",
+    spec: "microphone %1",
+    inputs: ["%m"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "SENSING_CURRENT",
     selector: "timeAndDate",
+    snap: "reportDate",
     spec: "current %1",
     inputs: ["%m.timeAndDate"],
     shape: "reporter",
@@ -1272,9 +1641,48 @@ export default [
     category: "sensing",
   },
   {
+    id: "snap:reportThreadCount",
+    snap: "reportThreadCount",
+    spec: "processes",
+    inputs: [],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportStackSize",
+    snap: "reportStackSize",
+    spec: "stack size",
+    inputs: [],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
+    id: "snap:reportYieldCount",
+    snap: "reportYieldCount",
+    spec: "yields",
+    inputs: [],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "OPERATORS_ADD",
     selector: "+",
-    spec: "%1 + %2",
+    snap: "reportVariadicSum",
+    spec: "{sum}",
+    specDefs: {
+      "sum": [
+        "%1 + %2",
+        "sum %1",
+        "sum @addInput",
+        "sum @verticalEllipsis @addInput",
+        "%1 + %2 {add}",
+      ],
+      "add": [
+        "+ %2 {add}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
     inputs: ["%n", "%n"],
     shape: "reporter",
     category: "operators",
@@ -1282,6 +1690,7 @@ export default [
   {
     id: "OPERATORS_SUBTRACT",
     selector: "-",
+    snap: "reportDifference",
     spec: "%1 - %2",
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1290,7 +1699,27 @@ export default [
   {
     id: "OPERATORS_MULTIPLY",
     selector: "*",
-    spec: "%1 * %2",
+    snap: "reportVariadicProduct",
+    spec: "{product}",
+    specDefs: {
+      "product": [
+        "%1 {operator} %2",
+        "product %1",
+        "product @addInput",
+        "product @verticalEllipsis @addInput",
+        "%1 {operator} %2 {add}",
+      ],
+      "add": [
+        "{operator} %2 {add}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+      "operator": [
+        "*",
+        "×",
+        "x",
+      ]
+    },
     inputs: ["%n", "%n"],
     shape: "reporter",
     category: "operators",
@@ -1298,7 +1727,68 @@ export default [
   {
     id: "OPERATORS_DIVIDE",
     selector: "/",
+    snap: "reportQuotient",
     spec: "%1 / %2",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportPower",
+    snap: "reportPower",
+    spec: "%1 ^ %2",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportModulus",
+    snap: "reportModulus",
+    spec: "%1 mod %2",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicMin",
+    snap: "reportVariadicMin",
+    spec: "{minimum}",
+    specDefs: {
+      "minimum": [
+        "%1 min %2",
+        "minimum %1",
+        "minimum @addInput",
+        "minimum @verticalEllipsis @addInput",
+        "%1 min %2 {min}",
+      ],
+      "min": [
+        "min %2 {min}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicMax",
+    snap: "reportVariadicMax",
+    spec: "{maximum}",
+    specDefs: {
+      "maximum": [
+        "%1 max %2",
+        "maximum %1",
+        "maximum @addInput",
+        "maximum @verticalEllipsis @addInput",
+        "%1 max %2 {max}",
+      ],
+      "max": [
+        "max %2 {max}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
     inputs: ["%n", "%n"],
     shape: "reporter",
     category: "operators",
@@ -1306,6 +1796,7 @@ export default [
   {
     id: "OPERATORS_RANDOM",
     selector: "randomFrom:to:",
+    snap: "reportRandom",
     spec: "pick random %1 to %2",
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1314,7 +1805,22 @@ export default [
   {
     id: "OPERATORS_LT",
     selector: "<",
-    spec: "%1 < %2",
+    snap: "reportVariadicLessThan",
+    spec: "{all}",
+    specDefs: {
+      "all": [
+        "%1 < %2",
+        "all < %1",
+        "all < @addInput",
+        "all < @verticalEllipsis @addInput",
+        "%1 < %2 {less}",
+      ],
+      "less": [
+        "< %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ]
+    },
     inputs: ["%s", "%s"],
     shape: "boolean",
     category: "operators",
@@ -1394,6 +1900,7 @@ export default [
   {
     id: "OPERATORS_ROUND",
     selector: "rounded",
+    snap: "reportRound",
     spec: "round %1",
     inputs: ["%n"],
     shape: "reporter",
@@ -1402,8 +1909,23 @@ export default [
   {
     id: "OPERATORS_MATHOP",
     selector: "computeFunction:of:",
+    snap: "reportMonadic",
     spec: "%1 of %2",
     inputs: ["%m.mathOp", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportAtan2",
+    snap: "reportAtan2",
+    spec: "atan2 %1 {operator} %2",
+    specDefs: {
+      "operator": [
+        "/",
+        "÷",
+      ]
+    },
+    inputs: ["%n", "%n"],
     shape: "reporter",
     category: "operators",
   },
@@ -1453,20 +1975,6 @@ export default [
     category: "list",
   },
   {
-    id: "CONTROL_ELSE",
-    spec: "else",
-    inputs: [],
-    shape: "celse",
-    category: "control",
-  },
-  {
-    selector: "elseIf",
-    spec: "else if %1",
-    inputs: ["%b"],
-    shape: "celse",
-    category: "control",
-  },
-  {
     id: "scratchblocks:end",
     spec: "end",
     inputs: [],
@@ -1495,7 +2003,7 @@ export default [
     category: "grey",
   },
   {
-    id: "scratchblocks:addInput",
+    id: "snap:ring",
     spec: "%1 @addInput",
     inputs: ["%n", "%c"],
     shape: "ring",
@@ -1523,9 +2031,9 @@ export default [
   },
   {
     selector: "doForeverIf",
-    spec: "forever if %1",
-    inputs: ["%b"],
-    shape: "c-block cap",
+    spec: "forever if %1 %2",
+    inputs: ["%b", "%cs"],
+    shape: "stack cap",
     category: "control",
   },
   {

@@ -267,8 +267,10 @@ export const english = {
   // Valid arguments to "of" dropdown, for resolving ambiguous situations
   math: [
     "abs",
-    "floor",
+    "neg",
+    "sign",
     "ceiling",
+    "floor",
     "sqrt",
     "sin",
     "cos",
@@ -278,8 +280,14 @@ export const english = {
     "atan",
     "ln",
     "log",
+    "lg",
     "e ^",
+    "e^",
     "10 ^",
+    "10^",
+    "2 ^",
+    "2^",
+    "id",
   ],
 
   // Valid arguments to "sound effect" dropdown, for resolving ambiguous situations
@@ -289,7 +297,7 @@ export const english = {
   microbitWhen: ["moved", "shaken", "jumped"],
 
   // For detecting the "stop" cap / stack block
-  osis: ["other scripts in sprite", "other scripts in stage"],
+  osis: ["other scripts in sprite", "other scripts in stage", "all but this script"],
 
   dropdowns: {},
 
@@ -389,7 +397,7 @@ disambig(
   "makeymakey.whenKeyPressed",
   "EVENT_WHENKEYPRESSED",
   (children, _lang) => {
-    // List block if dropdown, otherwise operators
+    // makey makey block if number-dropdown, otherwise events
     const first = children[1]
     // console.log("when key pressed", children)
     if (!first.isInput) {
@@ -451,6 +459,31 @@ disambig("ev3.buttonPressed", "microbit.isButtonPressed", (children, _lang) => {
   return false
 })
 
+disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
+  let first = children[3]
+  if (first.isInput) {
+    return true
+  }
+
+  let last = children[5]
+  if (last.isInput) {
+    return true
+  }
+  
+  return false
+})
+
+disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
+  let last = children[children.length - 1]
+  // console.log('last', last)
+  if (last.isInput &&
+      last.isBoolean) {
+        return true
+      }
+  
+  return false
+})
+
 specialCase("CONTROL_STOP", (_, children, lang) => {
   // Cap block unless argument is "other scripts in sprite"
   const last = children[children.length - 1]
@@ -460,6 +493,26 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
   const value = last.value
   if (lang.osis.includes(value)) {
     return { ...blocksById.CONTROL_STOP, shape: "stack" }
+  }
+})
+
+// convert * to × for the snap variadic version
+specialCase("OPERATORS_MULTIPLY", (_, children, lang) => {
+  let operators = children.filter((child) => child.isLabel && ["*", "x"].includes(child.value.toLowerCase()))
+  let last = children[children.length - 1]
+
+  if (last.isIcon) {
+    for (let operator of operators) {
+      operator.value = '×'
+    }
+  }
+})
+
+// convert / to ÷
+specialCase("snap:reportAtan2", (_, children, lang) => {
+  let operators = children.filter((child) => child.value === "/")
+  for (let operator of operators) {
+    operator.value = '÷'
   }
 })
 
