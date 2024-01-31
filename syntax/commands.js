@@ -773,15 +773,8 @@ export default [
     snap: "doBroadcast",
     spec: "broadcast %1 {reciever}",
     specDefs: {
-      "receiver": [
-        "",
-        "@addInput",
-        "to %2 {data}",
-      ],
-      "data": [
-        "@delInput @addInput",
-        "with data %3 @delInput",
-      ],
+      receiver: ["", "@addInput", "to %2 {data}"],
+      data: ["@delInput @addInput", "with data %3 @delInput"],
     },
     inputs: ["%m.broadcast", "%m.sprite", "%s"],
     shape: "stack",
@@ -917,17 +910,17 @@ export default [
     snap: "doRun",
     spec: "run %1 {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "with inputs %2 {inputs}"
+        "with inputs %2 {inputs}",
       ],
-      "inputs": [
+      inputs: [
         "%2 {inputs}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s", "%s"],
     shape: "stack",
@@ -938,17 +931,17 @@ export default [
     snap: "fork",
     spec: "launch %1 {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "with inputs %2 {inputs}"
+        "with inputs %2 {inputs}",
       ],
-      "inputs": [
+      inputs: [
         "%2 {inputs}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s", "%s"],
     shape: "stack",
@@ -959,17 +952,17 @@ export default [
     snap: "evaluate",
     spec: "call %1 {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "with inputs %2 {inputs}"
+        "with inputs %2 {inputs}",
       ],
-      "inputs": [
+      inputs: [
         "%2 {inputs}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s", "%s"],
     shape: "reporter",
@@ -980,38 +973,38 @@ export default [
     snap: "reportPipe",
     spec: "pipe %1 @arrowRight {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "%2 {expanded}"
+        "%2 {expanded}",
       ],
-      "expanded": [
+      expanded: [
         "%2 {expanded}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s", "%s"],
     shape: "reporter",
-    category: "control"
+    category: "control",
   },
   {
     id: "snap:doTellTo",
     snap: "doTellTo",
     spec: "tell %1 to %2 {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "with inputs %3 {inputs}"
+        "with inputs %3 {inputs}",
       ],
-      "inputs": [
+      inputs: [
         "%3 {inputs}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%m.sprites", "%s", "%s"],
     shape: "stack",
@@ -1022,17 +1015,17 @@ export default [
     snap: "reportAskFor",
     spec: "ask %1 for %2 {closed}",
     specDefs: {
-      "closed": [
+      closed: [
         "%2",
         "@addInput",
         "@verticalEllipsis @addInput",
-        "with inputs %3 {inputs}"
+        "with inputs %3 {inputs}",
       ],
-      "inputs": [
+      inputs: [
         "%3 {inputs}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%m.sprites", "%s", "%s"],
     shape: "reporter",
@@ -1085,14 +1078,8 @@ export default [
     snap: "doSwitchToScene",
     spec: "switch to scene %1 {message}",
     specDefs: {
-      "message": [
-        "@addInput",
-        "and send %2 {data}",
-      ],
-      "data": [
-        "@delInput @addInput",
-        "with data %3 @delInput",
-      ]
+      message: ["@addInput", "and send %2 {data}"],
+      data: ["@delInput @addInput", "with data %3 @delInput"],
     },
     inputs: ["%m", "%m.messages", "%s"],
     shape: "cap",
@@ -1103,10 +1090,7 @@ export default [
     snap: "receiveUserEdit",
     spec: "when %1 is edited {data}",
     specDefs: {
-      "data": [
-        "@addInput",
-        "%2 @delInput",
-      ]
+      data: ["@addInput", "%2 @delInput"],
     },
     inputs: ["%m", "%s"],
     shape: "hat",
@@ -1165,7 +1149,7 @@ export default [
     spec: "zip %1 inputs: \n %2 leaf-rank %3 \n %4 leaf-rank %5",
     inputs: ["%s", "%s", "%n", "%s", "%n"],
     shape: "reporter",
-    category: "control"
+    category: "control",
   },
   {
     id: "snap:doCallCC",
@@ -1670,18 +1654,18 @@ export default [
     snap: "reportVariadicSum",
     spec: "{sum}",
     specDefs: {
-      "sum": [
+      sum: [
         "%1 + %2",
         "sum %1",
         "sum @addInput",
         "sum @verticalEllipsis @addInput",
         "%1 + %2 {add}",
       ],
-      "add": [
+      add: [
         "+ %2 {add}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1702,23 +1686,19 @@ export default [
     snap: "reportVariadicProduct",
     spec: "{product}",
     specDefs: {
-      "product": [
+      product: [
         "%1 {operator} %2",
         "product %1",
         "product @addInput",
         "product @verticalEllipsis @addInput",
         "%1 {operator} %2 {add}",
       ],
-      "add": [
+      add: [
         "{operator} %2 {add}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
       ],
-      "operator": [
-        "*",
-        "×",
-        "x",
-      ]
+      operator: ["*", "×", "x"],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1754,18 +1734,18 @@ export default [
     snap: "reportVariadicMin",
     spec: "{minimum}",
     specDefs: {
-      "minimum": [
+      minimum: [
         "%1 min %2",
         "minimum %1",
         "minimum @addInput",
         "minimum @verticalEllipsis @addInput",
         "%1 min %2 {min}",
       ],
-      "min": [
+      min: [
         "min %2 {min}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1776,18 +1756,18 @@ export default [
     snap: "reportVariadicMax",
     spec: "{maximum}",
     specDefs: {
-      "maximum": [
+      maximum: [
         "%1 max %2",
         "maximum %1",
         "maximum @addInput",
         "maximum @verticalEllipsis @addInput",
         "%1 max %2 {max}",
       ],
-      "max": [
+      max: [
         "max %2 {max}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1808,18 +1788,18 @@ export default [
     snap: "reportVariadicLessThan",
     spec: "{all}",
     specDefs: {
-      "all": [
+      all: [
         "%1 < %2",
         "all < %1",
         "all < @addInput",
         "all < @verticalEllipsis @addInput",
         "%1 < %2 {less}",
       ],
-      "less": [
+      less: [
         "< %2 {less}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
-      ]
+      ],
     },
     inputs: ["%s", "%s"],
     shape: "boolean",
@@ -1920,10 +1900,7 @@ export default [
     snap: "reportAtan2",
     spec: "atan2 %1 {operator} %2",
     specDefs: {
-      "operator": [
-        "/",
-        "÷",
-      ]
+      operator: ["/", "÷"],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",

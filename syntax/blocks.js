@@ -297,7 +297,11 @@ export const english = {
   microbitWhen: ["moved", "shaken", "jumped"],
 
   // For detecting the "stop" cap / stack block
-  osis: ["other scripts in sprite", "other scripts in stage", "all but this script"],
+  osis: [
+    "other scripts in sprite",
+    "other scripts in stage",
+    "all but this script",
+  ],
 
   dropdowns: {},
 
@@ -469,18 +473,17 @@ disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
   if (last.isInput) {
     return true
   }
-  
+
   return false
 })
 
 disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
   let last = children[children.length - 1]
   // console.log('last', last)
-  if (last.isInput &&
-      last.isBoolean) {
-        return true
-      }
-  
+  if (last.isInput && last.isBoolean) {
+    return true
+  }
+
   return false
 })
 
@@ -498,21 +501,23 @@ specialCase("CONTROL_STOP", (_, children, lang) => {
 
 // convert * to × for the snap variadic version
 specialCase("OPERATORS_MULTIPLY", (_, children, lang) => {
-  let operators = children.filter((child) => child.isLabel && ["*", "x"].includes(child.value.toLowerCase()))
+  let operators = children.filter(
+    child => child.isLabel && ["*", "x"].includes(child.value.toLowerCase()),
+  )
   let last = children[children.length - 1]
 
   if (last.isIcon) {
     for (let operator of operators) {
-      operator.value = '×'
+      operator.value = "×"
     }
   }
 })
 
 // convert / to ÷
 specialCase("snap:reportAtan2", (_, children, lang) => {
-  let operators = children.filter((child) => child.value === "/")
+  let operators = children.filter(child => child.value === "/")
   for (let operator of operators) {
-    operator.value = '÷'
+    operator.value = "÷"
   }
 })
 
