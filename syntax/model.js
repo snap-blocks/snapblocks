@@ -221,10 +221,10 @@ export class Block {
           ? `{\n${indent(child.stringify())}\n} `
           : child.isCommand
           ? `{${child.stringify()}}`
-          : child.stringify().trim() + " "
+          : child.stringify().replace(/^\x20+|\x20+$/g, "") + " " // keep newlines, while also trimming spaces
       })
       .join("")
-      .trim()
+      .replace(/^\x20+|\x20+$/g, "")
 
     const lang = this.info.language
     if (checkAlias && lang && this.info.selector) {
