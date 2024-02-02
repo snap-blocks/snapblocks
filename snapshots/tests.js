@@ -201,23 +201,29 @@ test(
 
 wait (1) secs
 
-repeat (10)
-end
+repeat (10) {
 
-forever
-end
+}
 
-if <> then
-end
+forever {
 
-if <> then
-else
-end
+}
+
+if <> then {
+
+}
+
+if <> then {
+
+} else {
+
+}
 
 wait until <>
 
-repeat until <>
-end
+repeat until <> {
+
+}
 
 // caps!
 
@@ -563,23 +569,29 @@ test(
 
 wait (1) seconds
 
-repeat (10)
-end
+repeat (10) {
 
-forever
-end
+}
 
-if <> then
-end
+forever {
 
-if <> then
-else
-end
+}
+
+if <> then {
+
+}
+
+if <> then {
+
+} else {
+
+}
 
 wait until <>
 
-repeat until <>
-end
+repeat until <> {
+
+}
 
 stop [all v]
 
@@ -1014,22 +1026,27 @@ test(
 
 warte (1) Sekunden
 
-wiederhole (10) mal
-Ende
+wiederhole (10) mal {
 
-wiederhole fortlaufend
-Ende
+}
 
-falls <>, dann
-Ende
+wiederhole fortlaufend {
 
-falls <>, dann
-Ende
+}
+
+falls <>, dann {
+
+}
+
+falls <>, dann {
+
+}
 
 warte bis <>
 
-wiederhole bis <>
-Ende
+wiederhole bis <> {
+  
+}
 
 stoppe [andere Skripte der Figur v]
 stoppe [alles v]
