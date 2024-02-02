@@ -401,11 +401,13 @@ next background
 
 // Control
 
-if <>
-end
+if <> {
+  
+}
 
-forever if <>
-end
+forever if <> {
+
+}
 
 stop script
 stop all
@@ -1045,7 +1047,7 @@ falls <>, dann {
 warte bis <>
 
 wiederhole bis <> {
-  
+
 }
 
 stoppe [andere Skripte der Figur v]
