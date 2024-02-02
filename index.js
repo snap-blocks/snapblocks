@@ -1,6 +1,6 @@
 /*
  * snapblocks
- * http://ego-lay0atman-bay.github.io/snapblocks
+ * http://snap-blocks.github.io/
  *
  * Copyright 2023, ego-lay-atman-bay
  * snapblocks is a fork of scratchblocks by Tim Radvan
