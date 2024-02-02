@@ -34,6 +34,7 @@ const overrideShapes = [
 
 const aliasShapes = {
   predicate: "boolean",
+  command: "stack",
 }
 
 // languages that should be displayed right to left
@@ -131,6 +132,7 @@ export const unicodeIcons = {
   "@delInput": "◂",
   "@turtle": "➤",
   "@cloud": "☁",
+  "@verticalEllipsis": "⋮"
 }
 
 export const allLanguages = {}
