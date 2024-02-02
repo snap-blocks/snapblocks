@@ -859,7 +859,7 @@ export default [
     snap: "doForever",
     spec: "forever %1",
     inputs: ["%cs"],
-    shape: "stack cap",
+    shape: "cap",
     category: "control",
     hasLoopArrow: true,
   },
