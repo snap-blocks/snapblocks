@@ -607,7 +607,9 @@ describe("c blocks", () => {
   test("if else", () => {
     // We used to give these different IDs for toJSON(); we no longer need to.
     expect(parseBlock("if <> then {\n}").info).toMatchObject(ifBlock)
-    expect(parseBlock("if <> then {\n} else {\n}").info).toMatchObject(ifElseBlock)
+    expect(parseBlock("if <> then {\n} else {\n}").info).toMatchObject(
+      ifElseBlock,
+    )
   })
 })
 
@@ -753,9 +755,7 @@ describe("translate", () => {
   test("escapes brackets in labels: en -> ko", () => {
     const b = parseBlock("if <mouse down?> then {\n}")
     b.translate(allLanguages.ko)
-    expect(b.stringify()).toEqual(
-      "만약 <마우스를 클릭했는가?> \\(이\\)라면",
-    )
+    expect(b.stringify()).toEqual("만약 <마우스를 클릭했는가?> \\(이\\)라면")
   })
 
   test("translates stop block: en -> ja", () => {

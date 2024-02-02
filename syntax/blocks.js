@@ -316,7 +316,6 @@ export const english = {
       "hex sha512 hash",
     ],
   },
-  
 
   // Language name is needed for the English locale as well
   name: "English",
@@ -417,8 +416,10 @@ registerCheck("SENSING_OF", (info, children, lang) => {
     return
   }
   const name = first.value
-  return !lang.of.math.includes(name.toLowerCase()) &&
-         !lang.of.text.includes(name.toLowerCase())
+  return (
+    !lang.of.math.includes(name.toLowerCase()) &&
+    !lang.of.text.includes(name.toLowerCase())
+  )
 })
 
 // I could not figure out how to get it to detect list of with specDefs, or aliases.
@@ -432,7 +433,7 @@ specialCase("SENSING_OF", (_, children, lang) => {
   }
   const name = first.value
   if (lang.of.list.includes(name.toLowerCase())) {
-    return {...blocksById['snap:reportListAttribute']}
+    return { ...blocksById["snap:reportListAttribute"] }
   }
 })
 
@@ -468,9 +469,9 @@ disambig("SOUND_SETEFFECTO", "LOOKS_SETEFFECTTO", (children, lang) => {
 
 specialCase("OPERATORS_LENGTH", (_, children, lang) => {
   const last = children[children.length - 1]
-  console.log('shape', last.shape)
+  console.log("shape", last.shape)
   if ((last.isInput && last.shape === "dropdown") || last.isIcon) {
-    return {...blocksById.DATA_LENGTHOFLIST}
+    return { ...blocksById.DATA_LENGTHOFLIST }
   }
   return
 })
@@ -698,7 +699,13 @@ export function findAbstractBlocks(
       // console.log('abstract: spec starts with', spec.startsWith(partialHashParts.join(' ')))
 
       // take into account blank spec defs
-      if (spec.split(' ').filter(part => part !== "").join(' ').startsWith(partialHashParts.join(" "))) {
+      if (
+        spec
+          .split(" ")
+          .filter(part => part !== "")
+          .join(" ")
+          .startsWith(partialHashParts.join(" "))
+      ) {
         partialCommands.push({
           ...command,
           spec: spec,
@@ -710,9 +717,11 @@ export function findAbstractBlocks(
 
   // full
   for (const command of partialCommands) {
-    
     // take into account blank spec defs
-    let spec = command.spec.split(' ').filter(part => part !== "").join(' ')
+    let spec = command.spec
+      .split(" ")
+      .filter(part => part !== "")
+      .join(" ")
     if (spec === fullHash) {
       fullCommands.push(command)
     }
