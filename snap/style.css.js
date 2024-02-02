@@ -111,19 +111,20 @@ export default `
 }
 
 .snap-comment {
-  fill: rgb(255 255 180);
+  fill: #ffffb4;
   stroke: #d0d1d2;
   stroke-width: 1;
 }
 .snap-comment-line {
-  fill: rgb(255 255 180);
+  fill: #ffffb4;
 }
 .snap-comment-label {
   font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
-  font-weight: bold;
-  fill: #5c5d5f;
+  font-weight: normal;
+  fill: #000;
   word-spacing: 0;
   font-size: 12px;
+  filter: none;
 }
 
 .snap-diff {
