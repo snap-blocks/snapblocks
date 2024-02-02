@@ -469,7 +469,6 @@ disambig("SOUND_SETEFFECTO", "LOOKS_SETEFFECTTO", (children, lang) => {
 
 specialCase("OPERATORS_LENGTH", (_, children, lang) => {
   const last = children[children.length - 1]
-  console.log("shape", last.shape)
   if ((last.isInput && last.shape === "dropdown") || last.isIcon) {
     return { ...blocksById.DATA_LENGTHOFLIST }
   }
