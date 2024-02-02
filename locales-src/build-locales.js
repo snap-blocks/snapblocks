@@ -144,7 +144,11 @@ const buildLocale = (code, rawLocale) => {
       .split(/ /g)
       .filter(x => !!x),
     palette: dictionaryWith(palette), // used for forum menu
-    math: listFor(mathFuncs),
+    of: {
+      math: listFor(mathFuncs),
+      list: [],
+      text: [],
+    },
     aliases: extra?.aliases || {},
 
     name: localeNames[code].name,

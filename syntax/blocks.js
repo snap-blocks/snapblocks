@@ -265,30 +265,58 @@ export const english = {
   ignorelt: ["when distance"],
 
   // Valid arguments to "of" dropdown, for resolving ambiguous situations
-  math: [
-    "abs",
-    "neg",
-    "sign",
-    "ceiling",
-    "floor",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "lg",
-    "e ^",
-    "e^",
-    "10 ^",
-    "10^",
-    "2 ^",
-    "2^",
-    "id",
-  ],
+  of: {
+    math: [
+      "abs",
+      "neg",
+      "sign",
+      "ceiling",
+      "floor",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "lg",
+      "e ^",
+      "e^",
+      "10 ^",
+      "10^",
+      "2 ^",
+      "2^",
+      "id",
+    ],
+    list: [
+      "length",
+      "rank",
+      "dimensions",
+      "flatten",
+      "columns",
+      "uniques",
+      "distribution",
+      "sorted",
+      "shuffled",
+      "text",
+      "lines",
+      "csv",
+      "json",
+    ],
+    text: [
+      "encode uri",
+      "decode uri",
+      "encode uri component",
+      "decode uri component",
+      "xml escape",
+      "xml unescape",
+      "js escape",
+      "hex sha512 hash",
+    ],
+  },
+  
 
   // Valid arguments to "sound effect" dropdown, for resolving ambiguous situations
   soundEffects: ["pitch", "pan left/right"],
@@ -348,14 +376,61 @@ function disambig(id1, id2, test) {
   })
 }
 
-disambig("OPERATORS_MATHOP", "SENSING_OF", (children, lang) => {
-  // Operators if math function, otherwise sensing "attribute of" block
+// 4-way disambiguation
+registerCheck("OPERATORS_MATHOP", (info, children, lang) => {
+  // Operators if math function
   const first = children[0]
   if (!first.isInput) {
     return
   }
   const name = first.value
-  return lang.math.includes(name)
+  return lang.of.math.includes(name.toLowerCase())
+})
+
+registerCheck("snap:reportTextFunction", (info, children, lang) => {
+  // Operators if text function
+  const first = children[0]
+  if (!first.isInput) {
+    return
+  }
+  const name = first.value
+  return lang.of.text.includes(name.toLowerCase())
+})
+
+registerCheck("snap:reportListAttribute", (info, children, lang) => {
+  // Operators if text function
+  const first = children[0]
+  if (!first.isInput) {
+    return
+  }
+  const name = first.value
+  return lang.of.list.includes(name.toLowerCase())
+})
+
+registerCheck("SENSING_OF", (info, children, lang) => {
+  // sensing if not math, text, or list function
+  const first = children[0]
+  if (!first.isInput) {
+    return
+  }
+  const name = first.value
+  return !lang.of.math.includes(name.toLowerCase()) &&
+         !lang.of.text.includes(name.toLowerCase())
+})
+
+// I could not figure out how to get it to detect list of with specDefs, or aliases.
+// Maybe if I fix the translate function to work with specDefs,
+// then maybe I could do away with this, but for now, this is it.
+// (seriously, why does snap have 4 block with the same spec?)
+specialCase("SENSING_OF", (_, children, lang) => {
+  const first = children[0]
+  if (!first.isInput) {
+    return
+  }
+  const name = first.value
+  if (lang.of.list.includes(name.toLowerCase())) {
+    return {...blocksById['snap:reportListAttribute']}
+  }
 })
 
 disambig("SOUND_CHANGEEFFECTBY", "LOOKS_CHANGEEFFECTBY", (children, lang) => {
@@ -388,13 +463,13 @@ disambig("SOUND_SETEFFECTO", "LOOKS_SETEFFECTTO", (children, lang) => {
   return false
 })
 
-disambig("DATA_LENGTHOFLIST", "OPERATORS_LENGTH", (children, _lang) => {
-  // List block if dropdown, otherwise operators
+specialCase("OPERATORS_LENGTH", (_, children, lang) => {
   const last = children[children.length - 1]
-  if (!last.isInput) {
-    return
+  console.log('shape', last.shape)
+  if ((last.isInput && last.shape === "dropdown") || last.isIcon) {
+    return {...blocksById.DATA_LENGTHOFLIST}
   }
-  return last.shape === "dropdown"
+  return
 })
 
 disambig(
@@ -441,6 +516,16 @@ disambig("microbit.whenGesture", "gdxfor.whenGesture", (children, lang) => {
     }
   }
   return false
+})
+
+// This is more important that scratch 3 extensions
+registerCheck("snap:receiveCondition", (info, children, lang) => {
+  for (const child of children) {
+    if (child.isInput && child.shape === "dropdown") {
+      return false
+    }
+  }
+  return true
 })
 
 // This block does not need disambiguation in English;
@@ -521,6 +606,30 @@ specialCase("snap:reportAtan2", (_, children, lang) => {
   }
 })
 
+// convert <= to ≤
+specialCase("snap:reportVariadicLessThanOrEquals", (_, children, lang) => {
+  let operators = children.filter(child => child.value === "<=")
+  for (let operator of operators) {
+    operator.value = "≤"
+  }
+})
+
+// convert != to ≠
+specialCase("snap:reportVariadicNotEquals", (_, children, lang) => {
+  let operators = children.filter(child => child.value === "!=")
+  for (let operator of operators) {
+    operator.value = "≠"
+  }
+})
+
+// convert >= to ≥
+specialCase("snap:reportVariadicGreaterThanOrEquals", (_, children, lang) => {
+  let operators = children.filter(child => child.value === ">=")
+  for (let operator of operators) {
+    operator.value = "≥"
+  }
+})
+
 export function fillSpecDef(part, defs) {
   if (/^{[^ {}\\]+}$/gm.test(part)) {
     let defName = part.slice(1, part.length - 1)
@@ -581,11 +690,12 @@ export function findAbstractBlocks(
     } else {
       specs.push(originalSpec)
     }
-    for (const spec of specs) {
+    for (let spec of specs) {
       // console.log('abstract: spec starts with spec', spec)
       // console.log('abstract: spec starts with', spec.startsWith(partialHashParts.join(' ')))
 
-      if (spec.startsWith(partialHashParts.join(" "))) {
+      // take into account blank spec defs
+      if (spec.split(' ').filter(part => part !== "").join(' ').startsWith(partialHashParts.join(" "))) {
         partialCommands.push({
           ...command,
           spec: spec,
@@ -597,7 +707,10 @@ export function findAbstractBlocks(
 
   // full
   for (const command of partialCommands) {
-    if (command.spec === fullHash) {
+    
+    // take into account blank spec defs
+    let spec = command.spec.split(' ').filter(part => part !== "").join(' ')
+    if (spec === fullHash) {
       fullCommands.push(command)
     }
   }

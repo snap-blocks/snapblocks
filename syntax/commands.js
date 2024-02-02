@@ -181,9 +181,9 @@ export default [
   },
   {
     snap: "reportNewCostume",
-    spec: "new costume %1 width %2 height %3",
-    aliases: ["new costume @list width %1 height %2"],
-    inputs: ["%s", "%n", "%n"],
+    spec: "new costume {list} width %2 height %3",
+    specDefs: {list: ["@list", "%1"]},
+    inputs: ["%m.list", "%n", "%n"],
     shape: "reporter",
     category: "looks",
   },
@@ -339,7 +339,7 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      closed: ["%1", "@addInput", "{info}"],
+      closed: ["%1", "@verticalEllipsis", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -355,7 +355,7 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      closed: ["%1", "@addInput", "{info}"],
+      closed: ["%1", "@verticalEllipsis", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -471,8 +471,8 @@ export default [
   },
   {
     snap: "reportNewSoundFromSamples",
-    spec: "new sound %1 rate %2 Hz",
-    aliases: ["new sound @list rate %2 Hz"],
+    spec: "new sound {list} rate %2 Hz",
+    specDefs: {list: ["@list", "%1"]},
     inputs: ["%s", "%n"],
     shape: "reporter",
     category: "sound",
@@ -729,6 +729,22 @@ export default [
     category: "events",
   },
   {
+    id: "snap:receiveInteraction",
+    snap: "receiveInteraction",
+    spec: "when I am %1",
+    inputs: ["%m"],
+    shape: "hat",
+    category: "events",
+  },
+  {
+    id: "snap:receiveCondition",
+    snap: "receiveCondition",
+    spec: "when %1",
+    inputs: ["%b"],
+    shape: "hat",
+    category: "events",
+  },
+  {
     id: "EVENT_WHENTHISSPRITECLICKED",
     selector: "whenClicked",
     spec: "when this sprite clicked",
@@ -768,10 +784,31 @@ export default [
     category: "events",
   },
   {
+    id: "snap:receiveMessage",
+    snap: "receiveMessage",
+    spec: "when I receive %1 {data}",
+    specDefs: {
+      "data": [
+        "@addInput",
+        "%2 @delInput",
+      ],
+    },
+    inputs: ["%m.broadcast", "%s"],
+    shape: "hat",
+    category: "events",
+  },
+  {
     id: "EVENT_BROADCAST",
     selector: "broadcast:",
+    spec: "broadcast %1",
+    inputs: ["%m.broadcast"],
+    shape: "stack",
+    category: "events",
+  },
+  {
+    id: "snap:doBroadcast",
     snap: "doBroadcast",
-    spec: "broadcast %1 {reciever}",
+    spec: "broadcast %1 {receiver}",
     specDefs: {
       receiver: ["", "@addInput", "to %2 {data}"],
       data: ["@delInput @addInput", "with data %3 @delInput"],
@@ -784,15 +821,12 @@ export default [
     id: "EVENT_BROADCASTANDWAIT",
     selector: "doBroadcastAndWait",
     snap: "doBroadcastAndWait",
-    spec: "broadcast %1 and wait",
-    aliases: [
-      "broadcast %1 @addInput and wait",
-      "broadcast %1 to %2 and wait",
-      "broadcast %1 to %2 @delInput @addInput and wait",
-      "broadcast %1 to %2 with data %3 and wait",
-      "broadcast %1 to %2 with data %3 @delInput and wait",
-    ],
-    inputs: ["%m.broadcast"],
+    spec: "broadcast %1 {receiver} and wait",
+    specDefs: {
+      receiver: ["", "@addInput", "to %2 {data}"],
+      data: ["@delInput @addInput", "with data %3 @delInput"],
+    },
+    inputs: ["%m.broadcast", "%m.sprite", "%s"],
     shape: "stack",
     category: "events",
   },
@@ -911,7 +945,7 @@ export default [
     spec: "run %1 {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "with inputs %2 {inputs}",
@@ -932,7 +966,7 @@ export default [
     spec: "launch %1 {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "with inputs %2 {inputs}",
@@ -953,7 +987,7 @@ export default [
     spec: "call %1 {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "with inputs %2 {inputs}",
@@ -974,7 +1008,7 @@ export default [
     spec: "pipe %1 @arrowRight {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "%2 {expanded}",
@@ -995,7 +1029,7 @@ export default [
     spec: "tell %1 to %2 {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "with inputs %3 {inputs}",
@@ -1016,7 +1050,7 @@ export default [
     spec: "ask %1 for %2 {closed}",
     specDefs: {
       closed: [
-        "%2",
+        "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
         "with inputs %3 {inputs}",
@@ -1034,6 +1068,7 @@ export default [
   {
     id: "CONTROL_STARTASCLONE",
     selector: "whenCloned",
+    snap: "receiveOnClone",
     spec: "when I start as a clone",
     inputs: [],
     shape: "hat",
@@ -1228,6 +1263,7 @@ export default [
   {
     id: "DATA_SETVARIABLETO",
     selector: "setVar:to:",
+    snap: "doSetVar",
     spec: "set %1 to %2",
     inputs: ["%m.var", "%s"],
     shape: "stack",
@@ -1236,6 +1272,7 @@ export default [
   {
     id: "DATA_CHANGEVARIABLEBY",
     selector: "changeVar:by:",
+    snap: "doChangeVar",
     spec: "change %1 by %2",
     inputs: ["%m.var", "%n"],
     shape: "stack",
@@ -1244,6 +1281,7 @@ export default [
   {
     id: "DATA_SHOWVARIABLE",
     selector: "showVariable:",
+    snap: "doShowVar",
     spec: "show variable %1",
     inputs: ["%m.var"],
     shape: "stack",
@@ -1252,15 +1290,98 @@ export default [
   {
     id: "DATA_HIDEVARIABLE",
     selector: "hideVariable:",
+    snap: "doHideVar",
     spec: "hide variable %1",
     inputs: ["%m.var"],
     shape: "stack",
     category: "variables",
   },
   {
+    id: "snap:doDeclareVariables",
+    snap: "doDeclareVariables",
+    spec: "script variables {vars}",
+    specDefs: {
+      "vars": [
+        "%1 @addInput",
+        "%1 {multi}",
+      ],
+      "multi": [
+        "%1 {multi}",
+        "%1 @delInput @addInput",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "stack",
+    category: "other",
+  },
+  {
+    id: "snap:doDeleteAttr",
+    snap: "doDeleteAttr",
+    spec: "inherit %1",
+    inputs: ["%m.var"],
+    shape: "stack",
+    category: "variables",
+  },
+  {
+    id: "snap:reportNewList",
+    snap: "reportNewList",
+    spec: "list {list}",
+    specDefs: {
+      "list": [
+        "@addInput",
+        "{multi}",
+      ],
+      "multi": [
+        "%1 {multi}",
+        "%1 @delInput @addInput",
+      ],
+    },
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportNumbers",
+    snap: "reportNumbers",
+    spec: "numbers from %1 to %2",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportCONS",
+    snap: "reportCONS",
+    spec: "%1 in front of {list}",
+    specDefs: {
+      "list": ["@list", "%2"],
+    },
+    inputs: ["%s", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportCDR",
+    snap: "reportCDR",
+    spec: "all but first of {list}",
+    specDefs: {"list": ["@list", "%2"]},
+    shape: "reporter",
+    category: "list"
+  },
+  {
+    id: "snap:doForEach",
+    snap: "doForEach",
+    spec: "for each %1 in {list} %3",
+    specDefs: {list: ["@list", "%1"]},
+    inputs: ["%s", "%m.list", "%cs"],
+    shape: "stack",
+    category: "list",
+  },
+  {
     id: "DATA_ADDTOLIST",
     selector: "append:toList:",
-    spec: "add %1 to %2",
+    snap: "doAddToList",
+    spec: "add %1 to {list}",
+    specDefs: {list: ["@list", "%2"]},
     inputs: ["%s", "%m.list"],
     shape: "stack",
     category: "list",
@@ -1268,7 +1389,9 @@ export default [
   {
     id: "DATA_DELETEOFLIST",
     selector: "deleteLine:ofList:",
-    spec: "delete %1 of %2",
+    snap: "doDeleteFromList",
+    spec: "delete %1 of {list}",
+    specDefs: {list: ["@list", "%2"]},
     inputs: ["%d.listDeleteItem", "%m.list"],
     shape: "stack",
     category: "list",
@@ -1292,7 +1415,9 @@ export default [
   {
     id: "DATA_INSERTATLIST",
     selector: "insert:at:ofList:",
-    spec: "insert %1 at %2 of %3",
+    snap: "doInsertInList",
+    spec: "insert %1 at %2 of {list}",
+    specDefs: {list: ["@list", "%3"]},
     inputs: ["%s", "%d.listItem", "%m.list"],
     shape: "stack",
     category: "list",
@@ -1300,7 +1425,9 @@ export default [
   {
     id: "DATA_REPLACEITEMOFLIST",
     selector: "setLine:ofList:to:",
-    spec: "replace item %1 of %2 with %3",
+    snap: "doReplaceInList",
+    spec: "replace item %1 of {list} with %3",
+    specDefs: {list: ["@list", "%3"]},
     inputs: ["%d.listItem", "%m.list", "%s"],
     shape: "stack",
     category: "list",
@@ -1722,14 +1849,6 @@ export default [
     category: "operators",
   },
   {
-    id: "snap:reportModulus",
-    snap: "reportModulus",
-    spec: "%1 mod %2",
-    inputs: ["%n", "%n"],
-    shape: "reporter",
-    category: "operators",
-  },
-  {
     id: "snap:reportVariadicMin",
     snap: "reportVariadicMin",
     spec: "{minimum}",
@@ -1808,7 +1927,22 @@ export default [
   {
     id: "OPERATORS_EQUALS",
     selector: "=",
-    spec: "%1 = %2",
+    snap: "reportVariadicEquals",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 = %2",
+        "all = %1",
+        "all = @addInput",
+        "all = @verticalEllipsis @addInput",
+        "%1 = %2 {less}",
+      ],
+      less: [
+        "= %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+    },
     inputs: ["%s", "%s"],
     shape: "boolean",
     category: "operators",
@@ -1816,7 +1950,100 @@ export default [
   {
     id: "OPERATORS_GT",
     selector: ">",
-    spec: "%1 > %2",
+    snap: "reportVariadicGreaterThan",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 > %2",
+        "all > %1",
+        "all > @addInput",
+        "all > @verticalEllipsis @addInput",
+        "%1 > %2 {less}",
+      ],
+      less: [
+        "> %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%s", "%s"],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicLessThanOrEquals",
+    snap: "reportVariadicLessThanOrEquals",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 {operator} %2",
+        "all {operator} %1",
+        "all {operator} @addInput",
+        "all {operator} @verticalEllipsis @addInput",
+        "%1 {operator} %2 {less}",
+      ],
+      less: [
+        "{operator} %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+      operator: [
+        "<=",
+        "≤",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicNotEquals",
+    snap: "reportVariadicNotEquals",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 {operator} %2",
+        "neighbors {operator} %1",
+        "neighbors {operator} @addInput",
+        "neighbors {operator} @verticalEllipsis @addInput",
+        "%1 {operator} %2 {less}",
+      ],
+      less: [
+        "{operator} %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+      operator: [
+        "!=",
+        "≠",
+      ]
+    },
+    inputs: ["%s", "%s"],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicGreaterThanOrEquals",
+    snap: "reportVariadicGreaterThanOrEquals",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 {operator} %2",
+        "all {operator} %1",
+        "all {operator} @addInput",
+        "all {operator} @verticalEllipsis @addInput",
+        "%1 {operator} %2 {less}",
+      ],
+      less: [
+        "{operator} %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+      operator: [
+        ">=",
+        "≥",
+      ]
+    },
     inputs: ["%s", "%s"],
     shape: "boolean",
     category: "operators",
@@ -1824,7 +2051,22 @@ export default [
   {
     id: "OPERATORS_AND",
     selector: "&",
-    spec: "%1 and %2",
+    snap: "reportVariadicAnd",
+    spec: "{all}",
+    specDefs: {
+      all: [
+        "%1 and %2",
+        "all %1",
+        "all @addInput",
+        "all @verticalEllipsis @addInput",
+        "%1 and %2 {less}",
+      ],
+      less: [
+        "and %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+    },
     inputs: ["%b", "%b"],
     shape: "boolean",
     category: "operators",
@@ -1832,7 +2074,22 @@ export default [
   {
     id: "OPERATORS_OR",
     selector: "|",
-    spec: "%1 or %2",
+    snap: "reportVariadicOr",
+    spec: "{any}",
+    specDefs: {
+      any: [
+        "%1 and %2",
+        "any %1",
+        "any @addInput",
+        "any @verticalEllipsis @addInput",
+        "%1 and %2 {less}",
+      ],
+      less: [
+        "and %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+    },
     inputs: ["%b", "%b"],
     shape: "boolean",
     category: "operators",
@@ -1840,6 +2097,7 @@ export default [
   {
     id: "OPERATORS_NOT",
     selector: "not",
+    snap: "reportNot",
     spec: "not %1",
     inputs: ["%b"],
     shape: "boolean",
@@ -1848,7 +2106,24 @@ export default [
   {
     id: "OPERATORS_JOIN",
     selector: "concatenate:with:",
-    spec: "join %1 %2",
+    snap: "reportJoinWords",
+    spec: "join {closed}",
+    specDefs: {
+      closed: ["input list: %1", "@verticalEllipsis @addInput", "@addInput", "{info}"],
+      info: [
+        "%1 {info}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%s", "%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportTextSplit",
+    snap: "reportTextSplit",
+    spec: "split %1 by %2",
     inputs: ["%s", "%s"],
     shape: "reporter",
     category: "operators",
@@ -1856,6 +2131,7 @@ export default [
   {
     id: "OPERATORS_LETTEROF",
     selector: "letter:of:",
+    snap: "reportLetter",
     spec: "letter %1 of %2",
     inputs: ["%n", "%s"],
     shape: "reporter",
@@ -1870,8 +2146,100 @@ export default [
     category: "operators",
   },
   {
+    id: "snap:reportTextAttribute",
+    snap: "reportTextAttribute",
+    spec: "%1 of text %2",
+    inputs: ["%m", "%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportUnicode",
+    snap: "reportUnicode",
+    spec: "unicode of %1",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportUnicodeAsLetter",
+    snap: "reportUnicodeAsLetter",
+    spec: "unicode %1 as letter",
+    inputs: ["%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportIsA",
+    snap: "reportIsA",
+    spec: "is %1 a %2",
+    inputs: ["%s", "%m"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportVariadicIsIdentical",
+    snap: "reportVariadicIsIdentical",
+    spec: "is {all} ?",
+    specDefs: {
+      all: [
+        "%1 identical to %2",
+        "all identical %1",
+        "all identical @addInput",
+        "all identical @verticalEllipsis @addInput",
+        "%1 identical to %2 {less}",
+      ],
+      less: [
+        "identical to %2 {less}",
+        "@delInput @addInput",
+        "@delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%b", "%b"],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
+    id: "snap:reportJSFunction",
+    snap: "reportJSFunction",
+    spec: "JavaScript function ( {parameters} ) { %2 }",
+    specDefs: {
+      "parameters": [
+        "input list: %1",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "{variadic}"
+      ],
+      "variadic": [
+        "%1 {variadic}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%s", "%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportTypeOf",
+    snap: "reportTypeOf",
+    spec: "type of %1",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
+    id: "snap:reportTextFunction",
+    snap: "reportTextFunction",
+    spec: "%1 of %2",
+    inputs: ["%m", "%s"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
     id: "OPERATORS_MOD",
     selector: "%",
+    snap: "reportModulus",
     spec: "%1 mod %2",
     inputs: ["%n", "%n"],
     shape: "reporter",
@@ -1916,7 +2284,11 @@ export default [
   {
     id: "DATA_ITEMOFLIST",
     selector: "getLine:ofList:",
-    spec: "item %1 of %2",
+    snap: "reportListItem",
+    spec: "item %1 of {list}",
+    specDefs: {
+      "list": ["@list", "%2"]
+    },
     inputs: ["%d.listItem", "%m.list"],
     shape: "reporter",
     category: "list",
@@ -1929,27 +2301,190 @@ export default [
     category: "list",
   },
   {
+    id: "snap:reportListIndex",
+    snap: "reportListIndex",
+    spec: "index of %1 in {list}",
+    specDefs: {list: ["@list", "%2"]},
+    inputs: ["%s", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
     id: "DATA_LENGTHOFLIST",
     selector: "lineCountOfList:",
-    spec: "length of %1",
+    spec: "length of {list}",
+    specDefs: {"list": ["@list", "%1"]},
     inputs: ["%m.list"],
     shape: "reporter",
     category: "list",
   },
   {
+    id: "snap:reportListAttribute",
+    snap: "reportListAttribute",
+    spec: "%1 of {list}",
+    specDefs: {"list": ["@list", "%1"]},
+    inputs: ["%m", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportConcatenatedLists",
+    snap: "reportConcatenatedLists",
+    spec: "append {append}",
+    specDefs: {
+      "append": [
+        "input list: %1",
+        "@addInput",
+        "@verticalEllipsis",
+        "{lists}",
+      ],
+      "lists": [
+        "{list} {lists}",
+        "{list} @delInput @addInput",
+        "{list} @delInput @verticalEllipsis @addInput",
+      ],
+      "list": ["%1", "@list"],
+    },
+    inputs: ["%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportReshape",
+    spec: "reshape %1 to {closed}",
+    specDefs: {
+      "closed": [
+        "input list: %2",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "{shape}",
+      ],
+      "shape": [
+        "%2 {shape}",
+        "%2 @delInput @addInput",
+        "%2 @delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%s", "%n"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportCrossproduct",
+    snap: "reportCrossproduct",
+    spec: "combinations {closed}",
+    specDefs: {
+      "closed": [
+        "input list: %1",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "{lists}",
+      ],
+      "lists": [
+        "{list} {lists}",
+        "{list} @delInput @addInput",
+        "{list} @delInput @verticalEllipsis @addInput",
+      ],
+      "list": ["%2", "@list"],
+    },
+    inputs: ["%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:doShowTable",
+    snap: "doShowTable",
+    spec: "show table {list}",
+    specDefs: ["@list", "%1"],
+    inputs: ["%m.list"],
+    shape: "stack",
+    category: "list",
+  },
+  {
     id: "DATA_LISTCONTAINSITEM",
     selector: "list:contains:",
-    spec: "%1 contains %2?",
+    spec: "{list} contains %2?",
+    specDefs: {list: ["@addInput", "%1"]},
     inputs: ["%m.list", "%s"],
     shape: "boolean",
     category: "list",
   },
   {
-    selector: "list:contains:",
-    spec: "@list contains %1",
-    inputs: ["%s"],
+    id: "snap:reportListIsEmpty",
+    snap: "reportListIsEmpty",
+    spec: "is {list} empty?",
+    specDefs: {list: ["@list", "%1"]},
+    inputs: ["%m.list"],
     shape: "boolean",
     category: "list",
+  },
+  {
+    id: "snap:reportMap",
+    snap: "reportMap",
+    spec: "map %1 over {list}",
+    specDefs: {list: ["@list", "%2"]},
+    inputs: ["%s", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportKeep",
+    snap: "reportKeep",
+    spec: "keep items %1 from {list}",
+    specDefs: {list: ["@list", "%2"]},
+    inputs: ["%s", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportFindFirst",
+    snap: "reportFindFirst",
+    spec: "find first item %1 in {list}",
+    specDefs: {list: ["@list", "%2"]},
+    inputs: ["%s", "%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:reportCombine",
+    snap: "reportCombine",
+    spec: "combine {list} using %2",
+    specDefs: {list: ["@list", "%1"]},
+    inputs: ["%m.list", "%s"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    id: "snap:doMapCodeOrHeader",
+    snap: "doMapCodeOrHeader",
+    spec: "map %1 to %2 %3",
+    inputs: ["%s", "%m", "%s"],
+    shape: "stack",
+    category: "other",
+  },
+  {
+    id: "snap:doMapValueCode",
+    snap: "doMapValueCode",
+    spec: "map %1 to code %2",
+    inputs: ["%m", "%s"],
+    shape: "stack",
+    category: "other",
+  },
+  {
+    id: "snap:doMapListCode",
+    snap: "doMapListCode",
+    spec: "map %1 of %2 to code %3",
+    inputs: ["%m", "%m", "%s"],
+    shape: "stack",
+    category: "other",
+  },
+  {
+    id: "snap:reportMappedCode",
+    snap: "reportMappedCode",
+    spec: "code of %1",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "other",
   },
   {
     id: "scratchblocks:end",
@@ -1981,7 +2516,17 @@ export default [
   },
   {
     id: "snap:ring",
-    spec: "%1 @addInput",
+    spec: "%1 {add}",
+    specDefs: {
+      "add": [
+        "@addInput",
+        "{vars}"
+      ],
+      "vars": [
+        "%2 {vars}",
+        "%2 @delInput @addInput",
+      ]
+    },
     inputs: ["%n", "%c"],
     shape: "ring",
     category: "other",
@@ -2485,13 +3030,5 @@ export default [
     inputs: ["%n"],
     shape: "stack",
     category: "boost",
-  },
-  {
-    snap: "reportMap",
-    spec: "map %1 over %2",
-    aliases: ["map %1 over @list"],
-    inputs: ["%n", "%s"],
-    shape: "reporter",
-    category: "list",
   },
 ]
