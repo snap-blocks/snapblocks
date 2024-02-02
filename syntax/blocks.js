@@ -132,7 +132,7 @@ export const unicodeIcons = {
   "@delInput": "◂",
   "@turtle": "➤",
   "@cloud": "☁",
-  "@verticalEllipsis": "⋮"
+  "@verticalEllipsis": "⋮",
 }
 
 export const allLanguages = {}
