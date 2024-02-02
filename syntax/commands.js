@@ -2054,14 +2054,14 @@ export default [
     spec: "{any}",
     specDefs: {
       any: [
-        "%1 and %2",
+        "%1 or %2",
         "any %1",
         "any @addInput",
         "any @verticalEllipsis @addInput",
-        "%1 and %2 {less}",
+        "%1 or %2 {less}",
       ],
       less: [
-        "and %2 {less}",
+        "or %2 {less}",
         "@delInput @addInput",
         "@delInput @verticalEllipsis @addInput",
       ],
@@ -2086,6 +2086,7 @@ export default [
     spec: "join {closed}",
     specDefs: {
       closed: [
+        "%1 %2",
         "input list: %1",
         "@verticalEllipsis @addInput",
         "@addInput",
