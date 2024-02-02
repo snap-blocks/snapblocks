@@ -158,23 +158,29 @@ broadcast [message1 v] and wait
 
 wait (1) secs
 
-repeat (10)
-end
+repeat (10) {
 
-forever
-end
+}
 
-if <> then
-end
+forever {
 
-if <> then
-else
-end
+}
+
+if <> {
+
+}
+
+if <> {
+
+} else {
+
+}
 
 wait until <>
 
-repeat until <>
-end
+repeat until <> {
+    
+}
 
 // caps!
 
@@ -326,11 +332,13 @@ next background
 
 // Control
 
-if <>
-end
+if <> {
+    
+}
 
-forever if <>
-end
+forever if {
+
+}
 
 stop script
 stop all
