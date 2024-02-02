@@ -85,7 +85,7 @@ function paintBlock(info, children, languages) {
       children = [new Label(". . .")]
     }
   } else {
-    // The block was not recognised, so we check if it's a define block.
+    // The block was not recognized, so we check if it's a define block.
     //
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
@@ -122,7 +122,7 @@ function paintBlock(info, children, languages) {
       }
 
       if (!overrides.includes("define")) {
-        // Setting the shape also triggers some logic in recogniseStuff.
+        // Setting the shape also triggers some logic in recognizeStuff.
         if (overrides.includes("stack")) {
           continue
         }
@@ -900,7 +900,7 @@ const listBlocks = {
   "hideList:": 0,
 }
 
-function recogniseStuff(scripts) {
+function recognizeStuff(scripts) {
   const customBlocksByHash = Object.create(null)
   const listNames = new Set()
 
@@ -1195,6 +1195,6 @@ export function parse(code, options) {
 
   const f = parseLines(code, languages)
   const scripts = parseScripts(f)
-  recogniseStuff(scripts)
+  recognizeStuff(scripts)
   return new Document(scripts)
 }
