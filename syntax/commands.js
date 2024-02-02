@@ -339,7 +339,7 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      closed: ["%1", "@verticalEllipsis", "@addInput", "{info}"],
+      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -355,7 +355,7 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      closed: ["%1", "@verticalEllipsis", "@addInput", "{info}"],
+      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -2460,6 +2460,38 @@ export default [
     snap: "reportMappedCode",
     spec: "code of %1",
     inputs: ["%s"],
+    shape: "reporter",
+    category: "other",
+  },
+  {
+    id: "snap:doApplyExtension",
+    snap: "doApplyExtension",
+    spec: "primitive %1 {closed}",
+    specDefs: {
+      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      info: [
+        "%1 {info}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%m", "%s"],
+    shape: "stack",
+    category: "other",
+  },
+  {
+    id: "snap:reportApplyExtension",
+    snap: "reportApplyExtension",
+    spec: "primitive %1 {closed}",
+    specDefs: {
+      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      info: [
+        "%1 {info}",
+        "%1 @delInput @addInput",
+        "%1 @delInput @verticalEllipsis @addInput",
+      ],
+    },
+    inputs: ["%m", "%s"],
     shape: "reporter",
     category: "other",
   },
