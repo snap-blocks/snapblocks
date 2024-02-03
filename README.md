@@ -1,20 +1,14 @@
 Make pictures of Snap<i>!</i> blocks from text.
 
-[![Screenshot](https://scratchblocks.github.io/screenshot.png)](https://scratchblocks.github.io/#when%20flag%20clicked%0Aclear%0Aforever%0Apen%20down%0Aif%20%3C%3Cmouse%20down%3F%3E%20and%20%3Ctouching%20%5Bmouse-pointer%20v%5D%3F%3E%3E%20then%0Aswitch%20costume%20to%20%5Bbutton%20v%5D%0Aelse%0Aadd%20(x%20position)%20to%20%5Blist%20v%5D%0Aend%0Amove%20(foo)%20steps%0Aturn%20ccw%20(9)%20degrees)
+[![Screenshot](./readme-assets/images/screenshot.png)](http://snap-blocks.github.io/#?style=snap&script=when%20flag%20clicked%0Aclear%0Aforever%20%7B%0A%20%20pen%20down%0A%20%20if%20%3C%3Cmouse%20down%3F%3E%20and%20%3Ctouching%20%5Bmouse-pointer%20v%5D%3F%3E%3E%20%7B%0A%20%20%20%20switch%20costume%20to%20%5Bbutton%20v%5D%0A%20%20%7D%20else%20%7B%0A%20%20%20%20add%20(x%20position)%20to%20(list)%0A%20%20%7D%0A%20%20move%20(foo)%20steps%0A%20%20turn%20ccw%20(9)%20degrees%0A%7D)
+
 
 **[Try it out!](https://snap-blocks.github.io/snapblocks)**
 
 ---
 
-**snapblocks** is a fork of **scratchblocks** which aims to be more catered towards Snap<i>!</i>. These changes include, adding Snap<i>!</i> blocks, inputs, icons, and eventually a way to convert to Snap<i>!</i> xml.
+**snapblocks** is a fork of **scratchblocks** which aims to be more catered towards Snap<i>!</i>. These changes include, adding Snap<i>!</i> blocks, inputs, icons, and more.
 
-Since Snap<i>!</i> is more advanced than scratch, scratchblocks has to be modified to add support for Snap<i>!</i> exclusive features. Scratchblocks does already have a bit of Snap<i>!</i> support, with the grey rings and `@list` icon, but there are still many features in Snap<i>!</i> that require modification. These include, multiline blocks / inputs, more input types (which can be represented by icons), and regular snap icons.
-
-The define block also has to be changed, specifically because Snap<i>!</i> does not have the same representation as Scratch. Most notably, Snap<i>!</i> uses a regular control hat block with the colored block in the hat block. Ok, the word "define" isn't even used in the custom block definition, it's just the block.
-
-Oh yeah, I also fixed the grey ring rendering because tjvr is not doing anything about it.
-
-Since snapblocks is a fork of scratchblocks, it will keep the scratch 2 and 3 styles, and add a new snap style. The snap style is just modified scratch 2 to make it look more like snap, with the snap category colors (and events is the same color as control, since the events category is not in snap). I do also kind of want to add the snap flat design, much like scratch 3's high contrast style.
 ---
 
 **snapblocks** is used to write Snap scripts:
@@ -22,12 +16,43 @@ Since snapblocks is a fork of scratchblocks, it will keep the scratch 2 and 3 st
 - in [Snap Forum](https://forum.snap.berkeley.edu/) posts
 - in [Snap Wiki](https://snapwiki.miraheze.org/) articles
 
-These currently use the original scratchblocks, but I have a feeling when snapblocks is ready they'll transition to using snapblocks (as soon as it's integrated into the plugins anyway).
+These currently use the original scratchblocks, but the wiki is working on transitioning over. I have a feeling once I mention this on the forum, they will also transition over.
 
 It's MIT licensed, so you can use it in your projects.
-(But do send me a link [on Twitter](https://twitter.com/blob8108)!)
 
 For the full guide to the syntax, see [the wiki](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax) (hopefully when this is finished, we can make a snapblocks syntax article on the snap wiki).
+
+<!-- removed for now
+# Differences from scratchblocks
+
+As you can probably tell, snapblocks is for Snap<i>!</i>, which means that there are many things that need to be changed.
+
+## Define block
+
+First and foremost, the define block. There is a big issue with the scratchblocks implementation. The define keyword forces a block outline, making it impossible to create the snap "define" block. Take a look for yourself.
+
+```scratchblocks
+define ((block) :: control) [] (() @addInput :: grey ring) :: stack control
+```
+<img src="./readme-assets/scratchblocks/snap-define-block.png" width="40%">
+
+This is not at all how it's supposed to look, in fact, it's very bad. Snapblocks fixes this by not forcing the define block outline, inputs, and also by changing the scratch define block syntax.
+
+```snapblocks
+define ((block)) [] (() @addInput)
+```
+
+<img src="./readme-assets/snapblocks/snap-define-block.png" width="40%">
+
+The scratchblocks define block just takes the `define` keyword, then whatever's after is, is the new block. This may look fine, but sometimes you'll run into issues like this. Snapblocks changes the scratch define block syntax to be more strict, as in, it doesn't assume I want a weird block with a white block outline.
+
+```snapblocks
+define {block}
+```
+
+<img src="./readme-assets/snapblocks/scratch2-define-block.png" width="25%">
+ -->
+
 
 # Usage
 
@@ -35,28 +60,20 @@ All of these, except html, currently do not have a snapblocks version, but it sh
 
 ## MediaWiki
 
-Use [the MediaWiki plugin](https://github.com/InternationalScratchWiki/mw-ScratchBlocks4).
-(This is what the [Scratch Wiki](https://en.scratch-wiki.info/wiki/Block_Plugin) uses.)
+Use [the MediaWiki plugin](https://github.com/snap-blocks/mw-snapblocks) (work in progress).
 
 ## WordPress
 
 I found [a WordPress plugin](https://github.com/tkc49/scratchblocks-for-wp).
 It might work for you; I haven't tried it.
 
-## Pandoc
-
-Code Club use their own [lesson_format](https://github.com/CodeClub/lesson_format) tool to generate the PDF versions of their project guides.
-It uses the [pandoc_scratchblocks](https://github.com/CodeClub/pandoc_scratchblocks) plugin they wrote to make pictures of Scratch scripts.
-
-This would probably be a good way to write a Scratch book.
-
 ## HTML
 
 You'll need to include a copy of the snapblocks JS file on your webpage.
 There are a few ways of getting one:
 
-* Download it from the <https://github.com/ego-lay-atman-bay/snapblocks/releases> page
-* If you have a fancy JS build system, you might like to include the `snapblocksblocks` package from NPM (when it's on NPM)
+* Download it from the <https://github.com/snap-blocks/snapblocks/releases> page
+* If you have a fancy JS build system, you might like to include the `snapblocks` package from NPM (when it's on NPM)
 * You could clone this repository and build it yourself using Node 16.14.0+ (`npm run build`).
 
 ```html
@@ -83,15 +100,16 @@ scratchblocks.renderMatching('pre.blocks', {
 </script>
 ```
 Note: this does use `scratchblocks` so it's easier to migrate from scratchblocks to snapblocks.
+
 The `renderMatching()` function takes a CSS-style selector for the elements that contain snapblocks code: we use `pre.blocks` to target `pre` tags with the class `blocks`.
 
-The `style` option controls how the blocks appear, either the Scratch 2 or Scratch 3 style is supported.
+The `style` option controls how the blocks appear, either the Snap, Scratch 2, or Scratch 3 style is supported.
 
 ### Inline blocks
 
 You might also want to use blocks "inline", inside a paragraph:
 ```html
-I'm rather fond of the <code class="b">stamp</code> block in Scratch.
+I'm rather fond of the <code class="b">cut from [ v]</code> block in Snap.
 ```
 
 To allow this, make a second call to `renderMatching` using the `inline` argument.
@@ -108,6 +126,8 @@ scratchblocks.renderMatching("code.b", {
 This time we use `code.b` to target `code` blocks with the class `b`.
 
 ### Translations
+
+Note: currently translations are partially broken, but I hope to get them fixed in v1.1.0.
 
 If you want to use languages other than English, you'll need to include a second JS file that contains translations.
 The releases page includes two options; you can pick one:
@@ -141,8 +161,8 @@ code, you can just add `snapblocks` to your dependencies, and everything
 should Just Work™.
 
 ```js
-var scratchblocks = require('snapblocks');
-scratchblocks.renderMatching('pre.blocks');
+var snapblocks = require('snapblocks');
+snapblocks.renderMatching('pre.blocks');
 ```
 
 ## ESM Support
@@ -180,12 +200,12 @@ npm start
 
 Then open <http://localhost:8000/> :-)
 
-For more details, see [`CONTRIBUTING.md`](https://github.com/ego-lay-atman-bay/snapblocks/blob/master/.github/CONTRIBUTING.md).
+For more details, see [`CONTRIBUTING.md`](https://github.com/snap-blocks/snapblocks/blob/master/.github/CONTRIBUTING.md).
 
 
 # Credits
 
-Many, many thanks to the [contributors](https://github.com/ego-lay-atman-bay/snapblocks/graphs/contributors)!
+Many, many thanks to the [contributors](https://github.com/snap-blocks/snapblocks/graphs/contributors)!
 
 * Maintained by [ego-lay-atman-bay](https://github.com/ego-lay-atman-bay)
 * This is a fork of [scratchblocks](https://github.com/scratchblocks/scratchblocks), so all the credit there still applies here.
