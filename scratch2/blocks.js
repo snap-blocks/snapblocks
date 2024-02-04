@@ -601,7 +601,7 @@ class BlockView {
       const child = children[i]
       child.el = child.draw(this)
 
-      if (child.isScript) {
+      if (child.isCShape) {
         this.hasScript = true
         if (lines.length === 0) {
           pushLine(0)

@@ -693,7 +693,7 @@ class BlockView {
       const child = children[i]
       child.el = child.draw(iconStyle, this)
 
-      if (child.isScript) {
+      if (child.isCShape) {
         this.hasScript = true
         line.height = Math.max(27, line.height + 5)
         // console.log('sb3 height', line.height)

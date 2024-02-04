@@ -639,6 +639,11 @@ function parseLines(code, languages) {
     next() // '{'
 
     sawNL = false
+    let isCShape = false
+    while (tok && tok === ' ') {
+      next()
+    }
+    isCShape = tok === '\n'
     const f = function () {
       while (tok && tok !== "}") {
         const block = pBlock("}")
@@ -660,7 +665,9 @@ function parseLines(code, languages) {
       assert(blocks.length <= 1)
       return blocks.length ? blocks[0] : makeBlock("stack", [])
     }
-    return new Script(blocks)
+    const block = new Script(blocks)
+    block.isCShape = isCShape
+    return block
   }
 
   function pIcon() {

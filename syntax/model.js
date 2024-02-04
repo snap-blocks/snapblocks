@@ -399,6 +399,7 @@ export class Script {
     this.blocks = blocks
     this.isEmpty = !blocks.length
     this.isFinal = !this.isEmpty && blocks[blocks.length - 1].isFinal
+    this.isCShape = false
   }
   get isScript() {
     return true
