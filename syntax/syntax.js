@@ -640,10 +640,10 @@ function parseLines(code, languages) {
 
     sawNL = false
     let isCShape = false
-    while (tok && tok === ' ') {
+    while (tok && tok === " ") {
       next()
     }
-    isCShape = tok === '\n'
+    isCShape = tok === "\n"
     const f = function () {
       while (tok && tok !== "}") {
         const block = pBlock("}")
