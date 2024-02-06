@@ -79,14 +79,14 @@
   
       var chooseLang = document.getElementById('choose-lang');
   
-      var languageCodes = Object.keys(scratchblocks.allLanguages)
+      var languageCodes = Object.keys(snapblocks.allLanguages)
       languageCodes.sort()
       languageCodes.forEach(function (code) {
         if (code === "en") return
         var option = document.createElement("option")
         option.value = code
   
-        var language = scratchblocks.allLanguages[code]
+        var language = snapblocks.allLanguages[code]
         option.textContent = language.name && language.altName ? `${language.name} — ${language.altName}` : language
           .name || language.altName || code
         chooseLang.appendChild(option)
@@ -178,7 +178,7 @@
         /*
         // renderMatching API example
         preview.innerHTML = obj.script;
-        scratchblocks.renderMatching('pre.blocks', {
+        snapblocks.renderMatching('pre.blocks', {
           languages: ['en', obj.lang],
           render: function(doc, cb) {
             doc.render(function(svg) {
@@ -186,8 +186,8 @@
               el.appendChild(svg);
   
               var link = exportSVGLink = document.createElement('a');
-              exportLink.href = scratchblocks.exportSVG(svg);
-              exportLink.setAttribute('download', 'scratchblocks.svg');
+              exportLink.href = snapblocks.exportSVG(svg);
+              exportLink.setAttribute('download', 'snapblocks.svg');
               exportLink.textContent = "Export SVG";
               exportLink.className = 'export-link';
               var p = document.createElement('p');
@@ -200,34 +200,34 @@
         });
         */
   
-        var doc = window.doc = scratchblocks.parse(obj.script, {
+        var doc = window.doc = snapblocks.parse(obj.script, {
           languages: obj.lang ? ['en', obj.lang] : ['en'],
         });
   
-        // doc.translate(scratchblocks.allLanguages['de']);
+        // doc.translate(snapblocks.allLanguages['de']);
   
-        // var doc = window.doc = scratchblocks.fromJSON({
+        // var doc = window.doc = snapblocks.fromJSON({
         //   scripts: eval(obj.script),
         // });
   
-        console.log(scratchblocks.stringify(doc));
-        var docViewSnap = scratchblocks.newView(doc, {
+        console.log(snapblocks.stringify(doc));
+        var docViewSnap = snapblocks.newView(doc, {
           style: "snap",
           scale: 1
         });
-        var docViewSnapFlat = scratchblocks.newView(doc, {
+        var docViewSnapFlat = snapblocks.newView(doc, {
           style: "snap-flat",
           scale: 1
         });
-        var docView2 = scratchblocks.newView(doc, {
+        var docView2 = snapblocks.newView(doc, {
           style: "scratch2",
           scale: 1
         });
-        var docView3HighContrast = scratchblocks.newView(doc, {
+        var docView3HighContrast = snapblocks.newView(doc, {
           style: "scratch3-high-contrast",
           scale: 0.675
         });
-        var docView3 = scratchblocks.newView(doc, {
+        var docView3 = snapblocks.newView(doc, {
           style: "scratch3",
           scale: 0.675
         });
@@ -245,8 +245,8 @@
         svg3HighContrast.classList.add("scratch3");
         svg3.classList.add("scratch3")
         // Need to add manually if calling View#render (folks, this is why you shouldn't use private API!)
-        svg3HighContrast.classList.add("scratchblocks-style-scratch3-high-contrast")
-        svg3.classList.add("scratchblocks-style-scratch3")
+        svg3HighContrast.classList.add("snapblocks-style-scratch3-high-contrast")
+        svg3.classList.add("snapblocks-style-scratch3")
   
         const getSelectedView = () => {
           switch (exportDropdown.value) {
@@ -266,13 +266,13 @@
         // add export link
         setTimeout(function () {
           if (!exportSVGLink) exportSVGLink = document.createElement('a');
-            exportSVGLink.onclick = () => download("scratchblocks.svg", getSelectedView().exportSVG());
+            exportSVGLink.onclick = () => download("snapblocks.svg", getSelectedView().exportSVG());
             exportSVGLink.textContent = "Export SVG";
             exportSVGLink.className = 'export-link';
           if (!exportSVGLink.isConnected) document.querySelector('#export-options').appendChild(exportSVGLink);
   
           if (!exportPNGLink) exportPNGLink = document.createElement('a');
-            exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("scratchblocks.png", url), 2);
+            exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("snapblocks.png", url), 2);
             exportPNGLink.textContent = "Export PNG";
             exportPNGLink.className = 'export-link';
           if (!exportPNGLink.isConnected) document.querySelector('#export-options').appendChild(exportPNGLink);
@@ -307,7 +307,7 @@
         }, 0);
   
         // update language dropdown
-        var lang = scratchblocks.allLanguages[obj.lang]
+        var lang = snapblocks.allLanguages[obj.lang]
         langStatus.textContent = lang ? `${lang.percentTranslated}%` : "";
       }
   
