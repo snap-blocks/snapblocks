@@ -220,13 +220,13 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 0.6 10 L 11.4 10 L 11.4 3 L 9 3 L 7.5 0.6 L 4.5 0.6 L 3 3 L 0.6 3 Z
           M 7.92 6 A 1.92 1.92 0 1 1 7.91999904000008 5.998080000319999 Z`,
         }),
         {
           id: "sb-camera",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("circle", {
@@ -235,8 +235,8 @@ export default class Style {
           cy: 5,
         }),
         {
-          id: "sb-circle"
-        }
+          id: "sb-circle",
+        },
       ),
 
       SVG.setProps(
