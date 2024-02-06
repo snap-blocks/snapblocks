@@ -1,17 +1,12 @@
 // Processed by Rollup
 export default `
 .snap-label {
-  font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
+  font-family: Verdana, Arial, DejaVu Sans, sans-serif;
   font-weight: bold;
   fill: #fff;
   font-size: 10px;
   word-spacing: +1px;
   /* filter: url(#snapDropShadow); */
-}
-
-.snap-label.snap-literal-string,
-.snap-label.snap-literal-number {
-  /* filter: none !important; */
 }
 
 .snap-drop-shadow {
@@ -63,7 +58,7 @@ export default `
 
 .snap-flat {
   stroke-width: 1;
-  stroke: rgba(0,0,0,0.25) !important;
+  stroke: rgba(0,0,0,0.25);
 }
 
 .snap-bevel {
@@ -76,12 +71,14 @@ export default `
 .snap-input-number,
 .snap-input-string,
 .snap-input-number-dropdown {
+  font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
   fill: #fff;
 }
 .snap-literal-number,
 .snap-literal-string,
 .snap-literal-number-dropdown,
 .snap-literal-dropdown {
+  font-family: Verdana, Arial, DejaVu Sans, sans-serif !important;
   font-weight: normal;
   font-size: 9px;
   word-spacing: 0;
@@ -89,6 +86,7 @@ export default `
 .snap-literal-number,
 .snap-literal-string,
 .snap-literal-number-dropdown {
+  font-family: Verdana, Arial, DejaVu Sans, sans-serif !important;
   fill: #000;
 }
 
