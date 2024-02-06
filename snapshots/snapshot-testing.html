@@ -5,17 +5,17 @@
     <title>Snapshot Test</title>
     <script>
       window.render = (source, options, scale) => {
-        const doc = scratchblocks.parse(source, {
+        const doc = snapblocks.parse(source, {
           languages: options.lang ? ["en", options.lang] : ["en"],
         })
 
-        const view = scratchblocks.newView(doc, {
+        const view = snapblocks.newView(doc, {
           style: options.style,
           scale: options.scale,
         })
         // Need to add manually if calling View#render (folks, this is why you shouldn't use private API!)
         const svg = view.render()
-        svg.classList.add(`scratchblocks-style-${options.style}`)
+        svg.classList.add(`snapblocks-style-${options.style}`)
 
         return new Promise(function (resolve) {
           view.toCanvas(function (canvas) {
@@ -27,9 +27,9 @@
       import("../browser.js")
         .then(() => fetch("../locales/de.json"))
         .then(res => res.json())
-        .then(de => scratchblocks.loadLanguages({ de }))
+        .then(de => snapblocks.loadLanguages({ de }))
         .then(() => {
-          window.scratchblocksLoaded = true
+          window.snapblocksLoaded = true
         })
     </script>
   </head>
