@@ -6,15 +6,15 @@ export default `
   fill: #fff;
   font-size: 10px;
   word-spacing: +1px;
-  filter: url(#snapDropShadow);
+  /* filter: url(#snapDropShadow); */
 }
 
 .snap-label.snap-literal-string,
 .snap-label.snap-literal-number {
-  filter: none !important;
+  /* filter: none !important; */
 }
 
-.snap-icon {
+.snap-drop-shadow {
   filter: url(#snapDropShadow)
 }
 
@@ -33,9 +33,7 @@ export default `
 .snap-pen {
   fill: #00a178;
 }
-.snap-events {
-  fill: #e6a822;
-}
+.snap-events,
 .snap-control {
   fill: #e6a822;
 }
@@ -51,27 +49,28 @@ export default `
 .snap-list {
   fill: #d94d11;
 }
-.snap-custom {
-  fill: #969696;
-}
 .snap-custom-arg {
   fill: #f3761d;
 }
 .snap-extension {
   fill: #4b4a60;
 }
-.snap-grey {
+.snap-grey,
+.snap-other,
+.snap-custom {
   fill: #969696;
 }
-.snap-other {
-  fill: #969696;
+
+.snap-flat {
+  stroke-width: 1;
+  stroke: rgba(0,0,0,0.25) !important;
 }
 
 .snap-bevel {
   filter: url(#snapBevelFilter);
 }
 
-.snap-input {
+.snap-input-bevel {
   filter: url(#snapInputBevelFilter);
 }
 .snap-input-number,

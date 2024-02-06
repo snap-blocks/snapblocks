@@ -39,7 +39,10 @@ export class LabelView {
     return true
   }
 
-  draw() {
+  draw(isFlat) {
+    if (!isFlat) {
+      this.el.classList.add('snap-drop-shadow')
+    }
     return this.el
   }
 
@@ -144,7 +147,7 @@ class IconView {
     return true
   }
 
-  draw() {
+  draw(isFlat) {
     let props = {
       width: this.width,
       height: this.height,
@@ -161,7 +164,9 @@ class IconView {
     }
     let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
     // console.log('symbol', symbol)
-    symbol.classList.add('snap-icon')
+    if (!isFlat) {
+      symbol.classList.add('snap-drop-shadow')
+    }
     return symbol
   }
 
@@ -235,11 +240,11 @@ class InputView {
     }
   }
 
-  draw(parent) {
+  draw(isFlat, parent) {
     let w
     let label
     if (this.hasLabel) {
-      label = this.label.draw()
+      label = this.label.draw(true)
       w = Math.max(
         (this.shape === "string" ? 5 : 14),
         this.label.width +
@@ -277,7 +282,7 @@ class InputView {
 
     const result = SVG.group([
       SVG.setProps(el, {
-        class: `snap-input snap-input-${this.shape}`,
+        class: `${!isFlat ? "snap-input-bevel" : ""} snap-input-${this.shape}`,
       }),
     ])
     if (this.hasLabel) {
@@ -329,6 +334,7 @@ class BlockView {
     this.height = null
     this.firstLine = null
     this.innerWidth = null
+    this.strokeWidth = 1
   }
 
   get isBlock() {
@@ -365,7 +371,7 @@ class BlockView {
     }
   }
 
-  drawSelf(w, h, lines) {
+  drawSelf(isFlat, w, h, lines) {
     // mouths
     // console.log('lines', lines)
     // console.log('height', this.height)
@@ -415,10 +421,19 @@ class BlockView {
       } else {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       }
-      return SVG.path({
-        class: `snap-${this.info.category} snap-bevel`,
+      p.push('Z')
+      let el = SVG.path({
+        class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
         path: p
       })
+
+      if (isFlat) {
+        SVG.setProps(el, {
+          "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, p.join(' '))}')`
+        })
+      }
+
+      return el
     }
 
     // outlines
@@ -451,9 +466,16 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape
-        return SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
-          class: `snap-${this.info.category} snap-bevel`,
+        let el = SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
+          class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
         })
+
+        if (isFlat) {
+          SVG.setProps(el, {
+            "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
+          })
+        }
+        return el
       }
     }
 
@@ -461,9 +483,16 @@ class BlockView {
     if (!func) {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
-    return func(w, h, {
-      class: `snap-${this.info.category} snap-bevel`,
+    let el = func(w, h, {
+      class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
     })
+
+    if (isFlat) {
+      SVG.setProps(el, {
+        "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
+      })
+    }
+    return el
   }
 
   minDistance(child) {
@@ -503,7 +532,7 @@ class BlockView {
     }
   }
 
-  draw() {
+  draw(isFlat) {
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
 
@@ -561,7 +590,7 @@ class BlockView {
     // console.log('before line', line.height)
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
-      child.el = child.draw(this)
+      child.el = child.draw(isFlat, this)
 
       if (child.isCShape) {
         this.hasScript = true
@@ -682,7 +711,7 @@ class BlockView {
       }
     }
 
-    const el = this.drawSelf(innerWidth, this.height, lines)
+    const el = this.drawSelf(isFlat, innerWidth, this.height, lines)
     objects.splice(0, 0, el)
     if (this.info.color) {
       SVG.setProps(el, {
@@ -718,7 +747,7 @@ class CommentView {
     this.label.measure()
   }
 
-  draw() {
+  draw(isFlat) {
     const labelEl = this.label.draw()
 
     this.width = this.label.width + 16
@@ -772,7 +801,7 @@ class GlowView {
   }
   // TODO how can we always raise Glows above their parents?
 
-  draw() {
+  draw(isFlat) {
     const c = this.child
     const el = c.isScript ? c.draw(true) : c.draw()
 
@@ -802,13 +831,13 @@ class ScriptView {
     }
   }
 
-  draw(inside) {
+  draw(isFlat, inside) {
     const children = []
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      const child = block.draw()
+      const child = block.draw(isFlat)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
 
@@ -854,6 +883,7 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
+    this.isFlat = options.style.replace("snap-", "").toLowerCase() === 'flat'
   }
 
   measure() {
@@ -878,7 +908,7 @@ class DocumentView {
         height += 10
       }
       script.y = height
-      elements.push(SVG.move(0, height, script.draw()))
+      elements.push(SVG.move(0, height, script.draw(this.isFlat)))
       height += script.height
       width = Math.max(width, script.width + 4)
     }
