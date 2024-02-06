@@ -215,6 +215,10 @@
           style: "snap",
           scale: 1
         });
+        var docViewSnapFlat = scratchblocks.newView(doc, {
+          style: "snap-flat",
+          scale: 1
+        });
         var docView2 = scratchblocks.newView(doc, {
           style: "scratch2",
           scale: 1
@@ -228,11 +232,13 @@
           scale: 0.675
         });
         var svgSnap = docViewSnap.render();
+        var svgSnapFlat = docViewSnapFlat.render();
         var svg2 = docView2.render();
         var svg3HighContrast = docView3HighContrast.render();
         var svg3 = docView3.render();
         preview.innerHTML = "";
         preview.appendChild(svgSnap);
+        preview.appendChild(svgSnapFlat);
         preview.appendChild(svg2);
         preview.appendChild(svg3HighContrast);
         preview.appendChild(svg3);
@@ -248,8 +254,10 @@
               return docView3HighContrast;
             case "2":
               return docView2;
-            case "snap":
+              case "snap":
               return docViewSnap
+              case "snap-flat":
+                  return docViewSnapFlat
             default:
               return docViewSnap;
           }
@@ -286,6 +294,11 @@
             exportDropdown.appendChild(Object.assign(document.createElement("option"), {
               label: "Snap",
               value: "snap",
+              selected: true,
+            }));
+            exportDropdown.appendChild(Object.assign(document.createElement("option"), {
+              label: "Snap Flat Design",
+              value: "snap-flat",
               selected: true,
             }));
             exportDropdown.className = 'export-link';
