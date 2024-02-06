@@ -187,7 +187,9 @@ class IconView {
       pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
       cloud: { width: 20, height: 12},
       cloudOutline: { width: 20, height: 12, fillAttribute: "stroke"},
-      flash: { width: 10, height: 12},
+      flash: { width: 10, height: 12 },
+      camera: { width: 12, height: 12 },
+      circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
 
       arrowUp:            { width: 12, height: 12},
       arrowUpOutline:     { width: 12, height: 12, fillAttribute: "stroke"},

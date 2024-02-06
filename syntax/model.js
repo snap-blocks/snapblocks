@@ -45,8 +45,13 @@ export class Label {
 
 export class Icon {
   constructor(name, modifiers) {
-    this.name = name
-    this.isArrow = name === "loopArrow"
+    if (!Object.prototype.hasOwnProperty.call(Icon.icons, name) &&
+        Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)) {
+      this.name = Icon.iconAliases[name]
+    } else {
+      this.name = name
+    }
+    this.isArrow = this.name === "loopArrow"
     this.isLoop = false
     this.modifiers = modifiers || null
 
@@ -55,10 +60,16 @@ export class Icon {
     this.g = this.modifiers ? parseFloat(this.modifiers[2]) : null
     this.b = this.modifiers ? parseFloat(this.modifiers[3]) : null
 
-    assert(Icon.icons[name], `no info for icon ${name}`)
+    assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
   get isIcon() {
     return true
+  }
+
+  static get iconAliases() {
+    return {
+      circleSolid: "circle",
+    }
   }
 
   static get icons() {
@@ -79,6 +90,8 @@ export class Icon {
       cloud: true,
       cloudOutline: true,
       flash: true,
+      camera: true,
+      circle: true,
 
       arrowUp: true,
       arrowUpOutline: true,

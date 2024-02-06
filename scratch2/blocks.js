@@ -182,7 +182,7 @@ class IconView {
     } else {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
-    let symbol = SVG.setProps(SVG.symbol(`#${this.name}`), props)
+    let symbol = SVG.setProps(SVG.symbol(`#sb-${this.name}`), props)
     // console.log("symbol", symbol)
     return symbol
   }
@@ -218,6 +218,8 @@ class IconView {
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
       pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
       flash: { width: 10, height: 12 },
+      camera: { width: 10, height: 12 },
+      circle: { width: 10, height: 12, r: 255, g: 0, b: 0 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },

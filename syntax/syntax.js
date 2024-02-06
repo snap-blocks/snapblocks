@@ -423,7 +423,8 @@ function parseLines(code, languages) {
               }
             }
             children.push(
-              Object.prototype.hasOwnProperty.call(Icon.icons, name)
+              Object.prototype.hasOwnProperty.call(Icon.icons, name) ||
+              Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
                 ? new Icon(name, modifiers)
                 : new Label(
                     `@${name}${modifiers.length ? "-" : ""}${modifiers.join(

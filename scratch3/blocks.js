@@ -224,6 +224,8 @@ export class IconView {
       turtleOutline: { width: 18, height: 12, fillAttribute: "stroke" },
       pause: { width: 20, height: 20, r: 255, g: 220, b: 0 },
       flash: { width: 10, height: 12 },
+      camera: { width: 12, height: 12 },
+      circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },

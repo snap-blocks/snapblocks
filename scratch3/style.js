@@ -17,6 +17,8 @@ const highContrastIcons = new Set([
   "turtle",
   "turtleOutline",
   "flash",
+  "camera",
+  
   "arrowUp",
   "arrowUpOutline",
   "arrowUpThin",
@@ -124,6 +126,16 @@ export default class Style {
         {
           id: "sb3-list",
         },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
+          id: "sb3-circle"
+        }
       ),
 
       SVG.el("image", {
@@ -536,6 +548,16 @@ export default class Style {
         },
       ),
       SVG.setProps(
+        SVG.el('path', {
+          d: `M 0.6 10 L 11.4 10 L 11.4 3 L 9 3 L 7.5 0.6 L 4.5 0.6 L 3 3 L 0.6 3 Z
+          M 7.92 6 A 1.92 1.92 0 1 1 7.91999904000008 5.998080000319999 Z`,
+        }),
+        {
+          id: "sb3-camera",
+        }
+      ),
+
+      SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
         }),
@@ -875,6 +897,16 @@ export default class Style {
           id: "sb3-flash-high-contrast",
         },
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: `M 0.6 10 L 11.4 10 L 11.4 3 L 9 3 L 7.5 0.6 L 4.5 0.6 L 3 3 L 0.6 3 Z
+          M 7.92 6 A 1.92 1.92 0 1 1 7.91999904000008 5.998080000319999 Z`,
+        }),
+        {
+          id: "sb3-camera-high-contrast",
+        }
+      ),
+
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
