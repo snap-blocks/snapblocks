@@ -542,6 +542,7 @@ class BlockView {
       } else {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       }
+      p.push('Z')
       return SVG.path({
         class: `sb3-${this.info.category}`,
         path: p,
