@@ -92,14 +92,13 @@ You then need to call `scratchblocks.renderMatching` after the page has loaded.
 Make sure this appears at the end of the page (just before the closing `</body>` tag):
 ```js
 <script>
-scratchblocks.renderMatching('pre.blocks', {
+snapblocks.renderMatching('pre.blocks', {
   style:     'snap',       // Optional, defaults to 'scratch2'.
   languages: ['en', 'de'], // Optional, defaults to ['en'].
   scale: 1,                // Optional, defaults to 1
 });
 </script>
 ```
-Note: this does use `scratchblocks` so it's easier to migrate from scratchblocks to snapblocks.
 
 The `renderMatching()` function takes a CSS-style selector for the elements that contain snapblocks code: we use `pre.blocks` to target `pre` tags with the class `blocks`.
 
@@ -115,9 +114,9 @@ I'm rather fond of the <code class="b">cut from [ v]</code> block in Snap.
 To allow this, make a second call to `renderMatching` using the `inline` argument.
 ```js
 <script>
-scratchblocks.renderMatching("pre.blocks", ...)
+snapblocks.renderMatching("pre.blocks", ...)
 
-scratchblocks.renderMatching("code.b", {
+snapblocks.renderMatching("code.b", {
   inline: true,
   // Repeat `style` and `languages` options here.
 });
@@ -139,7 +138,7 @@ The translations files are hundreds of kilobytes in size, so to keep your page b
 
 For example, a translations file that just loads the German language (ISO code `de`) would look something like this:
 ```js
-window.scratchblocks.loadLanguages({
+window.snapblocks.loadLanguages({
     de: <contents of locales/de.json>
 })
 ```
@@ -147,7 +146,7 @@ window.scratchblocks.loadLanguages({
 If you're using a JavaScript bundler you should be able to build your own translations file by calling `require()` with the path to the locale JSON file.
 This requires your bundler to allow importing JSON files as JavaScript.
 ```js
-window.scratchblocks.loadLanguages({
+window.snapblocks.loadLanguages({
     de: require('snapblocks/locales/de.json'),
 })
 ```
@@ -166,14 +165,14 @@ snapblocks.renderMatching('pre.blocks');
 ```
 
 ## ESM Support
-Since version 3.6.0, scratchblocks (and subsequently snapblocks) can be properly loaded as an ESM module. The ESM version, instead of defining `window.scratchblocks`, default-exports the `scratchblocks` object. Similarly, the JavaScript translation files default-exports a function to load the translations.
+Since version 3.6.0, scratchblocks (and subsequently snapblocks) can be properly loaded as an ESM module. The ESM version, instead of defining `window.snapblocks`, default-exports the `snapblocks` object. Similarly, the JavaScript translation files default-exports a function to load the translations.
 
 ```js
-import scratchblocks from "./snapblocks-es-min.js";
+import snapblocks from "./snapblocks-es-min.js";
 import loadTranslations from "./translations-all-es.js";
-loadTranslations(scratchblocks);
+loadTranslations(snapblocks);
 
-// window.scratchblocks is NOT available!
+// window.snapblocks is NOT available!
 ```
 
 # Languages

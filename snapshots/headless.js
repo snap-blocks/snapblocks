@@ -38,7 +38,7 @@ class Renderer {
     await this.page.goto(
       "http://localhost:8002/snapshots/snapshot-testing.html",
     )
-    await this.page.waitForFunction("window.scratchblocksLoaded")
+    await this.page.waitForFunction("window.snapblocksLoaded")
   }
 
   async snapshot(script, options) {

@@ -62,7 +62,7 @@ export default function (window) {
     const view = newView(doc, options)
     const svg = view.render()
     // Used in high contrast theme
-    svg.classList.add(`scratchblocks-style-${options.style}`)
+    svg.classList.add(`snapblocks-style-${options.style}`)
     return svg
   }
 
@@ -92,16 +92,16 @@ export default function (window) {
     let container
     if (options.inline) {
       container = document.createElement("span")
-      let cls = "scratchblocks scratchblocks-inline"
+      let cls = "snapblocks snapblocks-inline"
       if (doc.scripts[0] && !doc.scripts[0].isEmpty) {
-        cls += ` scratchblocks-inline-${doc.scripts[0].blocks[0].shape}`
+        cls += ` snapblocks-inline-${doc.scripts[0].blocks[0].shape}`
       }
       container.className = cls
       container.style.display = "inline-block"
       container.style.verticalAlign = "middle"
     } else {
       container = document.createElement("div")
-      container.className = "scratchblocks"
+      container.className = "snapblocks"
     }
     container.appendChild(svg)
 
@@ -112,9 +112,9 @@ export default function (window) {
   /* Render all matching elements in page to shiny scratch blocks.
    * Accepts a CSS selector as an argument.
    *
-   *  scratchblocks.renderMatching("pre.blocks");
+   *  snapblocks.renderMatching("pre.blocks");
    *
-   * Like the old 'scratchblocks2.parse().
+   * Like the old 'snapblocks2.parse().
    */
   const renderMatching = function (selector, options) {
     selector = selector || "pre.blocks"

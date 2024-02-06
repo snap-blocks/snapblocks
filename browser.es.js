@@ -1,8 +1,8 @@
 import init from "./index.js"
 
-const scratchblocks = init(window)
+const snapblocks = init(window)
 
 // add our CSS to the page
-scratchblocks.appendStyles()
+snapblocks.appendStyles()
 
-export default scratchblocks
+export default snapblocks

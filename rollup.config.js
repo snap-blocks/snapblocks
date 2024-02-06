@@ -58,7 +58,7 @@ export default [
     output: {
       file: pkg.main,
       format: "iife",
-      name: "scratchblocks",
+      name: "snapblocks",
       sourcemap: env.prod,
     },
     plugins: [
