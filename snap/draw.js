@@ -129,7 +129,7 @@ export default class SVG {
         //
         // It could indicate missing whitespace between the coordinates and the
         // operation.
-        assert(isX, "translatePath: invalid argument")
+        assert(isX, `translatePath: invalid argument: ${part}`)
       } else {
         part = +part
         part += isX ? dx : dy
@@ -290,13 +290,17 @@ export default class SVG {
   }
 
   static pointedPath(w, h) {
-    const r = h / 2
-    return [this.getPointedTop(w, h), this.getPointedBottom(w, h)]
+    return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
+  }
+
+  static pointedInput(w, h) {
+    console.log('input')
+    return [SVG.getPointedTop(w, h, h / 2), SVG.getPointedBottom(w, h, true, h / 2)]
   }
 
   static getPointedTop(w, h, r = 9) {
     var h2 = Math.floor(h / 2),
-        path
+        path = ""
     
     path = `M ${r} ${h} L 0 ${h2}
             L ${r} 0 L ${w - r} 0`
@@ -316,7 +320,14 @@ export default class SVG {
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getPointedTop(w,h, h / 2), SVG.getPointedBottom(w,h,true, h / 2)]
+      path: SVG.pointedPath(w, h)
+    })
+  }
+
+  static pointedRectInput(w, h, props) {
+    return SVG.path({
+      ...props,
+      path: SVG.pointedInput(w,h)
     })
   }
 
@@ -390,7 +401,7 @@ export default class SVG {
       path += ` L ${corner * 3 + 6 + inset + dent} ${y} `
       path += `L ${indent + dent} ${y + corner} `
       path += `L ${indent} ${y + corner} `
-      path += `L ${corner + 6 + inset} ${y} `
+      path += `L ${corner + 6 + inset} ${y}`
     }
 
     if (inset > 0) {
@@ -401,7 +412,7 @@ export default class SVG {
         this.radians(-90),
         this.radians(180),
         true,
-        "L"
+        " L"
       );
     } else {
       path += this.canvasArc(
@@ -411,7 +422,7 @@ export default class SVG {
         this.radians(90),
         this.radians(180),
         false,
-        "L"
+        " L"
       );
     }
 
@@ -580,14 +591,15 @@ export default class SVG {
     return SVG.path({ ...props, path: p })
   }
 
-  static ringRect(w, h, cy, cw, ch, shape, props) {
+  static ringRect(w, h, cy, cw, ch, shape, props, isEmpty) {
     const r = 8
     const func =
       shape === "reporter"
         ? SVG.roundedPath
         : shape === "boolean"
-        ? SVG.pointedPath
+        ? (isEmpty ? SVG.pointedInput : SVG.pointedPath)
         : SVG.capPath
+    console.log('path', func(cw, ch).join(" "))
     return SVG.path({
       ...props,
       path: [

@@ -235,7 +235,7 @@ class InputView {
       color: SVG.rect,
       dropdown: SVG.rect,
 
-      boolean: SVG.pointedRect,
+      boolean: SVG.pointedRectInput,
       stack: SVG.stackRect,
       reporter: SVG.roundedRect,
       ring: SVG.roundedRect,
@@ -465,11 +465,13 @@ class BlockView {
           child.isRound ||
           child.isBoolean)
       ) {
-        const shape = child.shape
+        console.log('isRing', !child.isBlock)
+        const shape = child.shape || child.info?.shape
         let el = SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
           class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
-        })
+        }, !shape.isBlock)
 
+        
         if (isFlat) {
           SVG.setProps(el, {
             "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
@@ -488,6 +490,8 @@ class BlockView {
     })
 
     if (isFlat) {
+      console.log('path', el.getAttribute('d'))
+      console.log('shape', this.info.shape)
       SVG.setProps(el, {
         "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
       })
@@ -686,6 +690,7 @@ class BlockView {
         }
         if (this.isRing) {
           child.y = (line.y + y) | 0
+          child.x -= 2
           if (child.isInset) {
             continue
           }
