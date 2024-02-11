@@ -294,7 +294,6 @@ export default class SVG {
   }
 
   static pointedInput(w, h) {
-    console.log('input')
     return [SVG.getPointedTop(w, h, h / 2), SVG.getPointedBottom(w, h, true, h / 2)]
   }
 
@@ -599,7 +598,6 @@ export default class SVG {
         : shape === "boolean"
         ? (isEmpty ? SVG.pointedInput : SVG.pointedPath)
         : SVG.capPath
-    console.log('path', func(cw, ch).join(" "))
     return SVG.path({
       ...props,
       path: [

@@ -66,7 +66,6 @@ export class LabelView {
         }))
     }
     this.height = y + 2
-    // console.log('label height', this.height)
 
     this.el = SVG.group(group)
 
@@ -153,8 +152,6 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
-    // console.log('hex', SVG.rgbToHex(this.r, this.g, this.b))
-    // console.log('rgb', this.r, this.g, this.b)
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
@@ -163,7 +160,6 @@ class IconView {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
-    // console.log('symbol', symbol)
     if (!isFlat) {
       symbol.classList.add('snap-drop-shadow')
     }
@@ -215,8 +211,6 @@ class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
-
-    // console.log('input', this)
 
     this.x = 0
   }
@@ -374,7 +368,6 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].totalHeight
       const p = []
-      // console.log('shape', this.info.shape)
       if (this.info.shape === 'stack') {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter") {
@@ -465,7 +458,6 @@ class BlockView {
           child.isRound ||
           child.isBoolean)
       ) {
-        console.log('isRing', !child.isBlock)
         const shape = child.shape || child.info?.shape
         let el = SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
           class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
@@ -490,8 +482,6 @@ class BlockView {
     })
 
     if (isFlat) {
-      console.log('path', el.getAttribute('d'))
-      console.log('shape', this.info.shape)
       SVG.setProps(el, {
         "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
       })
