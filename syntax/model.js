@@ -45,8 +45,10 @@ export class Label {
 
 export class Icon {
   constructor(name, modifiers) {
-    if (!Object.prototype.hasOwnProperty.call(Icon.icons, name) &&
-        Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)) {
+    if (
+      !Object.prototype.hasOwnProperty.call(Icon.icons, name) &&
+      Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
+    ) {
       this.name = Icon.iconAliases[name]
     } else {
       this.name = name
