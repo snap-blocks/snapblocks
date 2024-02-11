@@ -160,6 +160,47 @@ export default class SVG {
     return `L ${p1x} ${p1y} A ${rx} ${ry} 0 0 1 ${p2x} ${p2y}`
   }
 
+  static canvasArc (x, y, radius, startAngle, endAngle, counterClockwise, startCommand = 'M') {
+    // taken from https://github.com/gliffy/canvas2svg/blob/master/canvas2svg.js#L1008
+
+    // in canvas no circle is drawn if no angle is provided.
+    if (startAngle === endAngle) {
+        return ''
+    }
+    startAngle = startAngle % (2*Math.PI)
+    endAngle = endAngle % (2*Math.PI)
+    if (startAngle === endAngle) {
+        //circle time! subtract some of the angle so svg is happy (svg elliptical arc can't draw a full circle)
+        endAngle = ((endAngle + (2*Math.PI)) - 0.001 * (counterClockwise ? -1 : 1)) % (2*Math.PI)
+    }
+    var endX = x+radius*Math.cos(endAngle),
+        endY = y+radius*Math.sin(endAngle),
+        startX = x+radius*Math.cos(startAngle),
+        startY = y+radius*Math.sin(startAngle),
+        sweepFlag = counterClockwise ? 0 : 1,
+        largeArcFlag = 0,
+        diff = endAngle - startAngle
+
+    if (diff < 0) {
+        diff += 2*Math.PI
+    }
+
+    if (counterClockwise) {
+        largeArcFlag = diff > Math.PI ? 0 : 1
+    } else {
+        largeArcFlag = diff > Math.PI ? 1 : 0
+    }
+
+    let command = `${startCommand} ${startX} ${startY}`
+    command += ` A ${radius} ${radius} 0 ${largeArcFlag} ${sweepFlag} ${endX} ${endY}`
+
+    return command
+  }
+
+  static radians(degrees) {
+    return degrees * Math.PI / 180
+  }
+
   static arcw(p1x, p1y, p2x, p2y, rx, ry) {
     return `L ${p1x} ${p1y} A ${rx} ${ry} 0 0 0 ${p2x} ${p2y}`
   }
@@ -177,63 +218,96 @@ export default class SVG {
   }
 
   static roundedRect(w, h, props) {
-    return SVG.path({ ...props, path: SVG.roundedPath(w, h) })
+    return SVG.path({ ...props, path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)] })
   }
 
-  static getRoundedTop(w, h) {
-    return `M 0 10
-      C 0 5 5 0 10 0
-      L ${w - 10} 0
-      C ${w - 5} 0 ${w} 5 ${w} 10`
+  static getRoundedTop(w, h, rounding = 9) {
+    // I'm too lazy to figure out how to recreate the snap reporter,
+    // so here's almost the same code snap uses to draw it.
+    // It's not exactly the same, as snap uses canvas apis, and we use svg.
+    var edge = 1,
+        r = Math.max(Math.min(rounding, h / 2), edge),
+        path = ""
+
+    // top left
+    path += this.canvasArc(
+      r,
+      r,
+      r,
+      this.radians(180),
+      this.radians(270),
+      false,
+      "M"
+    );
+
+    // top line
+    path += ` L ${w - r} 0 `
+
+    // top right
+    path += this.canvasArc(
+      w - r,
+      r,
+      r,
+      this.radians(-90),
+      this.radians(0),
+      false,
+      "L"
+    );
+
+    return path
   }
 
-  static getRoundedBottom(w, h) {
-    return `L ${w} ${h - 10}
-      C ${w} ${h - 5} ${w - 5} ${h} ${w - 10} ${h}
-      L 10 ${h}
-      C 5 ${h} 0 ${h - 5} 0 ${h - 10}`
+  static getRoundedBottom(w, h, rounding = 9) {
+    var edge = 1,
+      r = Math.max(Math.min(rounding, h / 2), edge),
+      path = ""
+
+    path += this.canvasArc(
+      w - r,
+      h - r,
+      r,
+      this.radians(0),
+      this.radians(90),
+      false,
+      "L"
+    );
+    
+    // bottom line
+    path += ` L ${w - r} ${h} `
+    
+    // bottom left
+    path += this.canvasArc(
+        r,
+        h - r,
+        r,
+        this.radians(90),
+        this.radians(180),
+        false,
+        "L"
+    );
+
+    return path
   }
 
   static pointedPath(w, h) {
     const r = h / 2
-    return [
-      "M",
-      r,
-      0,
-      "L",
-      w - r,
-      0,
-      w,
-      r,
-      "L",
-      w,
-      r,
-      w - r,
-      h,
-      "L",
-      r,
-      h,
-      0,
-      r,
-      "L",
-      0,
-      r,
-      r,
-      0,
-      "Z",
-    ]
+    return [this.getPointedTop(w, h), this.getPointedBottom(w, h)]
   }
 
-  static getPointedTop(w, h) {
-    const r = 8
-    return  `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
+  static getPointedTop(w, h, r = 9) {
+    var h2 = Math.floor(h / 2),
+        path
+    
+    path = `M ${r} ${h} L 0 ${h2}
+            L ${r} 0 L ${w - r} 0`
+    return path
   }
 
-  static getPointedBottom(w, h, showRight) {
-    const r = 8
-    let path = ``
+  static getPointedBottom(w, h, showRight, r = 9) {
+    var h2 = Math.floor(h / 2),
+        path = ''
     if (showRight) {
-      path += `L ${w} ${h / 2} `
+      path += `L ${w} ${h2} `
     }
     path += `L ${w - r} ${h} Z`
     return path
@@ -242,87 +316,142 @@ export default class SVG {
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getPointedTop(w,h), SVG.getPointedBottom(w,h,true)]
+      path: [SVG.getPointedTop(w,h, h / 2), SVG.getPointedBottom(w,h,true, h / 2)]
     })
   }
 
-  static getTop(w) {
-    return `M 0 5
-      C 0 2 2 0 5 0
-      L 13 0
-      L 16 3
-      L 24 3
-      L 27 0
-      L ${w - 5} 0
-      C ${w - 2} 0 ${w} 2 ${w} 5`
+  static getRingTop(w, h) {
+    return this.getRoundedTop(w, h, 4.5)
   }
 
-  static getRingTop(w) {
-    return `M 0 3
-      L 3 0
-      L 7 0
-      L 10 3
-      L 16 3
-      L 19 0
-      L ${w - 3} 0
-      L ${w} 3`
+  static getRingBottom(w, h) {
+    return this.getRoundedBottom(w, h, 4.5)
+  }
+
+  static getRingPath(w, h) {
+    return this.roundedRect(w, h)
+  }
+  
+  static getTop(w) {
+    var corner = 3,
+        dent = 8,
+        indent = corner * 2 + 6,
+        path = "";
+
+    path += this.canvasArc(
+      corner,
+      corner,
+      corner,
+      this.radians(-180),
+      this.radians(-90),
+      false
+    )
+
+    path += ` L ${corner + 6} 0 `
+    path += `L ${indent} ${corner} `
+    path += `L ${indent + dent} ${corner} `
+    path += `L ${corner * 3 + 6 + dent} 0 `
+    path += `L ${w - corner} 0 `
+
+    path += this.canvasArc(
+      w - corner,
+      corner,
+      corner,
+      this.radians(-90),
+      this.radians(-0),
+      false,
+      "L"
+    )
+
+    return path
   }
 
   static getRightAndBottom(w, y, hasNotch, inset) {
     if (typeof inset === "undefined") {
       inset = 0
     }
-    let arr = ["L", w, y - 5, "C", w, y - 2, w - 2, y, w - 5, y]
+    var corner = 3,
+        dent = 8,
+        indent = corner * 2 + 6 + inset,
+        radius = corner,
+        path = "";
+    
+    path += this.canvasArc(
+      w - corner,
+      y - corner,
+      radius,
+      this.radians(0),
+      this.radians(90),
+      false,
+      "L"
+    );
+
     if (hasNotch) {
-      arr = arr.concat([
-        "L",
-        inset + 27,
-        y,
-        "L",
-        inset + 24,
-        y + 3,
-        "L",
-        inset + 16,
-        y + 3,
-        "L",
-        inset + 13,
-        y,
-      ])
+      path += ` L ${corner * 3 + 6 + inset + dent} ${y} `
+      path += `L ${indent + dent} ${y + corner} `
+      path += `L ${indent} ${y + corner} `
+      path += `L ${corner + 6 + inset} ${y} `
     }
+
     if (inset > 0) {
-      arr = arr.concat(["L", inset + 5, y,])
-      arr = arr.concat([
-        "C",
-        inset + 2,
-        y,
-        inset,
-        y + 2,
-        inset,
-        y + 5,
-      ])
+      path += this.canvasArc(
+        corner + inset,
+        y + corner,
+        radius,
+        this.radians(-90),
+        this.radians(180),
+        true,
+        "L"
+      );
     } else {
-      arr = arr.concat(["L", inset + 5, y,])
-      arr = arr.concat([
-        "C",
-        inset + 2,
-        y,
-        inset,
-        y - 2,
-        inset,
-        y - 5,
-      ])
+      path += this.canvasArc(
+        corner + inset,
+        y - corner,
+        radius,
+        this.radians(90),
+        this.radians(180),
+        false,
+        "L"
+      );
     }
-    return arr.join(" ")
+
+    return path
   }
 
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
     }
-    return `L ${inset} ${armTop - 5}
-      C ${inset} ${armTop - 2} ${inset + 2} ${armTop} ${inset + 5} ${armTop}
-      L ${w - 5} ${armTop}
-      C ${w - 2} ${armTop} ${w} ${armTop + 2} ${w} ${armTop + 5}`
+
+    var ox = inset,
+        oy = armTop,
+        corner = 3,
+        radius = Math.max(corner, 0),
+        path = "";
+    
+    path += this.canvasArc(
+      inset + corner,
+      armTop - corner,
+      corner,
+      this.radians(180),
+      this.radians(90),
+      true,
+      "L"
+    );
+
+    path += ` L ${w - corner} ${armTop} `
+
+    path += this.canvasArc(
+      w - corner,
+      armTop + corner,
+      radius,
+      this.radians(-90),
+      this.radians(-0),
+      false,
+      "L"
+    );
+
+    return path
   }
 
   static stackRect(w, h, props) {

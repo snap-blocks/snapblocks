@@ -7,6 +7,7 @@ export default `
   font-size: 10px;
   word-spacing: +1px;
   /* filter: url(#snapDropShadow); */
+  white-space: pre;
 }
 
 .snap-drop-shadow {
@@ -78,7 +79,7 @@ export default `
 .snap-literal-string,
 .snap-literal-number-dropdown,
 .snap-literal-dropdown {
-  font-family: Verdana, Arial, DejaVu Sans, sans-serif !important;
+  font-family: Arial, DejaVu Sans, sans-serif;
   font-weight: normal;
   font-size: 9px;
   word-spacing: 0;
@@ -86,7 +87,6 @@ export default `
 .snap-literal-number,
 .snap-literal-string,
 .snap-literal-number-dropdown {
-  font-family: Verdana, Arial, DejaVu Sans, sans-serif !important;
   fill: #000;
 }
 

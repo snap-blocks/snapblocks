@@ -443,7 +443,7 @@ export default class Style {
 
     f.merge([
       "SourceGraphic",
-      f.comp("in", f.flood("#000", 0.2), "SourceAlpha"),
+      f.comp("in", f.flood("#000", 0.4), "SourceAlpha"),
     ])
 
     return f.el
