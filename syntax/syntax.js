@@ -333,9 +333,9 @@ function parseLines(code, languages) {
     return paintBlock(info, children, languages)
   }
 
-  function makeMenu(shape, value) {
+  function makeMenu(shape, value, isReadonly) {
     const menu = lookupDropdown(value, languages) || value
-    return new Input(shape, value, menu)
+    return new Input(shape, value, menu, isReadonly)
   }
 
   function pParts(end) {
@@ -514,8 +514,10 @@ function parseLines(code, languages) {
       return new Input("color", s)
     }
     return !escapeV && / v$/.test(s)
-      ? makeMenu("dropdown", s.slice(0, s.length - 2))
-      : new Input("string", s)
+      ? makeMenu("dropdown", s.slice(0, s.length - 2), false)
+      : !escapeV && / V$/.test(s)
+      ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
+      : new Input("string", s, true)
   }
 
   function pBlock(end) {
@@ -552,6 +554,12 @@ function parseLines(code, languages) {
         next()
         return new Input("number-dropdown", "")
       }
+      console.log('tok', tok)
+      if (tok === "V" && peek() === ")") {
+        next()
+        next()
+        return new Input("number-dropdown", "", null, true)
+      }
     }
 
     const children = pParts(")")
@@ -582,6 +590,11 @@ function parseLines(code, languages) {
         children.pop()
         const value = children.map(l => l.value).join(" ")
         return makeMenu("number-dropdown", value)
+      }
+      if (last.value === "V") {
+        children.pop()
+        const value = children.map(l => l.value).join(" ")
+        return makeMenu("number-dropdown", value, true)
       }
     }
 

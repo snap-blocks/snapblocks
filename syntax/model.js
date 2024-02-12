@@ -118,7 +118,7 @@ export class Icon {
 }
 
 export class Input {
-  constructor(shape, value, menu) {
+  constructor(shape, value, menu, isReadonly) {
     this.shape = shape
     this.value = value
     this.menu = menu || null
@@ -132,13 +132,14 @@ export class Input {
     this.isColor = shape === "color"
     this.hasArrow = shape === "dropdown" || shape === "number-dropdown"
     this.isDarker =
-      shape === "boolean" || shape === "stack" || shape === "dropdown"
+      shape === "boolean" || shape === "stack" || isReadonly
     this.isSquare =
       shape === "string" || shape === "color" || shape === "dropdown"
+    
 
     this.hasLabel = !(this.isColor || this.isInset)
     this.label = this.hasLabel
-      ? new Label(value, `literal-${this.shape}`)
+      ? new Label(value, `literal-${this.shape}` + (isReadonly ? "-readonly" : ""))
       : null
     this.x = 0
   }

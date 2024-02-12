@@ -66,21 +66,29 @@ export default `
 }
 .sb-input-number,
 .sb-input-string,
-.sb-input-number-dropdown {
+.sb-input-number-dropdown,
+.sb-input-dropdown {
   fill: #fff;
 }
 .sb-literal-number,
 .sb-literal-string,
 .sb-literal-number-dropdown,
-.sb-literal-dropdown {
+.sb-literal-dropdown,
+.sb-literal-number-dropdown-readonly,
+.sb-literal-dropdown-readonly {
   font-weight: normal;
   font-size: 9px;
   word-spacing: 0;
 }
 .sb-literal-number,
 .sb-literal-string,
-.sb-literal-number-dropdown {
+.sb-literal-number-dropdown,
+.sb-literal-dropdown {
   fill: #000;
+}
+.sb-literal-number-dropdown-readonly,
+.sb-literal-dropdown-readonly {
+  fill: #fff;
 }
 
 .sb-darker {

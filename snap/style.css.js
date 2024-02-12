@@ -71,14 +71,17 @@ export default `
 }
 .snap-input-number,
 .snap-input-string,
-.snap-input-number-dropdown {
+.snap-input-number-dropdown,
+.snap-input-dropdown {
   font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
   fill: #fff;
 }
 .snap-literal-number,
 .snap-literal-string,
 .snap-literal-number-dropdown,
-.snap-literal-dropdown {
+.snap-literal-dropdown,
+.snap-literal-number-dropdown-readonly,
+.snap-literal-dropdown-readonly {
   font-family: Arial, DejaVu Sans, sans-serif;
   font-weight: normal;
   font-size: 9px;
@@ -86,8 +89,13 @@ export default `
 }
 .snap-literal-number,
 .snap-literal-string,
-.snap-literal-number-dropdown {
+.snap-literal-number-dropdown,
+.snap-literal-dropdown {
   fill: #000;
+}
+.snap-literal-number-dropdown-readonly,
+.snap-literal-dropdown-readonly {
+  fill: #fff;
 }
 
 .snap-darker {

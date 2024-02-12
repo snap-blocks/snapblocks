@@ -80,7 +80,7 @@ export class LabelView {
       const font = /comment-label/.test(this.cls)
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
         : /literal/.test(this.cls)
-        ? `normal 9px ${defaultFontFamily}`
+        ? `normal 9px Arial, DejaVu Sans, sans-serif`
         : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
@@ -244,7 +244,7 @@ class InputView {
       w = Math.max(
         (this.shape === "string" ? 8 : 11),
         this.label.width +
-          (this.shape === "string" || this.shape === "number-dropdown" ? 0 : 11),
+          (this.shape === "string" ? 1 : this.shape === "number-dropdown" ? 16 : 11),
       )
     } else {
       w = this.isBoolean ? 22 : this.isInset ? 30 : this.isColor ? 14 : null
@@ -283,13 +283,13 @@ class InputView {
       result.appendChild(SVG.move(x, 0, label))
     }
     if (this.hasArrow) {
-      const y = this.shape === "dropdown" ? 5 : 4
+      const y = 4
       result.appendChild(
         SVG.move(
-          w - 10,
+          w - 12,
           y,
           SVG.polygon({
-            points: [7, 0, 3.5, 4, 0, 0],
+            points: [1, 1, 11, 1, 6, 6],
             fill: "#000",
           }),
         ),
