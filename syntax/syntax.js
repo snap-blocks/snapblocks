@@ -554,7 +554,7 @@ function parseLines(code, languages) {
         next()
         return new Input("number-dropdown", "")
       }
-      console.log('tok', tok)
+      console.log("tok", tok)
       if (tok === "V" && peek() === ")") {
         next()
         next()

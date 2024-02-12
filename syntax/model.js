@@ -131,15 +131,16 @@ export class Input {
       shape === "boolean" || shape === "stack" || shape === "reporter"
     this.isColor = shape === "color"
     this.hasArrow = shape === "dropdown" || shape === "number-dropdown"
-    this.isDarker =
-      shape === "boolean" || shape === "stack" || isReadonly
+    this.isDarker = shape === "boolean" || shape === "stack" || isReadonly
     this.isSquare =
       shape === "string" || shape === "color" || shape === "dropdown"
-    
 
     this.hasLabel = !(this.isColor || this.isInset)
     this.label = this.hasLabel
-      ? new Label(value, `literal-${this.shape}` + (isReadonly ? "-readonly" : ""))
+      ? new Label(
+          value,
+          `literal-${this.shape}` + (isReadonly ? "-readonly" : ""),
+        )
       : null
     this.x = 0
   }
