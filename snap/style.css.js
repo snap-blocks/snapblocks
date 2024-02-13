@@ -99,7 +99,7 @@ export default `
 }
 
 .snap-darker {
-  filter: url(#inputDarkFilter);
+  filter: url(#snapInputDarkFilter);
 }
 
 .snap-outline {

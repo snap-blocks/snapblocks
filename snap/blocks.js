@@ -25,6 +25,8 @@ const {
   dropShadowFilter,
 } = style
 
+const unicodeIcons = {}
+
 export class LabelView {
   constructor(label) {
     Object.assign(this, label)
@@ -904,7 +906,7 @@ class DocumentView {
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter("snapBevelFilter", false),
         bevelFilter("snapInputBevelFilter", true),
-        darkFilter("inputDarkFilter"),
+        darkFilter("snapInputDarkFilter"),
         dropShadowFilter('snapDropShadow'),
         ...makeIcons(),
       ])),
@@ -968,6 +970,10 @@ class DocumentView {
 }
 
 const viewFor = node => {
+  if (node instanceof Icon && unicodeIcons[node.name]) {
+    return LabelView
+  }
+
   switch (node.constructor) {
     case Label:
       return LabelView
