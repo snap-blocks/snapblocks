@@ -18,10 +18,10 @@ turn left (15) degrees
 turn ↺ (15) degrees
 
 point in direction (90 v)
-point towards [ v]
+point towards [ V]
 
 go to x: (0) y: (0)
-go to [mouse-pointer v]
+go to [mouse-pointer V]
 glide (1) secs to x: (0) y: (0)
 
 change x by (10)
@@ -31,7 +31,7 @@ set y to (0)
 
 if on edge, bounce
 
-set rotation style [left-right v]
+set rotation style [left-right V]
 
 (x position)
 (y position)
@@ -55,12 +55,12 @@ think [Hmm...]
 show
 hide
 
-switch costume to [costume1 v]
+switch costume to [costume1 V]
 next costume
-switch backdrop to [backdrop1 v]
+switch backdrop to [backdrop1 V]
 
-change [color v] effect by (25)
-set [color v] effect to (0)
+change [color V] effect by (25)
+set [color V] effect to (0)
 clear graphic effects
 
 change size by (10)
@@ -75,7 +75,7 @@ go back (1) layers
 
 // (Stage-specific)
 
-switch backdrop to [backdrop1 v] and wait
+switch backdrop to [backdrop1 V] and wait
 next backdrop
 
 (backdrop #)
@@ -90,8 +90,8 @@ test(
 
 // Sound
 
-play sound [pop v]
-play sound [pop v] until done
+play sound [pop V]
+play sound [pop V] until done
 stop all sounds
 
 play drum (1 v) for (0.2) beats
@@ -145,25 +145,25 @@ test(
 
 // Variables
 
-set [var v] to [0]
-change [var v] by (1)
-show variable [var v]
-hide variable [var v]
+set [var V] to [0]
+change [var V] by (1)
+show variable [var V]
+hide variable [var V]
 
 // List
 
-add [thing] to [list v]
+add [thing] to [list V]
 
-delete (1 v) of [list v]
-insert [thing] at (1 v) of [list v]
-replace item (1 v) of [list v] with [thing]
+delete (1 v) of [list V]
+insert [thing] at (1 v) of [list V]
+replace item (1 v) of [list V] with [thing]
 
-(item (1 v) of [list v])
-(length of [list v])
-<[list v] contains [thing]>
+(item (1 v) of [list V])
+(length of [list V])
+<[list V] contains [thing]>
 
-show list [list v]
-hide list [list v]
+show list [list V]
+hide list [list V]
 
 `,
 )
@@ -179,15 +179,15 @@ when gf clicked
 when green flag clicked
 when flag clicked
 when ⚑ clicked
-when [space v] key pressed
+when [space V] key pressed
 when this sprite clicked
-when backdrop switches to [backdrop1 v]
+when backdrop switches to [backdrop1 V]
 
-when [loudness v] > (10)
+when [loudness V] > (10)
 
-when I receive [message1 v]
-broadcast [message1 v]
-broadcast [message1 v] and wait
+when I receive [message1 V]
+broadcast [message1 V]
+broadcast [message1 V] and wait
 
 `,
 )
@@ -227,18 +227,18 @@ repeat until <> {
 
 // caps!
 
-stop [all v]
+stop [all V]
 
-stop [this script v]
+stop [this script V]
 
 // stack
 
-stop [other scripts in sprite v]
+stop [other scripts in sprite V]
 
-stop [other scripts in stage v]
+stop [other scripts in stage V]
 
 when I start as a clone
-create clone of [myself v]
+create clone of [myself V]
 delete this clone
 
 `,
@@ -251,31 +251,31 @@ test(
 
 // Sensing
 
-<touching [ v]?>
+<touching [ V]?>
 <touching color [#f0f]?>
 <color [#f0f] is touching [#0f0]?>
-(distance to [ v])
+(distance to [ V])
 
 ask [What's your name?] and wait
 (answer)
 
-<key [space v] pressed?>
+<key [space V] pressed?>
 <mouse down?>
 (mouse x)
 (mouse y)
 
 (loudness)
 
-(video [motion v] on [this sprite v])
-turn video [on v]
+(video [motion V] on [this sprite V])
+turn video [on V]
 set video transparency to (50)%
 
 (timer)
 reset timer
 
-([x position v] of [Sprite1 v])
+([x position V] of [Sprite1 V])
 
-(current [minute v])
+(current [minute V])
 (days since 2000)
 (username)
 (user id)
@@ -315,7 +315,7 @@ test(
 (() mod ())
 (round ())
 
-([sqrt v] of (9))
+([sqrt V] of (9))
 
 `,
 )
@@ -327,55 +327,55 @@ test(
 
 // PicoBoard
 
-when [button pressed v]
+when [button pressed V]
 
-when [slider v] [> v] (50)
+when [slider V] [> V] (50)
 
-<sensor [button pressed v]?
+<sensor [button pressed V]?
 
-([slider v] sensor value)
+([slider V] sensor value)
 
 // Lego WeDo 1.0
 
-turn [motor v] on for (1) secs
+turn [motor V] on for (1) secs
 
-turn [motor v] on
+turn [motor V] on
 
-turn [motor v] off
+turn [motor V] off
 
-set [motor v] power to (100)
+set [motor V] power to (100)
 
-set [motor v] direction to [this way v]
+set [motor V] direction to [this way V]
 
-when distance [< v] (20)
+when distance [< V] (20)
 
-when tilt [= v] (20)
+when tilt [= V] (20)
 
 (tilt)
 
 // Lego WeDo 2.0
 
-turn [motor v] on for (1) seconds
+turn [motor V] on for (1) seconds
 
-turn [motor v] on
+turn [motor V] on
 
-turn [motor v] off
+turn [motor V] off
 
-set [motor v] power to (100)
+set [motor V] power to (100)
 
-set [motor v] direction to [this way v]
+set [motor V] direction to [this way V]
 
 set light color to (50)
 
 play note (60 v) for (0.5) seconds
 
-when distance [< v] (50)
+when distance [< V] (50)
 
 when tilted
 
 (distance)
 
-(tilt [up-down v])
+(tilt [up-down V])
 
 `
 )
@@ -391,9 +391,9 @@ test(
 
 // Looks
 
-switch to costume [costume1 v]
+switch to costume [costume1 V]
 
-switch to background [background1 v]
+switch to background [background1 V]
 next background
 (background #)
 
@@ -472,7 +472,7 @@ set y to (0)
 
 if on edge, bounce
 
-set rotation style [left-right v]
+set rotation style [left-right V]
 
 (x position)
 (y position)
@@ -501,18 +501,18 @@ next backdrop
 change size by (10)
 set size to (100) %
 
-change [color v] effect by (25)
-set [color v] effect to (0)
+change [color V] effect by (25)
+set [color V] effect to (0)
 clear graphic effects
 
 show
 hide
 
-go to [front v] layer
-go [forward v] (1) layers
+go to [front V] layer
+go [forward V] (1) layers
 
-(costume [number v])
-(backdrop [number v])
+(costume [number V])
+(backdrop [number V])
 (size)
 
 `,
@@ -529,8 +529,8 @@ play sound (Meow v) until done
 start sound (Meow v)
 stop all sounds
 
-change [pitch v] effect by (10)
-set [pitch v] effect to (100)
+change [pitch V] effect by (10)
+set [pitch V] effect to (100)
 clear sound effects
 
 change volume by (-10)
@@ -549,13 +549,13 @@ test(
 // Events
 
 when flag clicked
-when [space v] key pressed
+when [space V] key pressed
 when this sprite clicked
-when backdrop switches to [backdrop1 v]
+when backdrop switches to [backdrop1 V]
 
-when [loudness v] > (10)
+when [loudness V] > (10)
 
-when i receive [message1 v]
+when i receive [message1 V]
 broadcast (message1 v)
 broadcast (message1 v) and wait
 
@@ -595,7 +595,7 @@ repeat until <> {
 
 }
 
-stop [all v]
+stop [all V]
 
 when I start as a clone
 create clone of (myself v)
@@ -627,16 +627,16 @@ ask [What's your name?] and wait
 (mouse x)
 (mouse y)
 
-set drag mode [draggable v]
+set drag mode [draggable V]
 
 (loudness)
 
 (timer)
 reset timer
 
-([x position v] of (Stage v))
+([x position V] of (Stage v))
 
-(current [year v])
+(current [year V])
 (days since 2000)
 (username)
 
@@ -673,7 +673,7 @@ test(
 (() mod ())
 (round ())
 
-([abs v] of ())
+([abs V] of ())
 
 `,
 )
@@ -687,28 +687,28 @@ test(
 
 (foo)
 
-set [foo v] to (0)
-change [foo v] by (1)
-show variable [foo v]
-hide variable [foo v]
+set [foo V] to (0)
+change [foo V] by (1)
+show variable [foo V]
+hide variable [foo V]
 
 // Lists
 
 (list)
 
-add [thing] to [list v]
-delete (1) of [list v]
-delete all of [list v]
-insert (1) at (1) of [list v]
-replace item (1) of [list v] with (1)
+add [thing] to [list V]
+delete (1) of [list V]
+delete all of [list V]
+insert (1) at (1) of [list V]
+replace item (1) of [list V] with (1)
 
-(item (1) of [list v])
-(item # of [thing] in [list v])
-(length of [list v])
-<[list v] contains [thing]?>
+(item (1) of [list V])
+(item # of [thing] in [list V])
+(length of [list V])
+<[list V] contains [thing]?>
 
-show list [list v]
-hide list [list v]
+show list [list V]
+hide list [list V]
 
 `,
 )
@@ -791,10 +791,10 @@ test(
   `  
 // Text-to-Sppech
 speak [hello]
-set voice to [alto v]
+set voice to [alto V]
 
 // Translate
-(translate [hello] to [Thai v])
+(translate [hello] to [Thai V])
 (language)
 
 // Makey Makey
@@ -802,56 +802,56 @@ when (left up right v) pressed in order
 when (space v) key pressed
 
 // micro:bit
-when [A v] button pressed
-<[A v] button pressed?>
-when [moved v]
-display [heart v]
+when [A V] button pressed
+<[A V] button pressed?>
+when [moved V]
+display [heart V]
 display text [Hello!]
 clear display
-when tilted [any v]
-<tilted [any v]?>
-(tilt angle [front v])
-when pin [0 v] connected
+when tilted [any V]
+<tilted [any V]?>
+(tilt angle [front V])
+when pin [0 V] connected
 
 // EV3
-motor [A v] turn this way for (1) seconds
-motor [A v] turn that way for (1) seconds
-motor [A v] set power (100) %
-(motor [A v] position)
-when button [1 v] pressed
+motor [A V] turn this way for (1) seconds
+motor [A V] turn that way for (1) seconds
+motor [A V] set power (100) %
+(motor [A V] position)
+when button [1 V] pressed
 when distance \\< (5)
 when brightness \\< (50)
-<button [1 v] pressed?>
+<button [1 V] pressed?>
 (brightness)
 beep note (60) for (0.5) secs
 
 // BOOST
-turn motor [A v] for (1) seconds
-turn motor [A v] for (1) rotations
-turn motor [A v] on
-turn motor [A v] off
-set motor [ABCD v] speed to (100) %
-set motor [A v] direction [this way v]
-when [any color v] brick seen
-<seeing [any color v] brick?>
+turn motor [A V] for (1) seconds
+turn motor [A V] for (1) rotations
+turn motor [A V] on
+turn motor [A V] off
+set motor [ABCD V] speed to (100) %
+set motor [A V] direction [this way V]
+when [any color V] brick seen
+<seeing [any color V] brick?>
 
 // WeDo
-turn [motor v] on for (1) seconds
-turn [motor v] on
-turn [motor v] off
-set [motor v] power to (100)
-set [motor v] direction to [this way v]
+turn [motor V] on for (1) seconds
+turn [motor V] on
+turn [motor V] off
+set [motor V] power to (100)
+set [motor V] direction to [this way V]
 set light color to (50)
-when distance [< v] (50)
+when distance [< V] (50)
 (distance)
 
 // Force and Acceleration
-when [started falling v]
-when force sensor [pushed v]
+when [started falling V]
+when force sensor [pushed V]
 (force)
 <falling?>
-(spin speed [z v])
-(acceleration [x v])
+(spin speed [z V])
+(acceleration [x V])
 `,
 )
 
@@ -873,19 +873,19 @@ test(
   "scratch3",
   "en-color-regression",
   `
-test <> [item v] ()::motion
-test <> [item v] ()::looks
-test <> [item v] ()::sound
-test <> [item v] ()::control
-test <> [item v] ()::events
-test <> [item v] ()::sensing
-test <> [item v] ()::operators
-test <> [item v] ()::variables
-test <> [item v] ()::list
-test <> [item v] ()::custom
-test <> [item v] ()::extension
-test <> [item v] ()::obsolete
-test <> [item v] ()::grey
+test <> [item V] ()::motion
+test <> [item V] ()::looks
+test <> [item V] ()::sound
+test <> [item V] ()::control
+test <> [item V] ()::events
+test <> [item V] ()::sensing
+test <> [item V] ()::operators
+test <> [item V] ()::variables
+test <> [item V] ()::list
+test <> [item V] ()::custom
+test <> [item V] ()::extension
+test <> [item V] ()::obsolete
+test <> [item V] ()::grey
 `,
 )
 
@@ -918,7 +918,7 @@ setze y auf (0)
 
 pralle vom Rand ab
 
-setze Drehtyp auf [links-rechts v]
+setze Drehtyp auf [links-rechts V]
 
 (x-Position)
 
@@ -950,19 +950,19 @@ wechsle zum nächsten Bühnenbild
 ändere Größe um (10)
 setze Größe auf (100)
 
-ändere Effekt [Farbe v] um (25)
-setze Effekt [Farbe v] auf (0)
+ändere Effekt [Farbe V] um (25)
+setze Effekt [Farbe V] auf (0)
 schalte Grafikeffekte aus
 
 zeige dich
 verstecke dich
 
-gehe zu [vorderster v] Ebene
-gehe (1) Ebenen [nach vorne v]
+gehe zu [vorderster V] Ebene
+gehe (1) Ebenen [nach vorne V]
 
-(Kostüm [Nummer v])
+(Kostüm [Nummer V])
 
-(Bühnenbild [Nummer v])
+(Bühnenbild [Nummer V])
 
 (Größe)
 
@@ -983,8 +983,8 @@ spiele Klang (Meow v) ganz
 spiele Klang (Meow v)
 stoppe alle Klänge
 
-ändere Effekt [Höhe v] um (10)
-setze Effekt [Höhe v] auf (100)
+ändere Effekt [Höhe V] um (10)
+setze Effekt [Höhe V] auf (100)
 schalte Klangeffekte aus
 
 ändere Lautstärke um (-10)
@@ -1005,13 +1005,13 @@ test(
 // Ereignisse
 
 Wenn die grüne Flagge angeklickt
-Wenn Taste [Leertaste v] gedrückt wird
+Wenn Taste [Leertaste V] gedrückt wird
 Wenn diese Figur angeklickt wird
-Wenn das Bühnenbild zu [backdrop1 v] wechselt
+Wenn das Bühnenbild zu [backdrop1 V] wechselt
 
-Wenn [Lautstärke v] > (10)
+Wenn [Lautstärke V] > (10)
 
-Wenn ich [Nachricht1 v] empfange
+Wenn ich [Nachricht1 V] empfange
 sende (Nachricht1 v) an alle
 sende (Nachricht1 v) an alle und warte
 
@@ -1050,8 +1050,8 @@ wiederhole bis <> {
 
 }
 
-stoppe [andere Skripte der Figur v]
-stoppe [alles v]
+stoppe [andere Skripte der Figur V]
+stoppe [alles V]
 
 Wenn ich als Klon entstehe
 erzeuge Klon von (mir selbst v)
@@ -1082,15 +1082,15 @@ frage [Wie heißt du?] und warte
 (Maus x-Position)
 (Maus y-Position)
 
-setze Ziehbarkeit auf [ziehbar v]
+setze Ziehbarkeit auf [ziehbar V]
 
 (Stoppuhr)
 setze Stoppuhr zurück
 
-([x-Position v] von (Buehne v))
-([x-Position v] von (foo))
+([x-Position V] von (Buehne v))
+([x-Position V] von (foo))
 
-([Jahr v] im Moment)
+([Jahr V] im Moment)
 (Tage seit 2000)
 (Benutzername)
 
@@ -1128,8 +1128,8 @@ test(
 (() mod ())
 (() gerundet)
 
-([Betrag v] von (10))
-([Betrag v] von (foo))
+([Betrag V] von (10))
+([Betrag V] von (foo))
 
 `,
   "de",
@@ -1144,28 +1144,28 @@ test(
 
 (foo)
 
-setze [foo v] auf (0)
-ändere [foo v] um (1)
-zeige Variable [foo v]
-verstecke variable [foo v]
+setze [foo V] auf (0)
+ändere [foo V] um (1)
+zeige Variable [foo V]
+verstecke variable [foo V]
 
 // Liste
 
 (list)
 
-füge [Ding] zu [list v] hinzu
-lösche (1) aus [list v]
-lösche alles aus [list v]
-füge (1) bei (1) in [list v] ein
-ersetze Element (1) von [list v] durch (1)
+füge [Ding] zu [list V] hinzu
+lösche (1) aus [list V]
+lösche alles aus [list V]
+füge (1) bei (1) in [list V] ein
+ersetze Element (1) von [list V] durch (1)
 
-(Element (1) von [list v])
-(Nummer von [Ding] in [list v])
-(Länge von [list v])
-<[list v] enthält [Ding] ?>
+(Element (1) von [list V])
+(Nummer von [Ding] in [list V])
+(Länge von [list V])
+<[list V] enthält [Ding] ?>
 
-zeige Liste [list v]
-verstecke Liste [list v]
+zeige Liste [list V]
+verstecke Liste [list V]
 
 `,
   "de",
@@ -1265,59 +1265,59 @@ setze Sprache auf (English v)
 (Sprache)
 
 // Makey Makey
-Wenn [nach links nach oben nach rechts v] der Reihe nach gedrückt
+Wenn [nach links nach oben nach rechts V] der Reihe nach gedrückt
 
 // micro:bit
-Wenn Knopf [A v]gedrückt wird
-<Knopf [A v] gedrückt? >
-Wenn [bewegt v]
-zeige [heart v] an
+Wenn Knopf [A V]gedrückt wird
+<Knopf [A V] gedrückt? >
+Wenn [bewegt V]
+zeige [heart V] an
 zeige Text [Hallo!] an
 zeige nichts an
-Wenn [beliebiger v] geneigt
-<[beliebig v] geneigt?>
-(Neigungswinkel [nach vorne v])
-Wenn Pin [0 v] angeschlossen ist
+Wenn [beliebiger V] geneigt
+<[beliebig V] geneigt?>
+(Neigungswinkel [nach vorne V])
+Wenn Pin [0 V] angeschlossen ist
 
 // EV3
-drehe Motor [A v] für (1)Sekunden rechtsherum
-drehe Motor [A v]für (1)Sekunden linksherum
-setze Leistung von Motor [A v] auf (100)%
+drehe Motor [A V] für (1)Sekunden rechtsherum
+drehe Motor [A V]für (1)Sekunden linksherum
+setze Leistung von Motor [A V] auf (100)%
 
-(Position von Motor [A v])
-Wenn der Knopf [a v] gedrückt wird
+(Position von Motor [A V])
+Wenn der Knopf [a V] gedrückt wird
 Wenn Abstand \\< (5)
 Wenn Helligkeit \\< (50)
-<Knopf [1 v] gedrückt?>
+<Knopf [1 V] gedrückt?>
 (Helligkeit)
 piepse Note (60) für (0.5) Sek.
 
 // BOOST
-Schalte Motor [A v] für (1) Sekunden ein
-Schalte Motor [A v] für (1) Umdrehungen ein
-Schalte Motor [A v] ein
-Schalte Motor [A v] aus
-Setze von Motor [A v] die Geschwindigkeit auf (100)%
-Setze Richtung von Motor [A v] auf [linksherum v]
-Wenn [Irgendeine Farbe v] gesehen wird
-<Sehe Farbe [Irgendeine Farbe v]?>
+Schalte Motor [A V] für (1) Sekunden ein
+Schalte Motor [A V] für (1) Umdrehungen ein
+Schalte Motor [A V] ein
+Schalte Motor [A V] aus
+Setze von Motor [A V] die Geschwindigkeit auf (100)%
+Setze Richtung von Motor [A V] auf [linksherum V]
+Wenn [Irgendeine Farbe V] gesehen wird
+<Sehe Farbe [Irgendeine Farbe V]?>
 
 // WeDo
-schalte [Motor v] für (1) Sekunden an
-schalte [Motor v] an
-schalte [Motor v] aus
-setze Leistung von [Motor v] auf (100)
-setze Richtung von [Motor v] auf [linksherum v]
+schalte [Motor V] für (1) Sekunden an
+schalte [Motor V] an
+schalte [Motor V] aus
+setze Leistung von [Motor V] auf (100)
+setze Richtung von [Motor V] auf [linksherum V]
 setze Lichtfarbe auf (50)
-Wenn Abstand [< v] (50)
+Wenn Abstand [< V] (50)
 
 // Force and Acceleration
-Wenn [begonnen zu fallen v]
-Wenn Kraftsensor [gedrückt v]
+Wenn [begonnen zu fallen V]
+Wenn Kraftsensor [gedrückt V]
 (Kraft)
 <fallend?>
-(Rotationsgeschwindigkeit [z v])
-(Beschleunigung [x v])
+(Rotationsgeschwindigkeit [z V])
+(Beschleunigung [x V])
 `,
   "de",
 )
