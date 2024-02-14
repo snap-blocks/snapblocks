@@ -251,7 +251,7 @@ class InputView {
     this.x = 0
   }
 
-  get isInput () {
+  get isInput() {
     return true
   }
 
@@ -414,8 +414,7 @@ class BlockView {
       // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "reporter" ||
-                 this.info.shape === "ring") {
+      } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
         p.push(SVG.getRoundedTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
@@ -431,7 +430,14 @@ class BlockView {
         isLast = i + 2 === lines.length
 
         if (lines[i] instanceof ScriptView) {
-          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 9, y,  true, 15))
+          p.push(
+            SVG.getRightAndBottom(
+              w - (this.info.shape === "boolean") * 9,
+              y,
+              true,
+              15,
+            ),
+          )
           y += lines[i].height - 3
           p.push(SVG.getArm(w - (this.info.shape === "boolean") * 9, y, 8))
 
@@ -448,8 +454,7 @@ class BlockView {
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
-      } else if (this.info.shape === "reporter" ||
-                 this.info.shape === "ring") {
+      } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
         p.push(SVG.getRoundedBottom(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
@@ -492,9 +497,18 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
-          class: `sb-${this.info.category} sb-bevel`,
-        }, !shape.isBlock)
+        return SVG.ringRect(
+          w,
+          h,
+          child.y,
+          child.width,
+          child.height,
+          shape,
+          {
+            class: `sb-${this.info.category} sb-bevel`,
+          },
+          !shape.isBlock,
+        )
       }
     }
 
@@ -581,7 +595,7 @@ class BlockView {
         y += line.padding.top + line.padding.bottom
         let last = line.children[line.children.length - 1]
         if (last) {
-          console.log('last', last)
+          console.log("last", last)
           if (last.isLabel) {
             line.width += px
           } else {
@@ -592,7 +606,7 @@ class BlockView {
                 ? cmw
                 : 0
               : md
-            
+
             line.width += mw - px
           }
         }
@@ -636,7 +650,7 @@ class BlockView {
       if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
-        
+
         pushLine()
         child.y = y
         lines.push(child)
@@ -644,14 +658,13 @@ class BlockView {
         child.height = Math.max(13, child.height + 3)
         y += child.height
         line = new Line(y)
-      } else if (child.isLabel &&
-        child.value === "\n") {
+      } else if (child.isLabel && child.value === "\n") {
         pushLine()
         line = new Line(y)
       } else {
         const cmw = 0 // 27
         // we no longer need md
-        if ((line.width < px) && (child.isLabel || child.isCommand)) {
+        if (line.width < px && (child.isLabel || child.isCommand)) {
           line.width = px
         }
         if (line.children.length !== 0) {
@@ -661,7 +674,7 @@ class BlockView {
         line.width += child.width
         if (!child.isLabel) {
           line.height = Math.max(line.height, child.height)
-          if (!this.isUpvar && (child.isBlock)) {
+          if (!this.isUpvar && child.isBlock) {
             console.log(child)
             line.padding.top -= 1
             line.padding.bottom -= 2
