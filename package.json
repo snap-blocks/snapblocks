@@ -20,9 +20,9 @@
   },
   "scripts": {
     "build": "rollup -c --environment buildTarget:PROD",
-    "fmt": "prettier --cache --write *.js syntax/*.js scratch2/*.js scratch3/*.js locales-src/*.js snapshots/*.js snapshots/*.html tests/*.js",
+    "fmt": "prettier --cache --write *.js syntax/*.js snap/*.js scratch2/*.js scratch3/*.js locales-src/*.js snapshots/*.js snapshots/*.html tests/*.js",
     "lint:staged": "lint-staged",
-    "lint": "eslint *.js syntax/*.js scratch2/*.js scratch3/*.js locales-src/*.js snapshots/*.js tests/*.js",
+    "lint": "eslint *.js syntax/*.js snap/*.js scratch2/*.js scratch3/*.js locales-src/*.js snapshots/*.js tests/*.js",
     "locales": "node locales-src/build-locales.js",
     "rollup": "rollup -c",
     "snapshots": "node ./snapshots/index.js",
