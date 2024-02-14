@@ -61,8 +61,8 @@ export default class Filter {
       dx: dx,
       dy: dy,
       stdDeviation: blur,
-      'flood-color': color,
-      'flood-opacity': opacity,
+      "flood-color": color,
+      "flood-opacity": opacity,
     })
   }
 

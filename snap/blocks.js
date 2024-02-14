@@ -43,7 +43,7 @@ export class LabelView {
 
   draw(isFlat) {
     if (!isFlat) {
-      this.el.classList.add('snap-drop-shadow')
+      this.el.classList.add("snap-drop-shadow")
     }
     return this.el
   }
@@ -65,7 +65,8 @@ export class LabelView {
       group.push(
         SVG.text(0, y, line, {
           class: `snap-label ${cls}`,
-        }))
+        }),
+      )
     }
     this.height = y + 2
 
@@ -118,16 +119,35 @@ class IconView {
     }
     Object.assign(this, info)
 
-    if (isNaN(this.scale) ||
-        this.scale <= 0) {
-          this.scale = 1
-        }
+    if (isNaN(this.scale) || this.scale <= 0) {
+      this.scale = 1
+    }
 
-    this.scale = !isNaN(icon.scale) && icon.scale !== null ? icon.scale : (isNaN(this.scale) || this.scale == null) ? 1 : this.scale
-    this.r = !isNaN(icon.r) && icon.r !== null ? icon.r : (isNaN(this.r) || this.r == null) ? 255 : this.r
-    this.g = !isNaN(icon.g) && icon.g !== null ? icon.g : (isNaN(this.g) || this.g == null) ? 255 : this.g
-    this.b = !isNaN(icon.b) && icon.b !== null ? icon.b : (isNaN(this.b) || this.b == null) ? 255 : this.b
-    
+    this.scale =
+      !isNaN(icon.scale) && icon.scale !== null
+        ? icon.scale
+        : isNaN(this.scale) || this.scale == null
+        ? 1
+        : this.scale
+    this.r =
+      !isNaN(icon.r) && icon.r !== null
+        ? icon.r
+        : isNaN(this.r) || this.r == null
+        ? 255
+        : this.r
+    this.g =
+      !isNaN(icon.g) && icon.g !== null
+        ? icon.g
+        : isNaN(this.g) || this.g == null
+        ? 255
+        : this.g
+    this.b =
+      !isNaN(icon.b) && icon.b !== null
+        ? icon.b
+        : isNaN(this.b) || this.b == null
+        ? 255
+        : this.b
+
     if (this.scale <= 0) {
       this.scale = 1
     }
@@ -163,46 +183,62 @@ class IconView {
     }
     let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}`), props)
     if (!isFlat) {
-      symbol.classList.add('snap-drop-shadow')
+      symbol.classList.add("snap-drop-shadow")
     }
     return symbol
   }
 
   static get icons() {
     return {
-      greenFlag: { width: 12, height: 12, dy: 0, scale: 1.5, r: 0, g: 200, b: 0, fillAttribute: "stroke" },
+      greenFlag: {
+        width: 12,
+        height: 12,
+        dy: 0,
+        scale: 1.5,
+        r: 0,
+        g: 200,
+        b: 0,
+        fillAttribute: "stroke",
+      },
       stopSign: { width: 21, height: 21, r: 200, g: 0, b: 0 },
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
       addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
       delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
-      verticalEllipsis: { width: 2, height: 12, scale: 0.833333333, r: 0, g: 0, b: 0 },
+      verticalEllipsis: {
+        width: 2,
+        height: 12,
+        scale: 0.833333333,
+        r: 0,
+        g: 0,
+        b: 0,
+      },
       list: { width: 12, height: 14 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
       pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
-      cloud: { width: 20, height: 12},
-      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke"},
+      cloud: { width: 20, height: 12 },
+      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
       circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
 
-      arrowUp:            { width: 12, height: 12},
-      arrowUpOutline:     { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowUpThin:        { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowDown:          { width: 12, height: 12},
-      arrowDownOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowDownThin:      { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeft:          { width: 12, height: 12},
-      arrowLeftOutline:   { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeftThin:      { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowRight:         { width: 12, height: 12},
-      arrowRightOutline:  { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowRightThin:     { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowUpDownThin:    { width: 12, height: 12, fillAttribute: "stroke"},
-      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke"},
+      arrowUp: { width: 12, height: 12 },
+      arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUpThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowDown: { width: 12, height: 12 },
+      arrowDownOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeft: { width: 12, height: 12 },
+      arrowLeftOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeftThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowRight: { width: 12, height: 12 },
+      arrowRightOutline: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
     }
   }
 }
@@ -244,16 +280,20 @@ class InputView {
     if (this.hasLabel) {
       label = this.label.draw(true)
       w = Math.max(
-        (this.shape === "string" ? 8 : 11),
+        this.shape === "string" ? 8 : 11,
         this.label.width +
-          (this.shape === "string" ? 1 : this.shape === "number-dropdown" ? 16 : 11),
+          (this.shape === "string"
+            ? 1
+            : this.shape === "number-dropdown"
+            ? 16
+            : 11),
       )
     } else {
       w = this.isBoolean ? 22 : this.isInset ? 30 : this.isColor ? 14 : null
     }
-    
+
     let h = this.hasLabel ? this.label.height : 13
-    
+
     if (this.isBoolean) {
       h -= 2
     }
@@ -370,7 +410,7 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].totalHeight
       const p = []
-      if (this.info.shape === 'stack') {
+      if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter") {
         p.push(SVG.getRoundedTop(w, h))
@@ -390,10 +430,17 @@ class BlockView {
         isLast = i + 2 === lines.length
 
         if (lines[i] instanceof ScriptView) {
-          p.push(SVG.getRightAndBottom(w - (this.info.shape === "boolean") * 9, y,  true, 8))
+          p.push(
+            SVG.getRightAndBottom(
+              w - (this.info.shape === "boolean") * 9,
+              y,
+              true,
+              8,
+            ),
+          )
           y += lines[i].height - 3
           p.push(SVG.getArm(w - (this.info.shape === "boolean") * 9, y, 8))
-          
+
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 2
           y += lines[i + 1].totalHeight + 3
@@ -416,15 +463,21 @@ class BlockView {
       } else {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
-      p.push('Z')
+      p.push("Z")
       let el = SVG.path({
-        class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
-        path: p
+        class: `snap-${this.info.category} ${
+          isFlat ? "snap-flat" : "snap-bevel"
+        }`,
+        path: p,
       })
 
       if (isFlat) {
         SVG.setProps(el, {
-          "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, p.join(' '))}')`
+          "clip-path": `path('${SVG.translatePath(
+            this.strokeWidth / 2,
+            this.strokeWidth / 2,
+            p.join(" "),
+          )}')`,
         })
       }
 
@@ -433,15 +486,15 @@ class BlockView {
 
     // outlines
     if (/outline-\w+/.test(this.info.shape)) {
-      if (this.info.shape === 'outline-stack') {
+      if (this.info.shape === "outline-stack") {
         return SVG.setProps(SVG.stackRect(w, h), {
           class: "snap-outline",
         })
-      } else if (this.info.shape === 'outline-reporter') {
+      } else if (this.info.shape === "outline-reporter") {
         return SVG.setProps(SVG.roundedRect(w, h), {
           class: "snap-outline",
         })
-      } else if (this.info.shape === 'outline-boolean') {
+      } else if (this.info.shape === "outline-boolean") {
         return SVG.setProps(SVG.pointedRect(w, h), {
           class: "snap-outline",
         })
@@ -461,14 +514,28 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        let el = SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
-          class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
-        }, !shape.isBlock)
+        let el = SVG.ringRect(
+          w,
+          h,
+          child.y,
+          child.width,
+          child.height,
+          shape,
+          {
+            class: `snap-${this.info.category} ${
+              isFlat ? "snap-flat" : "snap-bevel"
+            }`,
+          },
+          !shape.isBlock,
+        )
 
-        
         if (isFlat) {
           SVG.setProps(el, {
-            "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
+            "clip-path": `path('${SVG.translatePath(
+              this.strokeWidth / 2,
+              this.strokeWidth / 2,
+              el.getAttribute("d"),
+            )}')`,
           })
         }
         return el
@@ -480,12 +547,18 @@ class BlockView {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
     let el = func(w, h, {
-      class: `snap-${this.info.category} ${isFlat ? "snap-flat" : "snap-bevel"}`,
+      class: `snap-${this.info.category} ${
+        isFlat ? "snap-flat" : "snap-bevel"
+      }`,
     })
 
     if (isFlat) {
       SVG.setProps(el, {
-        "clip-path": `path('${SVG.translatePath(this.strokeWidth / 2, this.strokeWidth / 2, el.getAttribute('d'))}')`
+        "clip-path": `path('${SVG.translatePath(
+          this.strokeWidth / 2,
+          this.strokeWidth / 2,
+          el.getAttribute("d"),
+        )}')`,
       })
     }
     return el
@@ -602,7 +675,7 @@ class BlockView {
       if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
-        
+
         pushLine()
         child.y = y
         lines.push(child)
@@ -610,14 +683,13 @@ class BlockView {
         child.height = Math.max(12, child.height + 3)
         y += child.height
         line = new Line(y)
-      } else if (child.isLabel &&
-                 child.value === "\n") {
+      } else if (child.isLabel && child.value === "\n") {
         pushLine()
         line = new Line(y)
       } else {
         const cmw = 0 // 27
         // we no longer need md
-        if ((line.width < px) && !this.isUpvar) {
+        if (line.width < px && !this.isUpvar) {
           line.width = px
         }
         if (line.children.length !== 0) {
@@ -670,7 +742,16 @@ class BlockView {
 
       for (const child of line.children) {
         if (child.isLoop) {
-          objects.push(SVG.move(innerWidth - child.width - 3 - ((this.info.shape === 'boolean') * 6), this.height - child.height - 3, child.el))
+          objects.push(
+            SVG.move(
+              innerWidth -
+                child.width -
+                3 -
+                (this.info.shape === "boolean") * 6,
+              this.height - child.height - 3,
+              child.el,
+            ),
+          )
           continue
         }
 
@@ -868,7 +949,7 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
-    this.isFlat = options.style.replace("snap-", "").toLowerCase() === 'flat'
+    this.isFlat = options.style.replace("snap-", "").toLowerCase() === "flat"
   }
 
   measure() {
@@ -907,7 +988,7 @@ class DocumentView {
         bevelFilter("snapBevelFilter", false),
         bevelFilter("snapInputBevelFilter", true),
         darkFilter("snapInputDarkFilter"),
-        dropShadowFilter('snapDropShadow'),
+        dropShadowFilter("snapDropShadow"),
         ...makeIcons(),
       ])),
     )

@@ -11,24 +11,21 @@ export default class Style {
     return [
       SVG.setProps(
         SVG.group([
-          SVG.el("path",
-          {
+          SVG.el("path", {
             d: "M 0.5 0 L 0.5 12",
             "stroke-width": 1,
           }),
-          SVG.el("path",
-          {
+          SVG.el("path", {
             d: "M 0 3 C 9.6 3 1.2 6 12 6",
             "stroke-width": 6,
-          })
+          }),
         ]),
         {
-          id: "snap-greenFlag"
-        }
+          id: "snap-greenFlag",
+        },
       ),
       SVG.el("path", {
-        d:
-          "M 6.17 0 L 13.83 0 L 20 6.14 L 20 13.83 L 13.83 20 L 6.17 20 L 0 13.83 L 0 6.17 Z",
+        d: "M 6.17 0 L 13.83 0 L 20 6.14 L 20 13.83 L 13.83 20 L 6.17 20 L 0 13.83 L 0 6.17 Z",
         id: "snap-stopSign",
       }),
       SVG.el("path", {
@@ -51,11 +48,11 @@ export default class Style {
         SVG.el("path", {
           d: `M 2.4000000000000004 1.2000000000000002 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 1.1988000001999994 Z
               M 2.4000000000000004 6.000000000000001 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 5.9988000002 Z
-              M 2.4000000000000004 10.8 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 10.7988000002 Z`
+              M 2.4000000000000004 10.8 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 10.7988000002 Z`,
         }),
         {
-          id: "snap-verticalEllipsis"
-        }
+          id: "snap-verticalEllipsis",
+        },
       ),
       SVG.setProps(
         SVG.group([
@@ -65,7 +62,7 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M 16.8 0 L 10.8 6 L 24 6 Z",
-            "stroke-width": 0
+            "stroke-width": 0,
           }),
         ]),
         {
@@ -178,7 +175,7 @@ export default class Style {
         }),
         {
           id: "snap-turtle",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("path", {
@@ -188,26 +185,26 @@ export default class Style {
         }),
         {
           id: "snap-turtleOutline",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('rect', {
-              width: (12 / 5) * 2,
-              height: 12,
+          SVG.el("rect", {
+            width: (12 / 5) * 2,
+            height: 12,
           }),
           SVG.el("rect", {
             width: (12 / 5) * 2,
             height: 12,
             x: (12 / 5) * 3,
-          })
+          }),
         ]),
         {
-          id: "snap-pause"
-        }
+          id: "snap-pause",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 3 12
             A 3 3 0 0 1 2.4275730138703637 6.055118449657009
             A 2.4 2.4 0 0 1 6.000000000000001 3.2548723642506805
@@ -216,25 +213,25 @@ export default class Style {
             Z`,
         }),
         {
-          id: 'snap-cloud'
+          id: "snap-cloud",
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 3 12
             A 3 3 0 0 1 2.4275730138703637 6.055118449657009
             A 2.4 2.4 0 0 1 6.000000000000001 3.2548723642506805
             A 4.8 4.8 0 0 1 15.353421766821956 4.548787410033867
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
-          fill: 'none',
+          fill: "none",
         }),
         {
-          id: 'snap-cloudOutline'
+          id: "snap-cloudOutline",
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 3 12
             A 3 3 0 0 1 2.4275730138703637 6.055118449657009
             A 2.4 2.4 0 0 1 6.000000000000001 3.2548723642506805
@@ -243,25 +240,25 @@ export default class Style {
             Z`,
         }),
         {
-          id: 'snap-cloudGradient'
+          id: "snap-cloudGradient",
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
         }),
         {
-          id: "snap-flash"
-        }
+          id: "snap-flash",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 0.6 10 L 11.4 10 L 11.4 3 L 9 3 L 7.5 0.6 L 4.5 0.6 L 3 3 L 0.6 3 Z
           M 7.92 6 A 1.92 1.92 0 1 1 7.91999904000008 5.998080000319999 Z`,
         }),
         {
           id: "snap-camera",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("circle", {
@@ -270,134 +267,134 @@ export default class Style {
           cy: 5,
         }),
         {
-          id: "snap-circle"
-        }
+          id: "snap-circle",
+        },
       ),
 
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
         }),
         {
-          id: "snap-arrowUp"
-        }
+          id: "snap-arrowUp",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
           fill: "none",
         }),
         {
-          id: "snap-arrowUpOutline"
-        }
+          id: "snap-arrowUpOutline",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 6 1.2 L 6 11.4",
           fill: "none",
         }),
         {
-          id: "snap-arrowUpThin"
-        }
+          id: "snap-arrowUpThin",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(180 6 6)"
+          transform: "rotate(180 6 6)",
         }),
         {
-          id: "snap-arrowDown"
-        }
+          id: "snap-arrowDown",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(180 6 6)"
+          transform: "rotate(180 6 6)",
         }),
         {
-          id: "snap-arrowDownOutline"
-        }
+          id: "snap-arrowDownOutline",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(180 6 6)"
+          transform: "rotate(180 6 6)",
         }),
         {
-          id: "snap-arrowDownThin"
-        }
+          id: "snap-arrowDownThin",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(-90 6 6)"
+          transform: "rotate(-90 6 6)",
         }),
         {
-          id: "snap-arrowLeft"
-        }
+          id: "snap-arrowLeft",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(-90 6 6)"
+          transform: "rotate(-90 6 6)",
         }),
         {
-          id: "snap-arrowLeftOutline"
-        }
+          id: "snap-arrowLeftOutline",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(-90 6 6)"
+          transform: "rotate(-90 6 6)",
         }),
         {
-          id: "snap-arrowLeftThin"
-        }
+          id: "snap-arrowLeftThin",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(90 6 6)"
+          transform: "rotate(90 6 6)",
         }),
         {
-          id: "snap-arrowRight"
-        }
+          id: "snap-arrowRight",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(90 6 6)"
+          transform: "rotate(90 6 6)",
         }),
         {
-          id: "snap-arrowRightOutline"
-        }
+          id: "snap-arrowRightOutline",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(90 6 6)"
+          transform: "rotate(90 6 6)",
         }),
         {
-          id: "snap-arrowRightThin"
-        }
+          id: "snap-arrowRightThin",
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
           fill: "none",
         }),
         {
-          id: "snap-arrowUpDownThin"
-        }
+          id: "snap-arrowUpDownThin",
+        },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-arrowUpDownThin",
-          transform: "rotate(90 6 6)"
+          transform: "rotate(90 6 6)",
         }),
         {
-          id: "snap-arrowLeftRightThin"
-        }
+          id: "snap-arrowLeftRightThin",
+        },
       ),
     ]
   }
@@ -410,7 +407,7 @@ export default class Style {
 
   static dropShadowFilter(id) {
     const f = new Filter(id)
-    f.dropShadow(-0.5, -0.5, 0, 'black', 0.2)
+    f.dropShadow(-0.5, -0.5, 0, "black", 0.2)
     return f.el
   }
 
@@ -426,12 +423,18 @@ export default class Style {
       f.comp(
         "in",
         f.flood("#fff", 0.7),
-        f.subtract(alpha, f.offset(inset ? -0.3 : 0.3, inset ? -0.3 : 0.3, blur)),
+        f.subtract(
+          alpha,
+          f.offset(inset ? -0.3 : 0.3, inset ? -0.3 : 0.3, blur),
+        ),
       ),
       f.comp(
         "in",
-        f.flood("#000", (inset ? 0.8: 0.99)),
-        f.subtract(alpha, f.offset(inset ? 0.8 : -0.8, inset ? 0.8 : -0.8, blur)),
+        f.flood("#000", inset ? 0.8 : 0.99),
+        f.subtract(
+          alpha,
+          f.offset(inset ? 0.8 : -0.8, inset ? 0.8 : -0.8, blur),
+        ),
       ),
     ])
 

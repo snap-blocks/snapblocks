@@ -90,8 +90,7 @@ export default class SVG {
   }
 
   static move(dx, dy, el) {
-    
-    let currentValue = el.getAttributeNS(null, 'transform')
+    let currentValue = el.getAttributeNS(null, "transform")
     if (!currentValue) {
       SVG.setProps(el, {
         transform: `translate(${dx} ${dy})`,
@@ -160,35 +159,45 @@ export default class SVG {
     return `L ${p1x} ${p1y} A ${rx} ${ry} 0 0 1 ${p2x} ${p2y}`
   }
 
-  static canvasArc (x, y, radius, startAngle, endAngle, counterClockwise, startCommand = 'M') {
+  static canvasArc(
+    x,
+    y,
+    radius,
+    startAngle,
+    endAngle,
+    counterClockwise,
+    startCommand = "M",
+  ) {
     // taken from https://github.com/gliffy/canvas2svg/blob/master/canvas2svg.js#L1008
 
     // in canvas no circle is drawn if no angle is provided.
     if (startAngle === endAngle) {
-        return ''
+      return ""
     }
-    startAngle = startAngle % (2*Math.PI)
-    endAngle = endAngle % (2*Math.PI)
+    startAngle = startAngle % (2 * Math.PI)
+    endAngle = endAngle % (2 * Math.PI)
     if (startAngle === endAngle) {
-        //circle time! subtract some of the angle so svg is happy (svg elliptical arc can't draw a full circle)
-        endAngle = ((endAngle + (2*Math.PI)) - 0.001 * (counterClockwise ? -1 : 1)) % (2*Math.PI)
+      //circle time! subtract some of the angle so svg is happy (svg elliptical arc can't draw a full circle)
+      endAngle =
+        (endAngle + 2 * Math.PI - 0.001 * (counterClockwise ? -1 : 1)) %
+        (2 * Math.PI)
     }
-    var endX = x+radius*Math.cos(endAngle),
-        endY = y+radius*Math.sin(endAngle),
-        startX = x+radius*Math.cos(startAngle),
-        startY = y+radius*Math.sin(startAngle),
-        sweepFlag = counterClockwise ? 0 : 1,
-        largeArcFlag = 0,
-        diff = endAngle - startAngle
+    var endX = x + radius * Math.cos(endAngle),
+      endY = y + radius * Math.sin(endAngle),
+      startX = x + radius * Math.cos(startAngle),
+      startY = y + radius * Math.sin(startAngle),
+      sweepFlag = counterClockwise ? 0 : 1,
+      largeArcFlag = 0,
+      diff = endAngle - startAngle
 
     if (diff < 0) {
-        diff += 2*Math.PI
+      diff += 2 * Math.PI
     }
 
     if (counterClockwise) {
-        largeArcFlag = diff > Math.PI ? 0 : 1
+      largeArcFlag = diff > Math.PI ? 0 : 1
     } else {
-        largeArcFlag = diff > Math.PI ? 1 : 0
+      largeArcFlag = diff > Math.PI ? 1 : 0
     }
 
     let command = `${startCommand} ${startX} ${startY}`
@@ -198,7 +207,7 @@ export default class SVG {
   }
 
   static radians(degrees) {
-    return degrees * Math.PI / 180
+    return (degrees * Math.PI) / 180
   }
 
   static arcw(p1x, p1y, p2x, p2y, rx, ry) {
@@ -218,7 +227,10 @@ export default class SVG {
   }
 
   static roundedRect(w, h, props) {
-    return SVG.path({ ...props, path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)] })
+    return SVG.path({
+      ...props,
+      path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)],
+    })
   }
 
   static getRoundedTop(w, h, rounding = 9) {
@@ -226,8 +238,8 @@ export default class SVG {
     // so here's almost the same code snap uses to draw it.
     // It's not exactly the same, as snap uses canvas apis, and we use svg.
     var edge = 1,
-        r = Math.max(Math.min(rounding, h / 2), edge),
-        path = ""
+      r = Math.max(Math.min(rounding, h / 2), edge),
+      path = ""
 
     // top left
     path += this.canvasArc(
@@ -237,8 +249,8 @@ export default class SVG {
       this.radians(180),
       this.radians(270),
       false,
-      "M"
-    );
+      "M",
+    )
 
     // top line
     path += ` L ${w - r} 0 `
@@ -251,8 +263,8 @@ export default class SVG {
       this.radians(-90),
       this.radians(0),
       false,
-      "L"
-    );
+      "L",
+    )
 
     return path
   }
@@ -269,22 +281,22 @@ export default class SVG {
       this.radians(0),
       this.radians(90),
       false,
-      "L"
-    );
-    
+      "L",
+    )
+
     // bottom line
     path += ` L ${w - r} ${h} `
-    
+
     // bottom left
     path += this.canvasArc(
-        r,
-        h - r,
-        r,
-        this.radians(90),
-        this.radians(180),
-        false,
-        "L"
-    );
+      r,
+      h - r,
+      r,
+      this.radians(90),
+      this.radians(180),
+      false,
+      "L",
+    )
 
     return path
   }
@@ -294,13 +306,16 @@ export default class SVG {
   }
 
   static pointedInput(w, h) {
-    return [SVG.getPointedTop(w, h, h / 2), SVG.getPointedBottom(w, h, true, h / 2)]
+    return [
+      SVG.getPointedTop(w, h, h / 2),
+      SVG.getPointedBottom(w, h, true, h / 2),
+    ]
   }
 
   static getPointedTop(w, h, r = 9) {
     var h2 = Math.floor(h / 2),
-        path = ""
-    
+      path = ""
+
     path = `M ${r} ${h} L 0 ${h2}
             L ${r} 0 L ${w - r} 0`
     return path
@@ -308,7 +323,7 @@ export default class SVG {
 
   static getPointedBottom(w, h, showRight, r = 9) {
     var h2 = Math.floor(h / 2),
-        path = ''
+      path = ""
     if (showRight) {
       path += `L ${w} ${h2} `
     }
@@ -319,14 +334,14 @@ export default class SVG {
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: SVG.pointedPath(w, h)
+      path: SVG.pointedPath(w, h),
     })
   }
 
   static pointedRectInput(w, h, props) {
     return SVG.path({
       ...props,
-      path: SVG.pointedInput(w,h)
+      path: SVG.pointedInput(w, h),
     })
   }
 
@@ -341,12 +356,12 @@ export default class SVG {
   static getRingPath(w, h) {
     return this.roundedRect(w, h)
   }
-  
+
   static getTop(w) {
     var corner = 3,
-        dent = 8,
-        indent = corner * 2 + 6,
-        path = "";
+      dent = 8,
+      indent = corner * 2 + 6,
+      path = ""
 
     path += this.canvasArc(
       corner,
@@ -354,7 +369,7 @@ export default class SVG {
       corner,
       this.radians(-180),
       this.radians(-90),
-      false
+      false,
     )
 
     path += ` L ${corner + 6} 0 `
@@ -370,7 +385,7 @@ export default class SVG {
       this.radians(-90),
       this.radians(-0),
       false,
-      "L"
+      "L",
     )
 
     return path
@@ -381,11 +396,11 @@ export default class SVG {
       inset = 0
     }
     var corner = 3,
-        dent = 8,
-        indent = corner * 2 + 6 + inset,
-        radius = corner,
-        path = "";
-    
+      dent = 8,
+      indent = corner * 2 + 6 + inset,
+      radius = corner,
+      path = ""
+
     path += this.canvasArc(
       w - corner,
       y - corner,
@@ -393,8 +408,8 @@ export default class SVG {
       this.radians(0),
       this.radians(90),
       false,
-      "L"
-    );
+      "L",
+    )
 
     if (hasNotch) {
       path += ` L ${corner * 3 + 6 + inset + dent} ${y} `
@@ -411,8 +426,8 @@ export default class SVG {
         this.radians(-90),
         this.radians(180),
         true,
-        " L"
-      );
+        " L",
+      )
     } else {
       path += this.canvasArc(
         corner + inset,
@@ -421,8 +436,8 @@ export default class SVG {
         this.radians(90),
         this.radians(180),
         false,
-        " L"
-      );
+        " L",
+      )
     }
 
     return path
@@ -434,11 +449,11 @@ export default class SVG {
     }
 
     var ox = inset,
-        oy = armTop,
-        corner = 3,
-        radius = Math.max(corner, 0),
-        path = "";
-    
+      oy = armTop,
+      corner = 3,
+      radius = Math.max(corner, 0),
+      path = ""
+
     path += this.canvasArc(
       inset + corner,
       armTop - corner,
@@ -446,8 +461,8 @@ export default class SVG {
       this.radians(180),
       this.radians(90),
       true,
-      "L"
-    );
+      "L",
+    )
 
     path += ` L ${w - corner} ${armTop} `
 
@@ -458,8 +473,8 @@ export default class SVG {
       this.radians(-90),
       this.radians(-0),
       false,
-      "L"
-    );
+      "L",
+    )
 
     return path
   }
@@ -487,7 +502,13 @@ export default class SVG {
         0,
         12,
         SVG.arc(0, 12, 35, 0, 50, 50),
-        "C", 70, 0, 70, 12, Math.min(70 * 1.7, w - 5), 12,
+        "C",
+        70,
+        0,
+        70,
+        12,
+        Math.min(70 * 1.7, w - 5),
+        12,
         "L",
         w - 5,
         12,
@@ -596,7 +617,9 @@ export default class SVG {
       shape === "reporter"
         ? SVG.roundedPath
         : shape === "boolean"
-        ? (isEmpty ? SVG.pointedInput : SVG.pointedPath)
+        ? isEmpty
+          ? SVG.pointedInput
+          : SVG.pointedPath
         : SVG.capPath
     return SVG.path({
       ...props,
@@ -649,14 +672,17 @@ export default class SVG {
     })
   }
 
-  static rgbToHex (r, g, b) {
-    if (r > 255) r = 255; else if (r < 0) r = 0;
-    if (g > 255) g = 255; else if (g < 0) g = 0;
-    if (b > 255) b = 255; else if (b < 0) b = 0;
+  static rgbToHex(r, g, b) {
+    if (r > 255) r = 255
+    else if (r < 0) r = 0
+    if (g > 255) g = 255
+    else if (g < 0) g = 0
+    if (b > 255) b = 255
+    else if (b < 0) b = 0
     return `#${[r, g, b]
-      .map((n) =>
-        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16)
+      .map(n =>
+        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16),
       )
-      .join("")}`;
+      .join("")}`
   }
 }
