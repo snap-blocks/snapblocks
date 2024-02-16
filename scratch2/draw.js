@@ -436,22 +436,21 @@ export default class SVG {
 
   static ringRect(w, h, child, shape, props) {
     let ch = child.height,
-        cw = child.width,
-        cy = child.y
-    
+      cw = child.width,
+      cy = child.y
+
     const r = 8
     const func =
       shape === "reporter"
         ? SVG.getRoundedPath
         : shape === "boolean"
         ? (w, h) => {
-          if (child.isBlock &&
-              child.lines.length > 1) {
-                return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
-              }
+            if (child.isBlock && child.lines.length > 1) {
+              return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
+            }
 
-          return SVG.pointedPath(w, h)
-        }
+            return SVG.pointedPath(w, h)
+          }
         : SVG.capPath
     return SVG.path({
       ...props,

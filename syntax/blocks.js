@@ -555,7 +555,7 @@ disambig("ev3.buttonPressed", "microbit.isButtonPressed", (children, _lang) => {
 
 disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
   let first = children[3]
-  console.log('first', first)
+  console.log("first", first)
   if (first.isCShape) {
     return false
   }
@@ -766,7 +766,7 @@ export function lookupHash(hash, info, children, languages) {
       )
       allCommands = newCommands.commands
       full = newCommands.full
-      console.log('new commands', allCommands)
+      console.log("new commands", allCommands)
 
       if (full || allCommands.length === 0) {
         break
