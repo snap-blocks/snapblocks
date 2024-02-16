@@ -372,6 +372,7 @@ class BlockView {
     this.firstLine = null
     this.innerWidth = null
     this.strokeWidth = 1
+    this.isSuperSnap = false
   }
 
   get isBlock() {
@@ -415,9 +416,12 @@ class BlockView {
       const p = []
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "reporter") {
+      } else if (this.info.shape === "reporter" ||
+                 (this.info.shape === "ring" &&
+                  !this.isSuperSnap)) {
         p.push(SVG.getRoundedTop(w, h))
-      } else if (this.info.shape === "ring") {
+      } else if (this.info.shape === "ring" &&
+                 this.isSuperSnap) {
         p.push(SVG.getRingTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
@@ -457,9 +461,12 @@ class BlockView {
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
-      } else if (this.info.shape === "reporter") {
+      } else if (this.info.shape === "reporter" || 
+                 (this.info.shape === "ring" &&
+                  !this.isSuperSnap)) {
         p.push(SVG.getRoundedBottom(w, h))
-      } else if (this.info.shape === "ring") {
+      } else if (this.info.shape === "ring" &&
+                 this.isSuperSnap) {
         p.push(SVG.getRingBottom(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
@@ -677,6 +684,7 @@ class BlockView {
         this.hasScript = true
         line.padding.bottom += pb
 
+        this.isSuperSnap = true
         pushLine()
         child.y = y
         lines.push(child)
@@ -685,28 +693,25 @@ class BlockView {
         y += child.height
         line = new Line(y)
       } else if (child.isLabel && child.value === "\n") {
+        this.isSuperSnap = true
         pushLine()
         line = new Line(y)
       } else {
         const cmw = 0 // 27
         // we no longer need md
+        if (options.wrapSize > 0 &&
+            line.width + child.width > options.wrapSize) {
+          pushLine()
+          line = new Line(y)
+        }
+
         if (line.width < px && !this.isUpvar) {
           line.width = px
         }
         if (line.children.length !== 0) {
           line.width += 4
         }
-        if (options.wrapSize > 0 &&
-            line.width + child.width > options.wrapSize) {
-          pushLine()
-          line = new Line(y)
-          if (line.width < px && !this.isUpvar) {
-            line.width = px
-          }
-          if (line.children.length !== 0) {
-            line.width += 4
-          }
-        }
+
         child.x = line.width
         line.width += child.width
         if (!child.isLabel) {
