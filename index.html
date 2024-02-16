@@ -213,11 +213,13 @@
         console.log(snapblocks.stringify(doc));
         var docViewSnap = snapblocks.newView(doc, {
           style: "snap",
-          scale: 1
+          scale: 1,
+          wrap: true
         });
         var docViewSnapFlat = snapblocks.newView(doc, {
           style: "snap-flat",
-          scale: 1
+          scale: 1,
+          wrap: true
         });
         var docView2 = snapblocks.newView(doc, {
           style: "scratch2",
@@ -252,12 +254,14 @@
           switch (exportDropdown.value) {
             case "3-high-contrast":
               return docView3HighContrast;
+            case "3":
+              return docView3;
             case "2":
               return docView2;
-              case "snap":
+            case "snap":
               return docViewSnap
-              case "snap-flat":
-                  return docViewSnapFlat
+            case "snap-flat":
+                  return docViewSnapFlat;
             default:
               return docViewSnap;
           }
@@ -272,7 +276,7 @@
           if (!exportSVGLink.isConnected) document.querySelector('#export-options').appendChild(exportSVGLink);
   
           if (!exportPNGLink) exportPNGLink = document.createElement('a');
-            exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("snapblocks.png", url), 2);
+            exportPNGLink.onclick = () => getSelectedView().exportPNG((url) => download("snapblocks.png", url), 3);
             exportPNGLink.textContent = "Export PNG";
             exportPNGLink.className = 'export-link';
           if (!exportPNGLink.isConnected) document.querySelector('#export-options').appendChild(exportPNGLink);
