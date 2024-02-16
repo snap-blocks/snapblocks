@@ -526,7 +526,7 @@ class BlockView {
               isFlat ? "snap-flat" : "snap-bevel"
             }`,
           },
-          !shape.isBlock,
+          !child.isBlock,
         )
 
         if (isFlat) {
