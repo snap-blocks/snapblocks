@@ -215,15 +215,7 @@ export default class SVG {
   }
 
   static roundedPath(w, h) {
-    const r = h / 2
-    return [
-      "M",
-      r,
-      0,
-      SVG.arc(w - r, 0, w - r, h, r, r),
-      SVG.arc(r, h, r, 0, r, r),
-      "Z",
-    ]
+    return [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)]
   }
 
   static roundedRect(w, h, props) {
@@ -611,8 +603,12 @@ export default class SVG {
     return SVG.path({ ...props, path: p })
   }
 
-  static ringRect(w, h, cy, cw, ch, shape, props, isEmpty) {
+  static ringRect(w, h, child, shape, props, isEmpty) {
     const r = 8
+    let cy = child.y,
+      cw = child.width,
+      ch = child.height
+
     const func =
       shape === "reporter"
         ? SVG.roundedPath

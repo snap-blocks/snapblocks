@@ -517,9 +517,7 @@ class BlockView {
         let el = SVG.ringRect(
           w,
           h,
-          child.y,
-          child.width,
-          child.height,
+          child,
           shape,
           {
             class: `snap-${this.info.category} ${
@@ -720,7 +718,7 @@ class BlockView {
     )
     this.height = y
     this.width = scriptWidth
-      ? Math.max(innerWidth, 15 + scriptWidth)
+      ? Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth)
       : innerWidth
     if (isDefine) {
       const p = Math.min(26, (3.5 + 0.13 * innerWidth) | 0) - 18
