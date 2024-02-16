@@ -197,7 +197,6 @@ export class IconView {
       SVG.symbol(`#sb3-${iconName(this.name, iconStyle)}`),
       props,
     )
-    // console.log("symbol", symbol)
     return symbol
   }
 
@@ -483,7 +482,6 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].totalHeight
       const p = []
-      // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
@@ -536,7 +534,6 @@ class BlockView {
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
       } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
-        // console.log("sb3 lines", lines)
         p.push(
           SVG.getRoundedBottom(
             w,
@@ -587,7 +584,6 @@ class BlockView {
           child.isRound ||
           child.isBoolean)
       ) {
-        console.log("child", child)
         const shape = child.shape || child.info?.shape
         return SVG.ringRect(w, h, child, shape, {
           class: `sb3-${this.info.category}`,
@@ -719,7 +715,6 @@ class BlockView {
         y += line.padding.top + line.padding.bottom
         let last = line.children[line.children.length - 1]
         if (last) {
-          console.log("last", last)
           // line.width += px
           //           if (last.isLabel) {
           //             line.width += px
@@ -908,10 +903,6 @@ class BlockView {
     //       let last = line.children[line.children.length - 1]
     //       let endX = last.x + last.width
     //
-    //       console.log('endX', endX)
-    //       console.log('width', innerWidth)
-    //       console.log('r', r)
-    //
     //       if ((last.isReporter ||
     //           last.isBoolean) &&
     //           last.lines.length > 1 &&
@@ -919,9 +910,7 @@ class BlockView {
     //         let pad = last.isReporter
     //                   ? Math.max(last.lines[0].totalHeight, last.lines[last.lines.length - 1].totalHeight) / 2
     //                   : 20
-    //         console.log('pad', pad)
     //         innerWidth += innerWidth - (endX + 4)
-    //         console.log('new', innerWidth)
     //       }
     //     }
 

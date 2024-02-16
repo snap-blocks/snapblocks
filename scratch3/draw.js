@@ -190,8 +190,6 @@ export default class SVG {
       // r = child.blocks[0].height / 2
     }
 
-    console.log("ring", child.isInput)
-
     const func =
       shape === "reporter" || shape === "ring"
         ? (w, h) => {
@@ -225,7 +223,6 @@ export default class SVG {
             }
           }
         : SVG.capPath
-    console.log("path", func(cw, ch).join(" "))
     return SVG.path({
       ...props,
       path: [

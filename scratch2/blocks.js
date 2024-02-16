@@ -179,7 +179,6 @@ class IconView {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(SVG.symbol(`#sb-${this.name}`), props)
-    // console.log("symbol", symbol)
     return symbol
   }
 
@@ -241,8 +240,6 @@ class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
-
-    // console.log("sb2 input", this)
 
     this.x = 0
   }
@@ -407,7 +404,6 @@ class BlockView {
     if (lines.length > 1) {
       let y = lines[0].totalHeight
       const p = []
-      // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
       } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
@@ -582,7 +578,6 @@ class BlockView {
         y += line.padding.top + line.padding.bottom
         let last = line.children[line.children.length - 1]
         if (last) {
-          console.log("last", last)
           if (last.isLabel) {
             line.width += px
           } else {
@@ -662,7 +657,6 @@ class BlockView {
         if (!child.isLabel) {
           line.height = Math.max(line.height, child.height)
           if (!this.isUpvar && child.isBlock) {
-            console.log(child)
             if (line.padding.top >= pt) {
               line.padding.top -= 1
               line.padding.bottom -= 2
