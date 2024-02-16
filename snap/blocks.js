@@ -280,7 +280,7 @@ class InputView {
     if (this.hasLabel) {
       label = this.label.draw({
         ...options,
-        isFlat: true
+        isFlat: true,
       })
       w = Math.max(
         this.shape === "string" ? 8 : 11,
@@ -320,7 +320,9 @@ class InputView {
 
     const result = SVG.group([
       SVG.setProps(el, {
-        class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${this.shape}`,
+        class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
+          this.shape
+        }`,
       }),
     ])
     if (this.hasLabel) {
@@ -416,12 +418,12 @@ class BlockView {
       const p = []
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "reporter" ||
-                 (this.info.shape === "ring" &&
-                  !this.isSuperSnap)) {
+      } else if (
+        this.info.shape === "reporter" ||
+        (this.info.shape === "ring" && !this.isSuperSnap)
+      ) {
         p.push(SVG.getRoundedTop(w, h))
-      } else if (this.info.shape === "ring" &&
-                 this.isSuperSnap) {
+      } else if (this.info.shape === "ring" && this.isSuperSnap) {
         p.push(SVG.getRingTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
@@ -461,12 +463,12 @@ class BlockView {
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
-      } else if (this.info.shape === "reporter" || 
-                 (this.info.shape === "ring" &&
-                  !this.isSuperSnap)) {
+      } else if (
+        this.info.shape === "reporter" ||
+        (this.info.shape === "ring" && !this.isSuperSnap)
+      ) {
         p.push(SVG.getRoundedBottom(w, h))
-      } else if (this.info.shape === "ring" &&
-                 this.isSuperSnap) {
+      } else if (this.info.shape === "ring" && this.isSuperSnap) {
         p.push(SVG.getRingBottom(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
@@ -699,8 +701,10 @@ class BlockView {
       } else {
         const cmw = 0 // 27
         // we no longer need md
-        if (options.wrapSize > 0 &&
-            line.width + child.width > options.wrapSize) {
+        if (
+          options.wrapSize > 0 &&
+          line.width + child.width > options.wrapSize
+        ) {
           pushLine()
           line = new Line(y)
         }
@@ -967,7 +971,11 @@ class DocumentView {
     this.defs = null
     this.scale = options.scale
     this.isFlat = options.style.replace("snap-", "").toLowerCase() === "flat"
-    this.wrapSize = options.wrap ? ((options.wrapSize != undefined) ? options.wrapSize : 600) : -1
+    this.wrapSize = options.wrap
+      ? options.wrapSize != undefined
+        ? options.wrapSize
+        : 600
+      : -1
   }
 
   measure() {
@@ -992,10 +1000,16 @@ class DocumentView {
         height += 10
       }
       script.y = height
-      elements.push(SVG.move(0, height, script.draw({
-        isFlat: this.isFlat,
-        wrapSize: this.wrapSize,
-      })))
+      elements.push(
+        SVG.move(
+          0,
+          height,
+          script.draw({
+            isFlat: this.isFlat,
+            wrapSize: this.wrapSize,
+          }),
+        ),
+      )
       height += script.height
       width = Math.max(width, script.width + 4)
     }
