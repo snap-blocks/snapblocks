@@ -2527,7 +2527,7 @@ export default [
     id: "snap:ring",
     spec: "%1 {add}",
     specDefs: {
-      add: ["@addInput", "{vars}"],
+      add: ["@addInput", "input names: {vars}"],
       vars: ["%2 {vars}", "%2 @delInput @addInput"],
     },
     inputs: ["%n", "%c"],
