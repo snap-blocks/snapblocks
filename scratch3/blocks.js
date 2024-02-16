@@ -309,8 +309,8 @@ export class InputView {
 
   static get shapes() {
     return {
-      string: (w,h) => SVG.roundRect(w, h, 16),
-      number: (w,h) => SVG.roundRect(w, h, 16),
+      string: (w, h) => SVG.roundRect(w, h, 16),
+      number: (w, h) => SVG.roundRect(w, h, 16),
       "number-dropdown": SVG.pillRect,
       color: SVG.pillRect,
       dropdown: SVG.roundRect,
@@ -486,13 +486,15 @@ class BlockView {
       // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "reporter" ||
-                 this.info.shape === "ring") {
+      } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
         p.push(
           SVG.getRoundedTop(
             w,
             h,
-            Math.max(lines[0].totalHeight, lines[lines.length - 1].totalHeight) / 2,
+            Math.max(
+              lines[0].totalHeight,
+              lines[lines.length - 1].totalHeight,
+            ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
@@ -533,14 +535,16 @@ class BlockView {
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
-      } else if (this.info.shape === "reporter" ||
-                 this.info.shape === "ring") {
+      } else if (this.info.shape === "reporter" || this.info.shape === "ring") {
         // console.log("sb3 lines", lines)
         p.push(
           SVG.getRoundedBottom(
             w,
             y,
-            Math.max(lines[0].totalHeight, lines[lines.length - 1].totalHeight) / 2,
+            Math.max(
+              lines[0].totalHeight,
+              lines[lines.length - 1].totalHeight,
+            ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
@@ -583,17 +587,11 @@ class BlockView {
           child.isRound ||
           child.isBoolean)
       ) {
-        console.log('child', child)
+        console.log("child", child)
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(
-          w,
-          h,
-          child,
-          shape,
-          {
-            class: `sb3-${this.info.category}`,
-          },
-        )
+        return SVG.ringRect(w, h, child, shape, {
+          class: `sb3-${this.info.category}`,
+        })
       }
     }
 
@@ -608,13 +606,34 @@ class BlockView {
 
   static get padding() {
     return {
-      hat: [[20, 30], [12, 21]],
-      cat: [[20, 30], [12, 21]],
-      "define-hat": [[20, 17], [16, 16]],
-      "snap-define": [[20, 30], [12 + 4, 21 + 4]],
-      boolean: [[4, 14], [4, 14]],
-      reporter: [[4, 14], [4, 14]],
-      null: [[4, 18], [4, 17]],
+      hat: [
+        [20, 30],
+        [12, 21],
+      ],
+      cat: [
+        [20, 30],
+        [12, 21],
+      ],
+      "define-hat": [
+        [20, 17],
+        [16, 16],
+      ],
+      "snap-define": [
+        [20, 30],
+        [12 + 4, 21 + 4],
+      ],
+      boolean: [
+        [4, 14],
+        [4, 14],
+      ],
+      reporter: [
+        [4, 14],
+        [4, 14],
+      ],
+      null: [
+        [4, 18],
+        [4, 17],
+      ],
     }
   }
 
@@ -702,19 +721,19 @@ class BlockView {
         if (last) {
           console.log("last", last)
           // line.width += px
-//           if (last.isLabel) {
-//             line.width += px
-//           } else {
-//             const cmw = 5 // 27
-//             const md = this.isCommand ? 0 : this.minDistance(last)
-//             const mw = this.isCommand
-//               ? last.isBlock || last.isInput
-//                 ? cmw
-//                 : 0
-//               : md
-// 
-//             line.width += mw - px
-//           }
+          //           if (last.isLabel) {
+          //             line.width += px
+          //           } else {
+          //             const cmw = 5 // 27
+          //             const md = this.isCommand ? 0 : this.minDistance(last)
+          //             const mw = this.isCommand
+          //               ? last.isBlock || last.isInput
+          //                 ? cmw
+          //                 : 0
+          //               : md
+          //
+          //             line.width += mw - px
+          //           }
         }
       } else {
         y += 1
@@ -759,14 +778,17 @@ class BlockView {
 
       if (child.isCShape) {
         this.hasScript = true
-        
+
         if (line.firstLine && line.firstSection) {
           line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
         }
         if (line.firstSection || (!line.firstLine && !line.firstSection)) {
           line.padding.bottom += Math.max(pb - (line.height - 13) / 2, pbmin)
         } else {
-          line.padding.bottom += Math.max((pbmin * 2) - (line.height - 13) / 2, pbmin)
+          line.padding.bottom += Math.max(
+            pbmin * 2 - (line.height - 13) / 2,
+            pbmin,
+          )
         }
 
         pushLine()
@@ -833,13 +855,18 @@ class BlockView {
       }
     }
     if (line.firstLine && line.firstSection) {
-      line.padding.top = Math.max((this.isOutline ? pt - 4 : pt) - (line.height - 13) / 2, ptmin)
+      line.padding.top = Math.max(
+        (this.isOutline ? pt - 4 : pt) - (line.height - 13) / 2,
+        ptmin,
+      )
     }
     if (line.firstSection || (!line.firstLine && !line.firstSection)) {
-      line.padding.bottom += Math.max((this.isOutline ? pb - 4 : pb) - (line.height - 13) / 2, pbmin)
+      line.padding.bottom += Math.max(
+        (this.isOutline ? pb - 4 : pb) - (line.height - 13) / 2,
+        pbmin,
+      )
     } else {
-      line.padding.bottom += Math.max((pbmin * 2) - (line.height - 13) / 2, pbmin)
-
+      line.padding.bottom += Math.max(pbmin * 2 - (line.height - 13) / 2, pbmin)
     }
     // y += pb
     pushLine()
@@ -868,36 +895,35 @@ class BlockView {
     )
 
     // Center the label text inside small reporters.
-    if (this.isReporter &&
-        !this.hasScript) {
+    if (this.isReporter && !this.hasScript) {
       padLeft += (innerWidth - originalInnerWidth) / 2
     }
 
     this.height = y
 
-//     if (lines.length === 1 &&
-//         (this.isReporter || this.isBoolean)) {
-//       let r = y / 2
-//       let line = lines[0]
-//       let last = line.children[line.children.length - 1]
-//       let endX = last.x + last.width
-// 
-//       console.log('endX', endX)
-//       console.log('width', innerWidth)
-//       console.log('r', r)
-// 
-//       if ((last.isReporter ||
-//           last.isBoolean) &&
-//           last.lines.length > 1 &&
-//           innerWidth - r < endX) {
-//         let pad = last.isReporter 
-//                   ? Math.max(last.lines[0].totalHeight, last.lines[last.lines.length - 1].totalHeight) / 2
-//                   : 20
-//         console.log('pad', pad)
-//         innerWidth += innerWidth - (endX + 4)
-//         console.log('new', innerWidth)
-//       }
-//     }
+    //     if (lines.length === 1 &&
+    //         (this.isReporter || this.isBoolean)) {
+    //       let r = y / 2
+    //       let line = lines[0]
+    //       let last = line.children[line.children.length - 1]
+    //       let endX = last.x + last.width
+    //
+    //       console.log('endX', endX)
+    //       console.log('width', innerWidth)
+    //       console.log('r', r)
+    //
+    //       if ((last.isReporter ||
+    //           last.isBoolean) &&
+    //           last.lines.length > 1 &&
+    //           innerWidth - r < endX) {
+    //         let pad = last.isReporter
+    //                   ? Math.max(last.lines[0].totalHeight, last.lines[last.lines.length - 1].totalHeight) / 2
+    //                   : 20
+    //         console.log('pad', pad)
+    //         innerWidth += innerWidth - (endX + 4)
+    //         console.log('new', innerWidth)
+    //       }
+    //     }
 
     this.width = scriptWidth
       ? Math.max(innerWidth, 16 + (this.isBoolean ? 20 : 0) + scriptWidth)
@@ -941,7 +967,7 @@ class BlockView {
         if (child.dx) {
           x += child.dx
         }
-        
+
         if (this.isRing) {
           child.y = (line.y + y) | 0
           if (child.isInset) {

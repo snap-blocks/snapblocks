@@ -183,44 +183,49 @@ export default class SVG {
 
   static ringRect(w, h, child, shape, props) {
     let cy = child.y,
-        ch = child.height,
-        cw = child.width
+      ch = child.height,
+      cw = child.width
     let r = 20
     if (child.isScript) {
       // r = child.blocks[0].height / 2
     }
 
-    console.log('ring', child.isInput)
-    
+    console.log("ring", child.isInput)
+
     const func =
       shape === "reporter" || shape === "ring"
-        ? (w,h) => {
-          let r = h / 2
-          if (child.isBlock &&
-              child.lines.length > 1) {
-            r = Math.max(child.lines[0].totalHeight, child.lines[child.lines.length - 1].totalHeight) / 2
-          }
+        ? (w, h) => {
+            let r = h / 2
+            if (child.isBlock && child.lines.length > 1) {
+              r =
+                Math.max(
+                  child.lines[0].totalHeight,
+                  child.lines[child.lines.length - 1].totalHeight,
+                ) / 2
+            }
 
-          return [SVG.getRoundedTop(w, h, r), SVG.getRoundedBottom(w, h, r)]
-        }
+            return [SVG.getRoundedTop(w, h, r), SVG.getRoundedBottom(w, h, r)]
+          }
         : shape === "boolean"
-        ? (w,h) => {
-          let r = h / 2
-          let showRight = true
-          if (child.isBlock &&
-              child.lines.length > 1) {
-            r = 20
-            showRight = !child.hasScript
+        ? (w, h) => {
+            let r = h / 2
+            let showRight = true
+            if (child.isBlock && child.lines.length > 1) {
+              r = 20
+              showRight = !child.hasScript
+            }
+
+            if (child.isBlock) {
+              return [
+                SVG.getPointedTop(w, h),
+                SVG.getPointedBottom(w, h, showRight, r),
+              ]
+            } else {
+              return SVG.pointedPath(w, h)
+            }
           }
-          
-          if (child.isBlock) {
-            return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, showRight, r)]
-          } else {
-            return SVG.pointedPath(w, h)
-          }
-        }
         : SVG.capPath
-    console.log('path', func(cw, ch).join(" "))
+    console.log("path", func(cw, ch).join(" "))
     return SVG.path({
       ...props,
       path: [

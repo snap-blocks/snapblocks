@@ -493,17 +493,9 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(
-          w,
-          h,
-          child.y,
-          child.width,
-          child.height,
-          shape,
-          {
-            class: `sb-${this.info.category} sb-bevel`,
-          },
-        )
+        return SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
+          class: `sb-${this.info.category} sb-bevel`,
+        })
       }
     }
 
