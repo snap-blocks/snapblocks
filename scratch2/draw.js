@@ -192,6 +192,11 @@ export default class SVG {
       L 10 ${h}
       C 5 ${h} 0 ${h - 5} 0 ${h - 10}`
   }
+
+  static getRoundedPath(w, h) {
+    return [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)]
+  }
+
   static pointedPath(w, h) {
     const r = h / 2
     return [
@@ -240,7 +245,7 @@ export default class SVG {
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)],
+      path: SVG.pointedPath(w, h),
     })
   }
 
@@ -429,13 +434,24 @@ export default class SVG {
     return SVG.path({ ...props, path: p })
   }
 
-  static ringRect(w, h, cy, cw, ch, shape, props) {
+  static ringRect(w, h, child, shape, props) {
+    let ch = child.height,
+        cw = child.width,
+        cy = child.y
+    
     const r = 8
     const func =
       shape === "reporter"
-        ? SVG.roundedPath
+        ? SVG.getRoundedPath
         : shape === "boolean"
-        ? SVG.pointedPath
+        ? (w, h) => {
+          if (child.isBlock &&
+              child.lines.length > 1) {
+                return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
+              }
+
+          return SVG.pointedPath(w, h)
+        }
         : SVG.capPath
     return SVG.path({
       ...props,

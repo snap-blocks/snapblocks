@@ -363,6 +363,7 @@ class BlockView {
     this.height = null
     this.firstLine = null
     this.innerWidth = null
+    this.lines = []
   }
 
   get isBlock() {
@@ -424,14 +425,14 @@ class BlockView {
         if (lines[i] instanceof ScriptView) {
           p.push(
             SVG.getRightAndBottom(
-              w - (this.info.shape === "boolean") * 9,
+              w - (this.info.shape === "boolean") * 8,
               y,
               true,
               15,
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 9, y, 8))
+          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y))
 
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 15
@@ -489,7 +490,7 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(w, h, child.y, child.width, child.height, shape, {
+        return SVG.ringRect(w, h, child, shape, {
           class: `sb-${this.info.category} sb-bevel`,
         })
       }
@@ -681,7 +682,7 @@ class BlockView {
     )
     this.height = y
     this.width = scriptWidth
-      ? Math.max(innerWidth, 15 + scriptWidth)
+      ? Math.max(innerWidth, 15 + (this.isBoolean ? 8 : 0) + scriptWidth)
       : innerWidth
     if (isDefine) {
       const p = Math.min(10, (3.5 + 0.13 * innerWidth) | 0)
@@ -692,6 +693,8 @@ class BlockView {
     this.innerWidth = innerWidth
 
     const objects = []
+
+    this.lines = lines
 
     for (const line of lines) {
       if (line.isScript) {
