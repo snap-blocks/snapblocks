@@ -63,14 +63,14 @@ export class LabelView {
 
     let y = 0
     for (let line of lines) {
-      y += 12 + this.lineHeight
+      y += 13 + this.lineHeight
       group.push(
         SVG.text(0, y - this.lineHeight, line, {
           class: `sb3-label ${cls}`,
         }),
       )
     }
-    this.height = Math.max(12, y - (this.lineHeight + 1))
+    this.height = Math.max(13, y - (this.lineHeight + 1))
 
     this.el = SVG.group(group)
 
@@ -294,6 +294,7 @@ export class InputView {
     this.isRound = !(this.isBoolean || this.isDropdown)
 
     this.x = 0
+    this.y = 0
   }
 
   get isInput() {
@@ -308,8 +309,8 @@ export class InputView {
 
   static get shapes() {
     return {
-      string: SVG.pillRect,
-      number: SVG.pillRect,
+      string: (w,h) => SVG.roundRect(w, h, 16),
+      number: (w,h) => SVG.roundRect(w, h, 16),
       "number-dropdown": SVG.pillRect,
       color: SVG.pillRect,
       dropdown: SVG.roundRect,
@@ -335,7 +336,7 @@ export class InputView {
       w = this.label.width + 2 * px
       label = SVG.move(px, 9, label)
     } else {
-      w = this.isInset ? 30 : null
+      w = !this.isStack ? 40 : 60
     }
     if (this.hasArrow) {
       w += 20
@@ -440,6 +441,7 @@ class BlockView {
     this.height = null
     this.firstLine = null
     this.innerWidth = null
+    this.lines = []
   }
 
   get isBlock() {
@@ -479,17 +481,18 @@ class BlockView {
   drawSelf(iconStyle, w, h, lines) {
     // mouths
     if (lines.length > 1) {
-      let y = lines[0].height
+      let y = lines[0].totalHeight
       const p = []
       // console.log("shape", this.info.shape)
       if (this.info.shape === "stack") {
         p.push(SVG.getTop(w))
-      } else if (this.info.shape === "reporter") {
+      } else if (this.info.shape === "reporter" ||
+                 this.info.shape === "ring") {
         p.push(
           SVG.getRoundedTop(
             w,
             h,
-            Math.max(lines[0].height, lines[lines.length - 1].height) / 2,
+            Math.max(lines[0].totalHeight, lines[lines.length - 1].totalHeight) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
@@ -511,38 +514,39 @@ class BlockView {
               w - (this.info.shape === "boolean") * 20,
               y,
               true,
-              15,
+              16,
             ),
           )
           y += lines[i].height - 3
           p.push(SVG.getArm(w - (this.info.shape === "boolean") * 20, y))
 
           hasNotch = !(isLast && this.isFinal)
-          inset = isLast ? 0 : 15
-          y += lines[i + 1].height + 3
+          inset = isLast ? 0 : 16
+          y += lines[i + 1].totalHeight + 3
           addBottom = false
           showBooleanRight = false
           i++
         } else {
-          y += lines[i].height
+          y += lines[i].totalHeight
           addBottom = true
         }
       }
       if (this.info.shape === "stack") {
         p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
-      } else if (this.info.shape === "reporter") {
+      } else if (this.info.shape === "reporter" ||
+                 this.info.shape === "ring") {
         // console.log("sb3 lines", lines)
         p.push(
           SVG.getRoundedBottom(
             w,
             y,
-            Math.max(lines[0].height, lines[lines.length - 1].height) / 2,
+            Math.max(lines[0].totalHeight, lines[lines.length - 1].totalHeight) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
       } else {
-        p.push(SVG.getRightAndBottom(w, y, !this.isFinal, 0))
+        p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
       p.push("Z")
       return SVG.path({
@@ -571,10 +575,25 @@ class BlockView {
     // rings
     if (this.isRing) {
       const child = this.children[0]
-      if (child && (child.isInput || child.isBlock || child.isScript)) {
-        return SVG.roundRect(w, h, {
-          class: `sb3-${this.info.category}`,
-        })
+      if (
+        child &&
+        (child.isStack ||
+          child.isBlock ||
+          child.isScript ||
+          child.isRound ||
+          child.isBoolean)
+      ) {
+        console.log('child', child)
+        const shape = child.shape || child.info?.shape
+        return SVG.ringRect(
+          w,
+          h,
+          child,
+          shape,
+          {
+            class: `sb3-${this.info.category}`,
+          },
+        )
       }
     }
 
@@ -589,11 +608,13 @@ class BlockView {
 
   static get padding() {
     return {
-      hat: [24, 8],
-      cat: [24, 8],
-      "define-hat": [20, 16],
-      "snap-define": [24, 12],
-      null: [4, 4],
+      hat: [[20, 30], [12, 21]],
+      cat: [[20, 30], [12, 21]],
+      "define-hat": [[20, 17], [16, 16]],
+      "snap-define": [[20, 30], [12 + 4, 21 + 4]],
+      boolean: [[4, 14], [4, 14]],
+      reporter: [[4, 14], [4, 14]],
+      null: [[4, 18], [4, 17]],
     }
   }
 
@@ -644,28 +665,61 @@ class BlockView {
     const isCommand = this.isCommand
 
     const padding = BlockView.padding[this.info.shape] || BlockView.padding.null
-    const pt = padding[0],
-      pb = padding[1]
+    const pt = padding[0][1],
+      pb = padding[1][1],
+      ptmin = padding[0][0],
+      pbmin = padding[1][0]
 
     let y = this.info.shape === "cat" ? 16 : 0
-    const Line = function (y) {
-      this.y = y
-      this.width = 0
-      this.height = isCommand ? 21 : 21
-      this.children = []
+    class Line {
+      constructor(y) {
+        this.y = y
+        this.width = 0
+        this.padding = {
+          top: 0,
+          bottom: 0,
+        }
+        this.height = 21
+        this.children = []
+        this.firstLine = false
+        this.firstSection = false
+      }
+      get totalHeight() {
+        return this.height + this.padding.top + this.padding.bottom
+      }
     }
 
     let innerWidth = 0
     let scriptWidth = 0
     let line = new Line(y)
-    const pushLine = type => {
-      if ([0, null].includes(type)) {
-        line.height += pt + pb
-      } else {
-        // line.height -= 11
-        line.y -= 2
-      }
+    const pushLine = () => {
+      line.y += line.padding.top
       y += line.height
+      // line.y = 0
+      if (!this.isUpvar) {
+        y += line.padding.top + line.padding.bottom
+        let last = line.children[line.children.length - 1]
+        if (last) {
+          console.log("last", last)
+          // line.width += px
+//           if (last.isLabel) {
+//             line.width += px
+//           } else {
+//             const cmw = 5 // 27
+//             const md = this.isCommand ? 0 : this.minDistance(last)
+//             const mw = this.isCommand
+//               ? last.isBlock || last.isInput
+//                 ? cmw
+//                 : 0
+//               : md
+// 
+//             line.width += mw - px
+//           }
+        }
+      } else {
+        y += 1
+      }
+      innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
     }
 
@@ -692,52 +746,51 @@ class BlockView {
     const lines = []
     let previousChild
     let lastChild
+    // if (this.isUpvar) {
+    //   line.padding.top += 3
+    // } else {
+    //   line.padding.top += pt
+    // }
+    line.firstLine = true
+    line.firstSection = true
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       child.el = child.draw(iconStyle, this)
 
       if (child.isCShape) {
         this.hasScript = true
-        line.height = Math.max(27, line.height + 5)
-        // console.log('sb3 height', line.height)
-        line.y -= 2
-        if (lines.length === 0) {
-          line.height = Math.max(50, line.height + 10)
-          line.y += 5
-          if (line.height <= 21) {
-            // console.log("sb3 greater", line)
-            line.height += pt + pb
-            line.y += isCommand ? 7 : 3
-          }
+        
+        if (line.firstLine && line.firstSection) {
+          line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
         }
-        pushLine(1)
+        if (line.firstSection || (!line.firstLine && !line.firstSection)) {
+          line.padding.bottom += Math.max(pb - (line.height - 13) / 2, pbmin)
+        } else {
+          line.padding.bottom += Math.max((pbmin * 2) - (line.height - 13) / 2, pbmin)
+        }
+
+        pushLine()
         child.y = y - 1
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
         child.height = Math.max(29, child.height + 3) - 2
         y += child.height
         line = new Line(y)
-        line.height += 5
-        line.y += 3
-        previousChild = null
+        // line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
+        line.firstLine = true
+        line.padding.top = 2
       } else if (child.isLoop) {
         line.children.push(child)
         previousChild = child
       } else if (child.isLabel && child.value === "\n") {
-        // child.y = y
-        // console.log("line", line.height)
-        // console.log("sb3 previous", previousChild)
-        if (lines.length === 0) {
-          line.height += 12
-          line.y += 5
-          if (line.height <= 21) {
-            // console.log("sb3 greater", line)
-            line.height += pt + pb
-            line.y += isCommand ? 7 : 3
-          }
+        line.padding.bottom = 4
+        if (line.firstLine) {
+          line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
         }
-        pushLine(1)
+        let firstSection = line.firstSection
+        pushLine()
         line = new Line(y)
+        line.firstSection = firstSection
       } else {
         // Remember the last child on the first line
         if (!lines.length) {
@@ -764,30 +817,34 @@ class BlockView {
 
         // Align extension category icons below notch
         if (child.isIcon && i === 0 && this.isCommand) {
-          line.height = Math.max(line.height, child.height + 8)
+          line.height = Math.max(line.height, child.height)
         }
 
         child.x = line.width
         line.width += child.width
         innerWidth = Math.max(innerWidth, line.width)
         if (!child.isLabel) {
+          // line.padding.top -= Math.max(line.padding.top - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.top - ptmin)
+          // line.padding.bottom += Math.max(line.padding.bottom - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.bottom - pbmin)
           line.height = Math.max(line.height, child.height)
         }
         line.children.push(child)
         previousChild = child
       }
     }
-    if (lines.length === 0) {
-      // console.log("0 before height", line.height)
-      line.height = Math.max(line.height, isCommand ? 40 : 32)
-      // console.log("0 after height", line.height)
-      pushLine(0)
-    } else {
-      line.height += pt + pb
-      // console.log("pt + pb", pt + pb)
-      line.y -= pt
-      pushLine(1)
+    if (line.firstLine && line.firstSection) {
+      line.padding.top = Math.max((this.isOutline ? pt - 4 : pt) - (line.height - 13) / 2, ptmin)
     }
+    if (line.firstSection || (!line.firstLine && !line.firstSection)) {
+      line.padding.bottom += Math.max((this.isOutline ? pb - 4 : pb) - (line.height - 13) / 2, pbmin)
+    } else {
+      line.padding.bottom += Math.max((pbmin * 2) - (line.height - 13) / 2, pbmin)
+
+    }
+    // y += pb
+    pushLine()
+
+    this.lines = lines
 
     let padLeft = children.length ? this.horizontalPadding(children[0]) : 0
     const padRight = children.length ? this.horizontalPadding(lastChild) : 0
@@ -811,14 +868,39 @@ class BlockView {
     )
 
     // Center the label text inside small reporters.
-    if (this.isReporter) {
+    if (this.isReporter &&
+        !this.hasScript) {
       padLeft += (innerWidth - originalInnerWidth) / 2
     }
 
     this.height = y
 
+//     if (lines.length === 1 &&
+//         (this.isReporter || this.isBoolean)) {
+//       let r = y / 2
+//       let line = lines[0]
+//       let last = line.children[line.children.length - 1]
+//       let endX = last.x + last.width
+// 
+//       console.log('endX', endX)
+//       console.log('width', innerWidth)
+//       console.log('r', r)
+// 
+//       if ((last.isReporter ||
+//           last.isBoolean) &&
+//           last.lines.length > 1 &&
+//           innerWidth - r < endX) {
+//         let pad = last.isReporter 
+//                   ? Math.max(last.lines[0].totalHeight, last.lines[last.lines.length - 1].totalHeight) / 2
+//                   : 20
+//         console.log('pad', pad)
+//         innerWidth += innerWidth - (endX + 4)
+//         console.log('new', innerWidth)
+//       }
+//     }
+
     this.width = scriptWidth
-      ? Math.max(innerWidth, 15 + scriptWidth)
+      ? Math.max(innerWidth, 16 + (this.isBoolean ? 20 : 0) + scriptWidth)
       : innerWidth
     this.firstLine = lines[0]
     this.innerWidth = innerWidth
@@ -858,6 +940,13 @@ class BlockView {
         let x = padLeft + child.x
         if (child.dx) {
           x += child.dx
+        }
+        
+        if (this.isRing) {
+          child.y = (line.y + y) | 0
+          if (child.isInset) {
+            continue
+          }
         }
 
         objects.push(SVG.move(x, (line.y + y) | 0, child.el))

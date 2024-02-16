@@ -1,5 +1,11 @@
 /* for constructing SVGs */
 
+function assert(bool, message) {
+  if (!bool) {
+    throw new Error(`Assertion failed! ${message || ""}`)
+  }
+}
+
 // set by SVG.init
 let document
 let xml
@@ -97,14 +103,143 @@ export default class SVG {
     return el
   }
 
+  // translatePath takes a path string such as "M 0 0 L 0 10 L 10 0 Z", fins
+  // the individual X/Y components, and translates them by dx/dy, so as to
+  // "move" the path.
+  //
+  // This is not a particularly good way of doing this, but given we control
+  // the inputs to it it works well enough I guess?
+  static translatePath(dx, dy, path) {
+    let isX = true
+    let isRelative = false
+    const parts = path.split(/\s+/)
+    const out = []
+    for (let i = 0; i < parts.length; i++) {
+      let part = parts[i]
+      if (part === "A") {
+        isRelative = false
+        const j = i + 5
+        out.push(part)
+        while (i < j) {
+          out.push(parts[++i])
+        }
+        continue
+      } else if (part === "C") {
+        isRelative = false
+        const j = i + 4
+        out.push(part)
+        while (i < j) {
+          out.push(parts[++i])
+        }
+        continue
+      } else if (/[SQ]/.test(part)) {
+        isRelative = false
+        const j = i + 2
+        out.push(part)
+        while (i < j) {
+          out.push(parts[++i])
+        }
+        continue
+      } else if (part === "H") {
+        isRelative = false
+        out.push("H")
+        out.push(+parts[++i] + dx)
+        continue
+      } else if (part === "V") {
+        isRelative = false
+        out.push("V")
+        out.push(+parts[++i] + dy)
+        continue
+      } else if (/[mlhvcsqtaz]/.test(part)) {
+        isRelative = true
+      } else if (/[MLHVCSQTAZ]/.test(part)) {
+        isRelative = false
+      } else if (/[A-Za-z]/.test(part)) {
+        // This assertion means the path was not a valid sequence of
+        // [operation, X coordinate, Y coordinate, ...].
+        //
+        // It could indicate missing whitespace between the coordinates and the
+        // operation.
+        assert(isX, `translatePath: invalid argument: ${part}`)
+      } else if (!isRelative) {
+        part = +part
+        part += isX ? dx : dy
+        isX = !isX
+      }
+      out.push(part)
+    }
+    return out.join(" ")
+  }
+
   /* shapes */
 
   static rect(w, h, props) {
     return SVG.el("rect", { ...props, x: 0, y: 0, width: w, height: h })
   }
 
-  static roundRect(w, h, props) {
-    return SVG.rect(w, h, { ...props, rx: 4, ry: 4 })
+  static roundRect(w, h, r = 4, props) {
+    return SVG.rect(w, h, { ...props, rx: r, ry: r })
+  }
+
+  static ringRect(w, h, child, shape, props) {
+    let cy = child.y,
+        ch = child.height,
+        cw = child.width
+    let r = 20
+    if (child.isScript) {
+      // r = child.blocks[0].height / 2
+    }
+
+    console.log('ring', child.isInput)
+    
+    const func =
+      shape === "reporter" || shape === "ring"
+        ? (w,h) => {
+          let r = h / 2
+          if (child.isBlock &&
+              child.lines.length > 1) {
+            r = Math.max(child.lines[0].totalHeight, child.lines[child.lines.length - 1].totalHeight) / 2
+          }
+
+          return [SVG.getRoundedTop(w, h, r), SVG.getRoundedBottom(w, h, r)]
+        }
+        : shape === "boolean"
+        ? (w,h) => {
+          let r = h / 2
+          let showRight = true
+          if (child.isBlock &&
+              child.lines.length > 1) {
+            r = 20
+            showRight = !child.hasScript
+          }
+          
+          if (child.isBlock) {
+            return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, showRight, r)]
+          } else {
+            return SVG.pointedPath(w, h)
+          }
+        }
+        : SVG.capPath
+    console.log('path', func(cw, ch).join(" "))
+    return SVG.path({
+      ...props,
+      path: [
+        "M",
+        r,
+        0,
+        `A ${r} ${r} 0 0 0 0 ${r}`,
+        `L 0 ${h - r}`,
+        `A ${r} ${r} 0 0 0 ${r} ${h}`,
+        `L ${w - r} ${h}`,
+        `A ${r} ${r} 0 0 0 ${w} ${h - r}`,
+        `L ${w} ${r}`,
+        `A ${r} ${r} 0 0 0 ${w - r} 0`,
+        `L ${r} 0`,
+        "Z",
+        SVG.translatePath(8, cy || 4, func(cw, ch).join(" ")),
+      ],
+      "fill-rule": "even-odd",
+    })
   }
 
   static getRoundedTop(w, h, r) {
@@ -126,7 +261,7 @@ export default class SVG {
   }
 
   static pillRect(w, h, props) {
-    const r = Math.min(h / 2, 20)
+    const r = h / 2
     return SVG.rect(w, h, { ...props, rx: r, ry: r })
   }
 
@@ -142,13 +277,11 @@ export default class SVG {
     ]
   }
 
-  static getPointedTop(w, h) {
-    const r = 20
+  static getPointedTop(w, h, r = 20) {
     return `M ${r} ${h} L 0 ${h / 2} ${r} 0 L ${w - r} 0`
   }
 
-  static getPointedBottom(w, h, showRight) {
-    const r = 20
+  static getPointedBottom(w, h, showRight, r = 20) {
     let path = ``
     if (showRight) {
       path += `L ${w} ${h / 2} `
@@ -296,24 +429,16 @@ export default class SVG {
           },
         ),
       ),
-      SVG.move(
-        0,
-        32,
-        SVG.el("path", {
-          d: "M73.1-15.6c1.7-4.2,4.5-9.1,5.8-8.5c1.6,0.8,5.4,7.9,5,15.4c0,0.6-0.7,0.7-1.1,0.5c-3-1.6-6.4-2.8-8.6-3.6C72.8-12.3,72.4-13.7,73.1-15.6z",
-          fill: "#FFD5E6",
-          transform: "translate(0, 32)",
-        }),
-      ),
-      SVG.move(
-        0,
-        32,
-        SVG.el("path", {
-          d: "M22.4-15.6c-1.7-4.2-4.5-9.1-5.8-8.5c-1.6,0.8-5.4,7.9-5,15.4c0,0.6,0.7,0.7,1.1,0.5c3-1.6,6.4-2.8,8.6-3.6C22.8-12.3,23.2-13.7,22.4-15.6z",
-          fill: "#FFD5E6",
-          transform: "translate(0, 32)",
-        }),
-      ),
+      SVG.el("path", {
+        d: "M73.1-15.6c1.7-4.2,4.5-9.1,5.8-8.5c1.6,0.8,5.4,7.9,5,15.4c0,0.6-0.7,0.7-1.1,0.5c-3-1.6-6.4-2.8-8.6-3.6C72.8-12.3,72.4-13.7,73.1-15.6z",
+        fill: "#FFD5E6",
+        transform: "translate(0, 32)",
+      }),
+      SVG.el("path", {
+        d: "M22.4-15.6c-1.7-4.2-4.5-9.1-5.8-8.5c-1.6,0.8-5.4,7.9-5,15.4c0,0.6,0.7,0.7,1.1,0.5c3-1.6,6.4-2.8,8.6-3.6C22.8-12.3,23.2-13.7,22.4-15.6z",
+        fill: "#FFD5E6",
+        transform: "translate(0, 32)",
+      }),
     ])
   }
 
