@@ -153,10 +153,6 @@ class IconView {
       this.scale = 1
     }
 
-    if (isNaN(this.r) || this.r == null) {
-      this.r = 255
-    }
-
     this.width = this.width * this.scale
     this.height = this.height * this.scale
 
@@ -507,7 +503,6 @@ class BlockView {
           {
             class: `sb-${this.info.category} sb-bevel`,
           },
-          !shape.isBlock,
         )
       }
     }
@@ -676,8 +671,10 @@ class BlockView {
           line.height = Math.max(line.height, child.height)
           if (!this.isUpvar && child.isBlock) {
             console.log(child)
-            line.padding.top -= 1
-            line.padding.bottom -= 2
+            if (line.padding.top >= pt) {
+              line.padding.top -= 1
+              line.padding.bottom -= 2
+            }
           }
         } else {
           line.height = Math.max(line.height, child.height)
