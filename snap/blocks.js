@@ -23,6 +23,7 @@ const {
   bevelFilter,
   darkFilter,
   dropShadowFilter,
+  lightFilter,
 } = style
 
 const unicodeIcons = {}
@@ -375,6 +376,7 @@ class BlockView {
     this.innerWidth = null
     this.strokeWidth = 1
     this.isSuperSnap = false
+    this.isZebra = false
   }
 
   get isBlock() {
@@ -493,6 +495,11 @@ class BlockView {
         })
       }
 
+      if (this.isZebra) {
+        el = this.applyZebra(el)
+      }
+      el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
+
       return el
     }
 
@@ -532,9 +539,7 @@ class BlockView {
           child,
           shape,
           {
-            class: `snap-${this.info.category} ${
-              options.isFlat ? "snap-flat" : "snap-bevel"
-            }`,
+            class: `snap-${this.info.category}`,
           },
           !child.isBlock,
         )
@@ -548,6 +553,10 @@ class BlockView {
             )}')`,
           })
         }
+        if (this.isZebra) {
+          el = this.applyZebra(el)
+        }
+        el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
         return el
       }
     }
@@ -571,7 +580,16 @@ class BlockView {
         )}')`,
       })
     }
+    if (this.isZebra) {
+      el = this.applyZebra(el)
+    }
+    el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     return el
+  }
+
+  applyZebra(el) {
+    el.classList.add('snap-zebra')
+    return SVG.group([el])
   }
 
   minDistance(child) {
@@ -680,8 +698,25 @@ class BlockView {
     }
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
-      child.el = child.draw(options, this)
+      if (options.zebraColoring) {
+        if (!this.isZebra && child.isBlock && !child.isUpvar) {
+          if (child.info.category === this.info.category ||
+              (child.info.color && child.info.color === this.info.color)) {
+            child.isZebra = true
+          }
+        }
+        if (child.isScript) {
+          child.parentCategory = this.info.color || this.info.category
+          child.isZebra = this.isZebra
+        }
+        if (this.isZebra && child.isLabel) {
+          child.cls = "label-dark"
+          child.measure()
+        }
+      }
 
+      child.el = child.draw(options, this)
+      
       if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
@@ -906,6 +941,8 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
+    this.parentCategory = null
+    this.isZebra = false
   }
 
   get isScript() {
@@ -918,13 +955,20 @@ class ScriptView {
     }
   }
 
-  draw(isFlat, inside) {
+  draw(options, inside) {
     const children = []
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      const child = block.draw(isFlat)
+      if (!this.isZebra &&
+          this.parentCategory) {
+            if (this.parentCategory.toLowerCase() === block.info.category.toLowerCase() ||
+                this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()) {
+                  block.isZebra = true
+                }
+          }
+      const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
 
@@ -970,12 +1014,15 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
-    this.isFlat = options.style.replace("snap-", "").toLowerCase() === "flat"
-    this.wrapSize = options.wrap
+    this.options = {
+      isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
+      wrapSize: options.wrap
       ? options.wrapSize != undefined
         ? options.wrapSize
-        : 600
-      : -1
+        : 460
+      : -1,
+      zebraColoring: options.zebraColoring,
+    }
   }
 
   measure() {
@@ -1004,10 +1051,7 @@ class DocumentView {
         SVG.move(
           0,
           height,
-          script.draw({
-            isFlat: this.isFlat,
-            wrapSize: this.wrapSize,
-          }),
+          script.draw(this.options),
         ),
       )
       height += script.height
@@ -1023,6 +1067,7 @@ class DocumentView {
         bevelFilter("snapBevelFilter", false),
         bevelFilter("snapInputBevelFilter", true),
         darkFilter("snapInputDarkFilter"),
+        lightFilter("snapLightFilter"),
         dropShadowFilter("snapDropShadow"),
         ...makeIcons(),
       ])),

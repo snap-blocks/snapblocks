@@ -87,6 +87,7 @@ export default `
   font-size: 9px;
   word-spacing: 0;
 }
+.snap-label-dark,
 .snap-literal-number,
 .snap-literal-string,
 .snap-literal-number-dropdown,
@@ -100,6 +101,10 @@ export default `
 
 .snap-darker {
   filter: url(#snapInputDarkFilter);
+}
+
+.snap-zebra {
+  filter: url(#snapLightFilter);
 }
 
 .snap-outline {

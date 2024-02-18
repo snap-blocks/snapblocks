@@ -452,6 +452,17 @@ export default class Style {
     return f.el
   }
 
+  static lightFilter(id) {
+    const f = new Filter(id)
+
+    f.merge([
+      "SourceGraphic",
+      f.comp("in", f.flood("#fff", 0.4), "SourceAlpha"),
+    ])
+
+    return f.el
+  }
+
   static darkRect(w, h, category, el) {
     return SVG.setProps(
       SVG.group([
