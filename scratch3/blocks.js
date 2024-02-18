@@ -711,8 +711,8 @@ class BlockView {
       line.y += line.padding.top
       y += line.height
       // line.y = 0
+      y += line.padding.top + line.padding.bottom
       if (!this.isUpvar) {
-        y += line.padding.top + line.padding.bottom
         let last = line.children[line.children.length - 1]
         if (last) {
           // line.width += px
@@ -731,7 +731,7 @@ class BlockView {
           //           }
         }
       } else {
-        y += 1
+        // y += 1
       }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
