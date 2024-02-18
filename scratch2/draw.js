@@ -442,14 +442,13 @@ export default class SVG {
     const r = 8
     const func =
       shape === "reporter"
-      ? (w, h) => {
-        if (child.isBlock &&
-          child.lines.length > 1) {
-            return SVG.getRoundedPath(w, h)
+        ? (w, h) => {
+            if (child.isBlock && child.lines.length > 1) {
+              return SVG.getRoundedPath(w, h)
+            }
+
+            return SVG.roundedPath(w, h)
           }
-          
-          return SVG.roundedPath(w, h)
-        }
         : shape === "boolean"
         ? (w, h) => {
             if (child.isBlock && child.lines.length > 1) {

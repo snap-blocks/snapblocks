@@ -588,7 +588,7 @@ class BlockView {
   }
 
   applyZebra(el) {
-    el.classList.add('snap-zebra')
+    el.classList.add("snap-zebra")
     return SVG.group([el])
   }
 
@@ -700,8 +700,10 @@ class BlockView {
       const child = children[i]
       if (options.zebraColoring) {
         if (!this.isZebra && child.isBlock && !child.isUpvar) {
-          if (child.info.category === this.info.category ||
-              (child.info.color && child.info.color === this.info.color)) {
+          if (
+            child.info.category === this.info.category ||
+            (child.info.color && child.info.color === this.info.color)
+          ) {
             child.isZebra = true
           }
         }
@@ -716,7 +718,7 @@ class BlockView {
       }
 
       child.el = child.draw(options, this)
-      
+
       if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
@@ -961,13 +963,15 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (!this.isZebra &&
-          this.parentCategory) {
-            if (this.parentCategory.toLowerCase() === block.info.category.toLowerCase() ||
-                this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()) {
-                  block.isZebra = true
-                }
-          }
+      if (!this.isZebra && this.parentCategory) {
+        if (
+          this.parentCategory.toLowerCase() ===
+            block.info.category.toLowerCase() ||
+          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
+        ) {
+          block.isZebra = true
+        }
+      }
       const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
@@ -1017,10 +1021,10 @@ class DocumentView {
     this.options = {
       isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
       wrapSize: options.wrap
-      ? options.wrapSize != undefined
-        ? options.wrapSize
-        : 460
-      : -1,
+        ? options.wrapSize != undefined
+          ? options.wrapSize
+          : 460
+        : -1,
       zebraColoring: options.zebraColoring,
     }
   }
@@ -1047,13 +1051,7 @@ class DocumentView {
         height += 10
       }
       script.y = height
-      elements.push(
-        SVG.move(
-          0,
-          height,
-          script.draw(this.options),
-        ),
-      )
+      elements.push(SVG.move(0, height, script.draw(this.options)))
       height += script.height
       width = Math.max(width, script.width + 4)
     }
