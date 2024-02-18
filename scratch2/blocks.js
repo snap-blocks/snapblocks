@@ -579,7 +579,8 @@ class BlockView {
         y += line.padding.top + line.padding.bottom
         let last = line.children[line.children.length - 1]
         if (last) {
-          if (last.isLabel) {
+          if (last.isLabel ||
+              last.isIcon) {
             line.width += px
           } else {
             const cmw = 5 // 27
