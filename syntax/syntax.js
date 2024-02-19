@@ -559,7 +559,9 @@ function parseLines(code, languages) {
       ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
       : (() => {
           let input = new Input("string", s, true)
-          input.label.raw = raw
+          if (input.hasLabel) {
+            input.label.raw = raw
+          }
           return input
         })()
   }
@@ -626,7 +628,7 @@ function parseLines(code, languages) {
       if (hexColorPat.test(value)) {
         input = new Input("color", value)
       }
-      if (input) {
+      if (input && input.hasLabel) {
         input.label.raw = children[0].raw
         return input
       }
@@ -640,7 +642,9 @@ function parseLines(code, languages) {
         const value = children.map(l => l.value).join(" ")
         const raw = children.map(l => l.raw).join(" ")
         let input = makeMenu("number-dropdown", value)
-        input.label.raw = raw
+        if (input.hasLabel) {
+          input.label.raw = raw
+        }
         return input
       }
       if (last.value === "V") {
@@ -648,7 +652,9 @@ function parseLines(code, languages) {
         const value = children.map(l => l.value).join(" ")
         const raw = children.map(l => l.raw).join(" ")
         let input = makeMenu("number-dropdown", value, true)
-        input.label.raw = raw
+        if (input.hasLabel) {
+          input.label.raw = raw
+        }
         return input
       }
     }
