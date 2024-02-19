@@ -29,8 +29,8 @@ const {
 const unicodeIcons = {}
 const categoryAliases = {
   ...aliasExtensions,
-  "events": "control",
-  "custom": "other",
+  events: "control",
+  custom: "other",
 }
 
 export class LabelView {
@@ -248,7 +248,7 @@ class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
-      plusSign: {width: 6, height: 14, dy: 12, padx: 0 },
+      plusSign: { width: 6, height: 14, dy: 12, padx: 0 },
     }
   }
 }
@@ -438,7 +438,9 @@ class BlockView {
         p.push(SVG.getRingTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
-      } else if (["hat", "snap-define", "define-hat"].includes(this.info.shape)) {
+      } else if (
+        ["hat", "snap-define", "define-hat"].includes(this.info.shape)
+      ) {
         p.push(SVG.getHatTop(w, h))
       } else {
         p.push(SVG.getTop(w))
@@ -712,8 +714,7 @@ class BlockView {
       if (options.zebraColoring) {
         if (this.info.shape === "snap-define") {
           console.log("snap-define", this.info.category)
-          if (child.isBlock &&
-              child.info.category === this.info.category) {
+          if (child.isBlock && child.info.category === this.info.category) {
             this.isZebra = true
           }
         } else if (!this.isZebra && child.isBlock && !child.isUpvar) {

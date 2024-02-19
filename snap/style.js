@@ -396,11 +396,11 @@ export default class Style {
           id: "snap-arrowLeftRightThin",
         },
       ),
-      SVG.text(0,0, "+", {
+      SVG.text(0, 0, "+", {
         id: "snap-plusSign",
         style: `font-size: 14px;
                 font-family: sans-serif;`,
-        fill: "#2d2d2d"
+        fill: "#2d2d2d",
       }),
     ]
   }

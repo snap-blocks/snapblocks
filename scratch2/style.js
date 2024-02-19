@@ -364,11 +364,11 @@ export default class Style {
           id: "sb-arrowLeftRightThin",
         },
       ),
-      SVG.text(0,0, "+", {
+      SVG.text(0, 0, "+", {
         id: "sb-plusSign",
         style: `font-size: 14px;
                 font-family: sans-serif;`,
-        fill: "#2d2d2d"
+        fill: "#2d2d2d",
       }),
     ]
   }

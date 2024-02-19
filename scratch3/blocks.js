@@ -241,7 +241,7 @@ export class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
-      plusSign: {width: 14, height: 14, dy: 16 },
+      plusSign: { width: 14, height: 14, dy: 16 },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
@@ -510,7 +510,9 @@ class BlockView {
         )
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
-      } else if (["hat", "snap-define", "define-hat"].includes(this.info.shape)) {
+      } else if (
+        ["hat", "snap-define", "define-hat"].includes(this.info.shape)
+      ) {
         p.push(SVG.getHatTop(w))
       } else {
         p.push(SVG.getTop(w))

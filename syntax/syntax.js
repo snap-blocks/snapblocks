@@ -94,10 +94,12 @@ function paintBlock(info, children, languages) {
       // console.log("lang", lang.definePrefix, lang.defineSuffix)
 
       if (
-        (overrides.includes("define") ||
-         overrides.includes("define+")) &&
-        !isDefineBlock(children, lang, !(overrides.includes("define") ||
-                                         overrides.includes("define+")))
+        (overrides.includes("define") || overrides.includes("define+")) &&
+        !isDefineBlock(
+          children,
+          lang,
+          !(overrides.includes("define") || overrides.includes("define+")),
+        )
       ) {
         if (children.length == 0) {
           continue
@@ -116,7 +118,7 @@ function paintBlock(info, children, languages) {
         let customChildren = []
         let isBlack = true
         let addPlusses = overrides.includes("define+")
-        
+
         if (addPlusses) {
           for (let child of block.children) {
             customChildren.push(new Icon("+"))
@@ -126,9 +128,11 @@ function paintBlock(info, children, languages) {
         } else {
           for (let index = 0; index < block.children.length; index++) {
             let child = block.children[index]
-            if (child.isLabel &&
-                child.value === "+" &&
-                !child.raw.includes("\\")) {
+            if (
+              child.isLabel &&
+              child.value === "+" &&
+              !child.raw.includes("\\")
+            ) {
               if (isBlack) {
                 customChildren.push(new Icon("+"))
               } else {
@@ -554,10 +558,10 @@ function parseLines(code, languages) {
       : !escapeV && / V$/.test(s)
       ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
       : (() => {
-        let input = new Input("string", s, true)
-        input.label.raw = raw
-        return input
-      })()
+          let input = new Input("string", s, true)
+          input.label.raw = raw
+          return input
+        })()
   }
 
   function pBlock(end) {
