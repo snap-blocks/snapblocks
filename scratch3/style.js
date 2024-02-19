@@ -139,7 +139,8 @@ export default class Style {
       ),
       SVG.text(0,0, "+", {
         id: "sb3-plusSign",
-        style: `font-size: 18pt;`,
+        style: `font-size: 18pt;
+                font-family: sans-serif;`,
         fill: "#2d2d2d"
       }),
 

@@ -366,7 +366,8 @@ export default class Style {
       ),
       SVG.text(0,0, "+", {
         id: "sb-plusSign",
-        style: `font-size: 14px;`,
+        style: `font-size: 14px;
+                font-family: sans-serif;`,
         fill: "#2d2d2d"
       }),
     ]
