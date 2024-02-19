@@ -27,6 +27,10 @@ const {
 } = style
 
 const unicodeIcons = {}
+const categoryAliases = {
+  ...aliasExtensions,
+  "events": "control"
+}
 
 export class LabelView {
   constructor(label) {
@@ -358,10 +362,10 @@ class BlockView {
     this.comment = this.comment ? newView(this.comment) : null
 
     if (
-      Object.prototype.hasOwnProperty.call(aliasExtensions, this.info.category)
+      Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {
       // handle aliases first
-      this.info.category = aliasExtensions[this.info.category]
+      this.info.category = categoryAliases[this.info.category]
     }
     if (
       Object.prototype.hasOwnProperty.call(movedExtensions, this.info.category)
@@ -703,7 +707,12 @@ class BlockView {
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       if (options.zebraColoring) {
-        if (!this.isZebra && child.isBlock && !child.isUpvar) {
+        if (this.info.shape === "snap-define") {
+          console.log("snap-define", this.info.category)
+          if (child.info.category === this.info.category) {
+            this.isZebra = true
+          }
+        } else if (!this.isZebra && child.isBlock && !child.isUpvar) {
           if (
             child.info.category === this.info.category ||
             (child.info.color && child.info.color === this.info.color)
