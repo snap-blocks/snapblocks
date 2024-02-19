@@ -25,6 +25,7 @@ import {
 export class Label {
   constructor(value, cls) {
     this.value = value
+    this.raw = value
     this.cls = cls || ""
     this.el = null
     this.height = 12
@@ -62,7 +63,7 @@ export class Icon {
     this.g = this.modifiers ? parseFloat(this.modifiers[2]) : null
     this.b = this.modifiers ? parseFloat(this.modifiers[3]) : null
 
-    assert(Icon.icons[this.name], `no info for icon ${this.name}`)
+    // assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
   get isIcon() {
     return true
@@ -71,6 +72,7 @@ export class Icon {
   static get iconAliases() {
     return {
       circleSolid: "circle",
+      "+": "plusSign",
     }
   }
 

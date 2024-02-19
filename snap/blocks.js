@@ -114,6 +114,8 @@ class IconView {
   constructor(icon) {
     Object.assign(this, icon)
 
+    this.padx = 4
+
     const info = IconView.icons[this.name]
     if (!info) {
       throw new Error(`no info for icon: ${this.name}`)
@@ -240,6 +242,8 @@ class IconView {
       arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+
+      plusSign: {width: 6, height: 14, dy: 12, padx: 0 },
     }
   }
 }
@@ -618,7 +622,7 @@ class BlockView {
       hat: [12, 3, 5],
       cat: [12, 3, 5],
       "define-hat": [13, 3, 7],
-      "snap-define": [10, 3, 7],
+      "snap-define": [12, 3, 7],
       reporter: [2, 3, 2],
       boolean: [2, 5, 2],
       cap: [4, 3, 4],
@@ -750,7 +754,11 @@ class BlockView {
           line.width = px
         }
         if (line.children.length !== 0) {
-          line.width += 4
+          if (child.isIcon) {
+            line.width += child.padx
+          } else {
+            line.width += 4
+          }
         }
 
         child.x = line.width

@@ -241,6 +241,8 @@ export class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
+      plusSign: {width: 14, height: 14, dy: 16 },
+
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
       videoBlock: { width: 40, height: 40, dy: 10 },
@@ -253,6 +255,17 @@ export class IconView {
       gdxforBlock: { width: 40, height: 40 },
       boostBlock: { width: 40, height: 40 },
     }
+  }
+
+  get isExtension() {
+    if (!this.name.endsWith("Block")) {
+      return false
+    }
+    let extension = this.name.replace("Block", "")
+    if (extensions[extension]) {
+      return true
+    }
+    return false
   }
 }
 
@@ -947,7 +960,7 @@ class BlockView {
           y += 3
         } else if (child.isIcon) {
           y += child.dy | 0
-          if (this.isCommand && i === 0 && j === 0) {
+          if (this.isCommand && i === 0 && j === 0 && child.isExtension) {
             y += 4
           }
         }

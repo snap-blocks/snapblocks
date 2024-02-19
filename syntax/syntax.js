@@ -94,8 +94,10 @@ function paintBlock(info, children, languages) {
       // console.log("lang", lang.definePrefix, lang.defineSuffix)
 
       if (
-        overrides.includes("define") &&
-        !isDefineBlock(children, lang, !overrides.includes("define"))
+        (overrides.includes("define") ||
+         overrides.includes("define+")) &&
+        !isDefineBlock(children, lang, !(overrides.includes("define") ||
+                                         overrides.includes("define+")))
       ) {
         if (children.length == 0) {
           continue
@@ -105,15 +107,44 @@ function paintBlock(info, children, languages) {
         }
         info.category = "events"
         info.shape = "snap-define"
-        // console.log("info", info)
-        // console.log("snap define")
 
         let block = children[0]
-        // console.log("block", block)
-        // console.log("overrides", structuredClone(overrides))
         if (block.info.categoryIsDefault) {
           block.info.category = "custom"
         }
+
+        let customChildren = []
+        let isBlack = true
+        let addPlusses = overrides.includes("define+")
+        
+        if (addPlusses) {
+          for (let child of block.children) {
+            customChildren.push(new Icon("+"))
+            customChildren.push(child)
+          }
+          customChildren.push(new Icon("+"))
+        } else {
+          for (let index = 0; index < block.children.length; index++) {
+            let child = block.children[index]
+            if (child.isLabel &&
+                child.value === "+" &&
+                !child.raw.includes("\\")) {
+              if (isBlack) {
+                customChildren.push(new Icon("+"))
+              } else {
+                customChildren.push(child)
+              }
+              isBlack = !isBlack
+            } else if (child.isIcon && child.name === "plusSign") {
+              customChildren.push(child)
+              isBlack = false
+            } else {
+              customChildren.push(child)
+              isBlack = true
+            }
+          }
+        }
+        block.children = customChildren
         continue
       }
 
@@ -403,7 +434,7 @@ function parseLines(code, languages) {
             next()
             let name = ""
             let modifiers = []
-            while (tok && /[a-zA-Z]/.test(tok)) {
+            while (tok && /[a-zA-Z+]/.test(tok)) {
               name += tok
               next()
             }
@@ -441,6 +472,13 @@ function parseLines(code, languages) {
               break
             }
           case "\\":
+            if (!label) {
+              children.push((label = new Label("")))
+            }
+            if (label) {
+              label.raw += tok
+            }
+
             if (tok === "\\" && ["n", "\n"].includes(peek())) {
               label = null
               children.push(new Label("\n"))
@@ -457,17 +495,16 @@ function parseLines(code, languages) {
             }
           // fallthrough
           default:
-            // console.log("label", label)
             if (!label) {
               children.push((label = new Label("")))
             }
             label.value += tok
+            label.raw += tok
             next()
         }
       }
 
       if (tok === "\n") {
-        // console.log("end", end)
         if (end && end !== "}") {
           label = null
           while (tok && tok !== end && tok === "\n") {
@@ -475,10 +512,6 @@ function parseLines(code, languages) {
             next()
           }
         }
-        // } else {
-        // next()
-        // break
-        // }
       }
     }
     return children
@@ -487,10 +520,13 @@ function parseLines(code, languages) {
   function pString() {
     next() // '['
     let s = ""
+    let raw = ""
     let escapeV = false
     while (tok && tok !== "]") {
+      raw += tok
       if (tok === "\\") {
         next()
+        raw += tok
         if (tok === "v") {
           escapeV = true
         }
@@ -517,7 +553,11 @@ function parseLines(code, languages) {
       ? makeMenu("dropdown", s.slice(0, s.length - 2), false)
       : !escapeV && / V$/.test(s)
       ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
-      : new Input("string", s, true)
+      : (() => {
+        let input = new Input("string", s, true)
+        input.label.raw = raw
+        return input
+      })()
   }
 
   function pBlock(end) {
@@ -575,11 +615,16 @@ function parseLines(code, languages) {
     // number
     if (children.length === 1 && children[0].isLabel) {
       const value = children[0].value
+      let input
       if (/^[0-9e.-]*$/.test(value)) {
-        return new Input("number", value)
+        input = new Input("number", value)
       }
       if (hexColorPat.test(value)) {
-        return new Input("color", value)
+        input = new Input("color", value)
+      }
+      if (input) {
+        input.label.raw = children[0].raw
+        return input
       }
     }
 
@@ -589,12 +634,18 @@ function parseLines(code, languages) {
       if (last.value === "v") {
         children.pop()
         const value = children.map(l => l.value).join(" ")
-        return makeMenu("number-dropdown", value)
+        const raw = children.map(l => l.raw).join(" ")
+        let input = makeMenu("number-dropdown", value)
+        input.label.raw = raw
+        return input
       }
       if (last.value === "V") {
         children.pop()
         const value = children.map(l => l.value).join(" ")
-        return makeMenu("number-dropdown", value, true)
+        const raw = children.map(l => l.raw).join(" ")
+        let input = makeMenu("number-dropdown", value, true)
+        input.label.raw = raw
+        return input
       }
     }
 
@@ -1009,14 +1060,15 @@ function recognizeStuff(scripts) {
         const parts = []
         for (const child of customBlock.children) {
           // console.log("value", child)
+          // we can format custom blocks with + between segments like snap
+          if (child.isIcon && child.name === "plusSign") {
+            continue
+          }
           if (child.isLabel) {
-            // so we can format custom blocks with + between segments like snap
-            if (child.value != "+") {
-              if (child.value === "$nl") {
-                parts.push("\n")
-              } else {
-                parts.push(child.value)
-              }
+            if (child.value === "$nl") {
+              parts.push("\n")
+            } else {
+              parts.push(child.value)
             }
           } else if (child.isBlock) {
             if (!child.isUpvar) {

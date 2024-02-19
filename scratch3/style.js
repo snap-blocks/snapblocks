@@ -137,6 +137,11 @@ export default class Style {
           id: "sb3-circle",
         },
       ),
+      SVG.text(0,0, "+", {
+        id: "sb3-plusSign",
+        style: `font-size: 18pt;`,
+        fill: "#2d2d2d"
+      }),
 
       SVG.el("image", {
         id: "sb3-microbitBlock",
