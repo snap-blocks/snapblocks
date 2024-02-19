@@ -413,6 +413,8 @@ class BlockView {
         p.push(SVG.getRoundedTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
+      } else if (["hat", "snap-define", "define-hat"].includes(this.info.shape)) {
+        p.push(SVG.getHatTop(w, h))
       } else {
         p.push(SVG.getTop(w))
       }

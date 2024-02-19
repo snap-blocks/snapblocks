@@ -29,7 +29,8 @@ const {
 const unicodeIcons = {}
 const categoryAliases = {
   ...aliasExtensions,
-  "events": "control"
+  "events": "control",
+  "custom": "other",
 }
 
 export class LabelView {
@@ -437,6 +438,8 @@ class BlockView {
         p.push(SVG.getRingTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
+      } else if (["hat", "snap-define", "define-hat"].includes(this.info.shape)) {
+        p.push(SVG.getHatTop(w, h))
       } else {
         p.push(SVG.getTop(w))
       }
@@ -709,7 +712,8 @@ class BlockView {
       if (options.zebraColoring) {
         if (this.info.shape === "snap-define") {
           console.log("snap-define", this.info.category)
-          if (child.info.category === this.info.category) {
+          if (child.isBlock &&
+              child.info.category === this.info.category) {
             this.isZebra = true
           }
         } else if (!this.isZebra && child.isBlock && !child.isUpvar) {

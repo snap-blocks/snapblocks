@@ -321,21 +321,27 @@ export default class SVG {
   static capRect(w, h, props) {
     return SVG.path({ ...props, path: SVG.capPath(w, h) })
   }
+  
+  static getHatTop(w, h) {
+    return [
+      "M",
+      0,
+      12,
+      SVG.arc(0, 12, 80, 10, 80, 80),
+      "L",
+      w - 3,
+      10,
+      "L",
+      w,
+      10 + 3,
+    ].join(" ")
+  }
 
   static hatRect(w, h, props) {
     return SVG.path({
       ...props,
       path: [
-        "M",
-        0,
-        12,
-        SVG.arc(0, 12, 80, 10, 80, 80),
-        "L",
-        w - 3,
-        10,
-        "L",
-        w,
-        10 + 3,
+        SVG.getHatTop(w, h),
         SVG.getRightAndBottom(w, h, true),
         "Z",
       ],
