@@ -114,6 +114,8 @@ class IconView {
   constructor(icon) {
     Object.assign(this, icon)
 
+    this.padx = 4
+
     const info = IconView.icons[this.name]
     if (!info) {
       throw new Error(`no info for icon: ${this.name}`)
