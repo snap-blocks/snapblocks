@@ -128,27 +128,23 @@
       }
   
       function decodeHash() {
-        var hash = location.href.split('#')[1];
-        if (!hash) return;
-  
-        if (!/^\?/.test(hash)) {
-          return {
-            script: decodeURIComponent(hash),
-          };
-        } else {
-          var newObj = {};
-          var parts = hash.slice(1).split('&');
-          parts.forEach(function (part) {
-            var match = /^(.*)=(.*)$/.exec(part);
-            if (!match) return;
-            var key = decodeURIComponent(match[1]);
-            var value = decodeURIComponent(match[2]);
-            if (key === "lang" || key === "script") {
-              newObj[key] = value;
-            }
-          });
-          return newObj;
+        var url = new URL(location.href)
+        let newObj = {
+          options: {}
         }
+        for (const [key, value] of url.searchParams.entries()) {
+          if (["script", "style", "lang"].includes(unescape(key))) {
+            newObj[unescape(key)] = unescape(value)
+          } else {
+            if (value != "") {
+              newObj.options[unescape(key)] = unescape(value)
+            } else {
+              newObj.options[unescape(key)] = true
+            }
+          }
+        }
+    
+        return newObj
       }
   
       function download(filename, content) {
@@ -160,45 +156,35 @@
         elem.click();
         document.body.removeChild(elem);
       }
+
+      function setURL(url) {
+        if (history && history.replaceState) {
+          history.replaceState("", "", url.toString());
+        } else {
+          location.href = url.toString();
+        }
+      }
   
       function objUpdated() {
         // set hash
-        if (obj.lang) {
-          location.hash = ('#?lang=' + encodeURIComponent(obj.lang) +
-            '&script=' + escape(obj.script));
-        } else if (obj.script) {
-          location.hash = '#' + escape(obj.script);
-        } else {
-          if (!(location.hash == '' || location.hash == '#')) {
-            location.hash = '#';
+        const url = new URL(location.origin)
+        const urlParams = new URLSearchParams();
+        if (obj.style) urlParams.set('style', escape(obj.style))
+        if (obj.lang) urlParams.set('lang', escape(obj.lang))
+        if (obj.options) {
+          for (let [option, value] of Object.entries(obj.options)) {
+            if ([true, false].includes(value)) {
+              if (value) {
+                urlParams.set(escape(option), '')
+              }
+            } else {
+              urlParams.set(escape(option), value)
+            }
           }
         }
-        // TODO: don't spam history on every keypress!
-  
-        /*
-        // renderMatching API example
-        preview.innerHTML = obj.script;
-        snapblocks.renderMatching('pre.blocks', {
-          languages: ['en', obj.lang],
-          render: function(doc, cb) {
-            doc.render(function(svg) {
-              var el = document.createElement('div');
-              el.appendChild(svg);
-  
-              var link = exportSVGLink = document.createElement('a');
-              exportLink.href = snapblocks.exportSVG(svg);
-              exportLink.setAttribute('download', 'snapblocks.svg');
-              exportLink.textContent = "Export SVG";
-              exportLink.className = 'export-link';
-              var p = document.createElement('p');
-              p.appendChild(exportLink);
-              el.appendChild(p);
-  
-              cb(el);
-            });
-          },
-        });
-        */
+        urlParams.set('script', escape(obj.script))
+        url.search = urlParams
+        setURL(url)
   
         var doc = window.doc = snapblocks.parse(obj.script, {
           languages: obj.lang ? ['en', obj.lang] : ['en'],
