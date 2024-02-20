@@ -574,7 +574,7 @@ class BlockView {
         path: p,
       })
       if (this.isZebra) {
-        el = this.makeZebra(el)
+        el = this.applyZebra(el)
       }
       return el
     }
@@ -612,7 +612,7 @@ class BlockView {
           class: `sb3-${this.info.category}`,
         })
         if (this.isZebra) {
-          el = this.makeZebra(el)
+          el = this.applyZebra(el)
         }
         return el
       }
@@ -626,12 +626,12 @@ class BlockView {
       class: `sb3-${this.info.category}`,
     })
     if (this.isZebra) {
-      el = this.makeZebra(el, options.iconStyle === "high-contrast")
+      el = this.applyZebra(el, options.iconStyle === "high-contrast")
     }
     return el
   }
 
-  makeZebra(el, isDark) {
+  applyZebra(el, isDark) {
     el.classList.add(`sb3-${isDark ? "dark" : "light"}-zebra`)
     return el
   }
