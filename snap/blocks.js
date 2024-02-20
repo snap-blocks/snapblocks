@@ -384,7 +384,7 @@ class BlockView {
     this.firstLine = null
     this.innerWidth = null
     this.strokeWidth = 1
-    this.isSuperSnap = false
+    this.isSnavanced = false
     this.isZebra = false
   }
 
@@ -431,10 +431,10 @@ class BlockView {
         p.push(SVG.getTop(w))
       } else if (
         this.info.shape === "reporter" ||
-        (this.info.shape === "ring" && !this.isSuperSnap)
+        (this.info.shape === "ring" && !this.isSnavanced)
       ) {
         p.push(SVG.getRoundedTop(w, h))
-      } else if (this.info.shape === "ring" && this.isSuperSnap) {
+      } else if (this.info.shape === "ring" && this.isSnavanced) {
         p.push(SVG.getRingTop(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
@@ -480,10 +480,10 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       } else if (
         this.info.shape === "reporter" ||
-        (this.info.shape === "ring" && !this.isSuperSnap)
+        (this.info.shape === "ring" && !this.isSnavanced)
       ) {
         p.push(SVG.getRoundedBottom(w, h))
-      } else if (this.info.shape === "ring" && this.isSuperSnap) {
+      } else if (this.info.shape === "ring" && this.isSnavanced) {
         p.push(SVG.getRingBottom(w, h))
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedBottom(w, h, showBooleanRight))
@@ -742,7 +742,7 @@ class BlockView {
         this.hasScript = true
         line.padding.bottom += pb
 
-        this.isSuperSnap = true
+        this.isSnavanced = true
         pushLine()
         child.y = y
         lines.push(child)
@@ -751,7 +751,7 @@ class BlockView {
         y += child.height
         line = new Line(y)
       } else if (child.isLabel && child.value === "\n") {
-        this.isSuperSnap = true
+        this.isSnavanced = true
         pushLine()
         line = new Line(y)
       } else {
