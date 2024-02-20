@@ -229,12 +229,14 @@
         var docView3HighContrast = snapblocks.newView(doc, {
           style: "scratch3-high-contrast",
           scale: 0.675,
-          wrap: true
+          wrap: true,
+          zebraColoring: true,
         });
         var docView3 = snapblocks.newView(doc, {
           style: "scratch3",
           scale: 0.675,
-          wrap: true
+          wrap: true,
+          zebraColoring: true,
         });
         var svgSnap = docViewSnap.render();
         var svgSnapFlat = docViewSnapFlat.render();

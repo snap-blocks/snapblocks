@@ -21,6 +21,7 @@ const {
   makeHighContrastIcons,
   iconName,
   highContrastIcons,
+  zebraFilter,
 } = style
 
 const unicodeIcons = {
@@ -47,7 +48,7 @@ export class LabelView {
     return true
   }
 
-  draw(_iconStyle) {
+  draw(options) {
     return this.el
   }
 
@@ -161,22 +162,22 @@ export class IconView {
     return true
   }
 
-  draw(iconStyle) {
+  draw(options) {
     this.r =
       this.r === null
-        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.r
     this.g =
       this.g === null
-        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.g
     this.b =
       this.b === null
-        ? iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.b
@@ -194,7 +195,7 @@ export class IconView {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(
-      SVG.symbol(`#sb3-${iconName(this.name, iconStyle)}`),
+      SVG.symbol(`#sb3-${iconName(this.name, options.iconStyle)}`),
       props,
     )
     return symbol
@@ -282,7 +283,7 @@ export class LineView {
 
   measure() {}
 
-  draw(_iconStyle, parent) {
+  draw(options, parent) {
     const category = parent.info.category
     return SVG.el("line", {
       class: `sb3-${category}-line`,
@@ -333,7 +334,7 @@ export class InputView {
     }
   }
 
-  draw(iconStyle, parent) {
+  draw(options, parent) {
     let w
     let label
     if (this.isBoolean) {
@@ -341,7 +342,7 @@ export class InputView {
     } else if (this.isColor) {
       w = 40
     } else if (this.hasLabel) {
-      label = this.label.draw(iconStyle)
+      label = this.label.draw(options)
       // Minimum padding of 11
       // Minimum width of 40, at which point we center the label
       const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
@@ -414,7 +415,7 @@ export class InputView {
           w - 24,
           13,
           SVG.symbol(
-            iconStyle === "high-contrast"
+            options.iconStyle === "high-contrast"
               ? "#sb3-dropdownArrow-high-contrast"
               : "#sb3-dropdownArrow",
             {},
@@ -454,6 +455,7 @@ class BlockView {
     this.firstLine = null
     this.innerWidth = null
     this.lines = []
+    this.isZebra = false
   }
 
   get isBlock() {
@@ -490,7 +492,7 @@ class BlockView {
     }
   }
 
-  drawSelf(iconStyle, w, h, lines) {
+  drawSelf(options, w, h, lines) {
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -567,10 +569,14 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
       p.push("Z")
-      return SVG.path({
+      let el = SVG.path({
         class: `sb3-${this.info.category}`,
         path: p,
       })
+      if (this.isZebra) {
+        el = this.makeZebra(el)
+      }
+      return el
     }
 
     // outlines
@@ -602,9 +608,13 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(w, h, child, shape, {
+        let el = SVG.ringRect(w, h, child, shape, {
           class: `sb3-${this.info.category}`,
         })
+        if (this.isZebra) {
+          el = this.makeZebra(el)
+        }
+        return el
       }
     }
 
@@ -612,9 +622,18 @@ class BlockView {
     if (!func) {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
-    return func(w, h, {
+    let el = func(w, h, {
       class: `sb3-${this.info.category}`,
     })
+    if (this.isZebra) {
+      el = this.makeZebra(el, options.iconStyle === "high-contrast")
+    }
+    return el
+  }
+
+  makeZebra(el, isDark) {
+    el.classList.add(`sb3-${isDark ? "dark" : "light"}-zebra`)
+    return el
   }
 
   static get padding() {
@@ -691,7 +710,7 @@ class BlockView {
     return 8 // default: 2 units
   }
 
-  draw(iconStyle) {
+  draw(options) {
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
     const isCommand = this.isCommand
@@ -729,27 +748,6 @@ class BlockView {
       y += line.height
       // line.y = 0
       y += line.padding.top + line.padding.bottom
-      if (!this.isUpvar) {
-        let last = line.children[line.children.length - 1]
-        if (last) {
-          // line.width += px
-          //           if (last.isLabel) {
-          //             line.width += px
-          //           } else {
-          //             const cmw = 5 // 27
-          //             const md = this.isCommand ? 0 : this.minDistance(last)
-          //             const mw = this.isCommand
-          //               ? last.isBlock || last.isInput
-          //                 ? cmw
-          //                 : 0
-          //               : md
-          //
-          //             line.width += mw - px
-          //           }
-        }
-      } else {
-        // y += 1
-      }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
     }
@@ -777,16 +775,35 @@ class BlockView {
     const lines = []
     let previousChild
     let lastChild
-    // if (this.isUpvar) {
-    //   line.padding.top += 3
-    // } else {
-    //   line.padding.top += pt
-    // }
     line.firstLine = true
     line.firstSection = true
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
-      child.el = child.draw(iconStyle, this)
+      if (options.zebraColoring) {
+        if (this.info.shape === "snap-define") {
+          console.log("snap-define", this.info.category)
+          if (child.isBlock && child.info.category === this.info.category) {
+            this.isZebra = true
+          }
+        } else if (!this.isZebra && child.isBlock && !child.isUpvar) {
+          if (
+            child.info.category === this.info.category ||
+            (child.info.color && child.info.color === this.info.color)
+          ) {
+            child.isZebra = true
+          }
+        }
+        if (child.isScript) {
+          child.parentCategory = this.info.color || this.info.category
+          child.isZebra = this.isZebra
+        }
+        if (this.isZebra && child.isLabel) {
+          child.cls = "label-dark"
+          child.measure()
+        }
+      }
+
+      child.el = child.draw(options, this)
 
       if (child.isCShape) {
         this.hasScript = true
@@ -810,7 +827,6 @@ class BlockView {
         child.height = Math.max(29, child.height + 3) - 2
         y += child.height
         line = new Line(y)
-        // line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
         line.firstLine = true
         line.padding.top = 2
       } else if (child.isLoop) {
@@ -829,6 +845,32 @@ class BlockView {
         // Remember the last child on the first line
         if (!lines.length) {
           lastChild = child
+        }
+
+        // block wrapping
+        if (
+          options.wrapSize > 0 &&
+          line.width + child.width > options.wrapSize
+        ) {
+          line.width += this.marginBetween(previousChild, child)
+          let firstSection = line.firstSection
+          if (line.firstLine && line.firstSection) {
+            line.padding.top = Math.max(
+              (this.isOutline ? pt - 4 : pt) - (line.height - 13) / 2,
+              ptmin,
+            )
+          }
+          if (line.firstSection || (!line.firstLine && !line.firstSection)) {
+            line.padding.bottom += Math.max(
+              (this.isOutline ? pb - 4 : pb) - (line.height - 13) / 2,
+              pbmin,
+            )
+          } else {
+            line.padding.bottom += Math.max(pbmin * 2 - (line.height - 13) / 2, pbmin)
+          }
+          pushLine()
+          line = new Line(y)
+          line.firstSection = firstSection
         }
 
         // Leave space between inputs
@@ -913,24 +955,6 @@ class BlockView {
 
     this.height = y
 
-    //     if (lines.length === 1 &&
-    //         (this.isReporter || this.isBoolean)) {
-    //       let r = y / 2
-    //       let line = lines[0]
-    //       let last = line.children[line.children.length - 1]
-    //       let endX = last.x + last.width
-    //
-    //       if ((last.isReporter ||
-    //           last.isBoolean) &&
-    //           last.lines.length > 1 &&
-    //           innerWidth - r < endX) {
-    //         let pad = last.isReporter
-    //                   ? Math.max(last.lines[0].totalHeight, last.lines[last.lines.length - 1].totalHeight) / 2
-    //                   : 20
-    //         innerWidth += innerWidth - (endX + 4)
-    //       }
-    //     }
-
     this.width = scriptWidth
       ? Math.max(innerWidth, 16 + (this.isBoolean ? 20 : 0) + scriptWidth)
       : innerWidth
@@ -985,7 +1009,7 @@ class BlockView {
       }
     }
 
-    const el = this.drawSelf(iconStyle, innerWidth, this.height, lines)
+    const el = this.drawSelf(options, innerWidth, this.height, lines)
     objects.splice(0, 0, el)
     if (this.info.color) {
       SVG.setProps(el, {
@@ -1022,8 +1046,8 @@ export class CommentView {
     this.label.measure()
   }
 
-  draw(iconStyle) {
-    const labelEl = this.label.draw(iconStyle)
+  draw(options) {
+    const labelEl = this.label.draw(options)
 
     this.width = this.label.width + 16
     return SVG.group([
@@ -1076,9 +1100,9 @@ class GlowView {
   }
   // TODO how can we always raise Glows above their parents?
 
-  draw(iconStyle) {
+  draw(options) {
     const c = this.child
-    const el = c.isScript ? c.draw(iconStyle, true) : c.draw(iconStyle)
+    const el = c.isScript ? c.draw(options, true) : c.draw(options)
 
     this.width = c.width
     this.height = (c.isBlock && c.firstLine.height) || c.height
@@ -1106,13 +1130,13 @@ class ScriptView {
     }
   }
 
-  draw(iconStyle, inside) {
+  draw(options, inside) {
     const children = []
     let y = 1
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      const child = block.draw(iconStyle)
+      const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
 
@@ -1131,7 +1155,7 @@ class ScriptView {
         const line = block.firstLine
         const cx = block.innerWidth + 2 + CommentView.lineLength
         const cy = y - block.height + line.height / 2
-        const el = comment.draw(iconStyle)
+        const el = comment.draw(options)
         children.push(SVG.move(cx, cy - comment.height / 2, el))
         this.width = Math.max(this.width, cx + comment.width)
       }
@@ -1159,6 +1183,16 @@ class DocumentView {
     this.defs = null
     this.scale = options.scale
     this.iconStyle = options.style.replace("scratch3-", "")
+    
+    this.options = {
+      iconStyle: this.iconStyle,
+      wrapSize: options.wrap
+        ? options.wrapSize != undefined
+          ? options.wrapSize
+          : 600
+        : -1,
+      zebraColoring: options.zebraColoring,
+    }
   }
 
   measure() {
@@ -1186,7 +1220,7 @@ class DocumentView {
         height += 10
       }
       script.y = height
-      elements.push(SVG.move(0, height, script.draw(this.iconStyle)))
+      elements.push(SVG.move(0, height, script.draw(this.options)))
       height += script.height
       if (i !== this.scripts.length - 1) {
         height += 36
@@ -1202,7 +1236,12 @@ class DocumentView {
       this.iconStyle === "high-contrast"
         ? makeHighContrastIcons()
         : makeOriginalIcons()
-    svg.appendChild((this.defs = SVG.withChildren(SVG.el("defs"), icons)))
+    svg.appendChild((this.defs = SVG.withChildren(SVG.el("defs"), [
+      ...icons,
+      this.iconStyle === "high-contrast" 
+        ? zebraFilter("sb3DarkFilter", true) 
+        : zebraFilter("sb3LightFilter", false)
+    ])))
 
     svg.appendChild(
       SVG.setProps(SVG.group(elements), {

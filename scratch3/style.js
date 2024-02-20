@@ -1,5 +1,6 @@
 import SVG from "./draw.js"
 import cssContent from "./style.css.js"
+import Filter from "./filter.js"
 
 // Need to define here, as we cannot reference Style#makeNewIcons
 // during JS loading phase.
@@ -1185,5 +1186,16 @@ export default class Style {
   }
   static get commentFont() {
     return "400 12pt Helvetica Neue, Helvetica, sans-serif"
+  }
+  
+  static zebraFilter(id, isDark) {
+    const f = new Filter(id)
+
+    f.merge([
+      "SourceGraphic",
+      f.comp("in", f.flood(isDark ? "#000" : "#fff", 0.3), "SourceAlpha"),
+    ])
+
+    return f.el
   }
 }

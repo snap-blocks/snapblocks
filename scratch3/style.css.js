@@ -23,6 +23,13 @@ const common = `
 .sb3-diff-del {
   stroke-width: 3px;
 }
+
+.sb3-light-zebra {
+  filter: url(#sb3LightFilter)
+}
+.sb3-dark-zebra {
+  filter: url(#sb3DarkFilter)
+}
 `
 
 // These override colors defined per style
@@ -73,24 +80,24 @@ ${createRule("obsolete", name, style)}
 ${createRule("grey", name, style)}
 ${createRule("other", name, style)}
 
-svg${name} .sb3-label {
+${name} .sb3-label {
   fill: ${style.label};
 }
 
-svg${name} .sb3-input-color {
+${name} .sb3-input-color {
   stroke: ${style.inputColorStroke};
 }
 
-svg${name} .sb3-input-number,
-svg${name} .sb3-input-string {
+${name} .sb3-input-number,
+${name} .sb3-input-string {
   fill: ${style.inputFill};
 }
-svg${name} .sb3-literal-number,
-svg${name} .sb3-literal-string {
+${name} .sb3-literal-number,
+${name} .sb3-literal-string {
   fill: ${style.literal};
 }
 
-svg${name} .sb3-custom-arg {
+${name} .sb3-custom-arg {
   fill: ${style.customPrimary};
   stroke: ${style.customTertiary};
 }
