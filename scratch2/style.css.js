@@ -58,11 +58,11 @@ export default `
 }
 
 .sb-bevel {
-  filter: url(#bevelFilter);
+  filter: url(#sbBevelFilter);
 }
 
 .sb-input {
-  filter: url(#inputBevelFilter);
+  filter: url(#sbInputBevelFilter);
 }
 .sb-input-number,
 .sb-input-string,
@@ -80,6 +80,7 @@ export default `
   font-size: 9px;
   word-spacing: 0;
 }
+.sb-label-dark,
 .sb-literal-number,
 .sb-literal-string,
 .sb-literal-number-dropdown,
@@ -92,7 +93,11 @@ export default `
 }
 
 .sb-darker {
-  filter: url(#inputDarkFilter);
+  filter: url(#sbInputDarkFilter);
+}
+
+.sb-zebra {
+  filter: url(#sbLightFilter);
 }
 
 .sb-outline {

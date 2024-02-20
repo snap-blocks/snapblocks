@@ -22,6 +22,7 @@ const {
   darkRect,
   bevelFilter,
   darkFilter,
+  lightFilter,
 } = style
 
 const unicodeIcons = {
@@ -47,7 +48,7 @@ export class LabelView {
     return true
   }
 
-  draw() {
+  draw(options) {
     return this.el
   }
 
@@ -167,7 +168,7 @@ class IconView {
     return true
   }
 
-  draw() {
+  draw(options) {
     let props = {
       width: this.width,
       height: this.height,
@@ -273,11 +274,11 @@ class InputView {
     }
   }
 
-  draw(parent) {
+  draw(options, parent) {
     let w
     let label
     if (this.hasLabel) {
-      label = this.label.draw()
+      label = this.label.draw(options)
       w = Math.max(
         14,
         this.label.width +
@@ -368,6 +369,7 @@ class BlockView {
     this.firstLine = null
     this.innerWidth = null
     this.lines = []
+    this.isZebra = false
   }
 
   get isBlock() {
@@ -404,7 +406,7 @@ class BlockView {
     }
   }
 
-  drawSelf(w, h, lines) {
+  drawSelf(options, w, h, lines) {
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -462,10 +464,16 @@ class BlockView {
       } else {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
-      return SVG.path({
-        class: `sb-${this.info.category} sb-bevel`,
+
+      let el = SVG.path({
+        class: `sb-${this.info.category}`,
         path: p,
       })
+      if (this.isZebra) {
+        el = this.applyZebra(el)
+      }
+      el.classList.add("sb-bevel")
+      return el
     }
 
     // outlines
@@ -498,9 +506,14 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        return SVG.ringRect(w, h, child, shape, {
-          class: `sb-${this.info.category} sb-bevel`,
+        let el = SVG.ringRect(w, h, child, shape, {
+          class: `sb-${this.info.category}`,
         })
+        if (this.isZebra) {
+          el = this.applyZebra(el)
+        }
+        el.classList.add("sb-bevel")
+        return el
       }
     }
 
@@ -508,9 +521,19 @@ class BlockView {
     if (!func) {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
-    return func(w, h, {
-      class: `sb-${this.info.category} sb-bevel`,
+    let el = func(w, h, {
+      class: `sb-${this.info.category}`,
     })
+    if (this.isZebra) {
+      el = this.applyZebra(el)
+    }
+    el.classList.add("sb-bevel")
+    return el
+  }
+
+  applyZebra(el) {
+    el.classList.add("sb-zebra")
+    return SVG.group([el])
   }
 
   minDistance(child) {
@@ -550,7 +573,7 @@ class BlockView {
     }
   }
 
-  draw() {
+  draw(options) {
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
 
@@ -636,7 +659,32 @@ class BlockView {
     }
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
-      child.el = child.draw(this)
+      
+      if (options.zebraColoring) {
+        if (this.info.shape === "snap-define") {
+          console.log("snap-define", this.info.category)
+          if (child.isBlock && child.info.category === this.info.category) {
+            this.isZebra = true
+          }
+        } else if (!this.isZebra && child.isBlock && !child.isUpvar) {
+          if (
+            child.info.category === this.info.category ||
+            (child.info.color && child.info.color === this.info.color)
+          ) {
+            child.isZebra = true
+          }
+        }
+        if (child.isScript) {
+          child.parentCategory = this.info.color || this.info.category
+          child.isZebra = this.isZebra
+        }
+        if (this.isZebra && child.isLabel) {
+          child.cls = "label-dark"
+          child.measure()
+        }
+      }
+
+      child.el = child.draw(options, this)
 
       if (child.isCShape) {
         this.hasScript = true
@@ -653,8 +701,14 @@ class BlockView {
         pushLine()
         line = new Line(y)
       } else {
-        const cmw = 0 // 27
-        // we no longer need md
+        if (
+          options.wrapSize > 0 &&
+          line.width + child.width > options.wrapSize
+        ) {
+          pushLine()
+          line = new Line(y)
+        }
+
         if (line.width < px && (child.isLabel || child.isCommand)) {
           line.width = px
         }
@@ -755,7 +809,7 @@ class BlockView {
       }
     }
 
-    const el = this.drawSelf(innerWidth, this.height, lines)
+    const el = this.drawSelf(options, innerWidth, this.height, lines)
     objects.splice(0, 0, el)
     if (this.info.color) {
       SVG.setProps(el, {
@@ -791,8 +845,8 @@ class CommentView {
     this.label.measure()
   }
 
-  draw() {
-    const labelEl = this.label.draw()
+  draw(options) {
+    const labelEl = this.label.draw(options)
 
     this.width = this.label.width + 16
     return SVG.group([
@@ -845,9 +899,9 @@ class GlowView {
   }
   // TODO how can we always raise Glows above their parents?
 
-  draw() {
+  draw(options) {
     const c = this.child
-    const el = c.isScript ? c.draw(true) : c.draw()
+    const el = c.isScript ? c.draw(options, true) : c.draw(options)
 
     this.width = c.width
     this.height = (c.isBlock && c.firstLine.height) || c.height
@@ -875,13 +929,13 @@ class ScriptView {
     }
   }
 
-  draw(inside) {
+  draw(options, inside) {
     const children = []
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      const child = block.draw()
+      const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
 
@@ -900,7 +954,7 @@ class ScriptView {
         const line = block.firstLine
         const cx = block.innerWidth + 2 + CommentView.lineLength
         const cy = y - block.height + line.height / 2
-        const el = comment.draw()
+        const el = comment.draw(options)
         children.push(SVG.move(cx, cy - comment.height / 2, el))
         this.width = Math.max(this.width, cx + comment.width)
       }
@@ -927,6 +981,14 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
+    this.options = {
+      wrapSize: options.wrap
+        ? options.wrapSize != undefined
+          ? options.wrapSize
+          : 460
+        : -1,
+      zebraColoring: options.zebraColoring,
+    }
   }
 
   measure() {
@@ -951,7 +1013,7 @@ class DocumentView {
         height += 10
       }
       script.y = height
-      elements.push(SVG.move(0, height, script.draw()))
+      elements.push(SVG.move(0, height, script.draw(this.options)))
       height += script.height
       width = Math.max(width, script.width + 4)
     }
@@ -962,9 +1024,10 @@ class DocumentView {
     const svg = SVG.newSVG(width, height, this.scale)
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
-        bevelFilter("bevelFilter", false),
-        bevelFilter("inputBevelFilter", true),
-        darkFilter("inputDarkFilter"),
+        bevelFilter("sbBevelFilter", false),
+        bevelFilter("sbInputBevelFilter", true),
+        darkFilter("sbInputDarkFilter"),
+        lightFilter("sbLightFilter"),
         ...makeIcons(),
       ])),
     )
