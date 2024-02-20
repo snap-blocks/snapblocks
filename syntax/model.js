@@ -72,7 +72,7 @@ export class Icon {
   static get iconAliases() {
     return {
       circleSolid: "circle",
-      "+": "plusSign",
+      "+": "plusSign", // I can't have + in an id.
     }
   }
 
