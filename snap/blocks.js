@@ -365,7 +365,7 @@ class BlockView {
 
     // Avoid accidental mutation
     this.info = { ...block.info }
-    
+
     if (
       Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {
