@@ -280,7 +280,7 @@ export default class Style {
         }),
         {
           id: "snap-notes",
-        }
+        },
       ),
 
       SVG.setProps(

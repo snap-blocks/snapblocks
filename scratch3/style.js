@@ -566,11 +566,11 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("use", {
-          href: "#sb3-musicBlock"
+          href: "#sb3-musicBlock",
         }),
         {
           id: "sb3-notes",
-        }
+        },
       ),
 
       SVG.setProps(
@@ -924,11 +924,11 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("use", {
-          href: "#sb3-musicBlock-high-contrast"
+          href: "#sb3-musicBlock-high-contrast",
         }),
         {
           id: "sb3-notes-high-contrast",
-        }
+        },
       ),
 
       SVG.setProps(

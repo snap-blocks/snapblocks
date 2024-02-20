@@ -347,7 +347,7 @@ class BlockView {
     Object.assign(this, block)
     this.children = block.children.map(newView)
     this.comment = this.comment ? newView(this.comment) : null
-    
+
     // Avoid accidental mutation
     this.info = { ...block.info }
 

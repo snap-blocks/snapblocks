@@ -248,7 +248,7 @@ export default class Style {
         }),
         {
           id: "sb-notes",
-        }
+        },
       ),
 
       SVG.setProps(
