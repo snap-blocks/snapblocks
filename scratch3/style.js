@@ -19,6 +19,7 @@ const highContrastIcons = new Set([
   "turtleOutline",
   "flash",
   "camera",
+  "notes",
 
   "arrowUp",
   "arrowUpOutline",
@@ -563,6 +564,14 @@ export default class Style {
           id: "sb3-camera",
         },
       ),
+      SVG.setProps(
+        SVG.el("use", {
+          href: "#sb3-musicBlock"
+        }),
+        {
+          id: "sb3-notes",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
@@ -912,6 +921,14 @@ export default class Style {
         {
           id: "sb3-camera-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.el("use", {
+          href: "#sb3-musicBlock-high-contrast"
+        }),
+        {
+          id: "sb3-notes-high-contrast",
+        }
       ),
 
       SVG.setProps(

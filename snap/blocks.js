@@ -232,6 +232,7 @@ class IconView {
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
       circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
+      notes: { width: 13, height: 12 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
@@ -362,6 +363,9 @@ class BlockView {
     this.children = block.children.map(newView)
     this.comment = this.comment ? newView(this.comment) : null
 
+    // Avoid accidental mutation
+    this.info = { ...block.info }
+    
     if (
       Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {

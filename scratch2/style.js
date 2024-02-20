@@ -238,6 +238,18 @@ export default class Style {
           id: "sb-circle",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: `M 4 10 A 2 2 0 1 1 3.9999990000000833 9.998000000333333 Z
+              M 12 8 A 2 2 0 1 1 11.999999000000084 7.998000000333332 Z
+              M 3 2 L 12 0 L 12 2 L 3 4 Z
+              M 3 10 L 3 3 L 4 3 L 4 10 Z
+              M 11 8 L 11 1 L 12 1 L 12 8 Z`,
+        }),
+        {
+          id: "sb-notes",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

@@ -229,6 +229,7 @@ export class IconView {
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
       circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
+      notes: { width: 40, height: 40 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
@@ -245,8 +246,6 @@ export class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
-      plusSign: { width: 14, height: 14, dy: 16 },
-
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
       videoBlock: { width: 40, height: 40, dy: 10 },
@@ -258,6 +257,8 @@ export class IconView {
       makeymakeyBlock: { width: 40, height: 40 },
       gdxforBlock: { width: 40, height: 40 },
       boostBlock: { width: 40, height: 40 },
+
+      plusSign: { width: 14, height: 14, dy: 16 },
     }
   }
 

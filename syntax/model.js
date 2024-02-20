@@ -96,6 +96,7 @@ export class Icon {
       flash: true,
       camera: true,
       circle: true,
+      notes: true,
 
       arrowUp: true,
       arrowUpOutline: true,

@@ -133,6 +133,7 @@ export const unicodeIcons = {
   "@turtle": "➤",
   "@cloud": "☁",
   "@verticalEllipsis": "⋮",
+  "@notes": "♫",
 }
 
 export const allLanguages = {}
