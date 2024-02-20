@@ -165,19 +165,22 @@ export class IconView {
   draw(options) {
     this.r =
       this.r === null
-        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" &&
+          highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.r
     this.g =
       this.g === null
-        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" &&
+          highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.g
     this.b =
       this.b === null
-        ? options.iconStyle === "high-contrast" && highContrastIcons.has(this.name)
+        ? options.iconStyle === "high-contrast" &&
+          highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.b
@@ -866,7 +869,10 @@ class BlockView {
               pbmin,
             )
           } else {
-            line.padding.bottom += Math.max(pbmin * 2 - (line.height - 13) / 2, pbmin)
+            line.padding.bottom += Math.max(
+              pbmin * 2 - (line.height - 13) / 2,
+              pbmin,
+            )
           }
           pushLine()
           line = new Line(y)
@@ -1183,7 +1189,7 @@ class DocumentView {
     this.defs = null
     this.scale = options.scale
     this.iconStyle = options.style.replace("scratch3-", "")
-    
+
     this.options = {
       iconStyle: this.iconStyle,
       wrapSize: options.wrap
@@ -1236,12 +1242,14 @@ class DocumentView {
       this.iconStyle === "high-contrast"
         ? makeHighContrastIcons()
         : makeOriginalIcons()
-    svg.appendChild((this.defs = SVG.withChildren(SVG.el("defs"), [
-      ...icons,
-      this.iconStyle === "high-contrast" 
-        ? zebraFilter("sb3DarkFilter", true) 
-        : zebraFilter("sb3LightFilter", false)
-    ])))
+    svg.appendChild(
+      (this.defs = SVG.withChildren(SVG.el("defs"), [
+        ...icons,
+        this.iconStyle === "high-contrast"
+          ? zebraFilter("sb3DarkFilter", true)
+          : zebraFilter("sb3LightFilter", false),
+      ])),
+    )
 
     svg.appendChild(
       SVG.setProps(SVG.group(elements), {

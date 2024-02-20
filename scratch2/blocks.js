@@ -659,7 +659,7 @@ class BlockView {
     }
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
-      
+
       if (options.zebraColoring) {
         if (this.info.shape === "snap-define") {
           console.log("snap-define", this.info.category)

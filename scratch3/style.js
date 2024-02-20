@@ -1187,7 +1187,7 @@ export default class Style {
   static get commentFont() {
     return "400 12pt Helvetica Neue, Helvetica, sans-serif"
   }
-  
+
   static zebraFilter(id, isDark) {
     const f = new Filter(id)
 
