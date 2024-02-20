@@ -16,9 +16,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Upload Release Asset
         uses: xresloader/upload-to-github-release@v1
@@ -28,3 +25,8 @@ jobs:
           file: "build/*.js"
           update_latest_release: true
           release_id: ${{ github.event.release.id }}
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
