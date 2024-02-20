@@ -754,8 +754,6 @@ class BlockView {
         pushLine()
         line = new Line(y)
       } else {
-        const cmw = 0 // 27
-        // we no longer need md
         if (
           options.wrapSize > 0 &&
           line.width + child.width > options.wrapSize
@@ -894,7 +892,7 @@ class CommentView {
   }
 
   draw(options) {
-    const labelEl = this.label.draw()
+    const labelEl = this.label.draw(options)
 
     this.width = this.label.width + 16
     return SVG.group([
