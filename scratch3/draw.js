@@ -480,7 +480,7 @@ export default class SVG {
   }
 
   static commentRect(w, h, props) {
-    return SVG.roundRect(w, h, { ...props, class: "sb3-comment" })
+    return SVG.roundRect(w, h, 4, { ...props, class: "sb3-comment" })
   }
 
   static commentLine(width, props) {
