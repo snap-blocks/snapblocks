@@ -624,12 +624,13 @@ function parseLines(code, languages) {
       let input
       if (/^[0-9e.-]*$/.test(value)) {
         input = new Input("number", value)
+        if (input.hasLabel) {
+          input.label.raw = children[0].raw
+        }
+        return input
       }
       if (hexColorPat.test(value)) {
         input = new Input("color", value)
-      }
-      if (input && input.hasLabel) {
-        input.label.raw = children[0].raw
         return input
       }
     }
