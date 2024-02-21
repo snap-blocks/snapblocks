@@ -88,7 +88,7 @@ move (10) steps
 </pre>
 ```
 
-You then need to call `scratchblocks.renderMatching` after the page has loaded.
+You then need to call `snapblocks.renderMatching` after the page has loaded.
 Make sure this appears at the end of the page (just before the closing `</body>` tag):
 ```js
 <script>
