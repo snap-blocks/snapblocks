@@ -1161,7 +1161,7 @@ class ScriptView {
       if (comment) {
         const line = block.firstLine
         const cx = block.innerWidth + 2 + CommentView.lineLength
-        const cy = y - block.height + line.height / 2
+        const cy = y - block.height + line.height
         const el = comment.draw(options)
         children.push(SVG.move(cx, cy - comment.height / 2, el))
         this.width = Math.max(this.width, cx + comment.width)
