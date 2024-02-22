@@ -856,7 +856,9 @@ class BlockView {
           options.wrapSize > 0 &&
           line.width + child.width > options.wrapSize
         ) {
-          line.width += this.marginBetween(previousChild, child)
+          if (previousChild && line.children.length > 0) {
+            line.width += this.marginBetween(previousChild, child)
+          }
           let firstSection = line.firstSection
           if (line.firstLine && line.firstSection) {
             line.padding.top = Math.max(
