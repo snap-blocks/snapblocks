@@ -987,7 +987,8 @@ class DocumentView {
     this.scale = options.scale
     this.options = {
       wrapSize: options.wrap
-        ? options.wrapSize != undefined
+        ? options.wrapSize != undefined &&
+          options.wrapSize > 0
           ? options.wrapSize
           : 460
         : -1,
