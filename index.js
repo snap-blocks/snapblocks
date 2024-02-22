@@ -109,12 +109,12 @@ export default function (window) {
     el.appendChild(container)
   }
 
-  /* Render all matching elements in page to shiny scratch blocks.
+  /* Render all matching elements in page to shiny snap blocks.
    * Accepts a CSS selector as an argument.
    *
    *  snapblocks.renderMatching("pre.blocks");
    *
-   * Like the old 'snapblocks2.parse().
+   * Like the old 'scratchblocks2.parse().
    */
   const renderMatching = function (selector, options) {
     selector = selector || "pre.blocks"
@@ -124,6 +124,10 @@ export default function (window) {
       inline: false,
       languages: ["en"],
       scale: 1,
+      zebraColoring: false,
+      wrap: false,
+      wrapSize: null,
+      elementOptions: false, // set options on the element
 
       read: readCode, // function(el, options) => code
       parse: parse, // function(code, options) => doc
@@ -133,16 +137,48 @@ export default function (window) {
       ...options,
     }
 
+    function validate(value) {
+      if (typeof value !='string') {
+        return value
+      }
+
+      if (['true', 'false'].includes(value.toLowerCase())) {
+        return value.toLowerCase() === 'true'
+      } else if (!isNaN(value)) {
+        return parseFloat(value)
+      }
+      return value
+    }
+
     // find elements
     const results = [].slice.apply(document.querySelectorAll(selector))
     results.forEach(el => {
-      const code = options.read(el, options)
+      let localOptions = {...options}
+      if (options.elementOptions) {
+        let overrideOptions = {
+          style: el.getAttribute('style'),
+          inline: el.getAttribute('inline'),
+          scale: el.getAttribute('scale'),
+          wrap: el.getAttribute('wrap'),
+          wrapSize: el.getAttribute('wrapSize'),
+          zebraColoring: el.getAttribute('zebraColoring') || el.getAttribute('zebra'),
+        }
+        
+        for (let [option, value] of Object.entries(overrideOptions)) {
+          value = validate(value)
+          console.log(option, value)
+          if (value != null) {
+            localOptions[option] = value
+          }
+        }
+      }
+      const code = options.read(el, localOptions)
 
-      const doc = options.parse(code, options)
+      const doc = options.parse(code, localOptions)
 
-      const svg = options.render(doc, options)
+      const svg = options.render(doc, localOptions)
 
-      options.replace(el, svg, doc, options)
+      options.replace(el, svg, doc, localOptions)
     })
   }
 
