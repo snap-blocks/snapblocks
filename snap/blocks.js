@@ -1046,8 +1046,7 @@ class DocumentView {
     this.options = {
       isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
       wrapSize: options.wrap
-        ? options.wrapSize != undefined &&
-          options.wrapSize > 0
+        ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
           : 460
         : -1,

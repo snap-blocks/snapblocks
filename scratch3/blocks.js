@@ -1196,8 +1196,7 @@ class DocumentView {
     this.options = {
       iconStyle: this.iconStyle,
       wrapSize: options.wrap
-        ? options.wrapSize != undefined &&
-          options.wrapSize > 0
+        ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
           : 600
         : -1,
