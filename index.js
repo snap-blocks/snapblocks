@@ -138,12 +138,12 @@ export default function (window) {
     }
 
     function validate(value) {
-      if (typeof value !='string') {
+      if (typeof value != "string") {
         return value
       }
 
-      if (['true', 'false'].includes(value.toLowerCase())) {
-        return value.toLowerCase() === 'true'
+      if (["true", "false"].includes(value.toLowerCase())) {
+        return value.toLowerCase() === "true"
       } else if (!isNaN(value)) {
         return parseFloat(value)
       }
@@ -153,17 +153,18 @@ export default function (window) {
     // find elements
     const results = [].slice.apply(document.querySelectorAll(selector))
     results.forEach(el => {
-      let localOptions = {...options}
+      let localOptions = { ...options }
       if (options.elementOptions) {
         let overrideOptions = {
-          style: el.getAttribute('style'),
-          inline: el.getAttribute('inline'),
-          scale: el.getAttribute('scale'),
-          wrap: el.getAttribute('wrap'),
-          wrapSize: el.getAttribute('wrapSize'),
-          zebraColoring: el.getAttribute('zebraColoring') || el.getAttribute('zebra'),
+          style: el.getAttribute("style"),
+          inline: el.getAttribute("inline"),
+          scale: el.getAttribute("scale"),
+          wrap: el.getAttribute("wrap"),
+          wrapSize: el.getAttribute("wrapSize"),
+          zebraColoring:
+            el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
         }
-        
+
         for (let [option, value] of Object.entries(overrideOptions)) {
           value = validate(value)
           console.log(option, value)
