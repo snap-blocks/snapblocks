@@ -202,6 +202,7 @@
           scale: 1,
           wrap: true,
           zebraColoring: true,
+          wrapSize: null,
         });
         var docViewSnapFlat = snapblocks.newView(doc, {
           style: "snap-flat",
@@ -240,6 +241,9 @@
         svg3HighContrast.classList.add("scratch3");
         svg3.classList.add("scratch3")
         // Need to add manually if calling View#render (folks, this is why you shouldn't use private API!)
+        svgSnap.classList.add("snapblocks-style-snap")
+        svgSnapFlat.classList.add("snapblocks-style-snap-flat")
+        svg2.classList.add("snapblocks-style-snap-scratch2")
         svg3HighContrast.classList.add("snapblocks-style-scratch3-high-contrast")
         svg3.classList.add("snapblocks-style-scratch3")
   
