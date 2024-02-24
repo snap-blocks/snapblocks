@@ -1,17 +1,25 @@
 // Processed by Rollup
 export default `
+.snapblocks-style-snap,
+.snapblocks-style-snap-flat {
+  --id: "";
+  --snapDropShadow: url(#snapDropShadow-);
+  --snapBevelFilter: url(#snapBevelFilter-);
+  --snapInputBevelFilter: url(#snapInputBevelFilter-);
+  --snapLightFilter: url(#snapLightFilter-);
+}
+
 .snap-label {
   font-family: Verdana, Arial, DejaVu Sans, sans-serif;
   font-weight: bold;
   fill: #fff;
   font-size: 10px;
   word-spacing: +1px;
-  /* filter: url(#snapDropShadow); */
   white-space: pre;
 }
 
 .snap-drop-shadow {
-  filter: url(#snapDropShadow)
+  filter: var(--snapDropShadow);
 }
 
 .snap-obsolete {
@@ -63,11 +71,11 @@ export default `
 }
 
 .snap-bevel {
-  filter: url(#snapBevelFilter);
+  filter: var(--snapBevelFilter);
 }
 
 .snap-input-bevel {
-  filter: url(#snapInputBevelFilter);
+  filter: var(--snapInputBevelFilter);
 }
 .snap-input-number,
 .snap-input-string,
@@ -100,11 +108,11 @@ export default `
 }
 
 .snap-darker {
-  filter: url(#snapInputDarkFilter);
+  filter: var(--snapInputBevelFilter);
 }
 
 .snap-zebra {
-  filter: url(#snapLightFilter);
+  filter: var(--snapLightFilter);
 }
 
 .snap-outline {

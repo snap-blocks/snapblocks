@@ -62,7 +62,7 @@ export default function (window) {
     const view = newView(doc, options)
     const svg = view.render()
     // Used in high contrast theme
-    svg.classList.add(`snapblocks-style-${options.style}`)
+    svg.classList.add(`snapblocks-style-${options.style != undefined ? options.style : 'snap'}`)
     return svg
   }
 
@@ -167,7 +167,6 @@ export default function (window) {
 
         for (let [option, value] of Object.entries(overrideOptions)) {
           value = validate(value)
-          console.log(option, value)
           if (value != null) {
             localOptions[option] = value
           }
