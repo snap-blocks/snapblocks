@@ -1026,6 +1026,7 @@ class DocumentView {
 
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
+    svg.classList.add("snapblocks-style-scratch2")
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter("sbBevelFilter", false),
