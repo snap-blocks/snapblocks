@@ -189,7 +189,10 @@ class IconView {
     } else {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
-    let symbol = SVG.setProps(SVG.symbol(`#snap-${this.name}-${options.id}`), props)
+    let symbol = SVG.setProps(
+      SVG.symbol(`#snap-${this.name}-${options.id}`),
+      props,
+    )
     if (!options.isFlat) {
       symbol.classList.add("snap-drop-shadow")
     }
@@ -1058,15 +1061,16 @@ class DocumentView {
   }
 
   makeid(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
+    let result = ""
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    const charactersLength = characters.length
+    let counter = 0
     while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+      counter += 1
     }
-    return result;
+    return result
   }
 
   measure() {
@@ -1100,7 +1104,9 @@ class DocumentView {
 
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
-    svg.classList.add(`snapblocks-style-snap${this.options.isFlat ? "-flat" : ""}`)
+    svg.classList.add(
+      `snapblocks-style-snap${this.options.isFlat ? "-flat" : ""}`,
+    )
 
     let icons = makeIcons()
 
@@ -1110,8 +1116,7 @@ class DocumentView {
 
       if (icon.tagName === "use") {
         let href = icon.getAttribute("href")
-        if (href &&
-            href.startsWith("#")) {
+        if (href && href.startsWith("#")) {
           icon.setAttribute("href", `${href}-${this.id}`)
         }
       }
@@ -1131,11 +1136,26 @@ class DocumentView {
     let group = SVG.group(elements)
 
     group.style.setProperty("--id", this.id)
-    group.style.setProperty("--snapBevelFilter", `url(#snapBevelFilter-${this.id})`)
-    group.style.setProperty("--snapInputBevelFilter", `url(#snapInputBevelFilter-${this.id})`)
-    group.style.setProperty("--snapInputDarkFilter", `url(#snapInputDarkFilter-${this.id})`)
-    group.style.setProperty("--snapLightFilter", `url(#snapLightFilter-${this.id})`)
-    group.style.setProperty("--snapDropShadow", `url(#snapDropShadow-${this.id})`)
+    group.style.setProperty(
+      "--snapBevelFilter",
+      `url(#snapBevelFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--snapInputBevelFilter",
+      `url(#snapInputBevelFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--snapInputDarkFilter",
+      `url(#snapInputDarkFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--snapLightFilter",
+      `url(#snapLightFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--snapDropShadow",
+      `url(#snapDropShadow-${this.id})`,
+    )
 
     svg.appendChild(group)
     this.el = svg

@@ -62,7 +62,9 @@ export default function (window) {
     const view = newView(doc, options)
     const svg = view.render()
     // Used in high contrast theme
-    svg.classList.add(`snapblocks-style-${options.style != undefined ? options.style : 'snap'}`)
+    svg.classList.add(
+      `snapblocks-style-${options.style != undefined ? options.style : "snap"}`,
+    )
     return svg
   }
 

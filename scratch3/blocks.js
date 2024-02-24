@@ -1244,9 +1244,11 @@ class DocumentView {
 
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
-    svg.classList.add(`snapblocks-style-scratch3${this.iconStyle ? `-${this.iconStyle}` : ""}`)
+    svg.classList.add(
+      `snapblocks-style-scratch3${this.iconStyle ? `-${this.iconStyle}` : ""}`,
+    )
     svg.classList.add("scratch3")
-    
+
     const icons =
       this.iconStyle === "high-contrast"
         ? makeHighContrastIcons()
