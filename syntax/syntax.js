@@ -743,7 +743,13 @@ function parseLines(code, languages) {
     isCShape = tok === "\n"
     const f = function () {
       while (tok && tok !== "}") {
-        const block = pBlock("}")
+        let block = pBlock("}")
+        if (block && block.isComment) {
+          let comment = block
+          block = makeBlock("stack", [])
+          comment.hasBlock = true
+          block.comment = comment
+        }
         if (block) {
           return block
         }
@@ -1075,8 +1081,6 @@ function recognizeStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-        // console.log("snap")
-
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
           return
