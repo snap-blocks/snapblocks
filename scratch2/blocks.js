@@ -673,19 +673,17 @@ class BlockView {
           if (child.isBlock && child.info.category === this.info.category) {
             this.isZebra = true
           }
-        } else if (!this.isZebra && child.isBlock && !child.isUpvar) {
+        } else if (!this.isZebra && child.isBlock && !child.isOutline && !child.isUpvar) {
           if (
             child.info.category === this.info.category ||
             (child.info.color && child.info.color === this.info.color)
           ) {
             child.isZebra = true
           }
-        }
-        if (child.isScript) {
+        } else if (child.isScript) {
           child.parentCategory = this.info.color || this.info.category
           child.isZebra = this.isZebra
-        }
-        if (this.isZebra && child.isLabel) {
+        } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
           child.measure()
         }
