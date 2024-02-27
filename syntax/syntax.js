@@ -747,7 +747,7 @@ function parseLines(code, languages) {
         let block = pBlock("}")
         if (block && block.isComment) {
           let comment = block
-          block = makeBlock('stack', [])
+          block = makeBlock("stack", [])
           comment.hasBlock = true
           block.comment = comment
         }
@@ -1082,7 +1082,6 @@ function recognizeStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
           return
