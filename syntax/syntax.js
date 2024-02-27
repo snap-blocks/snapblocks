@@ -29,6 +29,7 @@ import {
   parseSpec,
   unicodeIcons,
 } from "./blocks.js"
+import commands from "./commands.js"
 
 function paintBlock(info, children, languages) {
   let overrides = []
@@ -398,7 +399,7 @@ function parseLines(code, languages) {
       if (tok === end) {
         break
       }
-      if (tok === "/" && peek() === "/" && !end) {
+      if (tok === "/" && peek() === "/") {
         break
       }
 
@@ -572,7 +573,17 @@ function parseLines(code, languages) {
       sawNL = true
       next()
     }
+
+    let comment = null
+
+    if (tok && tok === "/" && peek() === "/") {
+      comment = pComment()
+    }
+
     if (children.length === 0) {
+      if (comment) {
+        return comment
+      }
       return
     }
 
@@ -583,10 +594,21 @@ function parseLines(code, languages) {
         child.isBlock &&
         (child.isReporter || child.isBoolean || child.isRing)
       ) {
+        if (comment) {
+          child.comment = comment
+          comment.hasBlock = true
+        }
         return child
       }
     }
-    return makeBlock("stack", children)
+
+    let block = makeBlock("stack", children)
+
+    if (comment) {
+      comment.hasBlock = true
+      block.comment = comment
+    }
+    return block
   }
 
   function pReporter() {
@@ -722,7 +744,13 @@ function parseLines(code, languages) {
     isCShape = tok === "\n"
     const f = function () {
       while (tok && tok !== "}") {
-        const block = pBlock("}")
+        let block = pBlock("}")
+        if (block && block.isComment) {
+          let comment = block
+          block = makeBlock('stack', [])
+          comment.hasBlock = true
+          block.comment = comment
+        }
         if (block) {
           return block
         }
@@ -736,10 +764,6 @@ function parseLines(code, languages) {
 
     if (tok === "}") {
       next()
-    }
-    if (!sawNL) {
-      assert(blocks.length <= 1)
-      return blocks.length ? blocks[0] : makeBlock("stack", [])
     }
     const block = new Script(blocks)
     block.isCShape = isCShape
@@ -1058,7 +1082,6 @@ function recognizeStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-        // console.log("snap")
 
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
