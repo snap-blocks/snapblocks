@@ -198,7 +198,7 @@ export class IconView {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
     let symbol = SVG.setProps(
-      SVG.symbol(`#sb3-${iconName(this.name, options.iconStyle)}`),
+      SVG.symbol(`#sb3-${iconName(this.name, options)}-${options.id}`),
       props,
     )
     return symbol
@@ -1183,6 +1183,8 @@ class ScriptView {
 
 class DocumentView {
   constructor(doc, options) {
+    this.id = this.makeid(10)
+
     Object.assign(this, doc)
     this.scripts = doc.scripts.map(newView)
 
@@ -1197,6 +1199,7 @@ class DocumentView {
     }
 
     this.options = {
+      id: this.id,
       iconStyle: this.iconStyle,
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
@@ -1205,6 +1208,19 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring,
     }
+  }
+
+  makeid(length) {
+    let result = ""
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+      counter += 1
+    }
+    return result
   }
 
   measure() {
@@ -1253,17 +1269,42 @@ class DocumentView {
       this.iconStyle === "high-contrast"
         ? makeHighContrastIcons()
         : makeOriginalIcons()
+
+    for (let icon of icons) {
+      let id = icon.getAttribute("id")
+      icon.setAttribute("id", `${id}-${this.id}`)
+
+      if (icon.tagName === "use") {
+        let href = icon.getAttribute("href")
+        if (href && href.startsWith("#")) {
+          icon.setAttribute("href", `${href}-${this.id}`)
+        }
+      }
+    }
+
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         ...icons,
         this.iconStyle === "high-contrast"
-          ? zebraFilter("sb3DarkFilter", true)
-          : zebraFilter("sb3LightFilter", false),
+          ? zebraFilter(`sb3DarkFilter-${this.id}`, true)
+          : zebraFilter(`sb3LightFilter-${this.id}`, false),
       ])),
     )
 
+    let group = SVG.group(elements)
+
+    group.style.setProperty("--id", this.id)
+    group.style.setProperty(
+      "--sb3DarkFilter",
+      `url(#sb3DarkFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--sb3LightFilter",
+      `url(#sb3LightFilter-${this.id})`,
+    )
+
     svg.appendChild(
-      SVG.setProps(SVG.group(elements), {
+      SVG.setProps(SVG.group([group]), {
         style: `transform: scale(${this.scale})`,
       }),
     )

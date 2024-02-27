@@ -1,5 +1,13 @@
 // Processed by Rollup
 export default `
+.snapblocks-style-scratch2 {
+  --id: "";
+  --sbDropShadow: url(#sbDropShadow-);
+  --sbBevelFilter: url(#sbBevelFilter-);
+  --sbInputBevelFilter: url(#sbInputBevelFilter-);
+  --sbLightFilter: url(#sbLightFilter-);
+}
+
 .sb-label {
   font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
   font-weight: bold;
@@ -58,11 +66,11 @@ export default `
 }
 
 .sb-bevel {
-  filter: url(#sbBevelFilter);
+  filter: var(--sbBevelFilter);
 }
 
 .sb-input {
-  filter: url(#sbInputBevelFilter);
+  filter: var(--sbInputBevelFilter);
 }
 .sb-input-number,
 .sb-input-string,
@@ -93,11 +101,11 @@ export default `
 }
 
 .sb-darker {
-  filter: url(#sbInputDarkFilter);
+  filter: var(--sbInputDarkFilter);
 }
 
 .sb-zebra {
-  filter: url(#sbLightFilter);
+  filter: var(--sbLightFilter);
 }
 
 .sb-outline {

@@ -181,7 +181,7 @@ class IconView {
     } else {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
-    let symbol = SVG.setProps(SVG.symbol(`#sb-${this.name}`), props)
+    let symbol = SVG.setProps(SVG.symbol(`#sb-${this.name}-${options.id}`), props)
     return symbol
   }
 
@@ -977,6 +977,8 @@ class ScriptView {
 
 class DocumentView {
   constructor(doc, options) {
+    this.id = this.makeid(10)
+
     Object.assign(this, doc)
     this.scripts = doc.scripts.map(newView)
 
@@ -986,6 +988,7 @@ class DocumentView {
     this.defs = null
     this.scale = options.scale
     this.options = {
+      id: this.id,
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
@@ -993,6 +996,19 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring,
     }
+  }
+
+  makeid(length) {
+    let result = ""
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+      counter += 1
+    }
+    return result
   }
 
   measure() {
@@ -1027,17 +1043,51 @@ class DocumentView {
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
     svg.classList.add("snapblocks-style-scratch2")
+
+    let icons = makeIcons()
+    for (let icon of icons) {
+      let id = icon.getAttribute("id")
+      icon.setAttribute("id", `${id}-${this.id}`)
+
+      if (icon.tagName === "use") {
+        let href = icon.getAttribute("href")
+        if (href && href.startsWith("#")) {
+          icon.setAttribute("href", `${href}-${this.id}`)
+        }
+      }
+    }
+
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
-        bevelFilter("sbBevelFilter", false),
-        bevelFilter("sbInputBevelFilter", true),
-        darkFilter("sbInputDarkFilter"),
-        lightFilter("sbLightFilter"),
-        ...makeIcons(),
+        bevelFilter(`sbBevelFilter-${this.id}`, false),
+        bevelFilter(`sbInputBevelFilter-${this.id}`, true),
+        darkFilter(`sbInputDarkFilter-${this.id}`),
+        lightFilter(`sbLightFilter-${this.id}`),
+        ...icons,
       ])),
     )
 
-    svg.appendChild(SVG.group(elements))
+    let group = SVG.group(elements)
+
+    group.style.setProperty("--id", this.id)
+    group.style.setProperty(
+      "--sbBevelFilter",
+      `url(#sbBevelFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--sbInputBevelFilter",
+      `url(#sbInputBevelFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--sbInputDarkFilter",
+      `url(#sbInputDarkFilter-${this.id})`,
+    )
+    group.style.setProperty(
+      "--sbLightFilter",
+      `url(#sbLightFilter-${this.id})`,
+    )
+
+    svg.appendChild(group)
     this.el = svg
     return svg
   }

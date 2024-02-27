@@ -1,6 +1,13 @@
 // Processed by Rollup
 
 const common = `
+.snapblocks-style-scratch3,
+.snapblocks-style-scratch3-high-contrast {
+  --id: "";
+  --sb3LightFilter: url(#sb3LightFilter-);
+  --sb3DarkFilter: url(#sb3DarkFilter-);
+}
+
 .sb3-label {
   font: 500 12pt Helvetica Neue, Helvetica, sans-serif;
   word-spacing: +1pt;
@@ -25,10 +32,10 @@ const common = `
 }
 
 .sb3-light-zebra {
-  filter: url(#sb3LightFilter)
+  filter: var(--sb3LightFilter)
 }
 .sb3-dark-zebra {
-  filter: url(#sb3DarkFilter)
+  filter: var(--sb3DarkFilter)
 }
 `
 
