@@ -108,7 +108,7 @@ export default `
 }
 
 .snap-darker {
-  filter: var(--snapInputBevelFilter);
+  filter: var(--snapInputDarkFilter);
 }
 
 .snap-zebra {
