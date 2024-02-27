@@ -181,7 +181,10 @@ class IconView {
     } else {
       props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
     }
-    let symbol = SVG.setProps(SVG.symbol(`#sb-${this.name}-${options.id}`), props)
+    let symbol = SVG.setProps(
+      SVG.symbol(`#sb-${this.name}-${options.id}`),
+      props,
+    )
     return symbol
   }
 
@@ -1070,10 +1073,7 @@ class DocumentView {
     let group = SVG.group(elements)
 
     group.style.setProperty("--id", this.id)
-    group.style.setProperty(
-      "--sbBevelFilter",
-      `url(#sbBevelFilter-${this.id})`,
-    )
+    group.style.setProperty("--sbBevelFilter", `url(#sbBevelFilter-${this.id})`)
     group.style.setProperty(
       "--sbInputBevelFilter",
       `url(#sbInputBevelFilter-${this.id})`,
@@ -1082,10 +1082,7 @@ class DocumentView {
       "--sbInputDarkFilter",
       `url(#sbInputDarkFilter-${this.id})`,
     )
-    group.style.setProperty(
-      "--sbLightFilter",
-      `url(#sbLightFilter-${this.id})`,
-    )
+    group.style.setProperty("--sbLightFilter", `url(#sbLightFilter-${this.id})`)
 
     svg.appendChild(group)
     this.el = svg

@@ -1294,10 +1294,7 @@ class DocumentView {
     let group = SVG.group(elements)
 
     group.style.setProperty("--id", this.id)
-    group.style.setProperty(
-      "--sb3DarkFilter",
-      `url(#sb3DarkFilter-${this.id})`,
-    )
+    group.style.setProperty("--sb3DarkFilter", `url(#sb3DarkFilter-${this.id})`)
     group.style.setProperty(
       "--sb3LightFilter",
       `url(#sb3LightFilter-${this.id})`,
