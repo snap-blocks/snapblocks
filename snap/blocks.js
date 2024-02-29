@@ -786,7 +786,10 @@ class BlockView {
         child.x = line.width
         line.width += child.width
         if (!child.isLabel) {
-          line.height = Math.max(line.height, child.height + (child.isBlock ? 0 : 2))
+          line.height = Math.max(
+            line.height,
+            child.height + (child.isBlock ? 0 : 2),
+          )
         } else {
           line.height = Math.max(line.height, child.height - 2)
         }
