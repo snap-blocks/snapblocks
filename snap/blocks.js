@@ -393,6 +393,10 @@ class BlockView {
     this.strokeWidth = 1
     this.isSnavanced = false
     this.isZebra = false
+    this.comments = []
+    if (this.comment) {
+      this.comments.push(this.comment)
+    }
   }
 
   get isBlock() {
@@ -747,6 +751,10 @@ class BlockView {
 
       child.el = child.draw(options, this)
 
+      if (child.comments) {
+        this.comments.push(...child.comments)
+      }
+
       if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
@@ -883,14 +891,13 @@ class CommentView {
     this.label = newView(comment.label)
 
     this.width = null
+    this.lineLength = 12
+    this.x = 0
+    this.y = 0
   }
 
   get isComment() {
     return true
-  }
-
-  static get lineLength() {
-    return 12
   }
 
   get height() {
@@ -901,17 +908,38 @@ class CommentView {
     this.label.measure()
   }
 
-  draw(options) {
-    const labelEl = this.label.draw(options)
+  move(dx, dy) {
+    if (!this.el) {
+      return
+    }
 
+    let lineLength = parseFloat(this.lineEl.getAttribute("width"))
+    lineLength += dx
+    this.lineLength = lineLength
+    this.lineEl.setAttribute("width", lineLength)
+    this.lineEl.setAttribute("transform", `translate(${-lineLength}, 9)`)
+    
+    SVG.move(dx, dy, this.el)
+    return this.el
+  }
+
+  draw(options) {
+    if (this.el) {
+      return this.el
+    }
+    this.labelEl = SVG.move(8, 4, this.label.draw(options))
     this.width = this.label.width + 16
-    return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, 6),
-      SVG.commentRect(this.width, this.height, {
-        class: "snap-comment",
-      }),
-      SVG.move(8, 4, labelEl),
+    this.lineEl = SVG.commentLine(this.hasBlock ? this.lineLength : 0, 6)
+    this.rectEl = SVG.commentRect(this.width, this.height, {
+      class: "snap-comment",
+    })
+
+    this.el = SVG.group([
+      this.lineEl,
+      this.rectEl,
+      this.labelEl,
     ])
+    return this.el
   }
 }
 
@@ -975,6 +1003,7 @@ class ScriptView {
     this.y = 0
     this.parentCategory = null
     this.isZebra = false
+    this.comments = []
   }
 
   get isScript() {
@@ -1019,11 +1048,18 @@ class ScriptView {
       const comment = block.comment
       if (comment) {
         const line = block.firstLine
-        const cx = block.innerWidth + 2 + CommentView.lineLength
+        const cx = block.innerWidth + 12
         const cy = y - block.height + line.height
+        comment.x = cx
         const el = comment.draw(options)
+        comment.y = cy - comment.height / 2
         children.push(SVG.move(cx, cy - comment.height / 2, el))
-        this.width = Math.max(this.width, cx + comment.width)
+        if (this.isCShape) {
+          this.width = Math.max(this.width, cx + (comment.width - 12) + comment.lineLength)
+        }
+      }
+      if (block.comments) {
+        this.comments.push(...block.comments)
       }
     }
     this.height = y
