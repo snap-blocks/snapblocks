@@ -3,7 +3,9 @@ Make pictures of Snap<i>!</i> blocks from text.
 [![Screenshot](./readme-assets/images/screenshot.png)](http://snap-blocks.github.io/#?style=snap&script=when%20flag%20clicked%0Aclear%0Aforever%20%7B%0A%20%20pen%20down%0A%20%20if%20%3C%3Cmouse%20down%3F%3E%20and%20%3Ctouching%20%5Bmouse-pointer%20v%5D%3F%3E%3E%20%7B%0A%20%20%20%20switch%20costume%20to%20%5Bbutton%20v%5D%0A%20%20%7D%20else%20%7B%0A%20%20%20%20add%20(x%20position)%20to%20(list)%0A%20%20%7D%0A%20%20move%20(foo)%20steps%0A%20%20turn%20ccw%20(9)%20degrees%0A%7D)
 
 
-**[Try it out!](https://snap-blocks.github.io/snapblocks)**
+**[Try it out!](https://snap-blocks.github.io/)**
+
+[Dev version](https://snap-blocks.github.io/snapblocks)
 
 ---
 
@@ -22,38 +24,6 @@ It's MIT licensed, so you can use it in your projects.
 
 For the full guide to the syntax, see [the wiki](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax) (hopefully when this is finished, we can make a snapblocks syntax article on the snap wiki).
 
-<!-- removed for now
-# Differences from scratchblocks
-
-As you can probably tell, snapblocks is for Snap<i>!</i>, which means that there are many things that need to be changed.
-
-## Define block
-
-First and foremost, the define block. There is a big issue with the scratchblocks implementation. The define keyword forces a block outline, making it impossible to create the snap "define" block. Take a look for yourself.
-
-```scratchblocks
-define ((block) :: control) [] (() @addInput :: grey ring) :: stack control
-```
-<img src="./readme-assets/scratchblocks/snap-define-block.png" width="40%">
-
-This is not at all how it's supposed to look, in fact, it's very bad. Snapblocks fixes this by not forcing the define block outline, inputs, and also by changing the scratch define block syntax.
-
-```snapblocks
-define ((block)) [] (() @addInput)
-```
-
-<img src="./readme-assets/snapblocks/snap-define-block.png" width="40%">
-
-The scratchblocks define block just takes the `define` keyword, then whatever's after is, is the new block. This may look fine, but sometimes you'll run into issues like this. Snapblocks changes the scratch define block syntax to be more strict, as in, it doesn't assume I want a weird block with a white block outline.
-
-```snapblocks
-define {block}
-```
-
-<img src="./readme-assets/snapblocks/scratch2-define-block.png" width="25%">
- -->
-
-
 # Usage
 
 All of these, except html, currently do not have a snapblocks version, but it shouldn't be too hard to modify them to add snapblocks support.
@@ -67,13 +37,17 @@ Use [the MediaWiki plugin](https://github.com/snap-blocks/mw-snapblocks) (work i
 I found [a WordPress plugin](https://github.com/tkc49/scratchblocks-for-wp).
 It might work for you; I haven't tried it.
 
+## React
+
+Use the [snapblocks-react](https://github.com/snap-blocks/snapblocks-react) library to render snapblocks in react.
+
 ## HTML
 
 You'll need to include a copy of the snapblocks JS file on your webpage.
 There are a few ways of getting one:
 
 * Download it from the <https://github.com/snap-blocks/snapblocks/releases> page
-* If you have a fancy JS build system, you might like to include the `snapblocks` package from NPM (when it's on NPM)
+* If you have a fancy JS build system, you might like to include the `snapblocks` package from NPM.
 * You could clone this repository and build it yourself using Node 16.14.0+ (`npm run build`).
 
 ```html
@@ -93,7 +67,7 @@ Make sure this appears at the end of the page (just before the closing `</body>`
 ```js
 <script>
 snapblocks.renderMatching('pre.blocks', {
-  style:     'snap',       // Optional, defaults to 'scratch2'.
+  style:     'snap',       // Optional, defaults to 'snap'.
   languages: ['en', 'de'], // Optional, defaults to ['en'].
   scale: 1,                // Optional, defaults to 1
 });
@@ -124,9 +98,24 @@ snapblocks.renderMatching("code.b", {
 ```
 This time we use `code.b` to target `code` blocks with the class `b`.
 
+### Other `renderMatching` options
+
+There are more options for `renderMatching` that you can use.
+
+```js
+snapblocks.renderMatching('pre.blocks', {
+  style:     'snap',       // Optional, defaults to 'scratch2'.
+  languages: ['en'],       // Optional, defaults to ['en'].
+  scale: 1,                // Optional, defaults to 1
+  wrap: true,              // Optional, defaults to false. This enabled block wrapping
+  wrapSize: 200,           // Optional, defaults to null. This sets the minimum width for block wrapping
+  zebraColoring: true,     // Optional, defaults to false. Enabled zebra coloring
+});
+```
+
 ### Translations
 
-Note: currently translations are partially broken, but I hope to get them fixed in v1.1.0.
+Note: currently translations are partially broken, but I hope to get them fixed in a future version.
 
 If you want to use languages other than English, you'll need to include a second JS file that contains translations.
 The releases page includes two options; you can pick one:
@@ -153,7 +142,7 @@ window.snapblocks.loadLanguages({
 
 ## NPM
 
-The `snapblocks` package will be published on NPM, and you can use it with browserify and other bundlers, if you're into that sort of thing.
+The `snapblocks` package is published on NPM, and you can use it with browserify and other bundlers, if you're into that sort of thing.
 
 Once you've got browserify set up to build a client-side bundle from your app
 code, you can just add `snapblocks` to your dependencies, and everything
