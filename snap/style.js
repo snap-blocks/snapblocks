@@ -37,11 +37,11 @@ export default class Style {
         id: "snap-turnLeft",
       }),
       SVG.el("path", {
-        d: "M 0 0 L 6 6 L 0 12 Z",
+        d: "M 0 1 L 5 6 L 0 11 Z",
         id: "snap-addInput",
       }),
       SVG.el("path", {
-        d: "M 0 6 L 6 0 L 6 12 Z",
+        d: "M 5 1 L 0 6 L 5 11 Z",
         id: "snap-delInput",
       }),
       SVG.setProps(

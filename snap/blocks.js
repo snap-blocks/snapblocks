@@ -215,8 +215,8 @@ class IconView {
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
-      delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
+      addInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
+      delInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
       verticalEllipsis: {
         width: 2,
         height: 12,
@@ -786,7 +786,7 @@ class BlockView {
         child.x = line.width
         line.width += child.width
         if (!child.isLabel) {
-          line.height = Math.max(line.height, child.height + 2)
+          line.height = Math.max(line.height, child.height + (child.isBlock ? 0 : 2))
         } else {
           line.height = Math.max(line.height, child.height - 2)
         }
