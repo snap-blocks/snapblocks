@@ -321,7 +321,7 @@ function isDefineBlock(children, lang, testBlock = true) {
     children.length - lang.defineSuffix.length,
   )
 
-  console.log('outline', outlineChildren)
+  console.log("outline", outlineChildren)
   if (outlineChildren[0].isLabel) {
     return false
   }
@@ -767,10 +767,9 @@ function parseLines(code, languages) {
     }
     if (!isCShape) {
       for (let block of blocks) {
-        console.log('comment', block.comment)
+        console.log("comment", block.comment)
         if (block.comment) {
           let label = block.comment.label.value
-          
         }
       }
     }

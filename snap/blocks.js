@@ -918,7 +918,7 @@ class CommentView {
     this.lineLength = lineLength
     this.lineEl.setAttribute("width", lineLength)
     this.lineEl.setAttribute("transform", `translate(${-lineLength}, 9)`)
-    
+
     SVG.move(dx, dy, this.el)
     return this.el
   }
@@ -934,11 +934,7 @@ class CommentView {
       class: "snap-comment",
     })
 
-    this.el = SVG.group([
-      this.lineEl,
-      this.rectEl,
-      this.labelEl,
-    ])
+    this.el = SVG.group([this.lineEl, this.rectEl, this.labelEl])
     return this.el
   }
 }
@@ -1055,7 +1051,10 @@ class ScriptView {
         comment.y = cy - comment.height / 2
         children.push(SVG.move(cx, cy - comment.height / 2, el))
         if (this.isCShape) {
-          this.width = Math.max(this.width, cx + (comment.width - 12) + comment.lineLength)
+          this.width = Math.max(
+            this.width,
+            cx + (comment.width - 12) + comment.lineLength,
+          )
         }
       }
       if (block.comments) {
