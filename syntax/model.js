@@ -102,6 +102,7 @@ export class Icon {
       brush: true,
       pipette: true,
       paintBucket: true,
+      eraser: true,
       location: true,
 
       arrowUp: true,

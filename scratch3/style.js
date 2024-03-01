@@ -25,6 +25,7 @@ const highContrastIcons = new Set([
   "pipette",
   "paintBucket",
   "location",
+  "eraser",
 
   "arrowUp",
   "arrowUpOutline",
@@ -804,6 +805,22 @@ export default class Style {
         },
       ),
       SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 9 0.6 L 0.6 9 Q 3 12 6 9 L 11.4 3 Z",
+            "stroke-width": 1.2,
+            fill: "none",
+          }),
+          SVG.el("path", {
+            d: "M 9 0 L 4.5 4.5 L 7.5 7.5 L 12 3 Z",
+            stroke: "none",
+          }),
+        ]),
+        {
+          id: "sb3-eraser",
+        },
+      ),
+      SVG.setProps(
         SVG.el("path", {
           d: "M 0 3.6 A 3.6 3.6 0 0 1 7.2 3.6 L 3.6 12 L 0 3.6 M 1.85 3.6 A 1.8 1.8 0 1 0 1.85 3.5982",
         }),
@@ -1004,6 +1021,22 @@ export default class Style {
         ]),
         {
           id: "sb3-paintBucket-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 9 0.6 L 0.6 9 Q 3 12 6 9 L 11.4 3 Z",
+            "stroke-width": 1.2,
+            fill: "none",
+          }),
+          SVG.el("path", {
+            d: "M 9 0 L 4.5 4.5 L 7.5 7.5 L 12 3 Z",
+            stroke: "none",
+          }),
+        ]),
+        {
+          id: "sb3-eraser-high-contrast",
         },
       ),
       SVG.setProps(
