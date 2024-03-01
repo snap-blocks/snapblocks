@@ -298,6 +298,24 @@ export default class Style {
           id: "snap-storage",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 4.5 6 Q 0 6 0.5 11.5 Q 6 12 6 7.5 Z",
+            stroke: "none",
+          }),
+          SVG.el("path", {
+            d: "M 4.5 6 L 9 0.5 Q 12 0 11.5 3 L 6 7.5",
+            "stroke-width": 1,
+            fill: "none",
+            "stroke-linejoin": "round",
+            "stroke-linecap": "round",
+          })
+        ]),
+        {
+          id: "snap-brush",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

@@ -98,6 +98,7 @@ export class Icon {
       circle: true,
       notes: true,
       storage: true,
+      brush: true,
 
       arrowUp: true,
       arrowUpOutline: true,
