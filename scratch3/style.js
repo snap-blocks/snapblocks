@@ -744,7 +744,7 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 4.5 6 Q 0 6 0.5 11.5 Q 6 12 6 7.5 Z",
             stroke: "none",
           }),
@@ -754,7 +754,7 @@ export default class Style {
             fill: "none",
             "stroke-linejoin": "round",
             "stroke-linecap": "round",
-          })
+          }),
         ]),
         {
           id: "sb3-brush",
@@ -899,7 +899,7 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 4.5 6 Q 0 6 0.5 11.5 Q 6 12 6 7.5 Z",
             stroke: "none",
           }),
@@ -909,7 +909,7 @@ export default class Style {
             fill: "none",
             "stroke-linejoin": "round",
             "stroke-linecap": "round",
-          })
+          }),
         ]),
         {
           id: "sb3-brush-high-contrast",
