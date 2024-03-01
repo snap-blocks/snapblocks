@@ -23,6 +23,7 @@ const highContrastIcons = new Set([
   "storage",
   "brush",
   "pipette",
+  "paintBucket",
 
   "arrowUp",
   "arrowUpOutline",
@@ -779,6 +780,28 @@ export default class Style {
           id: "sb3-pipette",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 4.8 2.4 L 9.6 7.2 L 7.2 9.6 Q 4.8 12 2.4 9.6 Q 0 7.2 2.4 4.8 Z",
+            "stroke-width": 1,
+            "fill": "none",
+          }),
+          SVG.el("path", {
+            d: `M 4.8 6 L 5.3 6 A 0.5 0.5 0 1 1 5.299999750000021 5.999500000083333 M 4.8 6 L 4.8 1.7
+            M 4.8 1.7 A 1.2 1.2 0 1 0 2.3999999999999995 1.7000000000000002 L 2.4 4.8`,
+            "stroke-width": 0.5,
+            "fill": "none",
+          }),
+          SVG.el("path", {
+            d: "M 8.4 8.4 Q 12 8.4 11.5 12 L 12 12 Q 12 4.8 6 3.5999999999999996 L 9.6 7.199999999999999 Z",
+            "stroke": "none",
+          }),
+        ]),
+        {
+          id: "sb3-paintBucket",
+        }
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -951,6 +974,28 @@ export default class Style {
         {
           id: "sb3-pipette-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 4.8 2.4 L 9.6 7.2 L 7.2 9.6 Q 4.8 12 2.4 9.6 Q 0 7.2 2.4 4.8 Z",
+            "stroke-width": 1,
+            "fill": "none",
+          }),
+          SVG.el("path", {
+            d: `M 4.8 6 L 5.3 6 A 0.5 0.5 0 1 1 5.299999750000021 5.999500000083333 M 4.8 6 L 4.8 1.7
+            M 4.8 1.7 A 1.2 1.2 0 1 0 2.3999999999999995 1.7000000000000002 L 2.4 4.8`,
+            "stroke-width": 0.5,
+            "fill": "none",
+          }),
+          SVG.el("path", {
+            d: "M 8.4 8.4 Q 12 8.4 11.5 12 L 12 12 Q 12 4.8 6 3.5999999999999996 L 9.6 7.199999999999999 Z",
+            "stroke": "none",
+          }),
+        ]),
+        {
+          id: "sb3-paintBucket-high-contrast",
+        }
       ),
 
       SVG.setProps(

@@ -73,6 +73,7 @@ export class Icon {
     return {
       circleSolid: "circle",
       "+": "plusSign", // I can't have + in an id.
+      bucket: "paintBucket",
     }
   }
 
@@ -100,6 +101,7 @@ export class Icon {
       storage: true,
       brush: true,
       pipette: true,
+      paintBucket: true,
 
       arrowUp: true,
       arrowUpOutline: true,
