@@ -777,7 +777,7 @@ export default class Style {
         ]),
         {
           id: "sb3-pipette",
-        }
+        },
       ),
 
       SVG.setProps(
@@ -950,7 +950,7 @@ export default class Style {
         ]),
         {
           id: "sb3-pipette-high-contrast",
-        }
+        },
       ),
 
       SVG.setProps(

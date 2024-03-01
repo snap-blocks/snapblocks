@@ -332,7 +332,7 @@ export default class Style {
         ]),
         {
           id: "snap-pipette",
-        }
+        },
       ),
 
       SVG.setProps(

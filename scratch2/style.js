@@ -302,7 +302,7 @@ export default class Style {
         ]),
         {
           id: "sb-pipette",
-        }
+        },
       ),
 
       SVG.setProps(
