@@ -286,6 +286,24 @@ export default class Style {
           id: "sb-brush",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: `M 0.6 11.4 Q 1.5 10.5 1.5 9 L 6 4.5
+            M 0.6 11.4 Q 1.5 10.5 3 10.5 L 7.5 6
+            M 6 3 L 9 6`,
+            "stroke-width": 1.2,
+            fill: "none",
+          }),
+          SVG.el("path", {
+            d: "M 11.4 3 A 2.4 2.4 0 1 1 11.3999988000001 2.9976000003999985",
+            stroke: "none",
+          }),
+        ]),
+        {
+          id: "sb-pipette",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

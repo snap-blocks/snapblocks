@@ -99,6 +99,7 @@ export class Icon {
       notes: true,
       storage: true,
       brush: true,
+      pipette: true,
 
       arrowUp: true,
       arrowUpOutline: true,
