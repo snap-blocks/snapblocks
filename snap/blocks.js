@@ -236,6 +236,7 @@ class IconView {
       camera: { width: 12, height: 12 },
       circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
       notes: { width: 13, height: 12 },
+      storage: { width: 13, height: 12, fillAttribute: ["stroke", "fill"] },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },

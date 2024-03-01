@@ -97,6 +97,7 @@ export class Icon {
       camera: true,
       circle: true,
       notes: true,
+      storage: true,
 
       arrowUp: true,
       arrowUpOutline: true,
