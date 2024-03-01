@@ -253,20 +253,20 @@ export default class Style {
       SVG.setProps(
         SVG.group([
           SVG.group([
-            SVG.el('path', {
+            SVG.el("path", {
               d: `M 12 10.3923 A 12 12 0 0 1 0 10.3923 L 0 9.8182 L 0 8.2105 A 12 12 0 0 0 12 8.2105 Z M 12 7.1196 A 12 12 0 0 1 0 7.1196 L 0 6.5455 L 0 4.9378 A 12 12 0 0 0 12 4.9378 Z M 12 3.8469 A 12 12 0 0 1 0 3.8469 L 0 3.2727 L 0 1.665 A 12 12 0 0 0 12 1.665 Z`,
               stroke: "none",
             }),
-            SVG.el('path', {
+            SVG.el("path", {
               d: `M 0 8.5531 A 12 12 0 0 1 12 8.5531 M 0 5.2804 A 12 12 0 0 1 12 5.2804 M 0 2.0077 A 12 12 0 0 1 12 2.0077`,
               "stroke-width": 0.5,
-              fill: 'none',
-            })
+              fill: "none",
+            }),
           ]),
         ]),
         {
           id: "sb-storage",
-        }
+        },
       ),
 
       SVG.setProps(
