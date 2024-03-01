@@ -356,6 +356,14 @@ export default class Style {
           id: "snap-paintBucket",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 0 3.6 A 3.6 3.6 0 0 1 7.2 3.6 L 3.6 12 L 0 3.6 M 1.85 3.6 A 1.8 1.8 0 1 0 1.85 3.5982",
+        }),
+        {
+          id: "snap-location",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

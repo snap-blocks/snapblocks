@@ -234,6 +234,7 @@ export class IconView {
       brush: { width: 13, height: 12, fillAttribute: ["stroke", "fill"] },
       pipette: { width: 13, height: 12, fillAttribute: ["stroke", "fill"] },
       paintBucket: { width: 13, height: 12, fillAttribute: ["stroke", "fill"] },
+      location: { width: 7.2, height: 12 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
