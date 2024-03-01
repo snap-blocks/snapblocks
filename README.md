@@ -7,6 +7,8 @@ Make pictures of Snap<i>!</i> blocks from text.
 
 [Dev version](https://snap-blocks.github.io/snapblocks)
 
+[Documentation](https://snap-blocks.github.io/docs)
+
 ---
 
 **snapblocks** is a fork of **scratchblocks** which aims to be more catered towards Snap<i>!</i>. These changes include, adding Snap<i>!</i> blocks, inputs, icons, and more.
