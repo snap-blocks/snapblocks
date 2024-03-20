@@ -49,6 +49,9 @@ export class LabelView {
   }
 
   draw(options) {
+    if (!options.showSpaces) {
+      this.el.classList.add("sb-hide-spaces")
+    }
     return this.el
   }
 
@@ -56,25 +59,18 @@ export class LabelView {
     return this.metrics.width
   }
 
+  get spaceWidth() {
+    return this.metrics.spaceWidth
+  }
+
+  get lines() {
+    return this.metrics.lines
+  }
+
   measure() {
     const value = this.value
     const cls = `sb-${this.cls}`
-    let lines = value.split("\n")
-    let group = []
-
-    let y = 0
-    for (let line of lines) {
-      y += 10
-      group.push(
-        SVG.text(0, y, line, {
-          class: `sb-label ${cls}`,
-        }),
-      )
-    }
-    this.height = y + 2
-
-    this.el = SVG.group(group)
-
+    
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
       cache = LabelView.metricsCache[cls] = Object.create(null)
@@ -91,20 +87,73 @@ export class LabelView {
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
+
+    let lines = this.lines
+    let group = []
+
+    let y = 0
+    for (let line of lines) {
+      let lineGroup = []
+      y += 10
+      let x = 0
+      let first = true
+      for (let wordInfo of line) {
+        if (!first) {
+          x += this.spaceWidth / 2
+          lineGroup.push(
+            SVG.el("circle", {
+              cx: x,
+              cy: y - 13 / 2 + this.spaceWidth,
+              r: this.spaceWidth / 2,
+              class: "sb-space",
+            }),
+          )
+          x += this.spaceWidth / 2
+        }
+        lineGroup.push(
+          SVG.text(x, y, wordInfo.word, {
+            class: `sb-label ${cls}`,
+          }),
+        )
+        x += wordInfo.width
+        first = false
+      }
+      group.push(SVG.group(lineGroup))
+    }
+    this.height = y + 2
+
+    this.el = SVG.group(group)
   }
 
   static measure(value, font) {
     const context = LabelView.measuring
     context.font = font
+
+    let spaceWidth = context.measureText(" ").width
     let lines = value.split("\n")
+    let computedLines = []
     let width = 0
     for (let line of lines) {
       const textMetrics = context.measureText(line)
       width = Math.max(width, textMetrics.width)
+      let words = line.split(" ")
+      let computedLine = []
+      for (let word of words) {
+        const textMetrics = context.measureText(word)
+        computedLine.push({
+          word: word,
+          width: textMetrics.width,
+        })
+      }
+      computedLines.push(computedLine)
     }
 
     width = (width + 3) | 0
-    return { width: width }
+    return {
+      width: width,
+      spaceWidth: spaceWidth,
+      lines: computedLines,
+    }
   }
 }
 
@@ -933,6 +982,8 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
+    this.parentCategory = null
+    this.isZebra = false
   }
 
   get isScript() {
@@ -951,6 +1002,15 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
+      if (!this.isZebra && this.parentCategory) {
+        if (
+          this.parentCategory.toLowerCase() ===
+            block.info.category.toLowerCase() ||
+          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
+        ) {
+          block.isZebra = true
+        }
+      }
       const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
@@ -1007,6 +1067,7 @@ class DocumentView {
           : 460
         : -1,
       zebraColoring: options.zebraColoring,
+      showSpaces: options.showSpaces,
     }
   }
 

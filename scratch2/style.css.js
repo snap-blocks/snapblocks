@@ -17,6 +17,13 @@ export default `
   white-space: pre;
 }
 
+.sb-hide-spaces .sb-space {
+  display: none;
+}
+.sb-space {
+  fill: #b48c8c
+}
+
 .sb-obsolete {
   fill: #d42828;
 }
