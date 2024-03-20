@@ -1136,6 +1136,8 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
+    this.parentCategory = null
+    this.isZebra = false
   }
 
   get isScript() {
@@ -1154,6 +1156,15 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
+      if (!this.isZebra && this.parentCategory) {
+        if (
+          this.parentCategory.toLowerCase() ===
+            block.info.category.toLowerCase() ||
+          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
+        ) {
+          block.isZebra = true
+        }
+      }
       const child = block.draw(options)
       children.push(SVG.move(x, y, child))
       this.width = Math.max(this.width, block.width)
