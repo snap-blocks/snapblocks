@@ -14,8 +14,15 @@ export default `
   font-weight: bold;
   fill: #fff;
   font-size: 10px;
-  word-spacing: +1px;
+  /* word-spacing: +1px; */
   white-space: pre;
+}
+
+.snap-hide-spaces .snap-space {
+  display: none;
+}
+.snap-space {
+  fill: #b48c8c
 }
 
 .snap-drop-shadow {
