@@ -129,6 +129,7 @@ export default function (window) {
       zebraColoring: false,
       wrap: false,
       wrapSize: null,
+      showSpaces: false,
       elementOptions: false, // set options on the element
 
       read: readCode, // function(el, options) => code
@@ -165,6 +166,7 @@ export default function (window) {
           wrapSize: el.getAttribute("sb-wrapSize"),
           zebraColoring:
             el.getAttribute("sb-zebraColoring") || el.getAttribute("sb-zebra"),
+          showSpaces: el.getAttribute("sb-showSpaces"),
         }
 
         for (let [option, value] of Object.entries(overrideOptions)) {
