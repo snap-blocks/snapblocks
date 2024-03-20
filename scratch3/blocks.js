@@ -98,7 +98,7 @@ export class LabelView {
           lineGroup.push(
             SVG.el("circle", {
               cx: x,
-              cy: (y - this.lineHeight) - 11 + this.spaceWidth,
+              cy: y - this.lineHeight - 11 + this.spaceWidth,
               r: this.spaceWidth / 2,
               class: "sb3-space",
             }),

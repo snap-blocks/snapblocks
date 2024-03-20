@@ -70,7 +70,7 @@ export class LabelView {
   measure() {
     const value = this.value
     const cls = `sb-${this.cls}`
-    
+
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
       cache = LabelView.metricsCache[cls] = Object.create(null)
