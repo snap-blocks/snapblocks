@@ -426,8 +426,8 @@ export class InputView {
           13,
           SVG.symbol(
             options.iconStyle === "high-contrast"
-              ? "#sb3-dropdownArrow-high-contrast"
-              : "#sb3-dropdownArrow",
+              ? `#sb3-dropdownArrow-high-contrast-${options.id}`
+              : `#sb3-dropdownArrow-${options.id}`,
             {},
           ),
         ),
