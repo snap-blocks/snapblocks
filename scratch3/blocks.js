@@ -49,31 +49,26 @@ export class LabelView {
   }
 
   draw(options) {
+    if (!options.showSpaces) {
+      this.el.classList.add("sb3-hide-spaces")
+    }
     return this.el
   }
 
   get width() {
     return this.metrics.width
   }
+  get spaceWidth() {
+    return this.metrics.spaceWidth
+  }
+
+  get lines() {
+    return this.metrics.lines
+  }
 
   measure() {
     const value = this.value
     const cls = `sb3-${this.cls}`
-    let lines = value.split("\n")
-    let group = []
-
-    let y = 0
-    for (let line of lines) {
-      y += 13 + this.lineHeight
-      group.push(
-        SVG.text(0, y - this.lineHeight, line, {
-          class: `sb3-label ${cls}`,
-        }),
-      )
-    }
-    this.height = Math.max(13, y - (this.lineHeight + 1))
-
-    this.el = SVG.group(group)
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -87,20 +82,73 @@ export class LabelView {
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
+
+    let lines = this.lines
+    let group = []
+
+    let y = 0
+    for (let line of lines) {
+      let lineGroup = []
+      y += 13 + this.lineHeight
+      let x = 0
+      let first = true
+      for (let wordInfo of line) {
+        if (!first) {
+          x += this.spaceWidth / 2
+          lineGroup.push(
+            SVG.el("circle", {
+              cx: x,
+              cy: (y - this.lineHeight) - 11 + this.spaceWidth,
+              r: this.spaceWidth / 2,
+              class: "sb3-space",
+            }),
+          )
+          x += this.spaceWidth / 2
+        }
+        lineGroup.push(
+          SVG.text(x, y - this.lineHeight, wordInfo.word, {
+            class: `sb3-label ${cls}`,
+          }),
+        )
+        x += wordInfo.width
+        first = false
+      }
+      group.push(SVG.group(lineGroup))
+    }
+    this.height = Math.max(13, y - (this.lineHeight + 1))
+
+    this.el = SVG.group(group)
   }
 
   static measure(value, font) {
     const context = LabelView.measuring
     context.font = font
+
+    let spaceWidth = context.measureText(" ").width
     let lines = value.split("\n")
+    let computedLines = []
     let width = 0
     for (let line of lines) {
       const textMetrics = context.measureText(line)
       width = Math.max(width, textMetrics.width)
+      let words = line.split(" ")
+      let computedLine = []
+      for (let word of words) {
+        const textMetrics = context.measureText(word)
+        computedLine.push({
+          word: word,
+          width: textMetrics.width,
+        })
+      }
+      computedLines.push(computedLine)
     }
 
     width = (width + 3) | 0
-    return { width: width }
+    return {
+      width: width,
+      spaceWidth: spaceWidth,
+      lines: computedLines,
+    }
   }
 }
 
@@ -1227,6 +1275,7 @@ class DocumentView {
           : 600
         : -1,
       zebraColoring: options.zebraColoring,
+      showSpaces: options.showSpaces,
     }
   }
 

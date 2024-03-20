@@ -13,6 +13,13 @@ const common = `
   word-spacing: +1pt;
 }
 
+.sb3-hide-spaces .sb3-space {
+  display: none;
+}
+.sb3-space {
+  fill: #b48c8c
+}
+
 .sb3-literal-number,
 .sb3-literal-string,
 .sb3-literal-number-dropdown,
