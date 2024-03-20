@@ -208,10 +208,6 @@ class IconView {
       this.scale = 1
     }
 
-    if (isNaN(this.r) || this.r == null) {
-      this.r = 255
-    }
-
     this.width = this.width * this.scale
     this.height = this.height * this.scale
 
@@ -319,6 +315,10 @@ class InputView {
     }
 
     this.x = 0
+  }
+
+  get isInput() {
+    return true
   }
 
   measure() {
