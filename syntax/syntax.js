@@ -338,8 +338,8 @@ function parseLines(code, languages) {
   function next() {
     tok = code[++index]
   }
-  function peek() {
-    return code[index + 1]
+  function peek(amount = 1) {
+    return code[index + amount]
   }
   function peekNonWs() {
     for (let i = index + 1; i < code.length; i++) {
@@ -593,18 +593,24 @@ function parseLines(code, languages) {
     next() // '('
 
     // empty number-dropdown
+    let startIndex = index
+    
+    let text = ""
     if (tok === " ") {
-      next()
+      while (tok === " ") {
+        text += tok
+        next()
+      }
       if (tok === "v" && peek() === ")") {
         next()
         next()
-        return new Input("number-dropdown", "")
+        return new Input("number-dropdown", text.substring(1, text.length))
       }
       // console.log("tok", tok)
       if (tok === "V" && peek() === ")") {
         next()
         next()
-        return new Input("number-dropdown", "", null, true)
+        return new Input("number-dropdown", text.substring(1, text.length), null, true)
       }
     }
 
@@ -638,21 +644,37 @@ function parseLines(code, languages) {
     // number-dropdown
     if (children.length > 1 && children.every(child => child.isLabel)) {
       const last = children[children.length - 1]
-      if (last.value === "v") {
-        children.pop()
-        const value = children.map(l => l.value).join(" ")
-        const raw = children.map(l => l.raw).join(" ")
-        let input = makeMenu("number-dropdown", value)
-        if (input.hasLabel) {
-          input.label.raw = raw
+      let end = last.value
+      if (end === "v" || end === "V") {
+        // Yes, I know this is a very hacky solution, I just want to keep all the spaces,
+        // and deal with backslashes. I wish I could come up with a much better way, then backtracking.
+        
+        let endIndex = index
+        let currentIndex = endIndex
+
+        while (code[currentIndex] != end) {
+          currentIndex -= 1
         }
-        return input
-      }
-      if (last.value === "V") {
-        children.pop()
-        const value = children.map(l => l.value).join(" ")
-        const raw = children.map(l => l.raw).join(" ")
-        let input = makeMenu("number-dropdown", value, true)
+        currentIndex -= 2
+        index = startIndex - 1
+
+        let value = ""
+        let raw = ""
+        
+        while (index < currentIndex) {
+          next()
+          if (tok === "\\") {
+            next()
+            raw += tok
+          }
+          value += tok
+          raw += tok
+        }
+
+        index = endIndex
+        tok = code[index]
+
+        let input = makeMenu("number-dropdown", value, end === "V")
         if (input.hasLabel) {
           input.label.raw = raw
         }
