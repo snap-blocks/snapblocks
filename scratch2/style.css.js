@@ -14,6 +14,7 @@ export default `
   fill: #fff;
   font-size: 10px;
   word-spacing: +1px;
+  white-space: pre;
 }
 
 .sb-obsolete {
