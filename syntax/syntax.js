@@ -594,7 +594,7 @@ function parseLines(code, languages) {
 
     // empty number-dropdown
     let startIndex = index
-    
+
     let text = ""
     if (tok === " ") {
       while (tok === " ") {
@@ -610,7 +610,12 @@ function parseLines(code, languages) {
       if (tok === "V" && peek() === ")") {
         next()
         next()
-        return new Input("number-dropdown", text.substring(1, text.length), null, true)
+        return new Input(
+          "number-dropdown",
+          text.substring(1, text.length),
+          null,
+          true,
+        )
       }
     }
 
@@ -648,7 +653,7 @@ function parseLines(code, languages) {
       if (end === "v" || end === "V") {
         // Yes, I know this is a very hacky solution, I just want to keep all the spaces,
         // and deal with backslashes. I wish I could come up with a much better way, then backtracking.
-        
+
         let endIndex = index
         let currentIndex = endIndex
 
@@ -660,7 +665,7 @@ function parseLines(code, languages) {
 
         let value = ""
         let raw = ""
-        
+
         while (index < currentIndex) {
           next()
           if (tok === "\\") {
