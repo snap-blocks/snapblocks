@@ -351,8 +351,7 @@ class InputView {
         isFlat: true,
       })
       w = Math.max(
-        this.shape === "string" ? 8 :
-          this.shape === "dropdown" ? 21 : 11,
+        this.shape === "string" ? 8 : this.shape === "dropdown" ? 21 : 11,
         this.label.width +
           (this.shape === "string"
             ? 1
