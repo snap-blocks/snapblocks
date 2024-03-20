@@ -91,8 +91,6 @@ export class LabelView {
       // TODO: add some way of making monospaced
     }
 
-    console.log("space width", this.lines)
-
     let lines = this.lines
     let group = []
 
