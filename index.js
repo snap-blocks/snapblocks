@@ -24,6 +24,8 @@ import * as scratch3 from "./scratch3/index.js"
 import * as snap from "./snap/index.js"
 
 export default function (window) {
+  const version = "1.3.0"
+
   const document = window.document
 
   snap.init(window)
@@ -187,6 +189,8 @@ export default function (window) {
   }
 
   return {
+    version: version,
+
     allLanguages: allLanguages, // read-only
     loadLanguages: loadLanguages,
 
