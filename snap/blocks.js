@@ -91,7 +91,7 @@ export class LabelView {
       // TODO: add some way of making monospaced
     }
 
-    console.log('space width', this.lines)
+    console.log("space width", this.lines)
 
     let lines = this.lines
     let group = []
@@ -108,24 +108,22 @@ export class LabelView {
           lineGroup.push(
             SVG.el("circle", {
               cx: x,
-              cy: y - (12 / 2) + (this.spaceWidth),
+              cy: y - 12 / 2 + this.spaceWidth,
               r: this.spaceWidth / 2,
               class: "snap-space",
-            })
+            }),
           )
           x += this.spaceWidth / 2
         }
         lineGroup.push(
           SVG.text(x, y, wordInfo.word, {
             class: `snap-label ${cls}`,
-          })
+          }),
         )
         x += wordInfo.width
         first = false
       }
-      group.push(
-        SVG.group(lineGroup)
-      )
+      group.push(SVG.group(lineGroup))
     }
     this.height = y + 2
 
@@ -135,7 +133,7 @@ export class LabelView {
   static measure(value, font) {
     const context = LabelView.measuring
     context.font = font
-    
+
     let spaceWidth = context.measureText(" ").width
     let lines = value.split("\n")
     let computedLines = []
