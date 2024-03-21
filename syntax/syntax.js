@@ -818,6 +818,9 @@ function parseLines(code, languages) {
     next()
     next()
     let comment = ""
+    if (tok === " ") {
+      next()
+    }
     while (tok && tok !== "\n" && tok !== end) {
       comment += tok
       next()
