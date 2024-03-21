@@ -1,19 +1,77 @@
-// green
-(length of [world])
-(length of (var))
-(length of (4))
+// math of
+([abs V] of (10))
+([neg V] of (10))
+([sign V] of (10))
+([ceiling V] of (10))
+([floor V] of (10))
+([sqrt V] of (10))
+([sin V] of (10))
+([cos V] of (10))
+([tan V] of (10))
+([asin V] of (10))
+([acos V] of (10))
+([atan V] of (10))
+([ln V] of (10))
+([log V] of (10))
+([lg V] of (10))
+([e ^ V] of (10))
+([e^ V] of (10))
+([10 ^ V] of (10))
+([10^ V] of (10))
+([2 ^ V] of (10))
+([2^ V] of (10))
+([id V] of (10))
 
-([sqrt v] of (9))
 ([sqrt v] of [4])
 ([sqrt v] of (var))
 
-([e^ v] of (9))
-([e ^ v] of (9))
+// text of
+
+([encode URI V] of [Abelson & Sussman])
+([decode URI V] of [Abelson & Sussman])
+([encode URI component V] of [Abelson & Sussman])
+([decode URI component V] of [Abelson & Sussman])
+([XML escape V] of [Abelson & Sussman])
+([XML unescape V] of [Abelson & Sussman])
+([JS escape V] of [Abelson & Sussman])
+([hex sha512 hash V] of [Abelson & Sussman])
+
+([encode URI V] of (5))
+([encode URI V] of (var))
+
+// snap list
+
+([length V] of @list)
+([rank V] of @list)
+([dimensions V] of @list)
+([flatten V] of @list)
+([columns V] of @list)
+([uniques V] of @list)
+([distribution V] of @list)
+([sorted V] of @list)
+([shuffled V] of @list)
+([text V] of @list)
+([lines V] of @list)
+([csv V] of @list)
+([json V] of @list)
+
+([length V] of (list))
+([rank V] of (list))
+([dimensions V] of (list))
+([flatten V] of (list))
+([columns V] of (list))
+([uniques V] of (list))
+([distribution V] of (list))
+([sorted V] of (list))
+([shuffled V] of (list))
+([text V] of (list))
+([lines V] of (list))
+([csv V] of (list))
+([json V] of (list))
 
 // blue
-([x position v] of [Sprite1 v])
-([x position v] of (var))
+([x position V] of [Sprite1 V])
+([x position V] of (var))
 
-// red
-(length of [list v])
+((var) of [Sprite1 V])
 
