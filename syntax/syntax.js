@@ -556,14 +556,14 @@ function parseLines(code, languages) {
     return !escapeV && / v$/.test(s)
       ? makeMenu("dropdown", s.slice(0, s.length - 2), false)
       : !escapeV && / V$/.test(s)
-      ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
-      : (() => {
-          let input = new Input("string", s, true)
-          if (input.hasLabel) {
-            input.label.raw = raw
-          }
-          return input
-        })()
+        ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
+        : (() => {
+            let input = new Input("string", s, true)
+            if (input.hasLabel) {
+              input.label.raw = raw
+            }
+            return input
+          })()
   }
 
   function pBlock(end) {
@@ -702,10 +702,10 @@ function parseLines(code, languages) {
           first.isCommand
             ? "stack"
             : first.isBoolean
-            ? "boolean"
-            : first.isRound
-            ? "reporter"
-            : "stack",
+              ? "boolean"
+              : first.isRound
+                ? "reporter"
+                : "stack",
         )
       } else if (
         (first && first.isScript && first.isEmpty) ||
@@ -715,10 +715,10 @@ function parseLines(code, languages) {
           first.isCommand
             ? "stack"
             : first.isBoolean
-            ? "boolean"
-            : first.isRound
-            ? "reporter"
-            : "stack",
+              ? "boolean"
+              : first.isRound
+                ? "reporter"
+                : "stack",
         )
       }
     }

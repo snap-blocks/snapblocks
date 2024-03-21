@@ -173,26 +173,26 @@ export class IconView {
       !isNaN(icon.scale) && icon.scale !== null
         ? icon.scale
         : isNaN(this.scale) || this.scale == null
-        ? 1
-        : this.scale
+          ? 1
+          : this.scale
     this.r =
       !isNaN(icon.r) && icon.r !== null
         ? icon.r
         : isNaN(this.r) || this.r == null
-        ? null
-        : this.r
+          ? null
+          : this.r
     this.g =
       !isNaN(icon.g) && icon.g !== null
         ? icon.g
         : isNaN(this.g) || this.g == null
-        ? null
-        : this.g
+          ? null
+          : this.g
     this.b =
       !isNaN(icon.b) && icon.b !== null
         ? icon.b
         : isNaN(this.b) || this.b == null
-        ? null
-        : this.b
+          ? null
+          : this.b
 
     if (this.scale <= 0) {
       this.scale = 1
@@ -1005,12 +1005,12 @@ class BlockView {
       this.hasScript
         ? 160
         : this.isHat
-        ? 108
-        : this.isCommand || this.isOutline
-        ? 64
-        : this.isReporter
-        ? 48
-        : 0,
+          ? 108
+          : this.isCommand || this.isOutline
+            ? 64
+            : this.isReporter
+              ? 48
+              : 0,
       innerWidth,
     )
 

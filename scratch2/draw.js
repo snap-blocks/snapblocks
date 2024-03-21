@@ -452,14 +452,17 @@ export default class SVG {
             return SVG.roundedPath(w, h)
           }
         : shape === "boolean"
-        ? (w, h) => {
-            if (child.isBlock && child.lines.length > 1) {
-              return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
-            }
+          ? (w, h) => {
+              if (child.isBlock && child.lines.length > 1) {
+                return [
+                  SVG.getPointedTop(w, h),
+                  SVG.getPointedBottom(w, h, true),
+                ]
+              }
 
-            return SVG.pointedPath(w, h)
-          }
-        : SVG.capPath
+              return SVG.pointedPath(w, h)
+            }
+          : SVG.capPath
     return SVG.path({
       ...props,
       path: [

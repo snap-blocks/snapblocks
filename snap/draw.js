@@ -615,10 +615,10 @@ export default class SVG {
       shape === "reporter"
         ? SVG.roundedPath
         : shape === "boolean"
-        ? isEmpty
-          ? SVG.pointedInput
-          : SVG.pointedPath
-        : SVG.capPath
+          ? isEmpty
+            ? SVG.pointedInput
+            : SVG.pointedPath
+          : SVG.capPath
     return SVG.path({
       ...props,
       path: [

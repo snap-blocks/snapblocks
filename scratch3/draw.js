@@ -205,24 +205,24 @@ export default class SVG {
             return [SVG.getRoundedTop(w, h, r), SVG.getRoundedBottom(w, h, r)]
           }
         : shape === "boolean"
-        ? (w, h) => {
-            let r = h / 2
-            let showRight = true
-            if (child.isBlock && child.lines.length > 1) {
-              r = 20
-              showRight = !child.hasScript
-            }
+          ? (w, h) => {
+              let r = h / 2
+              let showRight = true
+              if (child.isBlock && child.lines.length > 1) {
+                r = 20
+                showRight = !child.hasScript
+              }
 
-            if (child.isBlock) {
-              return [
-                SVG.getPointedTop(w, h),
-                SVG.getPointedBottom(w, h, showRight, r),
-              ]
-            } else {
-              return SVG.pointedPath(w, h)
+              if (child.isBlock) {
+                return [
+                  SVG.getPointedTop(w, h),
+                  SVG.getPointedBottom(w, h, showRight, r),
+                ]
+              } else {
+                return SVG.pointedPath(w, h)
+              }
             }
-          }
-        : SVG.capPath
+          : SVG.capPath
     return SVG.path({
       ...props,
       path: [

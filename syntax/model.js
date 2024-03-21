@@ -173,12 +173,12 @@ export class Input {
     return this.isRound
       ? `(${text})`
       : this.isSquare
-      ? `[${text}]`
-      : this.isBoolean
-      ? "<>"
-      : this.isStack
-      ? "{}"
-      : text
+        ? `[${text}]`
+        : this.isBoolean
+          ? "<>"
+          : this.isStack
+            ? "{}"
+            : text
   }
 
   translate(_lang) {
@@ -247,8 +247,8 @@ export class Block {
         return child.isScript
           ? `{\n${indent(child.stringify())}\n} `
           : child.isCommand
-          ? `{${child.stringify()}}`
-          : child.stringify().replace(/^\x20+|\x20+$/g, "") + " " // keep newlines, while also trimming spaces
+            ? `{${child.stringify()}}`
+            : child.stringify().replace(/^\x20+|\x20+$/g, "") + " " // keep newlines, while also trimming spaces
       })
       .join("")
       .replace(/^\x20+|\x20+$/g, "")
@@ -284,10 +284,10 @@ export class Block {
     return this.hasScript
       ? text + "\nend"
       : this.info.shape === "reporter"
-      ? `(${text})`
-      : this.info.shape === "boolean"
-      ? `<${text}>`
-      : text
+        ? `(${text})`
+        : this.info.shape === "boolean"
+          ? `<${text}>`
+          : text
   }
 
   translate(lang, isShallow) {

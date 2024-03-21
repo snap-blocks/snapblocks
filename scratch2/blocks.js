@@ -82,8 +82,8 @@ export class LabelView {
       const font = /comment-label/.test(this.cls)
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
         : /literal/.test(this.cls)
-        ? `normal 9px ${defaultFontFamily}`
-        : `bold 10px ${defaultFontFamily}`
+          ? `normal 9px ${defaultFontFamily}`
+          : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
@@ -180,26 +180,26 @@ class IconView {
       !isNaN(icon.scale) && icon.scale !== null
         ? icon.scale
         : isNaN(this.scale) || this.scale == null
-        ? 1
-        : this.scale
+          ? 1
+          : this.scale
     this.r =
       !isNaN(icon.r) && icon.r !== null
         ? icon.r
         : isNaN(this.r) || this.r == null
-        ? 255
-        : this.r
+          ? 255
+          : this.r
     this.g =
       !isNaN(icon.g) && icon.g !== null
         ? icon.g
         : isNaN(this.g) || this.g == null
-        ? 255
-        : this.g
+          ? 255
+          : this.g
     this.b =
       !isNaN(icon.b) && icon.b !== null
         ? icon.b
         : isNaN(this.b) || this.b == null
-        ? 255
-        : this.b
+          ? 255
+          : this.b
 
     if (this.scale <= 0) {
       this.scale = 1
@@ -603,18 +603,18 @@ class BlockView {
       return child.isReporter
         ? (4 + child.height / 4) | 0
         : child.isLabel
-        ? (5 + child.height / 2) | 0
-        : child.isBoolean || child.shape === "boolean"
-        ? 5
-        : (2 + child.height / 2) | 0
+          ? (5 + child.height / 2) | 0
+          : child.isBoolean || child.shape === "boolean"
+            ? 5
+            : (2 + child.height / 2) | 0
     }
     if (this.isReporter) {
       return (child.isInput && child.isRound) ||
         ((child.isReporter || child.isBoolean) && !child.hasScript)
         ? 4
         : child.isLabel
-        ? (2 + child.height / 2) | 0
-        : (-2 + child.height / 2) | 0
+          ? (2 + child.height / 2) | 0
+          : (-2 + child.height / 2) | 0
     }
     return 4
   }
@@ -808,8 +808,8 @@ class BlockView {
       this.isHat || this.hasScript
         ? 83
         : this.isCommand || this.isOutline || this.isRing
-        ? 39
-        : 20,
+          ? 39
+          : 20,
     )
     this.height = y
     this.width = scriptWidth

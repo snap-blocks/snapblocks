@@ -84,8 +84,8 @@ export class LabelView {
       const font = /comment-label/.test(this.cls)
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
         : /literal/.test(this.cls)
-        ? `normal 9px Arial, DejaVu Sans, sans-serif`
-        : `bold 10px ${defaultFontFamily}`
+          ? `normal 9px Arial, DejaVu Sans, sans-serif`
+          : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
@@ -183,26 +183,26 @@ class IconView {
       !isNaN(icon.scale) && icon.scale !== null
         ? icon.scale
         : isNaN(this.scale) || this.scale == null
-        ? 1
-        : this.scale
+          ? 1
+          : this.scale
     this.r =
       !isNaN(icon.r) && icon.r !== null
         ? icon.r
         : isNaN(this.r) || this.r == null
-        ? 255
-        : this.r
+          ? 255
+          : this.r
     this.g =
       !isNaN(icon.g) && icon.g !== null
         ? icon.g
         : isNaN(this.g) || this.g == null
-        ? 255
-        : this.g
+          ? 255
+          : this.g
     this.b =
       !isNaN(icon.b) && icon.b !== null
         ? icon.b
         : isNaN(this.b) || this.b == null
-        ? 255
-        : this.b
+          ? 255
+          : this.b
 
     if (this.scale <= 0) {
       this.scale = 1
@@ -356,8 +356,8 @@ class InputView {
           (this.shape === "string"
             ? 1
             : this.shape === "number-dropdown"
-            ? 16
-            : 13),
+              ? 16
+              : 13),
       )
     } else {
       w = this.isBoolean ? 22 : this.isInset ? 30 : this.isColor ? 14 : null
@@ -671,18 +671,18 @@ class BlockView {
       return child.isReporter
         ? (4 + child.height / 4) | 0
         : child.isLabel
-        ? (5 + child.height / 2) | 0
-        : child.isBoolean || child.shape === "boolean"
-        ? 5
-        : (2 + child.height / 2) | 0
+          ? (5 + child.height / 2) | 0
+          : child.isBoolean || child.shape === "boolean"
+            ? 5
+            : (2 + child.height / 2) | 0
     }
     if (this.isReporter) {
       return (child.isInput && child.isRound) ||
         ((child.isReporter || child.isBoolean) && !child.hasScript)
         ? 3
         : child.isLabel
-        ? (2 + child.height / 2) | 0
-        : (4 + child.height / 2) | 20
+          ? (2 + child.height / 2) | 0
+          : (4 + child.height / 2) | 20
     }
     return 0
   }
@@ -858,10 +858,10 @@ class BlockView {
       this.isHat
         ? 110
         : this.hasScript
-        ? 39
-        : this.isCommand || this.isOutline || this.isRing
-        ? 39
-        : 20,
+          ? 39
+          : this.isCommand || this.isOutline || this.isRing
+            ? 39
+            : 20,
     )
     this.height = y
     this.width = scriptWidth
