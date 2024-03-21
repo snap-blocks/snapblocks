@@ -959,7 +959,10 @@ class CommentView {
   }
 
   draw(options) {
-    const labelEl = this.label.draw(options)
+    const labelEl = this.label.draw({
+      ...options,
+      showSpaces: false,
+    })
 
     this.width = this.label.width + 16
     return SVG.group([
