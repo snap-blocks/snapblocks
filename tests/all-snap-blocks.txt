@@ -22,8 +22,6 @@ set y to (0)
 
 if on edge, bounce
 
-set rotation style [left-right V]
-
 (position)
 (x position)
 (y position)
@@ -34,10 +32,8 @@ set rotation style [left-right V]
 // Looks
 
 switch to costume [ V]
-switch costume to [costume1 V]
 next costume
 (costume #)
-(costume [name V])
 
 say [Hello!] for (2) secs
 say [Hello!]
@@ -62,7 +58,6 @@ show
 hide
 <shown?>
 
-go to front
 go to [front V] layer
 go back (1) layers
 
@@ -86,33 +81,22 @@ alert (list)
 
 save [pen trails V] as costume named [screenshot]
 
-// (Stage-specific)
-
-switch backdrop to [backdrop1 V]
-switch backdrop to [backdrop1 V] and wait
-next backdrop
-
-(backdrop #)
-(backdrop name)
-(backdrop [name V])
-
 
 
 // Sound
 
-play sound [pop V]
-play sound [pop V] until done
+play sound [ V]
+play sound [ V] until done
 stop all sounds
 
-play sound [pop V] at (44100 v) Hz
-([duration V] of sound [pop V])
+play sound [ V] at (44100 v) Hz
+([duration V] of sound [ V])
 (new sound @list rate (44100 v) Hz)
 (new sound (list) rate (44100 v) Hz)
 
 rest for (0.2) beats
 play note (60 v) for (0.5) beats
 set instrument to (1 v)
-play drum (1 v) for (0.2) beats
 
 change tempo by (20)
 set tempo to (60) bpm
@@ -141,16 +125,11 @@ pen up
 
 set pen color to [#911a44]
 set background color to [#911a44]
-change pen color by (10)
-set pen color to (0)
 change pen [hue V] by (10)
 set pen [hue V] to (50)
 change background [hue V] by (10)
 set background [hue V] to (50)
 (pen [hue V])
-
-change pen shade by (10)
-set pen shade to (50)
 
 change pen size by (1)
 set pen size to (1)
@@ -167,7 +146,7 @@ cut from [ V]
 
 
 
-// Events
+// Control
 
 when gf clicked
 when green flag clicked
@@ -176,30 +155,22 @@ when ⚑ clicked
 when [space V] key pressed
 when [any key V] key pressed ▸
 when [any key V] key pressed ((key)) ◂
-when this sprite clicked
-when backdrop switches to [backdrop1 V]
 when I am [clicked V]
 when <>
 when <[] = []>
 when (condition)
 
-when [loudness V] > (10)
-
-when I receive [message1 V]
-when I receive [message1 V] ▸
-when I receive [message1 V] ((data)) ◂
-broadcast [message1 V]
-broadcast [message1 V] ▸
-broadcast [message1 V] to [all V] ◂▸
-broadcast [message1 V] to [all V] with data [] ◂
-broadcast [message1 V] and wait
-broadcast [message1 V] ▸ and wait
-broadcast [message1 V] to [all V] ◂▸ and wait
-broadcast [message1 V] to [all V] with data [] ◂ and wait
-
-
-
-// Control
+when I receive [ V]
+when I receive [ V] ▸
+when I receive [ V] ((data)) ◂
+broadcast [ V]
+broadcast [ V] ▸
+broadcast [ V] to [all V] ◂▸
+broadcast [ V] to [all V] with data [] ◂
+broadcast [ V] and wait
+broadcast [ V] ▸ and wait
+broadcast [ V] to [all V] ◂▸ and wait
+broadcast [ V] to [all V] with data [] ◂ and wait
 
 warp {
     
@@ -228,10 +199,6 @@ if <> {
 
 }
 
-if <> then {
-
-}
-
 if <> {
 
 } ▸
@@ -243,12 +210,6 @@ if <> {
 } ◂▸
 
 if <> {
-
-} else {
-
-}
-
-if <> then {
 
 } else {
 
@@ -350,9 +311,9 @@ run ({}▸) w/continuation
 
 // Sensing
 
-<touching [mouse-pointer V]?>
-<touching color [#911a44]?>
-<color [#911a44] is touching [#911a44]?>
+<touching [mouse-pointer V] ?>
+<touching color [#911a44] ?>
+<color [#911a44] is touching [#911a44] ?>
 
 ask [What's your name?] and wait
 (answer)
@@ -364,26 +325,21 @@ ask [What's your name?] and wait
 
 <key [space V] pressed?>
 
-(distance to [mouse-pointer V])
 ([distance V] to [mouse-pointer V])
 ([hue V] at [mouse-pointer V])
-
-(loudness)
 
 reset timer
 (timer)
 (current [date V])
-(days since 2000)
 
-([costume # V] of [Sprite1 V])
+([costume # V] of [ V])
 (my [neighbors V])
 (object [myself V])
 
 (url [snap.berkeley.edu])
 (microphone [volume V])
 (video [motion V] on [myself V])
-turn video [on V]
-set video transparency to (50) %
+set video transparency to (50)
 
 <is [turbo mode V] on?>
 
@@ -399,9 +355,6 @@ set [flat line ends V] to (var)
 set [log pen vectors V] to (var)
 set [video capture V] to (var)
 set [mirror video V] to (var)
-
-(username)
-(user id)
 
 (processes)
 (stack size)
@@ -502,8 +455,6 @@ set [mirror video V] to (var)
 (atan2 () ÷ ())
 (pick random (1) to (10))
 
-// conditions
-
 <[] < []>
 <[] < []>
 <[] < [] ◂▸>
@@ -515,14 +466,23 @@ set [mirror video V] to (var)
 <all \< (list)>
 
 <[] \<= []>
+<[] ≤ []>
 <[] \<= []>
+<[] ≤ []>
 <[] \<= [] ◂▸>
+<[] ≤ [] ◂▸>
 <[] \<= [] ◂⋮▸>
+<[] ≤ [] ◂⋮▸>
 <[] \<= [] \<= [] ◂▸>
+<[] ≤ [] ≤ [] ◂▸>
 <[] \<= [] \<= [] ◂⋮▸>
+<[] ≤ [] ≤ [] ◂⋮▸>
 <all \<= ▸>
+<all ≤ ▸>
 <all \<= ⋮▸>
+<all ≤ ⋮▸>
 <all \<= (list)>
+<all ≤ (list)>
 
 <[] = []>
 <[] = []>
@@ -535,14 +495,23 @@ set [mirror video V] to (var)
 <all = (list)>
 
 <[] != []>
+<[] ≠ []>
 <[] != []>
+<[] ≠ []>
 <[] != [] ◂▸>
+<[] ≠ [] ◂▸>
 <[] != [] ◂⋮▸>
-<[] != [] != [] ◂▸>
+<[] ≠ [] ◂⋮▸>
+<[] != [] ≠ [] ◂▸>
+<[] ≠ [] != [] ◂▸>
 <[] != [] != [] ◂⋮▸>
+<[] ≠ [] ≠ [] ◂⋮▸>
 <neighbors != ▸>
+<neighbors ≠ ▸>
 <neighbors != ⋮▸>
+<neighbors ≠ ⋮▸>
 <neighbors != (list)>
+<neighbors ≠ (list)>
 
 <[] \> []>
 <[] \> []>
@@ -555,14 +524,23 @@ set [mirror video V] to (var)
 <all \> (list)>
 
 <[] \>= []>
+<[] ≥ []>
 <[] \>= []>
+<[] ≥ []>
 <[] \>= [] ◂▸>
+<[] ≥ [] ◂▸>
 <[] \>= [] ◂⋮▸>
+<[] ≥ [] ◂⋮▸>
 <[] \>= [] \>= [] ◂▸>
+<[] ≥ [] ≥ [] ◂▸>
 <[] \>= [] \>= [] ◂⋮▸>
+<[] ≥ [] ≥ [] ◂⋮▸>
 <all \>= ▸>
+<all ≥ ▸>
 <all \>= ⋮▸>
+<all ≥ ⋮▸>
 <all \>= (list)>
+<all ≥ (list)>
 
 <<> and <>>
 <<> and <> ◂▸>
@@ -587,7 +565,6 @@ set [mirror video V] to (var)
 <true> // no visual boolean icon yet
 <false> // no visual boolean icon yet
 
-(join [hello ] [world])
 (join [] ◂▸)
 (join [] ◂⋮▸)
 (join [] [] ◂▸)
@@ -620,10 +597,10 @@ set [mirror video V] to (var)
 (JavaScript function \( [] ◂⋮▸ \) \{ [] \} )
 (JavaScript function \( [] [] ◂▸ \) \{ [] \} )
 (JavaScript function \( [] [] ◂⋮▸ \) \{ [] \} )
-(JavaScript function \(▸ \) \{ [] \} )
-(JavaScript function \(⋮▸ \) \{ [] \} )
-(JavaScript function \((list) \) \{ [] \} )
-(JavaScript function \(input list: (list) \) \{ [] \} )
+(JavaScript function \( ▸ \) \{ [] \} )
+(JavaScript function \( ⋮▸ \) \{ [] \} )
+(JavaScript function \( (list) \) \{ [] \} )
+(JavaScript function \( input list: (list) \) \{ [] \} )
 
 (type of [5])
 
@@ -694,14 +671,10 @@ inherit [var V]
 ([csv V] of (list))
 ([json V] of (list))
 
-(length of [list V])
-
 (index of [thing] in @list)
 (index of [thing] in (list))
-(item # of [thing] in [list V])
 <@list contains [thing]>
 <(list) contains [thing]>
-<[list V] contains [thing] ?>
 <is @list empty?>
 <is (list) empty?>
 
@@ -721,16 +694,12 @@ for each ((item)) in (list) {
     
 }
 
-add [thing] to [list V]
 add [thing] to @list
 add [thing] to (list)
-delete (1 v) of [list V]
 delete (1 v) of @list
 delete (1 v) of (list)
-insert [thing] at (1 v) of [list V]
 insert [thing] at (1 v) of @list
 insert [thing] at (1 v) of (list)
-replace item (1 v) of [list V] with [thing]
 replace item (1 v) of @list with [thing]
 replace item (1 v) of (list) with [thing]
 
@@ -757,8 +726,6 @@ replace item (1 v) of (list) with [thing]
 (reshape [] to input list: (list))
 (reshape [] to (list))
 
-show list [list V]
-hide list [list V]
 show table @list
 show table (list)
 
@@ -806,94 +773,3 @@ map [String V] to code [<#1>]
 map [ V] of [ V] to code []
 
 (code of ({}▸))
-
-// PicoBoard
-
-when [button pressed V]
-
-when [slider V] [> V] (50)
-
-<sensor [button pressed V]?>
-([slider V] sensor value)
-
-// Lego WeDo 1.0
-
-turn [motor V] on for (1) secs
-turn [motor V] on
-turn [motor V] off
-
-set [motor V] power to (100)
-set [motor V] direction to [this way V]
-
-when distance [< V] (20)
-
-when tilt [= V] (20)
-
-(distance)
-(tilt)
-
-// Lego WeDo 2.0
-
-turn [motor V] on for (1) seconds
-turn [motor V] on
-turn [motor V] off
-
-set [motor V] power to (100)
-set [motor V] direction to [this way V]
-
-set light color to (50)
-play note (60 v) for (0.5) seconds
-when distance [< V] (50)
-
-when tilted
-
-(distance)
-(tilt [up-down V])
-
-
-// Obsolete Scratch 1.4 blocks:
-
-
-// Looks
-
-switch to background [background1 v]
-next background
-(background #)
-
-
-
-// Control
-
-forever if <> {
-
-}
-
-stop script
-stop all
-
-
-
-// Events
-
-when Sprite1 clicked
-
-
-
-// Sensing
-
-<loud?>
-
-
-
-// Grey
-
-. . .
-...
-…
-(. . .)
-(...)
-(…)
-<. . .>
-<...>
-<…>
-

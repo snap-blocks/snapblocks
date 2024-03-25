@@ -339,7 +339,7 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      closed: ["%1", "input list: %1", "@verticalEllipsis @addInput", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -355,7 +355,7 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      closed: ["%1", "input list: %1", "@verticalEllipsis @addInput", "@addInput", "{info}"],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -456,8 +456,15 @@ export default [
     category: "sound",
   },
   {
+    snap: "stopFreq",
+    spec: "stop frequency",
+    inputs: [],
+    shape: "stack",
+    category: "sound",
+  },
+  {
     snap: "doPlayFrequency",
-    spec: "play %1 Hz for %2 secs",
+    spec: "play %1 hz for %2 secs",
     inputs: ["%n", "%n"],
     shape: "stack",
     category: "sound",
@@ -593,8 +600,14 @@ export default [
     category: "pen",
   },
   {
+    snap: "reportPentrailsAsSVG",
+    spec: "pen vectors",
+    shape: "reporter",
+    category: "pen",
+  },
+  {
     snap: "doPasteOn",
-    spec: "pase on %1",
+    spec: "paste on %1",
     inputs: ["%m.sprite"],
     shape: "stack",
     category: "pen",
@@ -640,6 +653,13 @@ export default [
     category: "pen",
   },
   {
+    snap: "setBackgroundColor",
+    spec: "set background color to %1",
+    inputs: ["%c"],
+    shape: "stack",
+    category: "pen",
+  },
+  {
     id: "pen.changeHue",
     selector: "changePenHueBy:",
     spec: "change pen color by %1",
@@ -656,9 +676,23 @@ export default [
     category: "pen",
   },
   {
+    snap: "setBackgroundColorDimension",
+    spec: "set background %1 to %2",
+    inputs: ["%m.color", "%c"],
+    shape: "stack",
+    category: "pen",
+  },
+  {
     id: "pen.changeColorParam",
     snap: "changePenColorDimension",
     spec: "change pen %1 by %2",
+    inputs: ["%m.color", "%n"],
+    shape: "stack",
+    category: "pen",
+  },
+  {
+    snap: "changeBackgroundColorDimension",
+    spec: "change background %1 by %2",
     inputs: ["%m.color", "%n"],
     shape: "stack",
     category: "pen",
@@ -723,7 +757,18 @@ export default [
   {
     id: "EVENT_WHENKEYPRESSED",
     selector: "whenKeyPressed",
-    spec: "when %1 key pressed",
+    spec: "{spec}",
+    specDefs: {
+      "spec": [
+        "when %1 key pressed",
+        "when %1 key pressed {data}",
+      ],
+      "data": [
+        "",
+        "@addInput",
+        "%2 @delInput"
+      ]
+    },
     inputs: ["%m.key"],
     shape: "hat",
     category: "events",
@@ -828,6 +873,13 @@ export default [
     category: "events",
   },
   {
+    id: "EVENT_WHENTOUCHINGOBJECT",
+    spec: "when sprite touches %1",
+    inputs: ["%m"],
+    shape: "hat",
+    category: "events",
+  },
+  {
     snap: "doWarp",
     spec: "warp %1",
     inputs: ["%cs"],
@@ -920,6 +972,7 @@ export default [
     inputs: ["%s", "%n", "%n", "%cs"],
     shape: "stack",
     category: "control",
+    hasLoopArrow: true,
   },
   {
     id: "snap:doReport",
@@ -942,6 +995,7 @@ export default [
     spec: "run %1 {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -963,6 +1017,7 @@ export default [
     spec: "launch %1 {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -984,6 +1039,7 @@ export default [
     spec: "call %1 {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -1005,6 +1061,7 @@ export default [
     spec: "pipe %1 @arrowRight {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -1026,6 +1083,7 @@ export default [
     spec: "tell %1 to %2 {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -1047,6 +1105,7 @@ export default [
     spec: "ask %1 for %2 {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -1163,7 +1222,13 @@ export default [
   {
     id: "snap:reportEnvironment",
     snap: "reportEnvironment",
-    spec: "this %1",
+    spec: "this {script}",
+    specDefs: {
+      "script": [
+        "script",
+        "%1",
+      ]
+    },
     inputs: ["%m"],
     shape: "reporter",
     category: "control",
@@ -1200,6 +1265,42 @@ export default [
     category: "control",
   },
   {
+    id: "CONTROL_WHILE",
+    spec: "while %1 %2",
+    inputs: ["%b", "%cs"],
+    shape: "stack",
+    category: "control",
+    hasLoopArrow: true,
+  },
+  {
+    id: "CONTROL_FOR_EACH",
+    spec: "for each %1 in %2 %3",
+    inputs: ["%m", "%n", "%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "CONTROL_GET_COUNTER",
+    spec: "counter",
+    inputs: [],
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    id: "CONTROL_INCR_COUNTER",
+    spec: "increment counter",
+    inputs: [],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    id: "CONTROL_CLEAR_COUNTER",
+    spec: "clear counter",
+    inputs: [],
+    shape: "stack",
+    category: "control",
+  },
+  {
     id: "SENSING_ASKANDWAIT",
     selector: "doAsk",
     snap: "doAsk",
@@ -1220,7 +1321,13 @@ export default [
     id: "videoSensing.setVideoTransparency",
     selector: "setVideoTransparency",
     snap: "doSetVideoTransparency",
-    spec: "set video transparency to %1%",
+    spec: "set video transparency to {input}",
+    specDefs: {
+      "input": [
+        "%1 %",
+        "%1"
+      ]
+    },
     inputs: ["%n"],
     shape: "stack",
     category: "video",
@@ -1360,6 +1467,7 @@ export default [
     inputs: ["%s", "%m.list", "%cs"],
     shape: "stack",
     category: "list",
+    hasLoopArrow: true,
   },
   {
     id: "DATA_ADDTOLIST",
@@ -1753,6 +1861,13 @@ export default [
     category: "sensing",
   },
   {
+    snap: "reportFrameCount",
+    spec: "frames",
+    inputs: [],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "snap:reportYieldCount",
     snap: "reportYieldCount",
     spec: "yields",
@@ -2087,6 +2202,7 @@ export default [
     specDefs: {
       closed: [
         "%1 %2",
+        "%1",
         "input list: %1",
         "@verticalEllipsis @addInput",
         "@addInput",
@@ -2154,9 +2270,9 @@ export default [
   {
     id: "snap:reportIsA",
     snap: "reportIsA",
-    spec: "is %1 a %2",
+    spec: "is %1 a %2 ?",
     inputs: ["%s", "%m"],
-    shape: "reporter",
+    shape: "boolean",
     category: "operators",
   },
   {
@@ -2187,6 +2303,7 @@ export default [
     spec: "JavaScript function ( {parameters} ) { %2 }",
     specDefs: {
       parameters: [
+        "%1",
         "input list: %1",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -2314,7 +2431,7 @@ export default [
     snap: "reportConcatenatedLists",
     spec: "append {append}",
     specDefs: {
-      append: ["input list: %1", "@addInput", "@verticalEllipsis", "{lists}"],
+      append: ["%1", "input list: %1", "@addInput", "@verticalEllipsis @addInput", "{lists}"],
       lists: [
         "{list} {lists}",
         "{list} @delInput @addInput",
@@ -2331,6 +2448,7 @@ export default [
     spec: "reshape %1 to {closed}",
     specDefs: {
       closed: [
+        "%2",
         "input list: %2",
         "@addInput",
         "@verticalEllipsis @addInput",
@@ -2369,10 +2487,9 @@ export default [
     category: "list",
   },
   {
-    id: "snap:doShowTable",
     snap: "doShowTable",
     spec: "show table {list}",
-    specDefs: ["@list", "%1"],
+    specDefs: {list: ["@list", "%1"]},
     inputs: ["%m.list"],
     shape: "stack",
     category: "list",
@@ -2380,8 +2497,9 @@ export default [
   {
     id: "DATA_LISTCONTAINSITEM",
     selector: "list:contains:",
-    spec: "{list} contains %2?",
-    specDefs: { list: ["@addInput", "%1"] },
+    snap: "reportListContainsItem",
+    spec: "{list} contains {input}",
+    specDefs: { list: ["@list", "%1"], input: ["%1 ?", "%1"] },
     inputs: ["%m.list", "%s"],
     shape: "boolean",
     category: "list",
@@ -2466,13 +2584,14 @@ export default [
   {
     id: "snap:doApplyExtension",
     snap: "doApplyExtension",
-    spec: "primitive %1 {closed}",
+    spec: "{name} %1 {closed}",
     specDefs: {
-      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      name: ["primitive", "extension"],
+      closed: ["%2", "input list: %2", "@verticalEllipsis @addInput", "@addInput", "{info}"],
       info: [
-        "%1 {info}",
-        "%1 @delInput @addInput",
-        "%1 @delInput @verticalEllipsis @addInput",
+        "%2 {info}",
+        "%2 @delInput @addInput",
+        "%2 @delInput @verticalEllipsis @addInput",
       ],
     },
     inputs: ["%m", "%s"],
@@ -2482,13 +2601,14 @@ export default [
   {
     id: "snap:reportApplyExtension",
     snap: "reportApplyExtension",
-    spec: "primitive %1 {closed}",
+    spec: "{name} %1 {closed}",
     specDefs: {
-      closed: ["input list: %1", "@verticalEllipsis", "@addInput", "{info}"],
+      name: ["primitive", "extension"],
+      closed: ["%2", "input list: %2", "@verticalEllipsis @addInput", "@addInput", "{info}"],
       info: [
-        "%1 {info}",
-        "%1 @delInput @addInput",
-        "%1 @delInput @verticalEllipsis @addInput",
+        "%2 {info}",
+        "%2 @delInput @addInput",
+        "%2 @delInput @verticalEllipsis @addInput",
       ],
     },
     inputs: ["%m", "%s"],
@@ -2558,7 +2678,7 @@ export default [
     selector: "doForeverIf",
     spec: "forever if %1 %2",
     inputs: ["%b", "%cs"],
-    shape: "stack cap",
+    shape: "cap",
     category: "control",
   },
   {
@@ -2578,10 +2698,11 @@ export default [
   {
     snap: "doSwitchToCostume",
     selector: "lookLike:",
+    snap: "doSwitchToCostume",
     spec: "switch to costume %1",
     inputs: ["%m.costume"],
     shape: "stack",
-    category: "obsolete",
+    category: "looks",
   },
   {
     selector: "nextScene",
@@ -2613,6 +2734,34 @@ export default [
     category: "obsolete",
   },
   // TODO define
+  {
+    selector: "whenSensorConnected",
+    spec: "when %1",
+    inputs: ["%m.booleanSensor"],
+    shape: "hat",
+    category: "pico",
+  },
+  {
+    selector: "whenSensorPass",
+    spec: "when %1 %2 %3",
+    inputs: ["%m.sensor", "%m.lessMore", "%n"],
+    shape: "hat",
+    category: "pico",
+  },
+  {
+    selector: "sensorPressed",
+    spec: "sensor %1 ?",
+    inputs: ["%m.booleanSensor"],
+    shape: "boolean",
+    category: "pico",
+  },
+  {
+    selector: "sensor",
+    spec: "%1 sensor value",
+    inputs: ["%m.sensor"],
+    shape: "reporter",
+    category: "pico",
+  },
   {
     id: "text2speech.speakAndWaitBlock",
     spec: "speak %1",
@@ -2711,7 +2860,7 @@ export default [
   },
   {
     id: "microbit.isTilted",
-    spec: "tilted %1?",
+    spec: "tilted %1 ?",
     inputs: ["%m"],
     shape: "boolean",
     category: "microbit",
@@ -2841,6 +2990,13 @@ export default [
     category: "wedo",
   },
   {
+    selector: "whenTilt.1",
+    spec: "when tilt %1 %2",
+    inputs: ["%m.eNe", "%n"],
+    shape: "hat",
+    category: "wedo",
+  },
+  {
     id: "wedo2.getDistance",
     spec: "distance",
     inputs: [],
@@ -2848,8 +3004,22 @@ export default [
     category: "wedo",
   },
   {
+    selector: "getTilt.1",
+    spec: "tilt",
+    inputs: [],
+    shape: "reporter",
+    category: "wedo",
+  },
+  {
     id: "wedo2.motorOnFor",
-    spec: "turn %1 on for %2 seconds",
+    selector: "motorOnFor",
+    spec: "turn %1 on for %2 {secs}",
+    specDefs: {
+      "secs": [
+        "secs",
+        "seconds",
+      ]
+    },
     inputs: ["%m.motor", "%n"],
     shape: "stack",
     category: "wedo",
@@ -2877,7 +3047,7 @@ export default [
   },
   {
     id: "wedo2.isTilted",
-    spec: "tilted %1?",
+    spec: "tilted %1 ?",
     inputs: ["%m"],
     shape: "boolean",
     category: "wedo",
@@ -2918,7 +3088,7 @@ export default [
   },
   {
     id: "gdxfor.isTilted",
-    spec: "tilted %1?",
+    spec: "tilted %1 ?",
     inputs: ["%m"],
     shape: "boolean",
     category: "gdxfor",

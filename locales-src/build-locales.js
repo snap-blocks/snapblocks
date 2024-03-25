@@ -132,6 +132,7 @@ const buildLocale = (code, rawLocale) => {
     ignorelt: [],
     soundEffects: listFor(soundEffects),
     microbitWhen: listFor(microbitWhen),
+    picoWhen: [],
     osis: listFor(osis),
     definePrefix: /(.*)%1/
       .exec(procDef)[1]
@@ -149,6 +150,7 @@ const buildLocale = (code, rawLocale) => {
       list: [],
       text: [],
     },
+    setFlag: [],
     aliases: extra?.aliases || {},
 
     name: localeNames[code].name,

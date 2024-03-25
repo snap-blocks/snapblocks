@@ -328,11 +328,28 @@ export const english = {
   // Valid arguments to "microbit when" dropdown
   microbitWhen: ["moved", "shaken", "jumped"],
 
+  picoWhen: [
+    "button pressed",
+    "A connected",
+    "B connected",
+    "C connected",
+    "D connected",
+  ],
+
   // For detecting the "stop" cap / stack block
   osis: [
     "other scripts in sprite",
     "other scripts in stage",
     "all but this script",
+  ],
+
+  setFlag: [
+    "turbo mode",
+    "case sensitivity",
+    "flat line ends",
+    "log pen vectors",
+    "video capture",
+    "mirror video",
   ],
 
   dropdowns: {},
@@ -491,13 +508,13 @@ disambig(
   },
 )
 
-disambig("DATA_LISTCONTAINSITEM", "OPERATORS_CONTAINS", (children, _lang) => {
-  // List block if dropdown, otherwise operators
+// spec defs break disambig
+specialCase("OPERATORS_CONTAINS", (_, children, lang) => {
   const first = children[0]
-  if (!first.isInput) {
-    return
+  if (first.isInput && first.shape === "dropdown") {
+    return { ...blocksById.DATA_LISTCONTAINSITEM }
   }
-  return first.shape === "dropdown"
+  return
 })
 
 disambig("pen.setColor", "pen.setHue", (children, _lang) => {
@@ -508,25 +525,44 @@ disambig("pen.setColor", "pen.setHue", (children, _lang) => {
   return (last.isInput && last.isColor) || last.isBlock
 })
 
-disambig("microbit.whenGesture", "gdxfor.whenGesture", (children, lang) => {
-  for (const child of children) {
-    if (child.shape === "dropdown") {
-      const name = child.value
-      // Yes, "when shaken" gdxfor block exists. But microbit is more common.
-      for (const effect of lang.microbitWhen) {
-        if (minifyHash(effect) === minifyHash(name)) {
-          return true
-        }
-      }
-    }
+registerCheck("microbit.whenGesture", (info, children, lang) => {
+  let first = children.find(child => !child.isLabel)
+
+  if (!first.shape.includes("dropdown")) {
+    return false
   }
-  return false
+  
+  const name = first.value
+  return lang.microbitWhen.includes(name) && !lang.picoWhen.includes(name)
 })
 
-// This is more important that scratch 3 extensions
+registerCheck("sb2:whenSensorConnected", (info, children, lang) => {
+  console.log('children', children)
+  let first = children.find(child => !child.isLabel)
+
+  if (!first.shape.includes("dropdown")) {
+    return false
+  }
+  
+  const name = first.value
+  return !lang.microbitWhen.includes(name) && lang.picoWhen.includes(name)
+})
+
+registerCheck("gdxfor.whenGesture", (info, children, lang) => {
+  let first = children.find(child => !child.isLabel)
+
+  if (!first.shape.includes("dropdown")) {
+    return false
+  }
+  
+  const name = first.value
+  return !lang.microbitWhen.includes(name) && !lang.picoWhen.includes(name)
+})
+
+// This is more important that scratch extensions
 registerCheck("snap:receiveCondition", (info, children, lang) => {
   for (const child of children) {
-    if (child.isInput && child.shape === "dropdown") {
+    if (child.isInput && child.shape.includes("dropdown")) {
       return false
     }
   }
@@ -537,17 +573,15 @@ registerCheck("snap:receiveCondition", (info, children, lang) => {
 // however, many other languages do require that.
 disambig("ev3.buttonPressed", "microbit.isButtonPressed", (children, _lang) => {
   for (const child of children) {
-    if (child.shape === "dropdown") {
-      // EV3 "button pressed" block uses numeric identifier
-      // and does not support "any".
-      switch (minifyHash(child.value)) {
-        case "1":
-        case "2":
-        case "3":
-        case "4":
-          return true
-        default:
-      }
+    // EV3 "button pressed" block uses numeric identifier
+    // and does not support "any".
+    switch (minifyHash(child.value)) {
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+        return true
+      default:
     }
   }
   return false
@@ -570,12 +604,49 @@ disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
 
 disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
   let last = children[children.length - 1]
+  let first = children.find((child) => !child.isLabel)
   // console.log('last', last)
   if (last.isInput && last.isBoolean) {
     return true
   }
 
+  if (first.isInput && _lang.setFlag.includes(first.value)) {
+    return true
+  }
+
   return false
+})
+
+specialCase("CONTROL_FOR_EACH", (_, children, _lang) => {
+  let isSnap = true
+  
+  let inputNum = 0
+  for (const child of children) {
+    if (!child.isLabel) {
+      switch (inputNum) {
+        case 0:
+          if (child.isInput) {
+            isSnap = false
+          }
+          break;
+        
+        case 1:
+          if (child.isIcon) {
+            isSnap = true
+          }
+          break;
+      
+        default:
+          break;
+      }
+      
+      inputNum += 1
+    }
+  }
+
+  if (isSnap) {
+    return { ...blocksById["snap:doForEach"], shape: "stack" }
+  }
 })
 
 specialCase("CONTROL_STOP", (_, children, lang) => {
@@ -766,7 +837,7 @@ export function lookupHash(hash, info, children, languages) {
       )
       allCommands = newCommands.commands
       full = newCommands.full
-      // console.log("new commands", allCommands)
+      console.log("new commands", allCommands)
 
       if (full || allCommands.length === 0) {
         break
@@ -791,6 +862,7 @@ export function lookupHash(hash, info, children, languages) {
         if (allCommands.length > 1) {
           // Only check in case of collision;
           // perform "disambiguation"
+          console.log("block", allCommands)
           if (blockById.accepts && !blockById.accepts(info, children, lang)) {
             continue
           }

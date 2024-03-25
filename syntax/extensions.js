@@ -23,6 +23,7 @@ export const extensions = {
   ev3: "ev3",
   boost: "boost",
   gdxfor: "gdxfor",
+  pico: "pico",
 }
 
 // Alias extensions: unlike movedExtensions, this is handled for both scratch2 and scratch3.
@@ -30,4 +31,5 @@ export const extensions = {
 export const aliasExtensions = {
   wedo2: "wedo",
   text2speech: "tts",
+  pico: "extension",
 }
