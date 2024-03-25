@@ -592,10 +592,11 @@ function parseLines(code, languages) {
   function pReporter() {
     next() // '('
 
-    // empty number-dropdown
+    // set start index
     let startIndex = index
-
+    
     let text = ""
+    // empty number-dropdown
     if (tok === " ") {
       while (tok === " ") {
         text += tok
@@ -647,7 +648,7 @@ function parseLines(code, languages) {
     }
 
     // number-dropdown
-    if (children.length > 1 && children.every(child => child.isLabel)) {
+    if (children.length > 1) {
       const last = children[children.length - 1]
       let end = last.value
       if (end === "v" || end === "V") {
