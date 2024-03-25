@@ -531,19 +531,19 @@ registerCheck("microbit.whenGesture", (info, children, lang) => {
   if (!first.shape.includes("dropdown")) {
     return false
   }
-  
+
   const name = first.value
   return lang.microbitWhen.includes(name) && !lang.picoWhen.includes(name)
 })
 
 registerCheck("sb2:whenSensorConnected", (info, children, lang) => {
-  console.log('children', children)
+  console.log("children", children)
   let first = children.find(child => !child.isLabel)
 
   if (!first.shape.includes("dropdown")) {
     return false
   }
-  
+
   const name = first.value
   return !lang.microbitWhen.includes(name) && lang.picoWhen.includes(name)
 })
@@ -554,7 +554,7 @@ registerCheck("gdxfor.whenGesture", (info, children, lang) => {
   if (!first.shape.includes("dropdown")) {
     return false
   }
-  
+
   const name = first.value
   return !lang.microbitWhen.includes(name) && !lang.picoWhen.includes(name)
 })
@@ -604,7 +604,7 @@ disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
 
 disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
   let last = children[children.length - 1]
-  let first = children.find((child) => !child.isLabel)
+  let first = children.find(child => !child.isLabel)
   // console.log('last', last)
   if (last.isInput && last.isBoolean) {
     return true
@@ -619,7 +619,7 @@ disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
 
 specialCase("CONTROL_FOR_EACH", (_, children, _lang) => {
   let isSnap = true
-  
+
   let inputNum = 0
   for (const child of children) {
     if (!child.isLabel) {
@@ -628,18 +628,18 @@ specialCase("CONTROL_FOR_EACH", (_, children, _lang) => {
           if (child.isInput) {
             isSnap = false
           }
-          break;
-        
+          break
+
         case 1:
           if (child.isIcon) {
             isSnap = true
           }
-          break;
-      
+          break
+
         default:
-          break;
+          break
       }
-      
+
       inputNum += 1
     }
   }

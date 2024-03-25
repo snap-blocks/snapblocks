@@ -339,7 +339,13 @@ export default [
     snap: "log",
     spec: "console log {closed}",
     specDefs: {
-      closed: ["%1", "input list: %1", "@verticalEllipsis @addInput", "@addInput", "{info}"],
+      closed: [
+        "%1",
+        "input list: %1",
+        "@verticalEllipsis @addInput",
+        "@addInput",
+        "{info}",
+      ],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -355,7 +361,13 @@ export default [
     snap: "alert",
     spec: "alert {closed}",
     specDefs: {
-      closed: ["%1", "input list: %1", "@verticalEllipsis @addInput", "@addInput", "{info}"],
+      closed: [
+        "%1",
+        "input list: %1",
+        "@verticalEllipsis @addInput",
+        "@addInput",
+        "{info}",
+      ],
       info: [
         "%1 {info}",
         "%1 @delInput @addInput",
@@ -759,15 +771,8 @@ export default [
     selector: "whenKeyPressed",
     spec: "{spec}",
     specDefs: {
-      "spec": [
-        "when %1 key pressed",
-        "when %1 key pressed {data}",
-      ],
-      "data": [
-        "",
-        "@addInput",
-        "%2 @delInput"
-      ]
+      spec: ["when %1 key pressed", "when %1 key pressed {data}"],
+      data: ["", "@addInput", "%2 @delInput"],
     },
     inputs: ["%m.key"],
     shape: "hat",
@@ -1224,10 +1229,7 @@ export default [
     snap: "reportEnvironment",
     spec: "this {script}",
     specDefs: {
-      "script": [
-        "script",
-        "%1",
-      ]
+      script: ["script", "%1"],
     },
     inputs: ["%m"],
     shape: "reporter",
@@ -1323,10 +1325,7 @@ export default [
     snap: "doSetVideoTransparency",
     spec: "set video transparency to {input}",
     specDefs: {
-      "input": [
-        "%1 %",
-        "%1"
-      ]
+      input: ["%1 %", "%1"],
     },
     inputs: ["%n"],
     shape: "stack",
@@ -2431,7 +2430,13 @@ export default [
     snap: "reportConcatenatedLists",
     spec: "append {append}",
     specDefs: {
-      append: ["%1", "input list: %1", "@addInput", "@verticalEllipsis @addInput", "{lists}"],
+      append: [
+        "%1",
+        "input list: %1",
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "{lists}",
+      ],
       lists: [
         "{list} {lists}",
         "{list} @delInput @addInput",
@@ -2489,7 +2494,7 @@ export default [
   {
     snap: "doShowTable",
     spec: "show table {list}",
-    specDefs: {list: ["@list", "%1"]},
+    specDefs: { list: ["@list", "%1"] },
     inputs: ["%m.list"],
     shape: "stack",
     category: "list",
@@ -2587,7 +2592,13 @@ export default [
     spec: "{name} %1 {closed}",
     specDefs: {
       name: ["primitive", "extension"],
-      closed: ["%2", "input list: %2", "@verticalEllipsis @addInput", "@addInput", "{info}"],
+      closed: [
+        "%2",
+        "input list: %2",
+        "@verticalEllipsis @addInput",
+        "@addInput",
+        "{info}",
+      ],
       info: [
         "%2 {info}",
         "%2 @delInput @addInput",
@@ -2604,7 +2615,13 @@ export default [
     spec: "{name} %1 {closed}",
     specDefs: {
       name: ["primitive", "extension"],
-      closed: ["%2", "input list: %2", "@verticalEllipsis @addInput", "@addInput", "{info}"],
+      closed: [
+        "%2",
+        "input list: %2",
+        "@verticalEllipsis @addInput",
+        "@addInput",
+        "{info}",
+      ],
       info: [
         "%2 {info}",
         "%2 @delInput @addInput",
@@ -3015,10 +3032,7 @@ export default [
     selector: "motorOnFor",
     spec: "turn %1 on for %2 {secs}",
     specDefs: {
-      "secs": [
-        "secs",
-        "seconds",
-      ]
+      secs: ["secs", "seconds"],
     },
     inputs: ["%m.motor", "%n"],
     shape: "stack",

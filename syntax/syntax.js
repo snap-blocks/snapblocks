@@ -594,7 +594,7 @@ function parseLines(code, languages) {
 
     // set start index
     let startIndex = index
-    
+
     let text = ""
     // empty number-dropdown
     if (tok === " ") {
