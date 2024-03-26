@@ -43,6 +43,7 @@ hide
 switch costume to [costume2 V]
 next costume
 switch backdrop to [backdrop1]
+next backdrop
 
 change [color V] effect by (25)
 set [color V] effect to (0)
@@ -73,7 +74,7 @@ rest for (0.2) beats
 play note (60 v) for (0.5) beats
 set instrument to (1 v)
 
-change volume by (10)
+change volume by (-10)
 set volume to (100) %
 (volume)
 
