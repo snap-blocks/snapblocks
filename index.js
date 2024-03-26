@@ -85,9 +85,6 @@ export default function (window) {
     const pre = document.createElement("pre")
     pre.innerHTML = html
     let code = pre.textContent
-    if (options.inline) {
-      code = code.replace("\n", "")
-    }
     return code
   }
 
