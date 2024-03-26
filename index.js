@@ -158,14 +158,14 @@ export default function (window) {
       let localOptions = { ...options }
       if (options.elementOptions) {
         let overrideOptions = {
-          style: el.getAttribute("sb-style"),
-          inline: el.getAttribute("sb-inline"),
-          scale: el.getAttribute("sb-scale"),
-          wrap: el.getAttribute("sb-wrap"),
-          wrapSize: el.getAttribute("sb-wrapSize"),
+          style: el.getAttribute("blockStyle"),
+          inline: el.getAttribute("inline"),
+          scale: el.getAttribute("scale"),
+          wrap: el.getAttribute("wrap"),
+          wrapSize: el.getAttribute("wrapSize"),
           zebraColoring:
-            el.getAttribute("sb-zebraColoring") || el.getAttribute("sb-zebra"),
-          showSpaces: el.getAttribute("sb-showSpaces"),
+            el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
+          showSpaces: el.getAttribute("showSpaces"),
         }
 
         for (let [option, value] of Object.entries(overrideOptions)) {
