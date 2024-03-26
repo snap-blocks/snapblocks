@@ -1294,9 +1294,6 @@ export function parse(code, options) {
 
   code = code.replace(/&lt;/g, "<")
   code = code.replace(/&gt;/g, ">")
-  if (options.inline) {
-    code = code.replace(/\n/g, " ")
-  }
 
   const languages = options.languages.map(code => {
     const lang = allLanguages[code]
