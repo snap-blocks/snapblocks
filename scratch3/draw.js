@@ -63,7 +63,6 @@ export default class SVG {
 
   static newSVG(width, height, scale) {
     return SVG.el("svg", {
-      version: "1.1",
       width: width * scale,
       height: height * scale,
       viewBox: `0 0 ${width * scale} ${height * scale}`,
