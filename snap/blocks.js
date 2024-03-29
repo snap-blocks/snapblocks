@@ -1,4 +1,8 @@
 import {
+  hexColorPat
+} from "../syntax/blocks.js"
+
+import {
   Label,
   Icon,
   Input,
@@ -81,11 +85,11 @@ export class LabelView {
     if (Object.hasOwnProperty.call(cache, value)) {
       this.metrics = cache[value]
     } else {
-      const font = /comment-label/.test(this.cls)
-        ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
-        : /literal/.test(this.cls)
-          ? `normal 9px Arial, DejaVu Sans, sans-serif`
-          : `bold 10px ${defaultFontFamily}`
+      const font = /comment-label/.test(this.cls) ?
+        "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif" :
+        /literal/.test(this.cls) ?
+        `normal 9px Arial, DejaVu Sans, sans-serif` :
+        `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
@@ -179,30 +183,26 @@ class IconView {
       this.scale = 1
     }
 
-    this.scale =
-      !isNaN(icon.scale) && icon.scale !== null
-        ? icon.scale
-        : isNaN(this.scale) || this.scale == null
-          ? 1
-          : this.scale
-    this.r =
-      !isNaN(icon.r) && icon.r !== null
-        ? icon.r
-        : isNaN(this.r) || this.r == null
-          ? 255
-          : this.r
-    this.g =
-      !isNaN(icon.g) && icon.g !== null
-        ? icon.g
-        : isNaN(this.g) || this.g == null
-          ? 255
-          : this.g
-    this.b =
-      !isNaN(icon.b) && icon.b !== null
-        ? icon.b
-        : isNaN(this.b) || this.b == null
-          ? 255
-          : this.b
+    this.scale = !isNaN(icon.scale) && icon.scale !== null ?
+      icon.scale :
+      isNaN(this.scale) || this.scale == null ?
+      1 :
+      this.scale
+    this.r = !isNaN(icon.r) && icon.r !== null ?
+      icon.r :
+      isNaN(this.r) || this.r == null ?
+      255 :
+      this.r
+    this.g = !isNaN(icon.g) && icon.g !== null ?
+      icon.g :
+      isNaN(this.g) || this.g == null ?
+      255 :
+      this.g
+    this.b = !isNaN(icon.b) && icon.b !== null ?
+      icon.b :
+      isNaN(this.b) || this.b == null ?
+      255 :
+      this.b
 
     if (this.scale <= 0) {
       this.scale = 1
@@ -255,12 +255,42 @@ class IconView {
         b: 0,
         fillAttribute: "stroke",
       },
-      stopSign: { width: 21, height: 21, r: 200, g: 0, b: 0 },
-      turnLeft: { width: 10, height: 12, dy: +1 },
-      turnRight: { width: 10, height: 12, dy: +1 },
-      loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
-      delInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
+      stopSign: {
+        width: 21,
+        height: 21,
+        r: 200,
+        g: 0,
+        b: 0
+      },
+      turnLeft: {
+        width: 10,
+        height: 12,
+        dy: +1
+      },
+      turnRight: {
+        width: 10,
+        height: 12,
+        dy: +1
+      },
+      loopArrow: {
+        width: 24,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      addInput: {
+        width: 5,
+        height: 11,
+        r: 0,
+        g: 0,
+        b: 0
+      },
+      delInput: {
+        width: 5,
+        height: 11,
+        r: 0,
+        g: 0,
+        b: 0
+      },
       verticalEllipsis: {
         width: 2,
         height: 12,
@@ -269,40 +299,164 @@ class IconView {
         g: 0,
         b: 0,
       },
-      list: { width: 12, height: 14 },
-      pointRight: { width: 12, height: 12 },
-      turtle: { width: 18, height: 12, dy: +1 },
-      turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
-      pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
-      cloud: { width: 20, height: 12 },
-      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
-      flash: { width: 10, height: 12 },
-      camera: { width: 12, height: 12 },
-      circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
-      notes: { width: 13, height: 12 },
-      storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      paintBucket: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      eraser: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      location: { width: 7.2, height: 12 },
+      list: {
+        width: 8,
+        height: 10
+      },
+      pointRight: {
+        width: 12,
+        height: 12
+      },
+      turtle: {
+        width: 18,
+        height: 12,
+        dy: +1
+      },
+      turtleOutline: {
+        width: 18,
+        height: 12,
+        dy: +1,
+        fillAttribute: "stroke"
+      },
+      pause: {
+        width: 12,
+        height: 12,
+        dy: +1,
+        r: 255,
+        g: 220,
+        b: 0
+      },
+      cloud: {
+        width: 20,
+        height: 12
+      },
+      cloudOutline: {
+        width: 20,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      flash: {
+        width: 10,
+        height: 12
+      },
+      camera: {
+        width: 12,
+        height: 12
+      },
+      circle: {
+        width: 12,
+        height: 12,
+        r: 255,
+        g: 0,
+        b: 0
+      },
+      notes: {
+        width: 13,
+        height: 12
+      },
+      storage: {
+        width: 12,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      brush: {
+        width: 12,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      pipette: {
+        width: 12,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      paintBucket: {
+        width: 12,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      eraser: {
+        width: 12,
+        height: 12,
+        fillAttribute: ["stroke", "fill"]
+      },
+      location: {
+        width: 7.2,
+        height: 12
+      },
 
-      arrowUp: { width: 12, height: 12 },
-      arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDown: { width: 12, height: 12 },
-      arrowDownOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeft: { width: 12, height: 12 },
-      arrowLeftOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRight: { width: 12, height: 12 },
-      arrowRightOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUp: {
+        width: 12,
+        height: 12
+      },
+      arrowUpOutline: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowUpThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowDown: {
+        width: 12,
+        height: 12
+      },
+      arrowDownOutline: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowDownThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowLeft: {
+        width: 12,
+        height: 12
+      },
+      arrowLeftOutline: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowLeftThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowRight: {
+        width: 12,
+        height: 12
+      },
+      arrowRightOutline: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowRightThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowUpDownThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
+      arrowLeftRightThin: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke"
+      },
 
-      plusSign: { width: 6, height: 14, dy: 12, padx: 0 },
+      plusSign: {
+        width: 6,
+        height: 14,
+        dy: 12,
+        padx: 0
+      },
     }
   }
 }
@@ -353,17 +507,17 @@ class InputView {
       w = Math.max(
         this.shape === "string" ? 8 : this.shape === "dropdown" ? 21 : 11,
         this.label.width +
-          (this.shape === "string"
-            ? 1
-            : this.shape === "number-dropdown"
-              ? 16
-              : 13),
+        (this.shape === "string" ?
+          1 :
+          this.shape === "number-dropdown" ?
+          16 :
+          13),
       )
     } else {
       w = this.isBoolean ? 22 : this.isInset ? 30 : this.isColor ? 14 : null
     }
 
-    let h = this.hasLabel ? this.label.height : 13
+    let h = this.hasLabel ? this.label.height + 1 : 13
 
     if (this.isBoolean) {
       h -= 2
@@ -421,7 +575,9 @@ class BlockView {
     this.comment = this.comment ? newView(this.comment) : null
 
     // Avoid accidental mutation
-    this.info = { ...block.info }
+    this.info = {
+      ...block.info
+    }
 
     if (
       Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
@@ -553,26 +709,25 @@ class BlockView {
       }
       p.push("Z")
       let el = SVG.path({
-        class: `snap-${this.info.category} ${
+        class: `snap-block snap-${this.info.category} ${
           options.isFlat ? "snap-flat" : "snap-bevel"
         }`,
         path: p,
       })
 
       if (options.isFlat) {
-        SVG.setProps(el, {
-          "clip-path": `path('${SVG.translatePath(
-            this.strokeWidth / 2,
-            this.strokeWidth / 2,
-            p.join(" "),
-          )}')`,
-        })
+        // SVG.setProps(el, {
+        //   "clip-path": `path('${SVG.translatePath(
+        //     this.strokeWidth / 2,
+        //     this.strokeWidth / 2,
+        //     p.join(" "),
+        //   )}')`,
+        // })
       }
 
       if (this.isZebra) {
         el = this.applyZebra(el)
       }
-      el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
 
       return el
     }
@@ -611,21 +766,20 @@ class BlockView {
           w,
           h,
           child,
-          shape,
-          {
-            class: `snap-${this.info.category}`,
+          shape, {
+            class: `snap-block snap-${this.info.category}`,
           },
           !child.isBlock,
         )
 
         if (options.isFlat) {
-          SVG.setProps(el, {
-            "clip-path": `path('${SVG.translatePath(
-              this.strokeWidth / 2,
-              this.strokeWidth / 2,
-              el.getAttribute("d"),
-            )}')`,
-          })
+          // SVG.setProps(el, {
+          //   "clip-path": `path('${SVG.translatePath(
+          //     this.strokeWidth / 2,
+          //     this.strokeWidth / 2,
+          //     el.getAttribute("d"),
+          //   )}')`,
+          // })
         }
         if (this.isZebra) {
           el = this.applyZebra(el)
@@ -640,24 +794,23 @@ class BlockView {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
     let el = func(w, h, {
-      class: `snap-${this.info.category} ${
+      class: `snap-block snap-${this.info.category} ${
         options.isFlat ? "snap-flat" : "snap-bevel"
       }`,
     })
 
     if (options.isFlat) {
-      SVG.setProps(el, {
-        "clip-path": `path('${SVG.translatePath(
-          this.strokeWidth / 2,
-          this.strokeWidth / 2,
-          el.getAttribute("d"),
-        )}')`,
-      })
+      // SVG.setProps(el, {
+      //   "clip-path": `path('${SVG.translatePath(
+      //     this.strokeWidth / 2,
+      //     this.strokeWidth / 2,
+      //     el.getAttribute("d"),
+      //   )}')`,
+      // })
     }
     if (this.isZebra) {
       el = this.applyZebra(el)
     }
-    el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     return el
   }
 
@@ -668,21 +821,21 @@ class BlockView {
 
   minDistance(child) {
     if (this.isBoolean) {
-      return child.isReporter
-        ? (4 + child.height / 4) | 0
-        : child.isLabel
-          ? (5 + child.height / 2) | 0
-          : child.isBoolean || child.shape === "boolean"
-            ? 5
-            : (2 + child.height / 2) | 0
+      return child.isReporter ?
+        (4 + child.height / 4) | 0 :
+        child.isLabel ?
+        (5 + child.height / 2) | 0 :
+        child.isBoolean || child.shape === "boolean" ?
+        5 :
+        (2 + child.height / 2) | 0
     }
     if (this.isReporter) {
       return (child.isInput && child.isRound) ||
-        ((child.isReporter || child.isBoolean) && !child.hasScript)
-        ? 3
-        : child.isLabel
-          ? (2 + child.height / 2) | 0
-          : (4 + child.height / 2) | 20
+        ((child.isReporter || child.isBoolean) && !child.hasScript) ?
+        3 :
+        child.isLabel ?
+        (2 + child.height / 2) | 0 :
+        (4 + child.height / 2) | 20
     }
     return 0
   }
@@ -842,7 +995,7 @@ class BlockView {
         if (!child.isLabel) {
           line.height = Math.max(
             line.height,
-            child.height + (child.isBlock ? 0 : 2),
+            child.height + (child.isBlock ? 0 : 0),
           )
         } else {
           line.height = Math.max(line.height, child.height - 2)
@@ -855,18 +1008,18 @@ class BlockView {
 
     innerWidth = Math.max(
       innerWidth + px * 2,
-      this.isHat
-        ? 110
-        : this.hasScript
-          ? 39
-          : this.isCommand || this.isOutline || this.isRing
-            ? 39
-            : 20,
+      this.isHat ?
+      110 :
+      this.hasScript ?
+      39 :
+      this.isCommand || this.isOutline || this.isRing ?
+      39 :
+      20,
     )
     this.height = y
-    this.width = scriptWidth
-      ? Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth)
-      : innerWidth
+    this.width = scriptWidth ?
+      Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth) :
+      innerWidth
     if (isDefine) {
       const p = Math.min(26, (3.5 + 0.13 * innerWidth) | 0) - 18
       this.height += p
@@ -890,9 +1043,9 @@ class BlockView {
           objects.push(
             SVG.move(
               innerWidth -
-                child.width -
-                3 -
-                (this.info.shape === "boolean") * 6,
+              child.width -
+              3 -
+              (this.info.shape === "boolean") * 6,
               this.height - child.height - 3,
               child.el,
             ),
@@ -1056,7 +1209,7 @@ class ScriptView {
       if (!this.isZebra && this.parentCategory) {
         if (
           this.parentCategory.toLowerCase() ===
-            block.info.category.toLowerCase() ||
+          block.info.category.toLowerCase() ||
           this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
         ) {
           block.isZebra = true
@@ -1113,11 +1266,11 @@ class DocumentView {
     this.options = {
       id: this.id,
       isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
-      wrapSize: options.wrap
-        ? options.wrapSize != undefined && options.wrapSize > 0
-          ? options.wrapSize
-          : 460
-        : -1,
+      wrapSize: options.wrap ?
+        options.wrapSize != undefined && options.wrapSize > 0 ?
+        options.wrapSize :
+        460 :
+        -1,
       zebraColoring: options.zebraColoring,
       showSpaces: options.showSpaces,
     }
@@ -1138,6 +1291,40 @@ class DocumentView {
 
   measure() {
     this.scripts.forEach(script => script.measure())
+  }
+
+  updateIds(element) {
+    let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
+    let idRegex = /#[a-zA-Z][\w:.\-]*/
+
+    let id = element.getAttribute("id")
+    if (id) {
+      element.setAttribute("id", `${id}-${this.id}`)
+    }
+
+    Array.from(element.attributes).forEach(attribute => {
+      let value = attribute.nodeValue
+
+      let split = value.split(aroundIdRegex)
+      console.log('attribute', attribute.name)
+      console.log('split', split)
+
+
+      for (let index = 0; index < split.length; index++) {
+        let part = split[index];
+
+        if (idRegex.test(part) && !hexColorPat.test(part)) {
+          console.log('edited')
+          split[index] = `${part}-${this.id}`
+        }
+      }
+
+      attribute.nodeValue = split.join('')
+    })
+
+    for (let child of element.children) {
+      this.updateIds(child)
+    }
   }
 
   render(cb) {
@@ -1165,27 +1352,45 @@ class DocumentView {
     this.width = width
     this.height = height
 
+    let group = SVG.group(elements)
+
+    // apply flat design clip-paths
+    let clipPaths = []
+    if (this.options.isFlat) {
+      let blocks = group.querySelectorAll("path.snap-block.snap-flat")
+
+      for (let index = 0; index < blocks.length; index++) {
+        const block = blocks[index];
+
+        let clipPath = SVG.withChildren(SVG.el("clipPath", {
+          id: `block-path-${index}-${this.id}`
+        }), [
+          SVG.el("path", {
+            d: block.getAttribute('d')
+          })
+        ])
+
+        block.setAttribute("clip-path", `url(#block-path-${index}-${this.id})`)
+
+        clipPaths.push(clipPath)
+      }
+    }
+
+    let clipPathsGroup = SVG.group(clipPaths)
+
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
     svg.classList.add(
       `snapblocks-style-snap${this.options.isFlat ? "-flat" : ""}`,
     )
 
-    let icons = makeIcons()
+    let icons = makeIcons(this.options.isFlat)
 
     for (let icon of icons) {
-      let id = icon.getAttribute("id")
-      icon.setAttribute("id", `${id}-${this.id}`)
-
-      if (icon.tagName === "use") {
-        let href = icon.getAttribute("href")
-        if (href && href.startsWith("#")) {
-          icon.setAttribute("href", `${href}-${this.id}`)
-        }
-      }
+      this.updateIds(icon)
     }
 
-    svg.appendChild(
+    group.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter(`snapBevelFilter-${this.id}`, false),
         bevelFilter(`snapInputBevelFilter-${this.id}`, true),
@@ -1193,10 +1398,9 @@ class DocumentView {
         lightFilter(`snapLightFilter-${this.id}`),
         dropShadowFilter(`snapDropShadow-${this.id}`),
         ...icons,
+        clipPathsGroup,
       ])),
     )
-
-    let group = SVG.group(elements)
 
     group.style.setProperty("--id", this.id)
     group.style.setProperty(
@@ -1304,4 +1508,4 @@ const viewFor = node => {
   }
 }
 
-export const newView = (node, options) => new (viewFor(node))(node, options)
+export const newView = (node, options) => new(viewFor(node))(node, options)
