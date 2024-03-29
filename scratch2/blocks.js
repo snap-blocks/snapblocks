@@ -1,4 +1,8 @@
 import {
+  hexColorPat
+} from "../syntax/blocks.js"
+
+import {
   Label,
   Icon,
   Input,
@@ -262,7 +266,10 @@ class IconView {
         g: 0,
         b: 0,
       },
-      list: { width: 12, height: 14 },
+      list: {
+        width: 8,
+        height: 10
+      },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
@@ -1088,6 +1095,40 @@ class DocumentView {
     this.scripts.forEach(script => script.measure())
   }
 
+  updateIds(element) {
+    let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
+    let idRegex = /#[a-zA-Z][\w:.\-]*/
+
+    let id = element.getAttribute("id")
+    if (id) {
+      element.setAttribute("id", `${id}-${this.id}`)
+    }
+
+    Array.from(element.attributes).forEach(attribute => {
+      let value = attribute.nodeValue
+
+      let split = value.split(aroundIdRegex)
+      console.log('attribute', attribute.name)
+      console.log('split', split)
+
+
+      for (let index = 0; index < split.length; index++) {
+        let part = split[index];
+
+        if (idRegex.test(part) && !hexColorPat.test(part)) {
+          console.log('edited')
+          split[index] = `${part}-${this.id}`
+        }
+      }
+
+      attribute.nodeValue = split.join('')
+    })
+
+    for (let child of element.children) {
+      this.updateIds(child)
+    }
+  }
+
   render(cb) {
     if (typeof cb === "function") {
       throw new Error("render() no longer takes a callback")
@@ -1119,15 +1160,7 @@ class DocumentView {
 
     let icons = makeIcons()
     for (let icon of icons) {
-      let id = icon.getAttribute("id")
-      icon.setAttribute("id", `${id}-${this.id}`)
-
-      if (icon.tagName === "use") {
-        let href = icon.getAttribute("href")
-        if (href && href.startsWith("#")) {
-          icon.setAttribute("href", `${href}-${this.id}`)
-        }
-      }
+      this.updateIds(icon)
     }
 
     svg.appendChild(

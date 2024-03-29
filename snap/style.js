@@ -7,7 +7,7 @@ export default class Style {
     return cssContent
   }
 
-  static makeIcons() {
+  static makeIcons(isFlat) {
     return [
       SVG.setProps(
         SVG.group([
@@ -19,8 +19,7 @@ export default class Style {
             d: "M 0 3 C 9.6 3 1.2 6 12 6",
             "stroke-width": 6,
           }),
-        ]),
-        {
+        ]), {
           id: "snap-greenFlag",
         },
       ),
@@ -49,8 +48,7 @@ export default class Style {
           d: `M 2.4000000000000004 1.2000000000000002 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 1.1988000001999994 Z
               M 2.4000000000000004 6.000000000000001 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 5.9988000002 Z
               M 2.4000000000000004 10.8 A 1.2000000000000002 1.2000000000000002 0 1 1 2.39999940000005 10.7988000002 Z`,
-        }),
-        {
+        }), {
           id: "snap-verticalEllipsis",
         },
       ),
@@ -64,116 +62,92 @@ export default class Style {
             d: "M 16.8 0 L 10.8 6 L 24 6 Z",
             "stroke-width": 0,
           }),
-        ]),
-        {
+        ]), {
           id: "snap-loopArrow",
         },
       ),
       SVG.setProps(
         SVG.group([
+          SVG.withChildren(
+            SVG.el("mask", {
+              id: "snap-list-holes",
+            }),
+            [
+              SVG.el("rect", {
+                x: "0",
+                y: "0",
+                width: "8",
+                height: "10",
+                fill: "white",
+              }),
+              SVG.el("rect", {
+                x: "1",
+                y: "1",
+                width: "6",
+                height: "2",
+                fill: "black",
+              }),
+              SVG.el("rect", {
+                x: "1",
+                y: "4",
+                width: "6",
+                height: "2",
+                fill: "black",
+              }),
+              SVG.el("rect", {
+                x: "1",
+                y: "7",
+                width: "6",
+                height: "2",
+                fill: "black",
+              }),
+            ]),
+          SVG.group([
+            SVG.el("rect", {
+              x: 1 - (!isFlat * 0.5),
+              y: 1 - (!isFlat * 0.5),
+              width: "6",
+              height: "2",
+              fill: "#ff8c00",
+            }),
+            SVG.el("rect", {
+              x: 1 - (!isFlat * 0.5),
+              y: 4 - (!isFlat * 0.5),
+              width: "6",
+              height: "2",
+              fill: "#ff8c00",
+            }),
+            SVG.el("rect", {
+              x: 1 - (!isFlat * 0.5),
+              y: 7 - (!isFlat * 0.5),
+              width: "6",
+              height: "2",
+              fill: "#ff8c00",
+            }),
+          ]),
           SVG.el("rect", {
             x: "0",
             y: "0",
-            width: "12",
-            height: "14",
-            fill: "#000",
-            opacity: "0.25",
+            width: "8",
+            height: "10",
+            fill: "white",
+            "mask": "url(#snap-list-holes)",
           }),
-          SVG.el("rect", {
-            x: "1",
-            y: "1",
-            width: "1",
-            height: "13",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "11",
-            y: "1",
-            width: "1",
-            height: "13",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "1",
-            width: "9",
-            height: "1",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "5",
-            width: "9",
-            height: "1",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "9",
-            width: "9",
-            height: "1",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "13",
-            width: "9",
-            height: "1",
-            fill: "#fff",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "2",
-            width: "9",
-            height: "2",
-            fill: "#ea8d1c",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "6",
-            width: "9",
-            height: "2",
-            fill: "#ea8d1c",
-          }),
-          SVG.el("rect", {
-            x: "2",
-            y: "10",
-            width: "9",
-            height: "2",
-            fill: "#ea8d1c",
-          }),
-          SVG.el("rect", {
-            x: "11",
-            y: "0",
-            width: "1",
-            height: "1",
-            fill: "#ea8d1c",
-          }),
-          SVG.el("rect", {
-            x: "0",
-            y: "13",
-            width: "1",
-            height: "1",
-            fill: "#ea8d1c",
-          }),
-        ]),
-        {
+        ]), {
           id: "snap-list",
         },
       ),
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 10.392304845413264 6 L 0 12 Z",
-        }),
-        {
+        }), {
           id: "snap-pointRight",
         },
       ),
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
-        }),
-        {
+        }), {
           id: "snap-turtle",
         },
       ),
@@ -182,8 +156,7 @@ export default class Style {
           d: "M 0 0 L 18 6 L 0 12 L 6 6 Z",
           fill: "none",
           "stroke-width": 1,
-        }),
-        {
+        }), {
           id: "snap-turtleOutline",
         },
       ),
@@ -198,8 +171,7 @@ export default class Style {
             height: 12,
             x: (12 / 5) * 3,
           }),
-        ]),
-        {
+        ]), {
           id: "snap-pause",
         },
       ),
@@ -211,8 +183,7 @@ export default class Style {
             A 4.8 4.8 0 0 1 15.353421766821956 4.548787410033867
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
-        }),
-        {
+        }), {
           id: "snap-cloud",
         },
       ),
@@ -225,8 +196,7 @@ export default class Style {
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
           fill: "none",
-        }),
-        {
+        }), {
           id: "snap-cloudOutline",
         },
       ),
@@ -238,16 +208,14 @@ export default class Style {
             A 4.8 4.8 0 0 1 15.353421766821956 4.548787410033867
             A 3.6 3.6 0 1 1 15.600000000000003 12
             Z`,
-        }),
-        {
+        }), {
           id: "snap-cloudGradient",
         },
       ),
       SVG.setProps(
         SVG.el("path", {
           d: "M 4 0 L 0 4 L 3.2 4 L 0 8 L 3.2 8 L 0 12 L 9.6 6.6667 L 6.4 6.6667 L 9.6 2.6667 L 6.4 2.6667 L 9.6 0 Z",
-        }),
-        {
+        }), {
           id: "snap-flash",
         },
       ),
@@ -255,8 +223,7 @@ export default class Style {
         SVG.el("path", {
           d: `M 0.6 10 L 11.4 10 L 11.4 3 L 9 3 L 7.5 0.6 L 4.5 0.6 L 3 3 L 0.6 3 Z
           M 7.92 6 A 1.92 1.92 0 1 1 7.91999904000008 5.998080000319999 Z`,
-        }),
-        {
+        }), {
           id: "snap-camera",
         },
       ),
@@ -265,8 +232,7 @@ export default class Style {
           r: 6,
           cx: 6,
           cy: 5,
-        }),
-        {
+        }), {
           id: "snap-circle",
         },
       ),
@@ -277,8 +243,7 @@ export default class Style {
               M 3 2 L 12 0 L 12 2 L 3 4 Z
               M 3 10 L 3 3 L 4 3 L 4 10 Z
               M 11 8 L 11 1 L 12 1 L 12 8 Z`,
-        }),
-        {
+        }), {
           id: "snap-notes",
         },
       ),
@@ -293,8 +258,7 @@ export default class Style {
             "stroke-width": 0.5,
             fill: "none",
           }),
-        ]),
-        {
+        ]), {
           id: "snap-storage",
         },
       ),
@@ -311,8 +275,7 @@ export default class Style {
             "stroke-linejoin": "round",
             "stroke-linecap": "round",
           }),
-        ]),
-        {
+        ]), {
           id: "snap-brush",
         },
       ),
@@ -329,8 +292,7 @@ export default class Style {
             d: "M 11.4 3 A 2.4 2.4 0 1 1 11.3999988000001 2.9976000003999985",
             stroke: "none",
           }),
-        ]),
-        {
+        ]), {
           id: "snap-pipette",
         },
       ),
@@ -351,8 +313,7 @@ export default class Style {
             d: "M 8.4 8.4 Q 12 8.4 11.5 12 L 12 12 Q 12 4.8 6 3.5999999999999996 L 9.6 7.199999999999999 Z",
             stroke: "none",
           }),
-        ]),
-        {
+        ]), {
           id: "snap-paintBucket",
         },
       ),
@@ -367,16 +328,14 @@ export default class Style {
             d: "M 9 0 L 4.5 4.5 L 7.5 7.5 L 12 3 Z",
             stroke: "none",
           }),
-        ]),
-        {
+        ]), {
           id: "snap-eraser",
         },
       ),
       SVG.setProps(
         SVG.el("path", {
           d: "M 0 3.6 A 3.6 3.6 0 0 1 7.2 3.6 L 3.6 12 L 0 3.6 M 1.85 3.6 A 1.8 1.8 0 1 0 1.85 3.5982",
-        }),
-        {
+        }), {
           id: "snap-location",
         },
       ),
@@ -384,8 +343,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
-        }),
-        {
+        }), {
           id: "snap-arrowUp",
         },
       ),
@@ -393,8 +351,7 @@ export default class Style {
         SVG.el("path", {
           d: "M 0.6 6 L 6 0.6 L 11.4 6 L 7.8 6 L 7.8 11.4 L 4.2 11.4 L 4.2 6 Z",
           fill: "none",
-        }),
-        {
+        }), {
           id: "snap-arrowUpOutline",
         },
       ),
@@ -402,8 +359,7 @@ export default class Style {
         SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 6 1.2 L 6 11.4",
           fill: "none",
-        }),
-        {
+        }), {
           id: "snap-arrowUpThin",
         },
       ),
@@ -411,8 +367,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUp",
           transform: "rotate(180 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowDown",
         },
       ),
@@ -420,8 +375,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
           transform: "rotate(180 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowDownOutline",
         },
       ),
@@ -429,8 +383,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpThin",
           transform: "rotate(180 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowDownThin",
         },
       ),
@@ -438,8 +391,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUp",
           transform: "rotate(-90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowLeft",
         },
       ),
@@ -447,8 +399,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
           transform: "rotate(-90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowLeftOutline",
         },
       ),
@@ -456,8 +407,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpThin",
           transform: "rotate(-90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowLeftThin",
         },
       ),
@@ -465,8 +415,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUp",
           transform: "rotate(90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowRight",
         },
       ),
@@ -474,8 +423,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
           transform: "rotate(90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowRightOutline",
         },
       ),
@@ -483,8 +431,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpThin",
           transform: "rotate(90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowRightThin",
         },
       ),
@@ -492,8 +439,7 @@ export default class Style {
         SVG.el("path", {
           d: "M 8 4 L 6 1.2 L 4 4 M 8 8 L 6 10.8 L 4 8 M 6 1.2 L 6 10.8",
           fill: "none",
-        }),
-        {
+        }), {
           id: "snap-arrowUpDownThin",
         },
       ),
@@ -501,8 +447,7 @@ export default class Style {
         SVG.el("use", {
           href: "#snap-arrowUpDownThin",
           transform: "rotate(90 6 6)",
-        }),
-        {
+        }), {
           id: "snap-arrowLeftRightThin",
         },
       ),
@@ -523,7 +468,7 @@ export default class Style {
 
   static dropShadowFilter(id) {
     const f = new Filter(id)
-    f.dropShadow(-0.5, -0.5, 0, "black", 0.2)
+    f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
     return f.el
   }
 
@@ -585,8 +530,10 @@ export default class Style {
         SVG.setProps(el, {
           class: `snap-${category} snap-darker`,
         }),
-      ]),
-      { width: w, height: h },
+      ]), {
+        width: w,
+        height: h
+      },
     )
   }
 
