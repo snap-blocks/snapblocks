@@ -66,40 +66,13 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.withChildren(
-            SVG.el("mask", {
-              id: "sb-list-holes",
-            }),
-            [
-              SVG.el("rect", {
-                x: "0",
-                y: "0",
-                width: "8",
-                height: "10",
-                fill: "white",
-              }),
-              SVG.el("rect", {
-                x: "1",
-                y: "1",
-                width: "6",
-                height: "2",
-                fill: "black",
-              }),
-              SVG.el("rect", {
-                x: "1",
-                y: "4",
-                width: "6",
-                height: "2",
-                fill: "black",
-              }),
-              SVG.el("rect", {
-                x: "1",
-                y: "7",
-                width: "6",
-                height: "2",
-                fill: "black",
-              }),
-            ]),
+          SVG.el("rect", {
+            x: "0",
+            y: "0",
+            width: "8",
+            height: "10",
+            fill: "white",
+          }),
           SVG.group([
             SVG.el("rect", {
               x: 1,
@@ -123,14 +96,6 @@ export default class Style {
               fill: "#ff8c00",
             }),
           ]),
-          SVG.el("rect", {
-            x: "0",
-            y: "0",
-            width: "8",
-            height: "10",
-            fill: "white",
-            "mask": "url(#sb-list-holes)",
-          }),
         ]), {
           id: "sb-list",
         },

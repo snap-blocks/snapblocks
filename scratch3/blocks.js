@@ -269,7 +269,7 @@ export class IconView {
         g: 0,
         b: 0,
       },
-      list: { width: 15, height: 18 },
+      list: { width: 15, height: 17 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12 },
       turtleOutline: { width: 18, height: 12, fillAttribute: "stroke" },
