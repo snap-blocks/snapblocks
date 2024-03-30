@@ -96,7 +96,8 @@ export default class Style {
               fill: "#ff8c00",
             }),
           ]),
-        ]), {
+        ]),
+        {
           id: "sb-list",
         },
       ),

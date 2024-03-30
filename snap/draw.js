@@ -436,39 +436,38 @@ export default class SVG {
 
   static getCommandSlotTop(w, isFilled = false) {
     var corner = 3,
-        ins = (isFilled ? 6 : 3),
-        dent = (isFilled ? 8 : 4),
-        indent = corner * 2 + ins,
-        edge = 1,
-        rf = 0,
-        path = ""
-    
+      ins = isFilled ? 6 : 3,
+      dent = isFilled ? 8 : 4,
+      indent = corner * 2 + ins,
+      edge = 1,
+      rf = 0,
+      path = ""
+
     path += SVG.canvasArc(
-        corner + edge,
-        corner + edge,
-        corner,
-        SVG.radians(-180),
-        SVG.radians(-90),
-        false,
-        "M",
+      corner + edge,
+      corner + edge,
+      corner,
+      SVG.radians(-180),
+      SVG.radians(-90),
+      false,
+      "M",
     )
-    
-    
+
     path += ` L ${corner + ins + edge + rf * 2} ${edge}`
     path += ` L ${indent + edge + rf * 2} ${corner + edge}`
-    path += ` L ${indent + edge  + rf * 2 + (dent - rf * 2)} ${corner + edge}`
-    path += ` L ${indent + edge  + rf * 2 + (dent - rf * 2) + corner} ${edge}`
+    path += ` L ${indent + edge + rf * 2 + (dent - rf * 2)} ${corner + edge}`
+    path += ` L ${indent + edge + rf * 2 + (dent - rf * 2) + corner} ${edge}`
     path += ` L ${w - corner - edge} ${edge}`
-    
+
     return path
   }
 
   static getCommandSlotRightAndBottom(w, h, isFilled = false) {
     var corner = 3,
-        edge = 1,
-        y = h - corner - edge,
-        path = ""
-    
+      edge = 1,
+      y = h - corner - edge,
+      path = ""
+
     path += SVG.canvasArc(
       w - corner - edge,
       corner + edge,
@@ -486,7 +485,7 @@ export default class SVG {
       SVG.radians(0),
       SVG.radians(90),
       false,
-      " L"
+      " L",
     )
 
     path += SVG.canvasArc(
@@ -503,7 +502,11 @@ export default class SVG {
   }
 
   static getCommandSlotPath(w, h, isFilled = false) {
-    return [SVG.getCommandSlotTop(w, isFilled), SVG.getCommandSlotRightAndBottom(w, h, isFilled), "Z"]
+    return [
+      SVG.getCommandSlotTop(w, isFilled),
+      SVG.getCommandSlotRightAndBottom(w, h, isFilled),
+      "Z",
+    ]
   }
 
   static getCommandSlotRect(w, h, isFilled = false, props) {
@@ -697,8 +700,8 @@ export default class SVG {
             ? SVG.pointedInput
             : SVG.pointedPath
           : (w, h) => {
-            return SVG.getCommandSlotPath(w, h, !child.isInset)
-          }
+              return SVG.getCommandSlotPath(w, h, !child.isInset)
+            }
     return SVG.path({
       ...props,
       path: [

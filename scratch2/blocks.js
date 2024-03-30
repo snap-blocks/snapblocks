@@ -1,6 +1,4 @@
-import {
-  hexColorPat
-} from "../syntax/blocks.js"
+import { hexColorPat } from "../syntax/blocks.js"
 
 import {
   Label,
@@ -268,7 +266,7 @@ class IconView {
       },
       list: {
         width: 8,
-        height: 10
+        height: 10,
       },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
@@ -1108,20 +1106,19 @@ class DocumentView {
       let value = attribute.nodeValue
 
       let split = value.split(aroundIdRegex)
-      console.log('attribute', attribute.name)
-      console.log('split', split)
-
+      console.log("attribute", attribute.name)
+      console.log("split", split)
 
       for (let index = 0; index < split.length; index++) {
-        let part = split[index];
+        let part = split[index]
 
         if (idRegex.test(part) && !hexColorPat.test(part)) {
-          console.log('edited')
+          console.log("edited")
           split[index] = `${part}-${this.id}`
         }
       }
 
-      attribute.nodeValue = split.join('')
+      attribute.nodeValue = split.join("")
     })
 
     for (let child of element.children) {
