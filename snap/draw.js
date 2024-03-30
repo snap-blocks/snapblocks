@@ -434,6 +434,85 @@ export default class SVG {
     return path
   }
 
+  static getCommandSlotTop(w, isFilled = false) {
+    var corner = 3,
+        ins = (isFilled ? 6 : 3),
+        dent = (isFilled ? 8 : 4),
+        indent = corner * 2 + ins,
+        edge = 1,
+        rf = 0,
+        path = ""
+    
+    path += SVG.canvasArc(
+        corner + edge,
+        corner + edge,
+        corner,
+        SVG.radians(-180),
+        SVG.radians(-90),
+        false,
+        "M",
+    )
+    
+    
+    path += ` L ${corner + ins + edge + rf * 2} ${edge}`
+    path += ` L ${indent + edge + rf * 2} ${corner + edge}`
+    path += ` L ${indent + edge  + rf * 2 + (dent - rf * 2)} ${corner + edge}`
+    path += ` L ${indent + edge  + rf * 2 + (dent - rf * 2) + corner} ${edge}`
+    path += ` L ${w - corner - edge} ${edge}`
+    
+    return path
+  }
+
+  static getCommandSlotRightAndBottom(w, h, isFilled = false) {
+    var corner = 3,
+        edge = 1,
+        y = h - corner - edge,
+        path = ""
+    
+    path += SVG.canvasArc(
+      w - corner - edge,
+      corner + edge,
+      corner,
+      SVG.radians(-90),
+      SVG.radians(-0),
+      false,
+      "L",
+    )
+
+    path += SVG.canvasArc(
+      w - corner - edge,
+      y,
+      corner,
+      SVG.radians(0),
+      SVG.radians(90),
+      false,
+      " L"
+    )
+
+    path += SVG.canvasArc(
+      corner + edge,
+      y,
+      corner,
+      SVG.radians(90),
+      SVG.radians(180),
+      false,
+      " L",
+    )
+
+    return path
+  }
+
+  static getCommandSlotPath(w, h, isFilled = false) {
+    return [SVG.getCommandSlotTop(w, isFilled), SVG.getCommandSlotRightAndBottom(w, h, isFilled), "Z"]
+  }
+
+  static getCommandSlotRect(w, h, isFilled = false, props) {
+    return SVG.path({
+      ...props,
+      path: SVG.getCommandSlotPath(w, h, isFilled),
+    })
+  }
+
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
@@ -617,7 +696,9 @@ export default class SVG {
           ? isEmpty
             ? SVG.pointedInput
             : SVG.pointedPath
-          : SVG.capPath
+          : (w, h) => {
+            return SVG.getCommandSlotPath(w, h, !child.isInset)
+          }
     return SVG.path({
       ...props,
       path: [

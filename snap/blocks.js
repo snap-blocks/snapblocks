@@ -514,14 +514,10 @@ class InputView {
           13),
       )
     } else {
-      w = this.isBoolean ? 22 : this.isInset ? 30 : this.isColor ? 14 : null
+      w = this.isInset ? 26 : this.isBoolean ? 20 : this.isColor ? 14 : null
     }
 
-    let h = this.hasLabel ? this.label.height + 1 : 13
-
-    if (this.isBoolean) {
-      h -= 2
-    }
+    let h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
 
     this.width = w
     this.height = h
