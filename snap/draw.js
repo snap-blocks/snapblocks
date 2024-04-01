@@ -597,7 +597,7 @@ export default class SVG {
       h2 = Math.floor(h / 2),
       r = Math.min(rounding, h2),
       path = ""
-    
+
     path += `M ${edge} ${h2} `
     path += `L ${r + edge} ${edge} `
     path += `L ${w - r - edge} ${edge}`
@@ -611,7 +611,7 @@ export default class SVG {
       h2 = Math.floor(h / 2),
       r = Math.min(rounding, h2),
       path = ""
-    
+
     path += `L ${w - edge} ${h2} `
     path += `L ${w - r - edge} ${h - edge} `
     path += `L ${r + edge} ${h - edge} `
