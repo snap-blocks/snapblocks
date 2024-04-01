@@ -439,7 +439,7 @@ export default class SVG {
       ins = isFilled ? 6 : 3,
       dent = isFilled ? 8 : 4,
       indent = corner * 2 + ins,
-      edge = 1,
+      edge = isFilled ? 0 : 1,
       rf = 0,
       path = ""
 
@@ -464,7 +464,7 @@ export default class SVG {
 
   static getCommandSlotRightAndBottom(w, h, isFilled = false) {
     var corner = 3,
-      edge = 1,
+      edge = edge = isFilled ? 0 : 1,
       y = h - corner - edge,
       path = ""
 
@@ -516,10 +516,10 @@ export default class SVG {
     })
   }
 
-  static getReporterSlotTop(w, h) {
+  static getReporterSlotTop(w, h, isFilled = false) {
     var rounding = 9,
       r = Math.min(rounding, h / 2),
-      edge = 1,
+      edge = edge = isFilled ? 0 : 1,
       path = ""
 
     path += SVG.canvasArc(
@@ -535,10 +535,10 @@ export default class SVG {
     return path
   }
 
-  static getReporterSlotRightAndBottom(w, h) {
+  static getReporterSlotRightAndBottom(w, h, isFilled = false) {
     var rounding = 9,
       r = Math.min(rounding, h / 2),
-      edge = 1,
+      edge = edge = isFilled ? 0 : 1,
       path = ""
 
     path += SVG.canvasArc(
@@ -576,10 +576,10 @@ export default class SVG {
     return path
   }
 
-  static getReporterSlotPath(w, h) {
+  static getReporterSlotPath(w, h, isFilled = false) {
     return [
-      SVG.getReporterSlotTop(w, h),
-      SVG.getReporterSlotRightAndBottom(w, h),
+      SVG.getReporterSlotTop(w, h, isFilled),
+      SVG.getReporterSlotRightAndBottom(w, h, isFilled),
       "Z",
     ]
   }
@@ -591,8 +591,8 @@ export default class SVG {
     })
   }
 
-  static getBooleanSlotTop(w, h) {
-    var edge = 1,
+  static getBooleanSlotTop(w, h, isFilled = false) {
+    var edge = edge = isFilled ? 0 : 1,
       rounding = 9,
       h2 = Math.floor(h / 2),
       r = Math.min(rounding, h2),
@@ -605,8 +605,8 @@ export default class SVG {
     return path
   }
 
-  static getBooleanSlotRightAndBottom(w, h) {
-    var edge = 1,
+  static getBooleanSlotRightAndBottom(w, h, isFilled = false) {
+    var edge = edge = isFilled ? 0 : 1,
       rounding = 9,
       h2 = Math.floor(h / 2),
       r = Math.min(rounding, h2),
@@ -620,10 +620,10 @@ export default class SVG {
     return path
   }
 
-  static getBooleanSlotPath(w, h) {
+  static getBooleanSlotPath(w, h, isFilled = false) {
     return [
-      SVG.getBooleanSlotTop(w, h),
-      SVG.getBooleanSlotRightAndBottom(w, h),
+      SVG.getBooleanSlotTop(w, h, isFilled),
+      SVG.getBooleanSlotRightAndBottom(w, h, isFilled),
       "Z",
     ]
   }
