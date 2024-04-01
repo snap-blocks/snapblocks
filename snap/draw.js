@@ -518,10 +518,10 @@ export default class SVG {
 
   static getReporterSlotTop(w, h) {
     var rounding = 9,
-        r = Math.min(rounding, h / 2),
-        edge = 1,
-        path = ""
-    
+      r = Math.min(rounding, h / 2),
+      edge = 1,
+      path = ""
+
     path += SVG.canvasArc(
       r + edge,
       r + edge,
@@ -529,7 +529,7 @@ export default class SVG {
       SVG.radians(-180),
       SVG.radians(-90),
       false,
-      "M"
+      "M",
     )
 
     return path
@@ -537,10 +537,10 @@ export default class SVG {
 
   static getReporterSlotRightAndBottom(w, h) {
     var rounding = 9,
-        r = Math.min(rounding, h / 2),
-        edge = 1,
-        path = ""
-    
+      r = Math.min(rounding, h / 2),
+      edge = 1,
+      path = ""
+
     path += SVG.canvasArc(
       w - r - edge,
       r + edge,
@@ -568,9 +568,9 @@ export default class SVG {
       SVG.radians(90),
       SVG.radians(180),
       false,
-      " L"
+      " L",
     )
-    
+
     path += " Z"
 
     return path
