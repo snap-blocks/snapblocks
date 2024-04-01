@@ -516,6 +516,81 @@ export default class SVG {
     })
   }
 
+  static getReporterSlotTop(w, h) {
+    var rounding = 9,
+        r = Math.min(rounding, h / 2),
+        edge = 1,
+        path = ""
+    
+    path += SVG.canvasArc(
+      r + edge,
+      r + edge,
+      r,
+      SVG.radians(-180),
+      SVG.radians(-90),
+      false,
+      "M"
+    )
+
+    return path
+  }
+
+  static getReporterSlotRightAndBottom(w, h) {
+    var rounding = 9,
+        r = Math.min(rounding, h / 2),
+        edge = 1,
+        path = ""
+    
+    path += SVG.canvasArc(
+      w - r - edge,
+      r + edge,
+      r,
+      SVG.radians(-90),
+      SVG.radians(-0),
+      false,
+      "L",
+    )
+
+    path += SVG.canvasArc(
+      w - r - edge,
+      h - r - edge,
+      r,
+      SVG.radians(0),
+      SVG.radians(90),
+      false,
+      " L",
+    )
+
+    path += SVG.canvasArc(
+      r + edge,
+      h - r - edge,
+      r,
+      SVG.radians(90),
+      SVG.radians(180),
+      false,
+      " L"
+    )
+    
+    path += " Z"
+
+    return path
+  }
+
+  static getReporterSlotPath(w, h) {
+    return [
+      SVG.getReporterSlotTop(w, h),
+      SVG.getReporterSlotRightAndBottom(w, h),
+      "Z",
+    ]
+  }
+
+  static getReporterSlotRect(w, h, props) {
+    return SVG.path({
+      ...props,
+      path: SVG.getReporterSlotPath(w, h),
+    })
+  }
+
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
@@ -694,14 +769,12 @@ export default class SVG {
 
     const func =
       shape === "reporter"
-        ? SVG.roundedPath
+        ? SVG.getReporterSlotPath
         : shape === "boolean"
           ? isEmpty
             ? SVG.pointedInput
             : SVG.pointedPath
-          : (w, h) => {
-              return SVG.getCommandSlotPath(w, h, !child.isInset)
-            }
+          : SVG.getCommandSlotPath
     return SVG.path({
       ...props,
       path: [
@@ -713,7 +786,7 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        SVG.translatePath(4, cy || 4, func(cw, ch).join(" ")),
+        SVG.translatePath(4, cy || 4, func(cw, ch, !child.isInset).join(" ")),
       ],
       "fill-rule": "even-odd",
     })
