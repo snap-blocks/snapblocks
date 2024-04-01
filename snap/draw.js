@@ -591,6 +591,50 @@ export default class SVG {
     })
   }
 
+  static getBooleanSlotTop(w, h) {
+    var edge = 1,
+      rounding = 9,
+      h2 = Math.floor(h / 2),
+      r = Math.min(rounding, h2),
+      path = ""
+    
+    path += `M ${edge} ${h2} `
+    path += `L ${r + edge} ${edge} `
+    path += `L ${w - r - edge} ${edge}`
+
+    return path
+  }
+
+  static getBooleanSlotRightAndBottom(w, h) {
+    var edge = 1,
+      rounding = 9,
+      h2 = Math.floor(h / 2),
+      r = Math.min(rounding, h2),
+      path = ""
+    
+    path += `L ${w - edge} ${h2} `
+    path += `L ${w - r - edge} ${h - edge} `
+    path += `L ${r + edge} ${h - edge} `
+    path += `L ${edge} ${h2}`
+
+    return path
+  }
+
+  static getBooleanSlotPath(w, h) {
+    return [
+      SVG.getBooleanSlotTop(w, h),
+      SVG.getBooleanSlotRightAndBottom(w, h),
+      "Z",
+    ]
+  }
+
+  static getBooleanSlotRect(w, h, props) {
+    return SVG.path({
+      ...props,
+      path: SVG.getBooleanSlotPath(w, h),
+    })
+  }
+
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
@@ -771,9 +815,7 @@ export default class SVG {
       shape === "reporter"
         ? SVG.getReporterSlotPath
         : shape === "boolean"
-          ? isEmpty
-            ? SVG.pointedInput
-            : SVG.pointedPath
+          ? SVG.getBooleanSlotPath
           : SVG.getCommandSlotPath
     return SVG.path({
       ...props,
