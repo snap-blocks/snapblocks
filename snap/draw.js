@@ -637,14 +637,14 @@ export default class SVG {
 
   static getRoundSlotTop(w, h) {
     var edge = 1,
-        shift = edge * 0.5,
-        r = Math.max((h - (edge * 2)) / 2, 0),
-        start,
-        end,
-        path = ""
-    
-    start = r + edge;
-    end = w - r - edge;
+      shift = edge * 0.5,
+      r = Math.max((h - edge * 2) / 2, 0),
+      start,
+      end,
+      path = ""
+
+    start = r + edge
+    end = w - r - edge
     path += SVG.canvasArc(
       r,
       r,
