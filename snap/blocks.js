@@ -545,7 +545,7 @@ class InputView {
     }
 
     this.width = w
-    this.height = h
+    this.height = h + 1
 
     let el = InputView.shapes[this.shape](w, h)
     if (this.isColor) {
@@ -584,6 +584,7 @@ class InputView {
         ),
       )
     }
+    SVG.move(0, 0.5, result)
     return result
   }
 }
@@ -868,7 +869,7 @@ class BlockView {
       "define-hat": [13, 3, 7],
       "snap-define": [12, 3, 7],
       reporter: [2, 2, 2],
-      boolean: [3, 4, 3],
+      boolean: [3, 5, 3],
       cap: [4, 3, 4],
       "c-block": [4, 3, 4],
       "if-block": [4, 3, 4],
