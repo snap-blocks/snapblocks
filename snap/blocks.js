@@ -867,13 +867,13 @@ class BlockView {
       cat: [12, 3, 5],
       "define-hat": [13, 3, 7],
       "snap-define": [12, 3, 7],
-      reporter: [2, 3, 2],
-      boolean: [2, 5, 2],
+      reporter: [2, 2, 2],
+      boolean: [3, 4, 3],
       cap: [4, 3, 4],
       "c-block": [4, 3, 4],
       "if-block": [4, 3, 4],
       ring: [2, 3, 2],
-      null: [4, 3, 4],
+      null: [4, 3, 3],
     }
   }
 
@@ -1007,7 +1007,7 @@ class BlockView {
           if (child.isIcon) {
             line.width += child.padx
           } else {
-            line.width += 4
+            line.width += 2
           }
         }
 

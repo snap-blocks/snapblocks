@@ -303,7 +303,7 @@ export default class SVG {
     ]
   }
 
-  static getPointedTop(w, h, r = 9) {
+  static getPointedTop(w, h, r = 8) {
     var h2 = Math.floor(h / 2),
       path = ""
 
@@ -312,7 +312,7 @@ export default class SVG {
     return path
   }
 
-  static getPointedBottom(w, h, showRight, r = 9) {
+  static getPointedBottom(w, h, showRight, r = 8) {
     var h2 = Math.floor(h / 2),
       path = ""
     if (showRight) {
