@@ -1,3 +1,5 @@
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import babel from "@rollup/plugin-babel"
 import json from "@rollup/plugin-json"
 import pkg from "./package.json" assert { "type": "json" }
@@ -62,6 +64,8 @@ export default [
       sourcemap: env.prod,
     },
     plugins: [
+      commonjs(),
+      nodeResolve(),
       ...commonPreBabelOperations(),
       babel({ babelHelpers: "bundled" }),
       ...commonPostBabelOperations(),
@@ -80,6 +84,8 @@ export default [
       sourcemap: env.prod,
     },
     plugins: [
+      commonjs(),
+      nodeResolve(),
       ...commonPreBabelOperations(),
       // ESM bundle does not need Babel
       ...commonPostBabelOperations(true),

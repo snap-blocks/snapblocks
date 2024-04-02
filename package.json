@@ -38,7 +38,9 @@
     "@babel/plugin-transform-object-assign": "^7.24.1",
     "@babel/preset-env": "^7.24.3",
     "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "cross-env": "^7.0.3",
     "csso": "^5.0.5",
@@ -172,5 +174,8 @@
         }
       }
     ]
+  },
+  "dependencies": {
+    "html-entities": "^2.5.2"
   }
 }

@@ -4,6 +4,8 @@ function assert(bool, message) {
   }
 }
 
+import { decode } from "html-entities"
+
 import {
   Label,
   Icon,
@@ -1292,10 +1294,11 @@ export function parse(code, options) {
     throw new Error("Option 'dialect' no longer supported")
   }
 
-  let textarea = document.createElement("textarea")
-  textarea.innerHTML = code
-  code = textarea.value
+  // let textarea = document.createElement("textarea")
+  // textarea.innerHTML = code
+  // code = textarea.value
 
+  code = decode(code)
   code = code.replaceAll("\u00a0", " ") // replace non-breaking space (this is a big issue on the snap wiki)
 
   const languages = options.languages.map(code => {
