@@ -1296,9 +1296,7 @@ export function parse(code, options) {
   textarea.innerHTML = code
   code = textarea.value
 
-  code = code.replace("\u00a0", " ") // replace non-breaking space (this is a big issue on the snap wiki)
-
-  console.log("code", code)
+  code = code.replaceAll("\u00a0", " ") // replace non-breaking space (this is a big issue on the snap wiki)
 
   const languages = options.languages.map(code => {
     const lang = allLanguages[code]
