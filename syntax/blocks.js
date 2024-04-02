@@ -23,7 +23,7 @@ const overrideCategories = [
 ]
 
 const aliasCategories = {
-  "gray": "grey",
+  gray: "grey",
 }
 
 const overrideShapes = [
@@ -937,8 +937,10 @@ export function applyOverrides(info, overrides) {
     } else if (overrideCategories.includes(name)) {
       info.category = name
       info.categoryIsDefault = false
-    } else if (aliasCategories[name] && 
-               overrideCategories.includes(aliasCategories[name])) {
+    } else if (
+      aliasCategories[name] &&
+      overrideCategories.includes(aliasCategories[name])
+    ) {
       info.category = aliasCategories[name]
       info.categoryIsDefault = false
     } else if (overrideShapes.includes(name)) {
