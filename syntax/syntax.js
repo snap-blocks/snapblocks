@@ -1292,8 +1292,13 @@ export function parse(code, options) {
     throw new Error("Option 'dialect' no longer supported")
   }
 
-  code = code.replace(/&lt;/g, "<")
-  code = code.replace(/&gt;/g, ">")
+  let textarea = document.createElement("textarea")
+  textarea.innerHTML = code
+  code = textarea.value
+
+  code = code.replace("\u00a0", " ") // replace non-breaking space (this is a big issue on the snap wiki)
+
+  console.log('code', code)
 
   const languages = options.languages.map(code => {
     const lang = allLanguages[code]
