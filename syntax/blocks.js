@@ -504,7 +504,6 @@ disambig(
   (children, _lang) => {
     // makey makey block if number-dropdown, otherwise events
     const first = children[1]
-    // console.log("when key pressed", children)
     if (!first.isInput) {
       return
     }
@@ -541,7 +540,6 @@ registerCheck("microbit.whenGesture", (info, children, lang) => {
 })
 
 registerCheck("sb2:whenSensorConnected", (info, children, lang) => {
-  console.log("children", children)
   let first = children.find(child => !child.isLabel)
 
   if (!first.shape.includes("dropdown")) {
@@ -593,7 +591,6 @@ disambig("ev3.buttonPressed", "microbit.isButtonPressed", (children, _lang) => {
 
 disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
   let first = children[3]
-  // console.log("first", first)
   if (first.isCShape) {
     return false
   }
@@ -609,7 +606,6 @@ disambig("snap:reportIfElse", "CONTROL_ELSE", (children, _lang) => {
 disambig("snap:doSetGlobalFlag", "DATA_SETVARIABLETO", (children, _lang) => {
   let last = children[children.length - 1]
   let first = children.find(child => !child.isLabel)
-  // console.log('last', last)
   if (last.isInput && last.isBoolean) {
     return true
   }
@@ -841,7 +837,7 @@ export function lookupHash(hash, info, children, languages) {
       )
       allCommands = newCommands.commands
       full = newCommands.full
-      console.log("new commands", allCommands)
+      // console.log("new commands", allCommands)
 
       if (full || allCommands.length === 0) {
         break
@@ -866,7 +862,7 @@ export function lookupHash(hash, info, children, languages) {
         if (allCommands.length > 1) {
           // Only check in case of collision;
           // perform "disambiguation"
-          console.log("block", allCommands)
+          // console.log("block", allCommands)
           if (blockById.accepts && !blockById.accepts(info, children, lang)) {
             continue
           }

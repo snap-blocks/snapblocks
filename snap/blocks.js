@@ -509,9 +509,6 @@ class InputView {
 
       h = this.label.height + 0
 
-      console.log("shape", this.shape)
-      console.log("label width", this.hasArrow)
-
       if (this.shape === "number" || this.shape === "number-dropdown") {
         w = this.label.width + Math.floor(this.hasArrow * 12 * 0.5) + h
       } else {
@@ -522,11 +519,7 @@ class InputView {
             : (10 * 1.2) / 1.3 + this.hasArrow * 12,
           0,
         )
-
-        console.log("width", w)
       }
-
-      console.log("width", w)
     } else {
       h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
       w = this.isInset
@@ -1328,14 +1321,11 @@ class DocumentView {
       let value = attribute.nodeValue
 
       let split = value.split(aroundIdRegex)
-      console.log("attribute", attribute.name)
-      console.log("split", split)
 
       for (let index = 0; index < split.length; index++) {
         let part = split[index]
 
         if (idRegex.test(part) && !hexColorPat.test(part)) {
-          console.log("edited")
           split[index] = `${part}-${this.id}`
         }
       }

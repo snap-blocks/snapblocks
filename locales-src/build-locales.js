@@ -167,14 +167,11 @@ const buildLocale = (code, rawLocale) => {
       continue
     }
     if (extra && extra.blocks && extra.blocks[command.id]) {
-      // console.log(aliases.blocks[command.id])
       let fullBlock = extra.blocks[command.id]
       fullBlock.id = command.id
       locale.fullBlocks.push(fullBlock)
     }
     const result = translateKey(rawLocale, command.id)
-    // console.log('id', command.id)
-    // console.log('result', result)
     if (!result) {
       continue
     }

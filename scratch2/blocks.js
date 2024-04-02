@@ -729,7 +729,6 @@ class BlockView {
 
       if (options.zebraColoring) {
         if (this.info.shape === "snap-define") {
-          console.log("snap-define", this.info.category)
           if (child.isBlock && child.info.category === this.info.category) {
             this.isZebra = true
           }
@@ -1106,14 +1105,11 @@ class DocumentView {
       let value = attribute.nodeValue
 
       let split = value.split(aroundIdRegex)
-      console.log("attribute", attribute.name)
-      console.log("split", split)
 
       for (let index = 0; index < split.length; index++) {
         let part = split[index]
 
         if (idRegex.test(part) && !hexColorPat.test(part)) {
-          console.log("edited")
           split[index] = `${part}-${this.id}`
         }
       }

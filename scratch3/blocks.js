@@ -839,7 +839,6 @@ class BlockView {
       const child = children[i]
       if (options.zebraColoring) {
         if (this.info.shape === "snap-define") {
-          console.log("snap-define", this.info.category)
           if (child.isBlock && child.info.category === this.info.category) {
             this.isZebra = true
           }
