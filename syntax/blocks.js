@@ -22,6 +22,10 @@ const overrideCategories = [
   ...Object.keys(aliasExtensions),
 ]
 
+const aliasCategories = {
+  "gray": "grey",
+}
+
 const overrideShapes = [
   "hat",
   "cap",
@@ -932,6 +936,10 @@ export function applyOverrides(info, overrides) {
       info.categoryIsDefault = false
     } else if (overrideCategories.includes(name)) {
       info.category = name
+      info.categoryIsDefault = false
+    } else if (aliasCategories[name] && 
+               overrideCategories.includes(aliasCategories[name])) {
+      info.category = aliasCategories[name]
       info.categoryIsDefault = false
     } else if (overrideShapes.includes(name)) {
       info.shape = name
