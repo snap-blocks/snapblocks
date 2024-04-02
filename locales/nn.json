@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "når eg får meldinga %1",
     "EVENT_BROADCAST": "send meldinga %1",
     "EVENT_BROADCASTANDWAIT": "send meldinga %1 og vent",
+    "EVENT_WHENTOUCHINGOBJECT": "når figuren rører %1",
     "CONTROL_WAIT": "vent %1 sekund",
     "CONTROL_REPEAT": "gjenta %1 gongar",
     "CONTROL_FOREVER": "for alltid",
     "CONTROL_IF": "viss %1",
+    "CONTROL_ELSE": "elles",
     "CONTROL_WAITUNTIL": "vent til %1",
     "CONTROL_REPEATUNTIL": "gjenta til %1",
     "CONTROL_STOP": "stopp %1",
     "CONTROL_STARTASCLONE": "når eg startar som klon",
     "CONTROL_CREATECLONEOF": "lag klon av %1",
     "CONTROL_DELETETHISCLONE": "slett denne klonen",
+    "CONTROL_WHILE": "gjenta viss %1",
     "SENSING_ASKANDWAIT": "spør %1 og vent",
     "videoSensing.videoToggle": "set video %1",
     "videoSensing.setVideoTransparency": "set gjennomsikt av video til %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "posisjon til %1 i %2",
     "DATA_LENGTHOFLIST": "lengda til %1",
     "DATA_LISTCONTAINSITEM": "%1 inneheld %2?",
-    "CONTROL_ELSE": "elles",
     "SENSING_USERID": "brukar-id",
     "SENSING_LOUD": "høg lyd?",
     "text2speech.speakAndWaitBlock": "les opp %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "hellingsvinkel %1",
     "boost.setLightHue": "set lysfargen til %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "rista",
     "hoppa"
   ],
+  "picoWhen": [],
   "osis": [
     "andre skript i figuren"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variablar",
     "My Blocks": "Mine klossar"
   },
-  "math": [
-    "abs",
-    "golv",
-    "tak",
-    "kvadratrot",
-    "sin",
-    "cos",
-    "tan",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "golv",
+      "tak",
+      "kvadratrot",
+      "sin",
+      "cos",
+      "tan",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Norsk Nynorsk",
   "percentTranslated": 100

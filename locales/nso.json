@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ge ke amogela %1",
     "EVENT_BROADCAST": "kgašo %1",
     "EVENT_BROADCASTANDWAIT": "kgašo %1 o lete",
+    "EVENT_WHENTOUCHINGOBJECT": "ge motšeakarolo a kgoma %1",
     "CONTROL_WAIT": "ema %1 metsotswana",
     "CONTROL_REPEAT": "bušeletša %1",
     "CONTROL_FOREVER": "ka go sa felego",
     "CONTROL_IF": "ge e le %1 kemoka",
+    "CONTROL_ELSE": "enngwe",
     "CONTROL_WAITUNTIL": "ema go fihlela %1",
     "CONTROL_REPEATUNTIL": "bušeletša go fihlela %1",
     "CONTROL_STOP": "ema %1",
     "CONTROL_STARTASCLONE": "ge ke thoma popotshwano",
     "CONTROL_CREATECLONEOF": "hlama popotshwano %1",
     "CONTROL_DELETETHISCLONE": "phumula tshwantšho ye",
+    "CONTROL_WHILE": "ge %1",
     "SENSING_ASKANDWAIT": "botšiša %1 o be o lete",
     "videoSensing.videoToggle": "sotha video %1",
     "videoSensing.setVideoTransparency": "bea ponagatšo ya video go %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "selo # sa %1 go %2",
     "DATA_LENGTHOFLIST": "botelele bja %1",
     "DATA_LISTCONTAINSITEM": "%1 e na le %2",
-    "CONTROL_ELSE": "enngwe",
     "SENSING_USERID": "boitsebišo bja tšhomišo",
     "SENSING_LOUD": "rasa?",
     "text2speech.speakAndWaitBlock": "bolela %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "sekamiša sekhutlo %1",
     "boost.setLightHue": "bea mmala wa seetša go %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "šikinyegile",
     "fofile"
   ],
+  "picoWhen": [],
   "osis": [
     "dingwalwa tše dingwe tša motšeakarolo"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Diphetošo",
     "My Blocks": "Dipoloko tša Ka"
   },
-  "math": [
-    "abs",
-    "floor",
-    "ceiling",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "Ka gare",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "floor",
+      "ceiling",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "Ka gare",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Sepedi",
   "percentTranslated": 100

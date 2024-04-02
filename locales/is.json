@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "þegar ég fæ sent %1",
     "EVENT_BROADCAST": "senda %1",
     "EVENT_BROADCASTANDWAIT": "senda %1 og bíða",
+    "EVENT_WHENTOUCHINGOBJECT": "þegar karakterinn snertir %1",
     "CONTROL_WAIT": "bíða í %1 sekúndur",
     "CONTROL_REPEAT": "endurtaka %1 sinnum",
     "CONTROL_FOREVER": "endalaust",
     "CONTROL_IF": "ef %1 þá",
+    "CONTROL_ELSE": "annars",
     "CONTROL_WAITUNTIL": "bíða þangað til %1",
     "CONTROL_REPEATUNTIL": "endurtaka þar til %1",
     "CONTROL_STOP": "stöðva %1",
     "CONTROL_STARTASCLONE": "þegar ég byrja sem klónn",
     "CONTROL_CREATECLONEOF": "búa til klón af %1",
     "CONTROL_DELETETHISCLONE": "eyða þessum klón",
+    "CONTROL_WHILE": "á meðan %1",
     "SENSING_ASKANDWAIT": "spurðu %1 og bíddu",
     "videoSensing.videoToggle": "breyta vídeó %1",
     "videoSensing.setVideoTransparency": "setja gegnsæi hreyfimyndar í %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # of %1 in %2",
     "DATA_LENGTHOFLIST": "lengd %1",
     "DATA_LISTCONTAINSITEM": "inniheldur %1, %2?",
-    "CONTROL_ELSE": "annars",
     "SENSING_USERID": "einkenni notenda",
     "SENSING_LOUD": "hávær?",
     "text2speech.speakAndWaitBlock": "tala %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "shaken",
     "jumped"
   ],
+  "picoWhen": [],
   "osis": [
     "önnur forrit á karakter"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Breytur",
     "My Blocks": "Mínir kubbar"
   },
-  "math": [
-    "abs",
-    "rúna niður",
-    "rúna upp",
-    "kvaðratrót",
-    "sínus",
-    "kósínus",
-    "tangens",
-    "arksínus",
-    "arkcósínus",
-    "arktangens",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "rúna niður",
+      "rúna upp",
+      "kvaðratrót",
+      "sínus",
+      "kósínus",
+      "tangens",
+      "arksínus",
+      "arkcósínus",
+      "arktangens",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Íslenska",
   "percentTranslated": 100

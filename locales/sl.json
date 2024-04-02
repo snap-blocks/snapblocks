@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ko prejmem %1",
     "EVENT_BROADCAST": "objavi %1",
     "EVENT_BROADCASTANDWAIT": "objavi %1 in čakaj",
+    "EVENT_WHENTOUCHINGOBJECT": "ko se ta lik dotika %1",
     "CONTROL_WAIT": "počakaj %1 sekund",
     "CONTROL_REPEAT": "ponovi %1 krat",
     "CONTROL_FOREVER": "ponavljaj",
     "CONTROL_IF": "če %1 potem",
+    "CONTROL_ELSE": "sicer",
     "CONTROL_WAITUNTIL": "počakaj dokler ni %1",
     "CONTROL_REPEATUNTIL": "ponavljaj dokler ni %1",
     "CONTROL_STOP": "ustavi %1",
     "CONTROL_STARTASCLONE": "ko začnem kot dvojnik",
     "CONTROL_CREATECLONEOF": "ustvari dvojnika %1",
     "CONTROL_DELETETHISCLONE": "zbriši tega dvojnika",
+    "CONTROL_WHILE": "dokler %1",
     "SENSING_ASKANDWAIT": "vprašaj %1 in počakaj",
     "videoSensing.videoToggle": "nastavi video %1",
     "videoSensing.setVideoTransparency": "nastavi prosojnost videa na %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "predmet # od %1 v %2",
     "DATA_LENGTHOFLIST": "dolžina %1",
     "DATA_LISTCONTAINSITEM": "Ali %1 vsebuje %2?",
-    "CONTROL_ELSE": "sicer",
     "SENSING_USERID": "uporabnikova številka",
     "SENSING_LOUD": "glasno?",
     "text2speech.speakAndWaitBlock": "reci %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kot nagiba %1",
     "boost.setLightHue": "nastavi barvo svetlobe na %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "streseno",
     "poskok"
   ],
+  "picoWhen": [],
   "osis": [
     "ostale ukaze za ta lik"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Spremenljivke",
     "My Blocks": "Moji bloki"
   },
-  "math": [
-    "absolutna vrednost",
-    "zaokroženo navzdol",
-    "zaokroženo navzgor",
-    "kvadratni koren",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctg",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "absolutna vrednost",
+      "zaokroženo navzdol",
+      "zaokroženo navzgor",
+      "kvadratni koren",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctg",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "obrni se za %1 stopinj v levo": "MOTION_TURNLEFT",
     "obrni se za %1 stopinj v desno": "MOTION_TURNRIGHT",

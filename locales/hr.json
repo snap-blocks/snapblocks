@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kada primim %1",
     "EVENT_BROADCAST": "pošalji %1",
     "EVENT_BROADCASTANDWAIT": "pošalji %1 i čekaj",
+    "EVENT_WHENTOUCHINGOBJECT": "kada lik dodiruje %1",
     "CONTROL_WAIT": "čekaj %1 sekundi",
     "CONTROL_REPEAT": "ponovi %1",
     "CONTROL_FOREVER": "ponavljaj",
     "CONTROL_IF": "ako %1 onda",
+    "CONTROL_ELSE": "inače",
     "CONTROL_WAITUNTIL": "čekaj do %1",
     "CONTROL_REPEATUNTIL": "ponavljaj dok nije %1",
     "CONTROL_STOP": "zaustavi %1",
     "CONTROL_STARTASCLONE": "kada krećem kao klon",
     "CONTROL_CREATECLONEOF": "kloniraj %1",
     "CONTROL_DELETETHISCLONE": "izbriši klona",
+    "CONTROL_WHILE": "dok je %1",
     "SENSING_ASKANDWAIT": "pitaj %1 i čekaj",
     "videoSensing.videoToggle": "postavi video %1",
     "videoSensing.setVideoTransparency": "postavi providnost videa na %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "element # od %1 u %2",
     "DATA_LENGTHOFLIST": "dužina %1",
     "DATA_LISTCONTAINSITEM": "Sadrži li %1 %2?",
-    "CONTROL_ELSE": "inače",
     "SENSING_USERID": "korisnički id",
     "SENSING_LOUD": "glasno?",
     "text2speech.speakAndWaitBlock": "govori %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kut nagiba %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "protresen",
     "skok"
   ],
+  "picoWhen": [],
   "osis": [
     "druge programe lika"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Varijable",
     "My Blocks": "Moji Blokovi"
   },
-  "math": [
-    "apsolutno",
-    "donja vrijednost",
-    "gornja vrijednost",
-    "korijen",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "apsolutno",
+      "donja vrijednost",
+      "gornja vrijednost",
+      "korijen",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "skreni lijevo %1 stupnjeva": "MOTION_TURNLEFT",
     "skreni desno %1 stupnjeva": "MOTION_TURNRIGHT",

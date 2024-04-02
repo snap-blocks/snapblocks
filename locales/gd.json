@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "nuair a gheibh thu %1",
     "EVENT_BROADCAST": "craol %1",
     "EVENT_BROADCASTANDWAIT": "craol %1 is fan ri càch",
+    "EVENT_WHENTOUCHINGOBJECT": "nuair a bhios an sprìd a’ beantainn ri %1",
     "CONTROL_WAIT": "fan fad %1 diog",
     "CONTROL_REPEAT": "dèan seo %1 turas",
     "CONTROL_FOREVER": "gu buan",
     "CONTROL_IF": "ma tha %1 a-rèiste",
+    "CONTROL_ELSE": "air neo",
     "CONTROL_WAITUNTIL": "fan gus am bi %1",
     "CONTROL_REPEATUNTIL": "dèan a-rithist e gus am bi %1",
     "CONTROL_STOP": "cuir stad air %1",
     "CONTROL_STARTASCLONE": "nuair a thèid thu nad chlòn",
     "CONTROL_CREATECLONEOF": "cruthaich clòn %1",
     "CONTROL_DELETETHISCLONE": "sguab às an clòn seo",
+    "CONTROL_WHILE": "fhad ’s a tha %1",
     "SENSING_ASKANDWAIT": "faighnich %1 is fan ris",
     "videoSensing.videoToggle": "cuir a’ video %1",
     "videoSensing.setVideoTransparency": "suidhich trìd-shoillse a’ video air %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "àireamh an nì %1 air %2",
     "DATA_LENGTHOFLIST": "an fhaide aig %1",
     "DATA_LISTCONTAINSITEM": "%2 am broinn %1",
-    "CONTROL_ELSE": "air neo",
     "SENSING_USERID": "ID a’ chleachdaiche",
     "SENSING_LOUD": "an fhuaim air",
     "text2speech.speakAndWaitBlock": "can %1 gu h-àrd",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ceàrn claonaidh %1",
     "boost.setLightHue": "suidhich dath an t-solais air %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "crith",
     "leum"
   ],
+  "picoWhen": [],
   "osis": [
     "sgriobtaichean eile na sprìde"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Caochladairean",
     "My Blocks": "Bloca agamsa"
   },
-  "math": [
-    "an luach absaloideach",
-    "an cuairteachadh sìos",
-    "an cuairteachadh suas",
-    "am freumh ceàrnagach",
-    "an sìneas",
-    "an co-shìneas",
-    "am beantan",
-    "an t-àrc-shìneas",
-    "an t-àrc-cho-shìneas",
-    "an t-àrc-bheantan",
-    "an log-àireamh nàdarra",
-    "an log-àireamh",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "an luach absaloideach",
+      "an cuairteachadh sìos",
+      "an cuairteachadh suas",
+      "am freumh ceàrnagach",
+      "an sìneas",
+      "an co-shìneas",
+      "am beantan",
+      "an t-àrc-shìneas",
+      "an t-àrc-cho-shìneas",
+      "an t-àrc-bheantan",
+      "an log-àireamh nàdarra",
+      "an log-àireamh",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "cuairtich @turnLeft le %1 ceum": "MOTION_TURNLEFT",
     "cuairtich @turnRight le %1 ceum": "MOTION_TURNRIGHT",

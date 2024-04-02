@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 haberini aldığımda",
     "EVENT_BROADCAST": "%1 haberini sal",
     "EVENT_BROADCASTANDWAIT": "%1 haberini sal ve bekle",
+    "EVENT_WHENTOUCHINGOBJECT": "bu kukla %1 e dokunduğunda",
     "CONTROL_WAIT": "%1 saniye bekle",
     "CONTROL_REPEAT": "%1 defa tekrarla",
     "CONTROL_FOREVER": "sürekli tekrarla",
     "CONTROL_IF": "eğer %1 ise",
+    "CONTROL_ELSE": "değilse",
     "CONTROL_WAITUNTIL": "%1 olana kadar bekle",
     "CONTROL_REPEATUNTIL": "%1 olana kadar tekrarla",
     "CONTROL_STOP": "durdur %1",
     "CONTROL_STARTASCLONE": "ikiz olarak başladığımda",
     "CONTROL_CREATECLONEOF": "%1 in ikizini yarat",
     "CONTROL_DELETETHISCLONE": "bu ikizi sil",
+    "CONTROL_WHILE": "%1 olduğu sürece tekrarla",
     "SENSING_ASKANDWAIT": "%1 diye sor ve bekle",
     "videoSensing.videoToggle": "videoyu %1",
     "videoSensing.setVideoTransparency": "videonun saydamlığını %1 yap",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 in %1 öğesinin # öğesi",
     "DATA_LENGTHOFLIST": "%1 in uzunluğu",
     "DATA_LISTCONTAINSITEM": "%1, %2 i içeriyor mu?",
-    "CONTROL_ELSE": "değilse",
     "SENSING_USERID": "kullanıcı kimliği",
     "SENSING_LOUD": "gürültülü mü?",
     "text2speech.speakAndWaitBlock": "konuş %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "eğim açısı %1",
     "boost.setLightHue": "ışık rengini %1 olarak ayarla"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "sallanmış",
     "atlanmış"
   ],
+  "picoWhen": [],
   "osis": [
     "kukladaki diğer dizileri"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Değişkenler",
     "My Blocks": "Bloklarım"
   },
-  "math": [
-    "mutlak değer",
-    "aşağı yuvarla",
-    "yukarı yuvarla",
-    "karekök",
-    "sinüs",
-    "kosinüs",
-    "tanjant",
-    "arcsinüs",
-    "arckosinüs",
-    "arctanjant",
-    "ln",
-    "logaritma",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "mutlak değer",
+      "aşağı yuvarla",
+      "yukarı yuvarla",
+      "karekök",
+      "sinüs",
+      "kosinüs",
+      "tanjant",
+      "arcsinüs",
+      "arckosinüs",
+      "arctanjant",
+      "ln",
+      "logaritma",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "%1 derece sola dön": "MOTION_TURNLEFT",
     "%1 derece sağa dön": "MOTION_TURNRIGHT",

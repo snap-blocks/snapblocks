@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "dema ku min %1ê wergirt",
     "EVENT_BROADCAST": "%1ê biweşîne",
     "EVENT_BROADCASTANDWAIT": "%1ê biweşîne û bisekine",
+    "EVENT_WHENTOUCHINGOBJECT": "dema ku vê pêlîstikê li %1ê tikand",
     "CONTROL_WAIT": "%1 çirkeyan bisekine",
     "CONTROL_REPEAT": "%1 caran dubare bike",
     "CONTROL_FOREVER": "berdewamî",
     "CONTROL_IF": "heke %1 be",
+    "CONTROL_ELSE": "ne ew be",
     "CONTROL_WAITUNTIL": "heta ku bibe %1 bisekine",
     "CONTROL_REPEATUNTIL": "heta ku bibe %1 dubare bike",
     "CONTROL_STOP": "rawestîne %1",
     "CONTROL_STARTASCLONE": "dema ku min wekî cotikan dest pê kir",
     "CONTROL_CREATECLONEOF": "cotika %1yê biafirîne",
     "CONTROL_DELETETHISCLONE": "vê cotikê jê bibe",
+    "CONTROL_WHILE": "heta %1ê",
     "SENSING_ASKANDWAIT": "%1ê bipirse û bisekine",
     "videoSensing.videoToggle": "vîdyoyê %1",
     "videoSensing.setVideoTransparency": "zelalbûna vîdyoyê bike %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "hêmana %1 ya %2ê",
     "DATA_LENGTHOFLIST": "dirêjiya %1ê",
     "DATA_LISTCONTAINSITEM": "%1 di nav %2ê de heye?",
-    "CONTROL_ELSE": "ne ew be",
     "SENSING_USERID": "nasnameya bikarhêner",
     "SENSING_LOUD": "denge bilind?",
     "text2speech.speakAndWaitBlock": "bipeyive %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "pîvana xwarbûnê %1",
     "boost.setLightHue": "rengê ronahiyê bike %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "hejandî",
     "gavkirî"
   ],
+  "picoWhen": [],
   "osis": [
     "di pêlîstikê de rêzikên din"
   ],
@@ -241,22 +245,27 @@
     "Variables": "Guherok",
     "My Blocks": "Blokên Min"
   },
-  "math": [
-    "nirxê mutlaq",
-    "bigindirîne erdê",
-    "bigindirîne jorê",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "In",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "nirxê mutlaq",
+      "bigindirîne erdê",
+      "bigindirîne jorê",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "In",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Kurdî",
   "percentTranslated": 100

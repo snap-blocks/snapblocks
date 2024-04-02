@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "po obdržení zprávy %1",
     "EVENT_BROADCAST": "vyšli zprávu %1",
     "EVENT_BROADCASTANDWAIT": "vyšli zprávu %1 a čekej",
+    "EVENT_WHENTOUCHINGOBJECT": "po doteku %1",
     "CONTROL_WAIT": "čekej %1 sekund",
     "CONTROL_REPEAT": "opakuj %1 krát",
     "CONTROL_FOREVER": "opakuj stále",
     "CONTROL_IF": "když %1 tak",
+    "CONTROL_ELSE": "jinak",
     "CONTROL_WAITUNTIL": "čekej dokud nenastane %1",
     "CONTROL_REPEATUNTIL": "opakuj dokud nenastane %1",
     "CONTROL_STOP": "zastav %1",
     "CONTROL_STARTASCLONE": "když startuje můj klon",
     "CONTROL_CREATECLONEOF": "klonuj %1",
     "CONTROL_DELETETHISCLONE": "zruš tento klon",
+    "CONTROL_WHILE": "opakuj dokud platí %1",
     "SENSING_ASKANDWAIT": "otázka %1",
     "videoSensing.videoToggle": "%1 video",
     "videoSensing.setVideoTransparency": "nastav průhlednost videa na %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "pořadí %1 ve %2",
     "DATA_LENGTHOFLIST": "délka %1",
     "DATA_LISTCONTAINSITEM": "%1 obsahuje %2",
-    "CONTROL_ELSE": "jinak",
     "SENSING_USERID": "ID uživatele",
     "SENSING_LOUD": "hlasité?",
     "text2speech.speakAndWaitBlock": "řekni %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "úhel náklonu %1",
     "boost.setLightHue": "nastav barvu světla na %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "se zatřese",
     "poskočí"
   ],
+  "picoWhen": [],
   "osis": [
     "jiné scénáře postavy"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Proměnné",
     "My Blocks": "Moje bloky"
   },
-  "math": [
-    "abs",
-    "zaokr. dolů",
-    "zaokr. nahoru",
-    "odmocnina",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctg",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "zaokr. dolů",
+      "zaokr. nahoru",
+      "odmocnina",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctg",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "otoč se o %1 stupňů doleva": "MOTION_TURNLEFT",
     "otoč se o %1 stupňů doprava": "MOTION_TURNRIGHT",

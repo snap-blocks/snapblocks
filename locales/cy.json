@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "pan rwy'n derbyn %1",
     "EVENT_BROADCAST": "darlledu  %1",
     "EVENT_BROADCASTANDWAIT": "darlledu %1 ac aros",
+    "EVENT_WHENTOUCHINGOBJECT": "pan fydd y corlun yn cyffwrdd %1",
     "CONTROL_WAIT": "aros %1 eiliad",
     "CONTROL_REPEAT": "ailadrodd %1",
     "CONTROL_FOREVER": "am byth",
     "CONTROL_IF": "os %1 yna",
+    "CONTROL_ELSE": "fel arall",
     "CONTROL_WAITUNTIL": "aros hyd at %1",
     "CONTROL_REPEATUNTIL": "ailadrodd hyd at %1",
     "CONTROL_STOP": "aros %1",
     "CONTROL_STARTASCLONE": "pan rwy'n dechrau fel clôn",
     "CONTROL_CREATECLONEOF": "creu clôn o %1",
     "CONTROL_DELETETHISCLONE": "dileu y clôn hwn",
+    "CONTROL_WHILE": "tra bo %1",
     "SENSING_ASKANDWAIT": "gofyn %1 ac aros",
     "videoSensing.videoToggle": "troi fideo %1",
     "videoSensing.setVideoTransparency": "gosod tryloywder fideo i %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "eitem # %1 yn %2",
     "DATA_LENGTHOFLIST": "hyd %1",
     "DATA_LISTCONTAINSITEM": "%1 yn cynnwys %2?",
-    "CONTROL_ELSE": "fel arall",
     "SENSING_USERID": "id defnyddiwr",
     "SENSING_LOUD": "sain gref?",
     "text2speech.speakAndWaitBlock": "siarad %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ongl gogwyddo %1",
     "boost.setLightHue": "gosod lliw'r golau i %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ysgydwyd",
     "neidiodd"
   ],
+  "picoWhen": [],
   "osis": [
     "sgriptiau eraill yn y ciplun"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Newidynnau",
     "My Blocks": "Fy Mlociau"
   },
-  "math": [
-    "abs",
-    "llawr",
-    "nenfwd",
-    "ail isradd",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "Yn",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "llawr",
+      "nenfwd",
+      "ail isradd",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "Yn",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "troi %1 gradd i'r chwith": "MOTION_TURNLEFT",
     "troi %1 gradd i'r dde": "MOTION_TURNRIGHT",

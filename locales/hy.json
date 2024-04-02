@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "երբ ստանում եմ %1",
     "EVENT_BROADCAST": "հաղորդել %1",
     "EVENT_BROADCASTANDWAIT": "հաղորդել %1 և սպասել",
+    "EVENT_WHENTOUCHINGOBJECT": "երբ այս կերպարը հպվում է %1 -ին",
     "CONTROL_WAIT": "սպասել %1 վայրկյան",
     "CONTROL_REPEAT": "կրկնել %1",
     "CONTROL_FOREVER": "անվերջ",
     "CONTROL_IF": "եթե %1 ապա",
+    "CONTROL_ELSE": "այլապես",
     "CONTROL_WAITUNTIL": "սպասել մինչև %1",
     "CONTROL_REPEATUNTIL": "կրկնել մինչև %1",
     "CONTROL_STOP": "դադարեցնել %1",
     "CONTROL_STARTASCLONE": "Երբ սկսում եմ որպես կրկնօրինակ",
     "CONTROL_CREATECLONEOF": "ստեղծել  %1-ի կրկնօրինակը",
     "CONTROL_DELETETHISCLONE": "ջնջել այս կրկնօրինակը",
+    "CONTROL_WHILE": "մինչդեռ %1",
     "SENSING_ASKANDWAIT": "հարցնել %1 և սպասել",
     "videoSensing.videoToggle": "միացնել տեսանյութը %1",
     "videoSensing.setVideoTransparency": "սահմանել տեսանյութի թափանցիկությունը %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 տարրի համարը %2 -ում",
     "DATA_LENGTHOFLIST": "%1 -ի երկարությունը",
     "DATA_LISTCONTAINSITEM": "%1-ը պարունակու՞մ է %2",
-    "CONTROL_ELSE": "այլապես",
     "SENSING_USERID": "օգտատիրոջ id",
     "SENSING_LOUD": "ձայնը բա՞րձր է",
     "text2speech.speakAndWaitBlock": "ասել %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "թեքել անկյունը %1",
     "boost.setLightHue": "սահմանել լույսի գույնը %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "թափահարած",
     "ցատկած"
   ],
+  "picoWhen": [],
   "osis": [
     "կերպարի այլ սցենարները"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Փոփոխա­­կան",
     "My Blocks": "Մասնիկ"
   },
-  "math": [
-    "մոդուլ",
-    "ամբողջ թիվ՝ վար",
-    "ամբողջ թիվ՝ վեր",
-    "արմատ",
-    "sin",
-    "cos",
-    "tan",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "մոդուլ",
+      "ամբողջ թիվ՝ վար",
+      "ամբողջ թիվ՝ վեր",
+      "արմատ",
+      "sin",
+      "cos",
+      "tan",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Հայերեն",
   "percentTranslated": 100

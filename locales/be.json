@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "калі я атрымаю %1",
     "EVENT_BROADCAST": "разаслаць %1",
     "EVENT_BROADCASTANDWAIT": "разаслаць %1 і чакаць",
+    "EVENT_WHENTOUCHINGOBJECT": "калі спрайт кранаецца %1",
     "CONTROL_WAIT": "чакаць %1 секунд",
     "CONTROL_REPEAT": "паўтарыць %1",
     "CONTROL_FOREVER": "заўжды",
     "CONTROL_IF": "калі %1 , то",
+    "CONTROL_ELSE": "інакш",
     "CONTROL_WAITUNTIL": "чакаць да %1",
     "CONTROL_REPEATUNTIL": "паўтараць, пакуль не %1",
     "CONTROL_STOP": "стоп %1",
     "CONTROL_STARTASCLONE": "калі я пачынаю як клон",
     "CONTROL_CREATECLONEOF": "стварыць клона %1",
     "CONTROL_DELETETHISCLONE": "выдаліць гэтага клона",
+    "CONTROL_WHILE": "пакуль %1",
     "SENSING_ASKANDWAIT": "спытаць %1 і чакаць",
     "videoSensing.videoToggle": "запіс відэа %1",
     "videoSensing.setVideoTransparency": "устанавіць празрыстасць відэа %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "элемент # з %1 у %2",
     "DATA_LENGTHOFLIST": "даўжыня %1",
     "DATA_LISTCONTAINSITEM": "%1 змяшчае %2?",
-    "CONTROL_ELSE": "інакш",
     "SENSING_USERID": "id ўдзельніка",
     "SENSING_LOUD": "гучна?",
     "text2speech.speakAndWaitBlock": "сказаць %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "вугал нахілу %1",
     "boost.setLightHue": "устанавіць колер святла %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "патрэсці",
     "падкінуць"
   ],
+  "picoWhen": [],
   "osis": [
     "іншыя скрыпты спрайта"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Зменныя",
     "My Blocks": "Уласныя блокі"
   },
-  "math": [
-    "модуль",
-    "меншае цэлае",
-    "ліміт",
-    "квадратны корань",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "модуль",
+      "меншае цэлае",
+      "ліміт",
+      "квадратны корань",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Беларуская",
   "percentTranslated": 100

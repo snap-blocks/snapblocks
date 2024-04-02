@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "quan rebi %1",
     "EVENT_BROADCAST": "envia a tots %1",
     "EVENT_BROADCASTANDWAIT": "envia a tots %1 i espera",
+    "EVENT_WHENTOUCHINGOBJECT": "quan aquest objecte toqui %1",
     "CONTROL_WAIT": "espera %1 segons",
     "CONTROL_REPEAT": "repeteix %1",
     "CONTROL_FOREVER": "per sempre",
     "CONTROL_IF": "si %1 llavors",
+    "CONTROL_ELSE": "si no",
     "CONTROL_WAITUNTIL": "espera fins %1",
     "CONTROL_REPEATUNTIL": "repeteix fins %1",
     "CONTROL_STOP": "atura %1",
     "CONTROL_STARTASCLONE": "quan una còpia meva comenci",
     "CONTROL_CREATECLONEOF": "crea una còpia de %1",
     "CONTROL_DELETETHISCLONE": "esborra aquesta còpia",
+    "CONTROL_WHILE": "mentre %1",
     "SENSING_ASKANDWAIT": "pregunta %1 i espera",
     "videoSensing.videoToggle": "posa vídeo %1",
     "videoSensing.setVideoTransparency": "fixa la transparència del vídeo a %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "element # de %1 en %2",
     "DATA_LENGTHOFLIST": "llargada de %1",
     "DATA_LISTCONTAINSITEM": "%1 conté %2?",
-    "CONTROL_ELSE": "si no",
     "SENSING_USERID": "ID d'usuari",
     "SENSING_LOUD": "so fort?",
     "text2speech.speakAndWaitBlock": "parla %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "angle d'inclinació %1",
     "boost.setLightHue": "fixa el color del llum a %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "es sacsegi",
     "salti"
   ],
+  "picoWhen": [],
   "osis": [
     "altres programes del personatge"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variables",
     "My Blocks": "Els meus blocs"
   },
-  "math": [
-    "abs",
-    "part sencera",
-    "sostre",
-    "arrel quadrada",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "part sencera",
+      "sostre",
+      "arrel quadrada",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "gira a l'esquerra %1 graus": "MOTION_TURNLEFT",
     "gira a la dreta %1 graus": "MOTION_TURNRIGHT",

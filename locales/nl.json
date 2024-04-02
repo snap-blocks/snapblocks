@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "wanneer ik signaal %1 ontvang",
     "EVENT_BROADCAST": "zend signaal %1",
     "EVENT_BROADCASTANDWAIT": "zend signaal %1 en wacht",
+    "EVENT_WHENTOUCHINGOBJECT": "wanneer deze sprite %1 raakt",
     "CONTROL_WAIT": "wacht %1 sec.",
     "CONTROL_REPEAT": "herhaal %1",
     "CONTROL_FOREVER": "herhaal",
     "CONTROL_IF": "als %1 dan",
+    "CONTROL_ELSE": "anders",
     "CONTROL_WAITUNTIL": "wacht tot %1",
     "CONTROL_REPEATUNTIL": "herhaal tot %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "wanneer ik als kloon start",
     "CONTROL_CREATECLONEOF": "maak een kloon van %1",
     "CONTROL_DELETETHISCLONE": "verwijder deze kloon",
+    "CONTROL_WHILE": "zolang %1",
     "SENSING_ASKANDWAIT": "vraag %1 en wacht",
     "videoSensing.videoToggle": "zet video %1",
     "videoSensing.setVideoTransparency": "zet video transparantie op %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # van %1 in %2",
     "DATA_LENGTHOFLIST": "lengte van %1",
     "DATA_LISTCONTAINSITEM": "%1 bevat %2?",
-    "CONTROL_ELSE": "anders",
     "SENSING_USERID": "gebruiker id",
     "SENSING_LOUD": "luid?",
     "text2speech.speakAndWaitBlock": "zeg %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kantelhoek %1",
     "boost.setLightHue": "zet lichtkleur op %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "geschud",
     "gesprongen"
   ],
+  "picoWhen": [],
   "osis": [
     "andere scripts in sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabelen",
     "My Blocks": "Mijn blokken"
   },
-  "math": [
-    "absoluut",
-    "beneden",
-    "boven",
-    "wortel",
-    "sin",
-    "cos",
-    "tan",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "absoluut",
+      "beneden",
+      "boven",
+      "wortel",
+      "sin",
+      "cos",
+      "tan",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "draai %1 graden naar links": "MOTION_TURNLEFT",
     "draai %1 graden naar rechts": "MOTION_TURNRIGHT",

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 üzenet érkezésekor",
     "EVENT_BROADCAST": "küldj üzenetet: %1",
     "EVENT_BROADCASTANDWAIT": "küldj üzenetet: %1 és várj",
+    "EVENT_WHENTOUCHINGOBJECT": "%1 érintésekor",
     "CONTROL_WAIT": "várj %1 mp-et",
     "CONTROL_REPEAT": "ismételd %1",
     "CONTROL_FOREVER": "mindig",
     "CONTROL_IF": "ha %1 akkor",
+    "CONTROL_ELSE": "különben",
     "CONTROL_WAITUNTIL": "várj eddig: %1",
     "CONTROL_REPEATUNTIL": "ismételd eddig: %1",
     "CONTROL_STOP": "álljon le %1",
     "CONTROL_STARTASCLONE": "másolatként kezdéskor",
     "CONTROL_CREATECLONEOF": "készíts másolatot: %1",
     "CONTROL_DELETETHISCLONE": "töröld ezt a másolatot",
+    "CONTROL_WHILE": "amíg %1",
     "SENSING_ASKANDWAIT": "kérdezd meg: %1 és várj",
     "videoSensing.videoToggle": "videó kapcsolása %1",
     "videoSensing.setVideoTransparency": "videó átlátszósága legyen %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 sorszáma %2 listában",
     "DATA_LENGTHOFLIST": "%1 hossza",
     "DATA_LISTCONTAINSITEM": "%1 tartalmazza %2?",
-    "CONTROL_ELSE": "különben",
     "SENSING_USERID": "felhasználóazonosító",
     "SENSING_LOUD": "hangos?",
     "text2speech.speakAndWaitBlock": "mondd %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "%1 billenési szög",
     "boost.setLightHue": "lámpa színe legyen %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "megrázva",
     "átugrott"
   ],
+  "picoWhen": [],
   "osis": [
     "szereplő többi eljárása"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Változók",
     "My Blocks": "Blokkjaim"
   },
-  "math": [
-    "abszolut érték",
-    "lefelé kerekítve",
-    "felfelé kerekítve",
-    "gyök",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "abszolut érték",
+      "lefelé kerekítve",
+      "felfelé kerekítve",
+      "gyök",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "fordulj balra %1 fokot": "MOTION_TURNLEFT",
     "fordulj jobbra %1 fokot": "MOTION_TURNRIGHT",

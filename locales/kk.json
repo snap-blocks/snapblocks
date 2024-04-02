@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "маған %1 келгенде",
     "EVENT_BROADCAST": "%1ді тарату",
     "EVENT_BROADCASTANDWAIT": "%1ді таратып күту",
+    "EVENT_WHENTOUCHINGOBJECT": "осы спрайт %1ге тигенде",
     "CONTROL_WAIT": "%1 секунд күту",
     "CONTROL_REPEAT": "%1 рет қайталау",
     "CONTROL_FOREVER": "әрқашан",
     "CONTROL_IF": "егер %1, онда",
+    "CONTROL_ELSE": "әйтпесе",
     "CONTROL_WAITUNTIL": "%1 секундка дейін күту",
     "CONTROL_REPEATUNTIL": "%1 болғанға дейін қайталау",
     "CONTROL_STOP": "тоқтату %1",
     "CONTROL_STARTASCLONE": "мен клон ретінде бастағанда",
     "CONTROL_CREATECLONEOF": "%1 клонын жасау",
     "CONTROL_DELETETHISCLONE": "бұл клонды жою",
+    "CONTROL_WHILE": "%1 дейін",
     "SENSING_ASKANDWAIT": "%1ден сұра да күт",
     "videoSensing.videoToggle": "%1 видеоны іске қосу",
     "videoSensing.setVideoTransparency": "бейне ашықтығын %1  орнату",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2дегі %1 мүшесінің #",
     "DATA_LENGTHOFLIST": "%1дің ұзындығы",
     "DATA_LISTCONTAINSITEM": "%1де %2 бар ма?",
-    "CONTROL_ELSE": "әйтпесе",
     "SENSING_USERID": "қолданушы id",
     "SENSING_LOUD": "дауысу тым жоғары ма?",
     "text2speech.speakAndWaitBlock": "%1 айту",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "%1 еңкею бұрышы",
     "boost.setLightHue": "жарық түсін %1 орнат"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "шайқалды",
     "секірді"
   ],
+  "picoWhen": [],
   "osis": [
     "спрайттағы басқа скрипттер"
   ],
@@ -241,22 +245,27 @@
     "Variables": "айнымалылар",
     "My Blocks": "Менің блоктарым"
   },
-  "math": [
-    "модуль",
-    "еден",
-    "шектеу",
-    "квадрат түбір",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "модуль",
+      "еден",
+      "шектеу",
+      "квадрат түбір",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "қазақша",
   "percentTranslated": 100

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "когато получа %1",
     "EVENT_BROADCAST": "разпространи %1",
     "EVENT_BROADCASTANDWAIT": "разпространи %1 и чакай",
+    "EVENT_WHENTOUCHINGOBJECT": "когато този спрайт докосва %1",
     "CONTROL_WAIT": "изчакай %1 сек",
     "CONTROL_REPEAT": "повтори %1",
     "CONTROL_FOREVER": "винаги",
     "CONTROL_IF": "ако %1 тогава",
+    "CONTROL_ELSE": "иначе",
     "CONTROL_WAITUNTIL": "чакай докато %1",
     "CONTROL_REPEATUNTIL": "повтаряй докато %1",
     "CONTROL_STOP": "спри %1",
     "CONTROL_STARTASCLONE": "при старт като клонинг",
     "CONTROL_CREATECLONEOF": "създай клонинг на %1",
     "CONTROL_DELETETHISCLONE": "премахни този клонинг",
+    "CONTROL_WHILE": "докато %1",
     "SENSING_ASKANDWAIT": "питай %1 и чакай",
     "videoSensing.videoToggle": "%1 видео",
     "videoSensing.setVideoTransparency": "направи плътност на видеото на %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "номер на елемента %1 в %2",
     "DATA_LENGTHOFLIST": "големина на %1",
     "DATA_LISTCONTAINSITEM": "%1 съдържа %2?",
-    "CONTROL_ELSE": "иначе",
     "SENSING_USERID": "потребителски идентификатор",
     "SENSING_LOUD": "шумно ли е?",
     "text2speech.speakAndWaitBlock": "кажи %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "наклон на ъгъла %1",
     "boost.setLightHue": "направи светлината на цвета на %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "разтърсен",
     "подхвърлен"
   ],
+  "picoWhen": [],
   "osis": [
     "другите скриптове на спрайта"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Променливи",
     "My Blocks": "Моите Блокове"
   },
-  "math": [
-    "абсолютна стойност",
-    "закръглено надолу",
-    "закръглено нагоре",
-    "квадратен корен",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "абсолютна стойност",
+      "закръглено надолу",
+      "закръглено нагоре",
+      "квадратен корен",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Български",
   "percentTranslated": 100

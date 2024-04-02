@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "เมื่อฉันได้รับ %1",
     "EVENT_BROADCAST": "กระจาย %1",
     "EVENT_BROADCASTANDWAIT": "กระจาย %1 และรอ",
+    "EVENT_WHENTOUCHINGOBJECT": "เมื่อสไปรต์นี้แตะ %1",
     "CONTROL_WAIT": "รอ %1 วินาที",
     "CONTROL_REPEAT": "ทำซ้ำ %1",
     "CONTROL_FOREVER": "วนซ้ำตลอด",
     "CONTROL_IF": "ถ้า %1 แล้ว",
+    "CONTROL_ELSE": "มิฉะนั้น",
     "CONTROL_WAITUNTIL": "รอจนกระทั่ง %1",
     "CONTROL_REPEATUNTIL": "ทำซ้ำจน %1",
     "CONTROL_STOP": "หยุด %1",
     "CONTROL_STARTASCLONE": "เมื่อฉันเริ่มในฐานะโคลน",
     "CONTROL_CREATECLONEOF": "สร้าง โคลน ของ %1",
     "CONTROL_DELETETHISCLONE": "ลบโคลนตัวนี้",
+    "CONTROL_WHILE": "ขณะที่ %1",
     "SENSING_ASKANDWAIT": "ถาม %1 และรอ",
     "videoSensing.videoToggle": "%1 วิดีโอ",
     "videoSensing.setVideoTransparency": "ตั้งค่าความโปร่งใสของวิดีโอเป็น %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "รายการ # ของ %1 จาก %2",
     "DATA_LENGTHOFLIST": "ความยาวของ %1",
     "DATA_LISTCONTAINSITEM": "%1 มี %2?",
-    "CONTROL_ELSE": "มิฉะนั้น",
     "SENSING_USERID": "รหัสผู้ใช้",
     "SENSING_LOUD": "เสียงดัง?",
     "text2speech.speakAndWaitBlock": "พูด %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "มุมเอียง %1",
     "boost.setLightHue": "ตั้งสีหลอดไฟเป็น %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "เขย่า",
     "กระโดด"
   ],
+  "picoWhen": [],
   "osis": [
     "สริปต์อื่นในตัวละคร"
   ],
@@ -239,22 +243,27 @@
     "Variables": "ตัวแปร",
     "My Blocks": "บล็อกของฉัน"
   },
-  "math": [
-    "ค่าสัมบูรณ์",
-    "พื้น",
-    "เพดาน",
-    "รากที่สอง",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "ค่าสัมบูรณ์",
+      "พื้น",
+      "เพดาน",
+      "รากที่สอง",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "ไทย",
   "percentTranslated": 100

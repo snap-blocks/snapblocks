@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kai gausi žinutę %1",
     "EVENT_BROADCAST": "skelbti %1",
     "EVENT_BROADCASTANDWAIT": "skelbti %1 ir palaukti",
+    "EVENT_WHENTOUCHINGOBJECT": "kai paliesi %1",
     "CONTROL_WAIT": "palauk %1 sek.",
     "CONTROL_REPEAT": "kartok %1",
     "CONTROL_FOREVER": "kartok be galo",
     "CONTROL_IF": "jeigu %1",
+    "CONTROL_ELSE": "kitais atvejais",
     "CONTROL_WAITUNTIL": "palauk, kol pasidarys %1",
     "CONTROL_REPEATUNTIL": "kartok, kol pasidarys %1",
     "CONTROL_STOP": "sustok %1",
     "CONTROL_STARTASCLONE": "kai pradės veikti klonas",
     "CONTROL_CREATECLONEOF": "sukurk %1 kloną",
     "CONTROL_DELETETHISCLONE": "ištrink šį kloną",
+    "CONTROL_WHILE": "kol %1",
     "SENSING_ASKANDWAIT": "paklausk %1 ir lauk",
     "videoSensing.videoToggle": "perjungti video į %1",
     "videoSensing.setVideoTransparency": "nustatyk video permatomumą į%1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 vieta sąraše %2",
     "DATA_LENGTHOFLIST": "%1 ilgis",
     "DATA_LISTCONTAINSITEM": "%1 turi %2?",
-    "CONTROL_ELSE": "kitais atvejais",
     "SENSING_USERID": "vartotojo ID",
     "SENSING_LOUD": "garsiai?",
     "text2speech.speakAndWaitBlock": "sakyti %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "paversk kryptimi %1",
     "boost.setLightHue": "keisti šviesos spalvą į %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "papurtyta",
     "šuolis"
   ],
+  "picoWhen": [],
   "osis": [
     "kitus veikėjo scenarijus"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Kintamieji",
     "My Blocks": "Mano Komandos"
   },
-  "math": [
-    "teigiama reikšmė",
-    "apvalinimas žemyn",
-    "apvalinimas aukštyn",
-    "kvadratinė šaknis",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctg",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "teigiama reikšmė",
+      "apvalinimas žemyn",
+      "apvalinimas aukštyn",
+      "kvadratinė šaknis",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctg",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Lietuvių",
   "percentTranslated": 100

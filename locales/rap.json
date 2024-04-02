@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ki vaʾai mai %1",
     "EVENT_BROADCAST": "haka oho %1",
     "EVENT_BROADCASTANDWAIT": "e haka oho %1 e tiaki",
+    "EVENT_WHENTOUCHINGOBJECT": "mo te sprite he ŋatu te %1",
     "CONTROL_WAIT": "e tiaki %1 piere",
     "CONTROL_REPEAT": "haka ʾou %1",
     "CONTROL_FOREVER": "mo āŋa paurō te hora",
     "CONTROL_IF": "eʾe %1 oira",
+    "CONTROL_ELSE": "eʾe ina",
     "CONTROL_WAITUNTIL": "tiaki ki %1",
     "CONTROL_REPEATUNTIL": "hakaʾou ki %1",
     "CONTROL_STOP": "noho %1",
     "CONTROL_STARTASCLONE": "ki haʾamata pahe clon",
     "CONTROL_CREATECLONEOF": "e aŋa te ko tu meʾe a o te %1",
     "CONTROL_DELETETHISCLONE": "haka kore te clon nei",
+    "CONTROL_WHILE": "ki te tiaki %1",
     "SENSING_ASKANDWAIT": "e ʾui %1 e he tiaki",
     "videoSensing.videoToggle": "turn video %1",
     "videoSensing.setVideoTransparency": "haka tano te maeha o te teata ki te %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "# o te meʾe he %1 i te %2",
     "DATA_LENGTHOFLIST": "roa roa o te %1",
     "DATA_LISTCONTAINSITEM": "¿%2 e ai era te %1?",
-    "CONTROL_ELSE": "eʾe ina",
     "SENSING_USERID": "id o te kope kori",
     "SENSING_LOUD": "¿poŋeha?",
     "text2speech.speakAndWaitBlock": "e ki %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "haka tano te peni o te morī ki te %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "shaken",
     "jumped"
   ],
+  "picoWhen": [],
   "osis": [
     "te tahi programa i te sprite"
   ],
@@ -241,22 +245,27 @@
     "Variables": "variables",
     "My Blocks": "taʾaku avhata poto roa mekera"
   },
-  "math": [
-    "valor absoluto",
-    "suelo",
-    "techo",
-    "raíz cuadrada",
-    "sen",
-    "cos",
-    "tan",
-    "arcsen",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "valor absoluto",
+      "suelo",
+      "techo",
+      "raíz cuadrada",
+      "sen",
+      "cos",
+      "tan",
+      "arcsen",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Rapa Nui",
   "percentTranslated": 100

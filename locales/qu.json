@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ñuqa chaskispa %1",
     "EVENT_BROADCAST": "qawachinapaq %1",
     "EVENT_BROADCASTANDWAIT": "qawachinapaq %1 chaymanta suyay",
+    "EVENT_WHENTOUCHINGOBJECT": "kay muki ñitinqa %1",
     "CONTROL_WAIT": "Suyay %1 kaq",
     "CONTROL_REPEAT": "musuqmanta %1",
     "CONTROL_FOREVER": "wiñaypaq",
     "CONTROL_IF": "icha %1 hinaptin",
+    "CONTROL_ELSE": "ñataq",
     "CONTROL_WAITUNTIL": "suyaykuy askama %1",
     "CONTROL_REPEATUNTIL": "musuqmanta ruray askama %1",
     "CONTROL_STOP": "sayay %1",
     "CONTROL_STARTASCLONE": "Hayka qallarisaq huk ñuqahina",
     "CONTROL_CREATECLONEOF": "ruray huk hukhinata %1",
     "CONTROL_DELETETHISCLONE": "wañuchiy kay hukhina",
+    "CONTROL_WHILE": "chawpillampi %1",
     "SENSING_ASKANDWAIT": "tapuy %1 chaymanta suyay",
     "videoSensing.videoToggle": "muyuchiy widiuta %1",
     "videoSensing.setVideoTransparency": "churay vidio chhuyaqniman %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "Imakuna # kaypa %1 in %2",
     "DATA_LENGTHOFLIST": "sunin %1",
     "DATA_LISTCONTAINSITEM": "%1  kachkanchu %2?",
-    "CONTROL_ELSE": "ñataq",
     "SENSING_USERID": "id llamkaqpa",
     "SENSING_LOUD": "qapari?",
     "text2speech.speakAndWaitBlock": "rimay %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "Kuchuq kinraychasqa %1",
     "boost.setLightHue": "akchiqpa llimpinta churay %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "tapsiy",
     "pawarqun"
   ],
+  "picoWhen": [],
   "osis": [
     "huk qillqaykuna ipupi"
   ],
@@ -239,22 +243,27 @@
     "Variables": "hukniraq",
     "My Blocks": "champaykuna"
   },
-  "math": [
-    "abs",
-    "allpa",
-    "qata",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "in",
-    "Qallarichiy",
-    "Y ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "allpa",
+      "qata",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "in",
+      "Qallarichiy",
+      "Y ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Kichwa",
   "percentTranslated": 100

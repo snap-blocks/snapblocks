@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "quando eu receber %1",
     "EVENT_BROADCAST": "transmita %1",
     "EVENT_BROADCASTANDWAIT": "transmita %1 e espere",
+    "EVENT_WHENTOUCHINGOBJECT": "quando este ator tocar %1",
     "CONTROL_WAIT": "espere %1 seg",
     "CONTROL_REPEAT": "repita %1 vezes",
     "CONTROL_FOREVER": "sempre",
     "CONTROL_IF": "se %1 então",
+    "CONTROL_ELSE": "senão",
     "CONTROL_WAITUNTIL": "espere até que %1",
     "CONTROL_REPEATUNTIL": "repita até que %1",
     "CONTROL_STOP": "pare %1",
     "CONTROL_STARTASCLONE": "quando eu começar como um clone",
     "CONTROL_CREATECLONEOF": "crie clone de %1",
     "CONTROL_DELETETHISCLONE": "apague este clone",
+    "CONTROL_WHILE": "enquanto %1",
     "SENSING_ASKANDWAIT": "pergunte %1 e espere",
     "videoSensing.videoToggle": "mude vídeo para %1",
     "videoSensing.setVideoTransparency": "ajuste transparência do vídeo para %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # de %1 em %2",
     "DATA_LENGTHOFLIST": "tamanho de %1",
     "DATA_LISTCONTAINSITEM": "%1 contém %2?",
-    "CONTROL_ELSE": "senão",
     "SENSING_USERID": "id do usuário",
     "SENSING_LOUD": "alto?",
     "text2speech.speakAndWaitBlock": "fale %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ângulo de inclinação %1",
     "boost.setLightHue": "defina a cor como %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "agitar",
     "pular"
   ],
+  "picoWhen": [],
   "osis": [
     "outros scripts no ator"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variáveis",
     "My Blocks": "Meus Blocos"
   },
-  "math": [
-    "módulo",
-    "arredondamento para baixo de",
-    "arredondamento para cima de",
-    "raiz quadrada",
-    "sen",
-    "cos",
-    "tg",
-    "arcsen",
-    "arccos",
-    "arctg",
-    "ln",
-    "logaritmo",
-    "e elevado à",
-    "10 elevado à"
-  ],
+  "of": {
+    "math": [
+      "módulo",
+      "arredondamento para baixo de",
+      "arredondamento para cima de",
+      "raiz quadrada",
+      "sen",
+      "cos",
+      "tg",
+      "arcsen",
+      "arccos",
+      "arctg",
+      "ln",
+      "logaritmo",
+      "e elevado à",
+      "10 elevado à"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Português Brasileiro",
   "percentTranslated": 100

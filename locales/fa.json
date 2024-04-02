@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "وقتی‌ %1 را دریافت کردم",
     "EVENT_BROADCAST": "پخش سراسری %1",
     "EVENT_BROADCASTANDWAIT": "پخش سراسری %1 و منتظر بمان",
+    "EVENT_WHENTOUCHINGOBJECT": "وقتی‌ این شکلک به %1 خورد",
     "CONTROL_WAIT": "منتظر بمان %1 ثانیه",
     "CONTROL_REPEAT": "تکرار کن %1",
     "CONTROL_FOREVER": "برای همیشه",
     "CONTROL_IF": "اگر %1 آنگاه",
+    "CONTROL_ELSE": "وگرنه",
     "CONTROL_WAITUNTIL": "منتظر بمان تا اینکه %1",
     "CONTROL_REPEATUNTIL": "تکرار کن تا اینکه %1",
     "CONTROL_STOP": "توقف %1",
     "CONTROL_STARTASCLONE": "وقتی‌ به‌عنوان یک مشابه شروع کردم",
     "CONTROL_CREATECLONEOF": "مشابه %1 را بساز",
     "CONTROL_DELETETHISCLONE": "این مشابه را حذف کن",
+    "CONTROL_WHILE": "هنگامی‌که %1",
     "SENSING_ASKANDWAIT": "بپرس %1 و منتظر بمان",
     "videoSensing.videoToggle": "تشخیص ویدئویی %1 شود",
     "videoSensing.setVideoTransparency": "شفافیت ویدئو %1 شود",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "# ردیف %1 در %2",
     "DATA_LENGTHOFLIST": "طول %1",
     "DATA_LISTCONTAINSITEM": "در %1 %2 هست؟",
-    "CONTROL_ELSE": "وگرنه",
     "SENSING_USERID": "شناسه‌ی کاربر",
     "SENSING_LOUD": "صدا بلند است؟",
     "text2speech.speakAndWaitBlock": "بگو %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "زاویه‌ی کج شدن %1",
     "boost.setLightHue": "رنگ %1 شود"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "تکان داده شد",
     "پرید"
   ],
+  "picoWhen": [],
   "osis": [
     "سایر برنامه‌های این شکلک"
   ],
@@ -239,22 +243,27 @@
     "Variables": "متغیرها",
     "My Blocks": "قطعه‌های من"
   },
-  "math": [
-    "قدر مطلق",
-    "جزء صحیح",
-    "سقف",
-    "جذر",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e به توان",
-    "۱۰ به توان"
-  ],
+  "of": {
+    "math": [
+      "قدر مطلق",
+      "جزء صحیح",
+      "سقف",
+      "جذر",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e به توان",
+      "۱۰ به توان"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "به اندازه %1 درجه به چپ بچرخ": "MOTION_TURNLEFT",
     "به اندازه %1 درجه به راست بچرخ": "MOTION_TURNRIGHT",

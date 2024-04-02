@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "Quando receberes a mensagem %1",
     "EVENT_BROADCAST": "difunde a mensagem %1",
     "EVENT_BROADCASTANDWAIT": "difunde a mensagem %1 e espera",
+    "EVENT_WHENTOUCHINGOBJECT": "Quando tocares em %1",
     "CONTROL_WAIT": "espera %1 s",
     "CONTROL_REPEAT": "repete %1 vezes",
     "CONTROL_FOREVER": "repete para sempre",
     "CONTROL_IF": "se %1 , então",
+    "CONTROL_ELSE": "senão,",
     "CONTROL_WAITUNTIL": "espera até que %1",
     "CONTROL_REPEATUNTIL": "até que %1 , repete",
     "CONTROL_STOP": "pára %1",
     "CONTROL_STARTASCLONE": "Quando fores criado como um clone",
     "CONTROL_CREATECLONEOF": "cria um clone de %1",
     "CONTROL_DELETETHISCLONE": "remove-te como clone",
+    "CONTROL_WHILE": "enquanto %1",
     "SENSING_ASKANDWAIT": "pergunta %1 e espera pela resposta",
     "videoSensing.videoToggle": "altera o estado do vídeo para %1",
     "videoSensing.setVideoTransparency": "altera a transparência do vídeo para %1 %",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "o número do item %1 em %2",
     "DATA_LENGTHOFLIST": "o comprimento de %1",
     "DATA_LISTCONTAINSITEM": "%1 contém %2",
-    "CONTROL_ELSE": "senão,",
     "SENSING_USERID": "o ID de utilizador",
     "SENSING_LOUD": "o som é forte",
     "text2speech.speakAndWaitBlock": "fala %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "o ângulo da inclinação %1",
     "boost.setLightHue": "altera a cor da luz para %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "for abanado",
     "saltar"
   ],
+  "picoWhen": [],
   "osis": [
     "os teus outros guiões"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variáveis",
     "My Blocks": "Os Meus Blocos"
   },
-  "math": [
-    "o valor absoluto",
-    "o chão (o maior inteiro não superior)",
-    "o tecto (menor inteiro não inferior)",
-    "a raiz quadrada",
-    "o seno",
-    "o cosseno",
-    "a tangente",
-    "o arco-seno",
-    "o arco-cosseno",
-    "o arco-tangente",
-    "o logaritmo natural",
-    "o logaritmo",
-    "a exponencial",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "o valor absoluto",
+      "o chão (o maior inteiro não superior)",
+      "o tecto (menor inteiro não inferior)",
+      "a raiz quadrada",
+      "o seno",
+      "o cosseno",
+      "a tangente",
+      "o arco-seno",
+      "o arco-cosseno",
+      "o arco-tangente",
+      "o logaritmo natural",
+      "o logaritmo",
+      "a exponencial",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "gira para a esquerda %1 º": "MOTION_TURNLEFT",
     "gira para a direita %1 º": "MOTION_TURNRIGHT",

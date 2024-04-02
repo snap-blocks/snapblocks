@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "όταν λάβω %1",
     "EVENT_BROADCAST": "μετάδωσε %1",
     "EVENT_BROADCASTANDWAIT": "μετάδωσε %1 και περίμενε",
+    "EVENT_WHENTOUCHINGOBJECT": "όταν αυτό το αντικείμενο αγγίξει το %1",
     "CONTROL_WAIT": "περίμενε %1 δευτερόλεπτα",
     "CONTROL_REPEAT": "επανάλαβε %1",
     "CONTROL_FOREVER": "για πάντα",
     "CONTROL_IF": "εάν %1 τότε",
+    "CONTROL_ELSE": "αλλιώς",
     "CONTROL_WAITUNTIL": "περίμενε ώσπου %1",
     "CONTROL_REPEATUNTIL": "επανάλαβε ώσπου %1",
     "CONTROL_STOP": "σταμάτησε %1",
     "CONTROL_STARTASCLONE": "όταν ξεκινήσω ως κλώνος",
     "CONTROL_CREATECLONEOF": "δημιούργησε κλώνο του %1",
     "CONTROL_DELETETHISCLONE": "διάγραψε αυτόν τον κλώνο",
+    "CONTROL_WHILE": "όσο %1",
     "SENSING_ASKANDWAIT": "ρώτησε %1 και περίμενε",
     "videoSensing.videoToggle": "βίντεο %1",
     "videoSensing.setVideoTransparency": "όρισε διαφάνεια βίντεο σε %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "# στοιχείου %1 σε %2",
     "DATA_LENGTHOFLIST": "μήκος λίστας %1",
     "DATA_LISTCONTAINSITEM": "%1 περιέχει %2;",
-    "CONTROL_ELSE": "αλλιώς",
     "SENSING_USERID": "αναγνωριστικό χρήστη",
     "SENSING_LOUD": "δυνατά;",
     "text2speech.speakAndWaitBlock": "μίλησε %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "γωνία κλίσης %1",
     "boost.setLightHue": "όρισε χρώμα φωτός σε %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "τρανταχθεί",
     "αναπηδήσει"
   ],
+  "picoWhen": [],
   "osis": [
     "άλλα σενάρια σε αυτό το αντικείμενο"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Μεταβλητές",
     "My Blocks": "Οι Εντολές μου"
   },
-  "math": [
-    "απόλυτο",
-    "στρογγυλ. κάτω",
-    "στρογγυλ. άνω",
-    "τετρ. ρίζα",
-    "ημ",
-    "συν",
-    "εφ",
-    "τοξημ",
-    "τοξσυν",
-    "τοξεφ",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "απόλυτο",
+      "στρογγυλ. κάτω",
+      "στρογγυλ. άνω",
+      "τετρ. ρίζα",
+      "ημ",
+      "συν",
+      "εφ",
+      "τοξημ",
+      "τοξσυν",
+      "τοξεφ",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "στρίψε αριστερά %1 μοίρες": "MOTION_TURNLEFT",
     "στρίψε αριστερόστροφα %1 μοίρες": "MOTION_TURNLEFT",

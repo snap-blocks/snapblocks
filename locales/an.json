@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "en recibir %1",
     "EVENT_BROADCAST": "ninviar %1",
     "EVENT_BROADCASTANDWAIT": "ninviar %1 y aguardar",
+    "EVENT_WHENTOUCHINGOBJECT": "quan l'obchecto toque %1",
     "CONTROL_WAIT": "aguardar %1 segundos",
     "CONTROL_REPEAT": "repetir %1",
     "CONTROL_FOREVER": "pa cutio",
     "CONTROL_IF": "si %1 allora",
+    "CONTROL_ELSE": "si no",
     "CONTROL_WAITUNTIL": "aguardar dica que %1",
     "CONTROL_REPEATUNTIL": "repetir dica que %1",
     "CONTROL_STOP": "aturar %1",
     "CONTROL_STARTASCLONE": "en prencipiar como replica",
     "CONTROL_CREATECLONEOF": "crear replica de %1",
     "CONTROL_DELETETHISCLONE": "eliminar esta replica",
+    "CONTROL_WHILE": "mientres %1",
     "SENSING_ASKANDWAIT": "preguntar %1 y aguardar",
     "videoSensing.videoToggle": "%1 video",
     "videoSensing.setVideoTransparency": "fixar transparencia de video a %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "# d'elementos de %1 en %2",
     "DATA_LENGTHOFLIST": "longaria de %1",
     "DATA_LISTCONTAINSITEM": "%2 ye en %1?",
-    "CONTROL_ELSE": "si no",
     "SENSING_USERID": "identificación d'usuario",
     "SENSING_LOUD": "masiau alto?",
     "text2speech.speakAndWaitBlock": "decir %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "anglo d'inclinación enta %1",
     "boost.setLightHue": "fixar color d'a luz a %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "sobatiu",
     "blincau"
   ],
+  "picoWhen": [],
   "osis": [
     "atros programas en l'obchecto"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variables",
     "My Blocks": "Los míos bloques"
   },
-  "math": [
-    "valor absoluta",
-    "suelo",
-    "teito",
-    "radiz quadrada",
-    "sen",
-    "cos",
-    "tan",
-    "arcsen",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "valor absoluta",
+      "suelo",
+      "teito",
+      "radiz quadrada",
+      "sen",
+      "cos",
+      "tan",
+      "arcsen",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Aragonés",
   "percentTranslated": 100

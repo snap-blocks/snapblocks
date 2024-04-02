@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "lapho ngithola %1",
     "EVENT_BROADCAST": "sakaza %1",
     "EVENT_BROADCASTANDWAIT": "sakaza %1 bese ulinda",
+    "EVENT_WHENTOUCHINGOBJECT": "uma lomlingisi ethinta %1",
     "CONTROL_WAIT": "linda %1 umzuzuwana",
     "CONTROL_REPEAT": "phinda %1",
     "CONTROL_FOREVER": "phakade",
     "CONTROL_IF": "uma %1 lapho ke",
+    "CONTROL_ELSE": "noma",
     "CONTROL_WAITUNTIL": "linda kuze kube  %1",
     "CONTROL_REPEATUNTIL": "phinda kuze kube %1",
     "CONTROL_STOP": "ima %1",
     "CONTROL_STARTASCLONE": "lapho ngiqala njengo mfanekiso",
     "CONTROL_CREATECLONEOF": "akha okufanayo %1",
     "CONTROL_DELETETHISCLONE": "Susa lumfanekiso",
+    "CONTROL_WHILE": "ngenkathi %1",
     "SENSING_ASKANDWAIT": "buza %1 futhi linda",
     "videoSensing.videoToggle": "phendula ividiyo %1",
     "videoSensing.setVideoTransparency": "hlela ukubonakala kweVidiyo ukuyise %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "into # yaku %1 ku %2",
     "DATA_LENGTHOFLIST": "ubude be %1",
     "DATA_LISTCONTAINSITEM": "%1 iqukethe %2",
-    "CONTROL_ELSE": "noma",
     "SENSING_USERID": "umsebenzisi ID",
     "SENSING_LOUD": "kukhulu umsindo? / Umsindo uphezulu?",
     "text2speech.speakAndWaitBlock": "khuluma %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tshekisa engeli  %1",
     "boost.setLightHue": "hlela ukhanya kombala ukuyise %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ukunyakaziswa",
     "gxumile"
   ],
+  "picoWhen": [],
   "osis": [
     "eminye imibhalo kumlingisi"
   ],
@@ -239,22 +243,27 @@
     "Variables": "okuguqukayo",
     "My Blocks": "Amabhulokisi ami"
   },
-  "math": [
-    "abs",
-    "phansi",
-    "uphahla",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "phansi",
+      "uphahla",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "isiZulu",
   "percentTranslated": 100

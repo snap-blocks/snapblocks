@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "lè m resevwa %1",
     "EVENT_BROADCAST": "kònen %1",
     "EVENT_BROADCASTANDWAIT": "kònen %1 epi tann",
+    "EVENT_WHENTOUCHINGOBJECT": "lè aktè sa a touche %1",
     "CONTROL_WAIT": "rete tann %1 segond",
     "CONTROL_REPEAT": "repete %1",
     "CONTROL_FOREVER": "pou toujou",
     "CONTROL_IF": "si %1 ebyen",
+    "CONTROL_ELSE": "si non",
     "CONTROL_WAITUNTIL": "tann jiska %1",
     "CONTROL_REPEATUNTIL": "repete jiska %1",
     "CONTROL_STOP": "kanpe %1",
     "CONTROL_STARTASCLONE": "lè m parèt kòm marasa",
     "CONTROL_CREATECLONEOF": "kreye marasa pou  %1 sa a",
     "CONTROL_DELETETHISCLONE": "efase marasa sa a",
+    "CONTROL_WHILE": "pandan %1",
     "SENSING_ASKANDWAIT": "mande %1 epi tann",
     "videoSensing.videoToggle": "fè videyo %1",
     "videoSensing.setVideoTransparency": "fikse transparans videyo a %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "bagay # de %1 nan %2",
     "DATA_LENGTHOFLIST": "longè %1 a",
     "DATA_LISTCONTAINSITEM": "èske %1 genyen %2 ladan l ?",
-    "CONTROL_ELSE": "si non",
     "SENSING_USERID": "idantite itilizatè",
     "SENSING_LOUD": "fò ?",
     "text2speech.speakAndWaitBlock": "pale %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ang li panche %1",
     "boost.setLightHue": "mete koulè limyè sou %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "te souke",
     "sote"
   ],
+  "picoWhen": [],
   "osis": [
     "lòt eskrip nan aktè la"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Varyab",
     "My Blocks": "Blòk mwen yo"
   },
-  "math": [
-    "abs",
-    "desann pou awondi chif la",
-    "monte pou awondi chif la",
-    "rasin kare",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "desann pou awondi chif la",
+      "monte pou awondi chif la",
+      "rasin kare",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Kreyòl ayisyen",
   "percentTranslated": 100

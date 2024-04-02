@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "би %1-г хүлээж авах үед",
     "EVENT_BROADCAST": "%1-г дамжуулах",
     "EVENT_BROADCASTANDWAIT": "%1-г дамжуулаад хүлээ",
+    "EVENT_WHENTOUCHINGOBJECT": "Энэ дүрс %1-т хүрэх үед",
     "CONTROL_WAIT": "%1 секунд хүлээх",
     "CONTROL_REPEAT": "%1 удаа давтах",
     "CONTROL_FOREVER": "Үргэлж",
     "CONTROL_IF": "хэрэв %1 бол",
+    "CONTROL_ELSE": "эсвэл",
     "CONTROL_WAITUNTIL": "%1 болтол хүлээх",
     "CONTROL_REPEATUNTIL": "%1 болтол давт",
     "CONTROL_STOP": "зогсоо %1",
     "CONTROL_STARTASCLONE": "Миний хуулбар үүсэх үед",
     "CONTROL_CREATECLONEOF": "%1-н хуулбарыг үүсгэ",
     "CONTROL_DELETETHISCLONE": "Энэ хуулбарыг устга",
+    "CONTROL_WHILE": "%1 хүртэл",
     "SENSING_ASKANDWAIT": "%1-ийг асуугаад хүлээ",
     "videoSensing.videoToggle": "бичлэгийг %1 болго",
     "videoSensing.setVideoTransparency": "бичлэгийн тунгалагжилтыг %1 болго",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 доторх %1-н # хэсэг",
     "DATA_LENGTHOFLIST": "%1 жагсаалтын урт",
     "DATA_LISTCONTAINSITEM": "%1 жагсаалт %2-г агуулж байвал",
-    "CONTROL_ELSE": "эсвэл",
     "SENSING_USERID": "хэрэглэгчийн ID",
     "SENSING_LOUD": "чанга уу?",
     "text2speech.speakAndWaitBlock": "%1 үгийг хэл",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "%1 өнцгөөр хазайлга",
     "boost.setLightHue": "гэрлийн өнгийг %1 болго"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "сэгсрэгдсэн",
     "үсэрсэн"
   ],
+  "picoWhen": [],
   "osis": [
     "дүрсний бусад кодууд"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Хувьсагч",
     "My Blocks": "Миний блокууд"
   },
-  "math": [
-    "модуль",
-    "доош бүхэлд тоймлох",
-    "дээш бүхэлд тоймлох",
-    "квадрат язгуур",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "модуль",
+      "доош бүхэлд тоймлох",
+      "дээш бүхэлд тоймлох",
+      "квадрат язгуур",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Монгол хэл",
   "percentTranslated": 100

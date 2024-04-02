@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 신호를 받았을 때",
     "EVENT_BROADCAST": "%1 신호 보내기",
     "EVENT_BROADCASTANDWAIT": "%1 신호 보내고 기다리기",
+    "EVENT_WHENTOUCHINGOBJECT": "이 스프라이트가 %1 에 닿았을 때",
     "CONTROL_WAIT": "%1 초 기다리기",
     "CONTROL_REPEAT": "%1 번 반복하기",
     "CONTROL_FOREVER": "무한 반복하기",
     "CONTROL_IF": "만약 %1 (이)라면",
+    "CONTROL_ELSE": "아니면",
     "CONTROL_WAITUNTIL": "%1 까지 기다리기",
     "CONTROL_REPEATUNTIL": "%1 까지 반복하기",
     "CONTROL_STOP": "멈추기 %1",
     "CONTROL_STARTASCLONE": "복제되었을 때",
     "CONTROL_CREATECLONEOF": "%1 복제하기",
     "CONTROL_DELETETHISCLONE": "이 복제본 삭제하기",
+    "CONTROL_WHILE": "%1 동안 반복하기",
     "SENSING_ASKANDWAIT": "%1 라고 묻고 기다리기",
     "videoSensing.videoToggle": "비디오 %1",
     "videoSensing.setVideoTransparency": "비디오 투명도를 %1 (으)로 정하기",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 리스트에서 %1 항목의 위치",
     "DATA_LENGTHOFLIST": "%1 의 길이",
     "DATA_LISTCONTAINSITEM": "%1 이(가) %2 을(를) 포함하는가?",
-    "CONTROL_ELSE": "아니면",
     "SENSING_USERID": "사용자 번호",
     "SENSING_LOUD": "소리가 큰가?",
     "text2speech.speakAndWaitBlock": "%1 말하기",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "흔들어졌을",
     "점프하였을"
   ],
+  "picoWhen": [],
   "osis": [
     "이 스프라이트에 있는 다른 스크립트"
   ],
@@ -239,22 +243,27 @@
     "Variables": "변수",
     "My Blocks": "내 블록"
   },
-  "math": [
-    "절댓값",
-    "버림",
-    "올림",
-    "제곱근",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "절댓값",
+      "버림",
+      "올림",
+      "제곱근",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "한국어",
   "percentTranslated": 100

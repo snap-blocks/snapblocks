@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "როდესაც ვიღებ %1ს",
     "EVENT_BROADCAST": "გადაეცი %1",
     "EVENT_BROADCASTANDWAIT": "გადაეცი %1 და იცადე",
+    "EVENT_WHENTOUCHINGOBJECT": "როდესაც ეს სპრაიტი ეხება %1ს",
     "CONTROL_WAIT": "იცადე %1 წამი",
     "CONTROL_REPEAT": "გაიმეორე %1ჯერ",
     "CONTROL_FOREVER": "მუდმივად",
     "CONTROL_IF": "თუ %1 მაშინ",
+    "CONTROL_ELSE": "სხვა შემთხვევაში",
     "CONTROL_WAITUNTIL": "იცადე მანამ %1",
     "CONTROL_REPEATUNTIL": "გაიმეორე მანამ %1",
     "CONTROL_STOP": "გააჩერე %1",
     "CONTROL_STARTASCLONE": "როდესაც მე ვიწყებ როგორც კლონი",
     "CONTROL_CREATECLONEOF": "შექმენი  %1ს კლონი",
     "CONTROL_DELETETHISCLONE": "წაშალე ეს კლონი",
+    "CONTROL_WHILE": "მანამ სანამ %1",
     "SENSING_ASKANDWAIT": "იკითხე %1 და იცადე",
     "videoSensing.videoToggle": "ჩართე ვიდეო %1",
     "videoSensing.setVideoTransparency": "დააყენე ვიდეოს გამჭვირვალობა %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 ელემენტის № %2ში",
     "DATA_LENGTHOFLIST": "%1ს სიგრძე",
     "DATA_LISTCONTAINSITEM": "%1 შეიცავს %2ს?",
-    "CONTROL_ELSE": "სხვა შემთხვევაში",
     "SENSING_USERID": "მომხმარებლის id",
     "SENSING_LOUD": "ხმა მაღალია?",
     "text2speech.speakAndWaitBlock": "თქვი %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "დახრის კუთხე %1",
     "boost.setLightHue": "დააყენე ნათურის ფერი %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "შეირხა",
     "გადახტა"
   ],
+  "picoWhen": [],
   "osis": [
     "სპრაიტის სხვა სკრიპტები"
   ],
@@ -239,22 +243,27 @@
     "Variables": "ცვლადები",
     "My Blocks": "ჩემი ბლოკები"
   },
-  "math": [
-    "abs",
-    "უმცირესი მთელი",
-    "უდიდესი მთელი",
-    "კვადრატული ფესვი",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "უმცირესი მთელი",
+      "უდიდესი მთელი",
+      "კვადრატული ფესვი",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "ქართული ენა",
   "percentTranslated": 100

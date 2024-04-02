@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "lokacin da na karɓi %1",
     "EVENT_BROADCAST": "yaɗa %1",
     "EVENT_BROADCASTANDWAIT": "yaɗa %1 kuma a jira",
+    "EVENT_WHENTOUCHINGOBJECT": "lokacin da wannan sprite ɗin ya taɓa %1",
     "CONTROL_WAIT": "jira daƙiƙai %1",
     "CONTROL_REPEAT": "maimaita %1",
     "CONTROL_FOREVER": "har abada",
     "CONTROL_IF": "idan %1 sai",
+    "CONTROL_ELSE": "ko kuma",
     "CONTROL_WAITUNTIL": "jira har %1",
     "CONTROL_REPEATUNTIL": "maimaita har zuwa %1",
     "CONTROL_STOP": "tsaya %1",
     "CONTROL_STARTASCLONE": "lokacin da na fara a matsayin kwaikwayo",
     "CONTROL_CREATECLONEOF": "ƙirƙiri kwaikwayon %1",
     "CONTROL_DELETETHISCLONE": "goge wannan kwaikwayon",
+    "CONTROL_WHILE": "yayin da %1",
     "SENSING_ASKANDWAIT": "tambayi %1 kuma a jira",
     "videoSensing.videoToggle": "juya bidiyon %1",
     "videoSensing.setVideoTransparency": "Saita ganin bayyanar bidiyon zuwa %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "abun # na %1 cikin %2",
     "DATA_LENGTHOFLIST": "tsawon %1",
     "DATA_LISTCONTAINSITEM": "%1 ya ƙunshi %2?",
-    "CONTROL_ELSE": "ko kuma",
     "SENSING_USERID": "shaidar mai amfani",
     "SENSING_LOUD": "da ƙara?",
     "text2speech.speakAndWaitBlock": "yi magana%1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "karkata kwanar %1",
     "boost.setLightHue": "saita launin haske zuwa %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "an girgiza",
     "anyi tsalle"
   ],
+  "picoWhen": [],
   "osis": [
     "sauran rubutun cikin sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "abubuwa masu canzawa",
     "My Blocks": "tubalai na"
   },
-  "math": [
-    "abs",
-    "ƙasa",
-    "rufi",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "In",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "ƙasa",
+      "rufi",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "In",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Hausa",
   "percentTranslated": 100

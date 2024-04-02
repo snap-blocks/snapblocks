@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "pri prijatí správy %1",
     "EVENT_BROADCAST": "vyšli správu %1",
     "EVENT_BROADCASTANDWAIT": "vyšli správu %1 a počkaj",
+    "EVENT_WHENTOUCHINGOBJECT": "pri dotyku %1",
     "CONTROL_WAIT": "čakaj %1 s",
     "CONTROL_REPEAT": "opakuj %1",
     "CONTROL_FOREVER": "opakuj stále",
     "CONTROL_IF": "ak %1",
+    "CONTROL_ELSE": "inak",
     "CONTROL_WAITUNTIL": "čakaj až kým %1",
     "CONTROL_REPEATUNTIL": "opakuj až kým %1",
     "CONTROL_STOP": "zastav %1",
     "CONTROL_STARTASCLONE": "pri štarte klonu",
     "CONTROL_CREATECLONEOF": "naklonuj %1",
     "CONTROL_DELETETHISCLONE": "zruš tento klon",
+    "CONTROL_WHILE": "opakuj ak %1",
     "SENSING_ASKANDWAIT": "otázka %1",
     "videoSensing.videoToggle": "%1 snímanie",
     "videoSensing.setVideoTransparency": "nastav priehľadnosť snímania na %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "poradie prvku %1 v %2",
     "DATA_LENGTHOFLIST": "dĺžka %1",
     "DATA_LISTCONTAINSITEM": "%1 obsahuje %2?",
-    "CONTROL_ELSE": "inak",
     "SENSING_USERID": "užívateľské id",
     "SENSING_LOUD": "hlasný?",
     "text2speech.speakAndWaitBlock": "povedz %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "zatrasení",
     "skoku"
   ],
+  "picoWhen": [],
   "osis": [
     "moje iné scenáre"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Premenné",
     "My Blocks": "Nové bloky"
   },
-  "math": [
-    "abs",
-    "zaokrúhli nadol",
-    "zaokrúhli nahor",
-    "odmocnina",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctg",
-    "ln",
-    "log",
-    "exp",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "zaokrúhli nadol",
+      "zaokrúhli nahor",
+      "odmocnina",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctg",
+      "ln",
+      "log",
+      "exp",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Slovenčina",
   "percentTranslated": 100

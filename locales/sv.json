@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "när jag tar emot %1",
     "EVENT_BROADCAST": "skicka %1",
     "EVENT_BROADCASTANDWAIT": "skicka %1 och vänta",
+    "EVENT_WHENTOUCHINGOBJECT": "när denna sprajt rör %1",
     "CONTROL_WAIT": "vänta %1 sekunder",
     "CONTROL_REPEAT": "repetera %1",
     "CONTROL_FOREVER": "för alltid",
     "CONTROL_IF": "om %1 då",
+    "CONTROL_ELSE": "annars",
     "CONTROL_WAITUNTIL": "vänta tills %1",
     "CONTROL_REPEATUNTIL": "repetera tills %1",
     "CONTROL_STOP": "stoppa %1",
     "CONTROL_STARTASCLONE": "när jag startar som klon",
     "CONTROL_CREATECLONEOF": "skapa klon av %1",
     "CONTROL_DELETETHISCLONE": "radera klonen",
+    "CONTROL_WHILE": "medan %1",
     "SENSING_ASKANDWAIT": "fråga %1 och vänta",
     "videoSensing.videoToggle": "sätt video till %1",
     "videoSensing.setVideoTransparency": "sätt videotransparens till %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "post # av %1 i %2",
     "DATA_LENGTHOFLIST": "längden av %1",
     "DATA_LISTCONTAINSITEM": "%1 innehåller %2",
-    "CONTROL_ELSE": "annars",
     "SENSING_USERID": "användarnamn",
     "SENSING_LOUD": "högt ljud?",
     "text2speech.speakAndWaitBlock": "säg %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "lutningsvinkel %1",
     "boost.setLightHue": "sätt ljusets färg till %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "skaka",
     "hoppa"
   ],
+  "picoWhen": [],
   "osis": [
     "andra skript i sprajten"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabler",
     "My Blocks": "Mina block"
   },
-  "math": [
-    "abs",
-    "golv",
-    "tak",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "golv",
+      "tak",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Svenska",
   "percentTranslated": 100

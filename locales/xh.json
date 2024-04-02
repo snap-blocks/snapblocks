@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "xa ndifumana %1",
     "EVENT_BROADCAST": "usasazo %1",
     "EVENT_BROADCASTANDWAIT": "sasaza %1 ulinde",
+    "EVENT_WHENTOUCHINGOBJECT": "xa esi sprite sichukumisa %1",
     "CONTROL_WAIT": "yima %1 umzuzwana",
     "CONTROL_REPEAT": "phinda %1",
     "CONTROL_FOREVER": "naphakade",
     "CONTROL_IF": "if %1 then",
+    "CONTROL_ELSE": "okunye",
     "CONTROL_WAITUNTIL": "linda kude kube %1",
     "CONTROL_REPEATUNTIL": "pinda kude kube %1",
     "CONTROL_STOP": "yima %1",
     "CONTROL_STARTASCLONE": "xa ndiqala njengomfanekiso",
     "CONTROL_CREATECLONEOF": "yenza umfanekiso %1",
     "CONTROL_DELETETHISCLONE": "cima lomfanekiso",
+    "CONTROL_WHILE": "ngelixa %1",
     "SENSING_ASKANDWAIT": "buza %1 ulinde",
     "videoSensing.videoToggle": "guqula ividyo %1",
     "videoSensing.setVideoTransparency": "lungiselela ukubonisa kwelinye icala kwevidyo %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "into # ye %1 kwi %2",
     "DATA_LENGTHOFLIST": "Ubude be %1",
     "DATA_LISTCONTAINSITEM": "%1 iqulathe %2",
-    "CONTROL_ELSE": "okunye",
     "SENSING_USERID": "isazisi somsebenzisi",
     "SENSING_LOUD": "ingxolo?",
     "text2speech.speakAndWaitBlock": "thetha %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kekelisaa iengile %1",
     "boost.setLightHue": "lungiselela umbala wokukhanya %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "shukunyisiwe",
     "yatsiba"
   ],
+  "picoWhen": [],
   "osis": [
     "eminye imibhalo kwispraythi"
   ],
@@ -239,22 +243,27 @@
     "Variables": "iiveriyebhl",
     "My Blocks": "Ibhloko zam"
   },
-  "math": [
-    "abs",
-    "umgangatho",
-    "isilingi",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "phakathi",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "umgangatho",
+      "isilingi",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "phakathi",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "isiXhosa",
   "percentTranslated": 100

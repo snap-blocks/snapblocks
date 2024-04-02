@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "quand je reçois %1",
     "EVENT_BROADCAST": "envoyer à tous %1",
     "EVENT_BROADCASTANDWAIT": "envoyer à tous %1 et attendre",
+    "EVENT_WHENTOUCHINGOBJECT": "quand ce sprite touche %1",
     "CONTROL_WAIT": "attendre %1 secondes",
     "CONTROL_REPEAT": "répéter %1 fois",
     "CONTROL_FOREVER": "répéter indéfiniment",
     "CONTROL_IF": "si %1 alors",
+    "CONTROL_ELSE": "sinon",
     "CONTROL_WAITUNTIL": "attendre jusqu'à ce que %1",
     "CONTROL_REPEATUNTIL": "répéter jusqu'à ce que %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "quand je commence comme un clone",
     "CONTROL_CREATECLONEOF": "créer un clone de %1",
     "CONTROL_DELETETHISCLONE": "supprimer ce clone",
+    "CONTROL_WHILE": "tant que %1",
     "SENSING_ASKANDWAIT": "demander %1 et attendre",
     "videoSensing.videoToggle": "%1 la vidéo",
     "videoSensing.setVideoTransparency": "mettre la transparence de la vidéo à %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "position de %1 dans %2",
     "DATA_LENGTHOFLIST": "longueur de %1",
     "DATA_LISTCONTAINSITEM": "%1 contient %2 ?",
-    "CONTROL_ELSE": "sinon",
     "SENSING_USERID": "id de l'utilisateur",
     "SENSING_LOUD": "fort ?",
     "text2speech.speakAndWaitBlock": "prononcer %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "angle d'inclinaison %1",
     "boost.setLightHue": "mettre la couleur de la lampe à %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "secoué",
     "sauté"
   ],
+  "picoWhen": [],
   "osis": [
     "autres scripts dans sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variables",
     "My Blocks": "Mes Blocs"
   },
-  "math": [
-    "abs",
-    "plancher",
-    "plafond",
-    "racine",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "plancher",
+      "plafond",
+      "racine",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "tourner gauche de %1 degrés": "MOTION_TURNLEFT",
     "tourner droite de %1 degrés": "MOTION_TURNRIGHT",

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1ን ስቀበል",
     "EVENT_BROADCAST": "%1ን አሰራጭ",
     "EVENT_BROADCASTANDWAIT": "%1ን አሰራጭና ጠብቅ",
+    "EVENT_WHENTOUCHINGOBJECT": "ይህ ስፕራይት %1ን ሲነካ",
     "CONTROL_WAIT": "ጠብቅ ለ%1 ሰከንድ",
     "CONTROL_REPEAT": "%1ን ድገም",
     "CONTROL_FOREVER": "ለዘላለም",
     "CONTROL_IF": "%1 ከሆነ",
+    "CONTROL_ELSE": "ካልሆነ",
     "CONTROL_WAITUNTIL": "ጠብቅ እስከ %1",
     "CONTROL_REPEATUNTIL": "ድገም እስከ %1",
     "CONTROL_STOP": "አቁም %1",
     "CONTROL_STARTASCLONE": "እንደ አምሳያ ስጀምር",
     "CONTROL_CREATECLONEOF": "የ%1 አምሳያ ፍጠር",
     "CONTROL_DELETETHISCLONE": "ይህንን አምሳያ አጥፋ",
+    "CONTROL_WHILE": "%1 ያለ",
     "SENSING_ASKANDWAIT": "%1 ጠይቅና ጠብቅ",
     "videoSensing.videoToggle": "ቪድዮ ወደ %1 ቀይር",
     "videoSensing.setVideoTransparency": "የቪድዮ አሳይነት ወደ %1 ለውጥ",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # of %1 in %2",
     "DATA_LENGTHOFLIST": "%1 ርዝመት",
     "DATA_LISTCONTAINSITEM": "%2 %1 አለበት?",
-    "CONTROL_ELSE": "ካልሆነ",
     "SENSING_USERID": "የተጠቃሚ መታወቂያ",
     "SENSING_LOUD": "ጮክ ነው?",
     "text2speech.speakAndWaitBlock": "%1ን ተናገር",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "አራድቷል",
     "ዘልሏል"
   ],
+  "picoWhen": [],
   "osis": [
     "ሌሎች በስፕራይት ላይ ያሉ ስክሪፕቶች"
   ],
@@ -240,22 +244,27 @@
     "Variables": "ተለዋዋጮች",
     "My Blocks": "የኔ ጥምሮች"
   },
-  "math": [
-    "abs",
-    "መሬት",
-    "ጣራ",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ውስጥ",
-    "ግባ",
-    "e^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "መሬት",
+      "ጣራ",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ውስጥ",
+      "ግባ",
+      "e^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "አማርኛ",
   "percentTranslated": 100

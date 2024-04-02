@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ଯେତେବେଳେ ମୋତେ %1 ମିଳେ",
     "EVENT_BROADCAST": "%1 କୁ ପ୍ରସାରଣ କର",
     "EVENT_BROADCASTANDWAIT": "%1 ପ୍ରସାରଣ କରି ଅପେକ୍ଷା କର",
+    "EVENT_WHENTOUCHINGOBJECT": "ଯେତେବେଳେ ଏହି ସ୍ପ୍ରାଇଟ %1 କୁ ସ୍ପର୍ଶ କରିବ",
     "CONTROL_WAIT": "%1 ସେକେଣ୍ଡ ଅପେକ୍ଷା କର",
     "CONTROL_REPEAT": "%1 ପୁନରାବୃତ୍ତି କର",
     "CONTROL_FOREVER": "ସବୁ ଦିନ ପାଇଁ",
     "CONTROL_IF": "ଯଦି %1 ତେବେ",
+    "CONTROL_ELSE": "ଅଥବା",
     "CONTROL_WAITUNTIL": "%1 ସେକେଣ୍ଡ ପର୍ଯନ୍ତ ଅପେକ୍ଷା କର",
     "CONTROL_REPEATUNTIL": "%1 ପର୍ଯନ୍ତ ପୁନରାବୃତ୍ତି କର",
     "CONTROL_STOP": "ବନ୍ଦ କର %1",
     "CONTROL_STARTASCLONE": "ମୋର ଏକ କ୍ଲୋନ ରୂପରେ ଆରମ୍ଭ ହେଲାପରେ",
     "CONTROL_CREATECLONEOF": "%1 ର କ୍ଲୋନ ତିଆର କର",
     "CONTROL_DELETETHISCLONE": "ଏହି କ୍ଲୋନ କୁ ଲିଭାଇ ଦିଅ",
+    "CONTROL_WHILE": "ଯେ ପର୍ଯନ୍ତ  %1",
     "SENSING_ASKANDWAIT": "%1 ପଚାର ଓ ଅପେକ୍ଷା କର",
     "videoSensing.videoToggle": "ଭିଡିଓ କୁ ଘୂରାଅ %1",
     "videoSensing.setVideoTransparency": "ଭିଡିଓ ପାରଦର୍ଶିତା କୁ %1 ରେ ରଖ",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 ରେ %1 ତମ ବସ୍ତୁ",
     "DATA_LENGTHOFLIST": "%1 ର ଦୈର୍ଘ୍ୟ",
     "DATA_LISTCONTAINSITEM": "%1 ରେ %2 ଅଛି କି?",
-    "CONTROL_ELSE": "ଅଥବା",
     "SENSING_USERID": "ବ୍ୟବହାରକାରୀ ର ଚିହ୍ନ",
     "SENSING_LOUD": "ଅଧିକ?",
     "text2speech.speakAndWaitBlock": "କୁହ %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ଝୁଙ୍କାଇବାର ଦିଗ %1",
     "boost.setLightHue": "ଆଲୁଅ କଲଡର %1 ରଖ"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ହଲିଗଲା",
     "ଡେଇଁପଡ଼ିଲା"
   ],
+  "picoWhen": [],
   "osis": [
     "ସ୍ପ୍ରାଇଟ ରେ ଥିବା ଅନ୍ୟ ଲିପି"
   ],
@@ -240,22 +244,27 @@
     "Variables": "ଭେରିଏବଲ୍ ଗୁଡିକ",
     "My Blocks": "ମୋ ବ୍ଲକ ଗୁଡି଼କ"
   },
-  "math": [
-    "ଏବିଏସ",
-    "ତଳ",
-    "ଛାତ",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "cosec",
-    "cot",
-    "ln",
-    "log",
-    "e ^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "ଏବିଏସ",
+      "ତଳ",
+      "ଛାତ",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "cosec",
+      "cot",
+      "ln",
+      "log",
+      "e ^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "ଓଡ଼ିଆ",
   "percentTranslated": 100

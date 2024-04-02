@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "når jeg mottar %1",
     "EVENT_BROADCAST": "send melding %1",
     "EVENT_BROADCASTANDWAIT": "send melding %1 og vent",
+    "EVENT_WHENTOUCHINGOBJECT": "når denne figuren berører %1",
     "CONTROL_WAIT": "vent %1 sekunder",
     "CONTROL_REPEAT": "gjenta %1 ganger",
     "CONTROL_FOREVER": "gjenta for alltid",
     "CONTROL_IF": "hvis %1",
+    "CONTROL_ELSE": "ellers",
     "CONTROL_WAITUNTIL": "vent til %1",
     "CONTROL_REPEATUNTIL": "gjenta til %1",
     "CONTROL_STOP": "stopp %1",
     "CONTROL_STARTASCLONE": "når jeg starter som klon",
     "CONTROL_CREATECLONEOF": "lag klon av %1",
     "CONTROL_DELETETHISCLONE": "slett denne klonen",
+    "CONTROL_WHILE": "gjenta hvis %1",
     "SENSING_ASKANDWAIT": "spør %1 og vent",
     "videoSensing.videoToggle": "sett video %1",
     "videoSensing.setVideoTransparency": "sett %1 gjennomsiktighet av video",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "posisjon av %1 i %2",
     "DATA_LENGTHOFLIST": "lengden av %1",
     "DATA_LISTCONTAINSITEM": "%1 inneholder %2?",
-    "CONTROL_ELSE": "ellers",
     "SENSING_USERID": "brukernavn",
     "SENSING_LOUD": "høy lyd?",
     "text2speech.speakAndWaitBlock": "si %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "helningsvinkel %1",
     "boost.setLightHue": "sett lysfarge %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ristet",
     "hoppet"
   ],
+  "picoWhen": [],
   "osis": [
     "andre skript i figuren"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabler",
     "My Blocks": "Mine klosser"
   },
-  "math": [
-    "absoluttverdi",
-    "avrund ned",
-    "avrund opp",
-    "kvadratrot",
-    "sin",
-    "cos",
-    "tan",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "absoluttverdi",
+      "avrund ned",
+      "avrund opp",
+      "kvadratrot",
+      "sin",
+      "cos",
+      "tan",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "vend venstre %1 grader": "MOTION_TURNLEFT",
     "vend høyre %1 grader": "MOTION_TURNRIGHT",

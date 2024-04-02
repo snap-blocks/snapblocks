@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "когда я получу %1",
     "EVENT_BROADCAST": "передать %1",
     "EVENT_BROADCASTANDWAIT": "передать %1 и ждать до конца",
+    "EVENT_WHENTOUCHINGOBJECT": "когда этот спрайт касается %1",
     "CONTROL_WAIT": "ждать %1 секунд",
     "CONTROL_REPEAT": "повторить %1 раз",
     "CONTROL_FOREVER": "повторять всегда",
     "CONTROL_IF": "если %1 , то",
+    "CONTROL_ELSE": "иначе",
     "CONTROL_WAITUNTIL": "ждать до %1",
     "CONTROL_REPEATUNTIL": "повторять пока не %1",
     "CONTROL_STOP": "стоп %1",
     "CONTROL_STARTASCLONE": "когда я начинаю как клон",
     "CONTROL_CREATECLONEOF": "создать клон %1",
     "CONTROL_DELETETHISCLONE": "удалить клон",
+    "CONTROL_WHILE": "пока %1",
     "SENSING_ASKANDWAIT": "спросить %1 и ждать",
     "videoSensing.videoToggle": "включить видео %1",
     "videoSensing.setVideoTransparency": "установить прозрачность видео  %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "№ элемента %1 в %2",
     "DATA_LENGTHOFLIST": "длина списка %1",
     "DATA_LISTCONTAINSITEM": "%1 содержит %2?",
-    "CONTROL_ELSE": "иначе",
     "SENSING_USERID": "id пользователя",
     "SENSING_LOUD": "громко?",
     "text2speech.speakAndWaitBlock": "сказать %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "угол наклона %1",
     "boost.setLightHue": "установить цвет лампочки %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "встряхнули",
     "подпрыгнули"
   ],
+  "picoWhen": [],
   "osis": [
     "другие скрипты спрайта"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Переменные",
     "My Blocks": "Другие блоки"
   },
-  "math": [
-    "модуль",
-    "целое меньшее",
-    "целое большее",
-    "квадратный корень",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "модуль",
+      "целое меньшее",
+      "целое большее",
+      "квадратный корень",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "повернуть влево на %1 градусов": "MOTION_TURNLEFT",
     "повернуть вправо на %1 градусов": "MOTION_TURNRIGHT",

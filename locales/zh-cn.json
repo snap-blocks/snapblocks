@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "当接收到 %1",
     "EVENT_BROADCAST": "广播 %1",
     "EVENT_BROADCASTANDWAIT": "广播 %1 并等待",
+    "EVENT_WHENTOUCHINGOBJECT": "当该角色碰到 %1",
     "CONTROL_WAIT": "等待 %1 秒",
     "CONTROL_REPEAT": "重复执行 %1 次",
     "CONTROL_FOREVER": "重复执行",
     "CONTROL_IF": "如果 %1 那么",
+    "CONTROL_ELSE": "否则",
     "CONTROL_WAITUNTIL": "等待 %1",
     "CONTROL_REPEATUNTIL": "重复执行直到 %1",
     "CONTROL_STOP": "停止 %1",
     "CONTROL_STARTASCLONE": "当作为克隆体启动时",
     "CONTROL_CREATECLONEOF": "克隆 %1",
     "CONTROL_DELETETHISCLONE": "删除此克隆体",
+    "CONTROL_WHILE": "当 %1 重复执行",
     "SENSING_ASKANDWAIT": "询问 %1 并等待",
     "videoSensing.videoToggle": "%1摄像头",
     "videoSensing.setVideoTransparency": "将视频透明度设为%1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 中第一个 %1 的编号",
     "DATA_LENGTHOFLIST": "%1 的项目数",
     "DATA_LISTCONTAINSITEM": "%1 包含 %2 ?",
-    "CONTROL_ELSE": "否则",
     "SENSING_USERID": "用户id",
     "SENSING_LOUD": "响声？",
     "text2speech.speakAndWaitBlock": "朗读 %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "向%1倾角",
     "boost.setLightHue": "将灯光颜色设为%1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "晃动",
     "抛起"
   ],
+  "picoWhen": [],
   "osis": [
     "该角色的其他脚本"
   ],
@@ -239,22 +243,27 @@
     "Variables": "变量",
     "My Blocks": "自制积木"
   },
-  "math": [
-    "绝对值",
-    "向下取整",
-    "向上取整",
-    "平方根",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "绝对值",
+      "向下取整",
+      "向上取整",
+      "平方根",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "左转 %1 度": "MOTION_TURNLEFT",
     "右转 %1 度": "MOTION_TURNRIGHT",

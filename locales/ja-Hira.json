@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 をうけとったとき",
     "EVENT_BROADCAST": "%1 をおくる",
     "EVENT_BROADCASTANDWAIT": "%1 をおくってまつ",
+    "EVENT_WHENTOUCHINGOBJECT": "このスプライトが %1 にふれたとき",
     "CONTROL_WAIT": "%1 びょうまつ",
     "CONTROL_REPEAT": "%1 かいくりかえす",
     "CONTROL_FOREVER": "ずっと",
     "CONTROL_IF": "もし %1 なら",
+    "CONTROL_ELSE": "でなければ",
     "CONTROL_WAITUNTIL": "%1 までまつ",
     "CONTROL_REPEATUNTIL": "%1 までくりかえす",
     "CONTROL_STOP": " %1",
     "CONTROL_STARTASCLONE": "クローンされたとき",
     "CONTROL_CREATECLONEOF": "%1 のクローンをつくる",
     "CONTROL_DELETETHISCLONE": "このクローンをさくじょする",
+    "CONTROL_WHILE": "%1 のあいだくりかえす",
     "SENSING_ASKANDWAIT": "%1 ときいてまつ",
     "videoSensing.videoToggle": "ビデオを%1にする",
     "videoSensing.setVideoTransparency": "ビデオのとうめいどを%1にする",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2なかの%1のばしょ",
     "DATA_LENGTHOFLIST": "%1 のながさ",
     "DATA_LISTCONTAINSITEM": "%1 に %2 がふくまれる",
-    "CONTROL_ELSE": "でなければ",
     "SENSING_USERID": "ユーザーID",
     "SENSING_LOUD": "うるさい",
     "text2speech.speakAndWaitBlock": "%1としゃべる",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "%1ほうこうのかたむき",
     "boost.setLightHue": "ライトのいろを%1にする"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ふられた",
     "ジャンプした"
   ],
+  "picoWhen": [],
   "osis": [
     "スプライトのほかのスクリプトをとめる"
   ],
@@ -239,22 +243,27 @@
     "Variables": "へんすう",
     "My Blocks": "ブロックていぎ"
   },
-  "math": [
-    "ぜったいち",
-    "きりさげ",
-    "きりあげ",
-    "へいほうこん",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "ぜったいち",
+      "きりさげ",
+      "きりあげ",
+      "へいほうこん",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "ひだりに %1 どまわす": "MOTION_TURNLEFT",
     "はんとけいまわりに %1 どまわす": "MOTION_TURNLEFT",

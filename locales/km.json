@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "ពេលខ្ញុំទទួលបាន %1",
     "EVENT_BROADCAST": "បញ្ជូនសារ %1",
     "EVENT_BROADCASTANDWAIT": "បញ្ជូនសារ %1 ហើយចាំ",
+    "EVENT_WHENTOUCHINGOBJECT": "នៅពេលតួអង្គនេះប៉ះ %1",
     "CONTROL_WAIT": "ចាំ %1 វិនាទី",
     "CONTROL_REPEAT": "ធ្វើដដែលៗ %1 ដង",
     "CONTROL_FOREVER": "រហូត",
     "CONTROL_IF": "ប្រសិន %1 នោះ",
+    "CONTROL_ELSE": "បើមិនដូច្នោះទេ",
     "CONTROL_WAITUNTIL": "ចាំរហូតដល់ %1",
     "CONTROL_REPEATUNTIL": "ធ្វើដដែលៗរហូតដល់ %1",
     "CONTROL_STOP": "ឈប់ %1",
     "CONTROL_STARTASCLONE": "ពេលខ្ញុំចាប់ផ្តើមជារូបចម្លង",
     "CONTROL_CREATECLONEOF": "ចម្លងរូបរាងនៃ %1",
     "CONTROL_DELETETHISCLONE": "លុបរូបចម្លងនេះ",
+    "CONTROL_WHILE": "ខណៈពេល %1",
     "SENSING_ASKANDWAIT": "សួរ %1 ហើយចាំ",
     "videoSensing.videoToggle": "%1 វីដេអូ",
     "videoSensing.setVideoTransparency": "ដាក់កម្រិតឆ្លុះរបស់វីដេអូត្រឹម %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "លេខទីតាំងនៃធាតុ %1 ក្នុង %2",
     "DATA_LENGTHOFLIST": "ប្រវែងនៃ %1",
     "DATA_LISTCONTAINSITEM": "%1 មាន %2?",
-    "CONTROL_ELSE": "បើមិនដូច្នោះទេ",
     "SENSING_USERID": "លេខសម្គាល់អ្នកប្រើ",
     "SENSING_LOUD": "លឺ?",
     "text2speech.speakAndWaitBlock": "និយាយ %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "លម្អៀងមុំ %1",
     "boost.setLightHue": "ដាក់ពណ៌របស់ភ្លើងទៅជា %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ញាក់",
     "បានលោត"
   ],
+  "picoWhen": [],
   "osis": [
     "ស្រ្គីបផ្សេងទៀតក្នុងតួអង្គ"
   ],
@@ -239,22 +243,27 @@
     "Variables": "អថេរ",
     "My Blocks": "ប្លុកខ្ញុំ"
   },
-  "math": [
-    "តម្លៃដាច់ខាត",
-    "បង្គត់ចុះ",
-    "បង្គត់ឡើង",
-    "ឫស​ការ៉េ",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "តម្លៃដាច់ខាត",
+      "បង្គត់ចុះ",
+      "បង្គត់ឡើង",
+      "ឫស​ការ៉េ",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "ភាសាខ្មែរ",
   "percentTranslated": 100

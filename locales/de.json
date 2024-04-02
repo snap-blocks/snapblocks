@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "Wenn ich %1 empfange",
     "EVENT_BROADCAST": "sende %1 an alle",
     "EVENT_BROADCASTANDWAIT": "sende %1 an alle und warte",
+    "EVENT_WHENTOUCHINGOBJECT": "Wenn diese Figur %1 berührt",
     "CONTROL_WAIT": "warte %1 Sekunden",
     "CONTROL_REPEAT": "wiederhole %1 mal",
     "CONTROL_FOREVER": "wiederhole fortlaufend",
     "CONTROL_IF": "falls %1, dann",
+    "CONTROL_ELSE": "sonst",
     "CONTROL_WAITUNTIL": "warte bis %1",
     "CONTROL_REPEATUNTIL": "wiederhole bis %1",
     "CONTROL_STOP": "stoppe %1",
     "CONTROL_STARTASCLONE": "Wenn ich als Klon entstehe",
     "CONTROL_CREATECLONEOF": "erzeuge Klon von %1",
     "CONTROL_DELETETHISCLONE": "lösche diesen Klon",
+    "CONTROL_WHILE": "wiederhole solange %1",
     "SENSING_ASKANDWAIT": "frage %1 und warte",
     "videoSensing.videoToggle": "schalte Video %1",
     "videoSensing.setVideoTransparency": "setze Video-Transparenz auf %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "Nummer von %1 in %2",
     "DATA_LENGTHOFLIST": "Länge von %1",
     "DATA_LISTCONTAINSITEM": "%1 enthält %2?",
-    "CONTROL_ELSE": "sonst",
     "SENSING_USERID": "Benutzer-ID",
     "SENSING_LOUD": "laut?",
     "text2speech.speakAndWaitBlock": "sage %1",
@@ -210,6 +212,23 @@
     "boost.getTiltAngle": "Neigungswinkel %1",
     "boost.setLightHue": "setze Lichtfarbe auf %1"
   },
+  "fullBlocks": [
+    {
+      "spec": "{if}",
+      "specDefs": {
+        "if": [
+          "falls %1 %2",
+          "falls %1 %2 {else}"
+        ],
+        "else": [
+          "@addInput",
+          "@delInput @addInput",
+          "sonst {if}"
+        ]
+      },
+      "id": "snap:doIf"
+    }
+  ],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +240,7 @@
     "geschüttelt",
     "hochgehüpft"
   ],
+  "picoWhen": [],
   "osis": [
     "andere Skripte der Figur"
   ],
@@ -239,22 +259,27 @@
     "Variables": "Variablen",
     "My Blocks": "Meine Blöcke"
   },
-  "math": [
-    "Betrag",
-    "abrunden",
-    "aufrunden",
-    "Wurzel",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "Betrag",
+      "abrunden",
+      "aufrunden",
+      "Wurzel",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "drehe dich nach links um %1 Grad": "MOTION_TURNLEFT",
     "drehe dich nach rechts um %1 Grad": "MOTION_TURNRIGHT",

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "када примим %1",
     "EVENT_BROADCAST": "разгласи %1",
     "EVENT_BROADCASTANDWAIT": "разгласи %1 и чекај",
+    "EVENT_WHENTOUCHINGOBJECT": "када овај лик додирне %1",
     "CONTROL_WAIT": "чекај %1 секунду",
     "CONTROL_REPEAT": "понови %1",
     "CONTROL_FOREVER": "понављај заувек",
     "CONTROL_IF": "ако је %1 онда",
+    "CONTROL_ELSE": "у супротном",
     "CONTROL_WAITUNTIL": "чекај док не %1",
     "CONTROL_REPEATUNTIL": "понављај до %1",
     "CONTROL_STOP": "заустави %1",
     "CONTROL_STARTASCLONE": "када се појавим као умножак",
     "CONTROL_CREATECLONEOF": "направи дупликат од %1",
     "CONTROL_DELETETHISCLONE": "обриши овај умножак",
+    "CONTROL_WHILE": "док је %1",
     "SENSING_ASKANDWAIT": "питај %1 и чекај",
     "videoSensing.videoToggle": "нека видео буде %1",
     "videoSensing.setVideoTransparency": "нека провидност видеа буде  %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "место од %1 у %2",
     "DATA_LENGTHOFLIST": "дужина %1",
     "DATA_LISTCONTAINSITEM": "да ли %1 садржи %2?",
-    "CONTROL_ELSE": "у супротном",
     "SENSING_USERID": "корисников ид",
     "SENSING_LOUD": "гласно?",
     "text2speech.speakAndWaitBlock": "изговори %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "угао нагиба %1",
     "boost.setLightHue": "подеси боју светлости на %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "протресен",
     "скок"
   ],
+  "picoWhen": [],
   "osis": [
     "друге програме лика"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Променљиве",
     "My Blocks": "Моји блокови"
   },
-  "math": [
-    "абс",
-    "цео део",
-    "цео+1",
-    "корен",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "абс",
+      "цео део",
+      "цео+1",
+      "корен",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Српски",
   "percentTranslated": 100

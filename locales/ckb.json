@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "کاتێک بەدەستم گەیشت %1",
     "EVENT_BROADCAST": "پەخشکردن %1",
     "EVENT_BROADCASTANDWAIT": "پەخشکردنی %1 و چاوەڕێکردن",
+    "EVENT_WHENTOUCHINGOBJECT": "کاتێک ئەم تەنە بەرکەوت %1",
     "CONTROL_WAIT": "بوەستە %1 چرکە",
     "CONTROL_REPEAT": "دوبارەکردنەوە %1",
     "CONTROL_FOREVER": "بۆهەتایە",
     "CONTROL_IF": "ئەگەر %1 ئینجا",
+    "CONTROL_ELSE": "ئەگەرنا",
     "CONTROL_WAITUNTIL": "چاوەڕێ بکە تا %1",
     "CONTROL_REPEATUNTIL": "دوبارەکردنەوە تا %1",
     "CONTROL_STOP": "وەستان %1",
     "CONTROL_STARTASCLONE": "کاتێک دەستپێدەکەم وەک لێکچووێک",
     "CONTROL_CREATECLONEOF": "دروستکردنی لێکچوو لە %1",
     "CONTROL_DELETETHISCLONE": "سڕینەوەی ئەم لێکچووە",
+    "CONTROL_WHILE": "کاتێک %1",
     "SENSING_ASKANDWAIT": "پرسیار بکە %1 و چاوەڕێ بکە",
     "videoSensing.videoToggle": "ڤیدیۆ بکە بە %1",
     "videoSensing.setVideoTransparency": "دانانی ڕۆشنایی ڤیدیۆ بە %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "دانەی # %1 لە %2",
     "DATA_LENGTHOFLIST": "درێژی لە %1",
     "DATA_LISTCONTAINSITEM": "%1 تێیدایە %2؟",
-    "CONTROL_ELSE": "ئەگەرنا",
     "SENSING_USERID": "ژمارەی بەکارهێنەر",
     "SENSING_LOUD": "بەدەنگی بەرز؟",
     "text2speech.speakAndWaitBlock": "قسە بکە %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "گۆشەی لاری %1",
     "boost.setLightHue": "دانانی ڕووناکی ڕەنگ بە %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "هەژاو",
     "بازدراو"
   ],
+  "picoWhen": [],
   "osis": [
     "سکریپتەکانی تر لە تەن"
   ],
@@ -239,22 +243,27 @@
     "Variables": "گۆڕاوەکان",
     "My Blocks": "بلۆکەکانم"
   },
-  "math": [
-    "ڕەگی دووجا",
-    "زەوی",
-    "بنمیچ",
-    "ڕەگی دووجا",
-    "تەژێ",
-    "تەژێ تەواو",
-    "تانجێنت",
-    "asin",
-    "acos",
-    "atan",
-    "لن",
-    "لۆگاریتم",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "ڕەگی دووجا",
+      "زەوی",
+      "بنمیچ",
+      "ڕەگی دووجا",
+      "تەژێ",
+      "تەژێ تەواو",
+      "تانجێنت",
+      "asin",
+      "acos",
+      "atan",
+      "لن",
+      "لۆگاریتم",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "کوردیی ناوەندی",
   "percentTranslated": 100

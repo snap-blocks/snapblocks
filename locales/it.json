@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "quando ricevo %1",
     "EVENT_BROADCAST": "invia a tutti %1",
     "EVENT_BROADCASTANDWAIT": "invia a tutti %1 e attendi",
+    "EVENT_WHENTOUCHINGOBJECT": "quando questo sprite tocca %1",
     "CONTROL_WAIT": "attendi %1 secondi",
     "CONTROL_REPEAT": "ripeti %1  volte",
     "CONTROL_FOREVER": "per sempre",
     "CONTROL_IF": "se %1 allora",
+    "CONTROL_ELSE": "altrimenti",
     "CONTROL_WAITUNTIL": "attendi fino a quando %1",
     "CONTROL_REPEATUNTIL": "ripeti fino a quando %1",
     "CONTROL_STOP": "ferma %1",
     "CONTROL_STARTASCLONE": "quando vengo clonato",
     "CONTROL_CREATECLONEOF": "crea clone di %1",
     "CONTROL_DELETETHISCLONE": "elimina questo clone",
+    "CONTROL_WHILE": "mentre %1",
     "SENSING_ASKANDWAIT": "chiedi %1 e attendi",
     "videoSensing.videoToggle": "%1 il video della webcam",
     "videoSensing.setVideoTransparency": "porta trasparenza webcam a %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "posizione di %1 in %2",
     "DATA_LENGTHOFLIST": "lunghezza di %1",
     "DATA_LISTCONTAINSITEM": "%1 contiene %2",
-    "CONTROL_ELSE": "altrimenti",
     "SENSING_USERID": "user id",
     "SENSING_LOUD": "volume alto?",
     "text2speech.speakAndWaitBlock": "pronuncia %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "angolo inclinazione %1",
     "boost.setLightHue": "porta colore luci a %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "si scuote",
     "salta"
   ],
+  "picoWhen": [],
   "osis": [
     "tutti gli altri script dello sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabili",
     "My Blocks": "I Miei Blocchi"
   },
-  "math": [
-    "valore assoluto",
-    "intero inferiore",
-    "intero superiore",
-    "radice quadrata",
-    "sen",
-    "cos",
-    "tan",
-    "arcsen",
-    "arccos",
-    "arctan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "valore assoluto",
+      "intero inferiore",
+      "intero superiore",
+      "radice quadrata",
+      "sen",
+      "cos",
+      "tan",
+      "arcsen",
+      "arccos",
+      "arctan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "ruota in senso antiorario di %1 gradi": "MOTION_TURNLEFT",
     "ruota in senso orario di %1 gradi": "MOTION_TURNRIGHT",

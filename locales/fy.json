@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "as ik %1 ûntfang",
     "EVENT_BROADCAST": "stjoer %1 út",
     "EVENT_BROADCASTANDWAIT": "stjoer %1 út en wachtsje",
+    "EVENT_WHENTOUCHINGOBJECT": "as dizze sprite %1 oanrekket",
     "CONTROL_WAIT": "wachtsje %1 sekonden",
     "CONTROL_REPEAT": "werhelje %1",
     "CONTROL_FOREVER": "foar altyd",
     "CONTROL_IF": "as %1 dan",
+    "CONTROL_ELSE": "oars",
     "CONTROL_WAITUNTIL": "wachtsje oant %1",
     "CONTROL_REPEATUNTIL": "werhelje oant %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "as ik begjin as in kloan",
     "CONTROL_CREATECLONEOF": "meitsje kloan fan %1",
     "CONTROL_DELETETHISCLONE": "dizze kloan fuortsmite",
+    "CONTROL_WHILE": "salang't %1",
     "SENSING_ASKANDWAIT": "freegje %1 en wachtsje",
     "videoSensing.videoToggle": "keare fideo %1",
     "videoSensing.setVideoTransparency": "set fideotransparânsje yn op %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "ûnderdiel # fan %1 yn %2",
     "DATA_LENGTHOFLIST": "lingte fan %1",
     "DATA_LISTCONTAINSITEM": "%1 befettet %2?",
-    "CONTROL_ELSE": "oars",
     "SENSING_USERID": "brûkers-id",
     "SENSING_LOUD": "lûd?",
     "text2speech.speakAndWaitBlock": "sprekke %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kantelhoek %1",
     "boost.setLightHue": "stel de kleur fan it ljocht yn op %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "skodde",
     "sprong"
   ],
+  "picoWhen": [],
   "osis": [
     "oare skripts yn sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Fariabelen",
     "My Blocks": "Myn Blokken"
   },
-  "math": [
-    "abs",
-    "flier",
-    "plafond",
-    "woartel",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "flier",
+      "plafond",
+      "woartel",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Frysk",
   "percentTranslated": 100

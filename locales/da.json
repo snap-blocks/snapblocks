@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "når jeg modtager %1",
     "EVENT_BROADCAST": "send %1",
     "EVENT_BROADCASTANDWAIT": "send %1 og vent",
+    "EVENT_WHENTOUCHINGOBJECT": "når denne sprite berører %1",
     "CONTROL_WAIT": "vent %1 sekunder",
     "CONTROL_REPEAT": "gentag %1 gange",
     "CONTROL_FOREVER": "for evigt",
     "CONTROL_IF": "hvis %1 så",
+    "CONTROL_ELSE": "ellers",
     "CONTROL_WAITUNTIL": "vent indtil %1",
     "CONTROL_REPEATUNTIL": "gentag indtil %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "når jeg starter som klon",
     "CONTROL_CREATECLONEOF": "opret en klon af %1",
     "CONTROL_DELETETHISCLONE": "slet denne klon",
+    "CONTROL_WHILE": "mens %1",
     "SENSING_ASKANDWAIT": "bed om %1 og vent",
     "videoSensing.videoToggle": "video %1",
     "videoSensing.setVideoTransparency": "sæt video gennemsigtighed til %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "nummer # af %1 i %2",
     "DATA_LENGTHOFLIST": "længden af %1",
     "DATA_LISTCONTAINSITEM": "%1 indeholder %2?",
-    "CONTROL_ELSE": "ellers",
     "SENSING_USERID": "bruger id",
     "SENSING_LOUD": "højt?",
     "text2speech.speakAndWaitBlock": "sig %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "vippet vinkel %1",
     "boost.setLightHue": "sæt farven på lyset til %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "rystet",
     "hoppet"
   ],
+  "picoWhen": [],
   "osis": [
     "andre scripts i sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabler",
     "My Blocks": "Mine brikker"
   },
-  "math": [
-    "abs",
-    "rund ned",
-    "rund op",
-    "kvrod",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "rund ned",
+      "rund op",
+      "kvrod",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Dansk",
   "percentTranslated": 100

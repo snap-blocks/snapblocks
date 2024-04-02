@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "mən %1 qəbul edəndə",
     "EVENT_BROADCAST": "%1 ötür",
     "EVENT_BROADCASTANDWAIT": "%1 ötür və gözlə",
+    "EVENT_WHENTOUCHINGOBJECT": "sprayt %1 toxunanda",
     "CONTROL_WAIT": "%1 saniyə gözlə",
     "CONTROL_REPEAT": "təkrarla %1 dəfə",
     "CONTROL_FOREVER": "həmişə",
     "CONTROL_IF": "əgər %1, onda",
+    "CONTROL_ELSE": "əks halda",
     "CONTROL_WAITUNTIL": "%1 qədər gözlə",
     "CONTROL_REPEATUNTIL": "təkrarla nə qədər ki, %1 deyil",
     "CONTROL_STOP": "dayandır %1",
     "CONTROL_STARTASCLONE": "mən klon kimi başlayanda",
     "CONTROL_CREATECLONEOF": "%1 klonunu yarat",
     "CONTROL_DELETETHISCLONE": "bu klonu sil",
+    "CONTROL_WHILE": "təkrarla nə qədər ki, %1",
     "SENSING_ASKANDWAIT": "%1 soruş və gözlə",
     "videoSensing.videoToggle": "videonu %1 çevir",
     "videoSensing.setVideoTransparency": "videonun şəffaflığını %1 təyin et",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # of %1 in %2",
     "DATA_LENGTHOFLIST": "%1 siyahısının uzunluğu",
     "DATA_LISTCONTAINSITEM": "%1 tərkibində %2 var?",
-    "CONTROL_ELSE": "əks halda",
     "SENSING_USERID": "istifadəçi adı",
     "SENSING_LOUD": "ucadır?",
     "text2speech.speakAndWaitBlock": "speak %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "shaken",
     "jumped"
   ],
+  "picoWhen": [],
   "osis": [
     "spraytın digər skriptləri"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Dəyişənlər",
     "My Blocks": "Mənim Bloklarım"
   },
-  "math": [
-    "modul",
-    "aşağı yuvarlaqlaşdır",
-    "yuxarı yuvarlaqlaşdır",
-    "kvadrat kök",
-    "sin",
-    "cos",
-    "tg",
-    "arcsin",
-    "arccos",
-    "arctg",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "modul",
+      "aşağı yuvarlaqlaşdır",
+      "yuxarı yuvarlaqlaşdır",
+      "kvadrat kök",
+      "sin",
+      "cos",
+      "tg",
+      "arcsin",
+      "arccos",
+      "arctg",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Azeri",
   "percentTranslated": 100

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kiam mi ricevas %1",
     "EVENT_BROADCAST": "elsendi %1",
     "EVENT_BROADCASTANDWAIT": "elsendi %1 kaj atendi",
+    "EVENT_WHENTOUCHINGOBJECT": "kiam tiu ĉi rolulo tuŝas %1",
     "CONTROL_WAIT": "atendi %1 sekundojn",
     "CONTROL_REPEAT": "ripeti %1-foje",
     "CONTROL_FOREVER": "ripeti senfine",
     "CONTROL_IF": "se %1 do",
+    "CONTROL_ELSE": "alikaze",
     "CONTROL_WAITUNTIL": "atendi ĝis %1",
     "CONTROL_REPEATUNTIL": "ripeti ĝis %1",
     "CONTROL_STOP": "haltigi %1",
     "CONTROL_STARTASCLONE": "kiam mi kreiĝas kiel klono",
     "CONTROL_CREATECLONEOF": "krei klonon de %1",
     "CONTROL_DELETETHISCLONE": "forigi tiun ĉi klonon",
+    "CONTROL_WHILE": "dum %1",
     "SENSING_ASKANDWAIT": "demandi %1 kaj atendi",
     "videoSensing.videoToggle": "agordi videon %1",
     "videoSensing.setVideoTransparency": "agordi travideblecon de video al %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "vica numero de %1 en %2",
     "DATA_LENGTHOFLIST": "longo de %1",
     "DATA_LISTCONTAINSITEM": "ĉu %1 enhavas %2?",
-    "CONTROL_ELSE": "alikaze",
     "SENSING_USERID": "ID de uzanto",
     "SENSING_LOUD": "ĉu laŭta?",
     "text2speech.speakAndWaitBlock": "diri %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "angulo de klino %1",
     "boost.setLightHue": "kolorigi LED al %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ŝancelita",
     "saltigita"
   ],
+  "picoWhen": [],
   "osis": [
     "aliajn skriptojn en la rolulo"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variabloj",
     "My Blocks": "Miaj Blokoj"
   },
-  "math": [
-    "abs",
-    "planko",
-    "plafono",
-    "radiko",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "planko",
+      "plafono",
+      "radiko",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Esperanto",
   "percentTranslated": 100

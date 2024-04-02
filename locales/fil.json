@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kapag natanggap ko ang %1",
     "EVENT_BROADCAST": "iulat ang %1",
     "EVENT_BROADCASTANDWAIT": "iulat ang %1 at maghintay",
+    "EVENT_WHENTOUCHINGOBJECT": "kapag tumama ang sprite na ito sa %1",
     "CONTROL_WAIT": "maghintay nang %1 (na) segundo",
     "CONTROL_REPEAT": "ulitin nang %1",
     "CONTROL_FOREVER": "kailanman",
     "CONTROL_IF": "kung %1 edi",
+    "CONTROL_ELSE": "kundi",
     "CONTROL_WAITUNTIL": "maghintay hanggang %1",
     "CONTROL_REPEATUNTIL": "ulitin hanggang %1",
     "CONTROL_STOP": "itigil %1",
     "CONTROL_STARTASCLONE": "kapag clone ako nagsimula",
     "CONTROL_CREATECLONEOF": "gumawa ng clone ng %1",
     "CONTROL_DELETETHISCLONE": "tanggalin ang clone na ito",
+    "CONTROL_WHILE": "habang %1",
     "SENSING_ASKANDWAIT": "magtanong ng %1 at maghintay",
     "videoSensing.videoToggle": "itakda ang video sa %1",
     "videoSensing.setVideoTransparency": "itakda ang labo ng video sa %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "# ng item na %1 sa %2",
     "DATA_LENGTHOFLIST": "haba ng %1",
     "DATA_LISTCONTAINSITEM": "may %2 ang %1?",
-    "CONTROL_ELSE": "kundi",
     "SENSING_USERID": "user id",
     "SENSING_LOUD": "malakas?",
     "text2speech.speakAndWaitBlock": "sabihin ang %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "anggulo ng pagtagilid %1",
     "boost.setLightHue": "itakda ang kulay ng ilaw bilang %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "niyugyog",
     "tumalon"
   ],
+  "picoWhen": [],
   "osis": [
     "ibang script sa sprite"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Mga Variable",
     "My Blocks": "Mga Block Ko"
   },
-  "math": [
-    "abs",
-    "floor",
-    "ceiling",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "floor",
+      "ceiling",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Filipino",
   "percentTranslated": 100

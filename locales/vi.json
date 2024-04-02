@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "khi nhận %1",
     "EVENT_BROADCAST": "phát tin %1",
     "EVENT_BROADCASTANDWAIT": "phát tin %1 và đợi",
+    "EVENT_WHENTOUCHINGOBJECT": "Khi nhân vật này chạm vào %1",
     "CONTROL_WAIT": "đợi %1 giây",
     "CONTROL_REPEAT": "lặp lại %1",
     "CONTROL_FOREVER": "liên tục",
     "CONTROL_IF": "nếu %1 thì",
+    "CONTROL_ELSE": "nếu không thì",
     "CONTROL_WAITUNTIL": "đợi đến khi %1",
     "CONTROL_REPEATUNTIL": "lặp lại cho đến khi %1",
     "CONTROL_STOP": "dừng lại %1",
     "CONTROL_STARTASCLONE": "khi tôi bắt đầu là một bản sao",
     "CONTROL_CREATECLONEOF": "tạo bản sao của %1",
     "CONTROL_DELETETHISCLONE": "xóa bản sao này",
+    "CONTROL_WHILE": "trong khi %1",
     "SENSING_ASKANDWAIT": "hỏi %1 và đợi",
     "videoSensing.videoToggle": "mở video %1",
     "videoSensing.setVideoTransparency": "đặt độ trong suốt của video thành %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "số thứ tự của %1 trong %2",
     "DATA_LENGTHOFLIST": "kích thước của %1",
     "DATA_LISTCONTAINSITEM": "%1 chứa phần tử %2?",
-    "CONTROL_ELSE": "nếu không thì",
     "SENSING_USERID": "id người dùng",
     "SENSING_LOUD": "tiếng to?",
     "text2speech.speakAndWaitBlock": "nói %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "shaken",
     "jumped"
   ],
+  "picoWhen": [],
   "osis": [
     "other scripts in sprite"
   ],
@@ -240,22 +244,27 @@
     "Variables": "Các biến số",
     "My Blocks": "Khối của tôi"
   },
-  "math": [
-    "giá trị tuyệt đối",
-    "làm tròn xuống",
-    "trần",
-    "căn bậc hai",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "trong",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "giá trị tuyệt đối",
+      "làm tròn xuống",
+      "trần",
+      "căn bậc hai",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "trong",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Tiếng Việt",
   "percentTranslated": 100

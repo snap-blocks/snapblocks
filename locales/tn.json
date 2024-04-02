@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "fa ke amogela %1",
     "EVENT_BROADCAST": "gasa %1",
     "EVENT_BROADCASTANDWAIT": "gasa %1 mme o lete",
+    "EVENT_WHENTOUCHINGOBJECT": "fa sprite se kgoma %1",
     "CONTROL_WAIT": "leta %1 metsotswana",
     "CONTROL_REPEAT": "boeletsa %1",
     "CONTROL_FOREVER": "gosafeleng",
     "CONTROL_IF": "fa %1 gona",
+    "CONTROL_ELSE": "gongwe",
     "CONTROL_WAITUNTIL": "leta go fitlhela go %1",
     "CONTROL_REPEATUNTIL": "boeletsa go fitlhela go %1",
     "CONTROL_STOP": "ema %1",
     "CONTROL_STARTASCLONE": "fa ke simolola jaaka sebopapopego",
     "CONTROL_CREATECLONEOF": "dira sebopapopego sa %1",
     "CONTROL_DELETETHISCLONE": "phimola sebopapopego se",
+    "CONTROL_WHILE": "fa %1",
     "SENSING_ASKANDWAIT": "botsa %1 mme o lete",
     "videoSensing.videoToggle": "tshuma video %1",
     "videoSensing.setVideoTransparency": "tlhagisa bosengbofitlha ba video %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "selwana # sa %1 go %2",
     "DATA_LENGTHOFLIST": "boleele jwa %1",
     "DATA_LISTCONTAINSITEM": "%1 e tshotse %2?",
-    "CONTROL_ELSE": "gongwe",
     "SENSING_USERID": "tiriso ya go ikitsise",
     "SENSING_LOUD": "modumo?",
     "text2speech.speakAndWaitBlock": "bua %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "sekamisa enkele %1",
     "boost.setLightHue": "tshuma lebone la mmala go %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "reketlisiwa",
     "tloletse"
   ],
+  "picoWhen": [],
   "osis": [
     "makwalo a mangwe mo go sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Dipharologano",
     "My Blocks": "Diboloko tsa me"
   },
-  "math": [
-    "abs",
-    "boalo",
-    "Ceiling",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "gare",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "boalo",
+      "Ceiling",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "gare",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Setswana",
   "percentTranslated": 100

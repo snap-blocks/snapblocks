@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kun vastaanotan %1",
     "EVENT_BROADCAST": "lähetä %1",
     "EVENT_BROADCASTANDWAIT": "lähetä %1 ja odota",
+    "EVENT_WHENTOUCHINGOBJECT": "kun tämä hahmo koskettaa %1",
     "CONTROL_WAIT": "odota %1 sekuntia",
     "CONTROL_REPEAT": "toista %1 kertaa",
     "CONTROL_FOREVER": "ikuisesti",
     "CONTROL_IF": "jos %1, niin",
+    "CONTROL_ELSE": "tai muuten",
     "CONTROL_WAITUNTIL": "odota kunnes %1",
     "CONTROL_REPEATUNTIL": "toista kunnes %1",
     "CONTROL_STOP": "pysäytä %1",
     "CONTROL_STARTASCLONE": "kun aloitan kloonina",
     "CONTROL_CREATECLONEOF": "luo klooni hahmosta %1",
     "CONTROL_DELETETHISCLONE": "poista tämä klooni",
+    "CONTROL_WHILE": "kun %1",
     "SENSING_ASKANDWAIT": "kysy %1 ja odota",
     "videoSensing.videoToggle": "kytke video %1",
     "videoSensing.setVideoTransparency": "aseta videon läpinäkyvyys arvoon %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "kohteen %1 numero listassa %2",
     "DATA_LENGTHOFLIST": "listan %1 pituus",
     "DATA_LISTCONTAINSITEM": "%1 sisältää %2?",
-    "CONTROL_ELSE": "tai muuten",
     "SENSING_USERID": "käyttäjä-id",
     "SENSING_LOUD": "kova äänentaso?",
     "text2speech.speakAndWaitBlock": "puhu %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kallista suuntaan %1",
     "boost.setLightHue": "aseta valon väriksi %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "ravistettu",
     "hypätty"
   ],
+  "picoWhen": [],
   "osis": [
     "hahmon muut koodit"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Muuttujat",
     "My Blocks": "Lohkoni"
   },
-  "math": [
-    "itseisarvo",
-    "pyöristä alaspäin",
-    "pyöristä ylöspäin",
-    "neliöjuuri",
-    "sini",
-    "kosini",
-    "tangentti",
-    "asin",
-    "acos",
-    "atan",
-    "luonnollinen logaritmi",
-    "10-kantainen logaritmi",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "itseisarvo",
+      "pyöristä alaspäin",
+      "pyöristä ylöspäin",
+      "neliöjuuri",
+      "sini",
+      "kosini",
+      "tangentti",
+      "asin",
+      "acos",
+      "atan",
+      "luonnollinen logaritmi",
+      "10-kantainen logaritmi",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Suomi",
   "percentTranslated": 100

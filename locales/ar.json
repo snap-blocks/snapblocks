@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "عندما أتلقى %1",
     "EVENT_BROADCAST": "بث %1",
     "EVENT_BROADCASTANDWAIT": "بث %1 وانتظر",
+    "EVENT_WHENTOUCHINGOBJECT": "عندما يلامس هذا الكائن %1",
     "CONTROL_WAIT": "انتظر %1 ثانية",
     "CONTROL_REPEAT": "كرِّر %1 مرة",
     "CONTROL_FOREVER": "كرِّر باستمرار",
     "CONTROL_IF": "إذا %1",
+    "CONTROL_ELSE": "وإلا",
     "CONTROL_WAITUNTIL": "انتظر حتى %1",
     "CONTROL_REPEATUNTIL": "كرِّر حتى %1",
     "CONTROL_STOP": "أوقف %1",
     "CONTROL_STARTASCLONE": "عندما تبدأ نسخةً مني",
     "CONTROL_CREATECLONEOF": "أنشئ نسخةً من %1",
     "CONTROL_DELETETHISCLONE": "احذف هذه النسخة",
+    "CONTROL_WHILE": "طالما %1",
     "SENSING_ASKANDWAIT": "اسأل %1 وانتظر",
     "videoSensing.videoToggle": "اجعل الفيديو %1",
     "videoSensing.setVideoTransparency": "اجعل شفافية الفيديو مساويةً %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "رقم العنصر ذي القيمة %1 في %2",
     "DATA_LENGTHOFLIST": "طول %1",
     "DATA_LISTCONTAINSITEM": "%1 تحتوي %2؟",
-    "CONTROL_ELSE": "وإلا",
     "SENSING_USERID": "رقم المستخدم",
     "SENSING_LOUD": "الصوت مرتفع؟",
     "text2speech.speakAndWaitBlock": "تكلم %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "زاوية الميلان %1",
     "boost.setLightHue": "اجعل لون المصباح مساويًا %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "الهز",
     "القفز"
   ],
+  "picoWhen": [],
   "osis": [
     "المقاطع الأخرى في الكائن"
   ],
@@ -239,22 +243,27 @@
     "Variables": "المتغيرات",
     "My Blocks": "لبناتي"
   },
-  "math": [
-    "القيمة المطلقة",
-    "الجزء الصحيح",
-    "السقف",
-    "الجذر التربيعي",
-    "الجيب (sin)",
-    "جيب التمام (cos)",
-    "الظل (tan)",
-    "الجيب العكسي (asin)",
-    "جيب التمام العكسي (acos)",
-    "الظل العكسي (atan)",
-    "اللوغارتم الطبيعي",
-    "اللوغارتم العشري",
-    "هـ^",
-    "10^"
-  ],
+  "of": {
+    "math": [
+      "القيمة المطلقة",
+      "الجزء الصحيح",
+      "السقف",
+      "الجذر التربيعي",
+      "الجيب (sin)",
+      "جيب التمام (cos)",
+      "الظل (tan)",
+      "الجيب العكسي (asin)",
+      "جيب التمام العكسي (acos)",
+      "الظل العكسي (atan)",
+      "اللوغارتم الطبيعي",
+      "اللوغارتم العشري",
+      "هـ^",
+      "10^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "العربية",
   "percentTranslated": 100

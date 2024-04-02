@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 аус арура",
     "EVENT_BROADCAST": "идәықәҵатәуп %1",
     "EVENT_BROADCASTANDWAIT": "идәықәҵатәуп %1 нас иԥштәуп",
+    "EVENT_WHENTOUCHINGOBJECT": "ари анагӡаҩ %1 данадкьысло",
     "CONTROL_WAIT": "иԥштәуп %1 секундк",
     "CONTROL_REPEAT": "инагӡалатәуп %1 - нтә",
     "CONTROL_FOREVER": "инагӡалатәуп еснагь",
     "CONTROL_IF": "%1 акәзар",
+    "CONTROL_ELSE": "акәымзар",
     "CONTROL_WAITUNTIL": "иԥштәуп %1 -нӡа",
     "CONTROL_REPEATUNTIL": "инагӡалатәуп %1 акәымзар",
     "CONTROL_STOP": "иаанкылатәуп %1",
     "CONTROL_STARTASCLONE": "сара аклон ҳасабла саналаго",
     "CONTROL_CREATECLONEOF": "иаԥҵатәуп аклон %1",
     "CONTROL_DELETETHISCLONE": "ианыхтәуп ари аклон",
+    "CONTROL_WHILE": "%1 иашанаҵ",
     "SENSING_ASKANDWAIT": "иазҵаатәуп %1 нас иԥштәуп",
     "videoSensing.videoToggle": "иаҿактәуп авидео %1",
     "videoSensing.setVideoTransparency": "иқәыргылатәуп авидео аҵәцара %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "аелемент %1 № %2 аҟны",
     "DATA_LENGTHOFLIST": "асиа %1 аура",
     "DATA_LISTCONTAINSITEM": "%1 иаҵанакуама %2?",
-    "CONTROL_ELSE": "акәымзар",
     "SENSING_USERID": "Ахархәаҩ ID",
     "SENSING_LOUD": "абжьы дуума?",
     "text2speech.speakAndWaitBlock": "иҳәатәуп %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "арнаара акәакь %1",
     "boost.setLightHue": "иқәыргылатәуп  арлашага аԥштәы %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "идырҵысит",
     "иԥеит"
   ],
+  "picoWhen": [],
   "osis": [
     "анагӡаҩ егьырҭ ипрограммақәа"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Аҽеиҭакқәа",
     "My Blocks": "Сара сблокқәа"
   },
-  "math": [
-    "abs",
-    "еиҵоу еибгоу",
-    "еиҳау еибгоу",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "еиҵоу еибгоу",
+      "еиҳау еибгоу",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Аҧсшәа",
   "percentTranslated": 100

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "當收到訊息 %1",
     "EVENT_BROADCAST": "廣播訊息 %1",
     "EVENT_BROADCASTANDWAIT": "廣播訊息 %1 並等待",
+    "EVENT_WHENTOUCHINGOBJECT": "當角色碰到 %1",
     "CONTROL_WAIT": "等待 %1 秒",
     "CONTROL_REPEAT": "重複 %1 次",
     "CONTROL_FOREVER": "重複無限次",
     "CONTROL_IF": "如果 %1 那麼",
+    "CONTROL_ELSE": "否則",
     "CONTROL_WAITUNTIL": "等待直到 %1",
     "CONTROL_REPEATUNTIL": "重複直到 %1",
     "CONTROL_STOP": "停止 %1",
     "CONTROL_STARTASCLONE": "當分身產生",
     "CONTROL_CREATECLONEOF": "建立 %1 的分身",
     "CONTROL_DELETETHISCLONE": "分身刪除",
+    "CONTROL_WHILE": "當 %1",
     "SENSING_ASKANDWAIT": "詢問 %1 並等待",
     "videoSensing.videoToggle": "視訊設為 %1",
     "videoSensing.setVideoTransparency": "視訊透明度設為 %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 在 %2 裡的項目編號",
     "DATA_LENGTHOFLIST": "清單 %1 的長度",
     "DATA_LISTCONTAINSITEM": "清單 %1 包含 %2？",
-    "CONTROL_ELSE": "否則",
     "SENSING_USERID": "用戶 ID",
     "SENSING_LOUD": "大聲？",
     "text2speech.speakAndWaitBlock": "唸出 %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "傾斜角度 %1",
     "boost.setLightHue": "LED 顏色設為 %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "晃動",
     "跳動"
   ],
+  "picoWhen": [],
   "osis": [
     "這個物件的其它程式"
   ],
@@ -239,22 +243,27 @@
     "Variables": "變數",
     "My Blocks": "函式積木"
   },
-  "math": [
-    "絕對值",
-    "無條件捨去",
-    "無條件進位",
-    "平方根",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "絕對值",
+      "無條件捨去",
+      "無條件進位",
+      "平方根",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "左轉 %1 度": "MOTION_TURNLEFT",
     "右轉 %1 度": "MOTION_TURNRIGHT",

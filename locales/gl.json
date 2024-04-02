@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "Ao recibir %1",
     "EVENT_BROADCAST": "emitir %1",
     "EVENT_BROADCASTANDWAIT": "emitir %1 e agardar",
+    "EVENT_WHENTOUCHINGOBJECT": "Cando esta figura toque %1",
     "CONTROL_WAIT": "agardar %1 segundos",
     "CONTROL_REPEAT": "repetir %1",
     "CONTROL_FOREVER": "para sempre",
     "CONTROL_IF": "se %1 entón",
+    "CONTROL_ELSE": "se non",
     "CONTROL_WAITUNTIL": "agardar até %1",
     "CONTROL_REPEATUNTIL": "repetir até %1",
     "CONTROL_STOP": "parar. %1",
     "CONTROL_STARTASCLONE": "Ao comezar como clon",
     "CONTROL_CREATECLONEOF": "crear un clon de %1",
     "CONTROL_DELETETHISCLONE": "eliminar este clon.",
+    "CONTROL_WHILE": "mentres %1",
     "SENSING_ASKANDWAIT": "preguntar %1 e agardar",
     "videoSensing.videoToggle": "vídeo %1",
     "videoSensing.setVideoTransparency": "pór a transparencia de vídeo en %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "posición de %2 que contén %1",
     "DATA_LENGTHOFLIST": "lonxitude de %1",
     "DATA_LISTCONTAINSITEM": "%1 contén %2",
-    "CONTROL_ELSE": "se non",
     "SENSING_USERID": "identificador de usuario",
     "SENSING_LOUD": "forte?",
     "text2speech.speakAndWaitBlock": "falar %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ángulo de inclinación %1",
     "boost.setLightHue": "pór a cor da luz a %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "abalado",
     "saltado"
   ],
+  "picoWhen": [],
   "osis": [
     "outros programas na figura"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variábeis",
     "My Blocks": "Os meus bloques"
   },
-  "math": [
-    "valor absoluto",
-    "chan",
-    "teito",
-    "raíz cadrada",
-    "seno",
-    "coseno",
-    "tanxente",
-    "arco seno",
-    "arco coseno",
-    "arco tanxente",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "valor absoluto",
+      "chan",
+      "teito",
+      "raíz cadrada",
+      "seno",
+      "coseno",
+      "tanxente",
+      "arco seno",
+      "arco coseno",
+      "arco tanxente",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Galego",
   "percentTranslated": 100

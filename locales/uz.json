@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 ga teginganda",
     "EVENT_BROADCAST": "%1 ni tarqatish",
     "EVENT_BROADCASTANDWAIT": "%1 ni tarqatib kutish",
+    "EVENT_WHENTOUCHINGOBJECT": "shu sprayt %1 ga teginganda",
     "CONTROL_WAIT": "%1 soniya kutish",
     "CONTROL_REPEAT": "%1 marta takrorlash",
     "CONTROL_FOREVER": "har doim",
     "CONTROL_IF": "agar %1 bo'lsa",
+    "CONTROL_ELSE": "aks holda",
     "CONTROL_WAITUNTIL": "%1 gacha kutish",
     "CONTROL_REPEATUNTIL": "%1 gacha takrorlash",
     "CONTROL_STOP": "to'xtatish %1",
     "CONTROL_STARTASCLONE": "nusxani qabul qilganda",
     "CONTROL_CREATECLONEOF": "%1 o'zidan nusxa yaratish",
     "CONTROL_DELETETHISCLONE": "bu nusxani o'chirish",
+    "CONTROL_WHILE": "%1 davomida",
     "SENSING_ASKANDWAIT": "%1 ni so'rab kutish",
     "videoSensing.videoToggle": "video %1 yoqing",
     "videoSensing.setVideoTransparency": "vidio shaffofligini %1 ga sozlash",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%2 ro'yxatda %1 mavzuning joylashuvi",
     "DATA_LENGTHOFLIST": "uzunligidan %1",
     "DATA_LISTCONTAINSITEM": "%1 %2 ni ichiga oladimi?",
-    "CONTROL_ELSE": "aks holda",
     "SENSING_USERID": "foydalanuvchi ID",
     "SENSING_LOUD": "baland ovoz?",
     "text2speech.speakAndWaitBlock": "gapirish %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "%1 burilish burchagi",
     "boost.setLightHue": "ochiq rangni %1 ga o'rnatish"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "silkingan",
     "sakragan"
   ],
+  "picoWhen": [],
   "osis": [
     "boshqa spraytlardagi skriptlar"
   ],
@@ -240,22 +244,27 @@
     "Variables": "O'zgaruvchi",
     "My Blocks": "Mening bloklarim"
   },
-  "math": [
-    "modul",
-    "pol",
-    "ship",
-    "sqrt",
-    "sinus qiymati",
-    "kosinus qiymati",
-    "tan qiymati",
-    "asinus qiymati",
-    "akosinus qiymati",
-    "atan qiymati",
-    "Ichida",
-    "logarifm",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "modul",
+      "pol",
+      "ship",
+      "sqrt",
+      "sinus qiymati",
+      "kosinus qiymati",
+      "tan qiymati",
+      "asinus qiymati",
+      "akosinus qiymati",
+      "atan qiymati",
+      "Ichida",
+      "logarifm",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Oʻzbekcha",
   "percentTranslated": 100

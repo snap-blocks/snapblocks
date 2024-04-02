@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kui saan teate %1",
     "EVENT_BROADCAST": "teata %1",
     "EVENT_BROADCASTANDWAIT": "teata %1 ja oota",
+    "EVENT_WHENTOUCHINGOBJECT": "kui sprait puudutab %1",
     "CONTROL_WAIT": "oota %1 sek",
     "CONTROL_REPEAT": "korda %1 korda",
     "CONTROL_FOREVER": "korda lõputult",
     "CONTROL_IF": "kui %1 siis",
+    "CONTROL_ELSE": "muidu",
     "CONTROL_WAITUNTIL": "oota kuni %1",
     "CONTROL_REPEATUNTIL": "korda kuni %1",
     "CONTROL_STOP": "stopp %1",
     "CONTROL_STARTASCLONE": "kui alustan kloonina",
     "CONTROL_CREATECLONEOF": "klooni %1",
     "CONTROL_DELETETHISCLONE": "eemalda see kloon",
+    "CONTROL_WHILE": "kui %1",
     "SENSING_ASKANDWAIT": "küsi %1 ja oota",
     "videoSensing.videoToggle": "lülita video %1",
     "videoSensing.setVideoTransparency": "võta video läbipaistvus %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 jrk nr loendis %2",
     "DATA_LENGTHOFLIST": "%1 pikkus",
     "DATA_LISTCONTAINSITEM": "%1 sisaldab %2?",
-    "CONTROL_ELSE": "muidu",
     "SENSING_USERID": "kasutaja ID",
     "SENSING_LOUD": "väga vali?",
     "text2speech.speakAndWaitBlock": "ütle %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "rappus",
     "hüppas"
   ],
+  "picoWhen": [],
   "osis": [
     "teised spraidi skriptid"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Muutujad",
     "My Blocks": "Minu Plokid"
   },
-  "math": [
-    "abs",
-    "floor",
-    "ceiling",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "floor",
+      "ceiling",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Eesti",
   "percentTranslated": 100

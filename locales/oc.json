@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "quand recebi %1",
     "EVENT_BROADCAST": "difusir %1",
     "EVENT_BROADCASTANDWAIT": "difusir %1 e esperar",
+    "EVENT_WHENTOUCHINGOBJECT": "quand aquela sprite toca %1",
     "CONTROL_WAIT": "esperar %1 segondas",
     "CONTROL_REPEAT": "repetir %1",
     "CONTROL_FOREVER": "per totjorn",
     "CONTROL_IF": "se %1 alara",
+    "CONTROL_ELSE": "senon",
     "CONTROL_WAITUNTIL": "esperar fins a %1",
     "CONTROL_REPEATUNTIL": "repetir fins a %1",
     "CONTROL_STOP": "estòp %1",
     "CONTROL_STARTASCLONE": "quand comenci coma un clòn",
     "CONTROL_CREATECLONEOF": "crear clòn de %1",
     "CONTROL_DELETETHISCLONE": "suprimir aquel clòn",
+    "CONTROL_WHILE": "pendent %1",
     "SENSING_ASKANDWAIT": "demandar %1 e esperar",
     "videoSensing.videoToggle": "Comutar la video sus %1",
     "videoSensing.setVideoTransparency": "reglar la transparéncia sus %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "element # de %1 dins %2",
     "DATA_LENGTHOFLIST": "longor de %1",
     "DATA_LISTCONTAINSITEM": "%1 conten %2 ?",
-    "CONTROL_ELSE": "senon",
     "SENSING_USERID": "id d'utilizator",
     "SENSING_LOUD": "fòrt ?",
     "text2speech.speakAndWaitBlock": "dire %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "Anle d'enclinason %1",
     "boost.setLightHue": "reglar la color del lum sus %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "brandit",
     "sautat"
   ],
+  "picoWhen": [],
   "osis": [
     "autres escripts dins sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variablas",
     "My Blocks": "Mos Blòcs"
   },
-  "math": [
-    "abs",
-    "arredondit.inf",
-    "arredondit.sup",
-    "rasiga",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "arredondit.inf",
+      "arredondit.sup",
+      "rasiga",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Occitan",
   "percentTranslated": 100

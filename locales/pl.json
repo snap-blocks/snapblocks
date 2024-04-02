@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "kiedy otrzymam %1",
     "EVENT_BROADCAST": "nadaj komunikat %1",
     "EVENT_BROADCASTANDWAIT": "nadaj komunikat %1 i czekaj",
+    "EVENT_WHENTOUCHINGOBJECT": "kiedy ten duszek dotknie %1",
     "CONTROL_WAIT": "czekaj %1 sekund",
     "CONTROL_REPEAT": "powtórz %1 razy",
     "CONTROL_FOREVER": "zawsze",
     "CONTROL_IF": "jeżeli %1 to",
+    "CONTROL_ELSE": "w przeciwnym razie",
     "CONTROL_WAITUNTIL": "czekaj aż %1",
     "CONTROL_REPEATUNTIL": "powtarzaj aż %1",
     "CONTROL_STOP": "zatrzymaj %1",
     "CONTROL_STARTASCLONE": "gdy zaczynam jako klon",
     "CONTROL_CREATECLONEOF": "utwórz klona z %1",
     "CONTROL_DELETETHISCLONE": "usuń tego klona",
+    "CONTROL_WHILE": "podczas gdy %1",
     "SENSING_ASKANDWAIT": "zapytaj %1 i czekaj",
     "videoSensing.videoToggle": "%1 nagranie wideo",
     "videoSensing.setVideoTransparency": "ustaw transparentność wideo na %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "pozycja %1 na liście %2",
     "DATA_LENGTHOFLIST": "długość %1",
     "DATA_LISTCONTAINSITEM": "%1 zawiera %2?",
-    "CONTROL_ELSE": "w przeciwnym razie",
     "SENSING_USERID": "ID użytkownika",
     "SENSING_LOUD": "głośno?",
     "text2speech.speakAndWaitBlock": "Powiedz %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "Kąt pochylenia %1",
     "boost.setLightHue": "Ustaw kolor światła na %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "potrząśnięty",
     "podrzucony"
   ],
+  "picoWhen": [],
   "osis": [
     "inne skrypty duszka"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Zmienne",
     "My Blocks": "Moje bloki"
   },
-  "math": [
-    "wartość bezwzględna",
-    "podłoga",
-    "sufit",
-    "pierwiastek kwadratowy",
-    "sinus",
-    "cosinus",
-    "tangens",
-    "arcus sinus",
-    "arcus cosinus",
-    "arcus tangens",
-    "logarytm naturalny",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "wartość bezwzględna",
+      "podłoga",
+      "sufit",
+      "pierwiastek kwadratowy",
+      "sinus",
+      "cosinus",
+      "tangens",
+      "arcus sinus",
+      "arcus cosinus",
+      "arcus tangens",
+      "logarytm naturalny",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "obróć w lewo o %1 stopni": "MOTION_TURNLEFT",
     "obróć w prawo o %1 stopni": "MOTION_TURNRIGHT",

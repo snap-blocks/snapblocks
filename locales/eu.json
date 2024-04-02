@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "%1 jasotzean",
     "EVENT_BROADCAST": "bidali %1 guztiei",
     "EVENT_BROADCASTANDWAIT": "bidali %1 guztiei eta itxaron",
+    "EVENT_WHENTOUCHINGOBJECT": "pertsonai honek %1 ukitzen duenean",
     "CONTROL_WAIT": "itxaron %1 segundo",
     "CONTROL_REPEAT": "errepikatu %1 aldiz",
     "CONTROL_FOREVER": "etengabe",
     "CONTROL_IF": "baldin %1 orduan",
+    "CONTROL_ELSE": "bestela",
     "CONTROL_WAITUNTIL": "itxaron %1 arte",
     "CONTROL_REPEATUNTIL": "errepikatu %1 arte",
     "CONTROL_STOP": "gelditu %1",
     "CONTROL_STARTASCLONE": "klon moduan hasten naizenean",
     "CONTROL_CREATECLONEOF": "sortu %1 ren klona",
     "CONTROL_DELETETHISCLONE": "ezabatu klon hau",
+    "CONTROL_WHILE": "%1 den bitartean",
     "SENSING_ASKANDWAIT": "galdetu %1 eta itxaron",
     "videoSensing.videoToggle": "%1 bideoa",
     "videoSensing.setVideoTransparency": "ezarri bideo gardentasuna: %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "%1 tik #. elementua %2 n",
     "DATA_LENGTHOFLIST": "%1 ren luzera",
     "DATA_LISTCONTAINSITEM": "%1 k bere baitan al du %2?",
-    "CONTROL_ELSE": "bestela",
     "SENSING_USERID": "erabiltzaile-id",
     "SENSING_LOUD": "ozen?",
     "text2speech.speakAndWaitBlock": "esan %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "tilt angle %1",
     "boost.setLightHue": "set light color to %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "astindua",
     "salto egina"
   ],
+  "picoWhen": [],
   "osis": [
     "pertsonaiaren beste script batzuk"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Aldagaiak",
     "My Blocks": "Nire blokeak"
   },
-  "math": [
-    "balio absolutu",
-    "zoru-funtzioa",
-    "sabai-funtzioa",
-    "erro karratua",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "balio absolutu",
+      "zoru-funtzioa",
+      "sabai-funtzioa",
+      "erro karratua",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Euskara",
   "percentTranslated": 100

@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "wakati ninapopokea %1",
     "EVENT_BROADCAST": "tangaza %1",
     "EVENT_BROADCASTANDWAIT": "tangaza %1 na usubiri",
+    "EVENT_WHENTOUCHINGOBJECT": "wakati kihusika hiki kinapoguza %1",
     "CONTROL_WAIT": "subiri sekunde %1",
     "CONTROL_REPEAT": "rudia %1",
     "CONTROL_FOREVER": "milele",
     "CONTROL_IF": "ikiwa %1 basi",
+    "CONTROL_ELSE": "isivyo",
     "CONTROL_WAITUNTIL": "subiri hadi %1",
     "CONTROL_REPEATUNTIL": "rudia hadi %1",
     "CONTROL_STOP": "komesha %1",
     "CONTROL_STARTASCLONE": "nikianza kama kinakili",
     "CONTROL_CREATECLONEOF": "unda kinakili cha %1",
     "CONTROL_DELETETHISCLONE": "futa kinakili hiki",
+    "CONTROL_WHILE": "wakati %1",
     "SENSING_ASKANDWAIT": "uliza %1 na subiri",
     "videoSensing.videoToggle": "video %1",
     "videoSensing.setVideoTransparency": "weka upenyeko wa nuru kuwa %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "kipengee # kati ya %1 katika %2",
     "DATA_LENGTHOFLIST": "urefu wa %1",
     "DATA_LISTCONTAINSITEM": "%1 ina %2?",
-    "CONTROL_ELSE": "isivyo",
     "SENSING_USERID": "kitambulisho cha mtumiaji",
     "SENSING_LOUD": "kuna sauti kubwa?",
     "text2speech.speakAndWaitBlock": "sema %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "pembe ya mwinamo %1",
     "boost.setLightHue": "weka rangi ya mwangaza kuwa %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "inapotikiswa",
     "inaporushwa"
   ],
+  "picoWhen": [],
   "osis": [
     "hati nyingine katika kihusika"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Vibadilika",
     "My Blocks": "Bloku Zangu"
   },
-  "math": [
-    "abs",
-    "kadiria chini namba kamili",
-    "kadiria juu namba kamili",
-    "kipeo cha pili",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "kadiria chini namba kamili",
+      "kadiria juu namba kamili",
+      "kipeo cha pili",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Kiswahili",
   "percentTranslated": 100

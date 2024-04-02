@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "nuair a fhaighim %1",
     "EVENT_BROADCAST": "craol %1",
     "EVENT_BROADCASTANDWAIT": "craol %1 agus fan",
+    "EVENT_WHENTOUCHINGOBJECT": "nuair a theagmhaíonn an sprid seo le %1",
     "CONTROL_WAIT": "fan %1 soicind",
     "CONTROL_REPEAT": "déan %1 uair",
     "CONTROL_FOREVER": "go deo",
     "CONTROL_IF": "más %1 ansin",
+    "CONTROL_ELSE": "seachas sin",
     "CONTROL_WAITUNTIL": "fan go %1",
     "CONTROL_REPEATUNTIL": "athdhéan go %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "nuair a thosaím mar chóip",
     "CONTROL_CREATECLONEOF": "cruthaigh cóip de %1",
     "CONTROL_DELETETHISCLONE": "scrios an chóip seo",
+    "CONTROL_WHILE": "chomh fada is %1",
     "SENSING_ASKANDWAIT": "fiafraigh %1 agus fan",
     "videoSensing.videoToggle": "cas an físeán %1",
     "videoSensing.setVideoTransparency": "socraigh an trédhearcacht físe: %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "mír # as %1 in %2",
     "DATA_LENGTHOFLIST": "fad %1",
     "DATA_LISTCONTAINSITEM": "%1 agus %2 ann?",
-    "CONTROL_ELSE": "seachas sin",
     "SENSING_USERID": "aitheantas úsáideora",
     "SENSING_LOUD": "os ard?",
     "text2speech.speakAndWaitBlock": "abair %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "uillinn chlaonta %1",
     "boost.setLightHue": "socraigh dath an tsolais: %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "croite",
     "léimthe"
   ],
+  "picoWhen": [],
   "osis": [
     "scripteanna eile sa sprid"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Athróga",
     "My Blocks": "Mo Chuid Blocanna"
   },
-  "math": [
-    "abs",
-    "urlár",
-    "síleáil",
-    "sqrt",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "urlár",
+      "síleáil",
+      "sqrt",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Gaeilge",
   "percentTranslated": 100

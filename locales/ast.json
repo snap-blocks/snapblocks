@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "cuando reciba %1",
     "EVENT_BROADCAST": "tresmitir %1",
     "EVENT_BROADCASTANDWAIT": "tresmitir %1 y esperar",
+    "EVENT_WHENTOUCHINGOBJECT": "cuando esti personaxe toque %1",
     "CONTROL_WAIT": "esperar %1 segundos",
     "CONTROL_REPEAT": "repetir %1",
     "CONTROL_FOREVER": "pa siempres",
     "CONTROL_IF": "si %1 entós",
+    "CONTROL_ELSE": "sinón",
     "CONTROL_WAITUNTIL": "esperar hasta %1",
     "CONTROL_REPEATUNTIL": "repetir hasta %1",
     "CONTROL_STOP": "parar %1",
     "CONTROL_STARTASCLONE": "cuando principie como clon",
     "CONTROL_CREATECLONEOF": "crear clon de %1",
     "CONTROL_DELETETHISCLONE": "desaniciar esti clon",
+    "CONTROL_WHILE": "mentanto %1",
     "SENSING_ASKANDWAIT": "Entrugar %1 y esperar",
     "videoSensing.videoToggle": "videu %1",
     "videoSensing.setVideoTransparency": "afitar tresparencia del videu como %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # de %1 en %2",
     "DATA_LENGTHOFLIST": "llonxitú de %1",
     "DATA_LISTCONTAINSITEM": "%1 contién %2?",
-    "CONTROL_ELSE": "sinón",
     "SENSING_USERID": "id d'usuariu",
     "SENSING_LOUD": "¿ruidosu?",
     "text2speech.speakAndWaitBlock": "falar %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "ángulu d'enclín %1",
     "boost.setLightHue": "afitar color de lluz pa %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "batulláu",
     "saltó"
   ],
+  "picoWhen": [],
   "osis": [
     "otros scripts nel personaxe"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Variables",
     "My Blocks": "Los Mios Bloques"
   },
-  "math": [
-    "abs",
-    "suelu",
-    "techu",
-    "raíz",
-    "sen",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "suelu",
+      "techu",
+      "raíz",
+      "sen",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Asturianu",
   "percentTranslated": 100

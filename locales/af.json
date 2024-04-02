@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "wanneer ek %1 ontvang",
     "EVENT_BROADCAST": "saai %1 uit",
     "EVENT_BROADCASTANDWAIT": "saai %1 uit en wag",
+    "EVENT_WHENTOUCHINGOBJECT": "wanneer hierdie sprite %1 raak",
     "CONTROL_WAIT": "wag %1 sekondes",
     "CONTROL_REPEAT": "herhaal %1 keer",
     "CONTROL_FOREVER": "vir ewig",
     "CONTROL_IF": "indien %1 dan",
+    "CONTROL_ELSE": "anders",
     "CONTROL_WAITUNTIL": "wag totdat %1",
     "CONTROL_REPEATUNTIL": "herhaal totdat %1",
     "CONTROL_STOP": "stop %1",
     "CONTROL_STARTASCLONE": "wanneer ek as 'n kloon begin",
     "CONTROL_CREATECLONEOF": "skep kloon van %1",
     "CONTROL_DELETETHISCLONE": "skrap hierdie kloon",
+    "CONTROL_WHILE": "terwyl %1",
     "SENSING_ASKANDWAIT": "vra %1 en wag",
     "videoSensing.videoToggle": "skakel video %1",
     "videoSensing.setVideoTransparency": "stel video deursigtigheid op %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "item # van %1 in %2",
     "DATA_LENGTHOFLIST": "lengte van %1",
     "DATA_LISTCONTAINSITEM": "%1 bevat %2?",
-    "CONTROL_ELSE": "anders",
     "SENSING_USERID": "gebruikers id",
     "SENSING_LOUD": "hard?",
     "text2speech.speakAndWaitBlock": "praat %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "kantel hoek %1",
     "boost.setLightHue": "stel ligkleur na %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "geskud",
     "gespring"
   ],
+  "picoWhen": [],
   "osis": [
     "ander skripte in sprite"
   ],
@@ -239,22 +243,27 @@
     "Variables": "Veranderlikes",
     "My Blocks": "My Blokke"
   },
-  "math": [
-    "abs",
-    "afrond",
-    "oprond",
-    "vierkantswortel",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "e ^",
-    "10 ^"
-  ],
+  "of": {
+    "math": [
+      "abs",
+      "afrond",
+      "oprond",
+      "vierkantswortel",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "e ^",
+      "10 ^"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {},
   "name": "Afrikaans",
   "percentTranslated": 100

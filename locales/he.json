@@ -68,16 +68,19 @@
     "EVENT_WHENBROADCASTRECEIVED": "כאשר מתקבל מסר %1",
     "EVENT_BROADCAST": "שדר מסר %1",
     "EVENT_BROADCASTANDWAIT": "שדר מסר %1 וחכה",
+    "EVENT_WHENTOUCHINGOBJECT": "כאשר דמות זו נוגעת ב %1",
     "CONTROL_WAIT": "חכה %1 שניות",
     "CONTROL_REPEAT": "חזור  %1 פעמים",
     "CONTROL_FOREVER": "לעולמים",
     "CONTROL_IF": "אם %1 אז",
+    "CONTROL_ELSE": "אחרת",
     "CONTROL_WAITUNTIL": "חכה עד ש %1",
     "CONTROL_REPEATUNTIL": "חזור עד ש %1",
     "CONTROL_STOP": "עצור %1",
     "CONTROL_STARTASCLONE": "כאשר מופעל ככפיל",
     "CONTROL_CREATECLONEOF": "יצירת כפיל של %1",
     "CONTROL_DELETETHISCLONE": "מחק כפיל זה",
+    "CONTROL_WHILE": "כל עוד %1",
     "SENSING_ASKANDWAIT": "שאל %1 והמתן",
     "videoSensing.videoToggle": "%1 את המצלמה",
     "videoSensing.setVideoTransparency": "קבע שקיפות מצלמה ל %1",
@@ -145,7 +148,6 @@
     "DATA_ITEMNUMOFLIST": "מספר פריט של %1 ב- %2",
     "DATA_LENGTHOFLIST": "האורך של %1",
     "DATA_LISTCONTAINSITEM": "%1 מכיל %2?",
-    "CONTROL_ELSE": "אחרת",
     "SENSING_USERID": "זהות המשתמש",
     "SENSING_LOUD": "עוצמת קול?",
     "text2speech.speakAndWaitBlock": "הקרא %1",
@@ -210,6 +212,7 @@
     "boost.getTiltAngle": "זווית הטיה %1",
     "boost.setLightHue": "קבע צבע אור ל %1"
   },
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
@@ -221,6 +224,7 @@
     "רעד",
     "קפץ"
   ],
+  "picoWhen": [],
   "osis": [
     "תסריטים אחרים בדמות"
   ],
@@ -239,22 +243,27 @@
     "Variables": "משתנים",
     "My Blocks": "הלבנים שלי"
   },
-  "math": [
-    "ערך מוחלט",
-    "עיגול למטה",
-    "עיגול למעלה",
-    "שורש ריבועי",
-    "sin",
-    "cos",
-    "tan",
-    "asin",
-    "acos",
-    "atan",
-    "ln",
-    "log",
-    "‏e בחזקה",
-    "‏10 בחזקה"
-  ],
+  "of": {
+    "math": [
+      "ערך מוחלט",
+      "עיגול למטה",
+      "עיגול למעלה",
+      "שורש ריבועי",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "ln",
+      "log",
+      "‏e בחזקה",
+      "‏10 בחזקה"
+    ],
+    "list": [],
+    "text": []
+  },
+  "setFlag": [],
   "aliases": {
     "הסתובב שמאל %1 מעלות": "MOTION_TURNLEFT",
     "הסתובב ימינה %1 מעלות": "MOTION_TURNRIGHT",
