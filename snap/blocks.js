@@ -1,4 +1,6 @@
-import { hexColorPat } from "../syntax/blocks.js"
+import {
+  hexColorPat
+} from "../syntax/blocks.js"
 
 import {
   Label,
@@ -83,11 +85,11 @@ export class LabelView {
     if (Object.hasOwnProperty.call(cache, value)) {
       this.metrics = cache[value]
     } else {
-      const font = /comment-label/.test(this.cls)
-        ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
-        : /literal/.test(this.cls)
-          ? `normal 9px Arial, DejaVu Sans, sans-serif`
-          : `bold 10px ${defaultFontFamily}`
+      const font = /comment-label/.test(this.cls) ?
+        "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif" :
+        /literal/.test(this.cls) ?
+        `normal 9px Arial, DejaVu Sans, sans-serif` :
+        `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
@@ -181,30 +183,26 @@ class IconView {
       this.scale = 1
     }
 
-    this.scale =
-      !isNaN(icon.scale) && icon.scale !== null
-        ? icon.scale
-        : isNaN(this.scale) || this.scale == null
-          ? 1
-          : this.scale
-    this.r =
-      !isNaN(icon.r) && icon.r !== null
-        ? icon.r
-        : isNaN(this.r) || this.r == null
-          ? 255
-          : this.r
-    this.g =
-      !isNaN(icon.g) && icon.g !== null
-        ? icon.g
-        : isNaN(this.g) || this.g == null
-          ? 255
-          : this.g
-    this.b =
-      !isNaN(icon.b) && icon.b !== null
-        ? icon.b
-        : isNaN(this.b) || this.b == null
-          ? 255
-          : this.b
+    this.scale = !isNaN(icon.scale) && icon.scale !== null ?
+      icon.scale :
+      isNaN(this.scale) || this.scale == null ?
+      1 :
+      this.scale
+    this.r = !isNaN(icon.r) && icon.r !== null ?
+      icon.r :
+      isNaN(this.r) || this.r == null ?
+      255 :
+      this.r
+    this.g = !isNaN(icon.g) && icon.g !== null ?
+      icon.g :
+      isNaN(this.g) || this.g == null ?
+      255 :
+      this.g
+    this.b = !isNaN(icon.b) && icon.b !== null ?
+      icon.b :
+      isNaN(this.b) || this.b == null ?
+      255 :
+      this.b
 
     if (this.scale <= 0) {
       this.scale = 1
@@ -499,35 +497,57 @@ class InputView {
   }
 
   draw(options, parent) {
-    let w
+    let w,
+      h
     let label
     if (this.hasLabel) {
       label = this.label.draw({
         ...options,
         isFlat: true,
       })
-      w = Math.max(
-        this.shape === "string" ? 8 : this.shape === "dropdown" ? 21 : 11,
-        this.label.width +
-          (this.shape === "string"
-            ? 1
-            : this.shape === "number-dropdown"
-              ? 16
-              : 13),
-      )
+
+      h = this.label.height + 0
+
+      console.log('shape', this.shape)
+      console.log('label width', this.hasArrow)
+
+      if (this.shape === "number" ||
+        this.shape === "number-dropdown") {
+        w = this.label.width +
+          Math.floor((this.hasArrow * 12) * 0.5) +
+          h
+      } else {
+        w = Math.max(
+          this.label.width +
+          (this.hasArrow * 12),
+          (this.label.lines.length <= 1) ? // single vs. multi-line contents
+          (this.label.height - 4) + (this.hasArrow * 12) :
+          (10 * 1.2) / 1.3 +
+          (this.hasArrow * 12),
+          0,
+        );
+
+        console.log('width', w)
+      }
+
+      console.log('width', w)
     } else {
-      w = this.isInset
-        ? this.isCommand
-          ? 26
-          : 24
-        : this.isBoolean
-          ? 20
-          : this.isColor
-            ? 14
-            : null
+
+      h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
+      w = this.isInset ?
+        this.isCommand ?
+        26 :
+        24 :
+        this.isBoolean ?
+        20 :
+        this.isColor ?
+        14 :
+        null
     }
 
-    let h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
+    if (this.isBoolean) {
+      h -= 1
+    }
 
     this.width = w
     this.height = h
@@ -554,15 +574,14 @@ class InputView {
       }),
     ])
     if (this.hasLabel) {
-      const x = this.isRound ? 6 : 2
-      result.appendChild(SVG.move(x, 0, label))
+      let x = this.isRound ? Math.floor(h / 2) + 1 : 2
+      result.appendChild(SVG.move(x, -0.5, label))
     }
     if (this.hasArrow) {
-      const y = 4
       result.appendChild(
         SVG.move(
-          w - 12,
-          y,
+          w - 12 - 1,
+          4,
           SVG.polygon({
             points: [1, 1, 11, 1, 6, 6],
             fill: "#000",
@@ -772,8 +791,7 @@ class BlockView {
           w,
           h,
           child,
-          shape,
-          {
+          shape, {
             class: `snap-block snap-${this.info.category}`,
           },
           !child.isBlock,
@@ -828,21 +846,21 @@ class BlockView {
 
   minDistance(child) {
     if (this.isBoolean) {
-      return child.isReporter
-        ? (4 + child.height / 4) | 0
-        : child.isLabel
-          ? (5 + child.height / 2) | 0
-          : child.isBoolean || child.shape === "boolean"
-            ? 5
-            : (2 + child.height / 2) | 0
+      return child.isReporter ?
+        (4 + child.height / 4) | 0 :
+        child.isLabel ?
+        (5 + child.height / 2) | 0 :
+        child.isBoolean || child.shape === "boolean" ?
+        5 :
+        (2 + child.height / 2) | 0
     }
     if (this.isReporter) {
       return (child.isInput && child.isRound) ||
-        ((child.isReporter || child.isBoolean) && !child.hasScript)
-        ? 3
-        : child.isLabel
-          ? (2 + child.height / 2) | 0
-          : (4 + child.height / 2) | 20
+        ((child.isReporter || child.isBoolean) && !child.hasScript) ?
+        3 :
+        child.isLabel ?
+        (2 + child.height / 2) | 0 :
+        (4 + child.height / 2) | 20
     }
     return 0
   }
@@ -1015,18 +1033,18 @@ class BlockView {
 
     innerWidth = Math.max(
       innerWidth + px * 2,
-      this.isHat
-        ? 110
-        : this.hasScript
-          ? 39
-          : this.isCommand || this.isOutline || this.isRing
-            ? 39
-            : 20,
+      this.isHat ?
+      110 :
+      this.hasScript ?
+      39 :
+      this.isCommand || this.isOutline || this.isRing ?
+      39 :
+      20,
     )
     this.height = y
-    this.width = scriptWidth
-      ? Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth)
-      : innerWidth
+    this.width = scriptWidth ?
+      Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth) :
+      innerWidth
     if (isDefine) {
       const p = Math.min(26, (3.5 + 0.13 * innerWidth) | 0) - 18
       this.height += p
@@ -1050,9 +1068,9 @@ class BlockView {
           objects.push(
             SVG.move(
               innerWidth -
-                child.width -
-                3 -
-                (this.info.shape === "boolean") * 6,
+              child.width -
+              3 -
+              (this.info.shape === "boolean") * 6,
               this.height - child.height - 3,
               child.el,
             ),
@@ -1216,7 +1234,7 @@ class ScriptView {
       if (!this.isZebra && this.parentCategory) {
         if (
           this.parentCategory.toLowerCase() ===
-            block.info.category.toLowerCase() ||
+          block.info.category.toLowerCase() ||
           this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
         ) {
           block.isZebra = true
@@ -1273,11 +1291,11 @@ class DocumentView {
     this.options = {
       id: this.id,
       isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
-      wrapSize: options.wrap
-        ? options.wrapSize != undefined && options.wrapSize > 0
-          ? options.wrapSize
-          : 460
-        : -1,
+      wrapSize: options.wrap ?
+        options.wrapSize != undefined && options.wrapSize > 0 ?
+        options.wrapSize :
+        460 :
+        -1,
       zebraColoring: options.zebraColoring,
       showSpaces: options.showSpaces,
     }
@@ -1517,4 +1535,4 @@ const viewFor = node => {
   }
 }
 
-export const newView = (node, options) => new (viewFor(node))(node, options)
+export const newView = (node, options) => new(viewFor(node))(node, options)

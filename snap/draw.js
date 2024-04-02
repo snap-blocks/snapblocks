@@ -635,6 +635,31 @@ export default class SVG {
     })
   }
 
+  static getRoundSlotTop(w, h) {
+    var edge = 1,
+        shift = edge * 0.5,
+        r = Math.max((h - (edge * 2)) / 2, 0),
+        start,
+        end,
+        path = ""
+    
+    start = r + edge;
+    end = w - r - edge;
+    path += SVG.canvasArc(
+      r,
+      r,
+      r - shift,
+      SVG.radians(180),
+      SVG.radians(270),
+      false,
+      "M",
+    )
+    if (end > start) {
+      path += ` L ${start} ${shift} `
+      path += `L ${end} ${shift} `
+    }
+  }
+
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
