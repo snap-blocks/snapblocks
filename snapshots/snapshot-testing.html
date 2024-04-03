@@ -22,10 +22,8 @@
         })
       }
 
-      import("../browser.js")
-        .then(() => fetch("../locales/de.json"))
-        .then(res => res.json())
-        .then(de => snapblocks.loadLanguages({ de }))
+      import("../build/snapblocks.min.js")
+        .then(() => import("../build/translations-all.js"))
         .then(() => {
           window.snapblocksLoaded = true
         })

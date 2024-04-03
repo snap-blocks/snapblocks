@@ -22,6 +22,9 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Check whether the code builds
+        run: npm run build
+
       - name: Build locales
         run: npm run locales
 
@@ -30,6 +33,3 @@ jobs:
 
       - name: Check whether snapshot builds
         run: npm run snapshots
-
-      - name: Check whether the code builds
-        run: npm run build
