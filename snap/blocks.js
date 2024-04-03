@@ -153,7 +153,7 @@ export class LabelView {
       computedLines.push(computedLine)
     }
 
-    width = (width) | 0
+    width = width | 0
     return {
       width: width,
       spaceWidth: spaceWidth,
@@ -696,7 +696,13 @@ class BlockView {
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y, this.info.shape === "boolean" ? 15 : 9))
+          p.push(
+            SVG.getArm(
+              w - (this.info.shape === "boolean") * 8,
+              y,
+              this.info.shape === "boolean" ? 15 : 9,
+            ),
+          )
 
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 2
@@ -910,7 +916,7 @@ class BlockView {
       if (!this.isUpvar) {
         y += line.padding.top + line.padding.bottom
         line.width += pxr
-        console.log('pxr', pxr)
+        console.log("pxr", pxr)
       }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
@@ -1024,7 +1030,9 @@ class BlockView {
     }
     y += pb
     if (this.hasScript) {
-      let hasVariadic = line.children.find((child) => child.isIcon && ["addInput", "delInput"].includes(child.name))
+      let hasVariadic = line.children.find(
+        child => child.isIcon && ["addInput", "delInput"].includes(child.name),
+      )
       if (!hasVariadic) {
         y += pb
       }

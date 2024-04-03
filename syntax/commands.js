@@ -2446,14 +2446,8 @@ export default [
     snap: "reportScript",
     spec: "the script. {input} %2",
     specDefs: {
-      "input": [
-        "@addInput",
-        "Input names: {names} @delInput @addInput",
-      ],
-      "names": [
-        "%1",
-        "%1 {names}"
-      ]
+      input: ["@addInput", "Input names: {names} @delInput @addInput"],
+      names: ["%1", "%1 {names}"],
     },
     inputs: ["%s", "%cs"],
     shape: "ring",
@@ -2463,14 +2457,8 @@ export default [
     snap: "reify",
     spec: "the %1 block. {input}",
     specDefs: {
-      "input": [
-        "@addInput",
-        "Input names: {names} @delInput @addInput",
-      ],
-      "names": [
-        "%1",
-        "%1 {names}"
-      ]
+      input: ["@addInput", "Input names: {names} @delInput @addInput"],
+      names: ["%1", "%1 {names}"],
     },
     inputs: ["%r", "%s"],
     shape: "ring",
@@ -2624,10 +2612,7 @@ export default [
     selector: "copyOfList:",
     spec: "copy of {list}",
     specDefs: {
-      "list": [
-        "@list",
-        "%1",
-      ]
+      list: ["@list", "%1"],
     },
     inputs: ["%s"],
     shape: "reporter",
