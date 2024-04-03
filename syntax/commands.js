@@ -1837,6 +1837,13 @@ export default [
     category: "sensing",
   },
   {
+    selector: "get:",
+    spec: "attribute %1",
+    inputs: ["%m"],
+    shape: "reporter",
+    category: "sensing",
+  },
+  {
     id: "snap:reportObject",
     snap: "reportObject",
     spec: "object %1",
@@ -2236,6 +2243,20 @@ export default [
     category: "operators",
   },
   {
+    selector: "getTrue",
+    spec: "true",
+    inputs: [],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
+    selector: "getFalse",
+    spec: "false",
+    inputs: [],
+    shape: "boolean",
+    category: "operators",
+  },
+  {
     id: "OPERATORS_JOIN",
     selector: "concatenate:with:",
     snap: "reportJoinWords",
@@ -2422,6 +2443,47 @@ export default [
     category: "operators",
   },
   {
+    snap: "reportScript",
+    spec: "the script. {input} %2",
+    specDefs: {
+      "input": [
+        "@addInput",
+        "Input names: {names} @delInput @addInput",
+      ],
+      "names": [
+        "%1",
+        "%1 {names}"
+      ]
+    },
+    inputs: ["%s", "%cs"],
+    shape: "ring",
+    category: "operators",
+  },
+  {
+    snap: "reify",
+    spec: "the %1 block. {input}",
+    specDefs: {
+      "input": [
+        "@addInput",
+        "Input names: {names} @delInput @addInput",
+      ],
+      "names": [
+        "%1",
+        "%1 {names}"
+      ]
+    },
+    inputs: ["%r", "%s"],
+    shape: "ring",
+    category: "operators",
+  },
+  {
+    selector: "spawn",
+    spec: "clone",
+    inputs: [],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
     id: "DATA_ITEMOFLIST",
     selector: "getLine:ofList:",
     snap: "reportListItem",
@@ -2549,6 +2611,26 @@ export default [
     specDefs: { list: ["@list", "%1"], input: ["%1 ?", "%1"] },
     inputs: ["%m.list", "%s"],
     shape: "boolean",
+    category: "list",
+  },
+  {
+    selector: "contentsOfList:",
+    spec: "%1 as text",
+    inputs: ["%m.list"],
+    shape: "reporter",
+    category: "list",
+  },
+  {
+    selector: "copyOfList:",
+    spec: "copy of {list}",
+    specDefs: {
+      "list": [
+        "@list",
+        "%1",
+      ]
+    },
+    inputs: ["%s"],
+    shape: "reporter",
     category: "list",
   },
   {
@@ -2753,6 +2835,27 @@ export default [
     spec: "stop all @stopSign",
     inputs: [],
     shape: "cap",
+    category: "control",
+  },
+  {
+    selector: "doStopBlock",
+    spec: "stop block",
+    inputs: [],
+    shape: "cap",
+    category: "control",
+  },
+  {
+    selector: "doPauseThreadReporter",
+    spec: "debug %1",
+    inputs: ["%s"],
+    shape: "reporter",
+    category: "control",
+  },
+  {
+    selector: "doPauseThread",
+    spec: "debug",
+    inputs: [],
+    shape: "stack",
     category: "control",
   },
   {
