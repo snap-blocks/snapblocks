@@ -153,7 +153,7 @@ export class LabelView {
       computedLines.push(computedLine)
     }
 
-    width = (width + 3) | 0
+    width = (width) | 0
     return {
       width: width,
       spaceWidth: spaceWidth,
@@ -295,7 +295,8 @@ class IconView {
       },
       verticalEllipsis: {
         width: 2,
-        height: 12,
+        height: 11,
+        dy: 1,
         scale: 0.833333333,
         r: 0,
         g: 0,
@@ -510,10 +511,10 @@ class InputView {
       h = this.label.height + 0
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
-        w = this.label.width + Math.floor(this.hasArrow * 12 * 0.5) + h
+        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h
       } else {
         w = Math.max(
-          this.label.width + this.hasArrow * 12,
+          this.label.width + this.hasArrow * 12 + 3,
           this.label.lines.length <= 1 // single vs. multi-line contents
             ? this.label.height - 4 + this.hasArrow * 12
             : (10 * 1.2) / 1.3 + this.hasArrow * 12,
@@ -537,7 +538,8 @@ class InputView {
       h -= 1
     }
 
-    this.width = w
+    // I'm adding a bit of padding around the input
+    this.width = w + 1
     this.height = h + 1
 
     let el = InputView.shapes[this.shape](w, h)
@@ -568,16 +570,16 @@ class InputView {
     if (this.hasArrow) {
       result.appendChild(
         SVG.move(
-          w - 12 - 1,
-          4,
+          w - 11,
+          3.5,
           SVG.polygon({
-            points: [1, 1, 11, 1, 6, 6],
+            points: [1, 1, 9, 1, 5, 5],
             fill: "#000",
           }),
         ),
       )
     }
-    SVG.move(0, 0.5, result)
+    SVG.move(0.5, 0.5, result)
     return result
   }
 }
@@ -687,14 +689,14 @@ class BlockView {
         if (lines[i] instanceof ScriptView) {
           p.push(
             SVG.getRightAndBottom(
-              w - (this.info.shape === "boolean") * 9,
+              w - (this.info.shape === "boolean") * 8,
               y,
               true,
-              8,
+              this.info.shape === "boolean" ? 15 : 9,
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 9, y, 8))
+          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 8, y, this.info.shape === "boolean" ? 15 : 9))
 
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 2
@@ -857,17 +859,17 @@ class BlockView {
 
   static get padding() {
     return {
-      hat: [12, 3, 5],
-      cat: [12, 3, 5],
-      "define-hat": [13, 3, 7],
-      "snap-define": [12, 3, 7],
-      reporter: [2, 2, 2],
-      boolean: [3, 5, 3],
-      cap: [4, 3, 4],
-      "c-block": [4, 3, 4],
-      "if-block": [4, 3, 4],
-      ring: [2, 3, 2],
-      null: [4, 3, 3],
+      hat: [12, 3, 3, 5],
+      cat: [12, 3, 3, 5],
+      "define-hat": [13, 3, 3, 7],
+      "snap-define": [12, 3, 3, 7],
+      reporter: [2, 3, 3, 2],
+      boolean: [3, 5, 7, 3],
+      cap: [4, 3, 3, 4],
+      "c-block": [4, 3, 3, 4],
+      "if-block": [4, 3, 3, 4],
+      ring: [2, 3, 3, 2],
+      null: [4, 3, 3, 3],
     }
   }
 
@@ -877,8 +879,9 @@ class BlockView {
 
     const padding = BlockView.padding[this.info.shape] || BlockView.padding.null
     let pt = padding[0]
-    const px = padding[1]
-    const pb = padding[2]
+    const pxl = padding[1]
+    const pxr = padding[2]
+    const pb = padding[3]
 
     let y = 0
     class Line {
@@ -906,7 +909,8 @@ class BlockView {
       // line.y = 0
       if (!this.isUpvar) {
         y += line.padding.top + line.padding.bottom
-        line.width += px
+        line.width += pxr
+        console.log('pxr', pxr)
       }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
@@ -994,14 +998,14 @@ class BlockView {
           line = new Line(y)
         }
 
-        if (line.width < px && !this.isUpvar) {
-          line.width = px
+        if (line.width < pxl && !this.isUpvar) {
+          line.width = pxl
         }
         if (line.children.length !== 0) {
           if (child.isIcon) {
             line.width += child.padx
           } else {
-            line.width += 2
+            line.width += 4
           }
         }
 
@@ -1019,10 +1023,16 @@ class BlockView {
       }
     }
     y += pb
+    if (this.hasScript) {
+      let hasVariadic = line.children.find((child) => child.isIcon && ["addInput", "delInput"].includes(child.name))
+      if (!hasVariadic) {
+        y += pb
+      }
+    }
     pushLine()
 
     innerWidth = Math.max(
-      innerWidth + px * 2,
+      innerWidth + pxl * 2,
       this.isHat
         ? 110
         : this.hasScript
@@ -1081,11 +1091,11 @@ class BlockView {
             continue
           }
         }
-        objects.push(SVG.move(px + child.x, (line.y + y) | 0, child.el))
+        objects.push(SVG.move(pxl + child.x, (line.y + y) | 0, child.el))
 
         if (child.diff === "+") {
           const ellipse = SVG.insEllipse(child.width, child.height)
-          objects.push(SVG.move(px + child.x, (line.y + y) | 0, ellipse))
+          objects.push(SVG.move(pxl + child.x, (line.y + y) | 0, ellipse))
         }
       }
     }
