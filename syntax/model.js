@@ -106,6 +106,7 @@ export class Icon {
       location: true,
       gears: true,
       gearPartial: true,
+      gearBig: true,
       globe: true,
       globeBig: true,
 

@@ -286,6 +286,7 @@ export class IconView {
       location: { width: 7.2, height: 12 },
       gear: { width: 12, height: 12 },
       gearPartial: { width: 12, height: 12 },
+      gearBig: { width: 12, height: 12 },
       globe: { width: 12, height: 12, fillAttribute: "stroke" },
       globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
 
