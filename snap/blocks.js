@@ -1088,7 +1088,7 @@ class ScriptView {
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
-      const x = inside ? this.shape === "boolean" ? 7 : 0 : 2
+      const x = inside ? (this.shape === "boolean" ? 7 : 0) : 2
       if (!this.isZebra && this.parentCategory) {
         if (
           this.parentCategory.toLowerCase() ===
