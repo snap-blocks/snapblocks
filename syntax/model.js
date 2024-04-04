@@ -105,6 +105,7 @@ export class Icon {
       eraser: true,
       location: true,
       gears: true,
+      gearPartial: true,
 
       arrowUp: true,
       arrowUpOutline: true,

@@ -283,6 +283,7 @@ class IconView {
       eraser: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
       location: { width: 7.2, height: 12 },
       gears: { width: 12, height: 12, },
+      gearPartial: { width: 12, height: 12, },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
