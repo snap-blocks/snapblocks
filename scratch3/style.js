@@ -838,7 +838,7 @@ export default class Style {
         }),
         {
           id: "sb3-gears",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("path", {
@@ -846,7 +846,7 @@ export default class Style {
         }),
         {
           id: "sb3-gearPartial",
-        }
+        },
       ),
 
       SVG.setProps(
@@ -1073,7 +1073,7 @@ export default class Style {
         }),
         {
           id: "sb3-gears-high-contrast",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("path", {
@@ -1081,7 +1081,7 @@ export default class Style {
         }),
         {
           id: "sb3-gearPartial-high-contrast",
-        }
+        },
       ),
 
       SVG.setProps(

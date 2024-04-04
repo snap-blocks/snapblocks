@@ -367,7 +367,7 @@ export default class Style {
         }),
         {
           id: "snap-gears",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("path", {
@@ -375,7 +375,7 @@ export default class Style {
         }),
         {
           id: "snap-gearPartial",
-        }
+        },
       ),
 
       SVG.setProps(

@@ -301,7 +301,7 @@ export default class Style {
         }),
         {
           id: "sb-gears",
-        }
+        },
       ),
       SVG.setProps(
         SVG.el("path", {
@@ -309,7 +309,7 @@ export default class Style {
         }),
         {
           id: "sb-gearPartial",
-        }
+        },
       ),
 
       SVG.setProps(
