@@ -28,6 +28,8 @@ const highContrastIcons = new Set([
   "location",
   "gears",
   "gearPartial",
+  "globe",
+  "globeBig",
 
   "arrowUp",
   "arrowUpOutline",
@@ -848,6 +850,26 @@ export default class Style {
           id: "sb3-gearPartial",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 11.5 6 A 5.5 5.5 0 1 1 11.5 5.9945 M 0.5 6 L 11.5 6 M 5.6255 0.51 A 9 9 0 0 0 5.6255 11.4842 M 6.3745 0.51 A 9 9 0 0 1 6.3745 11.4842",
+          fill: "none",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-globe",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 11.5 6 A 5.5 5.5 0 1 1 11.5 5.9945 M 1.05 3.6 L 10.95 3.6 M 1.05 8.4 L 10.95 8.4 M 0.5 6 L 11.5 6 M 5.6255 0.51 A 9 9 0 0 0 5.6255 11.4842 M 6.3745 0.51 A 9 9 0 0 1 6.3745 11.4842",
+          fill: "none",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-globeBig",
+        },
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -1081,6 +1103,26 @@ export default class Style {
         }),
         {
           id: "sb3-gearPartial-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 11.5 6 A 5.5 5.5 0 1 1 11.5 5.9945 M 0.5 6 L 11.5 6 M 5.6255 0.51 A 9 9 0 0 0 5.6255 11.4842 M 6.3745 0.51 A 9 9 0 0 1 6.3745 11.4842",
+          fill: "none",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-globe-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: "M 11.5 6 A 5.5 5.5 0 1 1 11.5 5.9945 M 1.05 3.6 L 10.95 3.6 M 1.05 8.4 L 10.95 8.4 M 0.5 6 L 11.5 6 M 5.6255 0.51 A 9 9 0 0 0 5.6255 11.4842 M 6.3745 0.51 A 9 9 0 0 1 6.3745 11.4842",
+          fill: "none",
+          "stroke-width": 1,
+        }),
+        {
+          id: "sb3-globeBig-high-contrast",
         },
       ),
 
