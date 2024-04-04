@@ -427,11 +427,12 @@ export class Glow {
 }
 
 export class Script {
-  constructor(blocks) {
+  constructor(blocks, shape) {
     this.blocks = blocks
     this.isEmpty = !blocks.length
     this.isFinal = !this.isEmpty && blocks[blocks.length - 1].isFinal
     this.isCShape = false
+    this.shape = shape || "stack"
   }
   get isScript() {
     return true

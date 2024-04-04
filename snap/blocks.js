@@ -767,7 +767,6 @@ class BlockView {
       if (!this.isUpvar) {
         y += line.padding.top + line.padding.bottom
         line.width += pxr
-        console.log("pxr", pxr)
       }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
@@ -1089,7 +1088,7 @@ class ScriptView {
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
-      const x = inside ? 0 : 2
+      const x = inside ? this.shape === "boolean" ? 7 : 0 : 2
       if (!this.isZebra && this.parentCategory) {
         if (
           this.parentCategory.toLowerCase() ===

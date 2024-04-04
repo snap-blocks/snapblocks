@@ -366,6 +366,11 @@ function parseLines(code, languages) {
       categoryIsDefault: true,
       hasLoopArrow: false,
     }
+    for (let child of children) {
+      if (child.isScript) {
+        child.shape = shape
+      }
+    }
     // console.log("children", children)
     return paintBlock(info, children, languages)
   }
