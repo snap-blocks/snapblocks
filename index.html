@@ -133,13 +133,13 @@
           options: {}
         }
         for (const [key, value] of url.searchParams.entries()) {
-          if (["script", "style", "lang"].includes(unescape(key))) {
-            newObj[unescape(key)] = unescape(value)
+          if (["script", "style", "lang"].includes(decodeURI(key))) {
+            newObj[decodeURI(key)] = decodeURI(value)
           } else {
             if (value != "") {
-              newObj.options[unescape(key)] = unescape(value)
+              newObj.options[decodeURI(key)] = decodeURI(value)
             } else {
-              newObj.options[unescape(key)] = true
+              newObj.options[decodeURI(key)] = true
             }
           }
         }
@@ -169,20 +169,20 @@
         // set hash
         const url = new URL(location)
         const urlParams = new URLSearchParams();
-        if (obj.style) urlParams.set('style', escape(obj.style))
-        if (obj.lang) urlParams.set('lang', escape(obj.lang))
+        if (obj.style) urlParams.set('style', encodeURI(obj.style))
+        if (obj.lang) urlParams.set('lang', encodeURI(obj.lang))
         if (obj.options) {
           for (let [option, value] of Object.entries(obj.options)) {
             if ([true, false].includes(value)) {
               if (value) {
-                urlParams.set(escape(option), '')
+                urlParams.set(encodeURI(option), '')
               }
             } else {
-              urlParams.set(escape(option), value)
+              urlParams.set(encodeURI(option), value)
             }
           }
         }
-        urlParams.set('script', escape(obj.script))
+        urlParams.set('script', encodeURI(obj.script))
         url.search = urlParams
         setURL(url)
   
