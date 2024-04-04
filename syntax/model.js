@@ -104,6 +104,7 @@ export class Icon {
       paintBucket: true,
       eraser: true,
       location: true,
+      gears: true,
 
       arrowUp: true,
       arrowUpOutline: true,
