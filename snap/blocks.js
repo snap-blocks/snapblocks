@@ -582,26 +582,14 @@ class BlockView {
       }
       p.push("Z")
       let el = SVG.path({
-        class: `snap-block snap-${this.info.category} ${
-          options.isFlat ? "snap-flat" : "snap-bevel"
-        }`,
+        class: `snap-block snap-${this.info.category}`,
         path: p,
       })
-
-      if (options.isFlat) {
-        // SVG.setProps(el, {
-        //   "clip-path": `path('${SVG.translatePath(
-        //     this.strokeWidth / 2,
-        //     this.strokeWidth / 2,
-        //     p.join(" "),
-        //   )}')`,
-        // })
-      }
 
       if (this.isZebra) {
         el = this.applyZebra(el)
       }
-
+      el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
       return el
     }
 
@@ -646,15 +634,6 @@ class BlockView {
           !child.isBlock,
         )
 
-        if (options.isFlat) {
-          // SVG.setProps(el, {
-          //   "clip-path": `path('${SVG.translatePath(
-          //     this.strokeWidth / 2,
-          //     this.strokeWidth / 2,
-          //     el.getAttribute("d"),
-          //   )}')`,
-          // })
-        }
         if (this.isZebra) {
           el = this.applyZebra(el)
         }
@@ -668,23 +647,13 @@ class BlockView {
       throw new Error(`no shape func: ${this.info.shape}`)
     }
     let el = func(w, h, {
-      class: `snap-block snap-${this.info.category} ${
-        options.isFlat ? "snap-flat" : "snap-bevel"
-      }`,
+      class: `snap-block snap-${this.info.category}`,
     })
 
-    if (options.isFlat) {
-      // SVG.setProps(el, {
-      //   "clip-path": `path('${SVG.translatePath(
-      //     this.strokeWidth / 2,
-      //     this.strokeWidth / 2,
-      //     el.getAttribute("d"),
-      //   )}')`,
-      // })
-    }
     if (this.isZebra) {
       el = this.applyZebra(el)
     }
+    el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     return el
   }
 
