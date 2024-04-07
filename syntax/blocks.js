@@ -24,6 +24,7 @@ const overrideCategories = [
 
 const aliasCategories = {
   gray: "grey",
+  lists: "list",
 }
 
 const overrideShapes = [
