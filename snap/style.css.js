@@ -44,7 +44,6 @@ export default `
 .snap-pen {
   fill: #00a178;
 }
-.snap-events,
 .snap-control {
   fill: #e6a822;
 }
@@ -66,9 +65,7 @@ export default `
 .snap-extension {
   fill: #4b4a60;
 }
-.snap-grey,
-.snap-other,
-.snap-custom {
+.snap-other {
   fill: #969696;
 }
 

@@ -23,7 +23,8 @@ const overrideCategories = [
 ]
 
 const aliasCategories = {
-  gray: "grey",
+  grey: "other",
+  gray: "other",
   lists: "list",
 }
 

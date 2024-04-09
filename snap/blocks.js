@@ -33,6 +33,9 @@ const categoryAliases = {
   ...aliasExtensions,
   events: "control",
   custom: "other",
+  grey: "other",
+  gray: "other",
+  "custom-arg": "variables",
 }
 
 export class LabelView {
@@ -687,7 +690,7 @@ class BlockView {
     return {
       hat: [12, 3, 3, 6],
       cat: [12, 3, 3, 6],
-      "define-hat": [10, 3, 3, 7],
+      "define-hat": [13, 3, 3, 7],
       "snap-define": [12, 3, 3, 6],
       reporter: [2, 3, 3, 2],
       boolean: [3, 5, 7, 3],
@@ -883,11 +886,6 @@ class BlockView {
     this.width = scriptWidth
       ? Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth)
       : innerWidth
-    if (isDefine) {
-      const p = Math.min(26, (3.5 + 0.13 * innerWidth) | 0) - 18
-      this.height += p
-      pt += 2 * p
-    }
     this.firstLine = lines[0]
     this.innerWidth = innerWidth
 
