@@ -509,8 +509,10 @@ function parseLines(code, languages) {
             if (!label) {
               children.push((label = new Label("")))
             }
-            label.value += tok
-            label.raw += tok
+            if (tok) {
+              label.value += tok
+              label.raw += tok
+            }
             next()
         }
       }
