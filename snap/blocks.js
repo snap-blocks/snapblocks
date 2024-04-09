@@ -310,7 +310,7 @@ class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
-      plusSign: { width: 6, height: 14, dy: 12, padx: 0 },
+      plusSign: { width: 4, height: 14, dy: 12, padx: 1 },
     }
   }
 }
@@ -685,10 +685,10 @@ class BlockView {
 
   static get padding() {
     return {
-      hat: [12, 3, 3, 5],
-      cat: [12, 3, 3, 5],
-      "define-hat": [13, 3, 3, 7],
-      "snap-define": [12, 3, 3, 7],
+      hat: [12, 3, 3, 6],
+      cat: [12, 3, 3, 6],
+      "define-hat": [10, 3, 3, 7],
+      "snap-define": [12, 3, 3, 6],
       reporter: [2, 3, 3, 2],
       boolean: [3, 5, 7, 3],
       cap: [4, 3, 3, 4],
@@ -736,6 +736,9 @@ class BlockView {
       if (!this.isUpvar) {
         y += line.padding.top + line.padding.bottom
         line.width += pxr
+      } else {
+        line.width -= 1
+        y += 2
       }
       innerWidth = Math.max(innerWidth, line.width)
       lines.push(line)
@@ -763,7 +766,7 @@ class BlockView {
 
     const lines = []
     if (this.isUpvar) {
-      line.padding.top += 1
+      line.padding.top += 2
     } else {
       line.padding.top += pt
     }
@@ -771,8 +774,8 @@ class BlockView {
       const child = children[i]
 
       if (options.zebraColoring) {
-        if (this.info.shape === "snap-define") {
-          if (child.isBlock && child.info.category === this.info.category) {
+        if (this.isSnapDefine) {
+          if (child.isBlock && !child.isUpvar && child.info.category === this.info.category) {
             this.isZebra = true
           }
         } else if (
@@ -825,6 +828,8 @@ class BlockView {
 
         if (line.width < pxl && !this.isUpvar) {
           line.width = pxl
+        } else if (this.isUpvar) {
+          line.width -= 1
         }
         if (line.children.length !== 0) {
           if (child.isIcon) {
@@ -841,6 +846,12 @@ class BlockView {
             line.height,
             child.height + (child.isBlock ? 0 : 0),
           )
+          if (child.isCommand) {
+            line.padding.bottom = Math.max(
+              line.padding.bottom,
+              3,
+            )
+          }
         } else {
           line.height = Math.max(line.height, child.height - 2)
         }
