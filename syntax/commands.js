@@ -2809,6 +2809,13 @@ export default [
     hasLoopArrow: true,
   },
   {
+    id: "CONTROL_ALL_AT_ONCE",
+    spec: "all at once %1",
+    inputs: ["%cs"],
+    shape: "stack",
+    category: "control",
+  },
+  {
     selector: "doReturn",
     spec: "stop script",
     inputs: [],
