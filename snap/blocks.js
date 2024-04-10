@@ -476,8 +476,9 @@ class BlockView {
     this.isSnavanced = false
     this.isZebra = false
 
-    this.color = this.info.color ? Color.fromString(this.info.color)
-                  : categoryColor(this.info.category)
+    this.color = this.info.color
+      ? Color.fromString(this.info.color)
+      : categoryColor(this.info.category)
   }
 
   get isBlock() {
@@ -516,7 +517,7 @@ class BlockView {
 
   drawSelf(options, w, h, lines) {
     let el = null
-    
+
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -649,7 +650,7 @@ class BlockView {
     if (this.isZebra) {
       if (color) {
         color = color.zebra()
-        console.log('color', color)
+        console.log("color", color)
       }
     }
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
@@ -781,9 +782,7 @@ class BlockView {
           !child.isOutline &&
           !child.isUpvar
         ) {
-          if (
-            this.color.eq(child.color)
-          ) {
+          if (this.color.eq(child.color)) {
             child.isZebra = true
           }
         } else if (child.isScript) {
@@ -843,10 +842,7 @@ class BlockView {
             child.height + (child.isBlock ? 0 : 0),
           )
           if (child.isCommand) {
-            line.padding.bottom = Math.max(
-              line.padding.bottom,
-              3,
-            )
+            line.padding.bottom = Math.max(line.padding.bottom, 3)
           }
         } else {
           line.height = Math.max(line.height, child.height - 2)
