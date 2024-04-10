@@ -13,11 +13,13 @@ import {
   movedExtensions,
   aliasExtensions,
 } from "../syntax/index.js"
+import Color from "./color.js"
 
 import SVG from "./draw.js"
 
 import style from "./style.js"
 const {
+  categoryColor,
   defaultFontFamily,
   makeStyle,
   makeIcons,
@@ -473,6 +475,9 @@ class BlockView {
     this.strokeWidth = 1
     this.isSnavanced = false
     this.isZebra = false
+
+    this.color = this.info.color ? Color.fromString(this.info.color)
+                  : categoryColor(this.info.category)
   }
 
   get isBlock() {
@@ -510,6 +515,8 @@ class BlockView {
   }
 
   drawSelf(options, w, h, lines) {
+    let el = null
+    
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -584,20 +591,12 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
       p.push("Z")
-      let el = SVG.path({
-        class: `snap-block snap-${this.info.category}`,
+      el = SVG.path({
+        class: `snap-block`,
         path: p,
       })
-
-      if (this.isZebra) {
-        el = this.applyZebra(el)
-      }
-      el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
-      return el
-    }
-
-    // outlines
-    if (/outline-\w+/.test(this.info.shape)) {
+    } else if (/outline-\w+/.test(this.info.shape)) {
+      // outlines
       if (this.info.shape === "outline-stack") {
         return SVG.setProps(SVG.stackRect(w, h), {
           class: "snap-outline",
@@ -611,10 +610,8 @@ class BlockView {
           class: "snap-outline",
         })
       }
-    }
-
-    // rings
-    if (this.isRing) {
+    } else if (this.isRing) {
+      // rings
       const child = this.children[0]
       // We use isStack for InputView; isBlock for BlockView; isScript for ScriptView.
       if (
@@ -626,43 +623,40 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        let el = SVG.ringRect(
+        el = SVG.ringRect(
           w,
           h,
           child,
           shape,
           {
-            class: `snap-block snap-${this.info.category}`,
+            class: `snap-block`,
           },
           !child.isBlock,
         )
-
-        if (this.isZebra) {
-          el = this.applyZebra(el)
-        }
-        el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
-        return el
       }
+    } else {
+      const func = BlockView.shapes[this.info.shape]
+      if (!func) {
+        throw new Error(`no shape func: ${this.info.shape}`)
+      }
+      el = func(w, h, {
+        class: `snap-block`,
+      })
     }
 
-    const func = BlockView.shapes[this.info.shape]
-    if (!func) {
-      throw new Error(`no shape func: ${this.info.shape}`)
-    }
-    let el = func(w, h, {
-      class: `snap-block snap-${this.info.category}`,
-    })
+    let color = this.color
 
     if (this.isZebra) {
-      el = this.applyZebra(el)
+      if (color) {
+        color = color.zebra()
+        console.log('color', color)
+      }
     }
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
+    if (color) {
+      el.style.fill = color.toHexString()
+    }
     return el
-  }
-
-  applyZebra(el) {
-    el.classList.add("snap-zebra")
-    return SVG.group([el])
   }
 
   minDistance(child) {
@@ -778,7 +772,7 @@ class BlockView {
 
       if (options.zebraColoring) {
         if (this.isSnapDefine) {
-          if (child.isBlock && !child.isUpvar && child.info.category === this.info.category) {
+          if (child.isBlock && !child.isUpvar && this.color.eq(child.color)) {
             this.isZebra = true
           }
         } else if (
@@ -788,13 +782,12 @@ class BlockView {
           !child.isUpvar
         ) {
           if (
-            child.info.category === this.info.category ||
-            (child.info.color && child.info.color === this.info.color)
+            this.color.eq(child.color)
           ) {
             child.isZebra = true
           }
         } else if (child.isScript) {
-          child.parentCategory = this.info.color || this.info.category
+          child.color = this.color
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
@@ -1047,7 +1040,7 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
-    this.parentCategory = null
+    this.color = new Color()
     this.isZebra = false
   }
 
@@ -1067,12 +1060,8 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? (this.shape === "boolean" ? 7 : 1) : 0
-      if (!this.isZebra && this.parentCategory) {
-        if (
-          this.parentCategory.toLowerCase() ===
-            block.info.category.toLowerCase() ||
-          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
-        ) {
+      if (!this.isZebra && this.color) {
+        if (this.color.eq(block.color)) {
           block.isZebra = true
         }
       }
