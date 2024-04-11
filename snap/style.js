@@ -633,7 +633,12 @@ export default class Style {
       SVG.group([
         SVG.setProps(el, {
           class: `snap-dark-input`,
-          fill: color instanceof Color ? color.darker().toHexString() : color ? Color.fromString(color)?.toHexString() : 'white',
+          fill:
+            color instanceof Color
+              ? color.darker().toHexString()
+              : color
+                ? Color.fromString(color)?.toHexString()
+                : "white",
         }),
       ]),
       {
