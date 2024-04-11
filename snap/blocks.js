@@ -404,12 +404,7 @@ class InputView {
         fill: this.value,
       })
     } else if (this.isDarker) {
-      el = darkRect(w, h, parent.info.category, el)
-      if (parent.info.color) {
-        SVG.setProps(el, {
-          fill: parent.info.color,
-        })
-      }
+      el = darkRect(w, h, parent.color, el)
     }
 
     const result = SVG.group([

@@ -628,11 +628,12 @@ export default class Style {
     return f.el
   }
 
-  static darkRect(w, h, category, el) {
+  static darkRect(w, h, color, el) {
     return SVG.setProps(
       SVG.group([
         SVG.setProps(el, {
-          class: `snap-${category} snap-darker`,
+          class: `snap-dark-input`,
+          fill: color instanceof Color ? color.darker().toHexString() : color ? Color.fromString(color)?.toHexString() : 'white',
         }),
       ]),
       {
