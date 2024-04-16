@@ -90,9 +90,11 @@ export class LabelView {
     } else {
       const font = /comment-label/.test(this.cls)
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
-        : /literal/.test(this.cls)
-          ? `normal 9px Arial, DejaVu Sans, sans-serif`
-          : `bold 10px ${defaultFontFamily}`
+        : /literal-boolean/.test(this.cls)
+          ? `bold 9px Arial, DejaVu Sans, sans-serif`
+          : /literal/.test(this.cls)
+            ? `normal 9px Arial, DejaVu Sans, sans-serif`
+            : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
@@ -326,7 +328,8 @@ class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
-
+    
+    console.log(this)
     this.x = 0
   }
 
@@ -358,16 +361,36 @@ class InputView {
   draw(options, parent) {
     let w, h
     let label
-    if (this.hasLabel) {
-      label = this.label.draw({
-        ...options,
-        isFlat: true,
+    if (this.isBoolean && !this.isBig) {
+      label = SVG.el("path", {
+        d: this.value == "t" 
+            ? "M 5 6 L 7.5 8.5 L 10 3.5"
+            : "M 13.5 3.5 L 18.5 8.5 M 18.5 3.5 L 13.5 8.5",
+        style: `stroke-linecap: round;
+                stroke-linejoin: round;`,
+        fill: "none",
+        stroke: "white",
+        strokeWidth: 1.5,
+        class: !options.isFlat ? "snap-drop-shadow" : ""
       })
+      w = 24
+      h = 12
+    } else if (this.hasLabel) {
+      if (!(this.isBoolean && !this.isBig)) {
+        label = this.label.draw({
+          ...options,
+          isFlat: !this.isBoolean || options.isFlat,
+        })
+      }
 
       h = this.label.height + 0
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
         w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h
+      } else if (this.isBoolean
+                 && this.isBig) {
+        h += 1
+        w = 23 + (h * 1.5)
       } else {
         w = Math.max(
           this.label.width + this.hasArrow * 12 + 3,
@@ -390,7 +413,7 @@ class InputView {
             : null
     }
 
-    if (this.isBoolean) {
+    if (this.isBoolean && !this.isBig) {
       h -= 1
     }
 
@@ -403,6 +426,30 @@ class InputView {
       SVG.setProps(el, {
         fill: this.value,
       })
+    } else if (this.isBoolean) {
+      switch (this.value) {
+        case "true":
+        case "t":
+          SVG.setProps(el, {
+            fill: new Color(0, 200, 0).toHexString(),
+          })
+          break;
+        case "false":
+        case "f":
+          SVG.setProps(el, {
+            fill: new Color(200, 0, 0).toHexString(),
+          })
+          break;
+        default:
+          SVG.setProps(el, {
+            fill: parent.color instanceof Color
+            ? parent.color.darker().toHexString()
+            : parent.color
+              ? Color.fromString(parent.color)?.toHexString()
+              : "white",
+          })
+          break;
+      }
     } else if (this.isDarker) {
       el = darkRect(w, h, parent.color, el)
     }
@@ -415,8 +462,33 @@ class InputView {
       }),
     ])
     if (this.hasLabel) {
-      let x = this.isRound ? Math.floor(h / 2) + 1 : 2
+      let x
+      if (this.isBoolean && this.isBig) {
+        if (this.value == "true" ) {
+          x = h / 2
+        } else {
+          x = w - (h / 2) - 21
+        }
+      } else if (this.isBoolean && !this.isBig) {
+        // it's offset in the path
+        x = 0
+      } else {
+        x = this.isRound ? Math.floor(h / 2) + 1 : 2
+      }
       result.appendChild(SVG.move(x, -0.5, label))
+    }
+    if (this.isBoolean && this.value) {
+      let y = (this.height - 1) / 2
+      let circle = SVG.el("circle", {
+        cx: (["true", "t"].includes(this.value) 
+              ? this.width - y - 1
+              : y),
+        cy: y,
+        r: y,
+        fill: new Color(220, 220, 220, 0.5).toHexString(),
+        class: !options.isFlat ? "snap-bevel" : ""
+      })
+      result.appendChild(circle)
     }
     if (this.hasArrow) {
       result.appendChild(
@@ -683,7 +755,7 @@ class BlockView {
       "define-hat": [13, 3, 3, 7],
       "snap-define": [12, 3, 3, 6],
       reporter: [2, 3, 3, 2],
-      boolean: [3, 5, 7, 3],
+      boolean: [2, 5, 7, 2],
       cap: [4, 3, 3, 4],
       "c-block": [4, 3, 3, 4],
       "if-block": [4, 3, 3, 4],

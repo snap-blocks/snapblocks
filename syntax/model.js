@@ -150,13 +150,14 @@ export class Input {
     this.isSquare =
       shape === "string" || shape === "color" || shape === "dropdown"
 
-    this.hasLabel = !(this.isColor || this.isInset)
+    this.hasLabel = !(this.isColor || this.isInset) || (this.value && this.isBoolean)
     this.label = this.hasLabel
       ? new Label(
           value,
           `literal-${this.shape}` + (isReadonly ? "-readonly" : ""),
         )
       : null
+    this.isBig = this.isBoolean && this.value ? this.value.length > 1 : null
     this.x = 0
   }
   get isInput() {
@@ -167,6 +168,13 @@ export class Input {
     if (this.isColor) {
       assert(this.value[0] === "#")
       return `[${this.value}]`
+    }
+    if (this.isBoolean) {
+      if (this.value) {
+        return `<${this.value}>`
+      } else {
+        return "<>"
+      }
     }
     // Order sensitive; see #439
     let text = (this.value ? String(this.value) : "")

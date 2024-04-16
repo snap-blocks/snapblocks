@@ -90,6 +90,7 @@ export default `
 }
 .snap-literal-number,
 .snap-literal-string,
+.snap-literal-boolean,
 .snap-literal-number-dropdown,
 .snap-literal-dropdown,
 .snap-literal-number-dropdown-readonly,
@@ -98,6 +99,9 @@ export default `
   font-weight: normal;
   font-size: 9px;
   word-spacing: 0;
+}
+.snap-literal-boolean {
+  font-weight: bold;
 }
 .snap-label-dark,
 .snap-literal-number,

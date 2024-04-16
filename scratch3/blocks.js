@@ -402,6 +402,14 @@ export class InputView {
     let label
     if (this.isBoolean) {
       w = 48
+      if (this.hasLabel) {
+        label = this.label.draw(options)
+        // Minimum padding of 11
+        // Minimum width of 40, at which point we center the label
+        const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
+        w = this.label.width + 2 * px
+        label = SVG.move(px, 9, label)
+      }
     } else if (this.isColor) {
       w = 40
     } else if (this.hasLabel) {
