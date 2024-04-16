@@ -559,7 +559,7 @@ function parseLines(code, languages) {
     if (tok === "]") {
       next()
     }
-    if (hexColorPat.test(s)) {
+    if (hexColorPat.test(raw)) {
       return new Input("color", s)
     }
     return !escapeV && / v$/.test(s)
