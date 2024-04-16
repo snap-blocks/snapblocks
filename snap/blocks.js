@@ -485,7 +485,7 @@ class InputView {
         cy: y,
         r: y,
         fill: new Color(220, 220, 220).toHexString(),
-        class: !options.isFlat ? "snap-bevel" : ""
+        class: !options.isFlat ? "snap-bevel" : "",
       })
       result.appendChild(circle)
     }
