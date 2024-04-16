@@ -1270,6 +1270,7 @@ function recognizeStuff(scripts) {
           if (child.isUpvar) {
             // console.log("category", block.info.category)
             child.info.category = block.info.category
+            child.info.color = block.info.color
           }
         }
       }
