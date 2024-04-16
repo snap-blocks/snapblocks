@@ -745,15 +745,21 @@ function parseLines(code, languages) {
     if (children.length === 0) {
       return new Input("boolean")
     }
-    if (children.length === 1
-        && children[0].isLabel
-        && ["t", "f"].includes(children[0].raw.toLowerCase())) {
+    if (
+      children.length === 1 &&
+      children[0].isLabel &&
+      ["t", "f"].includes(children[0].raw.toLowerCase())
+    ) {
       return new Input("boolean", children[0].value.toLowerCase())
     }
-    if (children.length === 1
-      && children[0].isLabel
-      && ["true", "false"].includes(children[0].raw.toLowerCase())) {
-      let block = makeBlock("boolean", [new Input("boolean", children[0].value.toLowerCase())])
+    if (
+      children.length === 1 &&
+      children[0].isLabel &&
+      ["true", "false"].includes(children[0].raw.toLowerCase())
+    ) {
+      let block = makeBlock("boolean", [
+        new Input("boolean", children[0].value.toLowerCase()),
+      ])
       block.info.category = "operators"
       return block
     }

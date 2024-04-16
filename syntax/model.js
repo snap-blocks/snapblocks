@@ -150,7 +150,8 @@ export class Input {
     this.isSquare =
       shape === "string" || shape === "color" || shape === "dropdown"
 
-    this.hasLabel = !(this.isColor || this.isInset) || (this.value && this.isBoolean)
+    this.hasLabel =
+      !(this.isColor || this.isInset) || (this.value && this.isBoolean)
     this.label = this.hasLabel
       ? new Label(
           value,
