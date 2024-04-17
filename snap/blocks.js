@@ -273,7 +273,7 @@ class IconView {
       verticalEllipsis: {
         width: 2,
         height: 11,
-        dy: 1,
+        dy: 0,
         scale: 0.833333333,
         r: 0,
         g: 0,
@@ -894,7 +894,16 @@ class BlockView {
         }
         if (line.children.length !== 0) {
           if (child.isIcon) {
-            line.width += child.padx
+            if ((line.children[line.children.length - 1].isIcon &&
+                 line.children[line.children.length - 1].name == "delInput" &&
+                 child.name == "verticalEllipsis") ||
+                (line.children[line.children.length - 1].isIcon &&
+                 line.children[line.children.length - 1].name == "verticalEllipsis" &&
+                 child.name == "addInput")) {
+              line.width += 2
+            } else {
+              line.width += child.padx
+            }
           } else {
             line.width += 4
           }
