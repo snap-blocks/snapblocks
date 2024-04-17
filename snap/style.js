@@ -581,7 +581,7 @@ export default class Style {
 
     const alpha = "SourceAlpha"
     const s = inset ? -0.4 : 0.2
-    const blur = f.blur(0.4, alpha)
+    const blur = f.blur(0.3, alpha)
 
     f.merge([
       "SourceGraphic",
@@ -590,15 +590,15 @@ export default class Style {
         f.flood("#fff", 0.7),
         f.subtract(
           alpha,
-          f.offset(inset ? -0.3 : 0.3, inset ? -0.3 : 0.3, blur),
+          f.offset(inset ? -0.3 : 0.4, inset ? -0.3 : 0.4, blur),
         ),
       ),
       f.comp(
         "in",
-        f.flood("#000", 0.9),
+        f.flood("#000", 0.8),
         f.subtract(
           alpha,
-          f.offset(inset ? 0.9 : -0.8, inset ? 0.9 : -0.8, blur),
+          f.offset(inset ? 0.9 : -0.7, inset ? 0.9 : -0.7, blur),
         ),
       ),
     ])
