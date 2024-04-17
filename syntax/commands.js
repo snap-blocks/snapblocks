@@ -885,6 +885,13 @@ export default [
     category: "events",
   },
   {
+    snap: "doSend",
+    spec: "send %1 to %2",
+    inputs: ["%m.messages", "%m.sprites"],
+    shape: "stack",
+    category: "events",
+  },
+  {
     id: "EVENT_WHENTOUCHINGOBJECT",
     spec: "when sprite touches %1",
     inputs: ["%m"],
