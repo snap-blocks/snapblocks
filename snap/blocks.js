@@ -894,12 +894,15 @@ class BlockView {
         }
         if (line.children.length !== 0) {
           if (child.isIcon) {
-            if ((line.children[line.children.length - 1].isIcon &&
-                 line.children[line.children.length - 1].name == "delInput" &&
-                 child.name == "verticalEllipsis") ||
-                (line.children[line.children.length - 1].isIcon &&
-                 line.children[line.children.length - 1].name == "verticalEllipsis" &&
-                 child.name == "addInput")) {
+            if (
+              (line.children[line.children.length - 1].isIcon &&
+                line.children[line.children.length - 1].name == "delInput" &&
+                child.name == "verticalEllipsis") ||
+              (line.children[line.children.length - 1].isIcon &&
+                line.children[line.children.length - 1].name ==
+                  "verticalEllipsis" &&
+                child.name == "addInput")
+            ) {
               line.width += 2
             } else {
               line.width += child.padx
