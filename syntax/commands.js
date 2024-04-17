@@ -1144,9 +1144,15 @@ export default [
   },
   {
     id: "CONTROL_CREATECLONEOF",
-    snap: "createClone",
     selector: "createCloneOf",
     spec: "create clone of %1",
+    inputs: ["%m.spriteOnly"],
+    shape: "stack",
+    category: "control",
+  },
+  {
+    snap: "createClone",
+    spec: "create a clone of %1",
     inputs: ["%m.spriteOnly"],
     shape: "stack",
     category: "control",
