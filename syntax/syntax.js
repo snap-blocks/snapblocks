@@ -150,7 +150,89 @@ function paintBlock(info, children, languages) {
             }
           }
         }
-        block.children = customChildren
+
+        block.children = customChildren.map(child => {
+            if (child.isInput && child.isBoolean) {
+              // Convert empty boolean slot to empty boolean argument.
+              child = paintBlock(
+                {
+                  shape: "reporter",
+                  argument: "boolean",
+                  category: "custom-arg",
+                },
+                [new Label(child.value ? child.value : ""), new Label("?")],
+                languages,
+              )
+            } else if (
+              child.isInput &&
+              (child.shape === "string")
+            ) {
+              // Convert string inputs to string arguments.
+              const labels = child.value.split(/ +/g).map(word => new Label(word))
+              child = paintBlock(
+                {
+                  shape: "reporter",
+                  argument: "string",
+                  category: "custom-arg",
+                },
+                labels,
+                languages,
+              )
+            } else if (
+              child.isInput &&
+              (child.shape === "number")
+            ) {
+              // Convert number inputs to number arguments.
+              const labels = child.value.split(/ +/g).map(word => new Label(word))
+              child = paintBlock(
+                {
+                  shape: "reporter",
+                  argument: "number",
+                  category: "custom-arg",
+                },
+                [...labels, new Label("#")],
+                languages,
+              )
+            } else if (child.isReporter && !child.isUpvar) {
+              // Convert variables to number arguments.
+              if (child.info.categoryIsDefault) {
+                child.info.category = "custom-arg"
+                child.info.argument = "number"
+                child.children.push(new Label("#"))
+              }
+            } else if (child.isBoolean) {
+              if (child.info.categoryIsDefault) {
+                child.info.category = "custom-arg"
+                child.info.shape = "reporter"
+                child.isReporter = true
+                child.isBoolean = false
+                child.info.argument = "boolean"
+                child.children.push(new Label("?"))
+              }
+            } else if (child.isCommand) {
+              if (child.info.categoryIsDefault) {
+                child.info.category = "custom-arg"
+                child.info.shape = "reporter"
+                child.isReporter = true
+                child.isCommand = false
+                child.info.argument = "ring"
+                child.children.push(new Label("λ"))
+              }
+            }
+            if (!child.isUpvar && !child.isLabel && !child.isIcon) {
+              child = paintBlock(
+                {
+                  shape: "reporter",
+                  category: block.info.category,
+                  color: block.info.color,
+                  categoryIsDefault: true,
+                },
+                [child],
+                languages,
+              )
+            }
+            return child
+          })
         continue
       }
 
@@ -216,7 +298,7 @@ function paintBlock(info, children, languages) {
                 argument: "boolean",
                 category: "custom-arg",
               },
-              [new Label("")],
+              [new Label(child.value ? child.value : "")],
               languages,
             )
           } else if (
@@ -441,7 +523,9 @@ function parseLines(code, languages) {
             next() // Skip over whitespace.
             label = null
             break
+          case "$":
           case "@": {
+            let start = tok
             next()
             let name = ""
             let modifiers = []
@@ -469,7 +553,7 @@ function parseLines(code, languages) {
                 Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
                 ? new Icon(name, modifiers)
                 : new Label(
-                    `@${name}${modifiers.length ? "-" : ""}${modifiers.join(
+                    `${start}${name}${modifiers.length ? "-" : ""}${modifiers.join(
                       "-",
                     )}`,
                   ),
@@ -1212,6 +1296,7 @@ function recognizeStuff(scripts) {
           spec: spec,
           names: names,
           category: customBlock.info.category,
+          color: customBlock.info.color,
           shape: customBlock.info.shape,
         }
         if (!customBlocksByHash[hash]) {
@@ -1242,7 +1327,8 @@ function recognizeStuff(scripts) {
       if (
         block.info &&
         block.info.categoryIsDefault &&
-        block.info.category === "obsolete"
+        (block.info.category === "obsolete" ||
+         (block.isReporter && block.info.category === "variables"))
       ) {
         // custom blocks
         // console.log("block hash", block.info.hash)
@@ -1252,7 +1338,8 @@ function recognizeStuff(scripts) {
           block.info.call = info.spec
           block.info.names = info.names
           block.info.category = info.category
-          // block.info.shape = info.shape
+          block.info.color = info.color
+          block.info.shape = info.shape
           block.info.isCustom = true
         }
       }
