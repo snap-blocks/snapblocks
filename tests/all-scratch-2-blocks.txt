@@ -271,7 +271,8 @@ reset timer
 
 
 
-// my blocks
+// Custom
+block (var) [string] <[] = []>
 
 define {block (reporter) [string] <boolean>}
 block (reporter) (string) <boolean>

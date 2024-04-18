@@ -157,6 +157,10 @@ for each [i V] in (10) {
 
 }
 
+all at once {
+
+}
+
 (counter)
 increment counter
 clear counter
@@ -269,7 +273,8 @@ hide list [list V]
 
 
 
-// my blocks
+// Custom
+block (var) [string] <[] = []>
 
 define {block (reporter) [string] <boolean>}
 block (reporter) (string) <boolean>

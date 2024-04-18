@@ -61,6 +61,8 @@ hide
 go to [front V] layer
 go back (1) layers
 
+// Dev mode
+
 console log [] ◂⋮▸
 console log [] ◂▸
 console log [] [] ◂⋮▸
@@ -112,6 +114,8 @@ set balance to (0)
 
 play frequency (440) Hz
 stop frequency
+
+// Dev mode
 
 play (440) Hz for (2) secs
 
@@ -305,9 +309,15 @@ set [label V] of block (()▸) to []
 (this [script V])
 (this script)
 
+// Dev mode
+
 (message)
 run ({}▸) w/continuation
 (call ({}▸) w/continuation)
+
+// Obsolete
+
+send [ V] to [ V]
 
 // Sensing
 
@@ -355,6 +365,8 @@ set [flat line ends V] to (var)
 set [log pen vectors V] to (var)
 set [video capture V] to (var)
 set [mirror video V] to (var)
+
+// Dev mode
 
 (processes)
 (stack size)
@@ -602,6 +614,8 @@ set [mirror video V] to (var)
 (JavaScript function \( (list) \) \{ [] \} )
 (JavaScript function \( input list: (list) \) \{ [] \} )
 
+// Dev mode
+
 (type of [5])
 
 ([encode URI V] of [Abelson & Sussman])
@@ -726,6 +740,8 @@ replace item (1 v) of (list) with [thing]
 (reshape [] to input list: (list))
 (reshape [] to (list))
 
+// Dev mode
+
 show table @list
 show table (list)
 
@@ -773,3 +789,19 @@ map [String V] to code [<#1>]
 map [ V] of [ V] to code []
 
 (code of ({}▸))
+
+
+
+// Custom
+
+{custom block ((string)) ((bool ?)) ((number #))} :: define
+
+custom block [] <> ()
+
+(+ custom + block + :: motion) :: define
+
+(custom block)
+
+<custom block :: operators> :: define+
+
+<custom block>

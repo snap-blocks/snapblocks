@@ -18,6 +18,15 @@ export function test(style, name, source, lang) {
       lang: lang || "en",
     })
   }
+
+  if (style === "snap") {
+    tests.push({
+      style: "snap-flat",
+      name,
+      source,
+      lang: lang || "en",
+    })
+  }
 }
 
 export function runTests(r) {
@@ -28,11 +37,14 @@ export function runTests(r) {
         tc.style,
         tc.name.replace(/ /g, "-") + ".png",
       )
-      console.log("running", tc.name)
+      console.log("running", tc.style, tc.name)
       return (async () => {
         const options = {
           lang: tc.lang,
           style: tc.style,
+          zebra: true,
+          showSpaces: true,
+          wrap: true,
           scale: 1,
         }
         await r.snapshotToFile(tc.source, options, outputPath)
