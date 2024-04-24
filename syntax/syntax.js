@@ -99,7 +99,6 @@ function paintBlock(info, children, languages) {
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
     for (const lang of languages) {
-
       if (
         (overrides.includes("define") || overrides.includes("define+")) &&
         !isDefineBlock(
@@ -157,90 +156,84 @@ function paintBlock(info, children, languages) {
         }
 
         block.children = customChildren.map(child => {
-            if (child.isIcon && child.name == "plusSign") {
-              return child
-            }
-            if (child.isInput && child.isBoolean) {
-              // Convert empty boolean slot to empty boolean argument.
-              child = new Block(
-                {
-                  shape: "reporter",
-                  argument: "boolean",
-                  category: "custom-arg",
-                },
-                [new Label(child.value ? child.value : ""), new Label("?")],
-              )
-            } else if (
-              child.isInput &&
-              (child.shape === "string")
-            ) {
-              // Convert string inputs to string arguments.
-              const labels = child.value.split(/ +/g).map(word => new Label(word))
-              child = new Block(
-                {
-                  shape: "reporter",
-                  argument: "string",
-                  category: "custom-arg",
-                },
-                labels,
-              )
-            } else if (
-              child.isInput &&
-              (child.shape === "number")
-            ) {
-              // Convert number inputs to number arguments.
-              const labels = child.value.split(/ +/g).map(word => new Label(word))
-              child = new Block(
-                {
-                  shape: "reporter",
-                  argument: "number",
-                  category: "custom-arg",
-                },
-                [...labels, new Label("#")],
-                languages,
-              )
-            } else if (child.isReporter && !child.isUpvar) {
-              // Convert variables to number arguments.
-              if (child.info.categoryIsDefault) {
-                child.info.category = "custom-arg"
-              }
-              child.info.argument = "number"
-              child.children.push(new Label("#"))
-            } else if (child.isBoolean) {
-              if (child.info.categoryIsDefault) {
-                child.info.category = "custom-arg"
-              }
-              child.info.shape = "reporter"
-              child.isReporter = true
-              child.isBoolean = false
-              child.info.argument = "boolean"
-              child.children.push(new Label("?"))
-            } else if (child.isCommand) {
-              if (child.info.categoryIsDefault) {
-                child.info.category = "custom-arg"
-              }
-              child.info.shape = "reporter"
-              child.isReporter = true
-              child.isCommand = false
-              child.info.argument = "ring"
-              child.children.push(new Label("λ"))
-            }
-            if (!child.isUpvar && !child.isLabel && !child.isIcon) {
-              applyOverrides(child.info, child.info.overrides)
-              child = paintBlock(
-                {
-                  shape: "reporter",
-                  category: block.info.category,
-                  color: block.info.color,
-                  categoryIsDefault: true,
-                },
-                [child],
-                languages,
-              )
-            }
+          if (child.isIcon && child.name == "plusSign") {
             return child
-          })
-        
+          }
+          if (child.isInput && child.isBoolean) {
+            // Convert empty boolean slot to empty boolean argument.
+            child = new Block(
+              {
+                shape: "reporter",
+                argument: "boolean",
+                category: "custom-arg",
+              },
+              [new Label(child.value ? child.value : ""), new Label("?")],
+            )
+          } else if (child.isInput && child.shape === "string") {
+            // Convert string inputs to string arguments.
+            const labels = child.value.split(/ +/g).map(word => new Label(word))
+            child = new Block(
+              {
+                shape: "reporter",
+                argument: "string",
+                category: "custom-arg",
+              },
+              labels,
+            )
+          } else if (child.isInput && child.shape === "number") {
+            // Convert number inputs to number arguments.
+            const labels = child.value.split(/ +/g).map(word => new Label(word))
+            child = new Block(
+              {
+                shape: "reporter",
+                argument: "number",
+                category: "custom-arg",
+              },
+              [...labels, new Label("#")],
+              languages,
+            )
+          } else if (child.isReporter && !child.isUpvar) {
+            // Convert variables to number arguments.
+            if (child.info.categoryIsDefault) {
+              child.info.category = "custom-arg"
+            }
+            child.info.argument = "number"
+            child.children.push(new Label("#"))
+          } else if (child.isBoolean) {
+            if (child.info.categoryIsDefault) {
+              child.info.category = "custom-arg"
+            }
+            child.info.shape = "reporter"
+            child.isReporter = true
+            child.isBoolean = false
+            child.info.argument = "boolean"
+            child.children.push(new Label("?"))
+          } else if (child.isCommand) {
+            if (child.info.categoryIsDefault) {
+              child.info.category = "custom-arg"
+            }
+            child.info.shape = "reporter"
+            child.isReporter = true
+            child.isCommand = false
+            child.info.argument = "ring"
+            child.children.push(new Label("λ"))
+          }
+          if (!child.isUpvar && !child.isLabel && !child.isIcon) {
+            applyOverrides(child.info, child.info.overrides)
+            child = paintBlock(
+              {
+                shape: "reporter",
+                category: block.info.category,
+                color: block.info.color,
+                categoryIsDefault: true,
+              },
+              [child],
+              languages,
+            )
+          }
+          return child
+        })
+
         break // We don't need to check other languages, do we?
       }
 
@@ -273,7 +266,6 @@ function paintBlock(info, children, languages) {
         lang.definePrefix.length,
         children.length - lang.defineSuffix.length,
       )
-
 
       if (blockChildren.length == 1 && !blockChildren[0].isLabel) {
         if (blockChildren[0] instanceof Input) {
@@ -1201,7 +1193,6 @@ function recognizeStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
           return
@@ -1321,7 +1312,7 @@ function recognizeStuff(scripts) {
         block.info &&
         block.info.categoryIsDefault &&
         (block.info.category === "obsolete" ||
-         (block.isReporter && block.info.category === "variables"))
+          (block.isReporter && block.info.category === "variables"))
       ) {
         // custom blocks
         const info = customBlocksByHash[block.info.hash]

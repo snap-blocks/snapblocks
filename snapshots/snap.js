@@ -1,4 +1,4 @@
-import { test } from "./runner.js";
+import { test } from "./runner.js"
 
 test(
   "snap",
@@ -32,7 +32,7 @@ test(
   (x position)
   (y position)
   (direction)
-  `
+  `,
 )
 
 test(
@@ -92,7 +92,7 @@ test(
   alert (list)
 
   save [pen trails V] as costume named [screenshot]
-  `
+  `,
 )
 
 test(
@@ -132,7 +132,7 @@ test(
   // Dev mode
 
   play (440) Hz for (2) secs
-  `
+  `,
 )
 
 test(
@@ -167,7 +167,7 @@ test(
 
   paste on [ V]
   cut from [ V]
-  `
+  `,
 )
 
 test(
@@ -342,7 +342,7 @@ test(
   // Obsolete
 
   send [ V] to [ V]
-  `
+  `,
 )
 
 test(
@@ -402,7 +402,7 @@ test(
   (stack size)
   (frames)
   (yields)
-  `
+  `,
 )
 
 test(
@@ -660,7 +660,7 @@ test(
   ([XML unescape V] of [Abelson & Sussman])
   ([JS escape V] of [Abelson & Sussman])
   ([hex sha512 hash V] of [Abelson & Sussman])
-  `
+  `,
 )
 
 test(
@@ -782,7 +782,7 @@ test(
 
   show table @list
   show table (list)
-  `
+  `,
 )
 
 test(
@@ -831,7 +831,7 @@ test(
   map [ V] of [ V] to code []
 
   (code of ({}▸))
-  `
+  `,
 )
 
 test(
@@ -851,5 +851,5 @@ test(
   <custom block :: operators> :: define+
 
   <custom block>
-  `
+  `,
 )

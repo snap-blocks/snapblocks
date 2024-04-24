@@ -1,4 +1,4 @@
-import { test } from "./runner.js";
+import { test } from "./runner.js"
 
 // Scratch 2, English
 
@@ -369,5 +369,5 @@ test(
   (distance)
   <tilted [any V] ?>
   (tilt angle [up-down V])
-  `
+  `,
 )

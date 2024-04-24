@@ -1,5 +1,4 @@
-import { test } from "./runner.js";
-
+import { test } from "./runner.js"
 
 /*****************************************************************************/
 
@@ -337,7 +336,7 @@ test(
   set tempo to (60)
   change tempo by (20)
   (tempo)
-`
+`,
 )
 
 test(
@@ -931,4 +930,3 @@ Wenn Kraftsensor [gedrückt V]
 `,
   "de",
 )
-

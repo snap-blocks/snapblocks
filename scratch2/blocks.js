@@ -92,9 +92,9 @@ export class LabelView {
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
         : /literal-boolean/.test(this.cls)
           ? `bold 10px ${defaultFontFamily}`
-        : /literal/.test(this.cls)
-          ? `normal 9px ${defaultFontFamily}`
-          : `bold 10px ${defaultFontFamily}`
+          : /literal/.test(this.cls)
+            ? `normal 9px ${defaultFontFamily}`
+            : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
@@ -374,7 +374,7 @@ class InputView {
       }
 
       h = this.label.height
-      
+
       if (this.isBoolean && this.isBig) {
         h += 1
         w = 26 + h * 1.5
@@ -382,7 +382,9 @@ class InputView {
         w = Math.max(
           14,
           this.label.width +
-            (this.shape === "string" || this.shape === "number-dropdown" ? 6  : 9),
+            (this.shape === "string" || this.shape === "number-dropdown"
+              ? 6
+              : 9),
         )
       }
     } else {
@@ -655,7 +657,6 @@ class BlockView {
         })
       }
     } else {
-
       const func = BlockView.shapes[this.info.shape]
       if (!func) {
         throw new Error(`no shape func: ${this.info.shape}`)
