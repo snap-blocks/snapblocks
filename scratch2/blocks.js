@@ -13,11 +13,13 @@ import {
   movedExtensions,
   aliasExtensions,
 } from "../syntax/index.js"
+import Color from "../shared/color.js"
 
 import SVG from "./draw.js"
 
 import style from "./style.js"
 const {
+  categoryColor,
   defaultFontFamily,
   makeStyle,
   makeIcons,
@@ -30,6 +32,11 @@ const {
 const unicodeIcons = {
   cloud: "☁",
   cloudOutline: "☁",
+}
+const categoryAliases = {
+  ...aliasExtensions,
+  grey: "other",
+  gray: "other",
 }
 
 export class LabelView {
@@ -83,6 +90,8 @@ export class LabelView {
     } else {
       const font = /comment-label/.test(this.cls)
         ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
+        : /literal-boolean/.test(this.cls)
+          ? `bold 10px ${defaultFontFamily}`
         : /literal/.test(this.cls)
           ? `normal 9px ${defaultFontFamily}`
           : `bold 10px ${defaultFontFamily}`
@@ -150,7 +159,7 @@ export class LabelView {
       computedLines.push(computedLine)
     }
 
-    width = (width + 3) | 0
+    width = width | 0
     return {
       width: width,
       spaceWidth: spaceWidth,
@@ -254,20 +263,18 @@ class IconView {
       turnLeft: { width: 15, height: 12, dy: +1 },
       turnRight: { width: 15, height: 12, dy: +1 },
       loopArrow: { width: 26, height: 20, scale: 0.5 },
-      addInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
-      delInput: { width: 5, height: 12, r: 0, g: 0, b: 0 },
+      addInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
+      delInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
       verticalEllipsis: {
         width: 2,
-        height: 12,
+        height: 11,
+        dy: 0,
         scale: 0.833333333,
         r: 0,
         g: 0,
         b: 0,
       },
-      list: {
-        width: 8,
-        height: 10,
-      },
+      list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
@@ -344,24 +351,49 @@ class InputView {
   }
 
   draw(options, parent) {
-    let w
+    let w, h
     let label
-    if (this.hasLabel) {
-      label = this.label.draw(options)
-      w = Math.max(
-        14,
-        this.label.width +
-          (this.shape === "string" || this.shape === "number-dropdown" ? 6 : 9),
-      )
+    if (this.isBoolean && !this.isBig) {
+      label = SVG.el("path", {
+        d:
+          this.value == "t"
+            ? "M 5 6 L 7.5 8.5 L 10 3.5"
+            : "M 13.5 3.5 L 18.5 8.5 M 18.5 3.5 L 13.5 8.5",
+        style: `stroke-linecap: round;
+                stroke-linejoin: round;`,
+        fill: "none",
+        stroke: "white",
+        strokeWidth: 1.5,
+        class: !options.isFlat ? "snap-drop-shadow" : "",
+      })
+      w = 24
+      h = 12
+    } else if (this.hasLabel) {
+      if (!(this.isBoolean && !this.isBig)) {
+        label = this.label.draw(options)
+      }
+
+      h = this.label.height
+      
+      if (this.isBoolean && this.isBig) {
+        h += 1
+        w = 26 + h * 1.5
+      } else {
+        w = Math.max(
+          14,
+          this.label.width +
+            (this.shape === "string" || this.shape === "number-dropdown" ? 6  : 9),
+        )
+      }
     } else {
+      h = this.hasLabel ? this.label.height : 13
+
       w = this.isInset ? 30 : this.isColor ? 13 : null
     }
     if (this.hasArrow) {
       w += 10
     }
     this.width = w
-
-    let h = this.hasLabel ? this.label.height : 13
 
     if (this.isRound || this.isColor) {
       h += 1
@@ -374,13 +406,33 @@ class InputView {
       SVG.setProps(el, {
         fill: this.value,
       })
-    } else if (this.isDarker) {
-      el = darkRect(w, h, parent.info.category, el)
-      if (parent.info.color) {
-        SVG.setProps(el, {
-          fill: parent.info.color,
-        })
+    } else if (this.isBoolean) {
+      switch (this.value) {
+        case "true":
+        case "t":
+          SVG.setProps(el, {
+            fill: new Color(0, 200, 0).toHexString(),
+          })
+          break
+        case "false":
+        case "f":
+          SVG.setProps(el, {
+            fill: new Color(200, 0, 0).toHexString(),
+          })
+          break
+        default:
+          SVG.setProps(el, {
+            fill:
+              parent.color instanceof Color
+                ? parent.color.darker().toHexString()
+                : parent.color
+                  ? Color.fromString(parent.color)?.toHexString()
+                  : "white",
+          })
+          break
       }
+    } else if (this.isDarker) {
+      el = darkRect(w, h, parent.color, el)
     }
 
     const result = SVG.group([
@@ -389,8 +441,31 @@ class InputView {
       }),
     ])
     if (this.hasLabel) {
-      const x = this.isRound ? 5 : 4
+      let x
+      if (this.isBoolean && this.isBig) {
+        if (this.value == "true") {
+          x = h / 2
+        } else {
+          x = w - h / 2 - 26
+        }
+      } else if (this.isBoolean && !this.isBig) {
+        // it's offset in the path
+        x = 0
+      } else {
+        x = this.isRound ? 5 : 4
+      }
       result.appendChild(SVG.move(x, 0, label))
+    }
+    if (this.isBoolean && this.value) {
+      let y = this.height / 2
+      let circle = SVG.el("circle", {
+        cx: ["true", "t"].includes(this.value) ? this.width - y - 1 : y,
+        cy: y,
+        r: y,
+        fill: new Color(220, 220, 220).toHexString(),
+        class: "sb-bevel",
+      })
+      result.appendChild(circle)
     }
     if (this.hasArrow) {
       const y = this.shape === "dropdown" ? 5 : 4
@@ -420,10 +495,10 @@ class BlockView {
     this.info = { ...block.info }
 
     if (
-      Object.prototype.hasOwnProperty.call(aliasExtensions, this.info.category)
+      Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {
       // handle aliases first
-      this.info.category = aliasExtensions[this.info.category]
+      this.info.category = categoryAliases[this.info.category]
     }
     if (
       Object.prototype.hasOwnProperty.call(movedExtensions, this.info.category)
@@ -442,6 +517,10 @@ class BlockView {
     this.innerWidth = null
     this.lines = []
     this.isZebra = false
+
+    this.color = this.info.color
+      ? Color.fromString(this.info.color)
+      : categoryColor(this.info.category)
   }
 
   get isBlock() {
@@ -479,6 +558,8 @@ class BlockView {
   }
 
   drawSelf(options, w, h, lines) {
+    let el = null
+
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -537,19 +618,12 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
 
-      let el = SVG.path({
-        class: `sb-${this.info.category}`,
+      el = SVG.path({
+        class: `sb-block`,
         path: p,
       })
-      if (this.isZebra) {
-        el = this.applyZebra(el)
-      }
-      el.classList.add("sb-bevel")
-      return el
-    }
-
-    // outlines
-    if (/outline-\w+/.test(this.info.shape)) {
+    } else if (/outline-\w+/.test(this.info.shape)) {
+      // outlines
       if (this.info.shape === "outline-stack") {
         return SVG.setProps(SVG.stackRect(w, h), {
           class: "sb-outline",
@@ -563,10 +637,8 @@ class BlockView {
           class: "sb-outline",
         })
       }
-    }
-
-    // rings
-    if (this.isRing) {
+    } else if (this.isRing) {
+      // rings
       const child = this.children[0]
       // We use isStack for InputView; isBlock for BlockView; isScript for ScriptView.
       if (
@@ -578,28 +650,32 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        let el = SVG.ringRect(w, h, child, shape, {
-          class: `sb-${this.info.category}`,
+        el = SVG.ringRect(w, h, child, shape, {
+          class: `sb-block`,
         })
-        if (this.isZebra) {
-          el = this.applyZebra(el)
-        }
-        el.classList.add("sb-bevel")
-        return el
       }
+    } else {
+
+      const func = BlockView.shapes[this.info.shape]
+      if (!func) {
+        throw new Error(`no shape func: ${this.info.shape}`)
+      }
+      el = func(w, h, {
+        class: `sb-block`,
+      })
     }
 
-    const func = BlockView.shapes[this.info.shape]
-    if (!func) {
-      throw new Error(`no shape func: ${this.info.shape}`)
-    }
-    let el = func(w, h, {
-      class: `sb-${this.info.category}`,
-    })
+    let color = this.color
+
     if (this.isZebra) {
-      el = this.applyZebra(el)
+      if (color) {
+        color = color.zebra()
+      }
     }
     el.classList.add("sb-bevel")
+    if (color) {
+      el.style.fill = color.toHexString()
+    }
     return el
   }
 
@@ -733,8 +809,8 @@ class BlockView {
       const child = children[i]
 
       if (options.zebraColoring) {
-        if (this.info.shape === "snap-define") {
-          if (child.isBlock && child.info.category === this.info.category) {
+        if (this.isSnapDefine) {
+          if (child.isBlock && !child.isUpvar && this.color.eq(child.color)) {
             this.isZebra = true
           }
         } else if (
@@ -743,14 +819,11 @@ class BlockView {
           !child.isOutline &&
           !child.isUpvar
         ) {
-          if (
-            child.info.category === this.info.category ||
-            (child.info.color && child.info.color === this.info.color)
-          ) {
+          if (this.color.eq(child.color)) {
             child.isZebra = true
           }
         } else if (child.isScript) {
-          child.parentCategory = this.info.color || this.info.category
+          child.color = this.color
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
@@ -783,16 +856,29 @@ class BlockView {
           line = new Line(y)
         }
 
-        if (line.width < px && (child.isLabel || child.isCommand)) {
+        if (line.width < px) {
           line.width = px
         }
         if (line.children.length !== 0) {
           if (child.isIcon) {
-            line.width += child.padx
+            if (
+              (line.children[line.children.length - 1].isIcon &&
+                line.children[line.children.length - 1].name == "delInput" &&
+                child.name == "verticalEllipsis") ||
+              (line.children[line.children.length - 1].isIcon &&
+                line.children[line.children.length - 1].name ==
+                  "verticalEllipsis" &&
+                child.name == "addInput")
+            ) {
+              line.width += 2
+            } else {
+              line.width += child.padx
+            }
           } else {
-            line.width += 4
+            line.width += 5
           }
         }
+
         child.x = line.width
         line.width += child.width
         if (!child.isLabel) {
@@ -991,7 +1077,7 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
-    this.parentCategory = null
+    this.color = new Color()
     this.isZebra = false
   }
 
@@ -1011,12 +1097,8 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (!this.isZebra && this.parentCategory) {
-        if (
-          this.parentCategory.toLowerCase() ===
-            block.info.category.toLowerCase() ||
-          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
-        ) {
+      if (!this.isZebra && this.color) {
+        if (this.color.eq(block.color)) {
           block.isZebra = true
         }
       }

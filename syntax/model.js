@@ -241,7 +241,7 @@ export class Block {
       this.isReporter &&
       info.categoryIsDefault &&
       children.length == 1 &&
-      children[0].isReporter
+      children[0].isBlock
   }
   get isBlock() {
     return true

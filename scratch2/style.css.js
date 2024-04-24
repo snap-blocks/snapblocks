@@ -28,46 +28,46 @@ export default `
   fill: #d42828;
 }
 .sb-motion {
-  fill: #4a6cd4;
+  fill: rgb(74, 108, 212);
 }
 .sb-looks {
-  fill: #8a55d7;
+  fill: rgb(138, 85, 215);
 }
 .sb-sound {
-  fill: #bb42c3;
+  fill: rgb(187, 66, 195);
 }
 .sb-pen {
-  fill: #0e9a6c;
+  fill: rgb(14, 154, 108);
 }
 .sb-events {
-  fill: #c88330;
+  fill: rgb(200, 131, 48);
 }
 .sb-control {
-  fill: #e1a91a;
+  fill: rgb(225, 169, 26);
 }
 .sb-sensing {
-  fill: #2ca5e2;
+  fill: rgb(44, 165, 226);
 }
 .sb-operators {
-  fill: #5cb712;
+  fill: rgb(92, 183, 18);
 }
 .sb-variables {
-  fill: #ee7d16;
+  fill: rgb(238, 125, 22);
 }
 .sb-list {
-  fill: #cc5b22;
+  fill: rgb(204, 91, 34);
 }
 .sb-custom {
-  fill: #632d99;
+  fill: rgb(99, 45, 153);
 }
 .sb-custom-arg {
-  fill: #5947b1;
+  fill: rgb(89, 71, 177);
 }
 .sb-extension {
-  fill: #4b4a60;
+  fill: rgb(75, 74, 96);
 }
 .sb-grey {
-  fill: #969696;
+  fill: rgb(150, 150, 150);
 }
 .sb-other {
   fill: #969696;

@@ -1,5 +1,5 @@
 import SVG from "./draw.js"
-import Color from "./color.js"
+import Color from "../shared/color.js"
 import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 

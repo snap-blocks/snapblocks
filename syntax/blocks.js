@@ -2,7 +2,7 @@ import { extensions, aliasExtensions } from "./extensions.js"
 
 // List of classes we're allowed to override.
 
-const overrideCategories = [
+export const overrideCategories = [
   "motion",
   "looks",
   "sound",
@@ -15,20 +15,19 @@ const overrideCategories = [
   "custom",
   "custom-arg",
   "extension",
-  "grey",
   "other",
   "obsolete",
   ...Object.keys(extensions),
   ...Object.keys(aliasExtensions),
 ]
 
-const aliasCategories = {
+export const aliasCategories = {
   grey: "other",
   gray: "other",
-  lists: "list",
+  list: "lists",
 }
 
-const overrideShapes = [
+export const overrideShapes = [
   "hat",
   "cap",
   "stack",
@@ -38,7 +37,7 @@ const overrideShapes = [
   "cat",
 ]
 
-const aliasShapes = {
+export const aliasShapes = {
   predicate: "boolean",
   command: "stack",
 }
@@ -927,6 +926,9 @@ export function lookupDropdown(name, languages) {
 }
 
 export function applyOverrides(info, overrides) {
+  if (!Array.isArray(overrides)) {
+    return
+  }
   for (const name of overrides) {
     if (hexColorPat.test(name)) {
       info.color = name

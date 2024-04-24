@@ -1,10 +1,37 @@
 import SVG from "./draw.js"
+import Color from "../shared/color.js"
 import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
 export default class Style {
   static get cssContent() {
     return cssContent
+  }
+
+  static categories = {
+    obsolete: new Color(212, 40, 40),
+    motion: new Color(74, 108, 212),
+    looks: new Color(138, 85, 215),
+    sound: new Color(187, 66, 195),
+    pen: new Color(14, 154, 108),
+    events: new Color(200, 131, 48),
+    control: new Color(225, 169, 26),
+    sensing: new Color(44, 165, 226),
+    operators: new Color(92, 183, 18),
+    variables: new Color(238, 125, 22),
+    lists: new Color(204, 91, 34),
+    custom: new Color(99, 45, 153),
+    "custom-arg": new Color(89, 71, 177),
+    extension: new Color(75, 74, 96),
+    other: new Color(150, 150, 150),
+  }
+
+  static categoryColor(category) {
+    if (Style.categories[category]) {
+      return Style.categories[category]
+    } else {
+      return new Color()
+    }
   }
 
   static makeIcons() {
@@ -526,11 +553,17 @@ export default class Style {
     return f.el
   }
 
-  static darkRect(w, h, category, el) {
+  static darkRect(w, h, color, el) {
     return SVG.setProps(
       SVG.group([
         SVG.setProps(el, {
-          class: `sb-${category} sb-darker`,
+          class: `sb-dark-input`,
+          fill:
+            color instanceof Color
+              ? color.darker(20).toHexString()
+              : color
+                ? Color.fromString(color)?.toHexString()
+                : "white",
         }),
       ]),
       { width: w, height: h },

@@ -13,7 +13,7 @@ import {
   movedExtensions,
   aliasExtensions,
 } from "../syntax/index.js"
-import Color from "./color.js"
+import Color from "../shared/color.js"
 
 import SVG from "./draw.js"
 
@@ -42,7 +42,11 @@ const categoryAliases = {
 
 export class LabelView {
   constructor(label) {
-    Object.assign(this, label)
+    if (label.isIcon && unicodeIcons[label.name]) {
+      Object.assign(this, { value: unicodeIcons[label.name] })
+    } else {
+      Object.assign(this, label)
+    }
 
     this.el = null
     this.height = 10
@@ -329,7 +333,6 @@ class InputView {
       this.label = newView(input.label)
     }
 
-    console.log(this)
     this.x = 0
   }
 
@@ -542,6 +545,8 @@ class BlockView {
     this.isSnavanced = false
     this.isZebra = false
 
+    console.log('category', this.info.category)
+
     this.color = this.info.color
       ? Color.fromString(this.info.color)
       : categoryColor(this.info.category)
@@ -716,7 +721,6 @@ class BlockView {
     if (this.isZebra) {
       if (color) {
         color = color.zebra()
-        console.log("color", color)
       }
     }
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
@@ -1098,7 +1102,7 @@ class GlowView {
 
   draw(options) {
     const c = this.child
-    const el = c.isScript ? c.draw(true) : c.draw()
+    const el = c.isScript ? c.draw(options, true) : c.draw(options)
 
     this.width = c.width
     this.height = (c.isBlock && c.firstLine.height) || c.height

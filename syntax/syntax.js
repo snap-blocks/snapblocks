@@ -30,6 +30,7 @@ import {
   blockName,
   parseSpec,
   unicodeIcons,
+  aliasCategories,
 } from "./blocks.js"
 
 function paintBlock(info, children, languages) {
@@ -37,6 +38,8 @@ function paintBlock(info, children, languages) {
   if (Array.isArray(children[children.length - 1])) {
     overrides = children.pop()
   }
+
+  info.overrides = overrides
 
   // build hash
   const words = []
@@ -68,7 +71,11 @@ function paintBlock(info, children, languages) {
     ) {
       info.shape = type.shape
     }
-    info.category = type.category
+    if (aliasCategories[type.category]) {
+      info.category = aliasCategories[type.category]
+    } else {
+      info.category = type.category
+    }
     info.categoryIsDefault = true
     // store selector, used for translation among other things
     if (type.selector) {
@@ -154,14 +161,13 @@ function paintBlock(info, children, languages) {
         block.children = customChildren.map(child => {
             if (child.isInput && child.isBoolean) {
               // Convert empty boolean slot to empty boolean argument.
-              child = paintBlock(
+              child = new Block(
                 {
                   shape: "reporter",
                   argument: "boolean",
                   category: "custom-arg",
                 },
                 [new Label(child.value ? child.value : ""), new Label("?")],
-                languages,
               )
             } else if (
               child.isInput &&
@@ -169,14 +175,13 @@ function paintBlock(info, children, languages) {
             ) {
               // Convert string inputs to string arguments.
               const labels = child.value.split(/ +/g).map(word => new Label(word))
-              child = paintBlock(
+              child = new Block(
                 {
                   shape: "reporter",
                   argument: "string",
                   category: "custom-arg",
                 },
                 labels,
-                languages,
               )
             } else if (
               child.isInput &&
@@ -184,7 +189,7 @@ function paintBlock(info, children, languages) {
             ) {
               // Convert number inputs to number arguments.
               const labels = child.value.split(/ +/g).map(word => new Label(word))
-              child = paintBlock(
+              child = new Block(
                 {
                   shape: "reporter",
                   argument: "number",
@@ -197,29 +202,30 @@ function paintBlock(info, children, languages) {
               // Convert variables to number arguments.
               if (child.info.categoryIsDefault) {
                 child.info.category = "custom-arg"
-                child.info.argument = "number"
-                child.children.push(new Label("#"))
               }
+              child.info.argument = "number"
+              child.children.push(new Label("#"))
             } else if (child.isBoolean) {
               if (child.info.categoryIsDefault) {
                 child.info.category = "custom-arg"
-                child.info.shape = "reporter"
-                child.isReporter = true
-                child.isBoolean = false
-                child.info.argument = "boolean"
-                child.children.push(new Label("?"))
               }
+              child.info.shape = "reporter"
+              child.isReporter = true
+              child.isBoolean = false
+              child.info.argument = "boolean"
+              child.children.push(new Label("?"))
             } else if (child.isCommand) {
               if (child.info.categoryIsDefault) {
                 child.info.category = "custom-arg"
-                child.info.shape = "reporter"
-                child.isReporter = true
-                child.isCommand = false
-                child.info.argument = "ring"
-                child.children.push(new Label("λ"))
               }
+              child.info.shape = "reporter"
+              child.isReporter = true
+              child.isCommand = false
+              child.info.argument = "ring"
+              child.children.push(new Label("λ"))
             }
             if (!child.isUpvar && !child.isLabel && !child.isIcon) {
+              applyOverrides(child.info, child.info.overrides)
               child = paintBlock(
                 {
                   shape: "reporter",
@@ -1176,7 +1182,7 @@ function recognizeStuff(scripts) {
           spec: spec,
           names: names,
           category: block.info.category,
-          shape: block.info.shape,
+          shape: outline.info.shape,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
@@ -1339,7 +1345,7 @@ function recognizeStuff(scripts) {
           block.info.names = info.names
           block.info.category = info.category
           block.info.color = info.color
-          block.info.shape = info.shape
+          // block.info.shape = info.shape
           block.info.isCustom = true
         }
       }
@@ -1386,7 +1392,7 @@ function recognizeStuff(scripts) {
 
       // list reporters
       if (listNames.has(name)) {
-        info.category = "list"
+        info.category = "lists"
         info.categoryIsDefault = false
         info.selector = "contentsOfList:"
       }
