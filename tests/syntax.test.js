@@ -217,7 +217,7 @@ describe("recognise lists", () => {
   })
 
   const list = {
-    category: "list",
+    category: "lists",
     selector: "contentsOfList:",
   }
 
@@ -252,7 +252,7 @@ describe("disambiguation", () => {
   })
 
   const lineCount = {
-    category: "list",
+    category: "lists",
     selector: "lineCountOfList:",
   }
 
@@ -341,7 +341,7 @@ describe("disambiguation", () => {
   })
 
   const listContains = {
-    category: "list",
+    category: "lists",
     selector: "list:contains:",
   }
 
