@@ -5,6 +5,7 @@
     <title>Snapshot Test</title>
     <script>
       window.render = (source, options, scale) => {
+
         const doc = snapblocks.parse(source, {
           languages: options.lang ? ["en", options.lang] : ["en"],
         })
@@ -12,6 +13,9 @@
         const view = snapblocks.newView(doc, {
           style: options.style,
           scale: options.scale,
+          zebra: options.zebra,
+          wrap: options.wrap,
+          showSpaces: options.showSpaces,
         })
         const svg = view.render()
 
