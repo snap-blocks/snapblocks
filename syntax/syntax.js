@@ -99,8 +99,6 @@ function paintBlock(info, children, languages) {
     // We check for built-in blocks first to avoid ambiguity, e.g. the
     // `defina o tamanho como (100) %` block in pt_BR.
     for (const lang of languages) {
-      // console.log("define")
-      // console.log("lang", lang.definePrefix, lang.defineSuffix)
 
       if (
         (overrides.includes("define") || overrides.includes("define+")) &&
@@ -159,6 +157,9 @@ function paintBlock(info, children, languages) {
         }
 
         block.children = customChildren.map(child => {
+            if (child.isIcon && child.name == "plusSign") {
+              return child
+            }
             if (child.isInput && child.isBoolean) {
               // Convert empty boolean slot to empty boolean argument.
               child = new Block(
@@ -239,7 +240,8 @@ function paintBlock(info, children, languages) {
             }
             return child
           })
-        continue
+        
+        break // We don't need to check other languages, do we?
       }
 
       if (!isDefineBlock(children, lang, !overrides.includes("define"))) {
@@ -260,7 +262,6 @@ function paintBlock(info, children, languages) {
 
       info.category = "custom"
 
-      // console.log("info", info.category)
       info.shape = "define-hat"
 
       // Move the children of the define block into an "outline", transforming
@@ -273,10 +274,8 @@ function paintBlock(info, children, languages) {
         children.length - lang.defineSuffix.length,
       )
 
-      // console.log("outlineChildren", structuredClone(blockChildren))
 
       if (blockChildren.length == 1 && !blockChildren[0].isLabel) {
-        // console.log("shape", blockChildren[1])
         if (blockChildren[0] instanceof Input) {
           // outlineShape = children[1].shape
         } else {
@@ -287,7 +286,6 @@ function paintBlock(info, children, languages) {
             ...blockChildren,
             ...children.slice(children.length - lang.defineSuffix.length),
           ]
-          // console.log("cloned children", children)
         }
       }
       const outlineChildren = children
@@ -459,7 +457,6 @@ function parseLines(code, languages) {
         child.shape = shape
       }
     }
-    // console.log("children", children)
     return paintBlock(info, children, languages)
   }
 
@@ -568,7 +565,6 @@ function parseLines(code, languages) {
             break
           }
           case "\n":
-            // console.log("end", end)
             if (end) {
               break
             }
@@ -706,7 +702,6 @@ function parseLines(code, languages) {
         next()
         return new Input("number-dropdown", text.substring(1, text.length))
       }
-      // console.log("tok", tok)
       if (tok === "V" && peek() === ")") {
         next()
         next()
@@ -1206,7 +1201,6 @@ function recognizeStuff(scripts) {
 
         // snap custom blocks
       } else if (block.isSnapDefine) {
-        // console.log("snap")
 
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
@@ -1218,7 +1212,6 @@ function recognizeStuff(scripts) {
         const names = []
         const parts = []
         for (const child of customBlock.children) {
-          // console.log("value", child)
           // we can format custom blocks with + between segments like snap
           if (child.isIcon && child.name === "plusSign") {
             continue
@@ -1242,7 +1235,6 @@ function recognizeStuff(scripts) {
               const containsEq = argVar.children.find(
                 child => child.value == "=",
               )
-              // console.log("containsEq", containsEq)
 
               var typePosition = argVar.children.length - 1
               if (containsEq) {
@@ -1252,7 +1244,6 @@ function recognizeStuff(scripts) {
                   typePosition--
                 ) {
                   const argChild = argVar.children[typePosition]
-                  // console.log("argChild", argChild)
                   if (argChild.isLabel && argChild.value == "=") {
                     typePosition -= 1
                     break
@@ -1272,7 +1263,6 @@ function recognizeStuff(scripts) {
 
             if (argVar.children[typePosition]) {
               argument = types[argVar.children[typePosition].value]
-              // console.log(argument)
               if (!argument) {
                 argument = "string"
               }
@@ -1285,7 +1275,6 @@ function recognizeStuff(scripts) {
                 boolean: "%b",
               }[argument] || "%s",
             )
-            // console.log("part", parts[parts.length - 1])
 
             const name = blockName(argVar)
             names.push(name)
@@ -1297,7 +1286,6 @@ function recognizeStuff(scripts) {
         const spec = parts.join(" ")
         const hash = hashSpec(spec)
 
-        // console.log("spec", spec)
         let info = {
           spec: spec,
           names: names,
@@ -1308,7 +1296,6 @@ function recognizeStuff(scripts) {
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = info
         }
-        // console.log("hash", hash)
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
         block.info.call = info.spec
@@ -1337,7 +1324,6 @@ function recognizeStuff(scripts) {
          (block.isReporter && block.info.category === "variables"))
       ) {
         // custom blocks
-        // console.log("block hash", block.info.hash)
         const info = customBlocksByHash[block.info.hash]
         if (info) {
           block.info.selector = "call"
@@ -1375,11 +1361,8 @@ function recognizeStuff(scripts) {
 
       // upvars
       if (block.isBlock) {
-        // console.log("block", block.info.isCustom)
         for (const child of block.children) {
-          // console.log("upvar", child.isUpvar)
           if (child.isUpvar) {
-            // console.log("category", block.info.category)
             child.info.category = block.info.category
             child.info.color = block.info.color
           }

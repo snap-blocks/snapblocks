@@ -545,8 +545,6 @@ class BlockView {
     this.isSnavanced = false
     this.isZebra = false
 
-    console.log('category', this.info.category)
-
     this.color = this.info.color
       ? Color.fromString(this.info.color)
       : categoryColor(this.info.category)
