@@ -1169,10 +1169,13 @@ function recognizeStuff(scripts) {
           spec: spec,
           names: names,
           category: block.info.category,
-          shape: outline.info.shape,
+          shape: outline.info.shape.replace('outline-', ''),
         }
+        console.log(info.shape)
         if (!customBlocksByHash[hash]) {
-          customBlocksByHash[hash] = info
+          customBlocksByHash[hash] = [info]
+        } else {
+          customBlocksByHash[hash].push(info)
         }
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
@@ -1285,7 +1288,9 @@ function recognizeStuff(scripts) {
           shape: customBlock.info.shape,
         }
         if (!customBlocksByHash[hash]) {
-          customBlocksByHash[hash] = info
+          customBlocksByHash[hash] = [info]
+        } else {
+          customBlocksByHash[hash].push(info)
         }
         block.info.id = "PROCEDURES_DEFINITION"
         block.info.selector = "procDef"
@@ -1315,15 +1320,24 @@ function recognizeStuff(scripts) {
           (block.isReporter && block.info.category === "variables"))
       ) {
         // custom blocks
-        const info = customBlocksByHash[block.info.hash]
-        if (info) {
-          block.info.selector = "call"
-          block.info.call = info.spec
-          block.info.names = info.names
-          block.info.category = info.category
-          block.info.color = info.color
-          // block.info.shape = info.shape
-          block.info.isCustom = true
+        const blocksInfo = customBlocksByHash[block.info.hash]
+        if (blocksInfo) {
+          let selected = blocksInfo[0]
+          console.log(blocksInfo)
+          for (let info of blocksInfo) {
+            if (info.shape == block.info.shape) {
+              selected = info
+            }
+          }
+          if (selected) {
+            block.info.selector = "call"
+            block.info.call = selected.spec
+            block.info.names = selected.names
+            block.info.category = selected.category
+            block.info.color = selected.color
+            // block.info.shape = selected.shape
+            block.info.isCustom = true
+          }
         }
       }
 
