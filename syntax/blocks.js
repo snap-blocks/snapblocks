@@ -930,7 +930,7 @@ export function applyOverrides(info, overrides) {
     return
   }
   for (const name of overrides) {
-    console.log('name', name)
+    console.log("name", name)
     if (hexColorPat.test(name) || rgbColorPat.test(name)) {
       info.color = Color.fromString(name)
       info.category = ""

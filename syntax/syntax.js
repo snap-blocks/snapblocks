@@ -41,7 +41,6 @@ function paintBlock(info, children, languages) {
   }
   info.overrides = overrides
 
-
   // build hash
   const words = []
   for (const child of children) {
@@ -911,8 +910,8 @@ function parseLines(code, languages) {
       } else if (tok === "/" && peek() === "/") {
         break
       } else if (tok === "(") {
-          override += tok
-          while (tok && tok !== "\n" && tok !== ")") {
+        override += tok
+        while (tok && tok !== "\n" && tok !== ")") {
           next()
           override += tok
         }
@@ -924,7 +923,7 @@ function parseLines(code, languages) {
     if (override) {
       overrides.push(override)
     }
-    console.log('overrides', overrides)
+    console.log("overrides", overrides)
     return overrides
   }
 
@@ -1178,7 +1177,7 @@ function recognizeStuff(scripts) {
           spec: spec,
           names: names,
           category: block.info.category,
-          shape: outline.info.shape.replace('outline-', ''),
+          shape: outline.info.shape.replace("outline-", ""),
         }
         console.log(info.shape)
         if (!customBlocksByHash[hash]) {
