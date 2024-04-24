@@ -34,10 +34,10 @@ import {
 
 import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
 
-let overrides = []
 function paintBlock(info, children, languages) {
-  overrides = children.pop()
+  let overrides = []
   if (Array.isArray(children[children.length - 1])) {
+    overrides = children.pop()
   }
   info.overrides = overrides
 
