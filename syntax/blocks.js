@@ -48,13 +48,13 @@ export const rtlLanguages = ["ar", "ckb", "fa", "he"]
 // List of commands taken from Scratch
 import scratchCommands from "./commands.js"
 
+import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
+
 const inputNumberPat = /%([0-9]+)/
 export const inputPat = /(%[a-zA-Z0-9](?:\.[a-zA-Z0-9]+)?)/
 const inputPatGlobal = new RegExp(inputPat.source, "g")
 export const iconPat = /(@[a-zA-Z]+)/
 const splitPat = new RegExp(`${inputPat.source}|${iconPat.source}| +`, "g")
-
-export const hexColorPat = /^#(?:[0-9a-fA-F]{3}){1,2}?$/
 
 export function parseInputNumber(part) {
   const m = inputNumberPat.exec(part)
@@ -930,8 +930,9 @@ export function applyOverrides(info, overrides) {
     return
   }
   for (const name of overrides) {
-    if (hexColorPat.test(name)) {
-      info.color = name
+    console.log('name', name)
+    if (hexColorPat.test(name) || rgbColorPat.test(name)) {
+      info.color = Color.fromString(name)
       info.category = ""
       info.categoryIsDefault = false
     } else if (overrideCategories.includes(name)) {

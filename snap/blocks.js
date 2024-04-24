@@ -1,5 +1,3 @@
-import { hexColorPat } from "../syntax/blocks.js"
-
 import {
   Label,
   Icon,
@@ -13,7 +11,7 @@ import {
   movedExtensions,
   aliasExtensions,
 } from "../syntax/index.js"
-import Color from "../shared/color.js"
+import Color, { hexColorPat } from "../shared/color.js"
 
 import SVG from "./draw.js"
 
@@ -427,7 +425,7 @@ class InputView {
     let el = InputView.shapes[this.shape](w, h)
     if (this.isColor) {
       SVG.setProps(el, {
-        fill: this.value,
+        fill: this.value.toHexString(),
       })
     } else if (this.isBoolean) {
       switch (this.value) {
@@ -546,7 +544,7 @@ class BlockView {
     this.isZebra = false
 
     this.color = this.info.color
-      ? Color.fromString(this.info.color)
+      ? this.info.color
       : categoryColor(this.info.category)
   }
 

@@ -451,7 +451,7 @@ export class InputView {
 
     if (this.isColor) {
       SVG.setProps(el, {
-        fill: this.value,
+        fill: this.value.toHexString(),
       })
     } else if (this.shape === "dropdown") {
       // custom colors

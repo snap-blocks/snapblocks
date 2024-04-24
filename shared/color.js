@@ -1,4 +1,5 @@
-import { hexColorPat } from "../syntax/blocks.js"
+export const hexColorPat = /^#(?:[0-9a-fA-F]{3}){1,2}?$/
+export const rgbColorPat = /^rgb\( *\d+ *(,? *\d* *){0,2}\)$/
 
 export default class Color {
   constructor(r, g, b, a) {
@@ -20,7 +21,9 @@ export default class Color {
     var components = aString.split(/[\(),]/),
       channels = aString.startsWith("rgba")
         ? components.slice(1, 5)
-        : components.slice(0, 4)
+        : aString.startsWith("rgb")
+          ? components.slice(1, 4)
+          : components.slice(0, 4)
     return new Color(+channels[0], +channels[1], +channels[2], +channels[3])
   }
   static fromHexString(hex) {

@@ -20,7 +20,6 @@ import {
 import {
   allLanguages,
   lookupDropdown,
-  hexColorPat,
   minifyHash,
   lookupHash,
   hashSpec,
@@ -33,13 +32,15 @@ import {
   aliasCategories,
 } from "./blocks.js"
 
-function paintBlock(info, children, languages) {
-  let overrides = []
-  if (Array.isArray(children[children.length - 1])) {
-    overrides = children.pop()
-  }
+import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
 
+let overrides = []
+function paintBlock(info, children, languages) {
+  overrides = children.pop()
+  if (Array.isArray(children[children.length - 1])) {
+  }
   info.overrides = overrides
+
 
   // build hash
   const words = []
@@ -637,8 +638,8 @@ function parseLines(code, languages) {
     if (tok === "]") {
       next()
     }
-    if (hexColorPat.test(raw)) {
-      return new Input("color", s)
+    if (hexColorPat.test(raw) || rgbColorPat.test(raw)) {
+      return new Input("color", Color.fromString(s))
     }
     return !escapeV && / v$/.test(s)
       ? makeMenu("dropdown", s.slice(0, s.length - 2), false)
@@ -719,6 +720,7 @@ function parseLines(code, languages) {
     // number
     if (children.length === 1 && children[0].isLabel) {
       const value = children[0].value
+      const raw = children[0].raw
       let input
       if (/^[0-9e.-]*$/.test(value)) {
         input = new Input("number", value)
@@ -727,8 +729,8 @@ function parseLines(code, languages) {
         }
         return input
       }
-      if (hexColorPat.test(value)) {
-        input = new Input("color", value)
+      if (hexColorPat.test(raw) || rgbColorPat.test(raw)) {
+        input = new Input("color", Color.fromString(raw))
         return input
       }
     }
@@ -897,8 +899,8 @@ function parseLines(code, languages) {
 
   function pOverrides(end) {
     next()
-    next()
     const overrides = []
+    next()
     let override = ""
     while (tok && tok !== "\n" && tok !== end) {
       if (tok === " ") {
@@ -908,6 +910,12 @@ function parseLines(code, languages) {
         }
       } else if (tok === "/" && peek() === "/") {
         break
+      } else if (tok === "(") {
+          override += tok
+          while (tok && tok !== "\n" && tok !== ")") {
+          next()
+          override += tok
+        }
       } else {
         override += tok
       }
@@ -916,6 +924,7 @@ function parseLines(code, languages) {
     if (override) {
       overrides.push(override)
     }
+    console.log('overrides', overrides)
     return overrides
   }
 

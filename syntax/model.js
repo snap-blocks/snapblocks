@@ -13,6 +13,7 @@ function indent(text) {
     .join("\n")
 }
 
+import Color from "../shared/color.js"
 import {
   parseSpec,
   inputPat,
@@ -167,8 +168,8 @@ export class Input {
 
   stringify() {
     if (this.isColor) {
-      assert(this.value[0] === "#")
-      return `[${this.value}]`
+      assert(this.value instanceof Color)
+      return `[${this.value.toHexString()}]`
     }
     if (this.isBoolean) {
       if (this.value) {
@@ -291,6 +292,12 @@ export class Block {
         overrides += " "
       }
       overrides += this.info.category
+    }
+    if (this.info.color) {
+      if (overrides) {
+        overrides += " "
+      }
+      overrides += this.info.color.toHexString()
     }
     if (overrides) {
       text += ` :: ${overrides}`
