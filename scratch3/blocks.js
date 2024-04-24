@@ -29,6 +29,13 @@ const unicodeIcons = {
   cloudOutline: "☁",
 }
 
+const categoryAliases = {
+  ...aliasExtensions,
+  grey: "other",
+  gray: "other",
+  lists: "list",
+}
+
 export class LabelView {
   constructor(label) {
     if (label.isIcon && unicodeIcons[label.name]) {
@@ -508,9 +515,9 @@ class BlockView {
     // Avoid accidental mutation
     this.info = { ...block.info }
     if (
-      Object.prototype.hasOwnProperty.call(aliasExtensions, this.info.category)
+      Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {
-      this.info.category = aliasExtensions[this.info.category]
+      this.info.category = categoryAliases[this.info.category]
     }
     if (Object.prototype.hasOwnProperty.call(extensions, this.info.category)) {
       this.children.unshift(new LineView())
