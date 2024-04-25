@@ -40,16 +40,35 @@ const categoryAliases = {
 
 export class LabelView {
   constructor(label) {
+    this._color = new Color(255, 255, 255)
+    this.defaultColor = true
+
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
     } else {
       Object.assign(this, label)
     }
 
+    if (label.color) {
+      this.color = label.color
+    }
+
     this.el = null
     this.height = 10
     this.metrics = null
     this.x = 0
+  }
+
+  get color() {
+    return this._color
+  }
+
+  set color(color) {
+    this.defaultColor = false
+    if (!(color instanceof Color)) {
+      color = Color.fromString(color)
+    }
+    this._color = color
   }
 
   get isLabel() {
@@ -81,6 +100,20 @@ export class LabelView {
   measure() {
     const value = this.value
     const cls = `snap-${this.cls}`
+
+    if (this.defaultColor) {
+      this._color = /comment-label|label-dark/.test(this.cls)
+      ? new Color()
+        : /(boolean|dropdown)/.test(this.cls)
+        ? new Color(255,255,255)
+            : /literal/.test(this.cls)
+              ? new Color()
+              : new Color(255,255,255)
+    }
+
+    console.log('class', this.cls)
+    console.log('default color', this.defaultColor)
+    console.log('color', this.color)
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -129,6 +162,7 @@ export class LabelView {
             class: `snap-label ${cls}`,
           }),
         )
+        lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
         first = false
       }
@@ -379,6 +413,12 @@ class InputView {
       h = 12
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
+        if (!this.isBoolean &&
+            this.isDarker &&
+            parent.isZebra) {
+          this.label.color = new Color()
+          this.label.measure()
+        }
         label = this.label.draw({
           ...options,
           isFlat: !this.isBoolean || options.isFlat,
@@ -423,6 +463,13 @@ class InputView {
     this.height = h + 1
 
     let el = InputView.shapes[this.shape](w, h)
+
+    let color = parent.color
+
+    if (parent.isZebra) {
+      color = color.zebra()
+    }
+
     if (this.isColor) {
       SVG.setProps(el, {
         fill: this.value.toHexString(),
@@ -444,16 +491,12 @@ class InputView {
         default:
           SVG.setProps(el, {
             fill:
-              parent.color instanceof Color
-                ? parent.color.darker().toHexString()
-                : parent.color
-                  ? Color.fromString(parent.color)?.toHexString()
-                  : "white",
+              parent.color.darker().toHexString()
           })
           break
       }
     } else if (this.isDarker) {
-      el = darkRect(w, h, parent.color, el)
+      el = darkRect(w, h, color, el)
     }
 
     const result = SVG.group([

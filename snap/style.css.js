@@ -108,11 +108,11 @@ export default `
 .snap-literal-string,
 .snap-literal-number-dropdown,
 .snap-literal-dropdown {
-  fill: #000;
+  /* fill: #000; */
 }
 .snap-literal-number-dropdown-readonly,
 .snap-literal-dropdown-readonly {
-  fill: #fff;
+  /* fill: #fff; */
 }
 
 .snap-darker {
