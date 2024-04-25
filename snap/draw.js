@@ -860,7 +860,7 @@ export default class SVG {
   }
 
   static commentRect(w, h, props) {
-    const r = 6
+    const r = 8
     return SVG.path({
       ...props,
       class: "snap-comment",
@@ -877,11 +877,11 @@ export default class SVG {
     })
   }
 
-  static commentLine(width, props) {
+  static commentLine(width, height, props) {
     return SVG.move(
       -width,
-      9,
-      SVG.rect(width, 2, { ...props, class: "snap-comment-line" }),
+      height / 2,
+      SVG.rect(width, 1, { ...props, class: "snap-comment-line" }),
     )
   }
 

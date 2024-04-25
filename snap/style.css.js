@@ -138,8 +138,6 @@ export default `
 
 .snap-comment {
   fill: #ffffb4;
-  stroke: #d0d1d2;
-  stroke-width: 1;
 }
 .snap-comment-line {
   fill: #ffffb4;

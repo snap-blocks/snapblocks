@@ -1056,6 +1056,7 @@ class CommentView {
   constructor(comment) {
     Object.assign(this, comment)
     this.label = newView(comment.label)
+    this.arrow = newView(new Icon("addInput"))
 
     this.width = null
   }
@@ -1065,11 +1066,11 @@ class CommentView {
   }
 
   static get lineLength() {
-    return 12
+    return 8
   }
 
   get height() {
-    return 20
+    return 17
   }
 
   measure() {
@@ -1077,18 +1078,27 @@ class CommentView {
   }
 
   draw(options) {
+    const padding = {
+      left: 10,
+      arrow: 5,
+      right: 10,
+    }
+
     const labelEl = this.label.draw({
       ...options,
       showSpaces: false,
     })
 
-    this.width = this.label.width + 16
+    const arrowEl = this.arrow.draw(options)
+
+    this.width = padding.left + this.arrow.width + padding.arrow + this.label.width + padding.right
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, 6),
+      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.height),
       SVG.commentRect(this.width, this.height, {
         class: "snap-comment",
       }),
-      SVG.move(8, 4, labelEl),
+      SVG.move(padding.left, this.height / 5, arrowEl),
+      SVG.move(padding.left + this.arrow.width + padding.arrow, this.height / 5, labelEl),
     ])
   }
 }
@@ -1193,10 +1203,10 @@ class ScriptView {
       const comment = block.comment
       if (comment) {
         const line = block.firstLine
-        const cx = block.innerWidth + 2 + CommentView.lineLength
-        const cy = y - block.height + line.height
+        const cx = block.innerWidth + CommentView.lineLength
+        const cy = y
         const el = comment.draw(options)
-        children.push(SVG.move(cx, cy - comment.height / 2, el))
+        children.push(SVG.move(cx, 2, el))
         this.width = Math.max(this.width, cx + comment.width)
       }
     }
