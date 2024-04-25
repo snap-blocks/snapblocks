@@ -1091,14 +1091,23 @@ class CommentView {
 
     const arrowEl = this.arrow.draw(options)
 
-    this.width = padding.left + this.arrow.width + padding.arrow + this.label.width + padding.right
+    this.width =
+      padding.left +
+      this.arrow.width +
+      padding.arrow +
+      this.label.width +
+      padding.right
     return SVG.group([
       SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.height),
       SVG.commentRect(this.width, this.height, {
         class: "snap-comment",
       }),
       SVG.move(padding.left, this.height / 5, arrowEl),
-      SVG.move(padding.left + this.arrow.width + padding.arrow, this.height / 5, labelEl),
+      SVG.move(
+        padding.left + this.arrow.width + padding.arrow,
+        this.height / 5,
+        labelEl,
+      ),
     ])
   }
 }
