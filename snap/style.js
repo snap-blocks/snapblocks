@@ -587,7 +587,7 @@ export default class Style {
       "SourceGraphic",
       f.comp(
         "in",
-        f.flood("#fff", 0.7),
+        f.flood("#fff", 0.4),
         f.subtract(
           alpha,
           f.offset(inset ? -0.3 : 0.4, inset ? -0.3 : 0.4, blur),
