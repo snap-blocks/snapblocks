@@ -740,7 +740,7 @@ function parseLines(code, languages) {
       let end = last.value
       if (end === "v" || end === "V") {
         // Yes, I know this is a very hacky solution, I just want to keep all the spaces,
-        // and deal with backslashes. I wish I could come up with a much better way, then backtracking.
+        // and deal with backslashes. I wish I could come up with a much better way then backtracking.
 
         let endIndex = index
         let currentIndex = endIndex
@@ -757,8 +757,8 @@ function parseLines(code, languages) {
         while (index < currentIndex) {
           next()
           if (tok === "\\") {
-            next()
             raw += tok
+            next()
           }
           value += tok
           raw += tok
