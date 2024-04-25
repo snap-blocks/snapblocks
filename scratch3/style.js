@@ -126,68 +126,68 @@ export default class Style {
   }
 
   static highContrastCategories = {
-    motion:{
+    motion: {
       primary: Color.fromString("#80b5ff"),
       secondary: Color.fromString("#b3d2ff"),
       tertiary: Color.fromString("#3373cc"),
     },
-    looks:{
+    looks: {
       primary: Color.fromString("#ccb3ff"),
       secondary: Color.fromString("#ddccff"),
       tertiary: Color.fromString("#774dcb"),
     },
-    sound:{
+    sound: {
       primary: Color.fromString("#e19de1"),
       secondary: Color.fromString("#ffb3ff"),
       tertiary: Color.fromString("#bd42bd"),
     },
-    control:{
+    control: {
       primary: Color.fromString("#ffbe4c"),
       secondary: Color.fromString("#ffda99"),
       tertiary: Color.fromString("#cf8b17"),
     },
-    events:{
+    events: {
       primary: Color.fromString("#ffd966"),
       secondary: Color.fromString("#ffecb3"),
       tertiary: Color.fromString("#cc9900"),
     },
-    sensing:{
+    sensing: {
       primary: Color.fromString("#85c4e0"),
       secondary: Color.fromString("#aed8ea"),
       tertiary: Color.fromString("#2e8eb8"),
     },
-    operators:{
+    operators: {
       primary: Color.fromString("#7ece7e"),
       secondary: Color.fromString("#b5e3b5"),
       tertiary: Color.fromString("#389438"),
     },
-    variables:{
+    variables: {
       primary: Color.fromString("#ffa54c"),
       secondary: Color.fromString("#ffcc99"),
       tertiary: Color.fromString("#db6e00"),
     },
-    lists:{
+    lists: {
       primary: Color.fromString("#ff9966"),
       secondary: Color.fromString("#ffcab0"),
       tertiary: Color.fromString("#e64d00"),
     },
-    custom:{
+    custom: {
       primary: Color.fromString("#ff99aa"),
       secondary: Color.fromString("#ffccd5"),
       tertiary: Color.fromString("#e64d00"),
     },
-    extension:{
+    extension: {
       primary: Color.fromString("#13ecaf"),
       secondary: Color.fromString("#75f0cd"),
       tertiary: Color.fromString("#0b8e69"),
     },
     /* Manually picked to be readable on black text */
-    obsolete:{
+    obsolete: {
       primary: Color.fromString("#fc6666"),
       secondary: Color.fromString("#fcb0b0"),
       tertiary: Color.fromString("#d32121"),
     },
-    other:{
+    other: {
       primary: Color.fromString("#bfbfbf"),
       secondary: Color.fromString("#b2b2b2"),
       /* Changed to be AAA against #000000, was AA */
@@ -201,12 +201,14 @@ export default class Style {
       categories = Style.highContrastCategories
     }
 
-    let color = categories[category] ? categories[category] : categories.obsolete
-    
+    let color = categories[category]
+      ? categories[category]
+      : categories.obsolete
+
     return {
       ...color,
       makeZebra: function (isHighContrast) {
-        let color = {...this}
+        let color = { ...this }
         if (isHighContrast) {
           color.primary = color.primary.darker(10)
           color.secondary = color.secondary.darker(10)

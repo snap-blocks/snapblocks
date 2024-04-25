@@ -915,10 +915,7 @@ class BlockView {
         child.x = line.width
         line.width += child.width
         if (!child.isLabel) {
-          line.height = Math.max(
-            line.height,
-            child.height,
-          )
+          line.height = Math.max(line.height, child.height)
           if (child.isCommand) {
             line.padding.bottom = Math.max(line.padding.bottom, 3)
           }

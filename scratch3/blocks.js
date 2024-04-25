@@ -222,22 +222,19 @@ export class IconView {
   draw(options) {
     this.r =
       this.r === null
-        ? options.isHighContrast &&
-          highContrastIcons.has(this.name)
+        ? options.isHighContrast && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.r
     this.g =
       this.g === null
-        ? options.isHighContrast &&
-          highContrastIcons.has(this.name)
+        ? options.isHighContrast && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.g
     this.b =
       this.b === null
-        ? options.isHighContrast &&
-          highContrastIcons.has(this.name)
+        ? options.isHighContrast && highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.b
@@ -529,10 +526,10 @@ class BlockView {
 
     this.color = this.info.color
       ? {
-        primary: this.info.color,
-        secondary: this.info.color.darker(20),
-        tertiary: this.info.color.darker(10),
-      }
+          primary: this.info.color,
+          secondary: this.info.color.darker(20),
+          tertiary: this.info.color.darker(10),
+        }
       : categoryColor(this.info.category)
   }
 
@@ -693,7 +690,7 @@ class BlockView {
       })
     }
 
-    let color = {...this.color}
+    let color = { ...this.color }
     if (this.isZebra) {
       color = color.makeZebra(options.isHighContrast)
     }
@@ -786,10 +783,10 @@ class BlockView {
   draw(options) {
     this.color = this.info.color
       ? {
-        primary: this.info.color,
-        secondary: this.info.color.darker(20),
-        tertiary: this.info.color.darker(10),
-      }
+          primary: this.info.color,
+          secondary: this.info.color.darker(20),
+          tertiary: this.info.color.darker(10),
+        }
       : categoryColor(this.info.category, options.isHighContrast)
 
     const isDefine = this.info.shape === "define-hat"
@@ -1282,7 +1279,8 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
-    this.isHighContrast = options.style.replace("scratch3-", "") == "high-contrast"
+    this.isHighContrast =
+      options.style.replace("scratch3-", "") == "high-contrast"
 
     this.options = {
       id: this.id,
@@ -1352,10 +1350,9 @@ class DocumentView {
     )
     svg.classList.add("scratch3")
 
-    const icons =
-      this.isHighContrast
-        ? makeHighContrastIcons()
-        : makeOriginalIcons()
+    const icons = this.isHighContrast
+      ? makeHighContrastIcons()
+      : makeOriginalIcons()
 
     for (let icon of icons) {
       let id = icon.getAttribute("id")
