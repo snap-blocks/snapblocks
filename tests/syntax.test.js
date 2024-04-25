@@ -196,13 +196,13 @@ describe("color literals", () => {
   test("work", () => {
     const b = parseBlock("<touching color [#f0f] ?>")
     expect(b.children[2].shape).toBe("color")
-    expect(b.children[2].value).toStrictEqual(new Color(255,0,255,1))
+    expect(b.children[2].value).toStrictEqual(new Color(255, 0, 255, 1))
   })
 
   test("can be round", () => {
     const b = parseBlock("<touching color (#f0f) ?>")
     expect(b.children[2].shape).toBe("color")
-    expect(b.children[2].value).toStrictEqual(new Color(255,0,255,1))
+    expect(b.children[2].value).toStrictEqual(new Color(255, 0, 255, 1))
   })
 })
 
