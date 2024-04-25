@@ -917,13 +917,13 @@ class BlockView {
         if (!child.isLabel) {
           line.height = Math.max(
             line.height,
-            child.height + (child.isBlock ? 0 : 0),
+            child.height,
           )
           if (child.isCommand) {
             line.padding.bottom = Math.max(line.padding.bottom, 3)
           }
         } else {
-          line.height = Math.max(line.height, child.height - 2)
+          line.height = Math.max(line.height, child.height + 2)
         }
         line.children.push(child)
       }
