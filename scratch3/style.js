@@ -1,4 +1,5 @@
 import SVG from "./draw.js"
+import Color from "../shared/color.js"
 import cssContent from "./style.css.js"
 import Filter from "./filter.js"
 
@@ -54,6 +55,171 @@ export default class Style {
 
   static get cssContent() {
     return cssContent
+  }
+
+  static categories = {
+    motion: {
+      primary: Color.fromString("#4c97ff"),
+      secondary: Color.fromString("#4280d7"),
+      tertiary: Color.fromString("#3373cc"),
+    },
+    looks: {
+      primary: Color.fromString("#9966ff"),
+      secondary: Color.fromString("#855cd6"),
+      tertiary: Color.fromString("#774dcb"),
+    },
+    sound: {
+      primary: Color.fromString("#cf63cf"),
+      secondary: Color.fromString("#c94fc9"),
+      tertiary: Color.fromString("#bd42bd"),
+    },
+    control: {
+      primary: Color.fromString("#ffab19"),
+      secondary: Color.fromString("#ec9c13"),
+      tertiary: Color.fromString("#cf8b17"),
+    },
+    events: {
+      primary: Color.fromString("#ffbf00"),
+      secondary: Color.fromString("#e6ac00"),
+      tertiary: Color.fromString("#cc9900"),
+    },
+    sensing: {
+      primary: Color.fromString("#5cb1d6"),
+      secondary: Color.fromString("#47a8d1"),
+      tertiary: Color.fromString("#2e8eb8"),
+    },
+    operators: {
+      primary: Color.fromString("#59c059"),
+      secondary: Color.fromString("#46b946"),
+      tertiary: Color.fromString("#389438"),
+    },
+    variables: {
+      primary: Color.fromString("#ff8c1a"),
+      secondary: Color.fromString("#ff8000"),
+      tertiary: Color.fromString("#db6e00"),
+    },
+    lists: {
+      primary: Color.fromString("#ff661a"),
+      secondary: Color.fromString("#ff5500"),
+      tertiary: Color.fromString("#e64d00"),
+    },
+    custom: {
+      primary: Color.fromString("#ff6680"),
+      secondary: Color.fromString("#ff4d6a"),
+      tertiary: Color.fromString("#ff3355"),
+    },
+    extension: {
+      primary: Color.fromString("#0fbd8c"),
+      secondary: Color.fromString("#0da57a"),
+      tertiary: Color.fromString("#0b8e69"),
+    },
+    obsolete: {
+      primary: Color.fromString("#ed4242"),
+      secondary: Color.fromString("#db3333"),
+      tertiary: Color.fromString("#ca2b2b"),
+    },
+    other: {
+      primary: Color.fromString("#bfbfbf"),
+      secondary: Color.fromString("#b2b2b2"),
+      tertiary: Color.fromString("#909090"),
+    },
+  }
+
+  static highContrastCategories = {
+    motion:{
+      primary: Color.fromString("#80b5ff"),
+      secondary: Color.fromString("#b3d2ff"),
+      tertiary: Color.fromString("#3373cc"),
+    },
+    looks:{
+      primary: Color.fromString("#ccb3ff"),
+      secondary: Color.fromString("#ddccff"),
+      tertiary: Color.fromString("#774dcb"),
+    },
+    sound:{
+      primary: Color.fromString("#e19de1"),
+      secondary: Color.fromString("#ffb3ff"),
+      tertiary: Color.fromString("#bd42bd"),
+    },
+    control:{
+      primary: Color.fromString("#ffbe4c"),
+      secondary: Color.fromString("#ffda99"),
+      tertiary: Color.fromString("#cf8b17"),
+    },
+    events:{
+      primary: Color.fromString("#ffd966"),
+      secondary: Color.fromString("#ffecb3"),
+      tertiary: Color.fromString("#cc9900"),
+    },
+    sensing:{
+      primary: Color.fromString("#85c4e0"),
+      secondary: Color.fromString("#aed8ea"),
+      tertiary: Color.fromString("#2e8eb8"),
+    },
+    operators:{
+      primary: Color.fromString("#7ece7e"),
+      secondary: Color.fromString("#b5e3b5"),
+      tertiary: Color.fromString("#389438"),
+    },
+    variables:{
+      primary: Color.fromString("#ffa54c"),
+      secondary: Color.fromString("#ffcc99"),
+      tertiary: Color.fromString("#db6e00"),
+    },
+    lists:{
+      primary: Color.fromString("#ff9966"),
+      secondary: Color.fromString("#ffcab0"),
+      tertiary: Color.fromString("#e64d00"),
+    },
+    custom:{
+      primary: Color.fromString("#ff99aa"),
+      secondary: Color.fromString("#ffccd5"),
+      tertiary: Color.fromString("#e64d00"),
+    },
+    extension:{
+      primary: Color.fromString("#13ecaf"),
+      secondary: Color.fromString("#75f0cd"),
+      tertiary: Color.fromString("#0b8e69"),
+    },
+    /* Manually picked to be readable on black text */
+    obsolete:{
+      primary: Color.fromString("#fc6666"),
+      secondary: Color.fromString("#fcb0b0"),
+      tertiary: Color.fromString("#d32121"),
+    },
+    other:{
+      primary: Color.fromString("#bfbfbf"),
+      secondary: Color.fromString("#b2b2b2"),
+      /* Changed to be AAA against #000000, was AA */
+      tertiary: Color.fromString("#959595"),
+    },
+  }
+
+  static categoryColor(category, isHighContrast) {
+    let categories = Style.categories
+    if (isHighContrast) {
+      categories = Style.highContrastCategories
+    }
+
+    let color = categories[category] ? categories[category] : categories.obsolete
+    
+    return {
+      ...color,
+      makeZebra: function (isHighContrast) {
+        let color = {...this}
+        if (isHighContrast) {
+          color.primary = color.primary.darker(10)
+          color.secondary = color.secondary.darker(10)
+          color.tertiary = color.tertiary.darker(10)
+        } else {
+          color.primary = color.primary.lighter(30)
+          color.secondary = color.secondary.lighter(30)
+          color.tertiary = color.tertiary.lighter(30)
+        }
+
+        return color
+      },
+    }
   }
 
   static makeCommonIcons() {

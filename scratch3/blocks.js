@@ -10,10 +10,12 @@ import {
   extensions,
   aliasExtensions,
 } from "../syntax/index.js"
+import Color, { hexColorPat } from "../shared/color.js"
 
 import SVG from "./draw.js"
 import style from "./style.js"
 const {
+  categoryColor,
   defaultFont,
   commentFont,
   makeStyle,
@@ -220,21 +222,21 @@ export class IconView {
   draw(options) {
     this.r =
       this.r === null
-        ? options.iconStyle === "high-contrast" &&
+        ? options.isHighContrast &&
           highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.r
     this.g =
       this.g === null
-        ? options.iconStyle === "high-contrast" &&
+        ? options.isHighContrast &&
           highContrastIcons.has(this.name)
           ? 0
           : 255
         : this.g
     this.b =
       this.b === null
-        ? options.iconStyle === "high-contrast" &&
+        ? options.isHighContrast &&
           highContrastIcons.has(this.name)
           ? 0
           : 255
@@ -442,11 +444,16 @@ export class InputView {
 
     this.height = h
 
+    let color = parent.color
+
+    if (parent.isZebra) {
+      color = color.makeZebra(options.isHighContrast)
+    }
+
     const el = InputView.shapes[this.shape](w, h)
     SVG.setProps(el, {
-      class: `${
-        this.isColor ? "" : `sb3-${parent.info.category}`
-      } sb3-input sb3-input-${this.shape}`,
+      class: `sb3-input sb3-input-${this.shape}`,
+      stroke: color.tertiary.toHexString(),
     })
 
     if (this.isColor) {
@@ -455,32 +462,17 @@ export class InputView {
       })
     } else if (this.shape === "dropdown") {
       // custom colors
-      if (parent.info.color) {
-        SVG.setProps(el, {
-          fill: parent.info.color,
-          stroke: "rgba(0, 0, 0, 0.2)",
-        })
-      }
+      SVG.setProps(el, {
+        fill: color.primary.toHexString(),
+      })
     } else if (this.shape === "number-dropdown") {
-      el.classList.add(`sb3-${parent.info.category}-alt`)
-
-      // custom colors
-      if (parent.info.color) {
-        SVG.setProps(el, {
-          fill: "rgba(0, 0, 0, 0.1)",
-          stroke: "rgba(0, 0, 0, 0.15)", // combines with fill...
-        })
-      }
+      SVG.setProps(el, {
+        fill: color.secondary.toHexString(),
+      })
     } else if (this.shape === "boolean") {
-      el.classList.remove(`sb3-${parent.info.category}`)
-      el.classList.add(`sb3-${parent.info.category}-dark`)
-
-      // custom colors
-      if (parent.info.color) {
-        SVG.setProps(el, {
-          fill: "rgba(0, 0, 0, 0.15)",
-        })
-      }
+      SVG.setProps(el, {
+        fill: color.tertiary.toHexString(),
+      })
     }
 
     const result = SVG.group([el])
@@ -493,7 +485,7 @@ export class InputView {
           w - 24,
           13,
           SVG.symbol(
-            options.iconStyle === "high-contrast"
+            options.isHighContrast
               ? `#sb3-dropdownArrow-high-contrast-${options.id}`
               : `#sb3-dropdownArrow-${options.id}`,
             {},
@@ -534,6 +526,14 @@ class BlockView {
     this.innerWidth = null
     this.lines = []
     this.isZebra = false
+
+    this.color = this.info.color
+      ? {
+        primary: this.info.color,
+        secondary: this.info.color.darker(20),
+        tertiary: this.info.color.darker(10),
+      }
+      : categoryColor(this.info.category)
   }
 
   get isBlock() {
@@ -571,6 +571,7 @@ class BlockView {
   }
 
   drawSelf(options, w, h, lines) {
+    let el = null
     // mouths
     if (lines.length > 1) {
       let y = lines[0].totalHeight
@@ -647,18 +648,12 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
       p.push("Z")
-      let el = SVG.path({
+      el = SVG.path({
         class: `sb3-${this.info.category}`,
         path: p,
       })
-      if (this.isZebra) {
-        el = this.applyZebra(el, options.iconStyle === "high-contrast")
-      }
-      return el
-    }
-
-    // outlines
-    if (/outline-\w+/.test(this.info.shape)) {
+    } else if (/outline-\w+/.test(this.info.shape)) {
+      // outlines
       if (this.info.shape === "outline-stack") {
         return SVG.setProps(SVG.stackRect(w, h), {
           class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
@@ -672,10 +667,8 @@ class BlockView {
           class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
         })
       }
-    }
-
-    // rings
-    if (this.isRing) {
+    } else if (this.isRing) {
+      // rings
       const child = this.children[0]
       if (
         child &&
@@ -686,26 +679,28 @@ class BlockView {
           child.isBoolean)
       ) {
         const shape = child.shape || child.info?.shape
-        let el = SVG.ringRect(w, h, child, shape, {
+        el = SVG.ringRect(w, h, child, shape, {
           class: `sb3-${this.info.category}`,
         })
-        if (this.isZebra) {
-          el = this.applyZebra(el, options.iconStyle === "high-contrast")
-        }
-        return el
       }
+    } else {
+      const func = BlockView.shapes[this.info.shape]
+      if (!func) {
+        throw new Error(`no shape func: ${this.info.shape}`)
+      }
+      el = func(w, h, {
+        class: `sb3-${this.info.category}`,
+      })
     }
 
-    const func = BlockView.shapes[this.info.shape]
-    if (!func) {
-      throw new Error(`no shape func: ${this.info.shape}`)
-    }
-    let el = func(w, h, {
-      class: `sb3-${this.info.category}`,
-    })
+    let color = {...this.color}
     if (this.isZebra) {
-      el = this.applyZebra(el, options.iconStyle === "high-contrast")
+      color = color.makeZebra(options.isHighContrast)
     }
+    SVG.setProps(el, {
+      fill: color.primary.toHexString(),
+      stroke: color.tertiary.toHexString(),
+    })
     return el
   }
 
@@ -789,6 +784,14 @@ class BlockView {
   }
 
   draw(options) {
+    this.color = this.info.color
+      ? {
+        primary: this.info.color,
+        secondary: this.info.color.darker(20),
+        tertiary: this.info.color.darker(10),
+      }
+      : categoryColor(this.info.category, options.isHighContrast)
+
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
     const isCommand = this.isCommand
@@ -1279,14 +1282,11 @@ class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
-    this.iconStyle = options.style.replace("scratch3-", "")
-    if (this.iconStyle === "scratch3") {
-      this.iconStyle = ""
-    }
+    this.isHighContrast = options.style.replace("scratch3-", "") == "high-contrast"
 
     this.options = {
       id: this.id,
-      iconStyle: this.iconStyle,
+      isHighContrast: this.isHighContrast,
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
@@ -1348,12 +1348,12 @@ class DocumentView {
     // return SVG
     const svg = SVG.newSVG(width, height, this.scale)
     svg.classList.add(
-      `snapblocks-style-scratch3${this.iconStyle ? `-${this.iconStyle}` : ""}`,
+      `snapblocks-style-scratch3${this.isHighContrast ? `-high-contrast` : ""}`,
     )
     svg.classList.add("scratch3")
 
     const icons =
-      this.iconStyle === "high-contrast"
+      this.isHighContrast
         ? makeHighContrastIcons()
         : makeOriginalIcons()
 
@@ -1372,7 +1372,7 @@ class DocumentView {
     svg.appendChild(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         ...icons,
-        this.iconStyle === "high-contrast"
+        this.isHighContrast
           ? zebraFilter(`sb3DarkFilter-${this.id}`, true)
           : zebraFilter(`sb3LightFilter-${this.id}`, false),
       ])),
