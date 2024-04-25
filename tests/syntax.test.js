@@ -6,6 +6,7 @@ import ko from "../locales/ko.json" assert { "type": "json" }
 import pt_br from "../locales/pt-br.json" assert { "type": "json" }
 import rap from "../locales/rap.json" assert { "type": "json" }
 import uz from "../locales/uz.json" assert { "type": "json" }
+import Color from "../shared/color"
 
 loadLanguages({
   de,
@@ -195,13 +196,13 @@ describe("color literals", () => {
   test("work", () => {
     const b = parseBlock("<touching color [#f0f] ?>")
     expect(b.children[2].shape).toBe("color")
-    expect(b.children[2].value).toBe("#f0f")
+    expect(b.children[2].value).toStrictEqual(new Color(255,0,255,1))
   })
 
   test("can be round", () => {
     const b = parseBlock("<touching color (#f0f) ?>")
     expect(b.children[2].shape).toBe("color")
-    expect(b.children[2].value).toBe("#f0f")
+    expect(b.children[2].value).toStrictEqual(new Color(255,0,255,1))
   })
 })
 
