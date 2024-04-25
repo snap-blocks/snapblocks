@@ -103,17 +103,17 @@ export class LabelView {
 
     if (this.defaultColor) {
       this._color = /comment-label|label-dark/.test(this.cls)
-      ? new Color()
+        ? new Color()
         : /(boolean|dropdown)/.test(this.cls)
-        ? new Color(255,255,255)
-            : /literal/.test(this.cls)
-              ? new Color()
-              : new Color(255,255,255)
+          ? new Color(255, 255, 255)
+          : /literal/.test(this.cls)
+            ? new Color()
+            : new Color(255, 255, 255)
     }
 
-    console.log('class', this.cls)
-    console.log('default color', this.defaultColor)
-    console.log('color', this.color)
+    console.log("class", this.cls)
+    console.log("default color", this.defaultColor)
+    console.log("color", this.color)
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -413,9 +413,7 @@ class InputView {
       h = 12
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
-        if (!this.isBoolean &&
-            this.isDarker &&
-            parent.isZebra) {
+        if (!this.isBoolean && this.isDarker && parent.isZebra) {
           this.label.color = new Color()
           this.label.measure()
         }
@@ -490,8 +488,7 @@ class InputView {
           break
         default:
           SVG.setProps(el, {
-            fill:
-              parent.color.darker().toHexString()
+            fill: parent.color.darker().toHexString(),
           })
           break
       }
