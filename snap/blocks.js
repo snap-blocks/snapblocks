@@ -104,16 +104,12 @@ export class LabelView {
     if (this.defaultColor) {
       this._color = /comment-label|label-dark/.test(this.cls)
         ? new Color()
-        : /(boolean|dropdown)/.test(this.cls)
+        : /(boolean|readonly)/.test(this.cls)
           ? new Color(255, 255, 255)
           : /literal/.test(this.cls)
             ? new Color()
             : new Color(255, 255, 255)
     }
-
-    console.log("class", this.cls)
-    console.log("default color", this.defaultColor)
-    console.log("color", this.color)
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -406,7 +402,7 @@ class InputView {
                 stroke-linejoin: round;`,
         fill: "none",
         stroke: "white",
-        strokeWidth: 1.5,
+        "stroke-width": 1.5,
         class: !options.isFlat ? "snap-drop-shadow" : "",
       })
       w = 24
@@ -423,7 +419,7 @@ class InputView {
         })
       }
 
-      h = this.label.height + 0
+      h = this.label.height
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
         w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h
@@ -490,7 +486,6 @@ class InputView {
           SVG.setProps(el, {
             fill: parent.color.darker().toHexString(),
           })
-          break
       }
     } else if (this.isDarker) {
       el = darkRect(w, h, color, el)
