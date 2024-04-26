@@ -546,7 +546,7 @@ function parseLines(code, languages) {
             children.push(
               Object.prototype.hasOwnProperty.call(Icon.icons, name) ||
                 Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
-                ? new Icon(name, modifiers)
+                ? new Icon(name, modifiers[0], modifiers.length > 1 ? new Color(modifiers[1] ? modifiers[1] : 255, modifiers[2] ? modifiers[2] : 255, modifiers[3] ? modifiers[3] : 255) : null)
                 : new Label(
                     `${start}${name}${modifiers.length ? "-" : ""}${modifiers.join(
                       "-",
