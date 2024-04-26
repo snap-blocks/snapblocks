@@ -96,7 +96,7 @@ export class LabelView {
   measure() {
     const value = this.value
     const cls = `sb3-${this.cls}`
-    
+
     if (this.defaultColor) {
       this._color = /comment-label|label-dark/.test(this.cls)
         ? new Color()
@@ -507,13 +507,17 @@ export class InputView {
         case "true":
         case "t":
           SVG.setProps(el, {
-            fill: options.isHighContrast ? new Color(0, 200, 0).lighter(30) : new Color(0, 200, 0).toHexString(),
+            fill: options.isHighContrast
+              ? new Color(0, 200, 0).lighter(30)
+              : new Color(0, 200, 0).toHexString(),
           })
           break
         case "false":
         case "f":
           SVG.setProps(el, {
-            fill: options.isHighContrast ? new Color(200, 0, 0).lighter(40) : new Color(200, 0, 0).toHexString(),
+            fill: options.isHighContrast
+              ? new Color(200, 0, 0).lighter(40)
+              : new Color(200, 0, 0).toHexString(),
           })
           break
         default:
