@@ -39,10 +39,17 @@ const categoryAliases = {
 
 export class LabelView {
   constructor(label) {
+    this._color = new Color(255, 255, 255)
+    this.defaultColor = true
+
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
     } else {
       Object.assign(this, label)
+    }
+
+    if (label.color) {
+      this.color = label.color
     }
 
     this.el = null
@@ -50,6 +57,18 @@ export class LabelView {
     this.lineHeight = 5
     this.metrics = null
     this.x = 0
+  }
+
+  get color() {
+    return this._color
+  }
+
+  set color(color) {
+    this.defaultColor = false
+    if (!(color instanceof Color)) {
+      color = Color.fromString(color)
+    }
+    this._color = color
   }
 
   get isLabel() {
@@ -77,6 +96,16 @@ export class LabelView {
   measure() {
     const value = this.value
     const cls = `sb3-${this.cls}`
+    
+    if (this.defaultColor) {
+      this._color = /comment-label|label-dark/.test(this.cls)
+        ? new Color()
+        : /(boolean|dropdown)/.test(this.cls)
+          ? new Color(255, 255, 255)
+          : /literal/.test(this.cls)
+            ? new Color()
+            : new Color(255, 255, 255)
+    }
 
     let cache = LabelView.metricsCache[cls]
     if (!cache) {
@@ -403,36 +432,53 @@ export class InputView {
   }
 
   draw(options, parent) {
-    let w
+    let w, h
     let label
-    if (this.isBoolean) {
-      w = 48
-      if (this.hasLabel) {
+    if (this.isBoolean && !this.isBig) {
+      label = SVG.el("path", {
+        d:
+          this.value == "t"
+            ? "M 14 16 L 21 23 L 28 9"
+            : "M 41 9 L 55 23 M 55 9 L 41 23",
+        style: `stroke-linecap: round;
+                stroke-linejoin: round;`,
+        fill: "none",
+        stroke: "white",
+        "stroke-width": 2,
+      })
+      w = this.value ? 70 : 48
+      h = 32
+    } else if (this.isColor) {
+      w = 40
+    } else if (this.hasLabel) {
+      if (!(this.isBoolean && !this.isBig)) {
+        // if (!this.isBoolean && this.isDarker && parent.isZebra) {
+        //   this.label.color = new Color()
+        //   // this.label.measure()
+        // }
         label = this.label.draw(options)
+      }
+
+      if (this.isBoolean && this.isBig) {
+        h = this.label.height + 19
+        w = 85
+        label = SVG.move(0, 9, label)
+      } else {
         // Minimum padding of 11
         // Minimum width of 40, at which point we center the label
+        h = this.label.height + 19
         const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
         w = this.label.width + 2 * px
         label = SVG.move(px, 9, label)
       }
-    } else if (this.isColor) {
-      w = 40
-    } else if (this.hasLabel) {
-      label = this.label.draw(options)
-      // Minimum padding of 11
-      // Minimum width of 40, at which point we center the label
-      const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
-      w = this.label.width + 2 * px
-      label = SVG.move(px, 9, label)
     } else {
+      h = 32
       w = !this.isStack ? 40 : 60
     }
     if (this.hasArrow) {
       w += 20
     }
     this.width = w
-
-    let h = this.hasLabel ? this.label.height + 19 : 32
 
     if (this.isRound || this.isColor) {
       h += 1
@@ -456,6 +502,25 @@ export class InputView {
       SVG.setProps(el, {
         fill: this.value.toHexString(),
       })
+    } else if (this.isBoolean) {
+      switch (this.value) {
+        case "true":
+        case "t":
+          SVG.setProps(el, {
+            fill: options.isHighContrast ? new Color(0, 200, 0).lighter(30) : new Color(0, 200, 0).toHexString(),
+          })
+          break
+        case "false":
+        case "f":
+          SVG.setProps(el, {
+            fill: options.isHighContrast ? new Color(200, 0, 0).lighter(40) : new Color(200, 0, 0).toHexString(),
+          })
+          break
+        default:
+          SVG.setProps(el, {
+            fill: parent.color.tertiary.toHexString(),
+          })
+      }
     } else if (this.shape === "dropdown") {
       // custom colors
       SVG.setProps(el, {
@@ -465,15 +530,34 @@ export class InputView {
       SVG.setProps(el, {
         fill: color.secondary.toHexString(),
       })
-    } else if (this.shape === "boolean") {
-      SVG.setProps(el, {
-        fill: color.tertiary.toHexString(),
-      })
     }
 
     const result = SVG.group([el])
     if (this.hasLabel) {
-      result.appendChild(label)
+      let x
+      if (this.isBoolean && this.isBig) {
+        if (this.value == "true") {
+          x = h / 2
+        } else {
+          x = w - h / 2 - 32
+        }
+      } else if (this.isBoolean && !this.isBig) {
+        // it's offset in the path
+        x = 0
+      } else {
+        x = 0
+      }
+      result.appendChild(SVG.move(x, 0, label))
+    }
+    if (this.isBoolean && this.value) {
+      let y = (this.height + 1) / 2
+      let circle = SVG.el("circle", {
+        cx: ["true", "t"].includes(this.value) ? this.width - y + 1 : y - 1,
+        cy: y - 0.5,
+        r: y,
+        fill: new Color(220, 220, 220).toHexString(),
+      })
+      result.appendChild(circle)
     }
     if (this.hasArrow) {
       result.appendChild(
