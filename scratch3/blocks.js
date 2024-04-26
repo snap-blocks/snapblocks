@@ -35,7 +35,6 @@ const categoryAliases = {
   ...aliasExtensions,
   grey: "other",
   gray: "other",
-  lists: "list",
 }
 
 export class LabelView {
