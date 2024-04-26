@@ -450,6 +450,7 @@ export class InputView {
       h = 32
     } else if (this.isColor) {
       w = 40
+      h = 32
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
         // if (!this.isBoolean && this.isDarker && parent.isZebra) {
