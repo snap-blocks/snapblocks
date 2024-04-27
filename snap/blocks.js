@@ -16,6 +16,8 @@ import Color, { hexColorPat } from "../shared/color.js"
 import SVG from "./draw.js"
 
 import style from "./style.js"
+import Style from "./style.js"
+import { toPx } from "../shared/cssToPx.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -42,6 +44,8 @@ export class LabelView {
   constructor(label) {
     this._color = new Color(255, 255, 255)
     this.defaultColor = true
+    this._fontSize = "10px"
+    this.defaultFontSize = true
 
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
@@ -51,6 +55,10 @@ export class LabelView {
 
     if (label.color) {
       this.color = label.color
+    }
+
+    if (!this.scale) {
+      this.scale = 1
     }
 
     this.el = null
@@ -64,11 +72,21 @@ export class LabelView {
   }
 
   set color(color) {
-    this.defaultColor = false
-    if (!(color instanceof Color)) {
-      color = Color.fromString(color)
+    if (color) {
+      this.defaultColor = false
+      if (!(color instanceof Color)) {
+        color = Color.fromString(color)
+      }
+      this._color = color
     }
-    this._color = color
+  }
+
+  get fontSize() {
+    return this._fontSize
+  }
+  set fontSize(size) {
+    this._fontSize = toPx(document.createElement("p"), size) + px
+    this.defaultFontSize = false
   }
 
   get isLabel() {
@@ -78,9 +96,6 @@ export class LabelView {
   draw(options) {
     if (!options.isFlat) {
       this.el.classList.add("snap-drop-shadow")
-    }
-    if (!options.showSpaces) {
-      this.el.classList.add("snap-hide-spaces")
     }
     return this.el
   }
@@ -97,11 +112,17 @@ export class LabelView {
     return this.metrics.lines
   }
 
-  measure() {
+  measure(options, isZebra) {
     const value = this.value
     const cls = `snap-${this.cls}`
 
     if (this.defaultColor) {
+      if (/comment-label/.test(this.cls)) {
+        this._color = Style.colors.commentLabel
+      } else if (/boolean/.test(this.cls)) {
+        this._color = Style.colors.booleanLiteral
+      }
+
       this._color = /comment-label|label-dark/.test(this.cls)
         ? new Color()
         : /(boolean|readonly)/.test(this.cls)
@@ -111,21 +132,46 @@ export class LabelView {
             : new Color(255, 255, 255)
     }
 
-    let cache = LabelView.metricsCache[cls]
+    if (this.defaultFontSize) {
+      this._fontSize = /comment-label/.test(this.cls)
+        ? "12px"
+        : /literal-boolean/.test(this.cls)
+          ? `9px`
+          : /literal/.test(this.cls)
+            ? `9px`
+            : `10px`
+    }
+
+    let fontWeight = /comment-label/.test(this.cls)
+    ? `bold`
+    : /literal-boolean/.test(this.cls)
+      ? `bold`
+      : /literal/.test(this.cls)
+        ? `normal`
+        : `bold`
+    
+    if (this.modified && fontWeight == "bold") {
+      fontWeight = "normal"
+    }
+
+    let pixels = toPx(document.createElement("p"), this.fontSize) * this.scale
+
+    const font = /comment-label/.test(this.cls)
+      ? `${fontWeight} ${pixels}px Helvetica, Arial, DejaVu Sans, sans-serif`
+      : /literal-boolean/.test(this.cls)
+        ? `${fontWeight} ${pixels}px Arial, DejaVu Sans, sans-serif`
+        : /literal/.test(this.cls)
+          ? `${fontWeight} ${pixels}px Arial, DejaVu Sans, sans-serif`
+          : `${fontWeight} ${pixels}px ${defaultFontFamily}`
+
+    let cache = LabelView.metricsCache[font]
     if (!cache) {
-      cache = LabelView.metricsCache[cls] = Object.create(null)
+      cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
     if (Object.hasOwnProperty.call(cache, value)) {
       this.metrics = cache[value]
     } else {
-      const font = /comment-label/.test(this.cls)
-        ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
-        : /literal-boolean/.test(this.cls)
-          ? `bold 9px Arial, DejaVu Sans, sans-serif`
-          : /literal/.test(this.cls)
-            ? `normal 9px Arial, DejaVu Sans, sans-serif`
-            : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
@@ -135,34 +181,44 @@ export class LabelView {
     let group = []
 
     let y = 0
+    let height = 0
     for (let line of lines) {
       let lineGroup = []
-      y += 10
+      height = 0
       let x = 0
       let first = true
       for (let wordInfo of line) {
         if (!first) {
-          x += this.spaceWidth / 2
-          lineGroup.push(
-            SVG.el("circle", {
-              cx: x,
-              cy: y - 12 / 2 + this.spaceWidth,
-              r: this.spaceWidth / 2,
-              class: "snap-space",
-            }),
-          )
-          x += this.spaceWidth / 2
+          if (options.showSpaces) {
+            x += this.spaceWidth / 2
+            lineGroup.push(
+              SVG.el("circle", {
+                cx: x,
+                cy: 12 / 2 + this.spaceWidth,
+                r: this.spaceWidth / 2,
+                class: "snap-space",
+              }),
+            )
+            x += this.spaceWidth / 2
+          } else {
+            x += this.spaceWidth
+          }
         }
         lineGroup.push(
-          SVG.text(x, y, wordInfo.word, {
+          SVG.text(x, wordInfo.height / -6, wordInfo.word, {
             class: `snap-label ${cls}`,
+            style: `font: ${font}`
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
+        height = Math.max(height, wordInfo.height)
         first = false
       }
-      group.push(SVG.group(lineGroup))
+      y += height - 5
+      console.log('y', y)
+      console.log('height', height)
+      group.push(SVG.move(0, y + 4, SVG.group(lineGroup)))
     }
     this.height = y + 2
 
@@ -187,6 +243,7 @@ export class LabelView {
         computedLine.push({
           word: word,
           width: textMetrics.width,
+          height: textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent,
         })
       }
       computedLines.push(computedLine)
@@ -216,37 +273,12 @@ class IconView {
     }
     Object.assign(this, info)
 
-    if (isNaN(this.scale) || this.scale <= 0) {
+    if (this.scale <= 0) {
       this.scale = 1
     }
 
-    this.scale =
-      !isNaN(icon.scale) && icon.scale !== null
-        ? icon.scale
-        : isNaN(this.scale) || this.scale == null
-          ? 1
-          : this.scale
-    this.r =
-      !isNaN(icon.r) && icon.r !== null
-        ? icon.r
-        : isNaN(this.r) || this.r == null
-          ? 255
-          : this.r
-    this.g =
-      !isNaN(icon.g) && icon.g !== null
-        ? icon.g
-        : isNaN(this.g) || this.g == null
-          ? 255
-          : this.g
-    this.b =
-      !isNaN(icon.b) && icon.b !== null
-        ? icon.b
-        : isNaN(this.b) || this.b == null
-          ? 255
-          : this.b
-
-    if (this.scale <= 0) {
-      this.scale = 1
+    if (!this.color) {
+      this.color = new Color(255, 255, 255)
     }
 
     this.width = this.width * this.scale
@@ -269,10 +301,10 @@ class IconView {
     }
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
-        props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+        props[fillAttribute] = this.color.toHexString()
       }
     } else {
-      props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+      props[this.fillAttribute] = this.color.toHexString()
     }
     let symbol = SVG.setProps(
       SVG.symbol(`#snap-${this.name}-${options.id}`),
@@ -286,41 +318,24 @@ class IconView {
 
   static get icons() {
     return {
-      greenFlag: {
-        width: 12,
-        height: 12,
-        dy: 0,
-        scale: 1.5,
-        r: 0,
-        g: 200,
-        b: 0,
-        fillAttribute: "stroke",
-      },
-      stopSign: { width: 21, height: 21, r: 200, g: 0, b: 0 },
+      greenFlag: { width: 12, height: 12, dy: 0, scale: 1.5, color: new Color(0, 200, 0), fillAttribute: "stroke" },
+      stopSign: { width: 21, height: 21, color: new Color(200, 0, 0) },
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
-      delInput: { width: 5, height: 11, r: 0, g: 0, b: 0 },
-      verticalEllipsis: {
-        width: 2,
-        height: 11,
-        dy: 0,
-        scale: 0.833333333,
-        r: 0,
-        g: 0,
-        b: 0,
-      },
+      addInput: { width: 5, height: 11, color: new Color(0, 0, 0) },
+      delInput: { width: 5, height: 11, color: new Color(0, 0, 0) },
+      verticalEllipsis: {width: 2, height: 11, dy: 0, scale: 0.833333333, color: new Color(0, 0, 0) },
       list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
-      pause: { width: 12, height: 12, dy: +1, r: 255, g: 220, b: 0 },
+      pause: { width: 12, height: 12, dy: +1, color: new Color(255, 220, 0) },
       cloud: { width: 20, height: 12 },
       cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
-      circle: { width: 12, height: 12, r: 255, g: 0, b: 0 },
+      circle: { width: 12, height: 12, color: new Color(255, 0, 0) },
       notes: { width: 13, height: 12 },
       storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
       brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
@@ -368,9 +383,9 @@ class InputView {
     return true
   }
 
-  measure() {
+  measure(options) {
     if (this.hasLabel) {
-      this.label.measure()
+      this.label.measure(options)
     }
   }
 
@@ -409,10 +424,7 @@ class InputView {
       h = 12
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
-        if (!this.isBoolean && this.isDarker && parent.isZebra) {
-          this.label.color = new Color()
-          this.label.measure()
-        }
+        this.label.measure(options, parent.isZebra)
         label = this.label.draw({
           ...options,
           isFlat: !this.isBoolean || options.isFlat,
@@ -473,13 +485,13 @@ class InputView {
         case "true":
         case "t":
           SVG.setProps(el, {
-            fill: new Color(0, 200, 0).toHexString(),
+            fill: categoryColor("true").toHexString(),
           })
           break
         case "false":
         case "f":
           SVG.setProps(el, {
-            fill: new Color(200, 0, 0).toHexString(),
+            fill: categoryColor("false").toHexString(),
           })
           break
         default:
@@ -587,14 +599,14 @@ class BlockView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const child of this.children) {
       if (child.measure) {
-        child.measure()
+        child.measure(options)
       }
     }
     if (this.comment) {
-      this.comment.measure()
+      this.comment.measure(options)
     }
   }
 
@@ -891,7 +903,7 @@ class BlockView {
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
-          child.measure()
+          child.measure(options, this.isZebra)
         }
       }
 
@@ -1068,8 +1080,8 @@ class CommentView {
     return 17
   }
 
-  measure() {
-    this.label.measure()
+  measure(options) {
+    this.label.measure(options)
   }
 
   draw(options) {
@@ -1121,8 +1133,8 @@ class GlowView {
     return true
   }
 
-  measure() {
-    this.child.measure()
+  measure(options) {
+    this.child.measure(options)
   }
 
   drawSelf() {
@@ -1173,9 +1185,9 @@ class ScriptView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const block of this.blocks) {
-      block.measure()
+      block.measure(options)
     }
   }
 
@@ -1264,8 +1276,8 @@ class DocumentView {
     return result
   }
 
-  measure() {
-    this.scripts.forEach(script => script.measure())
+  measure(options) {
+    this.scripts.forEach(script => script.measure(options))
   }
 
   updateIds(element) {
@@ -1304,7 +1316,7 @@ class DocumentView {
     }
 
     // measure strings
-    this.measure()
+    this.measure(this.options)
 
     // TODO: separate layout + render steps.
     // render each script
@@ -1459,6 +1471,8 @@ const viewFor = node => {
   if (node instanceof Icon && unicodeIcons[node.name]) {
     return LabelView
   }
+
+  console.log('node', node)
 
   switch (node.constructor) {
     case Label:

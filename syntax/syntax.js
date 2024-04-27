@@ -190,8 +190,8 @@ function paintBlock(info, children, languages) {
                 category: "custom-arg",
               },
               [...labels, new Label("#")],
-              languages,
             )
+            child.info.argument = "number"
           } else if (child.isReporter && !child.isUpvar) {
             // Convert variables to number arguments.
             if (child.info.categoryIsDefault) {
@@ -460,6 +460,11 @@ function parseLines(code, languages) {
   function pParts(end) {
     const children = []
     let label
+    let labelProps = {
+      modified: false,
+      scale: null,
+      color: null,
+    }
     while (tok && tok !== "\n") {
       // So that comparison operators `<()<()>` and `<()>()>` don't need the
       // central <> escaped, we interpret it as a label if particular
@@ -523,9 +528,19 @@ function parseLines(code, languages) {
             let start = tok
             next()
             let name = ""
+            let value = ""
+            let raw = ""
+            label = new Label("")
             let modifiers = []
-            while (tok && /[a-zA-Z+]/.test(tok)) {
+            while (tok && /[a-zA-Z+\\]/.test(tok)) {
+              if (tok === "\\") {
+                label.raw += tok
+                raw += tok
+                next()
+              }
               name += tok
+              label.value += tok
+              label.raw += tok
               next()
             }
             if (tok === "-") {
@@ -533,37 +548,46 @@ function parseLines(code, languages) {
               let modifier = 0
               modifiers[modifier] = ""
               next() // "-"
-              while (tok && /[0-9a-z-A-Z\-\.]/.test(tok)) {
-                if (tok === "-") {
+              while (tok && /[0-9a-z-A-Z\-\\\.]/.test(tok)) {
+                if (tok === "\\") {
+                  next()
+                  modifiers[modifier] += tok
+                } else if (tok === "-") {
                   modifier += 1
                   modifiers[modifier] = ""
                 } else {
                   modifiers[modifier] += tok
                 }
+                label.value += tok
+                label.raw += tok
                 next()
               }
             }
-            children.push(
-              Object.prototype.hasOwnProperty.call(Icon.icons, name) ||
-                Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
-                ? new Icon(
-                    name,
-                    modifiers[0],
-                    modifiers.length > 1
-                      ? new Color(
-                          modifiers[1] ? modifiers[1] : 255,
-                          modifiers[2] ? modifiers[2] : 255,
-                          modifiers[3] ? modifiers[3] : 255,
-                        )
-                      : null,
-                  )
-                : new Label(
-                    `${start}${name}${modifiers.length ? "-" : ""}${modifiers.join(
-                      "-",
-                    )}`,
-                  ),
-            )
-            label = null
+
+            if (Object.prototype.hasOwnProperty.call(Icon.icons, name) ||
+                Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)) {
+              children.push(new Icon(
+                raw,
+                modifiers[0],
+                modifiers.length > 1
+                  ? new Color(
+                      modifiers[1] ? modifiers[1] : 255,
+                      modifiers[2] ? modifiers[2] : 255,
+                      modifiers[3] ? modifiers[3] : 255,
+                    )
+                  : null,
+              ))
+            }
+            if (start == "$" && modifiers) {
+              label = new Label(name, null, modifiers[0], new Color(
+                modifiers[1] ? modifiers[1] : 255,
+                modifiers[2] ? modifiers[2] : 255,
+                modifiers[3] ? modifiers[3] : 255,
+              ))
+              label.raw = raw
+              label.modified = true
+            }
+            children.push(label)
             break
           }
           case "\n":
@@ -595,13 +619,21 @@ function parseLines(code, languages) {
           // fallthrough
           default:
             if (!label) {
-              children.push((label = new Label("")))
+              children.push((label = new Label("", null, labelProps.scale, labelProps.color)))
             }
             if (tok) {
               label.value += tok
               label.raw += tok
             }
             next()
+        }
+      }
+
+      if (label == null) {
+        labelProps = {
+          modified: false,
+          scale: null,
+          color: null,
         }
       }
 

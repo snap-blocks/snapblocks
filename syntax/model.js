@@ -24,7 +24,7 @@ import {
 } from "./blocks.js"
 
 export class Label {
-  constructor(value, cls) {
+  constructor(value, cls, scale, color) {
     this.value = value
     this.raw = value
     this.cls = cls || ""
@@ -32,6 +32,17 @@ export class Label {
     this.height = 12
     this.metrics = null
     this.x = 0
+    this.modified = false
+    
+    this.scale = scale ? parseFloat(scale) : null
+    if (this.scale === NaN) {
+      this.scale = null
+    }
+    this.color = color instanceof Color
+                  ? color.copy()
+                    : typeof color == 'string'
+                    ? Color.fromString(color)
+                    : null
   }
   get isLabel() {
     return true
@@ -46,7 +57,7 @@ export class Label {
 }
 
 export class Icon {
-  constructor(name, modifiers) {
+  constructor(name, scale, color) {
     if (
       !Object.prototype.hasOwnProperty.call(Icon.icons, name) &&
       Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)
@@ -57,12 +68,16 @@ export class Icon {
     }
     this.isArrow = this.name === "loopArrow"
     this.isLoop = false
-    this.modifiers = modifiers || null
 
-    this.scale = this.modifiers ? parseFloat(this.modifiers[0]) : null
-    this.r = this.modifiers ? parseFloat(this.modifiers[1]) : null
-    this.g = this.modifiers ? parseFloat(this.modifiers[2]) : null
-    this.b = this.modifiers ? parseFloat(this.modifiers[3]) : null
+    this.scale = scale ? parseFloat(scale) : null
+    if (this.scale === NaN) {
+      this.scale = null
+    }
+    this.color = color instanceof Color
+                  ? color.copy()
+                    : typeof color == 'string'
+                    ? Color.fromString(color)
+                    : null
 
     // assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
@@ -75,6 +90,8 @@ export class Icon {
       circleSolid: "circle",
       "+": "plusSign", // I can't have + in an id.
       bucket: "paintBucket",
+      flag: "greenFlag",
+      stop: "stopSign",
     }
   }
 

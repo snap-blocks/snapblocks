@@ -130,12 +130,6 @@ export default `
   fill: none;
 }
 
-.snap-define-hat-cap {
-  stroke: #632d99;
-  stroke-width: 1;
-  fill: #8e2ec2;
-}
-
 .snap-comment {
   fill: #ffffb4;
 }

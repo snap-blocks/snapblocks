@@ -64,11 +64,13 @@ export class LabelView {
   }
 
   set color(color) {
-    this.defaultColor = false
-    if (!(color instanceof Color)) {
-      color = Color.fromString(color)
+    if (color) {
+      this.defaultColor = false
+      if (!(color instanceof Color)) {
+        color = Color.fromString(color)
+      }
+      this._color = color
     }
-    this._color = color
   }
 
   get isLabel() {
@@ -76,9 +78,6 @@ export class LabelView {
   }
 
   draw(options) {
-    if (!options.showSpaces) {
-      this.el.classList.add("sb3-hide-spaces")
-    }
     return this.el
   }
 
@@ -93,7 +92,7 @@ export class LabelView {
     return this.metrics.lines
   }
 
-  measure() {
+  measure(options) {
     const value = this.value
     const cls = `sb3-${this.cls}`
 
@@ -131,16 +130,21 @@ export class LabelView {
       let first = true
       for (let wordInfo of line) {
         if (!first) {
-          x += this.spaceWidth / 2
-          lineGroup.push(
-            SVG.el("circle", {
-              cx: x,
-              cy: y - this.lineHeight - 11 + this.spaceWidth,
-              r: this.spaceWidth / 2,
-              class: "sb3-space",
-            }),
-          )
-          x += this.spaceWidth / 2
+          if (options.showSpaces) {
+            x += this.spaceWidth / 2
+            lineGroup.push(
+              SVG.el("circle", {
+                cx: x,
+                cy: y - this.lineHeight - 11 + this.spaceWidth,
+                r: this.spaceWidth / 2,
+                class: "sb3-space",
+              }),
+            )
+            lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
+            x += this.spaceWidth / 2
+          } else {
+            x += this.spaceWidth
+          }
         }
         lineGroup.push(
           SVG.text(x, y - this.lineHeight, wordInfo.word, {
@@ -378,7 +382,7 @@ export class LineView {
     return true
   }
 
-  measure() {}
+  measure(options) {}
 
   draw(options, parent) {
     const category = parent.info.category
@@ -411,9 +415,9 @@ export class InputView {
     return true
   }
 
-  measure() {
+  measure(options) {
     if (this.hasLabel) {
-      this.label.measure()
+      this.label.measure(options)
     }
   }
 
@@ -455,7 +459,7 @@ export class InputView {
       if (!(this.isBoolean && !this.isBig)) {
         // if (!this.isBoolean && this.isDarker && parent.isZebra) {
         //   this.label.color = new Color()
-        //   // this.label.measure()
+        //   // this.label.measure(options)
         // }
         label = this.label.draw(options)
       }
@@ -625,14 +629,14 @@ class BlockView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const child of this.children) {
       if (child.measure) {
-        child.measure()
+        child.measure(options)
       }
     }
     if (this.comment) {
-      this.comment.measure()
+      this.comment.measure(options)
     }
   }
 
@@ -782,10 +786,17 @@ class BlockView {
     if (this.isZebra) {
       color = color.makeZebra(options.isHighContrast)
     }
-    SVG.setProps(el, {
-      fill: color.primary.toHexString(),
-      stroke: color.tertiary.toHexString(),
-    })
+    if (this.info.shape === "cat") {
+      SVG.setProps(el.children[0], {
+        fill: color.primary.toHexString(),
+        stroke: color.tertiary.toHexString(),
+      })
+    } else {
+      SVG.setProps(el, {
+        fill: color.primary.toHexString(),
+        stroke: color.tertiary.toHexString(),
+      })
+    }
     return el
   }
 
@@ -967,7 +978,7 @@ class BlockView {
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
-          child.measure()
+          child.measure(options)
         }
       }
 
@@ -1214,8 +1225,8 @@ export class CommentView {
     return 20
   }
 
-  measure() {
-    this.label.measure()
+  measure(options) {
+    this.label.measure(options)
   }
 
   draw(options) {
@@ -1246,8 +1257,8 @@ class GlowView {
     return true
   }
 
-  measure() {
-    this.child.measure()
+  measure(options) {
+    this.child.measure(options)
   }
 
   drawSelf() {
@@ -1298,9 +1309,9 @@ class ScriptView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const block of this.blocks) {
-      block.measure()
+      block.measure(options)
     }
   }
 
@@ -1396,9 +1407,9 @@ class DocumentView {
     return result
   }
 
-  measure() {
+  measure(options) {
     this.scripts.forEach(script => {
-      script.measure()
+      script.measure(options)
     })
   }
 
@@ -1408,7 +1419,7 @@ class DocumentView {
     }
 
     // measure strings
-    this.measure()
+    this.measure(this.options)
 
     // TODO: separate layout + render steps.
     // render each script
