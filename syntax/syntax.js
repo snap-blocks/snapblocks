@@ -538,6 +538,7 @@ function parseLines(code, languages) {
                 raw += tok
                 next()
               }
+              raw += tok
               name += tok
               label.value += tok
               label.raw += tok
@@ -564,8 +565,8 @@ function parseLines(code, languages) {
               }
             }
 
-            if (Object.prototype.hasOwnProperty.call(Icon.icons, name) ||
-                Object.prototype.hasOwnProperty.call(Icon.iconAliases, name)) {
+            if (Object.prototype.hasOwnProperty.call(Icon.icons, raw) ||
+                Object.prototype.hasOwnProperty.call(Icon.iconAliases, raw)) {
               children.push(new Icon(
                 raw,
                 modifiers[0],
@@ -577,6 +578,7 @@ function parseLines(code, languages) {
                     )
                   : null,
               ))
+              break
             }
             if (start == "$" && modifiers) {
               label = new Label(name, null, modifiers[0] ? modifiers[0] : null, modifiers[1] ? new Color(
