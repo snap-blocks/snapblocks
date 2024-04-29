@@ -114,7 +114,9 @@ function paintBlock(info, children, languages) {
           continue
         }
         info.category = "events"
-        info.shape = "snap-define"
+        info.shape = "block-prototype"
+
+        console.log('children', children)
 
         let block = children[0]
         if (block.info.categoryIsDefault) {
@@ -1051,6 +1053,7 @@ function parseScripts(getLine) {
             blocks.pop()
             children = last.child.isScript ? last.child.blocks : [last.child]
           }
+          console.log('glow', b)
           children.push(b)
           blocks.push(new Glow(new Script(children)))
         } else if (b.isHat) {
@@ -1247,7 +1250,7 @@ function recognizeStuff(scripts) {
         }
 
         // snap custom blocks
-      } else if (block.isSnapDefine) {
+      } else if (block.isBlockPrototype) {
         // custom blocks will always be the first child. Anything after doesn't matter
         if (!block.children[0].isBlock) {
           return

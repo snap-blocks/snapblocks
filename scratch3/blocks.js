@@ -654,7 +654,7 @@ class BlockView {
       hat: SVG.hatRect,
       cat: SVG.catHat,
       "define-hat": SVG.procHatRect,
-      "snap-define": SVG.hatRect,
+      "block-prototype": SVG.hatRect,
       ring: SVG.pillRect,
     }
   }
@@ -681,7 +681,7 @@ class BlockView {
       } else if (this.info.shape === "boolean") {
         p.push(SVG.getPointedTop(w, h))
       } else if (
-        ["hat", "snap-define", "define-hat"].includes(this.info.shape)
+        ["hat", "block-prototype", "define-hat"].includes(this.info.shape)
       ) {
         p.push(SVG.getHatTop(w))
       } else {
@@ -819,7 +819,7 @@ class BlockView {
         [20, 17],
         [16, 16],
       ],
-      "snap-define": [
+      "block-prototype": [
         [20, 30],
         [12 + 4, 21 + 4],
       ],
@@ -957,7 +957,7 @@ class BlockView {
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       if (options.zebraColoring) {
-        if (this.info.shape === "snap-define") {
+        if (this.info.shape === "block-prototype") {
           if (child.isBlock && child.info.category === this.info.category) {
             this.isZebra = true
           }

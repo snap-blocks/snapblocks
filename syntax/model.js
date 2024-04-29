@@ -235,25 +235,24 @@ export class Block {
       shape === "hat" ||
       shape === "cat" ||
       shape === "define-hat" ||
-      shape === "snap-define"
+      shape === "block-prototype"
     this.hasPuzzle =
       shape === "stack" ||
       shape === "hat" ||
       shape === "cat" ||
       shape === "c-block" ||
-      shape === "snap-define"
+      shape === "block-prototype"
     this.isFinal = /cap/.test(shape)
-    this.isCommand = shape === "stack" || shape === "cap" || /block/.test(shape)
+    this.isCommand = shape === "stack" || shape === "cap"
     this.isOutline = /outline-\w+/.test(shape)
     this.isReporter = shape === "reporter"
     this.isBoolean = shape === "boolean"
 
     this.isRing = shape === "ring"
-    this.hasScript = /block/.test(shape)
     this.isElse = shape === "celse"
     this.isEnd = shape === "cend"
 
-    this.isSnapDefine = shape === "snap-define"
+    this.isBlockPrototype = shape === "block-prototype"
 
     this.isUpvar =
       this.isReporter &&
