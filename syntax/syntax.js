@@ -579,11 +579,11 @@ function parseLines(code, languages) {
               ))
             }
             if (start == "$" && modifiers) {
-              label = new Label(name, null, modifiers[0], new Color(
+              label = new Label(name, null, modifiers[0] ? modifiers[0] : null, modifiers[1] ? new Color(
                 modifiers[1] ? modifiers[1] : 255,
                 modifiers[2] ? modifiers[2] : 255,
                 modifiers[3] ? modifiers[3] : 255,
-              ))
+              ) : null)
               label.raw = raw
               label.modified = true
             }
@@ -1261,7 +1261,9 @@ function recognizeStuff(scripts) {
             continue
           }
           if (child.isLabel) {
-            if (child.value === "$nl") {
+            if (child.modified &&
+                child.value === "nl" &&
+                child.scale == null) {
               parts.push("\n")
             } else {
               parts.push(child.value)

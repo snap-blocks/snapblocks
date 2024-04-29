@@ -32,8 +32,8 @@ export class Label {
     this.height = 12
     this.metrics = null
     this.x = 0
-    this.modified = false
     
+    this.modified = false
     this.scale = scale ? parseFloat(scale) : null
     if (this.scale === NaN) {
       this.scale = null
