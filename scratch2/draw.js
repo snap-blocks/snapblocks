@@ -442,7 +442,9 @@ export default class SVG {
 
     const r = 8
     const func =
-      shape === "reporter"
+      child.isScript
+      ? SVG.capPath
+      : shape === "reporter"
         ? (w, h) => {
             if (child.isBlock && child.lines.length > 1) {
               return SVG.getRoundedPath(w, h)
