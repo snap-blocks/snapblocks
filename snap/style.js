@@ -9,15 +9,17 @@ export default class Style {
   }
 
   static colors = {
-    label: new Color(255,255,255),
+    label: new Color(255, 255, 255),
     zebraLabel: new Color(),
 
     commentLabel: new Color(),
 
-    literal: new Color(255,255,255),
-    zebraLiteral: new Color(),
+    literal: new Color(),
 
-    booleanLiteral: new Color(255,255,255),
+    booleanLiteral: new Color(255, 255, 255),
+
+    readonlyLiteral: new Color(255, 255, 255),
+    zebraReadonlyLiteral: new Color(),
 
     categories: {
       comment: new Color(255, 255, 180),

@@ -837,7 +837,11 @@ export default class SVG {
       ch = child.height
 
     const func =
-      shape === "reporter"
+      child.isScript
+      ? (w, h, isFilled) => {
+        return SVG.getCommandSlotPath(w, h - 3, isFilled)
+      }
+      : shape === "reporter"
         ? SVG.getReporterSlotPath
         : shape === "boolean"
           ? SVG.getBooleanSlotPath
@@ -853,9 +857,9 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        SVG.translatePath(4, cy || 4, func(cw, ch, !child.isInset).join(" ")),
+        SVG.translatePath(3, cy || 4, func(cw, ch, !child.isInset).join(" ")),
       ],
-      "fill-rule": "even-odd",
+      "fill-rule": "evenodd",
     })
   }
 

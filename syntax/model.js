@@ -32,17 +32,20 @@ export class Label {
     this.height = 12
     this.metrics = null
     this.x = 0
-    
+
+    this.isNewline = value == "\n"
+
     this.modified = false
     this.scale = scale ? parseFloat(scale) : null
     if (this.scale === NaN) {
       this.scale = null
     }
-    this.color = color instanceof Color
-                  ? color.copy()
-                    : typeof color == 'string'
-                    ? Color.fromString(color)
-                    : null
+    this.color =
+      color instanceof Color
+        ? color.copy()
+        : typeof color == "string"
+          ? Color.fromString(color)
+          : null
   }
   get isLabel() {
     return true
@@ -73,11 +76,12 @@ export class Icon {
     if (this.scale === NaN) {
       this.scale = null
     }
-    this.color = color instanceof Color
-                  ? color.copy()
-                    : typeof color == 'string'
-                    ? Color.fromString(color)
-                    : null
+    this.color =
+      color instanceof Color
+        ? color.copy()
+        : typeof color == "string"
+          ? Color.fromString(color)
+          : null
 
     // assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
@@ -146,7 +150,30 @@ export class Icon {
   }
 
   stringify() {
-    return unicodeIcons[`@${this.name}`] || ""
+    let start = "@"
+    let suffix = ""
+    let name = this.name
+    if (unicodeIcons[`@${name}`]) {
+      name = unicodeIcons[`@${name}`]
+    }
+    let alias = Object.keys(Icon.iconAliases).find(k => Icon.iconAliases[k] === name)
+    if (alias) {
+      name = alias
+    }
+    if (this.scale) {
+      start = "$"
+      suffix += `-${this.scale}`
+    }
+    if (this.color) {
+      if (suffix === "") {
+        suffix += "-1"
+      }
+      suffix += `-${this.color.r}-${this.color.g}-${this.color.b}`
+    }
+    if (name === "+") {
+      start = ""
+    }
+    return `${start}${name}${suffix}`
   }
 }
 
@@ -199,8 +226,9 @@ export class Input {
     let text = (this.value ? String(this.value) : "")
       .replace(/([\]\\])/g, "\\$1")
       .replace(/ v$/, " \\v")
+      .replace(/ V$/, " \\V")
     if (this.hasArrow) {
-      text += " v"
+      text += this.isDarker ? " V" : " v"
     }
     return this.isRound
       ? `(${text})`
@@ -298,6 +326,12 @@ export class Block {
     }
 
     let overrides = extras || ""
+    if (this.isBlockPrototype) {
+      if (overrides) {
+        overrides += " "
+      }
+      overrides += "define"
+    }
     if (
       this.info.categoryIsDefault === false ||
       (this.info.category === "custom-arg" &&
@@ -320,7 +354,7 @@ export class Block {
     }
     return this.hasScript
       ? text + "\nend"
-      : this.info.shape === "reporter"
+      : this.info.shape === "reporter" || this.info.shape === "ring"
         ? `(${text})`
         : this.info.shape === "boolean"
           ? `<${text}>`

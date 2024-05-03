@@ -67,6 +67,10 @@ export class LabelView {
     this.x = 0
   }
 
+  get isLabel() {
+    return true
+  }
+
   get color() {
     return this._color
   }
@@ -112,6 +116,11 @@ export class LabelView {
     return this.metrics.lines
   }
 
+  get rawHeight() {
+    // snap does this
+    return this.height / 1.2
+  }
+
   measure(options, isZebra) {
     const value = this.value
     const cls = `snap-${this.cls}`
@@ -121,15 +130,15 @@ export class LabelView {
         this._color = Style.colors.commentLabel
       } else if (/boolean/.test(this.cls)) {
         this._color = Style.colors.booleanLiteral
+      } else if (/label/.test(this.cls)) {
+        this._color = isZebra ? Style.colors.zebraLabel : Style.colors.label
+      } else if (/readonly/.test(this.cls)) {
+        this._color = isZebra ? Style.colors.zebraReadonlyLiteral : Style.colors.readonlyLiteral
+      } else if (/literal/.test(this.cls)) {
+        this._color = Style.colors.literal
+      } else {
+        this._color = new Color(255, 255, 255)
       }
-
-      this._color = /comment-label|label-dark/.test(this.cls)
-        ? new Color()
-        : /(boolean|readonly)/.test(this.cls)
-          ? new Color(255, 255, 255)
-          : /literal/.test(this.cls)
-            ? new Color()
-            : new Color(255, 255, 255)
     }
 
     if (this.defaultFontSize) {
@@ -143,13 +152,13 @@ export class LabelView {
     }
 
     let fontWeight = /comment-label/.test(this.cls)
-    ? `bold`
-    : /literal-boolean/.test(this.cls)
       ? `bold`
-      : /literal/.test(this.cls)
-        ? `normal`
-        : `bold`
-    
+      : /literal-boolean/.test(this.cls)
+        ? `bold`
+        : /literal/.test(this.cls)
+          ? `normal`
+          : `bold`
+
     if (this.modified && fontWeight == "bold") {
       fontWeight = "normal"
     }
@@ -194,7 +203,7 @@ export class LabelView {
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: 12 / 2 + this.spaceWidth,
+                cy: y + (wordInfo.height / 2),
                 r: this.spaceWidth / 2,
                 class: "snap-space",
               }),
@@ -205,9 +214,9 @@ export class LabelView {
           }
         }
         lineGroup.push(
-          SVG.text(x, wordInfo.height / -6, wordInfo.word, {
+          SVG.text(x, y + (wordInfo.height / 1.2), wordInfo.word, {
             class: `snap-label ${cls}`,
-            style: `font: ${font}`
+            style: `font: ${font}`,
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
@@ -215,12 +224,10 @@ export class LabelView {
         height = Math.max(height, wordInfo.height)
         first = false
       }
-      y += height - 5
-      console.log('y', y)
-      console.log('height', height)
-      group.push(SVG.move(0, y + 4, SVG.group(lineGroup)))
+      y += height
+      group.push(SVG.group(lineGroup))
     }
-    this.height = y + 2
+    this.height = y
 
     this.el = SVG.group(group)
   }
@@ -243,7 +250,9 @@ export class LabelView {
         computedLine.push({
           word: word,
           width: textMetrics.width,
-          height: textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent,
+          height:
+            textMetrics.fontBoundingBoxAscent +
+            textMetrics.fontBoundingBoxDescent,
         })
       }
       computedLines.push(computedLine)
@@ -311,21 +320,36 @@ class IconView {
       props,
     )
     if (!options.isFlat) {
-      symbol.classList.add("snap-drop-shadow")
+      symbol = SVG.setProps(SVG.group([symbol]), {
+        class: "snap-drop-shadow",
+      })
     }
     return symbol
   }
 
   static get icons() {
     return {
-      greenFlag: { width: 12, height: 12, dy: 0, scale: 1.5, color: new Color(0, 200, 0), fillAttribute: "stroke" },
+      greenFlag: {
+        width: 12,
+        height: 12,
+        dy: 0,
+        scale: 1.5,
+        color: new Color(0, 200, 0),
+        fillAttribute: "stroke",
+      },
       stopSign: { width: 21, height: 21, color: new Color(200, 0, 0) },
       turnLeft: { width: 10, height: 12, dy: +1 },
       turnRight: { width: 10, height: 12, dy: +1 },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 11, color: new Color(0, 0, 0) },
-      delInput: { width: 5, height: 11, color: new Color(0, 0, 0) },
-      verticalEllipsis: {width: 2, height: 11, dy: 0, scale: 0.833333333, color: new Color(0, 0, 0) },
+      addInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
+      delInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
+      verticalEllipsis: {
+        width: 2,
+        height: 12,
+        dy: 0,
+        scale: 0.833333333,
+        color: new Color(0, 0, 0),
+      },
       list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
       turtle: { width: 18, height: 12, dy: +1 },
@@ -364,7 +388,7 @@ class IconView {
       arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
 
-      plusSign: { width: 4, height: 14, dy: 12, padx: 1 },
+      plusSign: { width: 8, height: 14, dy: 12 },
     }
   }
 }
@@ -431,7 +455,7 @@ class InputView {
         })
       }
 
-      h = this.label.height
+      h = this.label.height + 2
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
         w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h
@@ -442,8 +466,8 @@ class InputView {
         w = Math.max(
           this.label.width + this.hasArrow * 12 + 3,
           this.label.lines.length <= 1 // single vs. multi-line contents
-            ? this.label.height - 4 + this.hasArrow * 12
-            : (10 * 1.2) / 1.3 + this.hasArrow * 12,
+            ? this.label.rawHeight + this.hasArrow * 12
+            : this.label.fontSize / 1.3 + this.hasArrow * 12,
           0,
         )
       }
@@ -460,13 +484,13 @@ class InputView {
             : null
     }
 
-    if (this.isBoolean && !this.isBig) {
+    if (this.isBoolean && !this.isBig || this.isInset) {
       h -= 1
     }
 
     // I'm adding a bit of padding around the input
     this.width = w + 1
-    this.height = h + 1
+    this.height = h + 2
 
     let el = InputView.shapes[this.shape](w, h)
 
@@ -504,11 +528,11 @@ class InputView {
     }
 
     const result = SVG.group([
-      SVG.setProps(el, {
+      SVG.move(0, 1, SVG.setProps(el, {
         class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
           this.shape
         }`,
-      }),
+      })),
     ])
     if (this.hasLabel) {
       let x
@@ -524,7 +548,7 @@ class InputView {
       } else {
         x = this.isRound ? Math.floor(h / 2) + 1 : 2
       }
-      result.appendChild(SVG.move(x, -0.5, label))
+      result.appendChild(SVG.move(x, this.isBoolean && !this.isBig ? -0.5 : ((this.height / 2) - (this.label.height / 2)), label))
     }
     if (this.isBoolean && this.value) {
       let y = (this.height - 1) / 2
@@ -662,7 +686,7 @@ class BlockView {
       for (let i = 1; i < lines.length; i += 1) {
         isLast = i + 2 === lines.length
 
-        if (lines[i] instanceof ScriptView) {
+        if (lines[i].isScript) {
           p.push(
             SVG.getRightAndBottom(
               w - (this.info.shape === "boolean") * 8,
@@ -706,10 +730,36 @@ class BlockView {
         p.push(SVG.getRightAndBottom(w, h, !this.isFinal, 0))
       }
       p.push("Z")
-      el = SVG.path({
+
+      let props = {
         class: `snap-block`,
-        path: p,
-      })
+      }
+
+      if (this.isRing) {
+        let child = this.children.find(child => child.isBlock)
+        if (child) {
+          const func =
+            child.isScript
+            ? (w, h, isFilled) => {
+              return SVG.getCommandSlotPath(w, h - 3, isFilled)
+            }
+            : child.info.shape === "reporter"
+              ? SVG.getReporterSlotPath
+              : child.info.shape === "boolean"
+                ? SVG.getBooleanSlotPath
+                : SVG.getCommandSlotPath
+          
+          let cy = child.y,
+              cw = child.width,
+              ch = child.height
+          p.push(SVG.translatePath(3, cy || 4, func(cw, ch, !child.isInset).join(" ")))
+          props['fill-rule'] = 'evenodd'
+        }
+      }
+
+      props['path'] = p
+
+      el = SVG.path(props)
     } else if (/outline-\w+/.test(this.info.shape)) {
       // outlines
       if (this.info.shape === "outline-stack") {
@@ -796,8 +846,8 @@ class BlockView {
 
   static get padding() {
     return {
-      hat: [12, 3, 3, 6],
-      cat: [12, 3, 3, 6],
+      hat: [16, 3, 3, 6],
+      cat: [16, 3, 3, 6],
       "define-hat": [13, 3, 3, 7],
       "block-prototype": [12, 3, 3, 6],
       reporter: [2, 3, 3, 2],
@@ -814,13 +864,6 @@ class BlockView {
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
 
-    const padding = BlockView.padding[this.info.shape] || BlockView.padding.null
-    let pt = padding[0]
-    const pxl = padding[1]
-    const pxr = padding[2]
-    const pb = padding[3]
-
-    let y = 0
     class Line {
       constructor(y) {
         this.y = y
@@ -837,53 +880,47 @@ class BlockView {
       }
     }
 
-    let innerWidth = 0
-    let scriptWidth = 0
-    let line = new Line(y)
-    const pushLine = () => {
-      line.y += line.padding.top
-      y += line.height
-      // line.y = 0
-      if (!this.isUpvar) {
-        y += line.padding.top + line.padding.bottom
-        line.width += pxr
-      } else {
-        line.width -= 1
-        y += 2
-      }
-      innerWidth = Math.max(innerWidth, line.width)
-      lines.push(line)
-    }
+    let rounding = 9,
+      edge = 1,
+      corner = 3,
+      inset = 6,
+      dent = 8,
+      labelPadding = 4,
+      fontSize = 10,
+      bottomPadding = this.isRing ? 0 : 3,
+      hatWidth = 70,
+      hatHeight = 12,
+      index = 0
 
-    if (this.info.isRTL) {
-      let start = 0
-      const flip = () => {
-        children = children
-          .slice(0, start)
-          .concat(children.slice(start, i).reverse())
-          .concat(children.slice(i))
-      }
-      let i
-      for (i = 0; i < children.length; i++) {
-        if (children[i].isScript) {
-          flip()
-          start = i + 1
-        }
-      }
-      if (start < i) {
-        flip()
-      }
-    }
+    let x = 0,
+      y,
+      lineHeight = 0,
+      maxX = 0,
+      blockWidth = 0,
+      fullWidth = 0,
+      blockHeight = 0,
+      l = [],
+      lines = [],
+      space = this.isBlockPrototype ? 1 : Math.floor((12 / 1.4) / 2),
+      ico = 0, // for local block, if I care to add that
+      bottomCorrection,
+      rightCorrection = 0,
+      rightMost,
+      hasLoopCSlot = false,
+      hasLoopArrow = false
 
-    const lines = []
-    if (this.isUpvar) {
-      line.padding.top += 2
+    if (this.isReporter || this.isBoolean) {
+      blockWidth += rounding * 2 + edge * 2
     } else {
-      line.padding.top += pt
+      blockWidth += corner * 4 + edge * 2 + inset * 3 + dent
     }
-    for (let i = 0; i < children.length; i++) {
-      const child = children[i]
 
+    index = 0
+    children.forEach(child => {
+      if (child.isLabel) {
+        child.cls = "block-label"
+        child.measure(options, this.isZebra)
+      }
       if (options.zebraColoring) {
         if (this.isBlockPrototype) {
           if (child.isBlock && !child.isUpvar && this.color.eq(child.color)) {
@@ -901,159 +938,280 @@ class BlockView {
         } else if (child.isScript) {
           child.color = this.color
           child.isZebra = this.isZebra
-        } else if (this.isZebra && child.isLabel) {
-          child.cls = "label-dark"
-          child.measure(options, this.isZebra)
         }
       }
 
       child.el = child.draw(options, this)
 
+      // snap positioning
       if (child.isCShape) {
-        this.hasScript = true
-        line.padding.bottom += pb
-
-        this.isSnavanced = true
-        pushLine()
-        child.y = y
-        lines.push(child)
-        scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
-        child.height = Math.max(12, child.height + 3)
-        y += child.height
-        line = new Line(y)
-      } else if (child.isLabel && child.value === "\n") {
-        this.isSnavanced = true
-        pushLine()
-        line = new Line(y)
-      } else {
-        if (
-          options.wrapSize > 0 &&
-          line.width + child.width > options.wrapSize
-        ) {
-          pushLine()
-          line = new Line(y)
+        if (l.length > 0) {
+          lines.push(l)
+          lines.push([child])
+          l = []
+          x = 0
+        } else {
+          lines.push([child])
         }
-
-        if (line.width < pxl && !this.isUpvar) {
-          line.width = pxl
-        } else if (this.isUpvar) {
-          line.width -= 1
+        this.isSnavanced = true
+      } else if (child.isIcon && ["delInput", "verticalEllipsis", "addInput"].includes(child.name)) {
+        
+        if (child.name === "verticalEllipsis"
+            && (children[index + 1]
+            && children[index + 1].isIcon
+            && children[index + 1].name === "addInput")) {
+          child.el.setAttribute('opacity', 0.5)
+          x += 4
+        } else if (child.name === "addInput"
+          && (children[index + 1]
+          && children[index + 1].isIcon
+          && children[index + 1].name === "verticalEllipsis")) {
+          x += 7
+        } else {
+          x += child.width + space
+          if (children[index - 1]
+              && !(children[index - 1].isIcon
+                   && ["delInput", "verticalEllipsis", "addINput"].includes(children[index - 1].name))) {
+            if (options.wrapSize > 0 && x > options.wrapSize) {
+              lines.push(l)
+              l = []
+              x = child.width + space
+            }
+          }
         }
-        if (line.children.length !== 0) {
-          if (child.isIcon) {
-            if (
-              (line.children[line.children.length - 1].isIcon &&
-                line.children[line.children.length - 1].name == "delInput" &&
-                child.name == "verticalEllipsis") ||
-              (line.children[line.children.length - 1].isIcon &&
-                line.children[line.children.length - 1].name ==
-                  "verticalEllipsis" &&
-                child.name == "addInput")
-            ) {
-              line.width += 2
+        l.push(child)
+    } else {
+        x += child.width + space
+        if ((options.wrapSize > 0 && x > options.wrapSize) || child.isNewline) {
+          if (l.length > 0) {
+            lines.push(l)
+            l = []
+            x = child.width + space
+          }
+        }
+        if (child.isNewline) {
+          this.isSnavanced = true
+          x = 0
+        } else {
+          l.push(child)
+        }
+      }
+      index += 1
+    })
+    if (l.length > 0) {
+      lines.push(l)
+    }
+
+    // distribute parts on lines
+    if (this.isCommand || this.isHat) {
+      y = corner + edge
+      if (this.isHat) {
+        y += hatHeight
+      }
+    } else if (this.isReporter || this.isBoolean || this.isRing) {
+      y = edge * 2
+    }
+
+    let drawLines = []
+    let drawLine
+    let isCSlot = false
+
+    lines.forEach(line => {
+      isCSlot = false
+      if (hasLoopCSlot) {
+        hasLoopArrow = true
+        hasLoopCSlot = false
+      }
+      x = ico + edge + labelPadding
+      if (this.isRing) {
+        x = space //this.labelPadding;
+      } else if (this.isBoolean) {
+        x = ico + rounding
+      } else if (this.isUpvar) {
+        x = edge + 1
+      }
+      y += lineHeight
+      drawLine = new Line(y)
+      lineHeight = 0
+      index = 0
+      line.forEach(child => {
+        if (child.isLoop) {
+          hasLoopCSlot = true
+        }
+        if (child.isCShape) {
+          isCSlot = true
+          y += this.isReporter || this.isBoolean ? 1 : 2
+          if (drawLines.length) {
+            if (!this.hasScript) {
+              drawLines[drawLines.length - 1].height += 6
             } else {
-              line.width += child.padx
+              drawLines[drawLines.length - 1].height += 2
             }
           } else {
-            line.width += 4
+            drawLine.height = y
+            drawLines.push(drawLine)
+            drawLine = new Line(y)
           }
-        }
-
-        child.x = line.width
-        line.width += child.width
-        if (!child.isLabel) {
-          line.height = Math.max(line.height, child.height)
-          if (child.isCommand) {
-            line.padding.bottom = Math.max(line.padding.bottom, 3)
+          this.hasScript = true
+          child.y = y
+          drawLines.push(child)
+          x -= labelPadding
+          x += 8
+          if (this.isBoolean) {
+            x += 2
           }
+          SVG.move(x, y, child.el)
+          lineHeight = child.height
+          fullWidth = Math.max(fullWidth, x + child.width + 8)
         } else {
-          line.height = Math.max(line.height, child.height + 2)
-        }
-        line.children.push(child)
-      }
-    }
-    y += pb
-    if (this.hasScript) {
-      let hasVariadic = line.children.find(
-        child => child.isIcon && ["addInput", "delInput"].includes(child.name),
-      )
-      if (!hasVariadic) {
-        y += pb
-      }
-    }
-    pushLine()
-
-    innerWidth = Math.max(
-      innerWidth + pxl * 2,
-      this.isHat
-        ? 110
-        : this.hasScript
-          ? 39
-          : this.isCommand || this.isOutline || this.isRing
-            ? 39
-            : 20,
-    )
-    this.height = y
-    this.width = scriptWidth
-      ? Math.max(innerWidth, 8 + (this.isBoolean ? 9 : 0) + scriptWidth)
-      : innerWidth
-    this.firstLine = lines[0]
-    this.innerWidth = innerWidth
-
-    const objects = []
-
-    for (const line of lines) {
-      if (line.isScript) {
-        objects.push(SVG.move(8, line.y, line.el))
-        continue
-      }
-
-      const h = line.height
-
-      for (const child of line.children) {
-        if (child.isLoop) {
-          objects.push(
-            SVG.move(
-              innerWidth -
-                child.width -
-                3 -
-                (this.info.shape === "boolean") * 6,
-              this.height - child.height - 3,
-              child.el,
-            ),
+          child.y = y
+          if (this.isBlockPrototype && child.isCommand) {
+            child.height += 3
+          }
+          SVG.move(x - (this.isRing ? 1 : 0), (child.isIcon ? y + (child.dy | 0) : y), child.el)
+          if (!child.isNewline) {
+            if (child.isCShape) {
+              x += child.width
+            } else if (
+              child.isIcon 
+              && (
+                child.name === "verticalEllipsis"
+              && (line[index + 1]
+                  && line[index + 1].isIcon
+                  && line[index + 1].name === "addInput"))) {
+              x += 4
+            } else if ((child.isIcon
+              && child.name === "delInput"
+              && (line[index + 1]
+                  && line[index + 1].isIcon
+                  && line[index + 1].name === "verticalEllipsis"))) {
+            x += 7
+          } else {
+              x += child.width + space
+            }
+          }
+          lineHeight = Math.max(
+            lineHeight,
+            child.isLabel ? child.rawHeight : child.height,
           )
-          continue
         }
+        fullWidth = Math.max(fullWidth, x)
+        maxX = Math.max(maxX, x)
 
-        let y = pt + (h - child.height - pt - pb) / 2
-        if (isDefine && child.isLabel) {
-          y += 3
-        } else if (child.isIcon) {
-          y += child.dy | 0
-        }
+        index += 1
+      })
+
+      // adjust label row below a loop-arrow C-slot to accomodate the loop icon
+      if (hasLoopArrow) {
+        x += fontSize * 1.5
+        maxX = Math.max(maxX, x)
+        fullWidth = Math.max(fullWidth, x)
+        hasLoopArrow = false
+      }
+
+      // center parts vertically on each line:
+      line.forEach(child => {
         if (this.isRing) {
-          child.y = (line.y + y) | 0
-          child.x -= 2
+          child.y += Math.floor((lineHeight - child.height) / 2)
+        }
+        SVG.move(
+          0,
+          Math.floor((lineHeight - child.height) / 2),
+          child.el,
+        )
+      })
+
+      drawLine.height = lineHeight
+      drawLine.children = [...line]
+      if (!isCSlot) {
+        drawLines.push(drawLine)
+      }
+    })
+    if (isCSlot) {
+      // drawLine.height = lineHeight
+      drawLines.push(drawLine)
+    }
+
+    // determine my height:
+    y += lineHeight
+    if (children.some(any => any.isCShape)) {
+      bottomCorrection = bottomPadding
+      rightMost = children
+        .reverse()
+        .find(
+          child =>
+            child.isIcon &&
+            ["delInput", "addInput"].includes(child.name),
+        )
+      if (rightMost
+          && rightMost.isIcon
+          && ["delInput", "addInput"].includes(rightMost.name)) {
+        bottomCorrection = 0
+      }
+      if (this.isReporter || this.isRing) {
+        bottomCorrection = Math.max(bottomPadding, rounding - bottomPadding)
+      }
+      y += bottomCorrection
+    }
+    if (this.isCommand || this.isHat) {
+      blockHeight = y + (corner * 2)
+    } else if (this.isUpvar) {
+      blockHeight = y + (edge * 2 + 3)
+    } else if (this.isReporter || this.isBoolean) {
+      blockHeight = y + (corner * 1.7)
+    } else if (this.isRing) {
+      blockHeight = y + (corner * 1.7)
+    }
+
+    // determine my width:
+    if (this.isBoolean) {
+      blockWidth = Math.max(blockWidth, maxX + rounding)
+      rightCorrection = space
+    } else if (this.isUpvar) {
+      blockWidth = Math.max(blockWidth, maxX - (edge + 1))
+    } else {
+      blockWidth = Math.max(blockWidth, maxX + labelPadding - edge)
+      rightCorrection = space
+    }
+
+    // adjust right padding if rightmost input has arrows
+    rightMost = children[children.length - 1]
+    if (
+      rightMost &&
+      rightMost.isIcon &&
+      ["delInput", "verticalEllipsis", "addInput"].includes(rightMost.name) &&
+      lines.length === 1
+    ) {
+      blockWidth -= rightCorrection
+    }
+
+    // adjust width to hat width
+    if (this.isHat) {
+      blockWidth = Math.max(blockWidth, hatWidth * 1.5)
+    }
+    fullWidth = Math.max(fullWidth, blockWidth)
+
+    // set my extent (silently, because we'll redraw later anyway):
+    this.width = fullWidth
+    this.height = blockHeight - 3
+
+    let objects = []
+
+    lines.forEach(line => {
+      line.forEach(child => {
+        if (this.isRing) {
           if (child.isInset) {
-            continue
+            return
           }
         }
-        objects.push(SVG.move(pxl + child.x, (line.y + y) | 0, child.el))
-
-        if (child.diff === "+") {
-          const ellipse = SVG.insEllipse(child.width, child.height)
-          objects.push(SVG.move(pxl + child.x, (line.y + y) | 0, ellipse))
-        }
-      }
-    }
-
-    const el = this.drawSelf(options, innerWidth, this.height, lines)
-    objects.splice(0, 0, el)
-    if (this.info.color) {
-      SVG.setProps(el, {
-        fill: this.info.color,
+        objects.push(child.el)
       })
-    }
+    })
+
+    this.lines = drawLines
+
+    const el = this.drawSelf(options, blockWidth, this.height, drawLines)
+    objects.splice(0, 0, el)
 
     return SVG.group(objects)
   }
@@ -1153,9 +1311,9 @@ class GlowView {
     } else {
       el = c.drawSelf(w, h, [])
     }
-    return SVG.setProps(el, {
+    return SVG.move(0, -1, SVG.setProps(el, {
       class: "snap-diff snap-diff-ins",
-    })
+    }))
   }
   // TODO how can we always raise Glows above their parents?
 
@@ -1196,7 +1354,7 @@ class ScriptView {
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
-      const x = inside ? (this.shape === "boolean" ? 7 : 1) : 0
+      const x = 0 // inside ? (this.shape === "boolean" ? 6 : 8) : 0
       if (!this.isZebra && this.color) {
         if (this.color.eq(block.color)) {
           block.isZebra = true
@@ -1209,7 +1367,7 @@ class ScriptView {
       const diff = block.diff
       if (diff === "-") {
         const dw = block.width
-        const dh = block.firstLine.height || block.height
+        const dh = block.lines[0].height || block.height
         children.push(SVG.move(x, y + dh / 2 + 1, SVG.strikethroughLine(dw)))
         this.width = Math.max(this.width, block.width)
       }
@@ -1226,7 +1384,7 @@ class ScriptView {
         this.width = Math.max(this.width, cx + comment.width)
       }
     }
-    this.height = y
+    this.height = y + 3
     if (!inside && !this.isFinal) {
       this.height += 3
     }
@@ -1234,6 +1392,8 @@ class ScriptView {
     if (!inside && lastBlock.isGlow) {
       this.height += 2 // TODO unbreak this
     }
+
+    this.height = Math.max(this.height, 3 * 4)
     return SVG.group(children)
   }
 }
@@ -1256,7 +1416,7 @@ class DocumentView {
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
-          : 460
+          : 450
         : -1,
       zebraColoring: options.zebraColoring,
       showSpaces: options.showSpaces,
@@ -1471,8 +1631,6 @@ const viewFor = node => {
   if (node instanceof Icon && unicodeIcons[node.name]) {
     return LabelView
   }
-
-  console.log('node', node)
 
   switch (node.constructor) {
     case Label:

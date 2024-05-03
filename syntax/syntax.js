@@ -116,8 +116,6 @@ function paintBlock(info, children, languages) {
         info.category = "events"
         info.shape = "block-prototype"
 
-        console.log('children', children)
-
         let block = children[0]
         if (block.info.categoryIsDefault) {
           block.info.category = "custom"
@@ -536,6 +534,9 @@ function parseLines(code, languages) {
             let modifiers = []
             while (tok && /[a-zA-Z+\\]/.test(tok)) {
               if (tok === "\\") {
+                if (peek() === "\n") {
+                  break
+                }
                 label.raw += tok
                 raw += tok
                 next()
@@ -547,12 +548,18 @@ function parseLines(code, languages) {
               next()
             }
             if (tok === "-") {
+              label.value += tok
+              label.raw += tok
               modifiers = []
               let modifier = 0
               modifiers[modifier] = ""
               next() // "-"
               while (tok && /[0-9a-z-A-Z\-\\\.]/.test(tok)) {
                 if (tok === "\\") {
+                  if (peek() === "\n") {
+                    break
+                  }
+                  label.raw += tok
                   next()
                   modifiers[modifier] += tok
                 } else if (tok === "-") {
@@ -567,29 +574,43 @@ function parseLines(code, languages) {
               }
             }
 
-            if (Object.prototype.hasOwnProperty.call(Icon.icons, raw) ||
-                Object.prototype.hasOwnProperty.call(Icon.iconAliases, raw)) {
-              children.push(new Icon(
-                raw,
-                modifiers[0],
-                modifiers.length > 1
+            if (
+              Object.prototype.hasOwnProperty.call(Icon.icons, raw) ||
+              Object.prototype.hasOwnProperty.call(Icon.iconAliases, raw)
+            ) {
+              children.push(
+                new Icon(
+                  raw,
+                  modifiers[0],
+                  modifiers.length > 1
+                    ? new Color(
+                        modifiers[1] ? modifiers[1] : 255,
+                        modifiers[2] ? modifiers[2] : 255,
+                        modifiers[3] ? modifiers[3] : 255,
+                      )
+                    : null,
+                ),
+              )
+              break
+            }
+            if (start == "$" && modifiers) {
+              label = new Label(
+                name,
+                null,
+                modifiers[0] ? modifiers[0] : null,
+                modifiers[1]
                   ? new Color(
                       modifiers[1] ? modifiers[1] : 255,
                       modifiers[2] ? modifiers[2] : 255,
                       modifiers[3] ? modifiers[3] : 255,
                     )
                   : null,
-              ))
-              break
-            }
-            if (start == "$" && modifiers) {
-              label = new Label(name, null, modifiers[0] ? modifiers[0] : null, modifiers[1] ? new Color(
-                modifiers[1] ? modifiers[1] : 255,
-                modifiers[2] ? modifiers[2] : 255,
-                modifiers[3] ? modifiers[3] : 255,
-              ) : null)
+              )
               label.raw = raw
               label.modified = true
+            } else {
+              label.value = start + label.value
+              label.raw = start + label.raw
             }
             children.push(label)
             break
@@ -623,7 +644,14 @@ function parseLines(code, languages) {
           // fallthrough
           default:
             if (!label) {
-              children.push((label = new Label("", null, labelProps.scale, labelProps.color)))
+              children.push(
+                (label = new Label(
+                  "",
+                  null,
+                  labelProps.scale,
+                  labelProps.color,
+                )),
+              )
             }
             if (tok) {
               label.value += tok
@@ -969,7 +997,6 @@ function parseLines(code, languages) {
     if (override) {
       overrides.push(override)
     }
-    console.log("overrides", overrides)
     return overrides
   }
 
@@ -1053,7 +1080,6 @@ function parseScripts(getLine) {
             blocks.pop()
             children = last.child.isScript ? last.child.blocks : [last.child]
           }
-          console.log('glow', b)
           children.push(b)
           blocks.push(new Glow(new Script(children)))
         } else if (b.isHat) {
@@ -1226,7 +1252,6 @@ function recognizeStuff(scripts) {
           category: block.info.category,
           shape: outline.info.shape.replace("outline-", ""),
         }
-        console.log(info.shape)
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = [info]
         } else {
@@ -1266,9 +1291,7 @@ function recognizeStuff(scripts) {
             continue
           }
           if (child.isLabel) {
-            if (child.modified &&
-                child.value === "nl" &&
-                child.scale == null) {
+            if (child.modified && child.value === "nl" && child.scale == null) {
               parts.push("\n")
             } else {
               parts.push(child.value)
@@ -1380,7 +1403,6 @@ function recognizeStuff(scripts) {
         const blocksInfo = customBlocksByHash[block.info.hash]
         if (blocksInfo) {
           let selected = blocksInfo[0]
-          console.log(blocksInfo)
           for (let info of blocksInfo) {
             if (info.shape == block.info.shape) {
               selected = info
