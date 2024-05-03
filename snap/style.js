@@ -70,13 +70,35 @@ export default class Style {
         d: "M 6.17 0 L 13.83 0 L 20 6.14 L 20 13.83 L 13.83 20 L 6.17 20 L 0 13.83 L 0 6.17 Z",
         id: "snap-stopSign",
       }),
-      SVG.el("path", {
-        d: "M 5 3 a 5 5 0 1 0 5 5 L 9 8 A 4 4 0 1 1 5 4 M 10 3 L 5 -2 L 5 8 Z",
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 8 4 L 4 0 L 4 8 Z",
+            "stroke-width": 0,
+          }),
+          SVG.el("path", {
+            d: "M 7.5 8 A 3.5 3.5 0 1 1 4 4.5",
+            "stroke-width": 1,
+            "fill": "none",
+          }),
+        ]),
+      {
         id: "snap-turnRight",
       }),
-      SVG.el("path", {
-        d: "M 5 3 a 5 5 90 1 1 -5 5 L 1 8 A 4 4 90 1 0 5 4 M 0 3 L 5 -2 L 5 8 Z",
-        id: "snap-turnLeft",
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 0 4 L 4 0 L 4 8 Z",
+            "stroke-width": 0,
+          }),
+          SVG.el("path", {
+            d: "M 0.5 8 A 3.5 3.5 0 1 0 4 4.5",
+            "stroke-width": 1,
+            fill: "none",
+          }),
+        ]),
+        {
+          id: "snap-turnLeft",
       }),
       SVG.el("path", {
         d: "M 0 1 L 5 6 L 0 11 Z",
