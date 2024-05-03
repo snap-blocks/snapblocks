@@ -79,12 +79,13 @@ export default class Style {
           SVG.el("path", {
             d: "M 7.5 8 A 3.5 3.5 0 1 1 4 4.5",
             "stroke-width": 1,
-            "fill": "none",
+            fill: "none",
           }),
         ]),
-      {
-        id: "snap-turnRight",
-      }),
+        {
+          id: "snap-turnRight",
+        },
+      ),
       SVG.setProps(
         SVG.group([
           SVG.el("path", {
@@ -99,7 +100,8 @@ export default class Style {
         ]),
         {
           id: "snap-turnLeft",
-      }),
+        },
+      ),
       SVG.el("path", {
         d: "M 0 1 L 5 6 L 0 11 Z",
         id: "snap-addInput",

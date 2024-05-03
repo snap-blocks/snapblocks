@@ -231,9 +231,11 @@ export class IconView {
     }
 
     if (!this.color) {
-      this.color = options.isHighContrast ? new Color() : new Color(255, 255, 255)
+      this.color = options.isHighContrast
+        ? new Color()
+        : new Color(255, 255, 255)
     }
-    
+
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
