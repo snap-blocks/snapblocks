@@ -181,37 +181,12 @@ class IconView {
     }
     Object.assign(this, info)
 
-    if (isNaN(this.scale) || this.scale <= 0) {
+    if (this.scale <= 0) {
       this.scale = 1
     }
 
-    this.scale =
-      !isNaN(icon.scale) && icon.scale !== null
-        ? icon.scale
-        : isNaN(this.scale) || this.scale == null
-          ? 1
-          : this.scale
-    this.r =
-      !isNaN(icon.r) && icon.r !== null
-        ? icon.r
-        : isNaN(this.r) || this.r == null
-          ? 255
-          : this.r
-    this.g =
-      !isNaN(icon.g) && icon.g !== null
-        ? icon.g
-        : isNaN(this.g) || this.g == null
-          ? 255
-          : this.g
-    this.b =
-      !isNaN(icon.b) && icon.b !== null
-        ? icon.b
-        : isNaN(this.b) || this.b == null
-          ? 255
-          : this.b
-
-    if (this.scale <= 0) {
-      this.scale = 1
+    if (!this.color) {
+      this.color = new Color(255, 255, 255)
     }
 
     this.width = this.width * this.scale
@@ -234,10 +209,10 @@ class IconView {
     }
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
-        props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+        props[fillAttribute] = this.color.toHexString()
       }
     } else {
-      props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+      props[this.fillAttribute] = this.color.toHexString()
     }
     let symbol = SVG.setProps(
       SVG.symbol(`#sb-${this.name}-${options.id}`),
