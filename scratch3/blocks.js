@@ -207,35 +207,6 @@ export class IconView {
     }
     Object.assign(this, info)
 
-    if (isNaN(this.scale) || this.scale <= 0) {
-      this.scale = 1
-    }
-
-    this.scale =
-      !isNaN(icon.scale) && icon.scale !== null
-        ? icon.scale
-        : isNaN(this.scale) || this.scale == null
-          ? 1
-          : this.scale
-    this.r =
-      !isNaN(icon.r) && icon.r !== null
-        ? icon.r
-        : isNaN(this.r) || this.r == null
-          ? null
-          : this.r
-    this.g =
-      !isNaN(icon.g) && icon.g !== null
-        ? icon.g
-        : isNaN(this.g) || this.g == null
-          ? null
-          : this.g
-    this.b =
-      !isNaN(icon.b) && icon.b !== null
-        ? icon.b
-        : isNaN(this.b) || this.b == null
-          ? null
-          : this.b
-
     if (this.scale <= 0) {
       this.scale = 1
     }
@@ -253,36 +224,22 @@ export class IconView {
   }
 
   draw(options) {
-    this.r =
-      this.r === null
-        ? options.isHighContrast && highContrastIcons.has(this.name)
-          ? 0
-          : 255
-        : this.r
-    this.g =
-      this.g === null
-        ? options.isHighContrast && highContrastIcons.has(this.name)
-          ? 0
-          : 255
-        : this.g
-    this.b =
-      this.b === null
-        ? options.isHighContrast && highContrastIcons.has(this.name)
-          ? 0
-          : 255
-        : this.b
-
     let props = {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale})`,
     }
+
+    if (!this.color) {
+      this.color = options.isHighContrast ? new Color() : new Color(255, 255, 255)
+    }
+    
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
-        props[fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+        props[fillAttribute] = this.color.toHexString()
       }
     } else {
-      props[this.fillAttribute] = SVG.rgbToHex(this.r, this.g, this.b)
+      props[this.fillAttribute] = this.color.toHexString()
     }
     let symbol = SVG.setProps(
       SVG.symbol(`#sb3-${iconName(this.name, options)}-${options.id}`),

@@ -1651,7 +1651,7 @@ export default class Style {
    * @return the icon name with suffix, if a high contrast icon is defined
    */
   static iconName(name, options) {
-    if (options.iconStyle === "high-contrast" && highContrastIcons.has(name)) {
+    if (options.isHighContrast && highContrastIcons.has(name)) {
       return `${name}-high-contrast`
     }
 
