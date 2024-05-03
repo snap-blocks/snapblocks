@@ -441,8 +441,7 @@ export default class SVG {
       cy = child.y
 
     const r = 8
-    const func =
-      child.isScript
+    const func = child.isScript
       ? SVG.capPath
       : shape === "reporter"
         ? (w, h) => {

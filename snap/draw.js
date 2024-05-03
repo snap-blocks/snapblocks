@@ -836,11 +836,10 @@ export default class SVG {
       cw = child.width,
       ch = child.height
 
-    const func =
-      child.isScript
+    const func = child.isScript
       ? (w, h, isFilled) => {
-        return SVG.getCommandSlotPath(w, h - 3, isFilled)
-      }
+          return SVG.getCommandSlotPath(w, h - 3, isFilled)
+        }
       : shape === "reporter"
         ? SVG.getReporterSlotPath
         : shape === "boolean"

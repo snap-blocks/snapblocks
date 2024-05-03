@@ -133,7 +133,9 @@ export class LabelView {
       } else if (/label/.test(this.cls)) {
         this._color = isZebra ? Style.colors.zebraLabel : Style.colors.label
       } else if (/readonly/.test(this.cls)) {
-        this._color = isZebra ? Style.colors.zebraReadonlyLiteral : Style.colors.readonlyLiteral
+        this._color = isZebra
+          ? Style.colors.zebraReadonlyLiteral
+          : Style.colors.readonlyLiteral
       } else if (/literal/.test(this.cls)) {
         this._color = Style.colors.literal
       } else {
@@ -203,7 +205,7 @@ export class LabelView {
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: y + (wordInfo.height / 2),
+                cy: y + wordInfo.height / 2,
                 r: this.spaceWidth / 2,
                 class: "snap-space",
               }),
@@ -214,7 +216,7 @@ export class LabelView {
           }
         }
         lineGroup.push(
-          SVG.text(x, y + (wordInfo.height / 1.2), wordInfo.word, {
+          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
             class: `snap-label ${cls}`,
             style: `font: ${font}`,
           }),
@@ -484,7 +486,7 @@ class InputView {
             : null
     }
 
-    if (this.isBoolean && !this.isBig || this.isInset) {
+    if ((this.isBoolean && !this.isBig) || this.isInset) {
       h -= 1
     }
 
@@ -528,11 +530,15 @@ class InputView {
     }
 
     const result = SVG.group([
-      SVG.move(0, 1, SVG.setProps(el, {
-        class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
-          this.shape
-        }`,
-      })),
+      SVG.move(
+        0,
+        1,
+        SVG.setProps(el, {
+          class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
+            this.shape
+          }`,
+        }),
+      ),
     ])
     if (this.hasLabel) {
       let x
@@ -548,7 +554,15 @@ class InputView {
       } else {
         x = this.isRound ? Math.floor(h / 2) + 1 : 2
       }
-      result.appendChild(SVG.move(x, this.isBoolean && !this.isBig ? -0.5 : ((this.height / 2) - (this.label.height / 2)), label))
+      result.appendChild(
+        SVG.move(
+          x,
+          this.isBoolean && !this.isBig
+            ? -0.5
+            : this.height / 2 - this.label.height / 2,
+          label,
+        ),
+      )
     }
     if (this.isBoolean && this.value) {
       let y = (this.height - 1) / 2
@@ -738,26 +752,31 @@ class BlockView {
       if (this.isRing) {
         let child = this.children.find(child => child.isBlock)
         if (child) {
-          const func =
-            child.isScript
+          const func = child.isScript
             ? (w, h, isFilled) => {
-              return SVG.getCommandSlotPath(w, h - 3, isFilled)
-            }
+                return SVG.getCommandSlotPath(w, h - 3, isFilled)
+              }
             : child.info.shape === "reporter"
               ? SVG.getReporterSlotPath
               : child.info.shape === "boolean"
                 ? SVG.getBooleanSlotPath
                 : SVG.getCommandSlotPath
-          
+
           let cy = child.y,
-              cw = child.width,
-              ch = child.height
-          p.push(SVG.translatePath(3, cy || 4, func(cw, ch, !child.isInset).join(" ")))
-          props['fill-rule'] = 'evenodd'
+            cw = child.width,
+            ch = child.height
+          p.push(
+            SVG.translatePath(
+              3,
+              cy || 4,
+              func(cw, ch, !child.isInset).join(" "),
+            ),
+          )
+          props["fill-rule"] = "evenodd"
         }
       }
 
-      props['path'] = p
+      props["path"] = p
 
       el = SVG.path(props)
     } else if (/outline-\w+/.test(this.info.shape)) {
@@ -901,7 +920,7 @@ class BlockView {
       blockHeight = 0,
       l = [],
       lines = [],
-      space = this.isBlockPrototype ? 1 : Math.floor((12 / 1.4) / 2),
+      space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
       ico = 0, // for local block, if I care to add that
       bottomCorrection,
       rightCorrection = 0,
@@ -954,24 +973,36 @@ class BlockView {
           lines.push([child])
         }
         this.isSnavanced = true
-      } else if (child.isIcon && ["delInput", "verticalEllipsis", "addInput"].includes(child.name)) {
-        
-        if (child.name === "verticalEllipsis"
-            && (children[index + 1]
-            && children[index + 1].isIcon
-            && children[index + 1].name === "addInput")) {
-          child.el.setAttribute('opacity', 0.5)
+      } else if (
+        child.isIcon &&
+        ["delInput", "verticalEllipsis", "addInput"].includes(child.name)
+      ) {
+        if (
+          child.name === "verticalEllipsis" &&
+          children[index + 1] &&
+          children[index + 1].isIcon &&
+          children[index + 1].name === "addInput"
+        ) {
+          child.el.setAttribute("opacity", 0.5)
           x += 4
-        } else if (child.name === "addInput"
-          && (children[index + 1]
-          && children[index + 1].isIcon
-          && children[index + 1].name === "verticalEllipsis")) {
+        } else if (
+          child.name === "addInput" &&
+          children[index + 1] &&
+          children[index + 1].isIcon &&
+          children[index + 1].name === "verticalEllipsis"
+        ) {
           x += 7
         } else {
           x += child.width + space
-          if (children[index - 1]
-              && !(children[index - 1].isIcon
-                   && ["delInput", "verticalEllipsis", "addINput"].includes(children[index - 1].name))) {
+          if (
+            children[index - 1] &&
+            !(
+              children[index - 1].isIcon &&
+              ["delInput", "verticalEllipsis", "addINput"].includes(
+                children[index - 1].name,
+              )
+            )
+          ) {
             if (options.wrapSize > 0 && x > options.wrapSize) {
               lines.push(l)
               l = []
@@ -980,7 +1011,7 @@ class BlockView {
           }
         }
         l.push(child)
-    } else {
+      } else {
         x += child.width + space
         if ((options.wrapSize > 0 && x > options.wrapSize) || child.isNewline) {
           if (l.length > 0) {
@@ -1068,25 +1099,31 @@ class BlockView {
           if (this.isBlockPrototype && child.isCommand) {
             child.height += 3
           }
-          SVG.move(x - (this.isRing ? 1 : 0), (child.isIcon ? y + (child.dy | 0) : y), child.el)
+          SVG.move(
+            x - (this.isRing ? 1 : 0),
+            child.isIcon ? y + (child.dy | 0) : y,
+            child.el,
+          )
           if (!child.isNewline) {
             if (child.isCShape) {
               x += child.width
             } else if (
-              child.isIcon 
-              && (
-                child.name === "verticalEllipsis"
-              && (line[index + 1]
-                  && line[index + 1].isIcon
-                  && line[index + 1].name === "addInput"))) {
+              child.isIcon &&
+              child.name === "verticalEllipsis" &&
+              line[index + 1] &&
+              line[index + 1].isIcon &&
+              line[index + 1].name === "addInput"
+            ) {
               x += 4
-            } else if ((child.isIcon
-              && child.name === "delInput"
-              && (line[index + 1]
-                  && line[index + 1].isIcon
-                  && line[index + 1].name === "verticalEllipsis"))) {
-            x += 7
-          } else {
+            } else if (
+              child.isIcon &&
+              child.name === "delInput" &&
+              line[index + 1] &&
+              line[index + 1].isIcon &&
+              line[index + 1].name === "verticalEllipsis"
+            ) {
+              x += 7
+            } else {
               x += child.width + space
             }
           }
@@ -1114,11 +1151,7 @@ class BlockView {
         if (this.isRing) {
           child.y += Math.floor((lineHeight - child.height) / 2)
         }
-        SVG.move(
-          0,
-          Math.floor((lineHeight - child.height) / 2),
-          child.el,
-        )
+        SVG.move(0, Math.floor((lineHeight - child.height) / 2), child.el)
       })
 
       drawLine.height = lineHeight
@@ -1140,12 +1173,13 @@ class BlockView {
         .reverse()
         .find(
           child =>
-            child.isIcon &&
-            ["delInput", "addInput"].includes(child.name),
+            child.isIcon && ["delInput", "addInput"].includes(child.name),
         )
-      if (rightMost
-          && rightMost.isIcon
-          && ["delInput", "addInput"].includes(rightMost.name)) {
+      if (
+        rightMost &&
+        rightMost.isIcon &&
+        ["delInput", "addInput"].includes(rightMost.name)
+      ) {
         bottomCorrection = 0
       }
       if (this.isReporter || this.isRing) {
@@ -1154,13 +1188,13 @@ class BlockView {
       y += bottomCorrection
     }
     if (this.isCommand || this.isHat) {
-      blockHeight = y + (corner * 2)
+      blockHeight = y + corner * 2
     } else if (this.isUpvar) {
       blockHeight = y + (edge * 2 + 3)
     } else if (this.isReporter || this.isBoolean) {
-      blockHeight = y + (corner * 1.7)
+      blockHeight = y + corner * 1.7
     } else if (this.isRing) {
-      blockHeight = y + (corner * 1.7)
+      blockHeight = y + corner * 1.7
     }
 
     // determine my width:
@@ -1311,9 +1345,13 @@ class GlowView {
     } else {
       el = c.drawSelf(w, h, [])
     }
-    return SVG.move(0, -1, SVG.setProps(el, {
-      class: "snap-diff snap-diff-ins",
-    }))
+    return SVG.move(
+      0,
+      -1,
+      SVG.setProps(el, {
+        class: "snap-diff snap-diff-ins",
+      }),
+    )
   }
   // TODO how can we always raise Glows above their parents?
 

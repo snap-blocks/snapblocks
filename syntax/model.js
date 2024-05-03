@@ -156,7 +156,9 @@ export class Icon {
     if (unicodeIcons[`@${name}`]) {
       name = unicodeIcons[`@${name}`]
     }
-    let alias = Object.keys(Icon.iconAliases).find(k => Icon.iconAliases[k] === name)
+    let alias = Object.keys(Icon.iconAliases).find(
+      k => Icon.iconAliases[k] === name,
+    )
     if (alias) {
       name = alias
     }

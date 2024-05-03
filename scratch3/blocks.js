@@ -968,9 +968,7 @@ class BlockView {
           !child.isOutline &&
           !child.isUpvar
         ) {
-          if (
-            child.color.primary.eq(this.color.primary)
-          ) {
+          if (child.color.primary.eq(this.color.primary)) {
             child.isZebra = true
           }
         } else if (child.isScript) {
@@ -1324,9 +1322,7 @@ class ScriptView {
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
       if (!this.isZebra && this.parentCategory) {
-        if (
-          this.color.primary.eq(block.color.primary)
-        ) {
+        if (this.color.primary.eq(block.color.primary)) {
           block.isZebra = true
         }
       }
