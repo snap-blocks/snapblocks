@@ -207,7 +207,7 @@ export class IconView {
     }
     Object.assign(this, info)
 
-    if (this.scale <= 0) {
+    if (this.scale <= 0 || isNaN(this.scale)) {
       this.scale = 1
     }
 
@@ -1362,6 +1362,36 @@ class DocumentView {
     return result
   }
 
+  updateIds(element) {
+    let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
+    let idRegex = /#[a-zA-Z][\w:.\-]*/
+
+    let id = element.getAttribute("id")
+    if (id) {
+      element.setAttribute("id", `${id}-${this.id}`)
+    }
+
+    Array.from(element.attributes).forEach(attribute => {
+      let value = attribute.nodeValue
+
+      let split = value.split(aroundIdRegex)
+
+      for (let index = 0; index < split.length; index++) {
+        let part = split[index]
+
+        if (idRegex.test(part) && !hexColorPat.test(part)) {
+          split[index] = `${part}-${this.id}`
+        }
+      }
+
+      attribute.nodeValue = split.join("")
+    })
+
+    for (let child of element.children) {
+      this.updateIds(child)
+    }
+  }
+
   measure(options) {
     this.scripts.forEach(script => {
       script.measure(options)
@@ -1409,15 +1439,7 @@ class DocumentView {
       : makeOriginalIcons()
 
     for (let icon of icons) {
-      let id = icon.getAttribute("id")
-      icon.setAttribute("id", `${id}-${this.id}`)
-
-      if (icon.tagName === "use") {
-        let href = icon.getAttribute("href")
-        if (href && href.startsWith("#")) {
-          icon.setAttribute("href", `${href}-${this.id}`)
-        }
-      }
+      this.updateIds(icon)
     }
 
     svg.appendChild(

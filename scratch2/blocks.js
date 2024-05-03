@@ -181,7 +181,7 @@ class IconView {
     }
     Object.assign(this, info)
 
-    if (this.scale <= 0) {
+    if (this.scale <= 0 || isNaN(this.scale)) {
       this.scale = 1
     }
 
