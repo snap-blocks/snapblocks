@@ -140,7 +140,8 @@ export class LabelView {
                 class: "sb3-space",
               }),
             )
-            lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
+            lineGroup[lineGroup.length - 1].style.fill =
+              this.color.toHexString()
             x += this.spaceWidth / 2
           } else {
             x += this.spaceWidth
@@ -958,7 +959,7 @@ class BlockView {
       const child = children[i]
       if (options.zebraColoring) {
         if (this.info.shape === "block-prototype") {
-          if (child.isBlock && child.info.category === this.info.category) {
+          if (child.isBlock && child.color.primary.eq(this.color.primary)) {
             this.isZebra = true
           }
         } else if (
@@ -968,13 +969,12 @@ class BlockView {
           !child.isUpvar
         ) {
           if (
-            child.info.category === this.info.category ||
-            (child.info.color && child.info.color === this.info.color)
+            child.color.primary.eq(this.color.primary)
           ) {
             child.isZebra = true
           }
         } else if (child.isScript) {
-          child.parentCategory = this.info.color || this.info.category
+          child.parentCategory = this.color
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
@@ -1303,6 +1303,8 @@ class ScriptView {
     this.y = 0
     this.parentCategory = null
     this.isZebra = false
+
+    this.color = categoryColor("obsolete")
   }
 
   get isScript() {
@@ -1323,9 +1325,7 @@ class ScriptView {
       const x = inside ? 0 : 2
       if (!this.isZebra && this.parentCategory) {
         if (
-          this.parentCategory.toLowerCase() ===
-            block.info.category.toLowerCase() ||
-          this.parentCategory.toLowerCase() === block.info.color?.toLowerCase()
+          this.color.primary.eq(block.color.primary)
         ) {
           block.isZebra = true
         }
