@@ -17,7 +17,7 @@ import SVG from "./draw.js"
 
 import style from "./style.js"
 import Style from "./style.js"
-import { toPx } from "../shared/cssToPx.js"
+import scaleFontSize from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -89,7 +89,7 @@ export class LabelView {
     return this._fontSize
   }
   set fontSize(size) {
-    this._fontSize = toPx(document.createElement("p"), size) + px
+    this._fontSize = size
     this.defaultFontSize = false
   }
 
@@ -161,15 +161,15 @@ export class LabelView {
       fontWeight = "normal"
     }
 
-    let pixels = toPx(document.createElement("p"), this.fontSize) * this.scale
+    let pixels = scaleFontSize(this.fontSize, this.scale)
 
     const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${pixels}px Helvetica, Arial, DejaVu Sans, sans-serif`
+      ? `${fontWeight} ${pixels} Helvetica, Arial, DejaVu Sans, sans-serif`
       : /literal-boolean/.test(this.cls)
-        ? `${fontWeight} ${pixels}px Arial, DejaVu Sans, sans-serif`
+        ? `${fontWeight} ${pixels} Arial, DejaVu Sans, sans-serif`
         : /literal/.test(this.cls)
-          ? `${fontWeight} ${pixels}px Arial, DejaVu Sans, sans-serif`
-          : `${fontWeight} ${pixels}px ${defaultFontFamily}`
+          ? `${fontWeight} ${pixels} Arial, DejaVu Sans, sans-serif`
+          : `${fontWeight} ${pixels} ${defaultFontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -1040,7 +1040,7 @@ class BlockView {
     }
 
     // distribute parts on lines
-    if (this.isCommand || this.isHat) {
+    if (this.isCommand || this.isFinal || this.isHat) {
       y = corner + edge
       if (this.isHat) {
         y += hatHeight
@@ -1193,7 +1193,7 @@ class BlockView {
       }
       y += bottomCorrection
     }
-    if (this.isCommand || this.isHat) {
+    if (this.isCommand || this.isFinal || this.isHat) {
       blockHeight = y + corner * 2
     } else if (this.isUpvar) {
       blockHeight = y + (edge * 2 + 3)
