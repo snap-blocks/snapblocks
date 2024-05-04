@@ -93,10 +93,6 @@ export class LabelView {
     this.defaultFontSize = false
   }
 
-  get isLabel() {
-    return true
-  }
-
   draw(options) {
     if (!options.isFlat) {
       this.el.classList.add("snap-drop-shadow")
