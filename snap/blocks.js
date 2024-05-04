@@ -1310,7 +1310,7 @@ class CommentView {
       SVG.move(padding.left, this.height / 5, arrowEl),
       SVG.move(
         padding.left + this.arrow.width + padding.arrow,
-        this.height / 5,
+        (this.height - this.label.height) / 2,
         labelEl,
       ),
     ])
