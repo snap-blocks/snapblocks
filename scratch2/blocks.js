@@ -110,7 +110,7 @@ export class LabelView {
   measure(options) {
     const value = this.value
     const cls = `sb-${this.cls}`
-    
+
     if (this.defaultColor) {
       if (/comment-label/.test(this.cls)) {
         this._color = new Color(92, 93, 95)
@@ -153,8 +153,8 @@ export class LabelView {
 
     const font = /comment-label/.test(this.cls)
       ? `${fontWeight} ${pixels} Helvetica, Arial, DejaVu Sans, sans-serif`
-        : `${fontWeight} ${pixels} ${defaultFontFamily}`
-    
+      : `${fontWeight} ${pixels} ${defaultFontFamily}`
+
     let cache = LabelView.metricsCache[font]
     if (!cache) {
       cache = LabelView.metricsCache[font] = Object.create(null)
