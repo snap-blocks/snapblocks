@@ -16,7 +16,7 @@ import Color, { hexColorPat } from "../shared/color.js"
 import SVG from "./draw.js"
 
 import style from "./style.js"
-import { toPx } from "../shared/cssToPx.js"
+import scaleFontSize from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -87,14 +87,11 @@ export class LabelView {
     return this._fontSize
   }
   set fontSize(size) {
-    this._fontSize = toPx(document.createElement("p"), size) + px
+    this._fontSize = size
     this.defaultFontSize = false
   }
 
   draw(options) {
-    if (!options.showSpaces) {
-      this.el.classList.add("sb-hide-spaces")
-    }
     return this.el
   }
 
@@ -152,15 +149,11 @@ export class LabelView {
       fontWeight = "normal"
     }
 
-    let pixels = toPx(document.createElement("p"), this.fontSize) * this.scale
+    let pixels = scaleFontSize(this.fontSize, this.scale)
 
     const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${pixels}px Helvetica, Arial, DejaVu Sans, sans-serif`
-      : /literal-boolean/.test(this.cls)
-        ? `${fontWeight} ${pixels}px ${defaultFontFamily}`
-        : /literal/.test(this.cls)
-          ? `${fontWeight} ${pixels}px ${defaultFontFamily}`
-          : `${fontWeight} ${pixels}px ${defaultFontFamily}`
+      ? `${fontWeight} ${pixels} Helvetica, Arial, DejaVu Sans, sans-serif`
+        : `${fontWeight} ${pixels} ${defaultFontFamily}`
     
     let cache = LabelView.metricsCache[font]
     if (!cache) {

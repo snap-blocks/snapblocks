@@ -14,6 +14,7 @@ import Color, { hexColorPat } from "../shared/color.js"
 
 import SVG from "./draw.js"
 import style from "./style.js"
+import scaleFontSize from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFont,
@@ -41,6 +42,8 @@ export class LabelView {
   constructor(label) {
     this._color = new Color(255, 255, 255)
     this.defaultColor = true
+    this._fontSize = "10px"
+    this.defaultFontSize = true
 
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
@@ -52,11 +55,19 @@ export class LabelView {
       this.color = label.color
     }
 
+    if (!this.scale) {
+      this.scale = 1
+    }
+
     this.el = null
     this.height = 12
     this.lineHeight = 5
     this.metrics = null
     this.x = 0
+  }
+
+  get isLabel() {
+    return true
   }
 
   get color() {
@@ -73,8 +84,12 @@ export class LabelView {
     }
   }
 
-  get isLabel() {
-    return true
+  get fontSize() {
+    return this._fontSize
+  }
+  set fontSize(size) {
+    this._fontSize = size
+    this.defaultFontSize = false
   }
 
   draw(options) {
@@ -84,6 +99,7 @@ export class LabelView {
   get width() {
     return this.metrics.width
   }
+
   get spaceWidth() {
     return this.metrics.spaceWidth
   }
@@ -100,21 +116,32 @@ export class LabelView {
       this._color = /comment-label|label-dark/.test(this.cls)
         ? new Color()
         : /(boolean|dropdown)/.test(this.cls)
-          ? new Color(255, 255, 255)
+          ? (options.isHighContrast ? new Color() : new Color(255, 255, 255))
           : /literal/.test(this.cls)
             ? new Color()
-            : new Color(255, 255, 255)
+            : (options.isHighContrast ? new Color() : new Color(255, 255, 255))
     }
 
-    let cache = LabelView.metricsCache[cls]
+    if (this.defaultFontSize) {
+      this._fontSize = "12pt"
+    }
+
+    let fontWeight = /comment-label/.test(this.cls)
+      ? "500"
+      : "400"
+    
+    let fontSize = scaleFontSize(this.fontSize, this.scale)
+    
+    const font = /comment-label/.test(this.cls) ? `${fontWeight} ${fontSize} ${commentFont}` : `${fontWeight} ${fontSize} ${defaultFont}`
+
+    let cache = LabelView.metricsCache[font]
     if (!cache) {
-      cache = LabelView.metricsCache[cls] = Object.create(null)
+      cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
     if (Object.hasOwnProperty.call(cache, value)) {
       this.metrics = cache[value]
     } else {
-      const font = /comment-label/.test(this.cls) ? commentFont : defaultFont
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
@@ -123,9 +150,10 @@ export class LabelView {
     let group = []
 
     let y = 0
+    let height = 0
     for (let line of lines) {
       let lineGroup = []
-      y += 13 + this.lineHeight
+      height = 0
       let x = 0
       let first = true
       for (let wordInfo of line) {
@@ -135,29 +163,31 @@ export class LabelView {
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: y - this.lineHeight - 11 + this.spaceWidth,
+                cy: y + wordInfo.height / 2,
                 r: this.spaceWidth / 2,
                 class: "sb3-space",
               }),
             )
-            lineGroup[lineGroup.length - 1].style.fill =
-              this.color.toHexString()
             x += this.spaceWidth / 2
           } else {
             x += this.spaceWidth
           }
         }
         lineGroup.push(
-          SVG.text(x, y - this.lineHeight, wordInfo.word, {
+          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
             class: `sb3-label ${cls}`,
+            style: `font: ${font}`
           }),
         )
+        lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
+        height = Math.max(height, wordInfo.height)
         first = false
       }
+      y += height
       group.push(SVG.group(lineGroup))
     }
-    this.height = Math.max(13, y - (this.lineHeight + 1))
+    this.height = Math.max(13, y / 1.2)
 
     this.el = SVG.group(group)
   }
@@ -180,6 +210,9 @@ export class LabelView {
         computedLine.push({
           word: word,
           width: textMetrics.width,
+          height:
+            textMetrics.fontBoundingBoxAscent +
+            textMetrics.fontBoundingBoxDescent,
         })
       }
       computedLines.push(computedLine)
@@ -1044,11 +1077,11 @@ class BlockView {
         child.x = line.width
         line.width += child.width
         innerWidth = Math.max(innerWidth, line.width)
-        if (!child.isLabel) {
+        // if (!child.isLabel) {
           // line.padding.top -= Math.max(line.padding.top - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.top - ptmin)
           // line.padding.bottom += Math.max(line.padding.bottom - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.bottom - pbmin)
           line.height = Math.max(line.height, child.height)
-        }
+        // }
         line.children.push(child)
         previousChild = child
       }
