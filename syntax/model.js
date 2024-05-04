@@ -273,10 +273,10 @@ export class Block {
       shape === "c-block" ||
       shape === "block-prototype"
     this.isFinal = /cap/.test(shape)
-    this.isCommand = shape === "stack" || shape === "cap"
+    this.isCommand = /stack/.test(shape) || shape === /cap/.test(shape)
     this.isOutline = /outline-\w+/.test(shape)
-    this.isReporter = shape === "reporter"
-    this.isBoolean = shape === "boolean"
+    this.isReporter = /reporter/.test(shape)
+    this.isBoolean = /boolean/.test(shape)
 
     this.isRing = shape === "ring"
     this.isElse = shape === "celse"
