@@ -705,17 +705,20 @@ class BlockView {
     } else if (/outline-\w+/.test(this.info.shape)) {
       // outlines
       if (this.info.shape === "outline-stack") {
-        return SVG.setProps(SVG.stackRect(w, h), {
+        el = SVG.setProps(SVG.stackRect(w, h), {
           class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
         })
       } else if (this.info.shape === "outline-reporter") {
-        return SVG.setProps(SVG.pillRect(w, h), {
+        el = SVG.setProps(SVG.pillRect(w, h), {
           class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
         })
       } else if (this.info.shape === "outline-boolean") {
-        return SVG.setProps(SVG.pointedRect(w, h), {
+        el = SVG.setProps(SVG.pointedRect(w, h), {
           class: `sb3-${this.info.category} sb3-${this.info.category}-alt`,
         })
+      }
+      if (el) {
+        el.style.fill = this.color.secondary
       }
     } else if (this.isRing) {
       // rings
