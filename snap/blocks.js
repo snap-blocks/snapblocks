@@ -141,7 +141,7 @@ export class LabelView {
 
     if (this.defaultFontSize) {
       this._fontSize = /comment-label/.test(this.cls)
-        ? "12px"
+        ? "10px"
         : /literal-boolean/.test(this.cls)
           ? `9px`
           : /literal/.test(this.cls)
@@ -1249,6 +1249,7 @@ class BlockView {
     })
 
     this.lines = drawLines
+    this.innerWidth = blockWidth
 
     const el = this.drawSelf(options, blockWidth, this.height, drawLines)
     objects.splice(0, 0, el)
@@ -1279,7 +1280,10 @@ class CommentView {
   }
 
   measure(options) {
-    this.label.measure(options)
+    this.label.measure({
+      ...options,
+      showSpaces: false,
+    })
   }
 
   draw(options) {
@@ -1307,10 +1311,10 @@ class CommentView {
       SVG.commentRect(this.width, this.height, {
         class: "snap-comment",
       }),
-      SVG.move(padding.left, this.height / 5, arrowEl),
+      SVG.move(padding.left, (this.height - this.arrow.height) / 2, arrowEl),
       SVG.move(
         padding.left + this.arrow.width + padding.arrow,
-        (this.height - this.label.height) / 2,
+        (this.height - this.label.height + 1) / 2,
         labelEl,
       ),
     ])
