@@ -24,55 +24,6 @@ export default `
   fill: #b48c8c
 }
 
-.sb-obsolete {
-  fill: #d42828;
-}
-.sb-motion {
-  fill: rgb(74, 108, 212);
-}
-.sb-looks {
-  fill: rgb(138, 85, 215);
-}
-.sb-sound {
-  fill: rgb(187, 66, 195);
-}
-.sb-pen {
-  fill: rgb(14, 154, 108);
-}
-.sb-events {
-  fill: rgb(200, 131, 48);
-}
-.sb-control {
-  fill: rgb(225, 169, 26);
-}
-.sb-sensing {
-  fill: rgb(44, 165, 226);
-}
-.sb-operators {
-  fill: rgb(92, 183, 18);
-}
-.sb-variables {
-  fill: rgb(238, 125, 22);
-}
-.sb-list {
-  fill: rgb(204, 91, 34);
-}
-.sb-custom {
-  fill: rgb(99, 45, 153);
-}
-.sb-custom-arg {
-  fill: rgb(89, 71, 177);
-}
-.sb-extension {
-  fill: rgb(75, 74, 96);
-}
-.sb-grey {
-  fill: rgb(150, 150, 150);
-}
-.sb-other {
-  fill: #969696;
-}
-
 .sb-bevel {
   filter: var(--sbBevelFilter);
 }

@@ -16,6 +16,7 @@ import Color, { hexColorPat } from "../shared/color.js"
 import SVG from "./draw.js"
 
 import style from "./style.js"
+import { toPx } from "../shared/cssToPx.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -39,10 +40,23 @@ const categoryAliases = {
 
 export class LabelView {
   constructor(label) {
+    this._color = new Color(255, 255, 255)
+    this.defaultColor = true
+    this._fontSize = "10px"
+    this.defaultFontSize = true
+
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
     } else {
       Object.assign(this, label)
+    }
+
+    if (label.color) {
+      this.color = label.color
+    }
+
+    if (!this.scale) {
+      this.scale = 1
     }
 
     this.el = null
@@ -53,6 +67,28 @@ export class LabelView {
 
   get isLabel() {
     return true
+  }
+
+  get color() {
+    return this._color
+  }
+
+  set color(color) {
+    if (color) {
+      this.defaultColor = false
+      if (!(color instanceof Color)) {
+        color = Color.fromString(color)
+      }
+      this._color = color
+    }
+  }
+
+  get fontSize() {
+    return this._fontSize
+  }
+  set fontSize(size) {
+    this._fontSize = toPx(document.createElement("p"), size) + px
+    this.defaultFontSize = false
   }
 
   draw(options) {
@@ -74,25 +110,66 @@ export class LabelView {
     return this.metrics.lines
   }
 
-  measure() {
+  measure(options) {
     const value = this.value
     const cls = `sb-${this.cls}`
+    
+    if (this.defaultColor) {
+      if (/comment-label/.test(this.cls)) {
+        this._color = new Color(92, 93, 95)
+      } else if (/boolean/.test(this.cls)) {
+        this._color = new Color(255, 255, 255)
+      } else if (/label/.test(this.cls)) {
+        this._color = new Color()
+      } else if (/readonly/.test(this.cls)) {
+        this._color = new Color(255, 255, 255)
+      } else if (/literal/.test(this.cls)) {
+        this._color = new Color()
+      } else {
+        this._color = new Color(255, 255, 255)
+      }
+    }
 
-    let cache = LabelView.metricsCache[cls]
+    if (this.defaultFontSize) {
+      this._fontSize = /comment-label/.test(this.cls)
+        ? "12px"
+        : /literal-boolean/.test(this.cls)
+          ? `10px`
+          : /literal/.test(this.cls)
+            ? `9px`
+            : `10px`
+    }
+
+    let fontWeight = /comment-label/.test(this.cls)
+      ? `bold`
+      : /literal-boolean/.test(this.cls)
+        ? `bold`
+        : /literal/.test(this.cls)
+          ? `normal`
+          : `bold`
+
+    if (this.modified && fontWeight == "bold") {
+      fontWeight = "normal"
+    }
+
+    let pixels = toPx(document.createElement("p"), this.fontSize) * this.scale
+
+    const font = /comment-label/.test(this.cls)
+      ? `${fontWeight} ${pixels}px Helvetica, Arial, DejaVu Sans, sans-serif`
+      : /literal-boolean/.test(this.cls)
+        ? `${fontWeight} ${pixels}px ${defaultFontFamily}`
+        : /literal/.test(this.cls)
+          ? `${fontWeight} ${pixels}px ${defaultFontFamily}`
+          : `${fontWeight} ${pixels}px ${defaultFontFamily}`
+    
+    let cache = LabelView.metricsCache[font]
     if (!cache) {
-      cache = LabelView.metricsCache[cls] = Object.create(null)
+      cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
     if (Object.hasOwnProperty.call(cache, value)) {
       this.metrics = cache[value]
     } else {
-      const font = /comment-label/.test(this.cls)
-        ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
-        : /literal-boolean/.test(this.cls)
-          ? `bold 10px ${defaultFontFamily}`
-          : /literal/.test(this.cls)
-            ? `normal 9px ${defaultFontFamily}`
-            : `bold 10px ${defaultFontFamily}`
       this.metrics = cache[value] = LabelView.measure(value, font)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
@@ -101,35 +178,44 @@ export class LabelView {
     let group = []
 
     let y = 0
+    let height = 0
     for (let line of lines) {
       let lineGroup = []
-      y += 10
+      height = 0
       let x = 0
       let first = true
       for (let wordInfo of line) {
         if (!first) {
-          x += this.spaceWidth / 2
-          lineGroup.push(
-            SVG.el("circle", {
-              cx: x,
-              cy: y - 13 / 2 + this.spaceWidth,
-              r: this.spaceWidth / 2,
-              class: "sb-space",
-            }),
-          )
-          x += this.spaceWidth / 2
+          if (options.showSpaces) {
+            x += this.spaceWidth / 2
+            lineGroup.push(
+              SVG.el("circle", {
+                cx: x,
+                cy: y + wordInfo.height / 2,
+                r: this.spaceWidth / 2,
+                class: "snap-space",
+              }),
+            )
+            x += this.spaceWidth / 2
+          } else {
+            x += this.spaceWidth
+          }
         }
         lineGroup.push(
-          SVG.text(x, y, wordInfo.word, {
-            class: `sb-label ${cls}`,
+          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
+            class: `snap-label ${cls}`,
+            style: `font: ${font}`,
           }),
         )
+        lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
+        height = Math.max(height, wordInfo.height)
         first = false
       }
+      y += height
       group.push(SVG.group(lineGroup))
     }
-    this.height = y + 2
+    this.height = y
 
     this.el = SVG.group(group)
   }
@@ -152,6 +238,9 @@ export class LabelView {
         computedLine.push({
           word: word,
           width: textMetrics.width,
+          height:
+            textMetrics.fontBoundingBoxAscent +
+            textMetrics.fontBoundingBoxDescent,
         })
       }
       computedLines.push(computedLine)
@@ -302,9 +391,9 @@ class InputView {
     return true
   }
 
-  measure() {
+  measure(options) {
     if (this.hasLabel) {
-      this.label.measure()
+      this.label.measure(options)
     }
   }
 
@@ -502,14 +591,14 @@ class BlockView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const child of this.children) {
       if (child.measure) {
-        child.measure()
+        child.measure(options)
       }
     }
     if (this.comment) {
-      this.comment.measure()
+      this.comment.measure(options)
     }
   }
 
@@ -801,7 +890,7 @@ class BlockView {
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
-          child.measure()
+          child.measure(options)
         }
       }
 
@@ -975,8 +1064,8 @@ class CommentView {
     return 20
   }
 
-  measure() {
-    this.label.measure()
+  measure(options) {
+    this.label.measure(options)
   }
 
   draw(options) {
@@ -1007,8 +1096,8 @@ class GlowView {
     return true
   }
 
-  measure() {
-    this.child.measure()
+  measure(options) {
+    this.child.measure(options)
   }
 
   drawSelf() {
@@ -1059,9 +1148,9 @@ class ScriptView {
     return true
   }
 
-  measure() {
+  measure(options) {
     for (const block of this.blocks) {
-      block.measure()
+      block.measure(options)
     }
   }
 
@@ -1149,8 +1238,8 @@ class DocumentView {
     return result
   }
 
-  measure() {
-    this.scripts.forEach(script => script.measure())
+  measure(options) {
+    this.scripts.forEach(script => script.measure(options))
   }
 
   updateIds(element) {
@@ -1189,7 +1278,7 @@ class DocumentView {
     }
 
     // measure strings
-    this.measure()
+    this.measure(this.options)
 
     // TODO: separate layout + render steps.
     // render each script
