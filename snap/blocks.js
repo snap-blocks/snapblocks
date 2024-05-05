@@ -317,7 +317,7 @@ class IconView {
       SVG.symbol(`#snap-${this.name}-${options.id}`),
       props,
     )
-    if (!options.isFlat) {
+    if (!options.isFlat && !this.noShadow) {
       symbol = SVG.setProps(SVG.group([symbol]), {
         class: "snap-drop-shadow",
       })
@@ -349,13 +349,13 @@ class IconView {
         fillAttribute: ["stroke", "fill"],
       },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
-      delInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
+      addInput: { width: 5, height: 12, color: new Color(0, 0, 0), noShadow: true },
+      delInput: { width: 5, height: 12, color: new Color(0, 0, 0), noShadow: true },
       verticalEllipsis: {
         width: 2,
         height: 12,
         dy: 0,
-        scale: 0.833333333,
+        scale: 10 / 12,
         color: new Color(0, 0, 0),
       },
       list: { width: 8, height: 10 },
@@ -995,15 +995,29 @@ class BlockView {
           children[index + 1].isIcon &&
           children[index + 1].name === "addInput"
         ) {
+          child.el.classList.remove("snap-drop-shadow")
           child.el.setAttribute("opacity", 0.5)
-          x += 4
+          x += 3
         } else if (
           child.name === "addInput" &&
           children[index + 1] &&
           children[index + 1].isIcon &&
           children[index + 1].name === "verticalEllipsis"
         ) {
-          x += 7
+          x += 6
+        } else if (child.isIcon &&
+          child.name === "verticalEllipsis" &&
+          children[index - 1] &&
+          children[index - 1].isIcon &&
+          children[index - 1].name === "delInput" &&
+          (!children[index + 1] ||
+            !(children[index + 1] &&
+              children[index + 1].isIcon &&
+              children[index + 1].name === "addInput"
+            )
+          )
+        ) {
+          x += 3
         } else {
           x += child.width + space
           if (
@@ -1126,7 +1140,7 @@ class BlockView {
               line[index + 1].isIcon &&
               line[index + 1].name === "addInput"
             ) {
-              x += 4
+              x += 3
             } else if (
               child.isIcon &&
               child.name === "delInput" &&
@@ -1134,7 +1148,21 @@ class BlockView {
               line[index + 1].isIcon &&
               line[index + 1].name === "verticalEllipsis"
             ) {
-              x += 7
+              x += 6
+            } else if (child.isIcon &&
+              child.name === "verticalEllipsis" &&
+              line[index - 1] &&
+              line[index - 1].isIcon &&
+              line[index - 1].name === "delInput" &&
+              (!line[index + 1] ||
+                !(line[index + 1] &&
+                  line[index + 1].isIcon &&
+                  line[index + 1].name === "addInput"
+                )
+              )
+            ) {
+              x += 3
+              SVG.move(-5, 0, child.el)
             } else {
               x += child.width + space
             }
