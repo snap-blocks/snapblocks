@@ -440,18 +440,25 @@ class InputView {
     let w, h
     let label
     if (this.isBoolean && !this.isBig) {
-      label = SVG.el("path", {
-        d:
-          this.value == "t"
-            ? "M 5 6 L 7.5 8.5 L 10 3.5"
-            : "M 13.5 3.5 L 18.5 8.5 M 18.5 3.5 L 13.5 8.5",
-        style: `stroke-linecap: round;
-                stroke-linejoin: round;`,
-        fill: "none",
-        stroke: "white",
-        "stroke-width": 1.5,
-        class: !options.isFlat ? "snap-drop-shadow" : "",
-      })
+      if (this.value == "t") {
+        label = SVG.el("path", {
+          d: "M 5 6 L 7.5 8.5 L 10 3.5",
+          style: `stroke-linecap: round; stroke-linejoin: miter;`,
+          fill: "none",
+          stroke: "white",
+          "stroke-width": 1.5,
+          class: !options.isFlat ? "snap-drop-shadow" : "",
+        })
+      } else {
+        label = SVG.el("path", {
+          d: "M 13.5 3.5 L 18.5 8.5 M 18.5 3.5 L 13.5 8.5",
+          style: `stroke-linecap: butt;`,
+          fill: "none",
+          stroke: "white",
+          "stroke-width": 1,
+          class: !options.isFlat ? "snap-drop-shadow" : "",
+        })
+      }
       w = 24
       h = 12
     } else if (this.hasLabel) {
@@ -497,8 +504,8 @@ class InputView {
     }
 
     // I'm adding a bit of padding around the input
-    this.width = w + 1
-    this.height = h + 2
+    this.width = w
+    this.height = h + 1
 
     let el = InputView.shapes[this.shape](w, h)
 
@@ -536,44 +543,43 @@ class InputView {
     }
 
     const result = SVG.group([
-      SVG.move(
-        0,
-        1,
-        SVG.setProps(el, {
-          class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
-            this.shape
-          }`,
-        }),
-      ),
+      SVG.setProps(el, {
+        class: `${!options.isFlat ? "snap-input-bevel" : ""} snap-input-${
+          this.shape
+        }`,
+      }),
     ])
     if (this.hasLabel) {
-      let x
-      if (this.isBoolean && this.isBig) {
-        if (this.value == "true") {
-          x = h / 2
+      let x, y
+      if (this.isBoolean) {
+        if (this.isBig) {
+          if (this.value == "true") {
+            x = h / 2
+          } else {
+            x = w - h / 2 - 21
+          }
+          y = 0
         } else {
-          x = w - h / 2 - 21
+          // it's offset in the path
+          x = 0
+          y = 0
         }
-      } else if (this.isBoolean && !this.isBig) {
-        // it's offset in the path
-        x = 0
       } else {
         x = this.isRound ? Math.floor(h / 2) + 1 : 2
+        y = 1
       }
       result.appendChild(
         SVG.move(
           x,
-          this.isBoolean && !this.isBig
-            ? -0.5
-            : this.height / 2 - this.label.height / 2,
+          y,
           label,
         ),
       )
     }
     if (this.isBoolean && this.value) {
-      let y = (this.height - 1) / 2
+      let y = h / 2
       let circle = SVG.el("circle", {
-        cx: ["true", "t"].includes(this.value) ? this.width - y - 1 : y,
+        cx: ["true", "t"].includes(this.value) ? this.width - y : y,
         cy: y,
         r: y,
         fill: new Color(220, 220, 220).toHexString(),
@@ -593,7 +599,7 @@ class InputView {
         ),
       )
     }
-    SVG.move(0.5, 0.5, result)
+    SVG.move(0, 0.5, result)
     return result
   }
 }
