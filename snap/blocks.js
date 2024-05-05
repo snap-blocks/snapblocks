@@ -528,11 +528,11 @@ class InputView {
           break
         default:
           SVG.setProps(el, {
-            fill: parent.color.darker().toHexString(),
+            fill: parent.color.darker(25).toHexString(),
           })
       }
     } else if (this.isDarker) {
-      el = darkRect(w, h, color, el)
+      el = darkRect(w, h, this.isBoolean ? color.darker(25) : color.darker(), el)
     }
 
     const result = SVG.group([
@@ -1077,12 +1077,12 @@ class BlockView {
         }
         if (child.isCShape) {
           isCSlot = true
-          y += this.isReporter || this.isBoolean ? 1 : 2
+          y += this.isReporter || this.isBoolean ? 1 : 4
           if (drawLines.length) {
             if (!this.hasScript) {
-              drawLines[drawLines.length - 1].height += 6
+              drawLines[drawLines.length - 1].height += 8
             } else {
-              drawLines[drawLines.length - 1].height += 2
+              drawLines[drawLines.length - 1].height += 4
             }
           } else {
             drawLine.height = y

@@ -677,7 +677,7 @@ export default class Style {
           class: `snap-dark-input`,
           fill:
             color instanceof Color
-              ? color.darker().toHexString()
+              ? color.toHexString()
               : color
                 ? Color.fromString(color)?.toHexString()
                 : "white",
