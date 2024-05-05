@@ -116,23 +116,27 @@ export class LabelView {
       this._color = /comment-label|label-dark/.test(this.cls)
         ? new Color()
         : /(boolean|dropdown)/.test(this.cls)
-          ? (options.isHighContrast ? new Color() : new Color(255, 255, 255))
+          ? options.isHighContrast
+            ? new Color()
+            : new Color(255, 255, 255)
           : /literal/.test(this.cls)
             ? new Color()
-            : (options.isHighContrast ? new Color() : new Color(255, 255, 255))
+            : options.isHighContrast
+              ? new Color()
+              : new Color(255, 255, 255)
     }
 
     if (this.defaultFontSize) {
       this._fontSize = "12pt"
     }
 
-    let fontWeight = /comment-label/.test(this.cls)
-      ? "500"
-      : "400"
-    
+    let fontWeight = /comment-label/.test(this.cls) ? "500" : "400"
+
     let fontSize = scaleFontSize(this.fontSize, this.scale)
-    
-    const font = /comment-label/.test(this.cls) ? `${fontWeight} ${fontSize} ${commentFont}` : `${fontWeight} ${fontSize} ${defaultFont}`
+
+    const font = /comment-label/.test(this.cls)
+      ? `${fontWeight} ${fontSize} ${commentFont}`
+      : `${fontWeight} ${fontSize} ${defaultFont}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -176,7 +180,7 @@ export class LabelView {
         lineGroup.push(
           SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
             class: `sb3-label ${cls}`,
-            style: `font: ${font}`
+            style: `font: ${font}`,
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
@@ -1078,9 +1082,9 @@ class BlockView {
         line.width += child.width
         innerWidth = Math.max(innerWidth, line.width)
         // if (!child.isLabel) {
-          // line.padding.top -= Math.max(line.padding.top - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.top - ptmin)
-          // line.padding.bottom += Math.max(line.padding.bottom - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.bottom - pbmin)
-          line.height = Math.max(line.height, child.height)
+        // line.padding.top -= Math.max(line.padding.top - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.top - ptmin)
+        // line.padding.bottom += Math.max(line.padding.bottom - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.bottom - pbmin)
+        line.height = Math.max(line.height, child.height)
         // }
         line.children.push(child)
         previousChild = child
