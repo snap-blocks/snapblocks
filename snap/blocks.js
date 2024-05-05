@@ -349,8 +349,18 @@ class IconView {
         fillAttribute: ["stroke", "fill"],
       },
       loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
-      addInput: { width: 5, height: 12, color: new Color(0, 0, 0), noShadow: true },
-      delInput: { width: 5, height: 12, color: new Color(0, 0, 0), noShadow: true },
+      addInput: {
+        width: 5,
+        height: 12,
+        color: new Color(0, 0, 0),
+        noShadow: true,
+      },
+      delInput: {
+        width: 5,
+        height: 12,
+        color: new Color(0, 0, 0),
+        noShadow: true,
+      },
       verticalEllipsis: {
         width: 2,
         height: 12,
@@ -539,7 +549,12 @@ class InputView {
           })
       }
     } else if (this.isDarker) {
-      el = darkRect(w, h, this.isBoolean ? color.darker(25) : color.darker(), el)
+      el = darkRect(
+        w,
+        h,
+        this.isBoolean ? color.darker(25) : color.darker(),
+        el,
+      )
     }
 
     const result = SVG.group([
@@ -568,13 +583,7 @@ class InputView {
         x = this.isRound ? Math.floor(h / 2) + 1 : 2
         y = 1
       }
-      result.appendChild(
-        SVG.move(
-          x,
-          y,
-          label,
-        ),
-      )
+      result.appendChild(SVG.move(x, y, label))
     }
     if (this.isBoolean && this.value) {
       let y = h / 2
@@ -1005,17 +1014,18 @@ class BlockView {
           children[index + 1].name === "verticalEllipsis"
         ) {
           x += 6
-        } else if (child.isIcon &&
+        } else if (
+          child.isIcon &&
           child.name === "verticalEllipsis" &&
           children[index - 1] &&
           children[index - 1].isIcon &&
           children[index - 1].name === "delInput" &&
           (!children[index + 1] ||
-            !(children[index + 1] &&
+            !(
+              children[index + 1] &&
               children[index + 1].isIcon &&
               children[index + 1].name === "addInput"
-            )
-          )
+            ))
         ) {
           x += 3
         } else {
@@ -1149,17 +1159,18 @@ class BlockView {
               line[index + 1].name === "verticalEllipsis"
             ) {
               x += 6
-            } else if (child.isIcon &&
+            } else if (
+              child.isIcon &&
               child.name === "verticalEllipsis" &&
               line[index - 1] &&
               line[index - 1].isIcon &&
               line[index - 1].name === "delInput" &&
               (!line[index + 1] ||
-                !(line[index + 1] &&
+                !(
+                  line[index + 1] &&
                   line[index + 1].isIcon &&
                   line[index + 1].name === "addInput"
-                )
-              )
+                ))
             ) {
               x += 3
               SVG.move(-5, 0, child.el)

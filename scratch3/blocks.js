@@ -289,7 +289,12 @@ export class IconView {
 
   static get icons() {
     return {
-      greenFlag: { width: 20, height: 21, dy: -2, color: new Color(76, 191, 86) },
+      greenFlag: {
+        width: 20,
+        height: 21,
+        dy: -2,
+        color: new Color(76, 191, 86),
+      },
       stopSign: { width: 20, height: 20, color: new Color(236, 89, 89) },
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
@@ -300,7 +305,7 @@ export class IconView {
         width: 2,
         height: 12,
         scale: 0.833333333,
-        color: new Color(0, 0, 0,),
+        color: new Color(0, 0, 0),
       },
       list: { width: 15, height: 17 },
       pointRight: { width: 12, height: 12 },
