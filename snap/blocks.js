@@ -306,6 +306,8 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
+    this.width = this.width * this.scale
+    this.height = this.height * this.scale
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
@@ -940,6 +942,8 @@ class BlockView {
       fullWidth = 0,
       blockHeight = 0,
       l = [],
+      noWrapLine = [],
+      noWrapLines = [],
       lines = [],
       space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
       ico = 0, // for local block, if I care to add that
@@ -985,6 +989,18 @@ class BlockView {
 
       // snap positioning
       if (child.isCShape) {
+        let loop = noWrapLine[noWrapLine.length - 1]
+        if (loop &&
+            loop.isIcon &&
+            !loop.modified &&
+            loop.isArrow &&
+            noWrapLines[noWrapLines.length - 1] &&
+            noWrapLines[noWrapLines.length - 1][0].isCShape
+        ) {
+          loop.isLoop = true
+          loop.scale = 0.5
+          loop.el = loop.draw(options, this)
+        }
         if (l.length > 0) {
           lines.push(l)
           lines.push([child])
@@ -992,6 +1008,13 @@ class BlockView {
           x = 0
         } else {
           lines.push([child])
+        }
+        if (noWrapLine.length > 0) {
+          noWrapLines.push(noWrapLine)
+          noWrapLines.push([child])
+          noWrapLine = []
+        } else {
+          noWrapLines.push([child])
         }
         this.isSnavanced = true
       } else if (
@@ -1043,6 +1066,7 @@ class BlockView {
               lines.push(l)
               l = []
               x = child.width + space
+              wrapped = true
             }
           }
         }
@@ -1059,8 +1083,25 @@ class BlockView {
         if (child.isNewline) {
           this.isSnavanced = true
           x = 0
+
+          let loop = noWrapLine[noWrapLine.length - 1]
+          if (loop &&
+              loop.isIcon &&
+              !loop.modified &&
+              loop.isArrow &&
+              noWrapLines[noWrapLines.length - 1] &&
+              noWrapLines[noWrapLines.length - 1][0].isCShape
+          ) {
+            loop.isLoop = true
+            loop.scale = 0.5
+            loop.el = loop.draw(options, this)
+          }
+
+          noWrapLines.push(noWrapLine)
+          noWrapLine = []
         } else {
           l.push(child)
+          noWrapLine.push(child)
         }
       }
       index += 1
@@ -1068,6 +1109,24 @@ class BlockView {
     if (l.length > 0) {
       lines.push(l)
     }
+    if (noWrapLine.length > 0) {
+      let loop = noWrapLine[noWrapLine.length - 1]
+      if (loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
+      ) {
+        loop.isLoop = true
+        loop.scale = 0.5
+        loop.el = loop.draw(options, this)
+      }
+      noWrapLines.push(noWrapLine)
+    }
+
+    console.log('lines', lines)
+    console.log('no wrap', noWrapLines)
 
     // distribute parts on lines
     if (this.isCommand || this.isFinal || this.isHat) {
@@ -1130,6 +1189,9 @@ class BlockView {
           SVG.move(x, y, child.el)
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
+        } else if (child.isLoop) {
+          console.log('skip loop', child)
+          hasLoopArrow = true
         } else {
           child.y = y
           if (this.isBlockPrototype && child.isCommand) {
@@ -1190,17 +1252,21 @@ class BlockView {
       })
 
       // adjust label row below a loop-arrow C-slot to accomodate the loop icon
-      if (hasLoopArrow) {
-        x += fontSize * 1.5
-        maxX = Math.max(maxX, x)
-        fullWidth = Math.max(fullWidth, x)
-        hasLoopArrow = false
-      }
+      // if (hasLoopArrow) {
+      //   x += fontSize * 1.5
+      //   maxX = Math.max(maxX, x)
+      //   console.log('after', x)
+      //   fullWidth = Math.max(fullWidth, x)
+      //   // hasLoopArrow = false
+      // }
 
       // center parts vertically on each line:
       line.forEach(child => {
         if (this.isRing) {
           child.y += Math.floor((lineHeight - child.height) / 2)
+        }
+        if (child.isLoop) {
+          return
         }
         SVG.move(0, Math.floor((lineHeight - child.height) / 2), child.el)
       })
@@ -1214,6 +1280,12 @@ class BlockView {
     if (isCSlot) {
       // drawLine.height = lineHeight
       drawLines.push(drawLine)
+    }
+
+    if (hasLoopArrow) {
+      maxX = Math.max(maxX, maxX + fontSize * 1.5)
+      fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
+      // hasLoopArrow = false
     }
 
     // determine my height:
@@ -1279,6 +1351,18 @@ class BlockView {
     // set my extent (silently, because we'll redraw later anyway):
     this.width = fullWidth
     this.height = blockHeight - 3
+
+    let lastCShape = null
+    noWrapLines.forEach(line => {
+      console.log('line', line)
+      if (line[0].isCShape) {
+        lastCShape = line[0]
+      } else if (lastCShape && line[line.length - 1].isLoop) {
+        console.log('last loop', line[line.length - 1])
+        let loop = line[line.length - 1]
+        SVG.move(blockWidth - loop.width - 2, lastCShape.y + lastCShape.height - 2, loop.el)
+      }
+    })
 
     let objects = []
 

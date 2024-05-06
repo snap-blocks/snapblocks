@@ -340,8 +340,6 @@ function paintBlock(info, children, languages) {
   // loop arrows
   if (info.hasLoopArrow) {
     let arrow = new Icon("loopArrow")
-    arrow.isLoop = true
-    arrow.scale = 0.5
     children.push(arrow)
   }
 
@@ -621,7 +619,7 @@ function parseLines(code, languages) {
             }
           case "\\":
             if (!label) {
-              children.push((label = new Label("")))
+              label = new Label("")
             }
             if (label) {
               label.raw += tok
@@ -634,6 +632,7 @@ function parseLines(code, languages) {
               next()
               break
             }
+            children.push(label)
             next() // escape character
           // fallthrough
           case ":":

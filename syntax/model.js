@@ -72,8 +72,9 @@ export class Icon {
     this.isArrow = this.name === "loopArrow"
     this.isLoop = false
 
+    this.modified = false
     this.scale = scale ? parseFloat(scale) : null
-    if (this.scale === NaN) {
+    if (isNaN(this.scale)) {
       this.scale = null
     }
     this.color =
@@ -82,6 +83,10 @@ export class Icon {
         : typeof color == "string"
           ? Color.fromString(color)
           : null
+    
+    if (this.color || scale) {
+      this.modified = true
+    }
 
     // assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
@@ -96,6 +101,7 @@ export class Icon {
       bucket: "paintBucket",
       flag: "greenFlag",
       stop: "stopSign",
+      loop: "loopArrow",
     }
   }
 
