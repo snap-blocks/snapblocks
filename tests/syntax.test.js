@@ -789,7 +789,7 @@ describe("define hats", () => {
     const b = parseBlock("define {foo (bar) quxx}")
     b.translate(allLanguages.de)
     // TODO omit custom-arg here
-    expect(b.stringify()).toEqual("Definiere foo (bar :: custom-arg) quxx")
+    expect(b.stringify()).toEqual("Definiere {foo (bar :: custom-arg) quxx}")
   })
 
   test("de", () => {
