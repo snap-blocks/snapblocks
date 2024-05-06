@@ -954,6 +954,9 @@ class BlockView {
     }
 
     const lines = []
+    let noWrapLine = [],
+      noWrapLines = [],
+      hasLoopArrow = false
     let previousChild
     let lastChild
     line.firstLine = true
@@ -986,6 +989,19 @@ class BlockView {
       child.el = child.draw(options, this)
 
       if (child.isCShape) {
+        if (noWrapLine.length > 0) {
+          noWrapLines.push(noWrapLine)
+          noWrapLines.push([child])
+          noWrapLine = []
+        } else {
+          noWrapLines.push([child])
+        }
+      } else {
+        noWrapLine.push(child)
+      }
+
+      let loop = noWrapLine[noWrapLine.length - 1]
+      if (child.isCShape) {
         this.hasScript = true
 
         if (line.firstLine && line.firstSection) {
@@ -1000,7 +1016,19 @@ class BlockView {
           )
         }
 
+        if (loop &&
+            loop.isIcon &&
+            !loop.modified &&
+            loop.isArrow &&
+            noWrapLines[noWrapLines.length - 1] &&
+            noWrapLines[noWrapLines.length - 1][0].isCShape
+        ) {
+          loop.isLoop = true
+          loop.scale = 0.5
+        }
+
         pushLine()
+
         child.y = y - 1
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
@@ -1009,10 +1037,22 @@ class BlockView {
         line = new Line(y)
         line.firstLine = true
         line.padding.top = 2
-      } else if (child.isLoop) {
-        line.children.push(child)
-        previousChild = child
-      } else if (child.isLabel && child.value === "\n") {
+      } else if (loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
+        ) {
+          hasLoopArrow = true
+          loop.isLoop = true
+          loop.scale = 0.5
+          line.children.push(child)
+          previousChild = child
+        } else if (child.isNewline) {
+        noWrapLines.push(noWrapLine)
+        noWrapLine = []
+
         line.padding.bottom = 4
         if (line.firstLine) {
           line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
@@ -1099,6 +1139,22 @@ class BlockView {
         ptmin,
       )
     }
+
+    if (noWrapLine.length > 0) {
+      let loop = noWrapLine[noWrapLine.length - 1]
+      if (loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
+      ) {
+        loop.isLoop = true
+        loop.scale = 0.5
+      }
+      noWrapLines.push(noWrapLine)
+    }
+
     if (line.firstSection || (!line.firstLine && !line.firstSection)) {
       line.padding.bottom += Math.max(
         (this.isOutline ? pb - 4 : pb) - (line.height - 13) / 2,
@@ -1132,6 +1188,10 @@ class BlockView {
       innerWidth,
     )
 
+    if (hasLoopArrow) {
+      innerWidth += IconView.icons.loopArrow.width * 0.5
+    }
+
     // Center the label text inside small reporters.
     if (this.isReporter && !this.hasScript) {
       padLeft += (innerWidth - originalInnerWidth) / 2
@@ -1147,10 +1207,12 @@ class BlockView {
 
     const objects = []
 
+    let lastCShape = null
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       if (line.isScript) {
         objects.push(SVG.move(16, line.y, line.el))
+        lastCShape = line
         continue
       }
 
@@ -1158,8 +1220,8 @@ class BlockView {
 
       for (let j = 0; j < line.children.length; j++) {
         const child = line.children[j]
-        if (child.isLoop) {
-          objects.push(SVG.move(innerWidth - 32, this.height - 28, child.el))
+        if (child.isLoop && lastCShape) {
+          objects.push(SVG.move(innerWidth - 32, lastCShape.y + lastCShape.height, child.el))
           continue
         }
 
