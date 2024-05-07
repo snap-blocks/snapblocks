@@ -964,7 +964,7 @@ class BlockView {
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       if (options.zebraColoring) {
-        if (this.info.shape === "block-prototype") {
+        if (this.isBlockPrototype) {
           if (child.isBlock && child.color.primary.eq(this.color.primary)) {
             this.isZebra = true
           }
@@ -1049,7 +1049,7 @@ class BlockView {
           loop.scale = 0.5
           line.children.push(child)
           previousChild = child
-        } else if (child.isNewline) {
+      } else if (child.isNewline) {
         noWrapLines.push(noWrapLine)
         noWrapLine = []
 
@@ -1175,6 +1175,12 @@ class BlockView {
     // Commands have a minimum width.
     // Outline min-width is deliberately higher (because Scratch 3 looks silly).
     const originalInnerWidth = innerWidth
+
+    
+    if (hasLoopArrow) {
+      innerWidth += IconView.icons.loopArrow.width * 0.5
+    }
+
     innerWidth = Math.max(
       this.hasScript
         ? 160
@@ -1187,10 +1193,6 @@ class BlockView {
               : 0,
       innerWidth,
     )
-
-    if (hasLoopArrow) {
-      innerWidth += IconView.icons.loopArrow.width * 0.5
-    }
 
     // Center the label text inside small reporters.
     if (this.isReporter && !this.hasScript) {
@@ -1206,8 +1208,8 @@ class BlockView {
     this.innerWidth = innerWidth
 
     const objects = []
-
     let lastCShape = null
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       if (line.isScript) {
@@ -1221,7 +1223,12 @@ class BlockView {
       for (let j = 0; j < line.children.length; j++) {
         const child = line.children[j]
         if (child.isLoop && lastCShape) {
-          objects.push(SVG.move(innerWidth - 32, lastCShape.y + lastCShape.height, child.el))
+          objects.push(
+            SVG.move(
+              innerWidth - child.width - 4 - (this.isBoolean * 18),
+              lastCShape.y + lastCShape.height,
+              child.el,
+            ))
           continue
         }
 
