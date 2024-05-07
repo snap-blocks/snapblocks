@@ -726,18 +726,18 @@ class BlockView {
         if (lines[i].isScript) {
           p.push(
             SVG.getRightAndBottom(
-              w - (this.info.shape === "boolean") * 8,
+              w - (this.isBoolean) * 8,
               y,
               true,
-              this.info.shape === "boolean" ? 15 : 9,
+              this.isBoolean ? 15 : 9,
             ),
           )
           y += lines[i].height - 3
           p.push(
             SVG.getArm(
-              w - (this.info.shape === "boolean") * 8,
+              w - (this.isBoolean) * 8,
               y,
-              this.info.shape === "boolean" ? 15 : 9,
+              this.isBoolean ? 15 : 9,
             ),
           )
 
@@ -1125,8 +1125,8 @@ class BlockView {
       noWrapLines.push(noWrapLine)
     }
 
-    console.log('lines', lines)
-    console.log('no wrap', noWrapLines)
+    // console.log('lines', lines)
+    // console.log('no wrap', noWrapLines)
 
     // distribute parts on lines
     if (this.isCommand || this.isFinal || this.isHat) {
@@ -1166,18 +1166,22 @@ class BlockView {
         }
         if (child.isCShape) {
           isCSlot = true
-          y += this.isReporter || this.isBoolean ? 1 : 4
+          y += this.isReporter || this.isBoolean ? 4 : 4
           if (drawLines.length) {
-            if (!this.hasScript) {
-              drawLines[drawLines.length - 1].height += 8
-            } else {
-              drawLines[drawLines.length - 1].height += 4
+            if (!drawLines[drawLines.length - 1]?.isScript) {
+              if (!this.hasScript) {
+                drawLines[drawLines.length - 1].height += 6 + (this.isCommand || this.isFinal) * 2
+              } else {
+                drawLines[drawLines.length - 1].height += 4
+              }
             }
-          } else {
-            drawLine.height = y
+          }
+          if (drawLines.length == 0 || drawLines[drawLines.length - 1].isScript) {
+            drawLine.height = drawLines.length == 0 ? 8 : 4
             drawLines.push(drawLine)
             drawLine = new Line(y)
           }
+
           this.hasScript = true
           child.y = y
           drawLines.push(child)
@@ -1185,13 +1189,12 @@ class BlockView {
           x += 8
           if (this.isBoolean) {
             x += 2
+          } else if (this.isRing) {
+            x += 1
           }
           SVG.move(x, y, child.el)
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
-          if (this.isReporter || this.isBoolean) {
-            y += 5
-          }
         } else if (child.isLoop) {
           hasLoopArrow = true
         } else {
@@ -1253,6 +1256,7 @@ class BlockView {
         index += 1
       })
 
+
       // adjust label row below a loop-arrow C-slot to accomodate the loop icon
       // if (hasLoopArrow) {
       //   x += fontSize * 1.5
@@ -1283,6 +1287,7 @@ class BlockView {
       // drawLine.height = lineHeight
       drawLines.push(drawLine)
     }
+    console.log('snap lines', drawLines)
 
     if (hasLoopArrow) {
       maxX = Math.max(maxX, maxX + fontSize * 1.5)
@@ -1356,13 +1361,13 @@ class BlockView {
 
     let lastCShape = null
     noWrapLines.forEach(line => {
-      console.log('line', line)
+      // console.log('line', line)
       if (line[0].isCShape) {
         lastCShape = line[0]
       } else if (lastCShape && line[line.length - 1].isLoop) {
-        console.log('last loop', line[line.length - 1])
+        // console.log('last loop', line[line.length - 1])
         let loop = line[line.length - 1]
-        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCShape.y + lastCShape.height - 2 + ((this.isBoolean || this.isReporter) * 5), loop.el)
+        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCShape.y + lastCShape.height - 2, loop.el)
       }
     })
 
