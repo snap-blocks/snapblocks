@@ -1395,8 +1395,10 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (!this.isZebra && this.color.primary.eq(block.color.primary)) {
-        block.isZebra = true
+      if (this.isBlock) {
+        if (!this.isZebra && this.color.primary.eq(block.color.primary)) {
+          block.isZebra = true
+        }
       }
       const child = block.draw(options)
       children.push(SVG.move(x, y, child))
