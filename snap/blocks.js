@@ -951,7 +951,8 @@ class BlockView {
       rightCorrection = 0,
       rightMost,
       hasLoopCSlot = false,
-      hasLoopArrow = false
+      hasLoopArrow = false,
+      lastCSlot = null
 
     if (this.isReporter || this.isBoolean) {
       blockWidth += rounding * 2 + edge * 2
@@ -1139,6 +1140,7 @@ class BlockView {
     let drawLine
     let isCSlot = false
 
+    lastCSlot = null
     lines.forEach(line => {
       isCSlot = false
       if (hasLoopCSlot) {
@@ -1192,8 +1194,20 @@ class BlockView {
           SVG.move(x, y, child.el)
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
+          lastCSlot = child
         } else if (child.isLoop) {
-          hasLoopArrow = true
+          if (lastCSlot) {
+            let cIndex = drawLines.indexOf(lastCSlot)
+            let trueRow = drawLines[cIndex + 1]
+            if (trueRow) {
+              trueRow.width += fontSize * 1.5
+              maxX = Math.max(maxX, trueRow.width)
+              fullWidth = Math.max(fullWidth, trueRow.width)
+            } else {
+              x += fontSize * 1.5
+            }
+            hasLoopArrow = true
+          }
         } else {
           child.y = y
           if (this.isBlockPrototype && child.isCommand) {
@@ -1274,6 +1288,7 @@ class BlockView {
         SVG.move(0, Math.floor((lineHeight - child.height) / 2), child.el)
       })
 
+      drawLine.width = x
       drawLine.height = lineHeight
       drawLine.children = [...line]
       if (!isCSlot) {
@@ -1286,8 +1301,8 @@ class BlockView {
     }
 
     if (hasLoopArrow) {
-      maxX = Math.max(maxX, maxX + fontSize * 1.5)
-      fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
+      // maxX = Math.max(maxX, maxX + fontSize * 1.5)
+      // fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
       // hasLoopArrow = false
     }
 
@@ -1355,13 +1370,13 @@ class BlockView {
     this.width = fullWidth
     this.height = blockHeight - 3
 
-    let lastCShape = null
+    lastCSlot = null
     noWrapLines.forEach(line => {
       if (line[0].isCShape) {
-        lastCShape = line[0]
-      } else if (lastCShape && line[line.length - 1].isLoop) {
+        lastCSlot = line[0]
+      } else if (lastCSlot && line[line.length - 1].isLoop) {
         let loop = line[line.length - 1]
-        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCShape.y + lastCShape.height - 2, loop.el)
+        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCSlot.y + lastCSlot.height - 2, loop.el)
       }
     })
 

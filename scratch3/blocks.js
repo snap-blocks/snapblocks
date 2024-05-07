@@ -956,7 +956,8 @@ class BlockView {
     const lines = []
     let noWrapLine = [],
       noWrapLines = [],
-      hasLoopArrow = false
+      hasLoopArrow = false,
+      lastCSlot = null
     let previousChild
     let lastChild
     line.firstLine = true
@@ -978,7 +979,7 @@ class BlockView {
             child.isZebra = true
           }
         } else if (child.isScript) {
-          child.parentCategory = this.color
+          child.color = this.color
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
@@ -1038,6 +1039,7 @@ class BlockView {
         line.firstLine = true
         line.padding.top = 2
         lastChild = child
+        lastCSlot = child
       } else if (loop &&
           loop.isIcon &&
           !loop.modified &&
@@ -1045,11 +1047,20 @@ class BlockView {
           noWrapLines[noWrapLines.length - 1] &&
           noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
-          hasLoopArrow = true
           loop.isLoop = true
           loop.scale = 0.5
           line.children.push(child)
           previousChild = child
+
+          let cIndex = lines.indexOf(lastCSlot)
+          let trueRow = lines[cIndex + 1]
+          if (trueRow) {
+            trueRow.width += IconView.icons.loopArrow.width * 0.5
+            innerWidth = Math.max(innerWidth, trueRow.width)
+          } else {
+            line.width += IconView.icons.loopArrow.width * 0.5
+          }
+          hasLoopArrow = true
       } else if (child.isNewline) {
         noWrapLines.push(noWrapLine)
         noWrapLine = []
@@ -1125,11 +1136,7 @@ class BlockView {
         child.x = line.width
         line.width += child.width
         innerWidth = Math.max(innerWidth, line.width)
-        // if (!child.isLabel) {
-        // line.padding.top -= Math.max(line.padding.top - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.top - ptmin)
-        // line.padding.bottom += Math.max(line.padding.bottom - Math.max((child.height + 1 - line.height) / 2, 0), line.padding.bottom - pbmin)
         line.height = Math.max(line.height, child.height)
-        // }
         line.children.push(child)
         previousChild = child
       }
@@ -1177,11 +1184,6 @@ class BlockView {
     // Outline min-width is deliberately higher (because Scratch 3 looks silly).
     const originalInnerWidth = innerWidth
 
-    
-    if (hasLoopArrow) {
-      innerWidth += IconView.icons.loopArrow.width * 0.5
-    }
-
     innerWidth = Math.max(
       this.hasScript
         ? 160
@@ -1209,13 +1211,13 @@ class BlockView {
     this.innerWidth = innerWidth
 
     const objects = []
-    let lastCShape = null
+    lastCSlot = null
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       if (line.isScript) {
         objects.push(SVG.move(16, line.y, line.el))
-        lastCShape = line
+        lastCSlot = line
         continue
       }
 
@@ -1223,11 +1225,11 @@ class BlockView {
 
       for (let j = 0; j < line.children.length; j++) {
         const child = line.children[j]
-        if (child.isLoop && lastCShape) {
+        if (child.isLoop && lastCSlot) {
           objects.push(
             SVG.move(
               innerWidth - child.width - 4 - (this.isBoolean * 18),
-              lastCShape.y + lastCShape.height,
+              lastCSlot.y + lastCSlot.height,
               child.el,
             ))
           continue
@@ -1372,7 +1374,6 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
-    this.parentCategory = null
     this.isZebra = false
 
     this.color = categoryColor("obsolete")
@@ -1394,10 +1395,8 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (!this.isZebra && this.parentCategory) {
-        if (this.color.primary.eq(block.color.primary)) {
-          block.isZebra = true
-        }
+      if (!this.isZebra && this.color.primary.eq(block.color.primary)) {
+        block.isZebra = true
       }
       const child = block.draw(options)
       children.push(SVG.move(x, y, child))

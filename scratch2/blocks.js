@@ -856,7 +856,8 @@ class BlockView {
     const lines = []
     let noWrapLine = [],
       noWrapLines = [],
-      hasLoopArrow = false
+      hasLoopArrow = false,
+      lastCSlot = null
     if (this.isUpvar) {
       line.padding.top += 3
     } else {
@@ -926,6 +927,7 @@ class BlockView {
         child.height = Math.max(13, child.height + 3)
         y += child.height
         line = new Line(y)
+        lastCSlot = child
       } else if (loop &&
         loop.isIcon &&
         !loop.modified &&
@@ -933,10 +935,19 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1] &&
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
-        hasLoopArrow = true
         loop.isLoop = true
         loop.scale = 0.5
         line.children.push(child)
+        
+        let cIndex = lines.indexOf(lastCSlot)
+        let trueRow = lines[cIndex + 1]
+        if (trueRow) {
+          trueRow.width += IconView.icons.loopArrow.width * 0.5
+          innerWidth = Math.max(innerWidth, trueRow.width)
+        } else {
+          line.width += IconView.icons.loopArrow.width * 0.5
+        }
+        hasLoopArrow = true
       } else if (child.isNewline) {
       noWrapLines.push(noWrapLine)
       noWrapLine = []
@@ -1016,10 +1027,6 @@ class BlockView {
     }
     y += pb
     pushLine()
-    
-    if (hasLoopArrow) {
-      innerWidth += IconView.icons.loopArrow.width * 0.5 + this.isBoolean * 5
-    }
 
     innerWidth = Math.max(
       innerWidth + px * 2,
@@ -1042,28 +1049,28 @@ class BlockView {
     this.innerWidth = innerWidth
 
     const objects = []
-    let lastCShape = null
+    lastCSlot = null
     
     this.lines = lines
 
     for (const line of lines) {
       if (line.isScript) {
         objects.push(SVG.move(15, line.y, line.el))
-        lastCShape = line
+        lastCSlot = line
         continue
       }
 
       const h = line.height
 
       for (const child of line.children) {
-        if (child.isLoop && lastCShape) {
+        if (child.isLoop && lastCSlot) {
           objects.push(
             SVG.move(
               innerWidth -
                 child.width -
                 3 -
                 this.isBoolean * 6,
-              lastCShape.y + lastCShape.height,
+              lastCSlot.y + lastCSlot.height,
               child.el,
             ),
           )
@@ -1131,7 +1138,10 @@ class CommentView {
   }
 
   draw(options) {
-    const labelEl = this.label.draw(options)
+    const labelEl = this.label.draw({
+      ...options,
+      showSpaces: false,
+    })
 
     this.width = this.label.width + 16
     return SVG.group([
