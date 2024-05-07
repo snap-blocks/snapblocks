@@ -1189,8 +1189,10 @@ class BlockView {
           SVG.move(x, y, child.el)
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
+          if (this.isReporter || this.isBoolean) {
+            y += 5
+          }
         } else if (child.isLoop) {
-          console.log('skip loop', child)
           hasLoopArrow = true
         } else {
           child.y = y
@@ -1360,7 +1362,7 @@ class BlockView {
       } else if (lastCShape && line[line.length - 1].isLoop) {
         console.log('last loop', line[line.length - 1])
         let loop = line[line.length - 1]
-        SVG.move(blockWidth - loop.width - 2, lastCShape.y + lastCShape.height - 2, loop.el)
+        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCShape.y + lastCShape.height - 2 + ((this.isBoolean || this.isReporter) * 5), loop.el)
       }
     })
 
