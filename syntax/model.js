@@ -83,7 +83,7 @@ export class Icon {
         : typeof color == "string"
           ? Color.fromString(color)
           : null
-    
+
     if (this.color || scale) {
       this.modified = true
     }

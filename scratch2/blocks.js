@@ -906,13 +906,13 @@ class BlockView {
         this.hasScript = true
         line.padding.bottom += pb
 
-        
-        if (loop &&
-            loop.isIcon &&
-            !loop.modified &&
-            loop.isArrow &&
-            noWrapLines[noWrapLines.length - 1] &&
-            noWrapLines[noWrapLines.length - 1][0].isCShape
+        if (
+          loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
           loop.scale = 0.5
@@ -926,7 +926,8 @@ class BlockView {
         y += child.height
         line = new Line(y)
         lastCSlot = child
-      } else if (loop &&
+      } else if (
+        loop &&
         loop.isIcon &&
         !loop.modified &&
         loop.isArrow &&
@@ -936,7 +937,7 @@ class BlockView {
         loop.isLoop = true
         loop.scale = 0.5
         line.children.push(child)
-        
+
         let cIndex = lines.indexOf(lastCSlot)
         let trueRow = lines[cIndex + 1]
         if (trueRow) {
@@ -947,18 +948,18 @@ class BlockView {
         }
         hasLoopArrow = true
       } else if (child.isNewline) {
-      noWrapLines.push(noWrapLine)
-      noWrapLine = []
+        noWrapLines.push(noWrapLine)
+        noWrapLine = []
 
-      line.padding.bottom = 4
-      if (line.firstLine) {
-        line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
-      }
-      let firstSection = line.firstSection
-      pushLine()
-      line = new Line(y)
-      line.firstSection = firstSection
-    } else if (child.isNewline) {
+        line.padding.bottom = 4
+        if (line.firstLine) {
+          line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
+        }
+        let firstSection = line.firstSection
+        pushLine()
+        line = new Line(y)
+        line.firstSection = firstSection
+      } else if (child.isNewline) {
         pushLine()
         line = new Line(y)
       } else {
@@ -1011,12 +1012,13 @@ class BlockView {
     }
     if (noWrapLine.length > 0) {
       let loop = noWrapLine[noWrapLine.length - 1]
-      if (loop &&
-          loop.isIcon &&
-          !loop.modified &&
-          loop.isArrow &&
-          noWrapLines[noWrapLines.length - 1] &&
-          noWrapLines[noWrapLines.length - 1][0].isCShape
+      if (
+        loop &&
+        loop.isIcon &&
+        !loop.modified &&
+        loop.isArrow &&
+        noWrapLines[noWrapLines.length - 1] &&
+        noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
         loop.scale = 0.5
@@ -1048,7 +1050,7 @@ class BlockView {
 
     const objects = []
     lastCSlot = null
-    
+
     this.lines = lines
 
     for (const line of lines) {
@@ -1064,10 +1066,7 @@ class BlockView {
         if (child.isLoop && lastCSlot) {
           objects.push(
             SVG.move(
-              innerWidth -
-                child.width -
-                3 -
-                this.isBoolean * 6,
+              innerWidth - child.width - 3 - this.isBoolean * 6,
               lastCSlot.y + lastCSlot.height,
               child.el,
             ),

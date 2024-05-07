@@ -1017,12 +1017,13 @@ class BlockView {
           )
         }
 
-        if (loop &&
-            loop.isIcon &&
-            !loop.modified &&
-            loop.isArrow &&
-            noWrapLines[noWrapLines.length - 1] &&
-            noWrapLines[noWrapLines.length - 1][0].isCShape
+        if (
+          loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
           loop.scale = 0.5
@@ -1040,27 +1041,28 @@ class BlockView {
         line.padding.top = 2
         lastChild = child
         lastCSlot = child
-      } else if (loop &&
-          loop.isIcon &&
-          !loop.modified &&
-          loop.isArrow &&
-          noWrapLines[noWrapLines.length - 1] &&
-          noWrapLines[noWrapLines.length - 1][0].isCShape
-        ) {
-          loop.isLoop = true
-          loop.scale = 0.5
-          line.children.push(child)
-          previousChild = child
+      } else if (
+        loop &&
+        loop.isIcon &&
+        !loop.modified &&
+        loop.isArrow &&
+        noWrapLines[noWrapLines.length - 1] &&
+        noWrapLines[noWrapLines.length - 1][0].isCShape
+      ) {
+        loop.isLoop = true
+        loop.scale = 0.5
+        line.children.push(child)
+        previousChild = child
 
-          let cIndex = lines.indexOf(lastCSlot)
-          let trueRow = lines[cIndex + 1]
-          if (trueRow) {
-            trueRow.width += IconView.icons.loopArrow.width * 0.5
-            innerWidth = Math.max(innerWidth, trueRow.width)
-          } else {
-            line.width += IconView.icons.loopArrow.width * 0.5
-          }
-          hasLoopArrow = true
+        let cIndex = lines.indexOf(lastCSlot)
+        let trueRow = lines[cIndex + 1]
+        if (trueRow) {
+          trueRow.width += IconView.icons.loopArrow.width * 0.5
+          innerWidth = Math.max(innerWidth, trueRow.width)
+        } else {
+          line.width += IconView.icons.loopArrow.width * 0.5
+        }
+        hasLoopArrow = true
       } else if (child.isNewline) {
         noWrapLines.push(noWrapLine)
         noWrapLine = []
@@ -1150,12 +1152,13 @@ class BlockView {
 
     if (noWrapLine.length > 0) {
       let loop = noWrapLine[noWrapLine.length - 1]
-      if (loop &&
-          loop.isIcon &&
-          !loop.modified &&
-          loop.isArrow &&
-          noWrapLines[noWrapLines.length - 1] &&
-          noWrapLines[noWrapLines.length - 1][0].isCShape
+      if (
+        loop &&
+        loop.isIcon &&
+        !loop.modified &&
+        loop.isArrow &&
+        noWrapLines[noWrapLines.length - 1] &&
+        noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
         loop.scale = 0.5
@@ -1228,10 +1231,11 @@ class BlockView {
         if (child.isLoop && lastCSlot) {
           objects.push(
             SVG.move(
-              innerWidth - child.width - 4 - (this.isBoolean * 18),
+              innerWidth - child.width - 4 - this.isBoolean * 18,
               lastCSlot.y + lastCSlot.height,
               child.el,
-            ))
+            ),
+          )
           continue
         }
 

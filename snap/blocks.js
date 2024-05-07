@@ -728,20 +728,14 @@ class BlockView {
         if (lines[i].isScript) {
           p.push(
             SVG.getRightAndBottom(
-              w - (this.isBoolean) * 8,
+              w - this.isBoolean * 8,
               y,
               true,
               this.isBoolean ? 15 : 9,
             ),
           )
           y += lines[i].height - 3
-          p.push(
-            SVG.getArm(
-              w - (this.isBoolean) * 8,
-              y,
-              this.isBoolean ? 15 : 9,
-            ),
-          )
+          p.push(SVG.getArm(w - this.isBoolean * 8, y, this.isBoolean ? 15 : 9))
 
           hasNotch = !(isLast && this.isFinal)
           inset = isLast ? 0 : 2
@@ -993,12 +987,13 @@ class BlockView {
       // snap positioning
       if (child.isCShape) {
         let loop = noWrapLine[noWrapLine.length - 1]
-        if (loop &&
-            loop.isIcon &&
-            !loop.modified &&
-            loop.isArrow &&
-            noWrapLines[noWrapLines.length - 1] &&
-            noWrapLines[noWrapLines.length - 1][0].isCShape
+        if (
+          loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
           loop.scale = 0.5
@@ -1088,12 +1083,13 @@ class BlockView {
           x = 0
 
           let loop = noWrapLine[noWrapLine.length - 1]
-          if (loop &&
-              loop.isIcon &&
-              !loop.modified &&
-              loop.isArrow &&
-              noWrapLines[noWrapLines.length - 1] &&
-              noWrapLines[noWrapLines.length - 1][0].isCShape
+          if (
+            loop &&
+            loop.isIcon &&
+            !loop.modified &&
+            loop.isArrow &&
+            noWrapLines[noWrapLines.length - 1] &&
+            noWrapLines[noWrapLines.length - 1][0].isCShape
           ) {
             loop.isLoop = true
             loop.scale = 0.5
@@ -1114,12 +1110,13 @@ class BlockView {
     }
     if (noWrapLine.length > 0) {
       let loop = noWrapLine[noWrapLine.length - 1]
-      if (loop &&
-          loop.isIcon &&
-          !loop.modified &&
-          loop.isArrow &&
-          noWrapLines[noWrapLines.length - 1] &&
-          noWrapLines[noWrapLines.length - 1][0].isCShape
+      if (
+        loop &&
+        loop.isIcon &&
+        !loop.modified &&
+        loop.isArrow &&
+        noWrapLines[noWrapLines.length - 1] &&
+        noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
         loop.scale = 0.5
@@ -1171,13 +1168,17 @@ class BlockView {
           if (drawLines.length) {
             if (!drawLines[drawLines.length - 1]?.isScript) {
               if (!this.hasScript) {
-                drawLines[drawLines.length - 1].height += 6 + (this.isCommand || this.isFinal) * 2
+                drawLines[drawLines.length - 1].height +=
+                  6 + (this.isCommand || this.isFinal) * 2
               } else {
                 drawLines[drawLines.length - 1].height += 4
               }
             }
           }
-          if (drawLines.length == 0 || drawLines[drawLines.length - 1].isScript) {
+          if (
+            drawLines.length == 0 ||
+            drawLines[drawLines.length - 1].isScript
+          ) {
             drawLine.height = drawLines.length == 0 ? 8 : 4
             drawLines.push(drawLine)
             drawLine = new Line(y)
@@ -1268,7 +1269,6 @@ class BlockView {
 
         index += 1
       })
-
 
       // adjust label row below a loop-arrow C-slot to accomodate the loop icon
       // if (hasLoopArrow) {
@@ -1378,7 +1378,11 @@ class BlockView {
         lastCSlot = line[0]
       } else if (lastCSlot && line[line.length - 1].isLoop) {
         let loop = line[line.length - 1]
-        SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCSlot.y + lastCSlot.height - 2, loop.el)
+        SVG.move(
+          blockWidth - loop.width - 2 - this.isBoolean * 8,
+          lastCSlot.y + lastCSlot.height - 2,
+          loop.el,
+        )
       }
     })
 
