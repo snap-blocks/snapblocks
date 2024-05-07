@@ -854,6 +854,9 @@ class BlockView {
     }
 
     const lines = []
+    let noWrapLine = [],
+      noWrapLines = [],
+      hasLoopArrow = false
     if (this.isUpvar) {
       line.padding.top += 3
     } else {
@@ -888,8 +891,33 @@ class BlockView {
       child.el = child.draw(options, this)
 
       if (child.isCShape) {
+        if (noWrapLine.length > 0) {
+          noWrapLines.push(noWrapLine)
+          noWrapLines.push([child])
+          noWrapLine = []
+        } else {
+          noWrapLines.push([child])
+        }
+      } else {
+        noWrapLine.push(child)
+      }
+
+      let loop = noWrapLine[noWrapLine.length - 1]
+      if (child.isCShape) {
         this.hasScript = true
         line.padding.bottom += pb
+
+        
+        if (loop &&
+            loop.isIcon &&
+            !loop.modified &&
+            loop.isArrow &&
+            noWrapLines[noWrapLines.length - 1] &&
+            noWrapLines[noWrapLines.length - 1][0].isCShape
+        ) {
+          loop.isLoop = true
+          loop.scale = 0.5
+        }
 
         pushLine()
         child.y = y
@@ -898,7 +926,30 @@ class BlockView {
         child.height = Math.max(13, child.height + 3)
         y += child.height
         line = new Line(y)
-      } else if (child.isLabel && child.value === "\n") {
+      } else if (loop &&
+        loop.isIcon &&
+        !loop.modified &&
+        loop.isArrow &&
+        noWrapLines[noWrapLines.length - 1] &&
+        noWrapLines[noWrapLines.length - 1][0].isCShape
+      ) {
+        hasLoopArrow = true
+        loop.isLoop = true
+        loop.scale = 0.5
+        line.children.push(child)
+      } else if (child.isNewline) {
+      noWrapLines.push(noWrapLine)
+      noWrapLine = []
+
+      line.padding.bottom = 4
+      if (line.firstLine) {
+        line.padding.top = Math.max(pt - (line.height - 13) / 2, ptmin)
+      }
+      let firstSection = line.firstSection
+      pushLine()
+      line = new Line(y)
+      line.firstSection = firstSection
+    } else if (child.isNewline) {
         pushLine()
         line = new Line(y)
       } else {
@@ -949,8 +1000,27 @@ class BlockView {
         line.children.push(child)
       }
     }
+    if (noWrapLine.length > 0) {
+      let loop = noWrapLine[noWrapLine.length - 1]
+      if (loop &&
+          loop.isIcon &&
+          !loop.modified &&
+          loop.isArrow &&
+          noWrapLines[noWrapLines.length - 1] &&
+          noWrapLines[noWrapLines.length - 1][0].isCShape
+      ) {
+        loop.isLoop = true
+        loop.scale = 0.5
+      }
+      noWrapLines.push(noWrapLine)
+    }
     y += pb
     pushLine()
+
+    
+    if (hasLoopArrow) {
+      innerWidth += IconView.icons.loopArrow.width * 0.5 + this.isBoolean * 5
+    }
 
     innerWidth = Math.max(
       innerWidth + px * 2,
@@ -973,26 +1043,28 @@ class BlockView {
     this.innerWidth = innerWidth
 
     const objects = []
-
+    let lastCShape = null
+    
     this.lines = lines
 
     for (const line of lines) {
       if (line.isScript) {
         objects.push(SVG.move(15, line.y, line.el))
+        lastCShape = line
         continue
       }
 
       const h = line.height
 
       for (const child of line.children) {
-        if (child.isLoop) {
+        if (child.isLoop && lastCShape) {
           objects.push(
             SVG.move(
               innerWidth -
                 child.width -
                 3 -
-                (this.info.shape === "boolean") * 6,
-              this.height - child.height - 3,
+                this.isBoolean * 6,
+              lastCShape.y + lastCShape.height,
               child.el,
             ),
           )
