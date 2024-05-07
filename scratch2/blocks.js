@@ -1016,9 +1016,6 @@ class BlockView {
     }
     y += pb
     pushLine()
-
-    console.log('scratch2 lines', lines)
-
     
     if (hasLoopArrow) {
       innerWidth += IconView.icons.loopArrow.width * 0.5 + this.isBoolean * 5

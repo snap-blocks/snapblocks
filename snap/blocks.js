@@ -1125,9 +1125,6 @@ class BlockView {
       noWrapLines.push(noWrapLine)
     }
 
-    // console.log('lines', lines)
-    // console.log('no wrap', noWrapLines)
-
     // distribute parts on lines
     if (this.isCommand || this.isFinal || this.isHat) {
       y = corner + edge
@@ -1287,7 +1284,6 @@ class BlockView {
       // drawLine.height = lineHeight
       drawLines.push(drawLine)
     }
-    console.log('snap lines', drawLines)
 
     if (hasLoopArrow) {
       maxX = Math.max(maxX, maxX + fontSize * 1.5)
@@ -1361,11 +1357,9 @@ class BlockView {
 
     let lastCShape = null
     noWrapLines.forEach(line => {
-      // console.log('line', line)
       if (line[0].isCShape) {
         lastCShape = line[0]
       } else if (lastCShape && line[line.length - 1].isLoop) {
-        // console.log('last loop', line[line.length - 1])
         let loop = line[line.length - 1]
         SVG.move(blockWidth - loop.width - 2 - (this.isBoolean * 8), lastCShape.y + lastCShape.height - 2, loop.el)
       }

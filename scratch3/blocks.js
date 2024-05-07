@@ -1170,7 +1170,6 @@ class BlockView {
     this.lines = lines
 
     let padLeft = children.length ? this.horizontalPadding(children[0]) : 0
-    console.log('last child', lastChild)
     const padRight = children.length ? this.horizontalPadding(lastChild) : 0
     innerWidth += padLeft + padRight
 
