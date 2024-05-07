@@ -29,51 +29,6 @@ export default `
   filter: var(--snapDropShadow);
 }
 
-.snap-obsolete {
-  fill: #c80014;
-}
-.snap-motion {
-  fill: #4a6cd4;
-}
-.snap-looks {
-  fill: #8f56e3;
-}
-.snap-sound {
-  fill: #cf4ad9;
-}
-.snap-pen {
-  fill: #00a178;
-}
-.snap-control {
-  fill: #e6a822;
-}
-.snap-sensing {
-  fill: #0494dc;
-}
-.snap-operators {
-  fill: #62c213;
-}
-.snap-variables {
-  fill: #f3761d;
-}
-.snap-list {
-  fill: #d94d11;
-}
-.snap-custom-arg {
-  fill: #f3761d;
-}
-.snap-extension {
-  fill: #4b4a60;
-}
-.snap-other {
-  fill: #969696;
-}
-
-.snap-flat {
-  stroke-width: 1;
-  stroke: rgba(0,0,0,0.25);
-}
-
 .snap-bevel {
   filter: var(--snapBevelFilter);
 }
