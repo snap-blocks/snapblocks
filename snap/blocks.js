@@ -271,7 +271,10 @@ LabelView.toMeasure = []
 class IconView {
   constructor(icon) {
     Object.assign(this, icon)
+    this.getInfo()
+  }
 
+  getInfo() {
     this.padx = 4
 
     const info = IconView.icons[this.name]
@@ -306,8 +309,7 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
-    this.width = this.width * this.scale
-    this.height = this.height * this.scale
+    this.getInfo()
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
