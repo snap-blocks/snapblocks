@@ -265,23 +265,26 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.withChildren(SVG.el("radialGradient", {
-            id: "snap-cloudGradient-fill",
-            cx: 0,
-            cy: 0,
-            r: 1,
-            fx: 0,
-            fy: 0,
-          }), [
-            SVG.el("stop", {
-              offset: "0%",
-              "stop-color": "rgba(0, 0, 0, 0)",
+          SVG.withChildren(
+            SVG.el("radialGradient", {
+              id: "snap-cloudGradient-fill",
+              cx: 0,
+              cy: 0,
+              r: 1,
+              fx: 0,
+              fy: 0,
             }),
-            SVG.el("stop", {
-              offset: "100%",
-              "stop-color": "rgba(0, 0, 0, 0.25)",
-            }),
-          ]),
+            [
+              SVG.el("stop", {
+                offset: "0%",
+                "stop-color": "rgba(0, 0, 0, 0)",
+              }),
+              SVG.el("stop", {
+                offset: "100%",
+                "stop-color": "rgba(0, 0, 0, 0.25)",
+              }),
+            ],
+          ),
           SVG.el("path", {
             d: `M 3 12
               A 3 3 0 0 1 2.4275730138703637 6.055118449657009

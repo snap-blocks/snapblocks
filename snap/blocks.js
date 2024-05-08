@@ -315,7 +315,7 @@ class IconView {
   get height() {
     return this._height * this.scale
   }
-  
+
   set height(height) {
     this._height = height
   }
