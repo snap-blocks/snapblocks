@@ -7,7 +7,9 @@ Make pictures of Snap<i>!</i> blocks from text.
 
 [Dev version](https://snap-blocks.github.io/snapblocks)
 
-[Documentation](https://snap-blocks.github.io/docs)
+[Documentation](https://snap-blocks.github.io/docs) (needs work)
+
+[Style guide](https://snapwiki.miraheze.org/wiki/Snapblocks_Style_Guide)
 
 ---
 
@@ -17,18 +19,14 @@ Make pictures of Snap<i>!</i> blocks from text.
 
 **snapblocks** is used to write Snap scripts:
 
-- in [Snap Forum](https://forum.snap.berkeley.edu/) posts
 - in [Snap Wiki](https://snapwiki.miraheze.org/) articles
-
-These currently use the original scratchblocks, but the wiki is working on transitioning over. I have a feeling once I mention this on the forum, they will also transition over.
+- in [Snap Forum](https://forum.snap.berkeley.edu/) posts (eventually)
 
 It's MIT licensed, so you can use it in your projects.
 
-For the full guide to the syntax, see [the wiki](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax) (hopefully when this is finished, we can make a snapblocks syntax article on the snap wiki).
+For the full guide to the syntax, see [the wcratch wiki](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax) (hopefully when this is finished, we can make a snapblocks syntax article on the snap wiki). There is a [style guide](https://snapwiki.miraheze.org/wiki/Snapblocks_Style_Guide) on the Snap wiki.
 
 # Usage
-
-All of these, except html, currently do not have a snapblocks version, but it shouldn't be too hard to modify them to add snapblocks support.
 
 ## MediaWiki
 
@@ -36,7 +34,7 @@ Use [the MediaWiki plugin](https://github.com/snap-blocks/mw-snapblocks) (work i
 
 ## WordPress
 
-I found [a WordPress plugin](https://github.com/tkc49/scratchblocks-for-wp).
+@tjvr found [a scratchblocks WordPress plugin](https://github.com/tkc49/scratchblocks-for-wp).
 It might work for you; I haven't tried it.
 
 ## React
@@ -56,6 +54,13 @@ There are a few ways of getting one:
 <script src="snapblocks-min.js"></script>
 ```
 
+In order to use translations, include the `translations-all.js` file.
+
+```html
+<script src="snapblocks.min.js"></script>
+<script src="translations-all.js"></script>
+```
+
 The convention is to write snapblocks inside `pre` tags with the class `blocks`:
 ```html
 <pre class="blocks">
@@ -70,7 +75,7 @@ Make sure this appears at the end of the page (just before the closing `</body>`
 <script>
 snapblocks.renderMatching('pre.blocks', {
   style:     'snap',       // Optional, defaults to 'snap'.
-  languages: ['en', 'de'], // Optional, defaults to ['en'].
+  languages: ['en'], // Optional, defaults to ['en'].
   scale: 1,                // Optional, defaults to 1
 });
 </script>
@@ -84,7 +89,7 @@ The `style` option controls how the blocks appear, either the Snap, Scratch 2, o
 
 You might also want to use blocks "inline", inside a paragraph:
 ```html
-I'm rather fond of the <code class="b">cut from [ v]</code> block in Snap.
+I'm rather fond of the <code class="b">cut from [ V]</code> block in Snap.
 ```
 
 To allow this, make a second call to `renderMatching` using the `inline` argument.
@@ -112,6 +117,7 @@ snapblocks.renderMatching('pre.blocks', {
   wrap: true,              // Optional, defaults to false. This enabled block wrapping
   wrapSize: 200,           // Optional, defaults to null. This sets the minimum width for block wrapping
   zebraColoring: true,     // Optional, defaults to false. Enabled zebra coloring
+  showSpaces: true,        // Optional, defaults to false. Shows spaces in inputs
 });
 ```
 
@@ -155,11 +161,14 @@ var snapblocks = require('snapblocks');
 snapblocks.renderMatching('pre.blocks');
 ```
 
+Please note, snapblocks is a client-side library, which means that you will get errors if
+the `window` object does not exist.
+
 ## ESM Support
 Since version 3.6.0, scratchblocks (and subsequently snapblocks) can be properly loaded as an ESM module. The ESM version, instead of defining `window.snapblocks`, default-exports the `snapblocks` object. Similarly, the JavaScript translation files default-exports a function to load the translations.
 
 ```js
-import snapblocks from "./snapblocks-es-min.js";
+import snapblocks from "./snapblocks.min.es.js";
 import loadTranslations from "./translations-all-es.js";
 loadTranslations(snapblocks);
 
@@ -199,11 +208,12 @@ Many, many thanks to the [contributors](https://github.com/snap-blocks/snapblock
 
 * Maintained by [ego-lay-atman-bay](https://github.com/ego-lay-atman-bay)
 * This is a fork of [scratchblocks](https://github.com/scratchblocks/scratchblocks), so all the credit there still applies here.
-* Original scratchblocks by [tjvr](https://github.com/tjvr)
+* Original scratchblocks library by [tjvr](https://github.com/tjvr)
 * Icons derived from [Scratch Blocks](https://github.com/scratchfoundation/scratch-blocks) (Apache License 2.0) and [Snap<i>!</i>](https://github.com/jmoenig/Snap/blob/master/src/symbols.js)
 * Scratch 2 SVG proof-of-concept, shapes & filters by [as-com](https://github.com/as-com)
 * Anna helped with a formula, and pointed out that tjvr can't read graphs
-* JSO designed the syntax and wrote the original [Block Plugin](https://en.scratch-wiki.info/wiki/Block_Plugin_\(1.4\))
+* JSO designed the original syntax and wrote the original [Block Plugin](https://en.scratch-wiki.info/wiki/Block_Plugin_\(1.4\))
+* The syntax changes (and additions) within snapblocks were made by me, ego-lay-atman-bay
 * Help with translation code from [joooni](https://scratch.mit.edu/users/joooni/)
 * Block translations from the [scratch-l10n repository](https://github.com/scratchfoundation/scratch-l10n/)
 * Ported to node by [arve0](https://github.com/arve0)
