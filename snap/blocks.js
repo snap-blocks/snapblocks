@@ -270,8 +270,6 @@ LabelView.toMeasure = []
 
 class IconView {
   constructor(icon) {
-    this.original = icon
-
     this.scale = 1
     this.width = 12
     this.height = 12
