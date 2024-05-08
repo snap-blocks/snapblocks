@@ -270,38 +270,59 @@ LabelView.toMeasure = []
 
 class IconView {
   constructor(icon) {
-    Object.assign(this, icon)
-    this._color = this.color
-    this.getInfo()
-  }
+    this.original = icon
 
-  getInfo() {
+    this.scale = 1
+    this.width = 12
+    this.height = 12
+    this.modified = false
+    this.name = ""
+    this.color = new Color(255, 255, 255)
     this.padx = 4
+    this.fillAttribute = "fill"
 
-    const info = IconView.icons[this.name]
+    const info = IconView.icons[icon.name]
     if (!info) {
-      throw new Error(`no info for icon: ${this.name}`)
+      throw new Error(`no info for icon: ${icon.name}`)
     }
+
     Object.assign(this, info)
+    Object.assign(this, icon)
+
+    if (this.scale && this.modified) {
+      this.scale = (10 / 12) * this.scale // set the size to 10 if the scale is set
+    }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
-      this.scale = 1
-    }
-
-    if (this._color) {
-      this.color = this._color
+      this.scale = info.scale || 1
     }
 
     if (!this.color) {
-      this.color = new Color(255, 255, 255)
+      this.color = info.color || new Color(255, 255, 255)
     }
-
-    this.width = this.width * this.scale
-    this.height = this.height * this.scale
 
     if (!this.fillAttribute) {
       this.fillAttribute = "fill"
     }
+  }
+
+  get width() {
+    return this._width * this.scale
+  }
+
+  set width(width) {
+    this._width = width
+  }
+
+  get height() {
+    return this._height * this.scale
+  }
+  
+  set height(height) {
+    this._height = height
+  }
+
+  getInfo() {
   }
 
   get isIcon() {
@@ -309,12 +330,12 @@ class IconView {
   }
 
   draw(options) {
+    this.getInfo()
     let props = {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale})`,
     }
-    this.getInfo()
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
@@ -383,6 +404,7 @@ class IconView {
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
       pause: { width: 12, height: 12, dy: +1, color: new Color(255, 220, 0) },
       cloud: { width: 20, height: 12 },
+      cloudGradient: { width: 20, height: 12 },
       cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
