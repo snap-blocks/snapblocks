@@ -30,6 +30,7 @@ const {
 const unicodeIcons = {
   cloud: "☁",
   cloudOutline: "☁",
+  cloudGradient: "☁",
 }
 
 const categoryAliases = {
@@ -236,32 +237,54 @@ LabelView.toMeasure = []
 
 export class IconView {
   constructor(icon) {
-    Object.assign(this, icon)
-    this._color = this.color
-    this.getInfo({})
-  }
+    this.scale = 1
+    this.width = 12
+    this.height = 12
+    this.modified = false
+    this.name = ""
+    this.color = new Color(255, 255, 255)
+    this.padx = 4
+    this.fillAttribute = "fill"
 
-  getInfo(options) {
-    const info = IconView.icons[this.name]
+    const info = IconView.icons[icon.name]
     if (!info) {
-      throw new Error(`no info for icon: ${this.name}`)
+      throw new Error(`no info for icon: ${icon.name}`)
     }
-    Object.assign(this, info)
 
-    if (this._color) {
-      this.color = this._color
+    Object.assign(this, info)
+    Object.assign(this, icon)
+
+    if (this.scale && this.modified) {
+      this.scale = (10 / 12) * this.scale // set the size to 10 if the scale is set
     }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
-      this.scale = 1
+      this.scale = info.scale || 1
     }
 
-    this.width = this.width * this.scale
-    this.height = this.height * this.scale
+    if (!this.color) {
+      this.color = info.color || null
+    }
 
     if (!this.fillAttribute) {
       this.fillAttribute = "fill"
     }
+  }
+
+  get width() {
+    return this._width * this.scale
+  }
+
+  set width(width) {
+    this._width = width
+  }
+
+  get height() {
+    return this._height * this.scale
+  }
+  
+  set height(height) {
+    this._height = height
   }
 
   get isIcon() {
@@ -275,7 +298,6 @@ export class IconView {
       transform: `scale(${this.scale})`,
     }
 
-    this.getInfo(options)
     if (!this.color) {
       this.color = options.isHighContrast
         ? new Color()
