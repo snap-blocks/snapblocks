@@ -98,7 +98,7 @@ export class Icon {
     return {
       "+": "plusSign", // I can't have + in an id.
       bucket: "paintBucket",
-      flag: "greenFlag",
+      greenflag: "greenFlag", // future snap greenflag icon (no capital)
       stop: "stopSign",
       loop: "loopArrow",
     }
@@ -107,6 +107,7 @@ export class Icon {
   static get icons() {
     return {
       greenFlag: true,
+      flag: true,
       stopSign: true,
       turnLeft: true,
       turnRight: true,

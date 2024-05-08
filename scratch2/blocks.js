@@ -310,6 +310,7 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
+    let name = this.alias || this.name
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
@@ -318,7 +319,7 @@ class IconView {
       props[this.fillAttribute] = this.color.toHexString()
     }
     let symbol = SVG.setProps(
-      SVG.symbol(`#sb-${this.name}-${options.id}`),
+      SVG.symbol(`#sb-${name}-${options.id}`),
       props,
     )
     return symbol
@@ -332,6 +333,12 @@ class IconView {
         dy: -2,
         scale: 1.5,
         color: new Color(63, 141, 21),
+      },
+      
+      flag: {
+        width: 13,
+        height: 14,
+        alias: "greenFlag",
       },
       stopSign: { width: 20, height: 20, color: new Color(187, 0, 16) },
       turnLeft: { width: 15, height: 12, dy: +1 },

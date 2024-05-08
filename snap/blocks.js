@@ -330,6 +330,7 @@ class IconView {
       height: this.height,
       transform: `scale(${this.scale})`,
     }
+    let name = this.alias || this.name
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {
         props[fillAttribute] = this.color.toHexString()
@@ -338,7 +339,7 @@ class IconView {
       props[this.fillAttribute] = this.color.toHexString()
     }
     let symbol = SVG.setProps(
-      SVG.symbol(`#snap-${this.name}-${options.id}`),
+      SVG.symbol(`#snap-${name}-${options.id}`),
       props,
     )
     if (!options.isFlat && !this.noShadow) {
@@ -358,6 +359,12 @@ class IconView {
         scale: 1.5,
         color: new Color(0, 200, 0),
         fillAttribute: "stroke",
+      },
+      flag: {
+        width: 12,
+        height: 12,
+        fillAttribute: "stroke",
+        alias: "greenFlag",
       },
       stopSign: { width: 21, height: 21, color: new Color(200, 0, 0) },
       turnLeft: {
