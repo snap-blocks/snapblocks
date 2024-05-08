@@ -317,7 +317,19 @@ export default class Style {
           cy: 5,
         }),
         {
+          id: "sb3-circleSolid",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
           id: "sb3-circle",
+          fill: "none",
+          "stroke-width": 1,
         },
       ),
       SVG.text(0, 0, "+", {

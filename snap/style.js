@@ -314,7 +314,19 @@ export default class Style {
           cy: 5,
         }),
         {
+          id: "snap-circleSolid",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 5,
+          cx: 5,
+          cy: 6,
+        }),
+        {
           id: "snap-circle",
+          fill: "none",
+          "stroke-width": 1.2,
         },
       ),
       SVG.setProps(

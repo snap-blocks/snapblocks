@@ -96,7 +96,6 @@ export class Icon {
 
   static get iconAliases() {
     return {
-      circleSolid: "circle",
       "+": "plusSign", // I can't have + in an id.
       bucket: "paintBucket",
       flag: "greenFlag",
@@ -125,6 +124,7 @@ export class Icon {
       flash: true,
       camera: true,
       circle: true,
+      circleSolid: true,
       notes: true,
       storage: true,
       brush: true,

@@ -237,12 +237,26 @@ LabelView.toMeasure = []
 export class IconView {
   constructor(icon) {
     Object.assign(this, icon)
+    this._color = this.color
+    this.getInfo()
+  }
 
+  getInfo() {
     const info = IconView.icons[this.name]
     if (!info) {
       throw new Error(`no info for icon: ${this.name}`)
     }
     Object.assign(this, info)
+
+    if (this._color) {
+      this.color = this._color
+    }
+
+    if (!this.color) {
+      this.color = options.isHighContrast
+        ? new Color()
+        : new Color(255, 255, 255)
+    }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
       this.scale = 1
@@ -265,12 +279,6 @@ export class IconView {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale})`,
-    }
-
-    if (!this.color) {
-      this.color = options.isHighContrast
-        ? new Color()
-        : new Color(255, 255, 255)
     }
 
     if (Array.isArray(this.fillAttribute)) {
@@ -314,7 +322,8 @@ export class IconView {
       pause: { width: 20, height: 20, color: new Color(255, 220, 0) },
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
-      circle: { width: 12, height: 12, color: new Color(255, 0, 0) },
+      circleSolid: { width: 12, height: 12, color: new Color(255, 0, 0) },
+      circle: { width: 12, height: 12, fillAttribute: "stroke" },
       notes: { width: 40, height: 40 },
       storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
       brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },

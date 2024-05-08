@@ -271,6 +271,7 @@ LabelView.toMeasure = []
 class IconView {
   constructor(icon) {
     Object.assign(this, icon)
+    this._color = this.color
     this.getInfo()
   }
 
@@ -285,6 +286,10 @@ class IconView {
 
     if (this.scale <= 0 || isNaN(this.scale)) {
       this.scale = 1
+    }
+
+    if (this._color) {
+      this.color = this._color
     }
 
     if (!this.color) {
@@ -381,7 +386,8 @@ class IconView {
       cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
       flash: { width: 10, height: 12 },
       camera: { width: 12, height: 12 },
-      circle: { width: 12, height: 12, color: new Color(255, 0, 0) },
+      circleSolid: { width: 12, height: 12, color: new Color(255, 0, 0) },
+      circle: { width: 12, height: 12, fillAttribute: "stroke" },
       notes: { width: 13, height: 12 },
       storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
       brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
