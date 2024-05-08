@@ -322,15 +322,11 @@ class IconView {
     this._height = height
   }
 
-  getInfo() {
-  }
-
   get isIcon() {
     return true
   }
 
   draw(options) {
-    this.getInfo()
     let props = {
       width: this.width,
       height: this.height,
