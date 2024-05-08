@@ -16,6 +16,7 @@ const highContrastIcons = new Set([
   "ttsBlock",
   "translationBlock",
   "cloud",
+  "cloudGradient",
   "turtle",
   "turtleOutline",
   "flash",

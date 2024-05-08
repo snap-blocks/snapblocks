@@ -120,6 +120,7 @@ export class Icon {
       turtleOutline: true,
       pause: true,
       cloud: true,
+      cloudGradient: true,
       cloudOutline: true,
       flash: true,
       camera: true,
