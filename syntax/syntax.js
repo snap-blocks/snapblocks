@@ -480,7 +480,7 @@ function parseLines(code, languages) {
         (tok === "<" || tok === ">") &&
         end === ">" && // We're parsing a predicate.
         children.length === 1 && // There's exactly one AST node behind us.
-        !(children[0].isInput && children[0].isBoolean) &&
+        !(children[0].isInput && children[0].isBoolean && children[0].isBig) &&
         !children[children.length - 1].isLabel // That node is not a label.
       ) {
         const c = peekNonWs()
