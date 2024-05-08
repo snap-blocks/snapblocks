@@ -159,9 +159,6 @@ export class Icon {
     let start = "@"
     let suffix = ""
     let name = this.name
-    if (unicodeIcons[`@${name}`]) {
-      name = unicodeIcons[`@${name}`]
-    }
     let alias = Object.keys(Icon.iconAliases).find(
       k => Icon.iconAliases[k] === name,
     )
@@ -177,6 +174,10 @@ export class Icon {
         suffix += "-1"
       }
       suffix += `-${this.color.r}-${this.color.g}-${this.color.b}`
+    }
+    if (suffix === "" && unicodeIcons[`@${name}`]) {
+      name = unicodeIcons[`@${name}`]
+      start = ""
     }
     if (name === "+") {
       start = ""
