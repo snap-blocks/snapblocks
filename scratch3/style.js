@@ -1068,7 +1068,7 @@ export default class Style {
         }),
         {
           id: "sb3-square",
-        }
+        },
       ),
 
       SVG.setProps(
@@ -1340,7 +1340,7 @@ export default class Style {
         }),
         {
           id: "sb3-square-high-contrast",
-        }
+        },
       ),
 
       SVG.setProps(

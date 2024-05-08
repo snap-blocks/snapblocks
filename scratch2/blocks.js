@@ -318,10 +318,7 @@ class IconView {
     } else {
       props[this.fillAttribute] = this.color.toHexString()
     }
-    let symbol = SVG.setProps(
-      SVG.symbol(`#sb-${name}-${options.id}`),
-      props,
-    )
+    let symbol = SVG.setProps(SVG.symbol(`#sb-${name}-${options.id}`), props)
     return symbol
   }
 
@@ -334,7 +331,7 @@ class IconView {
         scale: 1.5,
         color: new Color(63, 141, 21),
       },
-      
+
       flag: {
         width: 13,
         height: 14,

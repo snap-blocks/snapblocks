@@ -534,7 +534,7 @@ export default class Style {
         }),
         {
           id: "snap-square",
-        }
+        },
       ),
 
       SVG.setProps(

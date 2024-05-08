@@ -385,7 +385,7 @@ export default class Style {
         }),
         {
           id: "sb-square",
-        }
+        },
       ),
 
       SVG.setProps(

@@ -299,7 +299,7 @@ export class IconView {
         ? new Color()
         : new Color(255, 255, 255)
     }
-    
+
     let name = this.alias || this.name
     if (Array.isArray(this.fillAttribute)) {
       for (const fillAttribute of this.fillAttribute) {

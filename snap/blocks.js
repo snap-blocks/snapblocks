@@ -338,10 +338,7 @@ class IconView {
     } else {
       props[this.fillAttribute] = this.color.toHexString()
     }
-    let symbol = SVG.setProps(
-      SVG.symbol(`#snap-${name}-${options.id}`),
-      props,
-    )
+    let symbol = SVG.setProps(SVG.symbol(`#snap-${name}-${options.id}`), props)
     if (!options.isFlat && !this.noShadow) {
       symbol = SVG.setProps(SVG.group([symbol]), {
         class: "snap-drop-shadow",
@@ -379,8 +376,18 @@ class IconView {
         dy: +1,
         fillAttribute: ["stroke", "fill"],
       },
-      loop: { width: 24, height: 12, fillAttribute: ["stroke", "fill"], alias: "loopArrow" },
-      loopArrow: { width: 24, height: 12, scale: 0.7, fillAttribute: ["stroke", "fill"] },
+      loop: {
+        width: 24,
+        height: 12,
+        fillAttribute: ["stroke", "fill"],
+        alias: "loopArrow",
+      },
+      loopArrow: {
+        width: 24,
+        height: 12,
+        scale: 0.7,
+        fillAttribute: ["stroke", "fill"],
+      },
       addInput: {
         width: 5,
         height: 12,
@@ -424,7 +431,7 @@ class IconView {
       gearBig: { width: 12, height: 12 },
       globe: { width: 12, height: 12, fillAttribute: "stroke" },
       globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
-      square: {width: 10, height: 10, scale: 12 / 10 }, // scale is set to 12 / 10 for now
+      square: { width: 10, height: 10, scale: 12 / 10 }, // scale is set to 12 / 10 for now
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
