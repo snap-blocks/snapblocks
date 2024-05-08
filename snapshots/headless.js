@@ -45,8 +45,8 @@ class Renderer {
     const args = [script, options, this.scale]
       .map(x => JSON.stringify(x))
       .join(", ")
-    const dataURL = await this.page.evaluate(`render(${args})`)
     try {
+      const dataURL = await this.page.evaluate(`render(${args})`)
       return parseDataUrl(dataURL)
     } catch (e) {
       throw new Error(`Could not render script ${args}`, { cause: e })
