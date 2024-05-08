@@ -343,7 +343,7 @@ export class IconView {
       },
       list: { width: 15, height: 17 },
       pointRight: { width: 12, height: 12 },
-      turtle: { width: 18, height: 12 },
+      turtle: { width: 18, height: 12, scale: 1.2 },
       turtleOutline: { width: 18, height: 12, fillAttribute: "stroke" },
       pause: { width: 20, height: 20, color: new Color(255, 220, 0) },
       flash: { width: 10, height: 12 },

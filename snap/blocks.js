@@ -402,7 +402,7 @@ class IconView {
       },
       list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
-      turtle: { width: 18, height: 12, dy: +1 },
+      turtle: { width: 18, height: 12, scale: 1.2 },
       turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
       pause: { width: 12, height: 12, dy: +1, color: new Color(255, 220, 0) },
       cloud: { width: 20, height: 12 },
