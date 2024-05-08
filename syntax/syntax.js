@@ -93,6 +93,15 @@ function paintBlock(info, children, languages) {
     if (type.spec === ". . .") {
       children = [new Label(". . .")]
     }
+  } else if (
+    info.shape === "boolean" &&
+    children.length === 1 &&
+    children[0].isInput &&
+    children[0].isBoolean &&
+    children[0].isBig
+  ) {
+    info.category = "operators"
+    info.categoryIsDefault = true
   } else {
     // The block was not recognized, so we check if it's a define block.
     //
@@ -471,6 +480,7 @@ function parseLines(code, languages) {
         (tok === "<" || tok === ">") &&
         end === ">" && // We're parsing a predicate.
         children.length === 1 && // There's exactly one AST node behind us.
+        !(children[0].isInput && children[0].isBoolean) &&
         !children[children.length - 1].isLabel // That node is not a label.
       ) {
         const c = peekNonWs()
@@ -746,6 +756,20 @@ function parseLines(code, languages) {
         return child
       }
     }
+    // big boolean reporters
+    if (children.length === 1) {
+      const child = children[0]
+      if (
+        child.isInput &&
+        child.isBoolean &&
+        child.isBig
+      ) {
+        return paintBlock({
+          shape: "boolean",
+          category: "operators",
+        }, [child], languages)
+      }
+    }
     return makeBlock("stack", children)
   }
 
@@ -908,11 +932,7 @@ function parseLines(code, languages) {
       children[0].isLabel &&
       ["true", "false"].includes(children[0].raw.toLowerCase())
     ) {
-      let block = makeBlock("boolean", [
-        new Input("boolean", children[0].value.toLowerCase()),
-      ])
-      block.info.category = "operators"
-      return block
+      return new Input("boolean", children[0].value.toLowerCase())
     }
     return makeBlock("boolean", children)
   }
