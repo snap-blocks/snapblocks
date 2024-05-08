@@ -238,10 +238,10 @@ export class IconView {
   constructor(icon) {
     Object.assign(this, icon)
     this._color = this.color
-    this.getInfo()
+    this.getInfo({})
   }
 
-  getInfo() {
+  getInfo(options) {
     const info = IconView.icons[this.name]
     if (!info) {
       throw new Error(`no info for icon: ${this.name}`)
@@ -250,12 +250,6 @@ export class IconView {
 
     if (this._color) {
       this.color = this._color
-    }
-
-    if (!this.color) {
-      this.color = options.isHighContrast
-        ? new Color()
-        : new Color(255, 255, 255)
     }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
@@ -279,6 +273,13 @@ export class IconView {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale})`,
+    }
+
+    this.getInfo(options)
+    if (!this.color) {
+      this.color = options.isHighContrast
+        ? new Color()
+        : new Color(255, 255, 255)
     }
 
     if (Array.isArray(this.fillAttribute)) {
