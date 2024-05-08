@@ -759,15 +759,15 @@ function parseLines(code, languages) {
     // big boolean reporters
     if (children.length === 1) {
       const child = children[0]
-      if (
-        child.isInput &&
-        child.isBoolean &&
-        child.isBig
-      ) {
-        return paintBlock({
-          shape: "boolean",
-          category: "operators",
-        }, [child], languages)
+      if (child.isInput && child.isBoolean && child.isBig) {
+        return paintBlock(
+          {
+            shape: "boolean",
+            category: "operators",
+          },
+          [child],
+          languages,
+        )
       }
     }
     return makeBlock("stack", children)

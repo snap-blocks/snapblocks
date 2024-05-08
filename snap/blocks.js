@@ -1388,7 +1388,11 @@ class BlockView {
     noWrapLines.forEach(line => {
       if (line[0] && line[0].isCShape) {
         lastCSlot = line[0]
-      } else if (lastCSlot && line[line.length - 1] && line[line.length - 1].isLoop) {
+      } else if (
+        lastCSlot &&
+        line[line.length - 1] &&
+        line[line.length - 1].isLoop
+      ) {
         let loop = line[line.length - 1]
         SVG.move(
           blockWidth - loop.width - 2 - this.isBoolean * 8,
