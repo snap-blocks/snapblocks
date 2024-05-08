@@ -343,6 +343,7 @@ class IconView {
       stopSign: { width: 20, height: 20, color: new Color(187, 0, 16) },
       turnLeft: { width: 15, height: 12, dy: +1 },
       turnRight: { width: 15, height: 12, dy: +1 },
+      loop: { width: 26, height: 20, scale: 0.5, alias: "loopArrow" },
       loopArrow: { width: 26, height: 20, scale: 0.5 },
       addInput: { width: 5, height: 11, color: new Color(0, 0, 0) },
       delInput: { width: 5, height: 11, color: new Color(0, 0, 0) },

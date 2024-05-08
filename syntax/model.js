@@ -69,7 +69,7 @@ export class Icon {
     } else {
       this.name = name
     }
-    this.isArrow = this.name === "loopArrow"
+    this.isArrow = this.name === "loopArrow" || this.name === "loop"
     this.isLoop = false
 
     this.modified = false
@@ -100,7 +100,6 @@ export class Icon {
       bucket: "paintBucket",
       greenflag: "greenFlag", // future snap greenflag icon (no capital)
       stop: "stopSign",
-      loop: "loopArrow",
     }
   }
 
@@ -111,6 +110,7 @@ export class Icon {
       stopSign: true,
       turnLeft: true,
       turnRight: true,
+      loop: true,
       loopArrow: true,
       addInput: true,
       delInput: true,

@@ -379,7 +379,8 @@ class IconView {
         dy: +1,
         fillAttribute: ["stroke", "fill"],
       },
-      loopArrow: { width: 24, height: 12, fillAttribute: ["stroke", "fill"] },
+      loop: { width: 24, height: 12, fillAttribute: ["stroke", "fill"], alias: "loopArrow" },
+      loopArrow: { width: 24, height: 12, scale: 0.7, fillAttribute: ["stroke", "fill"] },
       addInput: {
         width: 5,
         height: 12,
