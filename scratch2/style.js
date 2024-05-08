@@ -378,6 +378,15 @@ export default class Style {
           id: "sb-globeBig",
         },
       ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 12,
+          height: 12,
+        }),
+        {
+          id: "sb-square",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

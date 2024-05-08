@@ -33,6 +33,7 @@ const highContrastIcons = new Set([
   "gearBig",
   "globe",
   "globeBig",
+  "square",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1060,6 +1061,15 @@ export default class Style {
           id: "sb3-globeBig",
         },
       ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 12,
+          height: 12,
+        }),
+        {
+          id: "sb3-square",
+        }
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -1322,6 +1332,15 @@ export default class Style {
         {
           id: "sb3-globeBig-high-contrast",
         },
+      ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 12,
+          height: 12,
+        }),
+        {
+          id: "sb3-square-high-contrast",
+        }
       ),
 
       SVG.setProps(

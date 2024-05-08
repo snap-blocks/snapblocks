@@ -254,10 +254,6 @@ export class IconView {
     Object.assign(this, info)
     Object.assign(this, icon)
 
-    if (this.scale && this.modified) {
-      this.scale = (10 / 12) * this.scale // set the size to 10 if the scale is set
-    }
-
     if (this.scale <= 0 || isNaN(this.scale)) {
       this.scale = info.scale || 1
     }
@@ -359,6 +355,7 @@ export class IconView {
       gearBig: { width: 12, height: 12 },
       globe: { width: 12, height: 12, fillAttribute: "stroke" },
       globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
+      square: { width: 12, height: 12 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },

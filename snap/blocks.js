@@ -416,6 +416,7 @@ class IconView {
       gearBig: { width: 12, height: 12 },
       globe: { width: 12, height: 12, fillAttribute: "stroke" },
       globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
+      square: {width: 10, height: 10, scale: 12 / 10 }, // scale is set to 12 / 10 for now
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },

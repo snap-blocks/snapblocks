@@ -138,6 +138,7 @@ export class Icon {
       gearBig: true,
       globe: true,
       globeBig: true,
+      square: true,
 
       arrowUp: true,
       arrowUpOutline: true,
