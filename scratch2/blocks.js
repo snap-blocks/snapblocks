@@ -373,6 +373,7 @@ class IconView {
       globe: { width: 12, height: 12, fillAttribute: "stroke" },
       globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
       square: { width: 12, height: 12 },
+      robot: { width: 10, height: 10, scale: 1.2 },
 
       arrowUp: { width: 12, height: 12 },
       arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
