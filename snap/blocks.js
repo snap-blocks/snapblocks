@@ -1742,7 +1742,8 @@ class DocumentView {
     this.width = width
     this.height = height
 
-    let group = SVG.group([])
+    let blocksGroup = SVG.group(elements)
+    let group = SVG.group([blocksGroup])
 
     // apply flat design clip-paths
     let clipPaths = []
@@ -1783,7 +1784,7 @@ class DocumentView {
       this.updateIds(icon)
     }
 
-    group.appendChild(
+    blocksGroup.before(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter(`snapBevelFilter-${this.id}`, false),
         bevelFilter(`snapInputBevelFilter-${this.id}`, true),
@@ -1817,7 +1818,6 @@ class DocumentView {
       `url(#snapDropShadow-${this.id})`,
     )
 
-    group.appendChild(SVG.group(elements))
     svg.appendChild(group)
     this.el = svg
     return svg
