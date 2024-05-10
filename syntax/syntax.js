@@ -1478,7 +1478,7 @@ function recognizeStuff(scripts) {
 
       // list reporters
       if (listNames.has(name)) {
-        info.category = "lists"
+        info.category = "list"
         info.categoryIsDefault = false
         info.selector = "contentsOfList:"
       }
