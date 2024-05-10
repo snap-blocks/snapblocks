@@ -756,9 +756,6 @@ class BlockView {
       } else {
         p.push(SVG.getTop(w))
       }
-      let addBottom = true
-      let hasNotch = true
-      let inset = 0
       let isLast = false
       let showBooleanRight = true
       for (let i = 1; i < lines.length; i += 1) {
@@ -776,15 +773,11 @@ class BlockView {
           y += lines[i].height - 3
           p.push(SVG.getArm(w - this.isBoolean * 8, y, this.isBoolean ? 15 : 9))
 
-          hasNotch = !(isLast && this.isFinal)
-          inset = isLast ? 0 : 2
           y += lines[i + 1].totalHeight + 3
-          addBottom = false
           showBooleanRight = false
           i++
         } else {
           y += lines[i].totalHeight
-          addBottom = true
         }
       }
       if (this.info.shape === "stack") {
