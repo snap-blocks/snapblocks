@@ -744,12 +744,14 @@ class BlockView {
           )
           y += lines[i].height - 3
 
-          hasNotch = !(lines[i].hasFinal)
-          
+          hasNotch = !lines[i].hasFinal
+
           if (hasNotch) {
             p.push(SVG.getArm(w - (this.info.shape === "boolean") * 20, y))
           } else {
-            p.push(SVG.getArmNoNotch(w - (this.info.shape === "boolean") * 20, y))
+            p.push(
+              SVG.getArmNoNotch(w - (this.info.shape === "boolean") * 20, y),
+            )
           }
 
           inset = isLast ? 0 : 16
@@ -1444,7 +1446,7 @@ class ScriptView {
   }
 
   get hasFinal() {
-    let last = this.blocks[this.blocks.length -1]
+    let last = this.blocks[this.blocks.length - 1]
     if (last) {
       return last.isFinal
     }
