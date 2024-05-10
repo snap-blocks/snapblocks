@@ -1186,7 +1186,7 @@ export default [
     snap: "doPauseAll",
     spec: "pause all @pause",
     inputs: [],
-    shape: "cap",
+    shape: "stack",
     category: "control",
   },
   {
