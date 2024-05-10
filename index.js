@@ -2,6 +2,7 @@
  * snapblocks
  * http://snap-blocks.github.io/
  *
+ * Copyright 2013-2021, Tim Radvan
  * Copyright 2024, ego-lay-atman-bay
  * snapblocks is a fork of scratchblocks by Tim Radvan
  * @license MIT
