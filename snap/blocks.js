@@ -896,7 +896,7 @@ class BlockView {
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     if (options.isFlat) {
       SVG.setProps(el, {
-        stroke: this.color.darker(25).toHexString(),
+        stroke: color.darker(25).toHexString(),
         "stroke-width": 1,
       })
     }
