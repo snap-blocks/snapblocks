@@ -1,6 +1,6 @@
 Make pictures of Snap<i>!</i> blocks from text.
 
-[![Screenshot](./readme-assets/images/screenshot.png)](http://snap-blocks.github.io/#?style=snap&script=when%20flag%20clicked%0Aclear%0Aforever%20%7B%0A%20%20pen%20down%0A%20%20if%20%3C%3Cmouse%20down%3F%3E%20and%20%3Ctouching%20%5Bmouse-pointer%20v%5D%3F%3E%3E%20%7B%0A%20%20%20%20switch%20costume%20to%20%5Bbutton%20v%5D%0A%20%20%7D%20else%20%7B%0A%20%20%20%20add%20(x%20position)%20to%20(list)%0A%20%20%7D%0A%20%20move%20(foo)%20steps%0A%20%20turn%20ccw%20(9)%20degrees%0A%7D)
+[![Screenshot](./readme-assets/images/screenshot.png)](https://snap-blocks.github.io/?style=snap&zebraColoring=&wrap=&showSpaces=&script=when%2520flag%2520clicked%250Aclear%250Aforever%2520%257B%250A%2520%2520pen%2520down%250A%2520%2520if%2520%253C%253Cmouse%2520down%3F%253E%2520and%2520%253Ctouching%2520%255Bmouse-pointer%2520V%255D%2520%3F%253E%253E%2520%257B%250A%2520%2520%2520%2520switch%2520to%2520costume%2520%255Bbutton%2520V%255D%250A%2520%2520%257D%2520else%2520%257B%250A%2520%2520%2520%2520add%2520%28x%2520position%29%2520to%2520%28list%29%250A%2520%2520%257D%250A%2520%2520move%2520%28foo%29%2520steps%250A%2520%2520turn%2520ccw%2520%289%29%2520degrees%250A%257D)
 
 
 **[Try it out!](https://snap-blocks.github.io/)**
