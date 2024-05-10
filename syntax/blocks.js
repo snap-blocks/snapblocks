@@ -24,7 +24,7 @@ export const overrideCategories = [
 export const aliasCategories = {
   grey: "other",
   gray: "other",
-  list: "lists",
+  lists: "list",
 }
 
 export const overrideShapes = [
