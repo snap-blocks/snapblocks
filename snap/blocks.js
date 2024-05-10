@@ -37,6 +37,7 @@ const categoryAliases = {
   custom: "other",
   grey: "other",
   gray: "other",
+  extension: "other",
   "custom-arg": "variables",
 }
 
