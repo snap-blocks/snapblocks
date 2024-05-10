@@ -1742,7 +1742,7 @@ class DocumentView {
     this.width = width
     this.height = height
 
-    let group = SVG.group(elements)
+    let group = SVG.group([])
 
     // apply flat design clip-paths
     let clipPaths = []
@@ -1817,6 +1817,7 @@ class DocumentView {
       `url(#snapDropShadow-${this.id})`,
     )
 
+    group.appendChild(SVG.group(elements))
     svg.appendChild(group)
     this.el = svg
     return svg
