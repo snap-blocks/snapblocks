@@ -7,7 +7,7 @@ export const overrideCategories = [
   "looks",
   "sound",
   "variables",
-  "list",
+  "lists",
   "events",
   "control",
   "sensing",
@@ -24,7 +24,7 @@ export const overrideCategories = [
 export const aliasCategories = {
   grey: "other",
   gray: "other",
-  lists: "list",
+  list: "lists",
 }
 
 export const overrideShapes = [

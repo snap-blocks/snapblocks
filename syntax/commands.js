@@ -1449,7 +1449,7 @@ export default [
     },
     inputs: ["%s"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportNumbers",
@@ -1457,7 +1457,7 @@ export default [
     spec: "numbers from %1 to %2",
     inputs: ["%n", "%n"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportCONS",
@@ -1468,7 +1468,7 @@ export default [
     },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportCDR",
@@ -1476,7 +1476,7 @@ export default [
     spec: "all but first of {list}",
     specDefs: { list: ["@list", "%2"] },
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:doForEach",
@@ -1485,7 +1485,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%s", "%m.list", "%cs"],
     shape: "stack",
-    category: "list",
+    category: "lists",
     hasLoopArrow: true,
   },
   {
@@ -1496,7 +1496,7 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_DELETEOFLIST",
@@ -1506,14 +1506,14 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%d.listDeleteItem", "%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_DELETEALLOFLIST",
     spec: "delete all of %1",
     inputs: ["%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "MOTION_IFONEDGEBOUNCE",
@@ -1567,7 +1567,7 @@ export default [
     specDefs: { list: ["@list", "%3"] },
     inputs: ["%s", "%d.listItem", "%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_REPLACEITEMOFLIST",
@@ -1577,7 +1577,7 @@ export default [
     specDefs: { list: ["@list", "%3"] },
     inputs: ["%d.listItem", "%m.list", "%s"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_SHOWLIST",
@@ -1585,7 +1585,7 @@ export default [
     spec: "show list %1",
     inputs: ["%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_HIDELIST",
@@ -1593,7 +1593,7 @@ export default [
     spec: "hide list %1",
     inputs: ["%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     snap: "getPosition",
@@ -2494,14 +2494,14 @@ export default [
     },
     inputs: ["%d.listItem", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_ITEMNUMOFLIST",
     spec: "item # of %1 in %2",
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportListIndex",
@@ -2510,7 +2510,7 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_LENGTHOFLIST",
@@ -2519,7 +2519,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportListAttribute",
@@ -2528,7 +2528,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%m", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportConcatenatedLists",
@@ -2551,7 +2551,7 @@ export default [
     },
     inputs: ["%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportReshape",
@@ -2572,7 +2572,7 @@ export default [
     },
     inputs: ["%s", "%n"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportCrossproduct",
@@ -2594,7 +2594,7 @@ export default [
     },
     inputs: ["%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     snap: "doShowTable",
@@ -2602,7 +2602,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%m.list"],
     shape: "stack",
-    category: "list",
+    category: "lists",
   },
   {
     id: "DATA_LISTCONTAINSITEM",
@@ -2612,14 +2612,14 @@ export default [
     specDefs: { list: ["@list", "%1"], input: ["%1 ?", "%1"] },
     inputs: ["%m.list", "%s"],
     shape: "boolean",
-    category: "list",
+    category: "lists",
   },
   {
     selector: "contentsOfList:",
     spec: "%1 as text",
     inputs: ["%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     selector: "copyOfList:",
@@ -2629,7 +2629,7 @@ export default [
     },
     inputs: ["%s"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportListIsEmpty",
@@ -2638,7 +2638,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%m.list"],
     shape: "boolean",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportMap",
@@ -2647,7 +2647,7 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportKeep",
@@ -2656,7 +2656,7 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportFindFirst",
@@ -2665,7 +2665,7 @@ export default [
     specDefs: { list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:reportCombine",
@@ -2674,7 +2674,7 @@ export default [
     specDefs: { list: ["@list", "%1"] },
     inputs: ["%m.list", "%s"],
     shape: "reporter",
-    category: "list",
+    category: "lists",
   },
   {
     id: "snap:doMapCodeOrHeader",

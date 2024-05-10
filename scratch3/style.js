@@ -101,7 +101,7 @@ export default class Style {
       secondary: Color.fromString("#ff8000"),
       tertiary: Color.fromString("#db6e00"),
     },
-    list: {
+    lists: {
       primary: Color.fromString("#ff661a"),
       secondary: Color.fromString("#ff5500"),
       tertiary: Color.fromString("#e64d00"),
@@ -169,7 +169,7 @@ export default class Style {
       secondary: Color.fromString("#ffcc99"),
       tertiary: Color.fromString("#db6e00"),
     },
-    list: {
+    lists: {
       primary: Color.fromString("#ff9966"),
       secondary: Color.fromString("#ffcab0"),
       tertiary: Color.fromString("#e64d00"),
