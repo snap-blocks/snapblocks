@@ -733,7 +733,7 @@ class BlockView {
       for (let i = 1; i < lines.length; i += 1) {
         isLast = i + 2 === lines.length
 
-        if (lines[i] instanceof ScriptView) {
+        if (lines[i].isScript) {
           p.push(
             SVG.getRightAndBottom(
               w - (this.info.shape === "boolean") * 20,
@@ -743,9 +743,15 @@ class BlockView {
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - (this.info.shape === "boolean") * 20, y))
 
-          hasNotch = !(isLast && this.isFinal)
+          hasNotch = !(lines[i].hasFinal)
+          
+          if (hasNotch) {
+            p.push(SVG.getArm(w - (this.info.shape === "boolean") * 20, y))
+          } else {
+            p.push(SVG.getArmNoNotch(w - (this.info.shape === "boolean") * 20, y))
+          }
+
           inset = isLast ? 0 : 16
           y += lines[i + 1].totalHeight + 3
           addBottom = false
@@ -1432,6 +1438,14 @@ class ScriptView {
 
   get isScript() {
     return true
+  }
+
+  get hasFinal() {
+    let last = this.blocks[this.blocks.length -1]
+    if (last) {
+      return last.isFinal
+    }
+    return false
   }
 
   measure(options) {
