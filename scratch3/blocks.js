@@ -920,7 +920,7 @@ class BlockView {
     return 8 // default: 2 units
   }
 
-  draw(options) {
+  getColor(options) {
     this.color = this.info.color
       ? {
           primary: this.info.color,
@@ -928,6 +928,12 @@ class BlockView {
           tertiary: this.info.color.darker(10),
         }
       : categoryColor(this.info.category, options.isHighContrast)
+    
+    return this.color
+  }
+
+  draw(options) {
+    this.getColor(options)
 
     const isDefine = this.info.shape === "define-hat"
     let children = this.children
@@ -1002,8 +1008,12 @@ class BlockView {
     for (let i = 0; i < children.length; i++) {
       const child = children[i]
       if (options.zebraColoring) {
-        if (this.isBlockPrototype) {
-          if (child.isBlock && child.color.primary.eq(this.color.primary)) {
+        if (child.isUpvar) {
+          if (this.color.primary.eq(child.getColor(options).primary)) {
+            child.isZebra = this.isZebra
+          }
+        } else if (this.isBlockPrototype) {
+          if (child.isBlock && child.getColor(options).primary.eq(this.color.primary)) {
             this.isZebra = true
           }
         } else if (
@@ -1012,7 +1022,7 @@ class BlockView {
           !child.isOutline &&
           !child.isUpvar
         ) {
-          if (child.color.primary.eq(this.color.primary)) {
+          if (child.getColor(options).primary.eq(this.color.primary)) {
             child.isZebra = true
           }
         } else if (child.isScript) {
@@ -1436,8 +1446,8 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (this.isBlock) {
-        if (!this.isZebra && this.color.primary.eq(block.color.primary)) {
+      if (block.isBlock) {
+        if (!this.isZebra && this.color.primary.eq(block.getColor(options).primary)) {
           block.isZebra = true
         }
       }
