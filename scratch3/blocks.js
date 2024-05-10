@@ -1250,7 +1250,7 @@ class BlockView {
         ? 160
         : this.isHat
           ? 100 // Correct for Scratch 3.0.
-          : this.isCommand || this.isOutline
+          : this.isCommand || this.isOutline || this.isFinal
             ? 64
             : this.isReporter
               ? 48
