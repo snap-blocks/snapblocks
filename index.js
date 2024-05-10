@@ -211,5 +211,11 @@ export default function (window) {
     renderMatching: renderMatching,
 
     appendStyles: appendStyles,
+
+    styles: {
+      snap: snap,
+      scratch2: scratch2,
+      scratch3: scratch3,
+    },
   }
 }
