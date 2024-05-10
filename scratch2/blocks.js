@@ -894,7 +894,11 @@ class BlockView {
       const child = children[i]
 
       if (options.zebraColoring) {
-        if (this.isBlockPrototype) {
+        if (child.isUpvar) {
+          if (this.color.eq(child.color)) {
+            child.isZebra = this.isZebra
+          }
+        } else if (this.isBlockPrototype) {
           if (child.isBlock && !child.isUpvar && this.color.eq(child.color)) {
             this.isZebra = true
           }
