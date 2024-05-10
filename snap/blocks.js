@@ -1494,6 +1494,7 @@ class CommentView {
     const labelEl = this.label.draw({
       ...options,
       showSpaces: false,
+      isFlat: true,
     })
 
     const arrowEl = this.arrow.draw(options)
