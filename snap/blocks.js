@@ -1600,7 +1600,7 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = 0 // inside ? (this.shape === "boolean" ? 6 : 8) : 0
-      if (!this.isZebra && this.color) {
+      if (inside && !this.isZebra && this.color) {
         if (this.color.eq(block.color)) {
           block.isZebra = true
         }
