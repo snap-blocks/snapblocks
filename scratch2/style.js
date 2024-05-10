@@ -19,7 +19,7 @@ export default class Style {
     sensing: new Color(44, 165, 226),
     operators: new Color(92, 183, 18),
     variables: new Color(238, 125, 22),
-    lists: new Color(204, 91, 34),
+    list: new Color(204, 91, 34),
     custom: new Color(99, 45, 153),
     "custom-arg": new Color(89, 71, 177),
     extension: new Color(75, 74, 96),
