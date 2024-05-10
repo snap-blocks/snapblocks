@@ -928,7 +928,7 @@ class BlockView {
           tertiary: this.info.color.darker(10),
         }
       : categoryColor(this.info.category, options.isHighContrast)
-    
+
     return this.color
   }
 
@@ -1013,7 +1013,10 @@ class BlockView {
             child.isZebra = this.isZebra
           }
         } else if (this.isBlockPrototype) {
-          if (child.isBlock && child.getColor(options).primary.eq(this.color.primary)) {
+          if (
+            child.isBlock &&
+            child.getColor(options).primary.eq(this.color.primary)
+          ) {
             this.isZebra = true
           }
         } else if (
@@ -1447,7 +1450,10 @@ class ScriptView {
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
       if (block.isBlock) {
-        if (!this.isZebra && this.color.primary.eq(block.getColor(options).primary)) {
+        if (
+          !this.isZebra &&
+          this.color.primary.eq(block.getColor(options).primary)
+        ) {
           block.isZebra = true
         }
       }
