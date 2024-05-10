@@ -146,7 +146,7 @@ export class LabelView {
         : /literal-boolean/.test(this.cls)
           ? `9px`
           : /literal/.test(this.cls)
-            ? `9px`
+            ? `10px`
             : `10px`
     }
 
