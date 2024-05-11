@@ -25,7 +25,7 @@ import * as scratch3 from "./scratch3/index.js"
 import * as snap from "./snap/index.js"
 
 export default function (window) {
-  const version = "1.4.1"
+  const version = "1.4.2"
 
   const document = window.document
 
