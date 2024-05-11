@@ -536,7 +536,7 @@ class InputView {
           this.label.width + this.hasArrow * 12 + 3,
           this.label.lines.length <= 1 // single vs. multi-line contents
             ? this.label.rawHeight + this.hasArrow * 12
-            : this.label.fontSize / 1.3 + this.hasArrow * 12,
+            : 10 / 1.3 + this.hasArrow * 12,
           0,
         )
       }
