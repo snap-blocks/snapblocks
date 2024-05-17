@@ -2709,6 +2709,13 @@ export default [
     category: "other",
   },
   {
+    "snap": "doPrimitive",
+    "spec": "%1 primitive %2",
+    "inputs": ["%b", "%m"],
+    "shape": "stack",
+    "category": "other",
+  },
+  {
     id: "snap:doApplyExtension",
     snap: "doApplyExtension",
     spec: "{name} %1 {closed}",
