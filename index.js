@@ -242,7 +242,7 @@ export default function (window) {
     try {
       const doc = options.parse(code, localOptions)
       const svg = options.render(doc, localOptions)
-      options.replace(el, svg, doc, localOptions)
+      options.replace(element, svg, doc, localOptions)
     } catch (error) {
       console.group('error rendering snapblocks')
       console.error(error)
