@@ -196,7 +196,7 @@ export default function (window) {
     })
   }
 
-  const renderElement(element, options) {
+  const renderElement = function(element, options) {
     options = {
       // Default values for the options
       style: "snap",
@@ -277,6 +277,7 @@ export default function (window) {
     replace: replace,
     render: render,
     renderMatching: renderMatching,
+    renderElement: renderElement,
 
     appendStyles: appendStyles,
 
