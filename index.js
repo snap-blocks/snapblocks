@@ -24,8 +24,21 @@ import * as scratch2 from "./scratch2/index.js"
 import * as scratch3 from "./scratch3/index.js"
 import * as snap from "./snap/index.js"
 
+function validate(value) {
+  if (typeof value != "string") {
+    return value
+  }
+
+  if (["true", "false"].includes(value.toLowerCase())) {
+    return value.toLowerCase() === "true"
+  } else if (!isNaN(value)) {
+    return parseFloat(value)
+  }
+  return value
+}
+
 export default function (window) {
-  const version = "1.4.2"
+  const version = "1.4.3"
 
   const document = window.document
 
@@ -140,50 +153,104 @@ export default function (window) {
       ...options,
     }
 
-    function validate(value) {
-      if (typeof value != "string") {
-        return value
-      }
-
-      if (["true", "false"].includes(value.toLowerCase())) {
-        return value.toLowerCase() === "true"
-      } else if (!isNaN(value)) {
-        return parseFloat(value)
-      }
-      return value
-    }
-
     // find elements
     const results = [].slice.apply(document.querySelectorAll(selector))
     results.forEach(el => {
-      let localOptions = { ...options }
-      if (options.elementOptions) {
-        let overrideOptions = {
-          style: el.getAttribute("blockStyle"),
-          inline: el.getAttribute("inline"),
-          scale: el.getAttribute("scale"),
-          wrap: el.getAttribute("wrap"),
-          wrapSize: el.getAttribute("wrapSize"),
-          zebraColoring:
-            el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
-          showSpaces: el.getAttribute("showSpaces"),
-        }
-
-        for (let [option, value] of Object.entries(overrideOptions)) {
-          value = validate(value)
-          if (value != null) {
-            localOptions[option] = value
+      try {
+        let localOptions = { ...options }
+        if (options.elementOptions) {
+          let overrideOptions = {
+            style: el.getAttribute("blockStyle"),
+            inline: el.getAttribute("inline"),
+            scale: el.getAttribute("scale"),
+            wrap: el.getAttribute("wrap"),
+            wrapSize: el.getAttribute("wrapSize"),
+            zebraColoring:
+              el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
+            showSpaces: el.getAttribute("showSpaces"),
+          }
+  
+          for (let [option, value] of Object.entries(overrideOptions)) {
+            value = validate(value)
+            if (value != null) {
+              localOptions[option] = value
+            }
           }
         }
+        const code = options.read(el, localOptions)
+        try {
+          const doc = options.parse(code, localOptions)
+          const svg = options.render(doc, localOptions)
+          options.replace(el, svg, doc, localOptions)
+        } catch (error) {
+          console.group('error rendering snapblocks')
+          console.error(error)
+          console.groupCollapsed('code')
+          console.info(code)
+          console.groupEnd()
+          console.groupEnd()
+        }
+      } catch (error) {
+        console.error(error)
       }
-      const code = options.read(el, localOptions)
-
-      const doc = options.parse(code, localOptions)
-
-      const svg = options.render(doc, localOptions)
-
-      options.replace(el, svg, doc, localOptions)
     })
+  }
+
+  const renderElement(element, options) {
+    options = {
+      // Default values for the options
+      style: "snap",
+      inline: false,
+      languages: ["en"],
+      scale: 1,
+      zebraColoring: false,
+      wrap: false,
+      wrapSize: null,
+      showSpaces: false,
+      elementOptions: false, // set options on the element
+
+      read: readCode, // function(el, options) => code
+      parse: parse, // function(code, options) => doc
+      render: render, // function(doc) => svg
+      replace: replace, // function(el, svg, doc, options)
+
+      ...options,
+    }
+
+    let localOptions = { ...options }
+    if (options.elementOptions) {
+      let overrideOptions = {
+        style: element.getAttribute("blockStyle"),
+        inline: element.getAttribute("inline"),
+        scale: element.getAttribute("scale"),
+        wrap: element.getAttribute("wrap"),
+        wrapSize: element.getAttribute("wrapSize"),
+        zebraColoring:
+          element.getAttribute("zebraColoring") || element.getAttribute("zebra"),
+        showSpaces: element.getAttribute("showSpaces"),
+      }
+
+      for (let [option, value] of Object.entries(overrideOptions)) {
+        value = validate(value)
+        if (value != null) {
+          localOptions[option] = value
+        }
+      }
+    }
+
+    const code = options.read(element, localOptions)
+    try {
+      const doc = options.parse(code, localOptions)
+      const svg = options.render(doc, localOptions)
+      options.replace(el, svg, doc, localOptions)
+    } catch (error) {
+      console.group('error rendering snapblocks')
+      console.error(error)
+      console.groupCollapsed('code')
+      console.info(code)
+      console.groupEnd()
+      console.groupEnd()
+    }
   }
 
   return {
