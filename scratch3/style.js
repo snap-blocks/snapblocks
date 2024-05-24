@@ -21,6 +21,8 @@ const highContrastIcons = new Set([
   "turtleOutline",
   "flash",
   "camera",
+  "circle",
+  "circleSolid",
   "notes",
   "storage",
   "brush",
@@ -314,25 +316,19 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el("circle", {
-          r: 6,
-          cx: 6,
-          cy: 5,
-        }),
+        SVG.group([
+          SVG.el("rect", {
+            width: (20 / 5) * 2,
+            height: 20,
+          }),
+          SVG.el("rect", {
+            width: (20 / 5) * 2,
+            height: 20,
+            x: (20 / 5) * 3,
+          }),
+        ]),
         {
-          id: "sb3-circleSolid",
-        },
-      ),
-      SVG.setProps(
-        SVG.el("circle", {
-          r: 6,
-          cx: 6,
-          cy: 5,
-        }),
-        {
-          id: "sb3-circle",
-          fill: "none",
-          "stroke-width": 1,
+          id: "sb3-pause",
         },
       ),
       SVG.text(0, 0, "+", {
@@ -726,22 +722,6 @@ export default class Style {
           id: "sb3-turtleOutline",
         },
       ),
-      SVG.setProps(
-        SVG.group([
-          SVG.el("rect", {
-            width: (20 / 5) * 2,
-            height: 20,
-          }),
-          SVG.el("rect", {
-            width: (20 / 5) * 2,
-            height: 20,
-            x: (20 / 5) * 3,
-          }),
-        ]),
-        {
-          id: "sb3-pause",
-        },
-      ),
 
       SVG.setProps(
         SVG.el("path", {
@@ -758,6 +738,28 @@ export default class Style {
         }),
         {
           id: "sb3-camera",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
+          id: "sb3-circleSolid",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
+          id: "sb3-circle",
+          fill: "none",
+          "stroke-width": 1,
         },
       ),
       SVG.setProps(
@@ -1445,6 +1447,28 @@ export default class Style {
         }),
         {
           id: "sb3-camera-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
+          id: "sb3-circleSolid-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 6,
+          cx: 6,
+          cy: 5,
+        }),
+        {
+          id: "sb3-circle-high-contrast",
+          fill: "none",
+          "stroke-width": 1,
         },
       ),
       SVG.setProps(
