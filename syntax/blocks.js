@@ -255,6 +255,7 @@ export const english = {
     "when flag clicked": "EVENT_WHENFLAGCLICKED",
     "when gf clicked": "EVENT_WHENFLAGCLICKED",
     "when green flag clicked": "EVENT_WHENFLAGCLICKED",
+    "pause all": "snap:doPauseAll",
   },
 
   renamedBlocks: {
