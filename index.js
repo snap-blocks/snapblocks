@@ -169,7 +169,7 @@ export default function (window) {
               el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
             showSpaces: el.getAttribute("showSpaces"),
           }
-  
+
           for (let [option, value] of Object.entries(overrideOptions)) {
             value = validate(value)
             if (value != null) {
@@ -183,9 +183,9 @@ export default function (window) {
           const svg = options.render(doc, localOptions)
           options.replace(el, svg, doc, localOptions)
         } catch (error) {
-          console.group('error rendering snapblocks')
+          console.group("error rendering snapblocks")
           console.error(error)
-          console.groupCollapsed('code')
+          console.groupCollapsed("code")
           console.info(code)
           console.groupEnd()
           console.groupEnd()
@@ -196,7 +196,7 @@ export default function (window) {
     })
   }
 
-  const renderElement = function(element, options) {
+  const renderElement = function (element, options) {
     options = {
       // Default values for the options
       style: "snap",
@@ -226,7 +226,8 @@ export default function (window) {
         wrap: element.getAttribute("wrap"),
         wrapSize: element.getAttribute("wrapSize"),
         zebraColoring:
-          element.getAttribute("zebraColoring") || element.getAttribute("zebra"),
+          element.getAttribute("zebraColoring") ||
+          element.getAttribute("zebra"),
         showSpaces: element.getAttribute("showSpaces"),
       }
 
@@ -244,9 +245,9 @@ export default function (window) {
       const svg = options.render(doc, localOptions)
       options.replace(element, svg, doc, localOptions)
     } catch (error) {
-      console.group('error rendering snapblocks')
+      console.group("error rendering snapblocks")
       console.error(error)
-      console.groupCollapsed('code')
+      console.groupCollapsed("code")
       console.info(code)
       console.groupEnd()
       console.groupEnd()
