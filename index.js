@@ -187,7 +187,16 @@ export default function (window) {
 
     let localOptions = { ...options }
     let overrideOptions = {}
-    let acceptedOptions = ["blockstyle", "inline", "scale", "wrap", "wrapsize", "zebracoloring", "zebra", "showspaces"]
+    let acceptedOptions = [
+      "blockstyle",
+      "inline",
+      "scale",
+      "wrap",
+      "wrapsize",
+      "zebracoloring",
+      "zebra",
+      "showspaces",
+    ]
     if (Array.isArray(options.elementOptions)) {
       acceptedOptions = []
       for (const option of options.elementOptions) {
@@ -196,14 +205,30 @@ export default function (window) {
     }
     if (options.elementOptions) {
       overrideOptions = {
-        style: acceptedOptions.includes("blockstyle") ? element.getAttribute("blockStyle") : null,
-        inline: acceptedOptions.includes("inline") ? element.getAttribute("inline") : null,
-        scale: acceptedOptions.includes("scale") ? element.getAttribute("scale") : null,
-        wrap: acceptedOptions.includes("wrap") ? element.getAttribute("wrap") : null,
-        wrapSize: acceptedOptions.includes("wrapsize") ? element.getAttribute("wrapSize") : null,
-        zebraColoring: acceptedOptions.includes("zebracoloring") ? element.getAttribute("zebraColoring") : null,
-        zebra: acceptedOptions.includes("zebra") ? element.getAttribute("zebra") : null,
-        showSpaces: acceptedOptions.includes("showspaces") ? element.getAttribute("showSpaces") : null,
+        style: acceptedOptions.includes("blockstyle")
+          ? element.getAttribute("blockStyle")
+          : null,
+        inline: acceptedOptions.includes("inline")
+          ? element.getAttribute("inline")
+          : null,
+        scale: acceptedOptions.includes("scale")
+          ? element.getAttribute("scale")
+          : null,
+        wrap: acceptedOptions.includes("wrap")
+          ? element.getAttribute("wrap")
+          : null,
+        wrapSize: acceptedOptions.includes("wrapsize")
+          ? element.getAttribute("wrapSize")
+          : null,
+        zebraColoring: acceptedOptions.includes("zebracoloring")
+          ? element.getAttribute("zebraColoring")
+          : null,
+        zebra: acceptedOptions.includes("zebra")
+          ? element.getAttribute("zebra")
+          : null,
+        showSpaces: acceptedOptions.includes("showspaces")
+          ? element.getAttribute("showSpaces")
+          : null,
       }
     }
     for (let [option, value] of Object.entries(overrideOptions)) {
