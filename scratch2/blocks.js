@@ -1322,7 +1322,7 @@ class DocumentView {
           ? options.wrapSize
           : 460
         : -1,
-      zebraColoring: options.zebraColoring,
+      zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
     }
   }
