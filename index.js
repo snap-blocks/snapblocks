@@ -157,39 +157,7 @@ export default function (window) {
     const results = [].slice.apply(document.querySelectorAll(selector))
     results.forEach(el => {
       try {
-        let localOptions = { ...options }
-        if (options.elementOptions) {
-          let overrideOptions = {
-            style: el.getAttribute("blockStyle"),
-            inline: el.getAttribute("inline"),
-            scale: el.getAttribute("scale"),
-            wrap: el.getAttribute("wrap"),
-            wrapSize: el.getAttribute("wrapSize"),
-            zebraColoring:
-              el.getAttribute("zebraColoring") || el.getAttribute("zebra"),
-            showSpaces: el.getAttribute("showSpaces"),
-          }
-
-          for (let [option, value] of Object.entries(overrideOptions)) {
-            value = validate(value)
-            if (value != null) {
-              localOptions[option] = value
-            }
-          }
-        }
-        const code = options.read(el, localOptions)
-        try {
-          const doc = options.parse(code, localOptions)
-          const svg = options.render(doc, localOptions)
-          options.replace(el, svg, doc, localOptions)
-        } catch (error) {
-          console.group("error rendering snapblocks")
-          console.error(error)
-          console.groupCollapsed("code")
-          console.info(code)
-          console.groupEnd()
-          console.groupEnd()
-        }
+        this.renderElement(el, options)
       } catch (error) {
         console.error(error)
       }
@@ -218,24 +186,30 @@ export default function (window) {
     }
 
     let localOptions = { ...options }
-    if (options.elementOptions) {
-      let overrideOptions = {
-        style: element.getAttribute("blockStyle"),
-        inline: element.getAttribute("inline"),
-        scale: element.getAttribute("scale"),
-        wrap: element.getAttribute("wrap"),
-        wrapSize: element.getAttribute("wrapSize"),
-        zebraColoring:
-          element.getAttribute("zebraColoring") ||
-          element.getAttribute("zebra"),
-        showSpaces: element.getAttribute("showSpaces"),
+    let overrideOptions = {}
+    let acceptedOptions = ["blockstyle", "inline", "scale", "wrap", "wrapsize", "zebracoloring", "zebra", "showspaces"]
+    if (Array.isArray(options.elementOptions)) {
+      acceptedOptions = []
+      for (const option of options.elementOptions) {
+        acceptedOptions.push(option.toLowerCase())
       }
-
-      for (let [option, value] of Object.entries(overrideOptions)) {
-        value = validate(value)
-        if (value != null) {
-          localOptions[option] = value
-        }
+    }
+    if (options.elementOptions) {
+      overrideOptions = {
+        style: acceptedOptions.includes("blockstyle") ? element.getAttribute("blockStyle") : null,
+        inline: acceptedOptions.includes("inline") ? element.getAttribute("inline") : null,
+        scale: acceptedOptions.includes("scale") ? element.getAttribute("scale") : null,
+        wrap: acceptedOptions.includes("wrap") ? element.getAttribute("wrap") : null,
+        wrapSize: acceptedOptions.includes("wrapsize") ? element.getAttribute("wrapSize") : null,
+        zebraColoring: acceptedOptions.includes("zebracoloring") ? element.getAttribute("zebraColoring") : null,
+        zebra: acceptedOptions.includes("zebra") ? element.getAttribute("zebra") : null,
+        showSpaces: acceptedOptions.includes("showspaces") ? element.getAttribute("showSpaces") : null,
+      }
+    }
+    for (let [option, value] of Object.entries(overrideOptions)) {
+      value = validate(value)
+      if (value != null) {
+        localOptions[option] = value
       }
     }
 
