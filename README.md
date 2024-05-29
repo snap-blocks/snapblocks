@@ -30,12 +30,16 @@ For the full guide to the syntax, see [the wcratch wiki](https://en.scratch-wiki
 
 ## MediaWiki
 
-Use [the MediaWiki plugin](https://github.com/snap-blocks/mw-snapblocks) (work in progress).
+Use [the MediaWiki plugin](https://github.com/snap-blocks/mw-snapblocks).
+
+## Discourse
+
+Use the [discourse plugin](https://github.com/snap-blocks/snapblocks-discourse) to add snapblocks to your discourse forum (the forum software used by the Snap<i>!</i> forum).
 
 ## WordPress
 
 @tjvr found [a scratchblocks WordPress plugin](https://github.com/tkc49/scratchblocks-for-wp).
-It might work for you; I haven't tried it.
+It might work for you; I haven't tried it (and you'd have to replace scratchblocks with snapblocks).
 
 ## React
 
