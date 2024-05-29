@@ -66,9 +66,10 @@ export default function (window) {
       return scratch2.newView(doc, options)
     } else if (/^scratch3($|-)/.test(options.style)) {
       return scratch3.newView(doc, options)
+    } else {
+      console.error(`unknown style: ${options.style}`)
+      return snap.newView(doc, options) // I don't want it to throw an error
     }
-
-    throw new Error(`Unknown style: ${options.style}`)
   }
 
   function render(doc, options) {
