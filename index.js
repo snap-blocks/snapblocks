@@ -60,6 +60,10 @@ export default function (window) {
 
     options.scale = options.scale || 1
 
+    if (typeof options.style != "string") {
+      options.style = "snap"
+    }
+
     if (/^snap($|-)/.test(options.style)) {
       return snap.newView(doc, options)
     } else if (options.style === "scratch2") {
