@@ -2485,6 +2485,13 @@ export default [
     category: "operators",
   },
   {
+    snap: "reportCompiled",
+    spec: "compile %1 for %2 args",
+    inputs: ["%r", "%n"],
+    shape: "reporter",
+    category: "operators",
+  },
+  {
     id: "DATA_ITEMOFLIST",
     selector: "getLine:ofList:",
     snap: "reportListItem",
