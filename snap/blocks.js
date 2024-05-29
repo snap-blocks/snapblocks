@@ -1107,7 +1107,6 @@ class BlockView {
               lines.push(l)
               l = []
               x = child.width + space
-              wrapped = true
             }
           }
         }
