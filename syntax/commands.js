@@ -1963,7 +1963,13 @@ export default [
     id: "OPERATORS_SUBTRACT",
     selector: "-",
     snap: "reportDifference",
-    spec: "%1 - %2",
+    spec: "%1 {minus} %2",
+    specDefs: {
+      minus: [
+        "-",
+        "−",
+      ]
+    },
     inputs: ["%n", "%n"],
     shape: "reporter",
     category: "operators",
