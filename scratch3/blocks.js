@@ -826,12 +826,12 @@ class BlockView {
     }
 
     let color = { ...this.color }
-    console.log('isZebra', this.isZebra)
-    console.log('color', color)
+    console.log("isZebra", this.isZebra)
+    console.log("color", color)
     if (this.isZebra) {
       color = color.makeZebra(options.isHighContrast)
     }
-    console.log('zebra color', color)
+    console.log("zebra color", color)
     if (this.info.shape === "cat") {
       el.children[0].style.fill = color.primary.toHexString()
       el.children[0].style.stroke = color.tertiary.toHexString()
@@ -922,7 +922,10 @@ class BlockView {
   }
 
   getColor(options) {
-    this.color = categoryColor(this.info.color || this.info.category, options.isHighContrast)
+    this.color = categoryColor(
+      this.info.color || this.info.category,
+      options.isHighContrast,
+    )
 
     return this.color
   }

@@ -1965,10 +1965,7 @@ export default [
     snap: "reportDifference",
     spec: "%1 {minus} %2",
     specDefs: {
-      minus: [
-        "-",
-        "−",
-      ]
+      minus: ["-", "−"],
     },
     inputs: ["%n", "%n"],
     shape: "reporter",

@@ -202,12 +202,12 @@ export default class Style {
 
   static categoryColor(category, isHighContrast) {
     let categories = Style.categories,
-        color
+      color
     if (isHighContrast) {
       categories = Style.highContrastCategories
     }
 
-    console.log('category:', category);
+    console.log("category:", category)
 
     if (categories[category]) {
       color = categories[category]
@@ -220,7 +220,6 @@ export default class Style {
     } else {
       color = categories.obsolete
     }
-
 
     return {
       ...color,

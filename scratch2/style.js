@@ -25,7 +25,7 @@ export default class Style {
       "custom-arg": new Color(89, 71, 177),
       extension: new Color(75, 74, 96),
       other: new Color(150, 150, 150),
-    }
+    },
   }
 
   static categoryColor(category) {
