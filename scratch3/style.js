@@ -201,14 +201,26 @@ export default class Style {
   }
 
   static categoryColor(category, isHighContrast) {
-    let categories = Style.categories
+    let categories = Style.categories,
+        color
     if (isHighContrast) {
       categories = Style.highContrastCategories
     }
 
-    let color = categories[category]
-      ? categories[category]
-      : categories.obsolete
+    console.log('category:', category);
+
+    if (categories[category]) {
+      color = categories[category]
+    } else if (category instanceof Color) {
+      color = {
+        primary: category,
+        secondary: category.darker(20),
+        tertiary: category.darker(10),
+      }
+    } else {
+      color = categories.obsolete
+    }
+
 
     return {
       ...color,

@@ -8,27 +8,31 @@ export default class Style {
     return cssContent
   }
 
-  static categories = {
-    obsolete: new Color(212, 40, 40),
-    motion: new Color(74, 108, 212),
-    looks: new Color(138, 85, 215),
-    sound: new Color(187, 66, 195),
-    pen: new Color(14, 154, 108),
-    events: new Color(200, 131, 48),
-    control: new Color(225, 169, 26),
-    sensing: new Color(44, 165, 226),
-    operators: new Color(92, 183, 18),
-    variables: new Color(238, 125, 22),
-    lists: new Color(204, 91, 34),
-    custom: new Color(99, 45, 153),
-    "custom-arg": new Color(89, 71, 177),
-    extension: new Color(75, 74, 96),
-    other: new Color(150, 150, 150),
+  static colors = {
+    categories: {
+      obsolete: new Color(212, 40, 40),
+      motion: new Color(74, 108, 212),
+      looks: new Color(138, 85, 215),
+      sound: new Color(187, 66, 195),
+      pen: new Color(14, 154, 108),
+      events: new Color(200, 131, 48),
+      control: new Color(225, 169, 26),
+      sensing: new Color(44, 165, 226),
+      operators: new Color(92, 183, 18),
+      variables: new Color(238, 125, 22),
+      lists: new Color(204, 91, 34),
+      custom: new Color(99, 45, 153),
+      "custom-arg": new Color(89, 71, 177),
+      extension: new Color(75, 74, 96),
+      other: new Color(150, 150, 150),
+    }
   }
 
   static categoryColor(category) {
-    if (Style.categories[category]) {
-      return Style.categories[category]
+    if (Style.colors.categories[category]) {
+      return Style.colors.categories[category]
+    } else if (category instanceof Color) {
+      return category
     } else {
       return new Color()
     }

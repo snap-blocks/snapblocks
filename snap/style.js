@@ -44,6 +44,8 @@ export default class Style {
   static categoryColor(category) {
     if (Style.colors.categories[category]) {
       return Style.colors.categories[category]
+    } else if (category instanceof Color) {
+      return category
     } else {
       return new Color()
     }

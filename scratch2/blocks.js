@@ -600,9 +600,7 @@ class BlockView {
     this.lines = []
     this.isZebra = false
 
-    this.color = this.info.color
-      ? this.info.color
-      : categoryColor(this.info.category)
+    this.color = categoryColor(this.info.color || this.info.category)
   }
 
   get isBlock() {

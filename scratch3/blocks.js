@@ -654,13 +654,7 @@ class BlockView {
     this.lines = []
     this.isZebra = false
 
-    this.color = this.info.color
-      ? {
-          primary: this.info.color,
-          secondary: this.info.color.darker(20),
-          tertiary: this.info.color.darker(10),
-        }
-      : categoryColor(this.info.category)
+    this.color = categoryColor(this.info.color || this.info.category)
   }
 
   get isBlock() {
@@ -832,19 +826,18 @@ class BlockView {
     }
 
     let color = { ...this.color }
+    console.log('isZebra', this.isZebra)
+    console.log('color', color)
     if (this.isZebra) {
       color = color.makeZebra(options.isHighContrast)
     }
+    console.log('zebra color', color)
     if (this.info.shape === "cat") {
-      SVG.setProps(el.children[0], {
-        fill: color.primary.toHexString(),
-        stroke: color.tertiary.toHexString(),
-      })
+      el.children[0].style.fill = color.primary.toHexString()
+      el.children[0].style.stroke = color.tertiary.toHexString()
     } else {
-      SVG.setProps(el, {
-        fill: color.primary.toHexString(),
-        stroke: color.tertiary.toHexString(),
-      })
+      el.style.fill = color.primary.toHexString()
+      el.style.stroke = color.tertiary.toHexString()
     }
     return el
   }
@@ -929,13 +922,7 @@ class BlockView {
   }
 
   getColor(options) {
-    this.color = this.info.color
-      ? {
-          primary: this.info.color,
-          secondary: this.info.color.darker(20),
-          tertiary: this.info.color.darker(10),
-        }
-      : categoryColor(this.info.category, options.isHighContrast)
+    this.color = categoryColor(this.info.color || this.info.category, options.isHighContrast)
 
     return this.color
   }
