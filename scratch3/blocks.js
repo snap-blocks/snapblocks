@@ -24,6 +24,7 @@ const {
   makeHighContrastIcons,
   iconName,
   highContrastIcons,
+  coloredIcons: snapIcons,
   zebraFilter,
 } = style
 
@@ -246,10 +247,7 @@ export class IconView {
     this.padx = 4
     this.fillAttribute = "fill"
 
-    const info = IconView.icons[icon.name]
-    if (!info) {
-      throw new Error(`no info for icon: ${icon.name}`)
-    }
+    const info = this.getInfo(icon.name)
 
     Object.assign(this, info)
     Object.assign(this, icon)
@@ -265,6 +263,23 @@ export class IconView {
     if (!this.fillAttribute) {
       this.fillAttribute = "fill"
     }
+  }
+
+  
+  getInfo(name) {
+    let info = IconView.icons[name]
+    if (!info) {
+      throw new Error(`no info for icon: ${name}`)
+    }
+
+    if (info.alias) {
+      info = {
+        ...this.getInfo(info.alias),
+        ...info,
+      }
+    }
+
+    return info
   }
 
   get width() {
@@ -288,10 +303,11 @@ export class IconView {
   }
 
   draw(options) {
+    let isSnapIcon = snapIcons.has(this.name)
     let props = {
-      width: this.width,
-      height: this.height,
-      transform: `scale(${this.scale})`,
+      width: this.width + (isSnapIcon * this.width),
+      height: this.height + (isSnapIcon * this.height),
+      transform: `scale(${this.scale + (isSnapIcon * this.scale)})`,
     }
 
     if (!this.color) {
@@ -318,67 +334,85 @@ export class IconView {
   static get icons() {
     return {
       greenFlag: {
-        width: 20,
-        height: 21,
-        dy: -2,
-        color: new Color(76, 191, 86),
+        color: Color.fromHexString('#4CBF56'),
+        alias: "flag",
       },
       flag: {
-        width: 20,
-        height: 21,
-        alias: "greenFlag",
+        width: 24,
+        height: 24,
       },
       stopSign: { width: 20, height: 20, color: new Color(236, 89, 89) },
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
-      loop: { width: 47, height: 47, scale: 0.5, alias: "loopArrow" },
-      loopArrow: { width: 47, height: 47, scale: 0.5 },
-      addInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
-      delInput: { width: 5, height: 12, color: new Color(0, 0, 0) },
+      clockwise: {
+        alias: 'turnRight',
+      },
+      counterClockwise: {
+        alias: 'turnLeft',
+      },
+      loop: { width: 24, height: 24, scale: 1 },
+      loopArrow: { alias: "loop" },
+      addInput: {
+        width: 5,
+        height: 10,
+        color: new Color(0, 0, 0),
+        noShadow: true,
+      },
+      delInput: {
+        width: 5,
+        height: 10,
+        color: new Color(0, 0, 0),
+        noShadow: true,
+      },
       verticalEllipsis: {
         width: 2,
-        height: 12,
-        scale: 0.833333333,
+        height: 10,
+        dy: 0,
+        scale: 10 / 12,
         color: new Color(0, 0, 0),
       },
-      list: { width: 15, height: 17 },
+      list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
-      turtle: { width: 18, height: 12, scale: 1.2 },
-      turtleOutline: { width: 18, height: 12, fillAttribute: "stroke" },
-      pause: { width: 20, height: 20, color: new Color(255, 220, 0) },
-      flash: { width: 10, height: 12 },
-      camera: { width: 12, height: 12 },
-      circleSolid: { width: 12, height: 12, color: new Color(255, 0, 0) },
-      circle: { width: 12, height: 12, fillAttribute: "stroke" },
-      notes: { width: 40, height: 40 },
-      storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      paintBucket: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      eraser: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      location: { width: 7.2, height: 12 },
-      gear: { width: 12, height: 12 },
-      gearPartial: { width: 12, height: 12 },
-      gearBig: { width: 12, height: 12 },
-      globe: { width: 12, height: 12, fillAttribute: "stroke" },
-      globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
-      square: { width: 12, height: 12 },
-      robot: { width: 10, height: 10, scale: 1.2 },
+      turtle: { width: 13, height: 10, scale: 1.2 },
+      turtleOutline: { width: 13, height: 10, fillAttribute: "stroke" },
+      pause: { width: 10, height: 10, color: new Color(255, 220, 0), scale: 1 },
+      cloud: { width: 16, height: 10 },
+      cloudGradient: { width: 16, height: 10 },
+      cloudOutline: { width: 16, height: 10, fillAttribute: "stroke" },
+      flash: { width: 8, height: 10 },
+      blitz: { alias: "flash", scale: 1 },
+      camera: { width: 10, height: 10 },
+      circleSolid: { width: 10, height: 10 },
+      circle: { width: 10, height: 10, fillAttribute: "stroke" },
+      notes: { alias: "musicBlock" },
+      storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      pipette: { width: 10, height: 10, scale: 1, fillAttribute: ["stroke", "fill"] },
+      paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      location: { width: 6, height: 10 },
+      gears: { width: 10, height: 10 },
+      gearPartial: { width: 10, height: 10 },
+      gearBig: { width: 10, height: 10 },
+      globe: { width: 10, height: 10, fillAttribute: "stroke" },
+      globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
+      square: { width: 10, height: 10 },
+      robot: { width: 10, height: 10 },
 
-      arrowUp: { width: 12, height: 12 },
-      arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDown: { width: 12, height: 12 },
-      arrowDownOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeft: { width: 12, height: 12 },
-      arrowLeftOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRight: { width: 12, height: 12 },
-      arrowRightOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUp: { width: 10, height: 10 },
+      arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowUpThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowDown: { width: 10, height: 10 },
+      arrowDownOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeft: { width: 10, height: 10 },
+      arrowLeftOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeftThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowRight: { width: 10, height: 10 },
+      arrowRightOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
@@ -392,7 +426,7 @@ export class IconView {
       gdxforBlock: { width: 40, height: 40 },
       boostBlock: { width: 40, height: 40 },
 
-      plusSign: { width: 14, height: 14, dy: 16 },
+      plusSign: { width: 16.799999999999955, height: 33.60000000000002, color: Color.fromHexString('#2d2d2d'), fillAttribute: "stroke" },
     }
   }
 

@@ -280,20 +280,17 @@ class IconView {
     this.padx = 4
     this.fillAttribute = "fill"
 
-    const info = IconView.icons[icon.name]
-    if (!info) {
-      throw new Error(`no info for icon: ${icon.name}`)
-    }
+    const info = this.getInfo(icon.name)
 
     Object.assign(this, info)
     Object.assign(this, icon)
 
-    if (this.scale && this.modified) {
-      this.scale = (10 / 12) * this.scale // set the size to 10 if the scale is set
-    }
+    // if (this.scale && this.modified) {
+    //   this.scale = (10 / 12) * this.scale // set the size to 10 if the scale is set
+    // }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
-      this.scale = info.scale || 1
+      this.scale = info.scale || (12 / 10)
     }
 
     if (!this.color) {
@@ -303,6 +300,22 @@ class IconView {
     if (!this.fillAttribute) {
       this.fillAttribute = "fill"
     }
+  }
+
+  getInfo(name) {
+    let info = IconView.icons[name]
+    if (!info) {
+      throw new Error(`no info for icon: ${name}`)
+    }
+
+    if (info.alias) {
+      info = {
+        ...this.getInfo(info.alias),
+        ...info,
+      }
+    }
+
+    return info
   }
 
   get width() {
@@ -351,106 +364,106 @@ class IconView {
   static get icons() {
     return {
       greenFlag: {
-        width: 12,
-        height: 12,
-        dy: 0,
         scale: 1.5,
         color: new Color(0, 200, 0),
-        fillAttribute: "stroke",
+        alias: "flag",
       },
       flag: {
-        width: 12,
-        height: 12,
+        width: 10,
+        height: 10,
         fillAttribute: "stroke",
-        alias: "greenFlag",
       },
-      stopSign: { width: 21, height: 21, color: new Color(200, 0, 0) },
+      stopSign: { width: 10, height: 10, color: new Color(200, 0, 0) },
       turnLeft: {
-        width: 8,
-        height: 12,
-        dy: +1,
+        width: 10 / 3 * 2,
+        height: 10,
         fillAttribute: ["stroke", "fill"],
       },
       turnRight: {
-        width: 8,
-        height: 12,
-        dy: +1,
+        width: 10 / 3 * 2,
+        height: 10,
         fillAttribute: ["stroke", "fill"],
+      },
+      clockwise: {
+        alias: 'turnRight',
+        scale: 1.5,
+      },
+      counterClockwise: {
+        alias: 'turnLeft',
+        scale: 1.5,
       },
       loop: {
-        width: 24,
-        height: 12,
+        width: 20,
+        height: 10,
         fillAttribute: ["stroke", "fill"],
-        alias: "loopArrow",
       },
       loopArrow: {
-        width: 24,
-        height: 12,
         scale: 0.7,
-        fillAttribute: ["stroke", "fill"],
+        alias: "loop",
       },
       addInput: {
         width: 5,
-        height: 12,
+        height: 10,
         color: new Color(0, 0, 0),
         noShadow: true,
       },
       delInput: {
         width: 5,
-        height: 12,
+        height: 10,
         color: new Color(0, 0, 0),
         noShadow: true,
       },
       verticalEllipsis: {
         width: 2,
-        height: 12,
+        height: 10,
         dy: 0,
         scale: 10 / 12,
         color: new Color(0, 0, 0),
       },
       list: { width: 8, height: 10 },
       pointRight: { width: 12, height: 12 },
-      turtle: { width: 18, height: 12, scale: 1.2 },
-      turtleOutline: { width: 18, height: 12, dy: +1, fillAttribute: "stroke" },
-      pause: { width: 12, height: 12, dy: +1, color: new Color(255, 220, 0) },
-      cloud: { width: 20, height: 12 },
-      cloudGradient: { width: 20, height: 12 },
-      cloudOutline: { width: 20, height: 12, fillAttribute: "stroke" },
-      flash: { width: 10, height: 12 },
-      camera: { width: 12, height: 12 },
-      circleSolid: { width: 12, height: 12, color: new Color(255, 0, 0) },
-      circle: { width: 12, height: 12, fillAttribute: "stroke" },
-      notes: { width: 13, height: 12 },
-      storage: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      brush: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      paintBucket: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      eraser: { width: 12, height: 12, fillAttribute: ["stroke", "fill"] },
-      location: { width: 7.2, height: 12 },
-      gears: { width: 12, height: 12 },
-      gearPartial: { width: 12, height: 12 },
-      gearBig: { width: 12, height: 12 },
-      globe: { width: 12, height: 12, fillAttribute: "stroke" },
-      globeBig: { width: 12, height: 12, fillAttribute: "stroke" },
-      square: { width: 10, height: 10, scale: 12 / 10 }, // scale is set to 12 / 10 for now
-      robot: { width: 10, height: 10, scale: 12 / 10 }, // scale is set to 12 / 10 for now
+      turtle: { width: 13, height: 10, scale: 1.2 },
+      turtleOutline: { width: 13, height: 10, fillAttribute: "stroke" },
+      pause: { width: 10, height: 10, color: new Color(255, 220, 0), scale: 1 },
+      cloud: { width: 16, height: 10 },
+      cloudGradient: { width: 16, height: 10 },
+      cloudOutline: { width: 16, height: 10, fillAttribute: "stroke" },
+      flash: { width: 8, height: 10 },
+      blitz: { alias: "flash", scale: 1 },
+      camera: { width: 10, height: 10 },
+      circleSolid: { width: 10, height: 10 },
+      circle: { width: 10, height: 10, fillAttribute: "stroke" },
+      notes: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      pipette: { width: 10, height: 10, scale: 1, fillAttribute: ["stroke", "fill"] },
+      paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      location: { width: 6, height: 10 },
+      gears: { width: 10, height: 10 },
+      gearPartial: { width: 10, height: 10 },
+      gearBig: { width: 10, height: 10 },
+      globe: { width: 10, height: 10, fillAttribute: "stroke" },
+      globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
+      square: { width: 10, height: 10 },
+      robot: { width: 10, height: 10 },
 
-      arrowUp: { width: 12, height: 12 },
-      arrowUpOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDown: { width: 12, height: 12 },
-      arrowDownOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeft: { width: 12, height: 12 },
-      arrowLeftOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRight: { width: 12, height: 12 },
-      arrowRightOutline: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowUpDownThin: { width: 12, height: 12, fillAttribute: "stroke" },
-      arrowLeftRightThin: { width: 12, height: 12, fillAttribute: "stroke" },
+      arrowUp: { width: 10, height: 10 },
+      arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowUpThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowDown: { width: 10, height: 10 },
+      arrowDownOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeft: { width: 10, height: 10 },
+      arrowLeftOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeftThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowRight: { width: 10, height: 10 },
+      arrowRightOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
 
-      plusSign: { width: 8, height: 14, dy: 12 },
+      plusSign: { width: 8.399999999999977, height: 16.80000000000001, color: Color.fromHexString('#2d2d2d'), fillAttribute: "stroke" },
     }
   }
 }

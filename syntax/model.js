@@ -110,6 +110,8 @@ export class Icon {
       stopSign: true,
       turnLeft: true,
       turnRight: true,
+      clockwise: true,
+      counterClockwise: true,
       loop: true,
       loopArrow: true,
       addInput: true,
@@ -124,9 +126,10 @@ export class Icon {
       cloudGradient: true,
       cloudOutline: true,
       flash: true,
+      blitz: true,
       camera: true,
-      circle: true,
       circleSolid: true,
+      circle: true,
       notes: true,
       storage: true,
       brush: true,
@@ -141,7 +144,7 @@ export class Icon {
       globeBig: true,
       square: true,
       robot: true,
-
+      
       arrowUp: true,
       arrowUpOutline: true,
       arrowUpThin: true,
@@ -156,6 +159,8 @@ export class Icon {
       arrowRightThin: true,
       arrowUpDownThin: true,
       arrowLeftRightThin: true,
+
+      plusSign: true,
     }
   }
 
