@@ -98,7 +98,7 @@ export class Icon {
     return {
       "+": "plusSign", // I can't have + in an id.
       bucket: "paintBucket",
-      greenflag: "greenFlag", // future snap greenflag icon (no capital)
+      greenflag: "greenFlag", // snap greenflag icon (no capital)
       stop: "stopSign",
     }
   }
@@ -144,7 +144,7 @@ export class Icon {
       globeBig: true,
       square: true,
       robot: true,
-      
+
       arrowUp: true,
       arrowUpOutline: true,
       arrowUpThin: true,
@@ -163,6 +163,48 @@ export class Icon {
       plusSign: true,
     }
   }
+
+  /* TODO:
+  - stepForward
+  - file
+  - fullScreen
+  - grow
+  - normalScreen
+  - shrink
+  - smallStage
+  - normalStage
+  - stage
+  - octagon
+  - turnAround
+  - poster
+  - tick
+  - checkedBox
+  - rectangle
+  - rectangleSolid
+  - dot
+  - ellipse
+  - line
+  - cross
+  - crosshairs
+  - paintbucket
+  - speechBubble
+  - speechBubbleOutline
+  - turnBack
+  - turnForward
+  - magnifyingGlass
+  - magnifierOutline
+  - selection
+  - polygon
+  - closedBrush
+  - footprints
+  - keyboard
+  - keyboardFilled
+  - listNarrow
+  - flipVertical
+  - flipHorizontal
+  - trash
+  - trashFull
+ */
 
   stringify() {
     let start = "@"
