@@ -225,7 +225,7 @@ export default class Style {
         }),
         {
           id: "sb-camera",
-          'stroke-width': 1,
+          "stroke-width": 1,
         },
       ),
       SVG.setProps(
@@ -263,7 +263,7 @@ export default class Style {
                 M 9.5 6.666666666666666 L 9.5 1 Z`,
             fill: "none",
             "stroke-width": 1,
-          })
+          }),
         ]),
         {
           id: "sb-notes",
@@ -454,7 +454,7 @@ export default class Style {
               L 9.962730758206611 4.3906532829742595 A 5 5 0 0 1 10 5L 10 5
               L 8 5 A 3 3 0 1 1 7.999998500000125 4.997000000499998
               L 6 5 A 1 1 0 1 1 5.999999500000042 4.999000000166666`,
-              "fill-rule": "evenodd",
+          "fill-rule": "evenodd",
         }),
         {
           id: "sb-gearBig",
@@ -628,12 +628,12 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 1 8.400000000000006 L 7.399999999999977 8.400000000000006 M 4.199999999999989 5.200000000000017 L 4.199999999999989 11.599999999999994`,
         }),
         {
           id: "sb-plusSign",
-        }
+        },
       ),
     ]
   }

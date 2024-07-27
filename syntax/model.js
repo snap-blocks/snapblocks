@@ -144,7 +144,7 @@ export class Icon {
       globeBig: true,
       square: true,
       robot: true,
-      
+
       arrowUp: true,
       arrowUpOutline: true,
       arrowUpThin: true,

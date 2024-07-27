@@ -290,7 +290,7 @@ class IconView {
     // }
 
     if (this.scale <= 0 || isNaN(this.scale)) {
-      this.scale = info.scale || (12 / 10)
+      this.scale = info.scale || 12 / 10
     }
 
     if (!this.color) {
@@ -375,21 +375,21 @@ class IconView {
       },
       stopSign: { width: 10, height: 10, color: new Color(200, 0, 0) },
       turnLeft: {
-        width: 10 / 3 * 2,
+        width: (10 / 3) * 2,
         height: 10,
         fillAttribute: ["stroke", "fill"],
       },
       turnRight: {
-        width: 10 / 3 * 2,
+        width: (10 / 3) * 2,
         height: 10,
         fillAttribute: ["stroke", "fill"],
       },
       clockwise: {
-        alias: 'turnRight',
+        alias: "turnRight",
         scale: 1.5,
       },
       counterClockwise: {
-        alias: 'turnLeft',
+        alias: "turnLeft",
         scale: 1.5,
       },
       loop: {
@@ -436,7 +436,12 @@ class IconView {
       notes: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 10, height: 10, scale: 1, fillAttribute: ["stroke", "fill"] },
+      pipette: {
+        width: 10,
+        height: 10,
+        scale: 1,
+        fillAttribute: ["stroke", "fill"],
+      },
       paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       location: { width: 6, height: 10 },
@@ -463,7 +468,12 @@ class IconView {
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
 
-      plusSign: { width: 8.399999999999977, height: 16.80000000000001, color: Color.fromHexString('#2d2d2d'), fillAttribute: "stroke" },
+      plusSign: {
+        width: 8.399999999999977,
+        height: 16.80000000000001,
+        color: Color.fromHexString("#2d2d2d"),
+        fillAttribute: "stroke",
+      },
     }
   }
 }
