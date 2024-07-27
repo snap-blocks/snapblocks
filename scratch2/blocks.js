@@ -281,7 +281,6 @@ class IconView {
     }
   }
 
-  
   getInfo(name) {
     let info = IconView.icons[name]
     if (!info) {
@@ -350,10 +349,10 @@ class IconView {
       turnLeft: { width: 15, height: 12, dy: +1 },
       turnRight: { width: 15, height: 12, dy: +1 },
       clockwise: {
-        alias: 'turnRight',
+        alias: "turnRight",
       },
       counterClockwise: {
-        alias: 'turnLeft',
+        alias: "turnLeft",
       },
       loop: { width: 13, height: 10, scale: 1 },
       loopArrow: { alias: "loop" },
@@ -392,7 +391,12 @@ class IconView {
       notes: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 10, height: 10, scale: 1, fillAttribute: ["stroke", "fill"] },
+      pipette: {
+        width: 10,
+        height: 10,
+        scale: 1,
+        fillAttribute: ["stroke", "fill"],
+      },
       paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       location: { width: 6, height: 10 },
@@ -419,7 +423,12 @@ class IconView {
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
 
-      plusSign: { width: 8.399999999999977, height: 16.80000000000001, color: Color.fromHexString('#2d2d2d'), fillAttribute: "stroke" },
+      plusSign: {
+        width: 8.399999999999977,
+        height: 16.80000000000001,
+        color: Color.fromHexString("#2d2d2d"),
+        fillAttribute: "stroke",
+      },
     }
   }
 }

@@ -265,7 +265,6 @@ export class IconView {
     }
   }
 
-  
   getInfo(name) {
     let info = IconView.icons[name]
     if (!info) {
@@ -305,9 +304,9 @@ export class IconView {
   draw(options) {
     let isSnapIcon = snapIcons.has(this.name)
     let props = {
-      width: this.width + (isSnapIcon * this.width),
-      height: this.height + (isSnapIcon * this.height),
-      transform: `scale(${this.scale + (isSnapIcon * this.scale)})`,
+      width: this.width + isSnapIcon * this.width,
+      height: this.height + isSnapIcon * this.height,
+      transform: `scale(${this.scale + isSnapIcon * this.scale})`,
     }
 
     if (!this.color) {
@@ -334,7 +333,7 @@ export class IconView {
   static get icons() {
     return {
       greenFlag: {
-        color: Color.fromHexString('#4CBF56'),
+        color: Color.fromHexString("#4CBF56"),
         alias: "flag",
       },
       flag: {
@@ -345,10 +344,10 @@ export class IconView {
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
       clockwise: {
-        alias: 'turnRight',
+        alias: "turnRight",
       },
       counterClockwise: {
-        alias: 'turnLeft',
+        alias: "turnLeft",
       },
       loop: { width: 24, height: 24, scale: 1 },
       loopArrow: { alias: "loop" },
@@ -387,7 +386,12 @@ export class IconView {
       notes: { alias: "musicBlock" },
       storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      pipette: { width: 10, height: 10, scale: 1, fillAttribute: ["stroke", "fill"] },
+      pipette: {
+        width: 10,
+        height: 10,
+        scale: 1,
+        fillAttribute: ["stroke", "fill"],
+      },
       paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       location: { width: 6, height: 10 },
@@ -426,7 +430,12 @@ export class IconView {
       gdxforBlock: { width: 40, height: 40 },
       boostBlock: { width: 40, height: 40 },
 
-      plusSign: { width: 16.799999999999955, height: 33.60000000000002, color: Color.fromHexString('#2d2d2d'), fillAttribute: "stroke" },
+      plusSign: {
+        width: 16.799999999999955,
+        height: 33.60000000000002,
+        color: Color.fromHexString("#2d2d2d"),
+        fillAttribute: "stroke",
+      },
     }
   }
 
