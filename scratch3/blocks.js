@@ -1145,10 +1145,10 @@ class BlockView {
         let cIndex = lines.indexOf(lastCSlot)
         let trueRow = lines[cIndex + 1]
         if (trueRow) {
-          trueRow.width += IconView.getInfo('loopArrow').width * 0.5
+          trueRow.width += IconView.getInfo("loopArrow").width * 0.5
           innerWidth = Math.max(innerWidth, trueRow.width)
         } else {
-          line.width += IconView.getInfo('loopArrow').width * 0.5
+          line.width += IconView.getInfo("loopArrow").width * 0.5
         }
         hasLoopArrow = true
       } else if (child.isNewline) {
