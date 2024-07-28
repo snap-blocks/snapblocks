@@ -263,7 +263,7 @@ class IconView {
     this.padx = 4
     this.fillAttribute = "fill"
 
-    const info = this.getInfo(icon.name)
+    const info = IconView.getInfo(icon.name)
 
     Object.assign(this, info)
     Object.assign(this, icon)
@@ -281,15 +281,14 @@ class IconView {
     }
   }
 
-  getInfo(name) {
+  static getInfo(name) {
     let info = IconView.icons[name]
     if (!info) {
       throw new Error(`no info for icon: ${name}`)
     }
-
     if (info.alias) {
       info = {
-        ...this.getInfo(info.alias),
+        ...IconView.getInfo(info.alias),
         ...info,
       }
     }
@@ -1010,10 +1009,10 @@ class BlockView {
         let cIndex = lines.indexOf(lastCSlot)
         let trueRow = lines[cIndex + 1]
         if (trueRow) {
-          trueRow.width += IconView.icons.loopArrow.width * 0.5
+          trueRow.width += IconView.getInfo('loopArrow').width * 0.5
           innerWidth = Math.max(innerWidth, trueRow.width)
         } else {
-          line.width += IconView.icons.loopArrow.width * 0.5
+          line.width += IconView.getInfo('loopArrow').width * 0.5
         }
         hasLoopArrow = true
       } else if (child.isNewline) {

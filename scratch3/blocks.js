@@ -247,7 +247,7 @@ export class IconView {
     this.padx = 4
     this.fillAttribute = "fill"
 
-    const info = this.getInfo(icon.name)
+    const info = IconView.getInfo(icon.name)
 
     Object.assign(this, info)
     Object.assign(this, icon)
@@ -265,7 +265,7 @@ export class IconView {
     }
   }
 
-  getInfo(name) {
+  static getInfo(name) {
     let info = IconView.icons[name]
     if (!info) {
       throw new Error(`no info for icon: ${name}`)
@@ -273,7 +273,7 @@ export class IconView {
 
     if (info.alias) {
       info = {
-        ...this.getInfo(info.alias),
+        ...IconView.getInfo(info.alias),
         ...info,
       }
     }
@@ -869,12 +869,9 @@ class BlockView {
     }
 
     let color = { ...this.color }
-    console.log("isZebra", this.isZebra)
-    console.log("color", color)
     if (this.isZebra) {
       color = color.makeZebra(options.isHighContrast)
     }
-    console.log("zebra color", color)
     if (this.info.shape === "cat") {
       el.children[0].style.fill = color.primary.toHexString()
       el.children[0].style.stroke = color.tertiary.toHexString()
@@ -1148,10 +1145,10 @@ class BlockView {
         let cIndex = lines.indexOf(lastCSlot)
         let trueRow = lines[cIndex + 1]
         if (trueRow) {
-          trueRow.width += IconView.icons.loopArrow.width * 0.5
+          trueRow.width += IconView.getInfo('loopArrow').width * 0.5
           innerWidth = Math.max(innerWidth, trueRow.width)
         } else {
-          line.width += IconView.icons.loopArrow.width * 0.5
+          line.width += IconView.getInfo('loopArrow').width * 0.5
         }
         hasLoopArrow = true
       } else if (child.isNewline) {
