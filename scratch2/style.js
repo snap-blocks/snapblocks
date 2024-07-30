@@ -628,6 +628,23 @@ export default class Style {
         },
       ),
       SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 0 0 L 7.5 5 L 0 10 Z`
+          }),
+          SVG.el('rect', {
+            x: 7.5,
+            y: 0,
+            width: 2.5,
+            height: 10,
+          })
+        ]),
+        {
+          id: "sb-stepForward",
+        }
+      ),
+      
+      SVG.setProps(
         SVG.el("path", {
           d: `M 1 8.400000000000006 L 7.399999999999977 8.400000000000006 M 4.199999999999989 5.200000000000017 L 4.199999999999989 11.599999999999994`,
         }),

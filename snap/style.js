@@ -1,5 +1,5 @@
 import SVG from "./draw.js"
-import Color from "../shared/color.js"
+import Color, { hexColorPat } from "../shared/color.js"
 import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
@@ -733,6 +733,23 @@ export default class Style {
           id: "snap-arrowLeftRightThin",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 0 0 L 7.5 5 L 0 10 Z`
+          }),
+          SVG.el('rect', {
+            x: 7.5,
+            y: 0,
+            width: 2.5,
+            height: 10,
+          })
+        ]),
+        {
+          id: "snap-stepForward",
+        }
+      ),
+      
       SVG.setProps(
         SVG.el("path", {
           d: `M 1 8.400000000000006 L 7.399999999999977 8.400000000000006 M 4.199999999999989 5.200000000000017 L 4.199999999999989 11.599999999999994`,

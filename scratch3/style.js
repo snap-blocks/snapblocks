@@ -53,6 +53,7 @@ const highContrastIcons = new Set([
   "arrowUpDownThin",
   "arrowLeftRightThin",
   "pointRight",
+  "stepForward",
 ])
 
 const coloredIcons = new Set([
@@ -93,6 +94,7 @@ const coloredIcons = new Set([
   "arrowUpDownThin",
   "arrowLeftRightThin",
   "pointRight",
+  "stepForward",
 ])
 
 export default class Style {
@@ -840,6 +842,23 @@ export default class Style {
           id: "sb3-arrowLeftRightThin",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 0 0 L 7.5 5 L 0 10 Z`
+          }),
+          SVG.el('rect', {
+            x: 7.5,
+            y: 0,
+            width: 2.5,
+            height: 10,
+          })
+        ]),
+        {
+          id: "sb3-stepForward",
+        }
+      ),
+      
       SVG.setProps(
         SVG.el("path", {
           d: `M 2 16.8 L 14.8 16.8 M 8.4 10.4 L 8.4 23.2`,
