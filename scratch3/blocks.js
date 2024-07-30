@@ -349,7 +349,8 @@ export class IconView {
         width: 24,
         height: 24,
       },
-      stopSign: { width: 20, height: 20, color: new Color(236, 89, 89) },
+      octagon: { width: 20, height: 20 },
+      stopSign: { alias: "octagon", color: new Color(236, 89, 89) },
       turnLeft: { width: 24, height: 24 },
       turnRight: { width: 24, height: 24 },
       clockwise: {

@@ -70,7 +70,7 @@ export default class Style {
       ),
       SVG.el("path", {
         d: "M 3.085 0 L 6.915 0 L 10 3.085 L 10 6.915 L 6.915 10 L 3.085 10 L 0 6.915 L 0 3.085 Z",
-        id: "snap-stopSign",
+        id: "snap-octagon",
       }),
       SVG.setProps(
         SVG.group([

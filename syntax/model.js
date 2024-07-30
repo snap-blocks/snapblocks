@@ -108,6 +108,7 @@ export class Icon {
       greenFlag: true,
       flag: true,
       stopSign: true,
+      octagon: true,
       turnLeft: true,
       turnRight: true,
       clockwise: true,

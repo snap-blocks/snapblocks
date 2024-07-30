@@ -309,7 +309,7 @@ export default class Style {
           "stroke-linecap": "round",
         }),
         {
-          id: "sb3-stopSign",
+          id: "sb3-octagon",
         },
       ),
 
