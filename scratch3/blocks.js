@@ -289,7 +289,8 @@ export class IconView {
   }
 
   get width() {
-    return this._width * this.scale
+    let isSnapIcon = snapIcons.has(this.name)
+    return (this._width + (isSnapIcon * this._width)) * this.scale
   }
 
   set width(width) {
@@ -297,7 +298,8 @@ export class IconView {
   }
 
   get height() {
-    return this._height * this.scale
+    let isSnapIcon = snapIcons.has(this.name)
+    return (this._height + (isSnapIcon * this._height)) * this.scale
   }
 
   set height(height) {
@@ -311,8 +313,8 @@ export class IconView {
   draw(options) {
     let isSnapIcon = snapIcons.has(this.name)
     let props = {
-      width: this.width + isSnapIcon * this.width,
-      height: this.height + isSnapIcon * this.height,
+      width: this.width,
+      height: this.height,
       transform: `scale(${this.scale + isSnapIcon * this.scale})`,
     }
 
