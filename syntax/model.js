@@ -144,8 +144,8 @@ export class Icon {
       globeBig: true,
       square: true,
       robot: true,
-
       stepForward: true,
+      file: true,
 
       arrowUp: true,
       arrowUpOutline: true,
@@ -167,7 +167,6 @@ export class Icon {
   }
 
   /* TODO:
-  - file
   - fullScreen
   - grow
   - normalScreen

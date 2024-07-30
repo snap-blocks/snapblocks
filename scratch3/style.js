@@ -37,6 +37,9 @@ const highContrastIcons = new Set([
   "globeBig",
   "square",
   "robot",
+  "pointRight",
+  "stepForward",
+  "file",
 
   "arrowUp",
   "arrowUpOutline",
@@ -52,8 +55,6 @@ const highContrastIcons = new Set([
   "arrowRightThin",
   "arrowUpDownThin",
   "arrowLeftRightThin",
-  "pointRight",
-  "stepForward",
 ])
 
 const coloredIcons = new Set([
@@ -78,6 +79,9 @@ const coloredIcons = new Set([
   "globeBig",
   "square",
   "robot",
+  "pointRight",
+  "stepForward",
+  "file",
 
   "arrowUp",
   "arrowUpOutline",
@@ -93,8 +97,6 @@ const coloredIcons = new Set([
   "arrowRightThin",
   "arrowUpDownThin",
   "arrowLeftRightThin",
-  "pointRight",
-  "stepForward",
 ])
 
 export default class Style {
@@ -858,7 +860,21 @@ export default class Style {
           id: "sb3-stepForward",
         }
       ),
-      
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 0 0 L 4 0 L 4 4 L 8 4 L 8 10 L 0 10 Z",
+          }),
+          SVG.el('path', {
+            d: "M 4 0 L 8 4 L 4 4 L 4 0 Z",
+            filter: "brightness(0.75)",
+          })
+        ]),
+        {
+          id: "sb3-file",
+        }
+      ),
+
       SVG.setProps(
         SVG.el("path", {
           d: `M 2 16.8 L 14.8 16.8 M 8.4 10.4 L 8.4 23.2`,

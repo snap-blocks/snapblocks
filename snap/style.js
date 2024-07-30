@@ -749,7 +749,21 @@ export default class Style {
           id: "snap-stepForward",
         }
       ),
-      
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 0 0 L 4 0 L 4 4 L 8 4 L 8 10 L 0 10 Z",
+          }),
+          SVG.el('path', {
+            d: "M 4 0 L 8 4 L 4 4 L 4 0 Z",
+            filter: "brightness(0.75)",
+          })
+        ]),
+        {
+          id: "snap-file",
+        }
+      ),
+
       SVG.setProps(
         SVG.el("path", {
           d: `M 1 8.400000000000006 L 7.399999999999977 8.400000000000006 M 4.199999999999989 5.200000000000017 L 4.199999999999989 11.599999999999994`,

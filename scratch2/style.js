@@ -643,6 +643,20 @@ export default class Style {
           id: "sb-stepForward",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 0 0 L 4 0 L 4 4 L 8 4 L 8 10 L 0 10 Z",
+          }),
+          SVG.el('path', {
+            d: "M 4 0 L 8 4 L 4 4 L 4 0 Z",
+            filter: "brightness(0.75)",
+          })
+        ]),
+        {
+          id: "sb-file",
+        }
+      ),
       
       SVG.setProps(
         SVG.el("path", {
