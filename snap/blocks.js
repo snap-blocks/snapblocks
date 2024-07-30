@@ -459,7 +459,7 @@ class IconView {
       globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
       square: { width: 10, height: 10 },
       robot: { width: 10, height: 10 },
-      stepForward: {width: 10, height: 10 },
+      stepForward: { width: 10, height: 10 },
       file: { width: 8, height: 10 },
 
       arrowUp: { width: 10, height: 10 },

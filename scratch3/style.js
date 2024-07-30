@@ -846,33 +846,33 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
-            d: `M 0 0 L 7.5 5 L 0 10 Z`
+          SVG.el("path", {
+            d: `M 0 0 L 7.5 5 L 0 10 Z`,
           }),
-          SVG.el('rect', {
+          SVG.el("rect", {
             x: 7.5,
             y: 0,
             width: 2.5,
             height: 10,
-          })
+          }),
         ]),
         {
           id: "sb3-stepForward",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 0 0 L 4 0 L 4 4 L 8 4 L 8 10 L 0 10 Z",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 4 0 L 8 4 L 4 4 L 4 0 Z",
             filter: "brightness(0.75)",
-          })
+          }),
         ]),
         {
           id: "sb3-file",
-        }
+        },
       ),
 
       SVG.setProps(

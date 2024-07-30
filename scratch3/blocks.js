@@ -290,7 +290,7 @@ export class IconView {
 
   get width() {
     let isSnapIcon = snapIcons.has(this.name)
-    return (this._width + (isSnapIcon * this._width)) * this.scale
+    return (this._width + isSnapIcon * this._width) * this.scale
   }
 
   set width(width) {
@@ -299,7 +299,7 @@ export class IconView {
 
   get height() {
     let isSnapIcon = snapIcons.has(this.name)
-    return (this._height + (isSnapIcon * this._height)) * this.scale
+    return (this._height + isSnapIcon * this._height) * this.scale
   }
 
   set height(height) {
@@ -411,7 +411,7 @@ export class IconView {
       globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
       square: { width: 10, height: 10 },
       robot: { width: 10, height: 10 },
-      stepForward: {width: 10, height: 10 },
+      stepForward: { width: 10, height: 10 },
       file: { width: 8, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
