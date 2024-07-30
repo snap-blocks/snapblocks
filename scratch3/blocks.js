@@ -211,7 +211,6 @@ export class LabelView {
     let width = 0
     for (let line of lines) {
       const textMetrics = context.measureText(line)
-      console.log('textMetrics', textMetrics)
       width = Math.max(width, textMetrics.width)
       let words = line.split(" ")
       let computedLine = []

@@ -248,8 +248,6 @@ export default class Style {
       categories = Style.highContrastCategories
     }
 
-    console.log("category:", category)
-
     if (categories[category]) {
       color = categories[category]
     } else if (category instanceof Color) {
