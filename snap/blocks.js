@@ -17,7 +17,7 @@ import SVG from "./draw.js"
 
 import style from "./style.js"
 import Style from "./style.js"
-import scaleFontSize from "../shared/scaleFontSize.js"
+import { scaleFontSize, splitFontSize } from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -162,15 +162,16 @@ export class LabelView {
       fontWeight = "normal"
     }
 
-    let pixels = scaleFontSize(this.fontSize, this.scale)
+    let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
+    let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
     const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${pixels} Helvetica, Arial, DejaVu Sans, sans-serif`
+      ? `${fontWeight} ${scaledFontSize} Helvetica, Arial, DejaVu Sans, sans-serif`
       : /literal-boolean/.test(this.cls)
-        ? `${fontWeight} ${pixels} Arial, DejaVu Sans, sans-serif`
+        ? `${fontWeight} ${scaledFontSize} Arial, DejaVu Sans, sans-serif`
         : /literal/.test(this.cls)
-          ? `${fontWeight} ${pixels} Arial, DejaVu Sans, sans-serif`
-          : `${fontWeight} ${pixels} ${defaultFontFamily}`
+          ? `${fontWeight} ${scaledFontSize} Arial, DejaVu Sans, sans-serif`
+          : `${fontWeight} ${scaledFontSize} ${defaultFontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -196,13 +197,14 @@ export class LabelView {
       let x = 0
       let first = true
       for (let wordInfo of line) {
+        let wordHeight = (wordInfo.height ? wordInfo.height : fontSizeData.value + 2)
         if (!first) {
           if (options.showSpaces) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: y + wordInfo.height / 2,
+                cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
                 class: "snap-space",
               }),
@@ -213,14 +215,14 @@ export class LabelView {
           }
         }
         lineGroup.push(
-          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
+          SVG.text(x, y + wordHeight / 1.2, wordInfo.word, {
             class: `snap-label ${cls}`,
             style: `font: ${font}`,
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
-        height = Math.max(height, wordInfo.height)
+        height = Math.max(height, wordHeight)
         first = false
       }
       y += height
@@ -246,6 +248,7 @@ export class LabelView {
       let computedLine = []
       for (let word of words) {
         const textMetrics = context.measureText(word)
+        console.log('textMetrics', textMetrics)
         computedLine.push({
           word: word,
           width: textMetrics.width,
@@ -257,6 +260,8 @@ export class LabelView {
       computedLines.push(computedLine)
     }
 
+    console.log('font width', width)
+    console.log('font height', computedLines[0][0]?.height)
     width = width | 0
     return {
       width: width,
@@ -1704,8 +1709,9 @@ class DocumentView {
   }
 
   updateIds(element) {
-    let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
-    let idRegex = /#[a-zA-Z][\w:.\-]*/
+    let aroundIdRegex = /^(#[a-zA-Z][\w:.\-]*)$/
+    let idRegex = /^#[a-zA-Z][\w:.\-]*$/
+    let urlRegex = /\((#[a-zA-Z][\w:.\-]*)\)/
 
     let id = element.getAttribute("id")
     if (id) {
@@ -1727,6 +1733,29 @@ class DocumentView {
 
       attribute.nodeValue = split.join("")
     })
+
+    if (element.tagName === "style") {
+      let text = element.textContent
+
+      let split = text.split(urlRegex)
+      for (let index = 0; index < split.length; index++) {
+        let part = split[index]
+
+        if (idRegex.test(part) && !hexColorPat.test(part)) {
+          // console.group('is id')
+          // console.log(part)
+          // console.log('id re', idRegex)
+          // console.log('color pat', hexColorPat)
+          // console.groupEnd()
+          split[index] = `(${part}-${this.id})`
+        }
+      }
+      // console.log('new text')
+      // console.log(split)
+
+      element.innerHTML = split.join("")
+      // console.log(element.innerHTML)
+    }
 
     for (let child of element.children) {
       this.updateIds(child)
@@ -1756,9 +1785,13 @@ class DocumentView {
       }
       script.y = height
       elements.push(SVG.move(0, height, script.draw(this.options)))
+      console.log('script width', script.width)
+      console.log('script height', script.height)
       height += script.height
       width = Math.max(width, script.width + 4)
     }
+    console.log('width', width)
+    console.log('height', height)
     this.width = width
     this.height = height
 
@@ -1850,6 +1883,8 @@ class DocumentView {
     }
 
     const style = makeStyle()
+    this.updateIds(style)
+    // console.log('style', style)
     this.defs.appendChild(style)
     const xml = new SVG.XMLSerializer().serializeToString(this.el)
     this.defs.removeChild(style)
@@ -1862,36 +1897,43 @@ class DocumentView {
     return `data:image/svg+xml;utf8,${xml.replace(/[#]/g, encodeURIComponent)}`
   }
 
-  toCanvas(cb, exportScale) {
-    exportScale = exportScale || 1.0
-
-    const canvas = SVG.makeCanvas()
-    canvas.width = Math.max(1, this.width * exportScale * this.scale)
-    canvas.height = Math.max(1, this.height * exportScale * this.scale)
-    const context = canvas.getContext("2d")
-
-    const image = new Image()
-    image.src = this.exportSVG()
-    image.onload = () => {
-      context.save()
-      context.scale(exportScale, exportScale)
-      context.drawImage(image, 0, 0)
-      context.restore()
-
-      cb(canvas)
-    }
+  toCanvas(exportScale) {
+    return new Promise((resolve) => {
+      exportScale = exportScale || 1.0
+  
+      const canvas = SVG.makeCanvas()
+      canvas.width = Math.max(1, this.width * exportScale * this.scale)
+      canvas.height = Math.max(1, this.height * exportScale * this.scale)
+      const context = canvas.getContext("2d")
+  
+      const image = new window.Image()
+      console.log('before load', image)
+      image.src = this.exportSVG()
+      image.onload = () => {
+        console.log('onload')
+        context.scale(exportScale, exportScale)
+        context.drawImage(image, 0, 0)
+  
+        resolve(canvas)
+      }
+    })
   }
 
-  exportPNG(cb, scale) {
-    this.toCanvas(canvas => {
-      if (URL && URL.createObjectURL && Blob && canvas.toBlob) {
-        canvas.toBlob(blob => {
-          cb(URL.createObjectURL(blob))
-        }, "image/png")
-      } else {
-        cb(canvas.toDataURL("image/png"))
-      }
-    }, scale)
+  exportPNG(scale, dataURI) {
+    return new Promise((resolve) => {
+      this.toCanvas(scale).then(canvas => {
+        if (!dataURI && (URL && URL.createObjectURL && Blob && canvas.toBlob)) {
+          console.log('URL')
+          // resolve(canvas.toDataURL("image/png"))
+          canvas.toBlob(blob => {
+            resolve(URL.createObjectURL(blob))
+          }, "image/png")
+        } else {
+          console.log('no URL')
+          resolve(canvas.toDataURL("image/png"))
+        }
+      })
+    })
   }
 }
 
