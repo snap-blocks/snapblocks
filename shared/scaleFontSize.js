@@ -27,3 +27,7 @@ export function scaleFontSize(fontSize, scale) {
 
   return `${result.value}${result.unit}`
 }
+
+export function getFontHeight(fontSize) {
+  return fontSize * 1.2
+}

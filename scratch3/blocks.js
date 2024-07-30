@@ -14,7 +14,7 @@ import Color, { hexColorPat } from "../shared/color.js"
 
 import SVG from "./draw.js"
 import style from "./style.js"
-import { scaleFontSize, splitFontSize } from "../shared/scaleFontSize.js"
+import { scaleFontSize, splitFontSize, getFontHeight } from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFont,
@@ -134,11 +134,12 @@ export class LabelView {
 
     let fontWeight = /comment-label/.test(this.cls) ? "500" : "400"
 
-    let fontSize = scaleFontSize(this.fontSize, this.scale)
+    let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
+    let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
     const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${fontSize} ${commentFont}`
-      : `${fontWeight} ${fontSize} ${defaultFont}`
+      ? `${fontWeight} ${scaledFontSize} ${commentFont}`
+      : `${fontWeight} ${scaledFontSize} ${defaultFont}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -163,13 +164,15 @@ export class LabelView {
       let x = 0
       let first = true
       for (let wordInfo of line) {
+        // let wordHeight = (wordInfo.height ? wordInfo.height : fontSizeData.value + (2 * this.scale))
+        let wordHeight = getFontHeight(fontSizeData.value)
         if (!first) {
           if (options.showSpaces) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: y + wordInfo.height / 2,
+                cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
                 class: "sb3-space",
               }),
@@ -180,14 +183,14 @@ export class LabelView {
           }
         }
         lineGroup.push(
-          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
+          SVG.text(x, y + wordHeight / 1.2, wordInfo.word, {
             class: `sb3-label ${cls}`,
             style: `font: ${font}`,
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
-        height = Math.max(height, wordInfo.height)
+        height = Math.max(height, wordHeight)
         first = false
       }
       y += height
@@ -208,6 +211,7 @@ export class LabelView {
     let width = 0
     for (let line of lines) {
       const textMetrics = context.measureText(line)
+      console.log('textMetrics', textMetrics)
       width = Math.max(width, textMetrics.width)
       let words = line.split(" ")
       let computedLine = []
@@ -216,9 +220,9 @@ export class LabelView {
         computedLine.push({
           word: word,
           width: textMetrics.width,
-          height:
-            textMetrics.fontBoundingBoxAscent +
-            textMetrics.fontBoundingBoxDescent,
+          // height:
+          //   textMetrics.fontBoundingBoxAscent +
+          //   textMetrics.fontBoundingBoxDescent,
         })
       }
       computedLines.push(computedLine)

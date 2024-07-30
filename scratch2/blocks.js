@@ -16,7 +16,7 @@ import Color, { hexColorPat } from "../shared/color.js"
 import SVG from "./draw.js"
 
 import style from "./style.js"
-import { scaleFontSize, splitFontSize } from "../shared/scaleFontSize.js"
+import { scaleFontSize, splitFontSize, getFontHeight } from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFontFamily,
@@ -150,11 +150,12 @@ export class LabelView {
       fontWeight = "normal"
     }
 
-    let pixels = scaleFontSize(this.fontSize, this.scale)
+    let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
+    let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
     const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${pixels} Helvetica, Arial, DejaVu Sans, sans-serif`
-      : `${fontWeight} ${pixels} ${defaultFontFamily}`
+      ? `${fontWeight} ${scaledFontSize} Helvetica, Arial, DejaVu Sans, sans-serif`
+      : `${fontWeight} ${scaledFontSize} ${defaultFontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -179,13 +180,14 @@ export class LabelView {
       let x = 0
       let first = true
       for (let wordInfo of line) {
+        let wordHeight = getFontHeight(fontSizeData.value)
         if (!first) {
           if (options.showSpaces) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
                 cx: x,
-                cy: y + wordInfo.height / 2,
+                cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
                 class: "snap-space",
               }),
@@ -196,14 +198,14 @@ export class LabelView {
           }
         }
         lineGroup.push(
-          SVG.text(x, y + wordInfo.height / 1.2, wordInfo.word, {
+          SVG.text(x, y + wordHeight / 1.2, wordInfo.word, {
             class: `snap-label ${cls}`,
             style: `font: ${font}`,
           }),
         )
         lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
         x += wordInfo.width
-        height = Math.max(height, wordInfo.height)
+        height = Math.max(height, wordHeight)
         first = false
       }
       y += height
