@@ -17,7 +17,11 @@ import SVG from "./draw.js"
 
 import style from "./style.js"
 import Style from "./style.js"
-import { scaleFontSize, splitFontSize, getFontHeight } from "../shared/scaleFontSize.js"
+import {
+  scaleFontSize,
+  splitFontSize,
+  getFontHeight,
+} from "../shared/scaleFontSize.js"
 const {
   categoryColor,
   defaultFontFamily,
