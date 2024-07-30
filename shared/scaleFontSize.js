@@ -13,7 +13,7 @@ export function splitFontSize(fontSize, scale) {
 
   if (unit.toLowerCase() == "pt") {
     value = pt2px(value)
-    unit = 'px'
+    unit = "px"
   }
 
   return {
