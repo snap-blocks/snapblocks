@@ -13,9 +13,7 @@ export default [
     snap: "turn",
     selector: "turnRight:",
     spec: "turn @clockwise %1 degrees",
-    aliases: [
-      "turn @turnRight %1 degrees"
-    ],
+    aliases: ["turn @turnRight %1 degrees"],
     inputs: ["%n"],
     shape: "stack",
     category: "motion",
@@ -25,9 +23,7 @@ export default [
     snap: "turnLeft",
     selector: "turnLeft:",
     spec: "turn @counterclockwise %1 degrees",
-    aliases: [
-      "turn @turnLeft %1 degrees"
-    ],
+    aliases: ["turn @turnLeft %1 degrees"],
     inputs: ["%n"],
     shape: "stack",
     category: "motion",
