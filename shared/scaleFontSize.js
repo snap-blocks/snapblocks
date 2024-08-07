@@ -7,6 +7,8 @@ export function splitFontSize(fontSize, scale) {
     scale = 1
   }
 
+  fontSize = String(fontSize)
+
   let parts = fontSize.split(/^([\d\.]*)(.*)$/)
   let value = parseFloat(parts[1])
   let unit = parts[2]
@@ -29,5 +31,7 @@ export function scaleFontSize(fontSize, scale) {
 }
 
 export function getFontHeight(fontSize) {
+  fontSize = splitFontSize(fontSize).value
+  
   return fontSize * 1.2
 }

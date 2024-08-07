@@ -557,19 +557,19 @@ class InputView {
         })
       }
 
-      h = this.label.height + 2
+      h = this.label.height
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
-        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h
+        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h + 2
       } else if (this.isBoolean && this.isBig) {
         h += 1
         w = 23 + h * 1.5
       } else {
         w = Math.max(
-          this.label.width + this.hasArrow * 12 + 3,
+          this.label.width + this.hasArrow * 12 + 2 + 2,
           this.label.lines.length <= 1 // single vs. multi-line contents
             ? this.label.rawHeight + this.hasArrow * 12
-            : 10 / 1.3 + this.hasArrow * 12,
+            : getFontHeight(this.label.fontSize) + this.hasArrow * 12,
           0,
         )
       }
@@ -657,8 +657,8 @@ class InputView {
           y = 0
         }
       } else {
-        x = this.isRound ? Math.floor(h / 2) + 1 : 2
-        y = 1
+        x = this.isRound ? Math.floor(h / 2) + 1 : 2 + 1
+        y = this.isRound ? 0 : 0
       }
       result.appendChild(SVG.move(x, y, label))
     }
