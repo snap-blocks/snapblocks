@@ -32,6 +32,6 @@ export function scaleFontSize(fontSize, scale) {
 
 export function getFontHeight(fontSize) {
   fontSize = splitFontSize(fontSize).value
-  
+
   return fontSize * 1.2
 }
