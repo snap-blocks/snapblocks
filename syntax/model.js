@@ -175,7 +175,6 @@ export class Icon {
   - smallStage
   - normalStage
   - stage
-  - octagon
   - turnAround
   - poster
   - tick
