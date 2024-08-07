@@ -200,7 +200,7 @@ export class LabelView {
       y += height
       group.push(SVG.group(lineGroup))
     }
-    this.height = Math.max(13, y / 1.2)
+    this.height = Math.max(13, y)
 
     this.el = SVG.group(group)
   }
