@@ -12,7 +12,10 @@ export default [
     id: "MOTION_TURNRIGHT",
     snap: "turn",
     selector: "turnRight:",
-    spec: "turn @turnRight %1 degrees",
+    spec: "turn @clockwise %1 degrees",
+    aliases: [
+      "turn @turnRight %1 degrees"
+    ],
     inputs: ["%n"],
     shape: "stack",
     category: "motion",
@@ -21,7 +24,10 @@ export default [
     id: "MOTION_TURNLEFT",
     snap: "turnLeft",
     selector: "turnLeft:",
-    spec: "turn @turnLeft %1 degrees",
+    spec: "turn @counterclockwise %1 degrees",
+    aliases: [
+      "turn @turnLeft %1 degrees"
+    ],
     inputs: ["%n"],
     shape: "stack",
     category: "motion",
@@ -2730,7 +2736,7 @@ export default [
     snap: "doApplyExtension",
     spec: "{name} %1 {closed}",
     specDefs: {
-      name: ["primitive", "extension"],
+      name: ["extension", "primitive"],
       closed: [
         "%2",
         "input list: %2",
@@ -2753,7 +2759,7 @@ export default [
     snap: "reportApplyExtension",
     spec: "{name} %1 {closed}",
     specDefs: {
-      name: ["primitive", "extension"],
+      name: ["extension", "primitive"],
       closed: [
         "%2",
         "input list: %2",

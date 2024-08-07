@@ -356,7 +356,7 @@ export class IconView {
       clockwise: {
         alias: "turnRight",
       },
-      counterClockwise: {
+      counterclockwise: {
         alias: "turnLeft",
       },
       loop: { width: 24, height: 24, scale: 1 },

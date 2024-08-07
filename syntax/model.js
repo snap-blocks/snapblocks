@@ -112,7 +112,7 @@ export class Icon {
       turnLeft: true,
       turnRight: true,
       clockwise: true,
-      counterClockwise: true,
+      counterclockwise: true,
       loop: true,
       loopArrow: true,
       addInput: true,

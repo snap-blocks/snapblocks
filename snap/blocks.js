@@ -396,7 +396,7 @@ class IconView {
         alias: "turnRight",
         scale: 1.5,
       },
-      counterClockwise: {
+      counterclockwise: {
         alias: "turnLeft",
         scale: 1.5,
       },
@@ -1714,7 +1714,7 @@ class DocumentView {
   }
 
   updateIds(element) {
-    let aroundIdRegex = /^(#[a-zA-Z][\w:.\-]*)$/
+    let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
     let idRegex = /^#[a-zA-Z][\w:.\-]*$/
     let urlRegex = /\((#[a-zA-Z][\w:.\-]*)\)/
 
