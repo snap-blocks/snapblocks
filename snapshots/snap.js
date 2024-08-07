@@ -656,6 +656,8 @@ test(
 
   (type of [5])
 
+  ([select V] of [Abelson & Sussman])
+  ([unselect V] of [Abelson & Sussman])
   ([encode URI V] of [Abelson & Sussman])
   ([decode URI V] of [Abelson & Sussman])
   ([encode URI component V] of [Abelson & Sussman])
@@ -708,6 +710,7 @@ test(
   ([distribution V] of @list)
   ([sorted V] of @list)
   ([shuffled V] of @list)
+  ([reverse V] of @list)
   ([text V] of @list)
   ([lines V] of @list)
   ([csv V] of @list)
@@ -722,6 +725,7 @@ test(
   ([distribution V] of (list))
   ([sorted V] of (list))
   ([shuffled V] of (list))
+  ([reverse V] of (list))
   ([text V] of (list))
   ([lines V] of (list))
   ([csv V] of (list))
