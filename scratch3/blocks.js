@@ -444,7 +444,8 @@ export class IconView {
 
       plusSign: {
         width: 16.799999999999955,
-        height: 33.60000000000002,
+        height: 12,
+        dy: -12,
         color: Color.fromHexString("#2d2d2d"),
         fillAttribute: "stroke",
       },

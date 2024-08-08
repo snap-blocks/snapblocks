@@ -433,7 +433,8 @@ class IconView {
 
       plusSign: {
         width: 8.399999999999977,
-        height: 16.80000000000001,
+        height: 12,
+        dy: -2,
         color: Color.fromHexString("#2d2d2d"),
         fillAttribute: "stroke",
       },

@@ -480,7 +480,8 @@ class IconView {
 
       plusSign: {
         width: 8.399999999999977,
-        height: 16.80000000000001,
+        height: 12,
+        dy: -2,
         color: Color.fromHexString("#2d2d2d"),
         fillAttribute: "stroke",
       },
@@ -931,6 +932,36 @@ class BlockView {
     return el
   }
 
+  drawLocalPin(options) {
+    var ext = {x: 7.92, y: 12},
+        w = ext.x,
+        h = ext.y,
+        r = w / 2,
+        x = 5,
+        y = 1,
+        contrast = options.isFlat ? 25 : 65,
+        path = ""
+    
+    if (this.isBoolean) {
+      x = 9
+    }
+    if (this.isCommand) {
+      y += 3
+    }
+
+    let color = this.isZebra ? this.color.darker(contrast) : this.color.lighter(contrast)
+
+    path += SVG.canvasArc(x + r, y + r, r, SVG.radians(-210), SVG.radians(30), false)
+    path += ` L ${x + r} ${y + h} Z `
+    path += SVG.canvasArc(x + r, y + r, r * 0.4, SVG.radians(0), SVG.radians(360), false)
+
+    return SVG.el('path', {
+      d: path,
+      "fill-rule": "evenodd",
+      fill: color,
+    })
+  }
+
   minDistance(child) {
     if (this.isBoolean) {
       return child.isReporter
@@ -1012,7 +1043,7 @@ class BlockView {
       noWrapLines = [],
       lines = [],
       space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
-      ico = 0, // for local block, if I care to add that
+      ico = this.info.local ? 7.92 + space : 0, // for local block, if I care to add that
       bottomCorrection,
       rightCorrection = 0,
       rightMost,
@@ -1475,6 +1506,10 @@ class BlockView {
         objects.push(child.el)
       })
     })
+
+    if (this.info.local) {
+      objects.push(this.drawLocalPin(options))
+    }
 
     this.lines = drawLines
     this.innerWidth = blockWidth
