@@ -376,6 +376,11 @@ allBlocks.forEach(info => {
       english.aliases[alias] = info.id
     }
   }
+
+  if (info.hasLoopArrow) {
+    english.aliases[info.spec + " @loopArrow"] = info.id
+    english.aliases[info.spec + " @loop"] = info.id
+  }
 })
 loadLanguages({
   en: english,

@@ -1070,7 +1070,7 @@ class BlockView {
           noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
-          loop.scale = 0.5
+          loop.scale = IconView.icons.loopArrow.scale || 1
           loop.el = loop.draw(options, this)
         }
         if (l.length > 0) {
@@ -1165,7 +1165,7 @@ class BlockView {
             noWrapLines[noWrapLines.length - 1][0].isCShape
           ) {
             loop.isLoop = true
-            loop.scale = 0.5
+            loop.scale = IconView.icons.loopArrow.scale || 1
             loop.el = loop.draw(options, this)
           }
 
@@ -1192,7 +1192,7 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
-        loop.scale = 0.5
+        loop.scale = IconView.icons.loopArrow.scale || 1
         loop.el = loop.draw(options, this)
       }
       noWrapLines.push(noWrapLine)
@@ -1375,11 +1375,11 @@ class BlockView {
       drawLines.push(drawLine)
     }
 
-    if (hasLoopArrow) {
+    // if (hasLoopArrow) {
       // maxX = Math.max(maxX, maxX + fontSize * 1.5)
       // fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
       // hasLoopArrow = false
-    }
+    // }
 
     // determine my height:
     y += lineHeight

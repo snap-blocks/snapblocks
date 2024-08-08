@@ -992,7 +992,7 @@ class BlockView {
           noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
-          loop.scale = 0.5
+          loop.scale = 1
         }
 
         pushLine()
@@ -1012,7 +1012,7 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
-        loop.scale = 0.5
+        loop.scale = 1
         line.children.push(child)
 
         let cIndex = lines.indexOf(lastCSlot)
@@ -1098,7 +1098,7 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
-        loop.scale = 0.5
+        loop.scale = 1
       }
       noWrapLines.push(noWrapLine)
     }

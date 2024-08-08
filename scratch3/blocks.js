@@ -1126,7 +1126,7 @@ class BlockView {
           noWrapLines[noWrapLines.length - 1][0].isCShape
         ) {
           loop.isLoop = true
-          loop.scale = 0.5
+          loop.scale = 1
         }
 
         pushLine()
@@ -1150,7 +1150,7 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
-        loop.scale = 0.5
+        loop.scale = 1
         line.children.push(child)
         previousChild = child
 
@@ -1261,7 +1261,7 @@ class BlockView {
         noWrapLines[noWrapLines.length - 1][0].isCShape
       ) {
         loop.isLoop = true
-        loop.scale = 0.5
+        loop.scale = 1
       }
       noWrapLines.push(noWrapLine)
     }
