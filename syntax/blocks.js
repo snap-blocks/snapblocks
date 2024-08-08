@@ -368,6 +368,12 @@ export const english = {
   fullBlocks: [],
 }
 allBlocks.forEach(info => {
+  if (info.hasLoopArrow) {
+    english.aliases[info.spec + " @loop"] = info.id
+    english.aliases[info.spec] = info.id
+    info.spec = info.spec + " @loopArrow"
+  }
+
   english.fullBlocks.push(structuredClone(info))
   english.commands[info.id] = info.spec
 
@@ -375,11 +381,6 @@ allBlocks.forEach(info => {
     for (const alias of info.aliases) {
       english.aliases[alias] = info.id
     }
-  }
-
-  if (info.hasLoopArrow) {
-    english.aliases[info.spec + " @loopArrow"] = info.id
-    english.aliases[info.spec + " @loop"] = info.id
   }
 })
 loadLanguages({
