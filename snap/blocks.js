@@ -933,15 +933,15 @@ class BlockView {
   }
 
   drawLocalPin(options) {
-    var ext = {x: 7.92, y: 12},
-        w = ext.x,
-        h = ext.y,
-        r = w / 2,
-        x = 5,
-        y = 1,
-        contrast = options.isFlat ? 25 : 65,
-        path = ""
-    
+    var ext = { x: 7.92, y: 12 },
+      w = ext.x,
+      h = ext.y,
+      r = w / 2,
+      x = 5,
+      y = 1,
+      contrast = options.isFlat ? 25 : 65,
+      path = ""
+
     if (this.isBoolean) {
       x = 9
     }
@@ -949,13 +949,29 @@ class BlockView {
       y += 3
     }
 
-    let color = this.isZebra ? this.color.darker(contrast) : this.color.lighter(contrast)
+    let color = this.isZebra
+      ? this.color.darker(contrast)
+      : this.color.lighter(contrast)
 
-    path += SVG.canvasArc(x + r, y + r, r, SVG.radians(-210), SVG.radians(30), false)
+    path += SVG.canvasArc(
+      x + r,
+      y + r,
+      r,
+      SVG.radians(-210),
+      SVG.radians(30),
+      false,
+    )
     path += ` L ${x + r} ${y + h} Z `
-    path += SVG.canvasArc(x + r, y + r, r * 0.4, SVG.radians(0), SVG.radians(360), false)
+    path += SVG.canvasArc(
+      x + r,
+      y + r,
+      r * 0.4,
+      SVG.radians(0),
+      SVG.radians(360),
+      false,
+    )
 
-    return SVG.el('path', {
+    return SVG.el("path", {
       d: path,
       "fill-rule": "evenodd",
       fill: color,
