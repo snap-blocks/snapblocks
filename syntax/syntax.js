@@ -1276,6 +1276,7 @@ function recognizeStuff(scripts) {
           names: names,
           category: block.info.category,
           shape: outline.info.shape.replace("outline-", ""),
+          local: outline.info.local,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = [info]
@@ -1391,6 +1392,7 @@ function recognizeStuff(scripts) {
           category: customBlock.info.category,
           color: customBlock.info.color,
           shape: customBlock.info.shape,
+          local: customBlock.info.local,
         }
         if (!customBlocksByHash[hash]) {
           customBlocksByHash[hash] = [info]
@@ -1439,6 +1441,7 @@ function recognizeStuff(scripts) {
             block.info.names = selected.names
             block.info.category = selected.category
             block.info.color = selected.color
+            block.info.local = selected.local
             // block.info.shape = selected.shape
             block.info.isCustom = true
           }
