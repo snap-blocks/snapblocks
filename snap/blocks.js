@@ -1376,9 +1376,9 @@ class BlockView {
     }
 
     // if (hasLoopArrow) {
-      // maxX = Math.max(maxX, maxX + fontSize * 1.5)
-      // fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
-      // hasLoopArrow = false
+    // maxX = Math.max(maxX, maxX + fontSize * 1.5)
+    // fullWidth = Math.max(fullWidth, fullWidth + fontSize * 1.5)
+    // hasLoopArrow = false
     // }
 
     // determine my height:

@@ -347,7 +347,13 @@ function paintBlock(info, children, languages) {
   applyOverrides(info, overrides)
 
   // loop arrows
-  if (info.hasLoopArrow && !(children[children.length - 1].isIcon && ['loopArrow', 'loop'].includes(children[children.length - 1].name))) {
+  if (
+    info.hasLoopArrow &&
+    !(
+      children[children.length - 1].isIcon &&
+      ["loopArrow", "loop"].includes(children[children.length - 1].name)
+    )
+  ) {
     let arrow = new Icon("loopArrow")
     children.push(arrow)
   }
