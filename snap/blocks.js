@@ -817,7 +817,13 @@ class BlockView {
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - this.isBoolean * 8, y, lines[i].x || (this.isBoolean ? 15 : 9)))
+          p.push(
+            SVG.getArm(
+              w - this.isBoolean * 8,
+              y,
+              lines[i].x || (this.isBoolean ? 15 : 9),
+            ),
+          )
 
           y += lines[i + 1].totalHeight + 3
           showBooleanRight = false
