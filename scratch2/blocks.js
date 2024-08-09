@@ -853,8 +853,12 @@ class BlockView {
 
     const padding = BlockView.padding[this.info.shape] || BlockView.padding.null
     let pt = padding[0]
-    const px = padding[1]
+    let px = padding[1]
     const pb = padding[2]
+
+    if (this.info.local) {
+      px += IconView.icons.location.width
+    }
 
     let y = 0
     class Line {
@@ -1130,6 +1134,14 @@ class BlockView {
     lastCSlot = null
 
     this.lines = lines
+
+    if (this.info.local) {
+      let localPin = newView(new Icon('location', 1.2, this.isZebra
+        ? this.color.darker(65)
+        : this.color.lighter(65)))
+      
+      objects.push(SVG.move(padding[1] * 2, pt, localPin.draw(options)))
+    }
 
     for (const line of lines) {
       if (line.isScript) {
