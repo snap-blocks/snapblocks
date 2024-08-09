@@ -699,14 +699,16 @@ class BlockView {
       this.info.local
     ) {
       this.children.unshift(new LineView())
-      if (Object.prototype.hasOwnProperty.call(extensions, this.info.category)) {
+      if (
+        Object.prototype.hasOwnProperty.call(extensions, this.info.category)
+      ) {
         this.children.unshift(
           new IconView({ name: this.info.category + "Block" }),
         )
         this.info.category = "extension"
       }
       if (this.info.local) {
-        this.children.unshift(newView(new Icon('location', 1.5)))
+        this.children.unshift(newView(new Icon("location", 1.5)))
       }
     }
 
@@ -1004,7 +1006,7 @@ class BlockView {
       ptmin = padding[0][0],
       pbmin = padding[1][0]
 
-    let y = this.info.shape === "cat" ? 16 : 0    
+    let y = this.info.shape === "cat" ? 16 : 0
     let extensionLineWidth = 0
     class Line {
       constructor(y) {
@@ -1100,7 +1102,8 @@ class BlockView {
       child.el = child.draw(options, this)
 
       if (previousChild?.isLine) {
-        extensionLineWidth = line.width + this.marginBetween(previousChild, child)
+        extensionLineWidth =
+          line.width + this.marginBetween(previousChild, child)
       }
 
       if (child.isCShape) {
@@ -1248,7 +1251,7 @@ class BlockView {
         if (child.isIcon && i === 0 && this.isCommand) {
           line.height = Math.max(line.height, child.height)
         }
-        
+
         child.x = line.width
         line.width += child.width
         innerWidth = Math.max(innerWidth, line.width)
@@ -1295,7 +1298,7 @@ class BlockView {
 
     let padLeft = children.length ? this.horizontalPadding(children[0]) : 0
     const padRight = children.length ? this.horizontalPadding(lastChild) : 0
-    
+
     innerWidth += padLeft + padRight
 
     // Commands have a minimum width.
