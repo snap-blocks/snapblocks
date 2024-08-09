@@ -256,13 +256,14 @@ export class Input {
       shape === "string" || shape === "color" || shape === "dropdown"
 
     this.hasLabel =
-      !(this.isColor || this.isInset) || (this.value && this.isBoolean)
+      (!(this.isColor || this.isInset) || (this.value && this.isBoolean)) && !this.value.isIcon
     this.label = this.hasLabel
       ? new Label(
           value,
           `literal-${this.shape}` + (isReadonly ? "-readonly" : ""),
         )
       : null
+    this.icon = this.value.isIcon ? this.value : null
     this.isBig = this.isBoolean && this.value ? this.value.length > 1 : null
     this.x = 0
   }

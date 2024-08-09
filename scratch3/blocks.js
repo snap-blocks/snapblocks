@@ -497,6 +497,9 @@ export class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
+    if (input.icon) {
+      this.icon = newView(input.icon)
+    }
     this.isBoolean = this.shape === "boolean"
     this.isDropdown = this.shape === "dropdown"
     this.isRound = !(this.isBoolean || this.isDropdown)
@@ -546,6 +549,13 @@ export class InputView {
       })
       w = this.value ? 70 : 48
       h = 32
+    } else if (this.icon) {
+      label = this.icon.draw(options)
+      h = this.icon.height + 4
+      w = this.icon.width
+            + this.hasArrow * 12
+            + 4
+            + 2
     } else if (this.isColor) {
       w = 40
       h = 32
@@ -636,7 +646,7 @@ export class InputView {
     }
 
     const result = SVG.group([el])
-    if (this.hasLabel) {
+    if (this.hasLabel || this.icon) {
       let x
       if (this.isBoolean && this.isBig) {
         if (this.value == "true") {
@@ -647,6 +657,9 @@ export class InputView {
       } else if (this.isBoolean && !this.isBig) {
         // it's offset in the path
         x = 0
+      } else if (this.icon) {
+        x = 2
+        // y = 2
       } else {
         x = 0
       }
@@ -663,10 +676,11 @@ export class InputView {
       result.appendChild(circle)
     }
     if (this.hasArrow) {
+      console.log('height', h)
       result.appendChild(
         SVG.move(
           w - 24,
-          13,
+          Math.min(h - 20, 13),
           SVG.symbol(
             options.isHighContrast
               ? `#sb3-dropdownArrow-high-contrast-${options.id}`

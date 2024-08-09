@@ -347,8 +347,8 @@ class IconView {
         alias: "flag",
       },
       flag: {
-        width: 13,
-        height: 14,
+        width: 20,
+        height: 21,
       },
       octagon: { width: 20, height: 20 },
       stopSign: { alias: "octagon", color: new Color(187, 0, 16) },
@@ -448,6 +448,9 @@ class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
+    if (input.icon) {
+      this.icon = newView(input.icon)
+    }
 
     this.x = 0
   }
@@ -495,6 +498,13 @@ class InputView {
       })
       w = 24
       h = 12
+    } else if (this.icon) {
+      label = this.icon.draw(options)
+      h = this.icon.height + 4
+      w = this.icon.width
+            + this.hasArrow * 12
+            + 4
+            + 2
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
         label = this.label.draw(options)
@@ -569,8 +579,8 @@ class InputView {
         class: `sb-input sb-input-${this.shape}`,
       }),
     ])
-    if (this.hasLabel) {
-      let x
+    if (this.hasLabel || this.icon) {
+      let x, y = 0
       if (this.isBoolean && this.isBig) {
         if (this.value == "true") {
           x = h / 2
@@ -580,10 +590,13 @@ class InputView {
       } else if (this.isBoolean && !this.isBig) {
         // it's offset in the path
         x = 0
+      } else if (this.icon) {
+        x = 2
+        y = 2
       } else {
         x = this.isRound ? 5 : 4
       }
-      result.appendChild(SVG.move(x, 0, label))
+      result.appendChild(SVG.move(x, y, label))
     }
     if (this.isBoolean && this.value) {
       let y = this.height / 2

@@ -495,6 +495,9 @@ class InputView {
     if (input.label) {
       this.label = newView(input.label)
     }
+    if (input.icon) {
+      this.icon = newView(input.icon)
+    }
 
     this.x = 0
   }
@@ -549,6 +552,13 @@ class InputView {
       }
       w = 24
       h = 12
+    } else if (this.icon) {
+      label = this.icon.draw(options)
+      h = this.icon.height + 4
+      w = this.icon.width
+            + this.hasArrow * 12
+            + 4
+            + 2
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
         this.label.measure(options, parent.isZebra)
@@ -642,7 +652,7 @@ class InputView {
         }`,
       }),
     ])
-    if (this.hasLabel) {
+    if (this.hasLabel || this.icon) {
       let x, y
       if (this.isBoolean) {
         if (this.isBig) {
@@ -657,6 +667,9 @@ class InputView {
           x = 0
           y = 0
         }
+      } else if (this.icon) {
+        x = 2
+        y = 2
       } else {
         x = this.isRound ? Math.floor(h / 2) + 1 : 2 + 1
         y = this.isRound ? 0 : 0

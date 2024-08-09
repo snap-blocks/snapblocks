@@ -441,6 +441,7 @@ function parseLines(code, languages) {
       }
     }
   }
+
   let sawNL
 
   let define = []
@@ -702,7 +703,8 @@ function parseLines(code, languages) {
     let s = ""
     let raw = ""
     let escapeV = false
-    while (tok && tok !== "]") {
+    let brackets = 0
+    while (tok && ((tok !== "]" && brackets == 0) || brackets > 0)) {
       raw += tok
       if (tok === "\\") {
         next()
@@ -719,6 +721,11 @@ function parseLines(code, languages) {
         }
       } else {
         escapeV = false
+        if (tok === "[") {
+          brackets += 1
+        } else if (tok === "]" && brackets) {
+          brackets -= 1
+        }
       }
       s += tok
       next()
@@ -729,17 +736,34 @@ function parseLines(code, languages) {
     if (hexColorPat.test(raw) || rgbColorPat.test(raw)) {
       return new Input("color", Color.fromString(s))
     }
-    return !escapeV && / v$/.test(s)
-      ? makeMenu("dropdown", s.slice(0, s.length - 2), false)
-      : !escapeV && / V$/.test(s)
-        ? makeMenu("dropdown", s.slice(0, s.length - 2), true)
-        : (() => {
-            let input = new Input("string", s, true)
-            if (input.hasLabel) {
-              input.label.raw = raw
-            }
-            return input
-          })()
+
+    let isDropdown = false,
+        isReadonly = false,
+        value
+
+    if (!escapeV && / v|V$/.test(s)) {
+      isDropdown = true
+      isReadonly = / V$/.test(s)
+      s = s.slice(0, s.length - 2)
+      raw = raw.slice(0, raw.length - 2)
+    }
+
+    value = s
+
+    console.log('raw', raw)
+    if (raw == "[__shout__go__]") {
+      value = new Icon('greenFlag')
+    }
+
+    return isDropdown
+      ? makeMenu("dropdown", value, isReadonly)
+      : (() => {
+          let input = new Input("string", value, true)
+          if (input.hasLabel) {
+            input.label.raw = raw
+          }
+          return input
+        })()
   }
 
   function pBlock(end) {
@@ -869,6 +893,10 @@ function parseLines(code, languages) {
 
         index = endIndex
         tok = code[index]
+
+        if (raw == "[__shout__go__]") {
+          value = new Icon('greenFlag')
+        }
 
         let input = makeMenu("number-dropdown", value, end === "V")
         if (input.hasLabel) {
