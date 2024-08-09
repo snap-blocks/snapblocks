@@ -771,12 +771,12 @@ function parseLines(code, languages) {
 
     escapedLast = false
     let start = raw[0]
-    let end = ''
+    let end = ""
 
     for (let c = 0; c < raw.length; c++) {
-      const t = raw[c];
-      
-      if (t == '\\') {
+      const t = raw[c]
+
+      if (t == "\\") {
         escapedLast = true
         c += 1
       } else {
@@ -787,7 +787,7 @@ function parseLines(code, languages) {
     end = raw[raw.length - 1]
     if (!escapedLast) {
       let formatted = false
-      if (start == "`" && end == '`') {
+      if (start == "`" && end == "`") {
         formatting.monospace = true
         formatted = true
       } else if (start == "[" && end == "]") {
@@ -810,7 +810,7 @@ function parseLines(code, languages) {
     let input = isDropdown
       ? makeMenu("dropdown", value, isReadonly)
       : new Input("string", value, true)
-      
+
     input.isBig = isBig
     if (input.hasLabel) {
       input.label.raw = raw
@@ -946,24 +946,24 @@ function parseLines(code, languages) {
 
         let isReadonly = finalV === "V"
 
-        console.log('value', value)
+        console.log("value", value)
 
         index = endIndex
         tok = code[index]
-        
+
         let formatting = {
           italic: false,
           monospace: false,
         }
-    
+
         let escapedLast = false
         let start = raw[0]
         let end = raw[raw.length - 1]
-    
+
         for (let c = 0; c < raw.length; c++) {
-          const t = raw[c];
-          
-          if (t == '\\') {
+          const t = raw[c]
+
+          if (t == "\\") {
             escapedLast = true
             c += 1
           } else {
@@ -973,14 +973,14 @@ function parseLines(code, languages) {
 
         if (!escapedLast) {
           let formatted = false
-          if (start == "`" && end == '`') {
+          if (start == "`" && end == "`") {
             formatting.monospace = true
             formatted = true
           } else if (start == "[" && end == "]") {
             formatting.italic = !isReadonly
             formatted = true
           }
-    
+
           if (formatted) {
             value = value.slice(1, value.length - 1)
           }
