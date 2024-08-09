@@ -169,14 +169,15 @@ export class LabelView {
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
-    let fontFamily = this.formatting.monospace ? "monospace" :
-     /comment-label/.test(this.cls)
-      ? `Helvetica, Arial, DejaVu Sans, sans-serif`
-      : /literal-boolean/.test(this.cls)
-        ? `Arial, DejaVu Sans, sans-serif`
-        : /literal/.test(this.cls)
+    let fontFamily = this.formatting.monospace
+      ? "monospace"
+      : /comment-label/.test(this.cls)
+        ? `Helvetica, Arial, DejaVu Sans, sans-serif`
+        : /literal-boolean/.test(this.cls)
           ? `Arial, DejaVu Sans, sans-serif`
-          : defaultFontFamily
+          : /literal/.test(this.cls)
+            ? `Arial, DejaVu Sans, sans-serif`
+            : defaultFontFamily
 
     const font = `${this.formatting.italic ? "italic" : "normal"} ${fontWeight} ${scaledFontSize} ${fontFamily}`
 
@@ -571,7 +572,12 @@ class InputView {
       h = this.label.height
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
-        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + Math.min(h, 12) + 2
+        w =
+          this.label.width +
+          2 +
+          Math.floor(this.hasArrow * 12 * 0.5) +
+          Math.min(h, 12) +
+          2
       } else if (this.isBoolean && this.isBig) {
         h += 1
         w = 23 + h * 1.5

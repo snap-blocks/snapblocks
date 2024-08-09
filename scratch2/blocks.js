@@ -157,10 +157,12 @@ export class LabelView {
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
-    const fontFamily = this.formatting.monospace ? "monospace" : /comment-label/.test(this.cls)
-      ? "Helvetica, Arial, DejaVu Sans, sans-serif"
-      : defaultFontFamily
-    
+    const fontFamily = this.formatting.monospace
+      ? "monospace"
+      : /comment-label/.test(this.cls)
+        ? "Helvetica, Arial, DejaVu Sans, sans-serif"
+        : defaultFontFamily
+
     const font = `${this.formatting.italic ? "italic" : "normal"} ${fontWeight} ${scaledFontSize} ${fontFamily}`
 
     let cache = LabelView.metricsCache[font]
