@@ -1136,10 +1136,14 @@ class BlockView {
     this.lines = lines
 
     if (this.info.local) {
-      let localPin = newView(new Icon('location', 1.2, this.isZebra
-        ? this.color.darker(65)
-        : this.color.lighter(65)))
-      
+      let localPin = newView(
+        new Icon(
+          "location",
+          1.2,
+          this.isZebra ? this.color.darker(65) : this.color.lighter(65),
+        ),
+      )
+
       objects.push(SVG.move(padding[1] * 2, pt, localPin.draw(options)))
     }
 
