@@ -28,7 +28,7 @@ const {
   makeHighContrastIcons,
   iconName,
   highContrastIcons,
-  coloredIcons: snapIcons,
+  snapIcons,
   zebraFilter,
 } = style
 

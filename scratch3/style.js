@@ -57,7 +57,8 @@ const highContrastIcons = new Set([
   "arrowLeftRightThin",
 ])
 
-const coloredIcons = new Set([
+const snapIcons = new Set([
+  "list",
   "cloud",
   "cloudGradient",
   "turtle",
@@ -101,7 +102,7 @@ const coloredIcons = new Set([
 
 export default class Style {
   static highContrastIcons = highContrastIcons
-  static coloredIcons = coloredIcons
+  static snapIcons = snapIcons
 
   static get cssContent() {
     return cssContent
@@ -1546,7 +1547,7 @@ export default class Style {
    */
   static iconName(name, options) {
     if (options.isHighContrast && highContrastIcons.has(name)) {
-      if (coloredIcons.has(name)) {
+      if (snapIcons.has(name)) {
         return name
       } else {
         return `${name}-high-contrast`
