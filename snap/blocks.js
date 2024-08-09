@@ -800,11 +800,11 @@ class BlockView {
               w - this.isBoolean * 8,
               y,
               true,
-              this.isBoolean ? 15 : 9,
+              lines[i].x || (this.isBoolean ? 15 : 9),
             ),
           )
           y += lines[i].height - 3
-          p.push(SVG.getArm(w - this.isBoolean * 8, y, this.isBoolean ? 15 : 9))
+          p.push(SVG.getArm(w - this.isBoolean * 8, y, lines[i].x || (this.isBoolean ? 15 : 9)))
 
           y += lines[i + 1].totalHeight + 3
           showBooleanRight = false
@@ -1284,7 +1284,7 @@ class BlockView {
         }
         if (child.isCShape) {
           isCSlot = true
-          y += this.isReporter || this.isBoolean ? 4 : 4
+          y += 4
           if (drawLines.length) {
             if (!drawLines[drawLines.length - 1]?.isScript) {
               if (!this.hasScript) {
@@ -1314,6 +1314,7 @@ class BlockView {
           } else if (this.isRing) {
             x += 1
           }
+          child.x = x
           SVG.move(x, y, child.el)
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
