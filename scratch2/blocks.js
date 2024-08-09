@@ -501,10 +501,7 @@ class InputView {
     } else if (this.icon) {
       label = this.icon.draw(options)
       h = this.icon.height + 4
-      w = this.icon.width
-            + this.hasArrow * 12
-            + 4
-            + 2
+      w = this.icon.width + this.hasArrow * 12 + 4 + 2
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
         label = this.label.draw(options)
@@ -580,7 +577,8 @@ class InputView {
       }),
     ])
     if (this.hasLabel || this.icon) {
-      let x, y = 0
+      let x,
+        y = 0
       if (this.isBoolean && this.isBig) {
         if (this.value == "true") {
           x = h / 2

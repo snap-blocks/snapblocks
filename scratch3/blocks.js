@@ -552,10 +552,7 @@ export class InputView {
     } else if (this.icon) {
       label = this.icon.draw(options)
       h = this.icon.height + 4
-      w = this.icon.width
-            + this.hasArrow * 12
-            + 4
-            + 2
+      w = this.icon.width + this.hasArrow * 12 + 4 + 2
     } else if (this.isColor) {
       w = 40
       h = 32
@@ -676,7 +673,7 @@ export class InputView {
       result.appendChild(circle)
     }
     if (this.hasArrow) {
-      console.log('height', h)
+      console.log("height", h)
       result.appendChild(
         SVG.move(
           w - 24,

@@ -738,8 +738,8 @@ function parseLines(code, languages) {
     }
 
     let isDropdown = false,
-        isReadonly = false,
-        value
+      isReadonly = false,
+      value
 
     if (!escapeV && / v|V$/.test(s)) {
       isDropdown = true
@@ -750,9 +750,9 @@ function parseLines(code, languages) {
 
     value = s
 
-    console.log('raw', raw)
+    console.log("raw", raw)
     if (raw == "[__shout__go__]") {
-      value = new Icon('greenFlag')
+      value = new Icon("greenFlag")
     }
 
     return isDropdown
@@ -895,7 +895,7 @@ function parseLines(code, languages) {
         tok = code[index]
 
         if (raw == "[__shout__go__]") {
-          value = new Icon('greenFlag')
+          value = new Icon("greenFlag")
         }
 
         let input = makeMenu("number-dropdown", value, end === "V")

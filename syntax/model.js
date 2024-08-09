@@ -256,7 +256,8 @@ export class Input {
       shape === "string" || shape === "color" || shape === "dropdown"
 
     this.hasLabel =
-      (!(this.isColor || this.isInset) || (this.value && this.isBoolean)) && !this.value.isIcon
+      (!(this.isColor || this.isInset) || (this.value && this.isBoolean)) &&
+      !this.value.isIcon
     this.label = this.hasLabel
       ? new Label(
           value,

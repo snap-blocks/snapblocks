@@ -555,10 +555,7 @@ class InputView {
     } else if (this.icon) {
       label = this.icon.draw(options)
       h = this.icon.height + 4
-      w = this.icon.width
-            + this.hasArrow * 12
-            + 4
-            + 2
+      w = this.icon.width + this.hasArrow * 12 + 4 + 2
     } else if (this.hasLabel) {
       if (!(this.isBoolean && !this.isBig)) {
         this.label.measure(options, parent.isZebra)
