@@ -169,13 +169,16 @@ export class LabelView {
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
-    const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${scaledFontSize} Helvetica, Arial, DejaVu Sans, sans-serif`
+    let fontFamily = this.formatting.monospace ? "monospace" :
+     /comment-label/.test(this.cls)
+      ? `Helvetica, Arial, DejaVu Sans, sans-serif`
       : /literal-boolean/.test(this.cls)
-        ? `${fontWeight} ${scaledFontSize} Arial, DejaVu Sans, sans-serif`
+        ? `Arial, DejaVu Sans, sans-serif`
         : /literal/.test(this.cls)
-          ? `${fontWeight} ${scaledFontSize} Arial, DejaVu Sans, sans-serif`
-          : `${fontWeight} ${scaledFontSize} ${defaultFontFamily}`
+          ? `Arial, DejaVu Sans, sans-serif`
+          : defaultFontFamily
+
+    const font = `${this.formatting.italic ? "italic" : "normal"} ${fontWeight} ${scaledFontSize} ${fontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -204,7 +207,7 @@ export class LabelView {
         // let wordHeight = (wordInfo.height ? wordInfo.height : fontSizeData.value + (2 * this.scale))
         let wordHeight = getFontHeight(fontSizeData.value)
         if (!first) {
-          if (options.showSpaces) {
+          if (options.showSpaces && !this.formatting.monospace) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
@@ -568,7 +571,7 @@ class InputView {
       h = this.label.height
 
       if (this.shape === "number" || this.shape === "number-dropdown") {
-        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + h + 2
+        w = this.label.width + 2 + Math.floor(this.hasArrow * 12 * 0.5) + Math.min(h, 12) + 2
       } else if (this.isBoolean && this.isBig) {
         h += 1
         w = 23 + h * 1.5
@@ -578,7 +581,7 @@ class InputView {
           this.label.lines.length <= 1 // single vs. multi-line contents
             ? this.label.rawHeight + this.hasArrow * 12
             : getFontHeight(this.label.fontSize) + this.hasArrow * 12,
-          0,
+          this.isBig * 23.8,
         )
       }
     } else {
@@ -668,7 +671,7 @@ class InputView {
         x = 2
         y = 2
       } else {
-        x = this.isRound ? Math.floor(h / 2) + 1 : 2 + 1
+        x = this.isRound ? Math.floor(Math.min(h, 12) / 2) + 1 : 2 + 1
         y = this.isRound ? 0 : 0
       }
       result.appendChild(SVG.move(x, y, label))

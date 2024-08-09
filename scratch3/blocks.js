@@ -141,9 +141,12 @@ export class LabelView {
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
-    const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${scaledFontSize} ${commentFont}`
-      : `${fontWeight} ${scaledFontSize} ${defaultFont}`
+    const fontFamily = this.formatting.monospace ? 
+    "monospace" : /comment-label/.test(this.cls)
+      ? commentFont
+      : defaultFont
+
+    const font = `${this.formatting.italic ? "italic" : "normal"} ${fontWeight} ${scaledFontSize} ${fontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -171,7 +174,7 @@ export class LabelView {
         // let wordHeight = (wordInfo.height ? wordInfo.height : fontSizeData.value + (2 * this.scale))
         let wordHeight = getFontHeight(fontSizeData.value)
         if (!first) {
-          if (options.showSpaces) {
+          if (options.showSpaces && !this.formatting.monospace) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
@@ -574,7 +577,7 @@ export class InputView {
         // Minimum width of 40, at which point we center the label
         h = this.label.height + 19
         const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
-        w = this.label.width + 2 * px
+        w = Math.max(this.label.width + 2 * px,this.isBig * 70)
         label = SVG.move(px, 9, label)
       }
     } else {

@@ -32,6 +32,10 @@ export class Label {
     this.height = 12
     this.metrics = null
     this.x = 0
+    this.formatting = {
+      italic: false,
+      monospace: false,
+    }
 
     this.isNewline = value == "\n"
 
@@ -264,7 +268,7 @@ export class Input {
           `literal-${this.shape}` + (isReadonly ? "-readonly" : ""),
         )
       : null
-    this.icon = this.value.isIcon ? this.value : null
+    this.icon = this.value?.isIcon ? this.value : null
     this.isBig = this.isBoolean && this.value ? this.value.length > 1 : null
     this.x = 0
   }

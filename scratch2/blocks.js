@@ -157,9 +157,11 @@ export class LabelView {
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
 
-    const font = /comment-label/.test(this.cls)
-      ? `${fontWeight} ${scaledFontSize} Helvetica, Arial, DejaVu Sans, sans-serif`
-      : `${fontWeight} ${scaledFontSize} ${defaultFontFamily}`
+    const fontFamily = this.formatting.monospace ? "monospace" : /comment-label/.test(this.cls)
+      ? "Helvetica, Arial, DejaVu Sans, sans-serif"
+      : defaultFontFamily
+    
+    const font = `${this.formatting.italic ? "italic" : "normal"} ${fontWeight} ${scaledFontSize} ${fontFamily}`
 
     let cache = LabelView.metricsCache[font]
     if (!cache) {
@@ -186,7 +188,7 @@ export class LabelView {
       for (let wordInfo of line) {
         let wordHeight = getFontHeight(fontSizeData.value)
         if (!first) {
-          if (options.showSpaces) {
+          if (options.showSpaces && !this.formatting.monospace) {
             x += this.spaceWidth / 2
             lineGroup.push(
               SVG.el("circle", {
@@ -514,7 +516,7 @@ class InputView {
         w = 26 + h * 1.5
       } else {
         w = Math.max(
-          14,
+          this.isBig ? 23.8 : 14,
           this.label.width +
             (this.shape === "string" || this.shape === "number-dropdown"
               ? 6

@@ -702,17 +702,21 @@ function parseLines(code, languages) {
     next() // '['
     let s = ""
     let raw = ""
+    let isBig = false
     let escapeV = false
+    let escapedLast = false
     let brackets = 0
     while (tok && ((tok !== "]" && brackets == 0) || brackets > 0)) {
       raw += tok
       if (tok === "\\") {
         next()
+        escapedLast = true
         raw += tok
         if (tok === "v") {
           escapeV = true
-        }
-        if (tok === ["n", "\n"].includes(peek())) {
+        } else if (tok === "]" && brackets) {
+          brackets -= 1
+        } else if (tok === ["n", "\n"].includes(peek())) {
           s += "\n"
           next()
         }
@@ -721,6 +725,7 @@ function parseLines(code, languages) {
         }
       } else {
         escapeV = false
+        escapedLast = false
         if (tok === "[") {
           brackets += 1
         } else if (tok === "]" && brackets) {
@@ -730,8 +735,19 @@ function parseLines(code, languages) {
       s += tok
       next()
     }
+    if (!tok) {
+      if (code[index - 1] == "]" && !escapedLast) {
+        s = s.slice(0, s.length - 2)
+        raw = raw.slice(0, raw.length - 2)
+      }
+    }
     if (tok === "]") {
       next()
+    }
+    if (raw[0] === "{" && raw[raw.length - 1] == "}" && !escapedLast) {
+      isBig = true
+      raw = raw.slice(1, raw.length - 1)
+      s = s.slice(1, s.length - 1)
     }
     if (hexColorPat.test(raw) || rgbColorPat.test(raw)) {
       return new Input("color", Color.fromString(s))
@@ -741,11 +757,47 @@ function parseLines(code, languages) {
       isReadonly = false,
       value
 
-    if (!escapeV && / v|V$/.test(s)) {
+    if (!escapeV && / [vV]$/.test(s)) {
       isDropdown = true
       isReadonly = / V$/.test(s)
       s = s.slice(0, s.length - 2)
       raw = raw.slice(0, raw.length - 2)
+    }
+
+    let formatting = {
+      italic: false,
+      monospace: false,
+    }
+
+    escapedLast = false
+    let start = raw[0]
+    let end = ''
+
+    for (let c = 0; c < raw.length; c++) {
+      const t = raw[c];
+      
+      if (t == '\\') {
+        escapedLast = true
+        c += 1
+      } else {
+        escapedLast = false
+      }
+    }
+
+    end = raw[raw.length - 1]
+    if (!escapedLast) {
+      let formatted = false
+      if (start == "`" && end == '`') {
+        formatting.monospace = true
+        formatted = true
+      } else if (start == "[" && end == "]") {
+        formatting.italic = !isReadonly
+        formatted = true
+      }
+
+      if (formatted) {
+        s = s.slice(1, s.length - 1)
+      }
     }
 
     value = s
@@ -755,15 +807,16 @@ function parseLines(code, languages) {
       value = new Icon("greenFlag")
     }
 
-    return isDropdown
+    let input = isDropdown
       ? makeMenu("dropdown", value, isReadonly)
-      : (() => {
-          let input = new Input("string", value, true)
-          if (input.hasLabel) {
-            input.label.raw = raw
-          }
-          return input
-        })()
+      : new Input("string", value, true)
+      
+    input.isBig = isBig
+    if (input.hasLabel) {
+      input.label.raw = raw
+      input.label.formatting = formatting
+    }
+    return input
   }
 
   function pBlock(end) {
@@ -864,15 +917,15 @@ function parseLines(code, languages) {
     // number-dropdown
     if (children.length > 1) {
       const last = children[children.length - 1]
-      let end = last.value
-      if (end === "v" || end === "V") {
+      let finalV = last.value
+      if (finalV === "v" || finalV === "V") {
         // Yes, I know this is a very hacky solution, I just want to keep all the spaces,
         // and deal with backslashes. I wish I could come up with a much better way then backtracking.
 
         let endIndex = index
         let currentIndex = endIndex
 
-        while (code[currentIndex] != end) {
+        while (code[currentIndex] != finalV) {
           currentIndex -= 1
         }
         currentIndex -= 2
@@ -891,16 +944,56 @@ function parseLines(code, languages) {
           raw += tok
         }
 
+        let isReadonly = finalV === "V"
+
+        console.log('value', value)
+
         index = endIndex
         tok = code[index]
+        
+        let formatting = {
+          italic: false,
+          monospace: false,
+        }
+    
+        let escapedLast = false
+        let start = raw[0]
+        let end = raw[raw.length - 1]
+    
+        for (let c = 0; c < raw.length; c++) {
+          const t = raw[c];
+          
+          if (t == '\\') {
+            escapedLast = true
+            c += 1
+          } else {
+            escapedLast = false
+          }
+        }
+
+        if (!escapedLast) {
+          let formatted = false
+          if (start == "`" && end == '`') {
+            formatting.monospace = true
+            formatted = true
+          } else if (start == "[" && end == "]") {
+            formatting.italic = !isReadonly
+            formatted = true
+          }
+    
+          if (formatted) {
+            value = value.slice(1, value.length - 1)
+          }
+        }
 
         if (raw == "[__shout__go__]") {
           value = new Icon("greenFlag")
         }
 
-        let input = makeMenu("number-dropdown", value, end === "V")
+        let input = makeMenu("number-dropdown", value, isReadonly)
         if (input.hasLabel) {
           input.label.raw = raw
+          input.label.formatting = formatting
         }
         return input
       }
