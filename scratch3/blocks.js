@@ -1435,11 +1435,17 @@ export class CommentView {
   }
 
   measure(options) {
-    this.label.measure(options)
+    this.label.measure({
+      ...options,
+      showSpaces: false,
+    })
   }
 
   draw(options) {
-    const labelEl = this.label.draw(options)
+    const labelEl = this.label.draw({
+      ...options,
+      showSpaces: false,
+    })
 
     this.width = this.label.width + 16
     return SVG.group([

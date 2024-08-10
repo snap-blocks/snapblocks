@@ -1240,7 +1240,10 @@ class CommentView {
   }
 
   measure(options) {
-    this.label.measure(options)
+    this.label.measure({
+      ...options,
+      showSpaces: false,
+    })
   }
 
   draw(options) {
