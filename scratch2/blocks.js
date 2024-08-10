@@ -197,7 +197,7 @@ export class LabelView {
                 cx: x,
                 cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
-                class: "snap-space",
+                class: "sb-space",
               }),
             )
             x += this.spaceWidth / 2
