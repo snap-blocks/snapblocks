@@ -420,7 +420,7 @@ registerCheck("OPERATORS_MATHOP", (info, children, lang) => {
     return
   }
   const last = children[children.length - 1]
-  if (last.isInput && last.hasArrow || last.isRing) {
+  if ((last.isInput && last.hasArrow) || last.isRing) {
     return
   }
   const name = first.value
@@ -434,7 +434,7 @@ registerCheck("snap:reportTextFunction", (info, children, lang) => {
     return
   }
   const last = children[children.length - 1]
-  if (last.isInput && last.hasArrow || last.isRing) {
+  if ((last.isInput && last.hasArrow) || last.isRing) {
     return
   }
   const name = first.value
@@ -448,7 +448,7 @@ registerCheck("snap:reportListAttribute", (info, children, lang) => {
     return
   }
   const last = children[children.length - 1]
-  if (last.isInput && last.hasArrow || last.isRing) {
+  if ((last.isInput && last.hasArrow) || last.isRing) {
     return
   }
   const name = first.value
@@ -462,7 +462,7 @@ registerCheck("SENSING_OF", (info, children, lang) => {
     return true
   }
   const last = children[children.length - 1]
-  if (last.isInput && last.hasArrow || last.isRing) {
+  if ((last.isInput && last.hasArrow) || last.isRing) {
     return true
   }
   const name = first.value
