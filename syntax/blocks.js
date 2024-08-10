@@ -419,6 +419,10 @@ registerCheck("OPERATORS_MATHOP", (info, children, lang) => {
   if (!first.isInput) {
     return
   }
+  const last = children[children.length - 1]
+  if (last.isInput && last.hasArrow || last.isRing) {
+    return
+  }
   const name = first.value
   return lang.of.math.includes(name.toLowerCase())
 })
@@ -427,6 +431,10 @@ registerCheck("snap:reportTextFunction", (info, children, lang) => {
   // Operators if text function
   const first = children[0]
   if (!first.isInput) {
+    return
+  }
+  const last = children[children.length - 1]
+  if (last.isInput && last.hasArrow || last.isRing) {
     return
   }
   const name = first.value
@@ -439,6 +447,10 @@ registerCheck("snap:reportListAttribute", (info, children, lang) => {
   if (!first.isInput) {
     return
   }
+  const last = children[children.length - 1]
+  if (last.isInput && last.hasArrow || last.isRing) {
+    return
+  }
   const name = first.value
   return lang.of.list.includes(name.toLowerCase())
 })
@@ -447,7 +459,11 @@ registerCheck("SENSING_OF", (info, children, lang) => {
   // sensing if not math, text, or list function
   const first = children[0]
   if (!first.isInput) {
-    return
+    return true
+  }
+  const last = children[children.length - 1]
+  if (last.isInput && last.hasArrow || last.isRing) {
+    return true
   }
   const name = first.value
   return (
