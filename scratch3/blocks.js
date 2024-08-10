@@ -677,7 +677,6 @@ export class InputView {
       result.appendChild(circle)
     }
     if (this.hasArrow) {
-      console.log("height", h)
       result.appendChild(
         SVG.move(
           w - 24,

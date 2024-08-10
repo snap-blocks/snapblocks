@@ -802,7 +802,6 @@ function parseLines(code, languages) {
 
     value = s
 
-    console.log("raw", raw)
     if (raw == "[__shout__go__]") {
       value = new Icon("greenFlag")
     }
@@ -945,8 +944,6 @@ function parseLines(code, languages) {
         }
 
         let isReadonly = finalV === "V"
-
-        console.log("value", value)
 
         index = endIndex
         tok = code[index]
