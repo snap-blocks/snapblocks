@@ -509,7 +509,7 @@ function parseLines(code, languages) {
       if (tok === end) {
         break
       }
-      if (tok === "/" && peek() === "/" && !end) {
+      if (tok === "/" && peek() === "/") {
         break
       }
 
@@ -831,7 +831,19 @@ function parseLines(code, languages) {
       sawNL = true
       next()
     }
+
+    let comment = null
+
+    console.log('tok', tok)
+    if (tok === "/" && peek() === "/") {
+      console.log('comment before end', end)
+      comment = pComment(end)
+    }
+
     if (children.length === 0) {
+      if (comment) {
+        return comment
+      }
       return
     }
 
@@ -842,6 +854,10 @@ function parseLines(code, languages) {
         child.isBlock &&
         (child.isReporter || child.isBoolean || child.isRing)
       ) {
+        if (comment) {
+          child.comment = comment
+          comment.hasBlock = true
+        }
         return child
       }
     }
@@ -859,7 +875,13 @@ function parseLines(code, languages) {
         )
       }
     }
-    return makeBlock("stack", children)
+    let block = makeBlock("stack", children)
+    if (comment) {
+      comment.hasBlock = true
+      block.comment = comment
+    }
+    
+    return block
   }
 
   function pReporter() {
@@ -867,6 +889,7 @@ function parseLines(code, languages) {
 
     // set start index
     let startIndex = index
+    let comment = null
 
     let text = ""
     // empty number-dropdown
@@ -893,6 +916,10 @@ function parseLines(code, languages) {
     }
 
     const children = pParts(")")
+    console.log('pReporter tok', tok)
+    if (tok && tok === "/" && peek() === "/") {
+      comment = pComment(")")
+    }
     if (tok && tok === ")") {
       next()
     }
@@ -1039,12 +1066,21 @@ function parseLines(code, languages) {
       }
     }
 
+    if (comment) {
+      block.comment = comment
+      comment.hasBlock = true
+    }
+
     return block
   }
 
   function pPredicate() {
     next() // '<'
     const children = pParts(">")
+    let comment = null
+    if (tok && tok === "/" && peek() === "/") {
+      comment = pComment(">")
+    }
     if (tok && tok === ">") {
       next()
     }
@@ -1065,7 +1101,14 @@ function parseLines(code, languages) {
     ) {
       return new Input("boolean", children[0].value.toLowerCase())
     }
-    return makeBlock("boolean", children)
+    const block = makeBlock("boolean", children)
+
+    if (comment) {
+      block.comment = comment
+      comment.hasBlock = true
+    }
+
+    return block
   }
 
   function pEmbedded() {
@@ -1080,6 +1123,12 @@ function parseLines(code, languages) {
     const f = function () {
       while (tok && tok !== "}") {
         const block = pBlock("}")
+        if (block && block.isComment) {
+          let comment = block
+          block = makeBlock("stack", [])
+          comment.hasBlock = true
+          block.comment = comment
+        }
         if (block) {
           return block
         }
@@ -1094,8 +1143,15 @@ function parseLines(code, languages) {
     if (tok === "}") {
       next()
     }
-    if (!sawNL) {
-      assert(blocks.length <= 1)
+    if (!isCShape) {
+      for (let block of blocks) {
+        console.log("comment", block.comment)
+        if (block.comment) {
+          let label = block.comment.label.value
+        }
+      }
+    }
+    if (!sawNL && blocks.length <= 1) {
       return blocks.length ? blocks[0] : makeBlock("stack", [])
     }
     const block = new Script(blocks)
@@ -1153,6 +1209,7 @@ function parseLines(code, languages) {
   function pComment(end) {
     next()
     next()
+    console.log('comment end', end)
     let comment = ""
     if (tok === " ") {
       next()
