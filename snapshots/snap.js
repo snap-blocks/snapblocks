@@ -19,10 +19,10 @@ test(
   turn ↺ (15) degrees
 
   point in direction (90 v)
-  point towards [mouse-pointer V]
+  point towards [[mouse-pointer] V]
 
   go to x: (0) y: (0)
-  go to [random position V]
+  go to [[random position] V]
   glide (1) secs to x: (0) y: (0)
 
   change x by (10)
@@ -54,8 +54,10 @@ test(
   think [Hmm...] for (2) secs
   think [Hmm...]
 
-  ([width V] of costume [current V])
-  (stretch [current V] x: (100) y: (50) %)
+  ([width V] of costume [costume1 V])
+  ([width V] of costume [[current] V])
+  (stretch [costume1 V] x: (100) y: (50) %)
+  (stretch [[current] V] x: (100) y: (50) %)
   (new costume @list width ( v) height ( v))
   (new costume (costume) width ( v) height ( v))
 
@@ -110,7 +112,9 @@ test(
   stop all sounds
 
   play sound [ V] at (44100 v) Hz
+  play sound [pop V] at (44100 v) Hz
   ([duration V] of sound [ V])
+  ([duration V] of sound [pop V])
   (new sound @list rate (44100 v) Hz)
   (new sound (list) rate (44100 v) Hz)
 
@@ -194,9 +198,11 @@ test(
 
   when I receive [ V]
   when I receive [ V] ▸
+  when I receive [[__shout__go__] V] ▸
   when I receive [ V] ((data)) ◂
   broadcast [ V]
   broadcast [ V] ▸
+  broadcast [[__shout__go__] V] ▸
   broadcast [ V] to [all V] ◂▸
   broadcast [ V] to [all V] with data [] ◂
   broadcast [ V] and wait
@@ -319,17 +325,21 @@ test(
   (ask [ V] for (()▸) (list))
 
   when I start as a clone
-  create clone of [myself V]
-  (a new clone of [myself V])
+  create clone of [Sprite V]
+  create clone of [[myself] V]
+  (a new clone of [Sprite V])
+  (a new clone of [[myself] V])
   delete this clone
 
   pause all @pause
-  switch to scene [next V] ▸
-  switch to scene [next V] and send [ v] ◂▸
-  switch to scene [next V] and send [ v] with data [] ◂
+  switch to scene [Scene1 V] ▸
+  switch to scene [[next] V] ▸
+  switch to scene [[next] V] and send [ v] ◂▸
+  switch to scene [[next] V] and send [ v] with data [] ◂
 
-  when [anything V] is edited ▸
-  when [anything V] is edited ((data)) ◂
+  when [Sprite V] is edited ▸
+  when [[anything] V] is edited ▸
+  when [[anything] V] is edited ((data)) ◂
   define ((block)) [] (()▸)
   delete block (()▸)
   set [label V] of block (()▸) to []
@@ -340,6 +350,9 @@ test(
   // Dev mode
 
   (message)
+  (zip (() @addInput) inputs:
+  [] leaf-rank () 
+  [] leaf-rank () :: control)
   run ({}▸) w/continuation
   (call ({}▸) w/continuation)
 
@@ -355,7 +368,7 @@ test(
   `
   // Sensing
 
-  <touching [mouse-pointer V] ?>
+  <touching [[mouse-pointer] V] ?>
   <touching color [#911a44] ?>
   <color [#911a44] is touching [#911a44] ?>
 
@@ -369,16 +382,17 @@ test(
 
   <key [space V] pressed?>
 
-  ([distance V] to [mouse-pointer V])
-  ([hue V] at [mouse-pointer V])
+  ([distance V] to [[mouse-pointer] V])
+  ([hue V] at [[mouse-pointer] V])
 
   reset timer
   (timer)
   (current [date V])
 
-  ([costume # V] of [ V])
+  ([[costume #] V] of [ V])
+  ([var V] of [Sprite V])
   (my [neighbors V])
-  (object [myself V])
+  (object [[myself] V])
 
   (url [snap.berkeley.edu])
   (microphone [volume V])
@@ -432,6 +446,7 @@ test(
   (sum (list))
 
   (() - ())
+  (() − ())
 
   (() * ())
   (() × ())
@@ -612,8 +627,8 @@ test(
 
   <not <>>
 
-  <true> // no visual boolean icon yet
-  <false> // no visual boolean icon yet
+  <true>
+  <false>
 
   (join [] ◂▸)
   (join [] ◂⋮▸)
@@ -624,6 +639,9 @@ test(
   (join input list: (list))
   (join (list))
 
+  (split [hello world] by [  v])
+  (split [hello world] by [word v])
+  (split [hello world] by [[word] v])
   (letter (1 v) of [world])
   ([length V] of text [world])
   (length of [world])
@@ -651,6 +669,10 @@ test(
   (JavaScript function \\( ⋮▸ \\) \\{ [] \\} )
   (JavaScript function \\( (list) \\) \\{ [] \\} )
   (JavaScript function \\( input list: (list) \\) \\{ [] \\} )
+  (JavaScript function \\( [] ◂⋮▸ \\) \\{ [\`let hello = "hello"
+let world = 'world'
+
+return \`\${hello} \${world}\`\`] \\} )
 
   // Dev mode
 
@@ -698,6 +720,8 @@ test(
   (item (1 v) of [list V])
   (item (1 v) of @list)
   (item (1 v) of (list))
+  (item ([last] v) of @list)
+  (item (last v) of @list)
   (all but first of @list)
   (all but first of (list))
 
@@ -758,6 +782,8 @@ test(
   add [thing] to (list)
   delete (1 v) of @list
   delete (1 v) of (list)
+  delete ([random] v) of @list
+  delete (random v) of @list
   insert [thing] at (1 v) of @list
   insert [thing] at (1 v) of (list)
   replace item (1 v) of @list with [thing]
@@ -798,23 +824,7 @@ test(
   "en-other",
   `
   // other
-  primitive [ V] [] ◂▸
-  primitive [ V] [] ◂⋮▸
-  primitive [ V] [] [] ◂▸
-  primitive [ V] [] [] ◂⋮▸
-  primitive [ V] ▸
-  primitive [ V] ⋮▸
-  primitive [ V] input list: (list)
-  primitive [ V] (list)
-
-  (primitive [ V] [] ◂▸)
-  (primitive [ V] [] ◂⋮▸)
-  (primitive [ V] [] [] ◂▸)
-  (primitive [ V] [] [] ◂⋮▸)
-  (primitive [ V] ▸)
-  (primitive [ V] ⋮▸)
-  (primitive [ V] input list: (list))
-  (primitive [ V] (list))
+  <t> primitive [ V]
 
   extension [ V] [] ◂▸
   extension [ V] [] ◂⋮▸
@@ -833,6 +843,24 @@ test(
   (extension [ V] ⋮▸)
   (extension [ V] input list: (list))
   (extension [ V] (list))
+
+  primitive [ V] [] ◂▸
+  primitive [ V] [] ◂⋮▸
+  primitive [ V] [] [] ◂▸
+  primitive [ V] [] [] ◂⋮▸
+  primitive [ V] ▸
+  primitive [ V] ⋮▸
+  primitive [ V] input list: (list)
+  primitive [ V] (list)
+
+  (primitive [ V] [] ◂▸)
+  (primitive [ V] [] ◂⋮▸)
+  (primitive [ V] [] [] ◂▸)
+  (primitive [ V] [] [] ◂⋮▸)
+  (primitive [ V] ▸)
+  (primitive [ V] ⋮▸)
+  (primitive [ V] input list: (list))
+  (primitive [ V] (list))
 
   map ({}▸) to [code V] []
   map [String V] to code [<#1>]
@@ -859,5 +887,9 @@ test(
   <custom block :: operators> :: define+
 
   <custom block>
+
+  {local block :: local motion} :: define+
+
+  local block
   `,
 )
