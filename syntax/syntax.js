@@ -54,9 +54,12 @@ function paintBlock(info, children, languages) {
   }
   const string = words.join(" ")
   const shortHash = (info.hash = minifyHash(string))
+  let o = null
 
+  if (!overrides.includes('reset')) {
+    o = lookupHash(shortHash, info, children, languages)
+  }
   // paint
-  const o = lookupHash(shortHash, info, children, languages)
   let lang
   let type
 
@@ -94,6 +97,7 @@ function paintBlock(info, children, languages) {
       children = [new Label(". . .")]
     }
   } else if (
+    !overrides.includes('reset') &&
     info.shape === "boolean" &&
     children.length === 1 &&
     children[0].isInput &&
@@ -246,7 +250,7 @@ function paintBlock(info, children, languages) {
         break // We don't need to check other languages, do we?
       }
 
-      if (!isDefineBlock(children, lang, !overrides.includes("define"))) {
+      if ((overrides.includes('reset') && !overrides.includes("define")) || !isDefineBlock(children, lang, !overrides.includes("define"))) {
         continue
       }
 
@@ -347,16 +351,16 @@ function paintBlock(info, children, languages) {
   applyOverrides(info, overrides)
 
   // loop arrows
-  if (
-    info.hasLoopArrow &&
-    !(
-      children[children.length - 1].isIcon &&
-      ["loopArrow", "loop"].includes(children[children.length - 1].name)
-    )
-  ) {
-    let arrow = new Icon("loopArrow")
-    children.push(arrow)
-  }
+  // if (
+  //   !overrides.includes('noloop') && info.hasLoopArrow &&
+  //   !(
+  //     children[children.length - 1].isIcon &&
+  //     ["loopArrow", "loop"].includes(children[children.length - 1].name)
+  //   )
+  // ) {
+  //   let arrow = new Icon("loopArrow")
+  //   children.push(arrow)
+  // }
 
   const block = new Block(info, children)
 
