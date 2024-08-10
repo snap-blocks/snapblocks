@@ -429,7 +429,7 @@ class IconView {
         width: 2,
         height: 10,
         dy: 0,
-        scale: 10 / 12,
+        scale: 11 / 12,
         color: new Color(0, 0, 0),
       },
       list: { width: 8, height: 10 },
@@ -1180,7 +1180,7 @@ class BlockView {
           children[index + 1].isIcon &&
           children[index + 1].name === "verticalEllipsis"
         ) {
-          x += 6
+          x += child.width + 1
         } else if (
           child.isIcon &&
           child.name === "verticalEllipsis" &&
@@ -1194,7 +1194,7 @@ class BlockView {
               children[index + 1].name === "addInput"
             ))
         ) {
-          x += 3
+          x += child.width
         } else {
           x += child.width + space
           if (
@@ -1377,7 +1377,7 @@ class BlockView {
               line[index + 1].isIcon &&
               line[index + 1].name === "addInput"
             ) {
-              x += 3
+              x += child.width
             } else if (
               child.isIcon &&
               child.name === "delInput" &&
@@ -1385,7 +1385,7 @@ class BlockView {
               line[index + 1].isIcon &&
               line[index + 1].name === "verticalEllipsis"
             ) {
-              x += 6
+              x += child.width + 1
             } else if (
               child.isIcon &&
               child.name === "verticalEllipsis" &&
@@ -1399,8 +1399,16 @@ class BlockView {
                   line[index + 1].name === "addInput"
                 ))
             ) {
-              x += 3
+              x += child.width
               SVG.move(-5, 0, child.el)
+            } else if (
+              child.isIcon &&
+              child.name === "delInput" &&
+              line[index + 1] &&
+              line[index + 1].isIcon &&
+              line[index + 1].name === "addInput"
+            ) {
+              x += child.width + 1
             } else {
               x += child.width + space
             }
