@@ -656,7 +656,9 @@ function parseLines(code, languages) {
               next()
               break
             }
-            children.push(label)
+            if (!children.includes(label)) {
+              children.push(label)
+            }
             next() // escape character
           // fallthrough
           case ":":
