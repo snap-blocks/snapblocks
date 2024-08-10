@@ -834,9 +834,9 @@ function parseLines(code, languages) {
 
     let comment = null
 
-    console.log('tok', tok)
+    console.log("tok", tok)
     if (tok === "/" && peek() === "/") {
-      console.log('comment before end', end)
+      console.log("comment before end", end)
       comment = pComment(end)
     }
 
@@ -880,7 +880,7 @@ function parseLines(code, languages) {
       comment.hasBlock = true
       block.comment = comment
     }
-    
+
     return block
   }
 
@@ -916,7 +916,7 @@ function parseLines(code, languages) {
     }
 
     const children = pParts(")")
-    console.log('pReporter tok', tok)
+    console.log("pReporter tok", tok)
     if (tok && tok === "/" && peek() === "/") {
       comment = pComment(")")
     }
@@ -1209,7 +1209,7 @@ function parseLines(code, languages) {
   function pComment(end) {
     next()
     next()
-    console.log('comment end', end)
+    console.log("comment end", end)
     let comment = ""
     if (tok === " ") {
       next()
