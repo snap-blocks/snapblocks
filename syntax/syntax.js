@@ -56,7 +56,7 @@ function paintBlock(info, children, languages) {
   const shortHash = (info.hash = minifyHash(string))
   let o = null
 
-  if (!overrides.includes('reset')) {
+  if (!overrides.includes("reset")) {
     o = lookupHash(shortHash, info, children, languages)
   }
   // paint
@@ -97,7 +97,7 @@ function paintBlock(info, children, languages) {
       children = [new Label(". . .")]
     }
   } else if (
-    !overrides.includes('reset') &&
+    !overrides.includes("reset") &&
     info.shape === "boolean" &&
     children.length === 1 &&
     children[0].isInput &&
@@ -250,7 +250,10 @@ function paintBlock(info, children, languages) {
         break // We don't need to check other languages, do we?
       }
 
-      if ((overrides.includes('reset') && !overrides.includes("define")) || !isDefineBlock(children, lang, !overrides.includes("define"))) {
+      if (
+        (overrides.includes("reset") && !overrides.includes("define")) ||
+        !isDefineBlock(children, lang, !overrides.includes("define"))
+      ) {
         continue
       }
 
