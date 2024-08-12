@@ -82,9 +82,10 @@ export default class SVG {
     return text
   }
 
-  static symbol(href) {
+  static symbol(href, props) {
     return SVG.el("use", {
       href: href,
+      ...props,
     })
   }
 
@@ -479,14 +480,14 @@ export default class SVG {
   }
 
   static commentRect(w, h, props) {
-    return SVG.roundRect(w, h, 4, { ...props, class: "sb3-comment" })
+    return SVG.roundRect(w, h, 4, { ...props })
   }
 
   static commentLine(width, props) {
     return SVG.move(
       -width,
       9,
-      SVG.rect(width, 2, { ...props, class: "sb3-comment-line" }),
+      SVG.rect(width, 2, props ),
     )
   }
 

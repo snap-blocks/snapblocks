@@ -484,7 +484,6 @@ export default class SVG {
     const r = 6
     return SVG.path({
       ...props,
-      class: "sb-comment",
       path: [
         "M",
         r,
@@ -502,7 +501,7 @@ export default class SVG {
     return SVG.move(
       -width,
       9,
-      SVG.rect(width, 2, { ...props, class: "sb-comment-line" }),
+      SVG.rect(width, 2, props),
     )
   }
 

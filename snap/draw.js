@@ -866,7 +866,6 @@ export default class SVG {
     const r = 8
     return SVG.path({
       ...props,
-      class: "snap-comment",
       path: [
         "M",
         r,
@@ -884,7 +883,7 @@ export default class SVG {
     return SVG.move(
       -width,
       height / 2,
-      SVG.rect(width, 1, { ...props, class: "snap-comment-line" }),
+      SVG.rect(width, 1, { ...props }),
     )
   }
 

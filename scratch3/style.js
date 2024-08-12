@@ -108,149 +108,156 @@ export default class Style {
     return cssContent
   }
 
-  static categories = {
-    motion: {
-      primary: Color.fromString("#4c97ff"),
-      secondary: Color.fromString("#4280d7"),
-      tertiary: Color.fromString("#3373cc"),
+  static colors = {
+    comment: {
+      border: Color.fromString('#bcA903'),
+      body: Color.fromString('#fef49c'),
     },
-    looks: {
-      primary: Color.fromString("#9966ff"),
-      secondary: Color.fromString("#855cd6"),
-      tertiary: Color.fromString("#774dcb"),
-    },
-    sound: {
-      primary: Color.fromString("#cf63cf"),
-      secondary: Color.fromString("#c94fc9"),
-      tertiary: Color.fromString("#bd42bd"),
-    },
-    control: {
-      primary: Color.fromString("#ffab19"),
-      secondary: Color.fromString("#ec9c13"),
-      tertiary: Color.fromString("#cf8b17"),
-    },
-    events: {
-      primary: Color.fromString("#ffbf00"),
-      secondary: Color.fromString("#e6ac00"),
-      tertiary: Color.fromString("#cc9900"),
-    },
-    sensing: {
-      primary: Color.fromString("#5cb1d6"),
-      secondary: Color.fromString("#47a8d1"),
-      tertiary: Color.fromString("#2e8eb8"),
-    },
-    operators: {
-      primary: Color.fromString("#59c059"),
-      secondary: Color.fromString("#46b946"),
-      tertiary: Color.fromString("#389438"),
-    },
-    variables: {
-      primary: Color.fromString("#ff8c1a"),
-      secondary: Color.fromString("#ff8000"),
-      tertiary: Color.fromString("#db6e00"),
-    },
-    lists: {
-      primary: Color.fromString("#ff661a"),
-      secondary: Color.fromString("#ff5500"),
-      tertiary: Color.fromString("#e64d00"),
-    },
-    custom: {
-      primary: Color.fromString("#ff6680"),
-      secondary: Color.fromString("#ff4d6a"),
-      tertiary: Color.fromString("#ff3355"),
-    },
-    extension: {
-      primary: Color.fromString("#0fbd8c"),
-      secondary: Color.fromString("#0da57a"),
-      tertiary: Color.fromString("#0b8e69"),
-    },
-    obsolete: {
-      primary: Color.fromString("#ed4242"),
-      secondary: Color.fromString("#db3333"),
-      tertiary: Color.fromString("#ca2b2b"),
-    },
-    other: {
-      primary: Color.fromString("#bfbfbf"),
-      secondary: Color.fromString("#b2b2b2"),
-      tertiary: Color.fromString("#909090"),
-    },
-  }
 
-  static highContrastCategories = {
-    motion: {
-      primary: Color.fromString("#80b5ff"),
-      secondary: Color.fromString("#b3d2ff"),
-      tertiary: Color.fromString("#3373cc"),
+    categories: {
+      motion: {
+        primary: Color.fromString("#4c97ff"),
+        secondary: Color.fromString("#4280d7"),
+        tertiary: Color.fromString("#3373cc"),
+      },
+      looks: {
+        primary: Color.fromString("#9966ff"),
+        secondary: Color.fromString("#855cd6"),
+        tertiary: Color.fromString("#774dcb"),
+      },
+      sound: {
+        primary: Color.fromString("#cf63cf"),
+        secondary: Color.fromString("#c94fc9"),
+        tertiary: Color.fromString("#bd42bd"),
+      },
+      control: {
+        primary: Color.fromString("#ffab19"),
+        secondary: Color.fromString("#ec9c13"),
+        tertiary: Color.fromString("#cf8b17"),
+      },
+      events: {
+        primary: Color.fromString("#ffbf00"),
+        secondary: Color.fromString("#e6ac00"),
+        tertiary: Color.fromString("#cc9900"),
+      },
+      sensing: {
+        primary: Color.fromString("#5cb1d6"),
+        secondary: Color.fromString("#47a8d1"),
+        tertiary: Color.fromString("#2e8eb8"),
+      },
+      operators: {
+        primary: Color.fromString("#59c059"),
+        secondary: Color.fromString("#46b946"),
+        tertiary: Color.fromString("#389438"),
+      },
+      variables: {
+        primary: Color.fromString("#ff8c1a"),
+        secondary: Color.fromString("#ff8000"),
+        tertiary: Color.fromString("#db6e00"),
+      },
+      lists: {
+        primary: Color.fromString("#ff661a"),
+        secondary: Color.fromString("#ff5500"),
+        tertiary: Color.fromString("#e64d00"),
+      },
+      custom: {
+        primary: Color.fromString("#ff6680"),
+        secondary: Color.fromString("#ff4d6a"),
+        tertiary: Color.fromString("#ff3355"),
+      },
+      extension: {
+        primary: Color.fromString("#0fbd8c"),
+        secondary: Color.fromString("#0da57a"),
+        tertiary: Color.fromString("#0b8e69"),
+      },
+      obsolete: {
+        primary: Color.fromString("#ed4242"),
+        secondary: Color.fromString("#db3333"),
+        tertiary: Color.fromString("#ca2b2b"),
+      },
+      other: {
+        primary: Color.fromString("#bfbfbf"),
+        secondary: Color.fromString("#b2b2b2"),
+        tertiary: Color.fromString("#909090"),
+      },
     },
-    looks: {
-      primary: Color.fromString("#ccb3ff"),
-      secondary: Color.fromString("#ddccff"),
-      tertiary: Color.fromString("#774dcb"),
-    },
-    sound: {
-      primary: Color.fromString("#e19de1"),
-      secondary: Color.fromString("#ffb3ff"),
-      tertiary: Color.fromString("#bd42bd"),
-    },
-    control: {
-      primary: Color.fromString("#ffbe4c"),
-      secondary: Color.fromString("#ffda99"),
-      tertiary: Color.fromString("#cf8b17"),
-    },
-    events: {
-      primary: Color.fromString("#ffd966"),
-      secondary: Color.fromString("#ffecb3"),
-      tertiary: Color.fromString("#cc9900"),
-    },
-    sensing: {
-      primary: Color.fromString("#85c4e0"),
-      secondary: Color.fromString("#aed8ea"),
-      tertiary: Color.fromString("#2e8eb8"),
-    },
-    operators: {
-      primary: Color.fromString("#7ece7e"),
-      secondary: Color.fromString("#b5e3b5"),
-      tertiary: Color.fromString("#389438"),
-    },
-    variables: {
-      primary: Color.fromString("#ffa54c"),
-      secondary: Color.fromString("#ffcc99"),
-      tertiary: Color.fromString("#db6e00"),
-    },
-    lists: {
-      primary: Color.fromString("#ff9966"),
-      secondary: Color.fromString("#ffcab0"),
-      tertiary: Color.fromString("#e64d00"),
-    },
-    custom: {
-      primary: Color.fromString("#ff99aa"),
-      secondary: Color.fromString("#ffccd5"),
-      tertiary: Color.fromString("#e64d00"),
-    },
-    extension: {
-      primary: Color.fromString("#13ecaf"),
-      secondary: Color.fromString("#75f0cd"),
-      tertiary: Color.fromString("#0b8e69"),
-    },
-    /* Manually picked to be readable on black text */
-    obsolete: {
-      primary: Color.fromString("#fc6666"),
-      secondary: Color.fromString("#fcb0b0"),
-      tertiary: Color.fromString("#d32121"),
-    },
-    other: {
-      primary: Color.fromString("#bfbfbf"),
-      secondary: Color.fromString("#b2b2b2"),
-      /* Changed to be AAA against #000000, was AA */
-      tertiary: Color.fromString("#959595"),
-    },
+
+    highContrastCategories: {
+      motion: {
+        primary: Color.fromString("#80b5ff"),
+        secondary: Color.fromString("#b3d2ff"),
+        tertiary: Color.fromString("#3373cc"),
+      },
+      looks: {
+        primary: Color.fromString("#ccb3ff"),
+        secondary: Color.fromString("#ddccff"),
+        tertiary: Color.fromString("#774dcb"),
+      },
+      sound: {
+        primary: Color.fromString("#e19de1"),
+        secondary: Color.fromString("#ffb3ff"),
+        tertiary: Color.fromString("#bd42bd"),
+      },
+      control: {
+        primary: Color.fromString("#ffbe4c"),
+        secondary: Color.fromString("#ffda99"),
+        tertiary: Color.fromString("#cf8b17"),
+      },
+      events: {
+        primary: Color.fromString("#ffd966"),
+        secondary: Color.fromString("#ffecb3"),
+        tertiary: Color.fromString("#cc9900"),
+      },
+      sensing: {
+        primary: Color.fromString("#85c4e0"),
+        secondary: Color.fromString("#aed8ea"),
+        tertiary: Color.fromString("#2e8eb8"),
+      },
+      operators: {
+        primary: Color.fromString("#7ece7e"),
+        secondary: Color.fromString("#b5e3b5"),
+        tertiary: Color.fromString("#389438"),
+      },
+      variables: {
+        primary: Color.fromString("#ffa54c"),
+        secondary: Color.fromString("#ffcc99"),
+        tertiary: Color.fromString("#db6e00"),
+      },
+      lists: {
+        primary: Color.fromString("#ff9966"),
+        secondary: Color.fromString("#ffcab0"),
+        tertiary: Color.fromString("#e64d00"),
+      },
+      custom: {
+        primary: Color.fromString("#ff99aa"),
+        secondary: Color.fromString("#ffccd5"),
+        tertiary: Color.fromString("#e64d00"),
+      },
+      extension: {
+        primary: Color.fromString("#13ecaf"),
+        secondary: Color.fromString("#75f0cd"),
+        tertiary: Color.fromString("#0b8e69"),
+      },
+      /* Manually picked to be readable on black text */
+      obsolete: {
+        primary: Color.fromString("#fc6666"),
+        secondary: Color.fromString("#fcb0b0"),
+        tertiary: Color.fromString("#d32121"),
+      },
+      other: {
+        primary: Color.fromString("#bfbfbf"),
+        secondary: Color.fromString("#b2b2b2"),
+        /* Changed to be AAA against #000000, was AA */
+        tertiary: Color.fromString("#959595"),
+      },
+    }
   }
 
   static categoryColor(category, isHighContrast) {
-    let categories = Style.categories,
+    let categories = Style.colors.categories,
       color
     if (isHighContrast) {
-      categories = Style.highContrastCategories
+      categories = Style.colors.highContrastCategories
     }
 
     if (categories[category]) {
@@ -1227,6 +1234,25 @@ export default class Style {
       ),
 
       SVG.setProps(
+        SVG.el('path', {
+          d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
+          stroke: "none",
+          fill: "#575e75",
+        }),
+        {
+          id: "sb3-commentArrowDown"
+        }
+      ),
+
+      SVG.setProps(SVG.el('use', {
+          href: "#sb3-commentArrowDown",
+          transform: "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
+        }),
+      {
+        id: "sb3-commentArrowUp"
+      }),
+
+      SVG.setProps(
         SVG.group([
           SVG.el("path", {
             d: "M22.68,12.2a1.6,1.6,0,0,1-1.27.63H13.72a1.59,1.59,0,0,1-1.16-2.58l1.12-1.41a4.82,4.82,0,0,0-3.14-.77,4.31,4.31,0,0,0-2,.8,4.25,4.25,0,0,0-1.34,1.73,5.06,5.06,0,0,0,.54,4.62A5.58,5.58,0,0,0,12,17.74h0a2.26,2.26,0,0,1-.16,4.52A10.25,10.25,0,0,1,3.74,18,10.14,10.14,0,0,1,2.25,8.78,9.7,9.7,0,0,1,5.08,4.64,9.92,9.92,0,0,1,9.66,2.5a10.66,10.66,0,0,1,7.72,1.68l1.08-1.35a1.57,1.57,0,0,1,1.24-.6,1.6,1.6,0,0,1,1.54,1.21l1.7,7.37A1.57,1.57,0,0,1,22.68,12.2Z",
@@ -1389,6 +1415,24 @@ export default class Style {
           id: "sb3-dropdownArrow-high-contrast",
         },
       ),
+
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
+          stroke: "none",
+          fill: "#000",
+        }),
+        {
+          id: "sb3-commentArrowDown-high-contrast"
+        }
+      ),
+      SVG.setProps(SVG.el('use', {
+          href: "#sb3-commentArrowDown-high-contrast",
+          transform: "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
+        }),
+      {
+        id: "sb3-commentArrowUp-high-contrast"
+      }),
 
       SVG.setProps(
         SVG.group([

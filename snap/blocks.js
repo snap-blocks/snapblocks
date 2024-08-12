@@ -128,7 +128,7 @@ export class LabelView {
 
     if (this.defaultColor) {
       if (/comment-label/.test(this.cls)) {
-        this._color = Style.colors.commentLabel
+        this._color = Style.colors.comment.label
       } else if (/boolean/.test(this.cls)) {
         this._color = Style.colors.booleanLiteral
       } else if (/label/.test(this.cls)) {
@@ -740,6 +740,7 @@ class BlockView {
     this.x = 0
     this.width = null
     this.height = null
+    this.commentHeight = 0
     this.firstLine = null
     this.innerWidth = null
     this.strokeWidth = 1
@@ -1344,6 +1345,15 @@ class BlockView {
           lineHeight = child.height
           fullWidth = Math.max(fullWidth, x + child.width + 8)
           lastCSlot = child
+
+          if (child.commentHeight) {
+            this.commentHeight = Math.max(
+              this.commentHeight,
+              child.y + child.commentHeight,
+            )
+            console.log('block commentHeight', this.commentHeight)
+          }
+
         } else if (child.isLoop) {
           if (lastCSlot) {
             let cIndex = drawLines.indexOf(lastCSlot)
@@ -1577,7 +1587,7 @@ class CommentView {
     this.label = newView(comment.label)
     this.arrow = newView(new Icon("addInput"))
 
-    this.width = null
+    this.padding = 5
   }
 
   get isComment() {
@@ -1588,8 +1598,32 @@ class CommentView {
     return 8
   }
 
+  get width() {
+    if (this.isMultiline) {
+      return Math.max(this.label.width + 2 * this.padding, 80)
+    } else {
+      const padding = {
+        left: 10,
+        arrow: 5,
+        right: 10,
+      }
+      return padding.left +
+              this.arrow.width +
+              padding.arrow +
+              this.label.width +
+              padding.right
+    }
+  }
+
   get height() {
-    return 17
+    return Math.max(this.titleBarHeight + (!this.isMultiline ? 0 : this.padding
+            + this.label.height
+            + this.padding))
+  }
+
+  get titleBarHeight() {
+    console.log('font height', getFontHeight(this.label.fontSize))
+    return getFontHeight(this.label.fontSize) + this.padding
   }
 
   measure(options) {
@@ -1600,6 +1634,52 @@ class CommentView {
   }
 
   draw(options) {
+    if (this.isMultiline) {
+      return this.drawExpanded(options)  
+    } else {
+      return this.drawCollapsed(options)
+    }
+  }
+
+  drawExpanded(options) {
+    let x, y
+    
+    const titleBar = SVG.commentRect(this.width, this.titleBarHeight, {
+      fill: Style.colors.comment.titleBar.toHexString(),
+    })
+
+    x = this.padding
+    y = this.titleBarHeight + this.padding
+
+    const arrowEl = SVG.move(this.padding, this.padding, SVG.setProps(this.arrow.draw(options), {
+      transform: `rotate(90 ${this.arrow.width / 2} ${this.arrow.height / 2})`
+    }))
+
+    const body = SVG.commentRect(this.width, this.height, {
+      fill: Style.colors.comment.body.toHexString(),
+      stroke: Style.colors.comment.outline.toHexString(),
+    })
+    
+    return SVG.group([
+      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.titleBarHeight, {
+        fill: Style.colors.comment.line.toHexString(),
+      }),
+      body,
+      titleBar,
+      arrowEl,
+      SVG.move(
+        x,
+        y,
+        this.label.draw({
+          ...options,
+          showSpaces: false,
+          isFlat: true,
+        }),
+      ),
+    ])
+  }
+
+  drawCollapsed(options) {
     const padding = {
       left: 10,
       arrow: 5,
@@ -1614,16 +1694,18 @@ class CommentView {
 
     const arrowEl = this.arrow.draw(options)
 
-    this.width =
-      padding.left +
-      this.arrow.width +
-      padding.arrow +
-      this.label.width +
-      padding.right
+    // this.width =
+    //   padding.left +
+    //   this.arrow.width +
+    //   padding.arrow +
+    //   this.label.width +
+    //   padding.right
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.height),
+      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.height, {
+        fill: Style.colors.comment.line.toHexString(),
+      }),
       SVG.commentRect(this.width, this.height, {
-        class: "snap-comment",
+        fill: Style.colors.comment.titleBar.toHexString(),
       }),
       SVG.move(padding.left, (this.height - this.arrow.height) / 2, arrowEl),
       SVG.move(
@@ -1697,6 +1779,7 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
+    this.commentHeight = 0
     this.color = new Color()
     this.isZebra = false
   }
@@ -1729,22 +1812,29 @@ class ScriptView {
       const diff = block.diff
       if (diff === "-") {
         const dw = block.width
-        const dh = block.lines[0].height || block.height
+        const dh = block.lines[0]?.height || block.height
         children.push(SVG.move(x, y + dh / 2 + 1, SVG.strikethroughLine(dw)))
         this.width = Math.max(this.width, block.width)
       }
-
-      y += block.height
 
       const comment = block.comment
       if (comment) {
         const line = block.firstLine
         const cx = block.innerWidth + CommentView.lineLength
-        const cy = y
+        const cy = y + 2
         const el = comment.draw(options)
-        children.push(SVG.move(cx, 2, el))
+        children.push(SVG.move(cx, cy, el))
         this.width = Math.max(this.width, cx + comment.width)
+        this.commentHeight = Math.max(
+          this.commentHeight, 
+          cy + comment.height + 1,
+        )
       }
+      this.commentHeight = Math.max(
+        this.commentHeight,
+        y + block.commentHeight,
+      )
+      y += block.height
     }
     this.height = y + 3
     if (!inside && !this.isFinal) {
@@ -1782,6 +1872,7 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
+      commentWidth: options.commentWidth || 90
     }
   }
 
@@ -1875,7 +1966,8 @@ class DocumentView {
       }
       script.y = height
       elements.push(SVG.move(0, height, script.draw(this.options)))
-      height += script.height
+      console.log('script', script)
+      height += Math.max(script.height, script.commentHeight ? script.commentHeight : 0)
       width = Math.max(width, script.width + 4)
     }
     this.width = width

@@ -657,6 +657,7 @@ class BlockView {
     this.x = 0
     this.width = null
     this.height = null
+    this.commentHeight = 0
     this.firstLine = null
     this.innerWidth = null
     this.lines = []
@@ -1017,6 +1018,12 @@ class BlockView {
 
         pushLine()
         child.y = y
+
+        this.commentHeight = Math.max(
+          this.commentHeight,
+          child.y + child.commentHeight,
+        )
+
         lines.push(child)
         scriptWidth = Math.max(scriptWidth, Math.max(1, child.width))
         child.height = Math.max(13, child.height + 3)
@@ -1223,8 +1230,6 @@ class CommentView {
   constructor(comment) {
     Object.assign(this, comment)
     this.label = newView(comment.label)
-
-    this.width = null
   }
 
   get isComment() {
@@ -1235,8 +1240,20 @@ class CommentView {
     return 12
   }
 
+  get width() {
+    return (!this.isMultiline * 4) + Math.max(this.label.width + 16, 100)
+  }
+
   get height() {
-    return 20
+    if (this.isMultiline) {
+      return this.titleBarHeight + this.label.height + 2
+    } else {
+      return 20
+    }
+  }
+
+  get titleBarHeight() {
+    return 22
   }
 
   measure(options) {
@@ -1247,18 +1264,72 @@ class CommentView {
   }
 
   draw(options) {
+    if (this.isMultiline) {
+      return this.drawExpanded(options)
+    } else {
+      return this.drawCollapsed(options)
+    }
+  }
+
+  drawExpanded(options) {
+    let x = 5,
+        y = 20
+
+    return SVG.group([
+      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+        fill: style.colors.comment.titleBar.toHexString(),
+      }),
+      SVG.el('rect', {
+        width: this.width,
+        height: this.height,
+        fill: style.colors.comment.body.toHexString(),
+        stroke: style.colors.comment.border.toHexString(),
+        rx: 5,
+        ry: 5,
+      }),
+      SVG.group([
+        SVG.el('rect', {
+          width: this.width,
+          height: this.titleBarHeight,
+          rx: 5,
+          ry: 5,
+          fill: style.colors.comment.titleBar.toHexString(),
+        }),
+        SVG.el('rect', {
+          y: this.titleBarHeight - 4,
+          width: this.width,
+          height: 4,
+          fill: style.colors.comment.body.toHexString(),
+        })
+      ]),
+      SVG.move(4, 4, SVG.symbol(
+        `#sb-commentArrowDown-${options.id}`,
+      )),
+      SVG.move(x, y, this.label.draw({
+        ...options,
+        showSpaces: false,
+      })),
+    ])
+  }
+
+  drawCollapsed(options) {
     const labelEl = this.label.draw({
       ...options,
       showSpaces: false,
     })
 
-    this.width = this.label.width + 16
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, 6),
-      SVG.commentRect(this.width, this.height, {
-        class: "sb-comment",
+      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+        fill: style.colors.comment.titleBar.toHexString(),
       }),
-      SVG.move(8, 4, labelEl),
+      SVG.commentRect(this.width, this.height, {
+        fill: style.colors.comment.titleBar.toHexString(),
+        stroke: style.colors.comment.border.toHexString(),
+      }),
+      SVG.move(16, 4, labelEl),
+      SVG.move(4, 4, SVG.symbol(
+        `#sb-commentArrowRight-${options.id}`,
+      )),
     ])
   }
 }
@@ -1321,6 +1392,7 @@ class ScriptView {
     this.blocks = script.blocks.map(newView)
 
     this.y = 0
+    this.commentHeight = 0
     this.color = new Color()
     this.isZebra = false
   }
@@ -1358,17 +1430,24 @@ class ScriptView {
         this.width = Math.max(this.width, block.width)
       }
 
-      y += block.height
-
       const comment = block.comment
       if (comment) {
         const line = block.firstLine
         const cx = block.innerWidth + 2 + CommentView.lineLength
-        const cy = y - block.height + line.height
+        const cy = y + 2
         const el = comment.draw(options)
-        children.push(SVG.move(cx, cy - comment.height / 2, el))
+        children.push(SVG.move(cx, cy, el))
         this.width = Math.max(this.width, cx + comment.width)
+        this.commentHeight = Math.max(
+          this.commentHeight, 
+          cy + comment.height + 1,
+        )
       }
+      this.commentHeight = Math.max(
+        this.commentHeight,
+        y + block.commentHeight,
+      )
+      y += block.height
     }
     this.height = y
     if (!inside && !this.isFinal) {
@@ -1472,7 +1551,10 @@ class DocumentView {
       }
       script.y = height
       elements.push(SVG.move(0, height, script.draw(this.options)))
-      height += script.height
+      height += Math.max(
+        script.height,
+        script.commentHeight ? script.commentHeight : 0,
+      )
       width = Math.max(width, script.width + 4)
     }
     this.width = width

@@ -509,7 +509,7 @@ function parseLines(code, languages) {
       if (tok === end) {
         break
       }
-      if (tok === "/" && peek() === "/") {
+      if (tok === "/" && ["/", "*"].includes(peek())) {
         break
       }
 
@@ -837,8 +837,7 @@ function parseLines(code, languages) {
     let comment = null
 
     console.log("tok", tok)
-    if (tok === "/" && peek() === "/") {
-      console.log("comment before end", end)
+    if (tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(end)
     }
 
@@ -919,7 +918,7 @@ function parseLines(code, languages) {
 
     const children = pParts(")")
     console.log("pReporter tok", tok)
-    if (tok && tok === "/" && peek() === "/") {
+    if (tok && tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(")")
     }
     if (tok && tok === ")") {
@@ -1080,7 +1079,7 @@ function parseLines(code, languages) {
     next() // '<'
     const children = pParts(">")
     let comment = null
-    if (tok && tok === "/" && peek() === "/") {
+    if (tok && tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(">")
     }
     if (tok && tok === ">") {
@@ -1189,7 +1188,7 @@ function parseLines(code, languages) {
           overrides.push(override)
           override = ""
         }
-      } else if (tok === "/" && peek() === "/") {
+      } else if (tok === "/" && ["/", "*"].includes(peek())) {
         break
       } else if (tok === "(") {
         override += tok
@@ -1210,20 +1209,40 @@ function parseLines(code, languages) {
 
   function pComment(end) {
     next()
+    let isMultiline = tok === "*"
     next()
-    console.log("comment end", end)
     let comment = ""
+    let raw = ""
     if (tok === " ") {
       next()
     }
-    while (tok && tok !== "\n" && tok !== end) {
+    while (tok && ((!isMultiline && tok !== "\n") || isMultiline) && ((!isMultiline && tok !== end) || (isMultiline && !(tok === "*" && peek() === "/")))) {
+      raw += tok
+      if (tok === "\\") {
+        next()
+        raw += tok
+      }
       comment += tok
       next()
+    }
+    if (isMultiline && tok && tok === "*") {
+      next()
+      if (tok === "/") {
+        next()
+      }
     }
     if (tok && tok === "\n") {
       next()
     }
-    return new Comment(comment, true)
+    if (comment[comment.length - 1] === " ") {
+      comment = comment.slice(0, comment.length - 1)
+    }
+
+    while (end && tok && tok !== end) {
+      next()
+    }
+
+    return new Comment(comment, true, isMultiline)
   }
 
   function pLine() {
@@ -1233,7 +1252,7 @@ function parseLines(code, languages) {
       next()
     }
     const block = pBlock()
-    if (tok === "/" && peek() === "/") {
+    if (tok === "/" && ["/", "*"].includes(peek())) {
       const comment = pComment()
       comment.hasBlock = block && block.children.length
       if (!comment.hasBlock) {

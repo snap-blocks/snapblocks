@@ -516,10 +516,10 @@ export class Block {
 }
 
 export class Comment {
-  constructor(value, hasBlock) {
+  constructor(value, hasBlock, isMultiline) {
     this.label = new Label(value, "comment-label")
-    this.width = null
     this.hasBlock = hasBlock
+    this.isMultiline = isMultiline || value.includes("\n")
   }
   get isComment() {
     return true

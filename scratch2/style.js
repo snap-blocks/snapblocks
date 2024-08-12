@@ -9,6 +9,12 @@ export default class Style {
   }
 
   static colors = {
+    comment: {
+      body: Color.fromString('#FFFFD2'),
+      titleBar: Color.fromString('#FFFFA5'),
+      border: Color.fromString('#D0D1D2'),
+    },
+
     categories: {
       obsolete: new Color(212, 40, 40),
       motion: new Color(74, 108, 212),
@@ -40,6 +46,17 @@ export default class Style {
 
   static makeIcons() {
     return [
+      SVG.el('path', {
+        d: "M 0 2 L 5.5 8 L 11 2 Z",
+        id: "sb-commentArrowDown",
+        fill: "#808080",
+      }),
+      SVG.el('path', {
+        d: "M 2 0 L 8 5.5 L 2 11 Z",
+        id: "sb-commentArrowRight",
+        fill: "#808080",
+      }),
+
       SVG.el("path", {
         d: "M1.504 21L0 19.493 4.567 0h1.948l-.5 2.418s1.002-.502 3.006 0c2.006.503 3.008 2.01 6.517 2.01 3.508 0 4.463-.545 4.463-.545l-.823 9.892s-2.137 1.005-5.144.696c-3.007-.307-3.007-2.007-6.014-2.51-3.008-.502-4.512.503-4.512.503L1.504 21z",
         id: "sb-flag",

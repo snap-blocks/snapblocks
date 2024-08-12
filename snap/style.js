@@ -12,8 +12,6 @@ export default class Style {
     label: new Color(255, 255, 255),
     zebraLabel: new Color(),
 
-    commentLabel: new Color(),
-
     literal: new Color(),
 
     booleanLiteral: new Color(255, 255, 255),
@@ -21,9 +19,15 @@ export default class Style {
     readonlyLiteral: new Color(255, 255, 255),
     zebraReadonlyLiteral: new Color(),
 
+    comment: {
+      label: new Color(),
+      titleBar: new Color(255, 255, 180),
+      body: new Color(255, 255, 220),
+      outline: new Color(255, 255, 180),
+      line: new Color(255, 255, 180),
+    },
+
     categories: {
-      comment: new Color(255, 255, 180),
-      commentLine: new Color(255, 255, 180),
       obsolete: new Color(200, 0, 20),
       motion: new Color(74, 108, 212),
       looks: new Color(143, 86, 227),
@@ -637,7 +641,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "snap-arrowDown",
@@ -646,7 +650,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "snap-arrowDownOutline",
@@ -655,7 +659,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "snap-arrowDownThin",
@@ -664,7 +668,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "snap-arrowLeft",
@@ -673,7 +677,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "snap-arrowLeftOutline",
@@ -682,7 +686,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "snap-arrowLeftThin",
@@ -691,7 +695,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUp",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "snap-arrowRight",
@@ -700,7 +704,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpOutline",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "snap-arrowRightOutline",
@@ -709,7 +713,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpThin",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "snap-arrowRightThin",
@@ -727,7 +731,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#snap-arrowUpDownThin",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "snap-arrowLeftRightThin",
