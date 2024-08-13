@@ -17,6 +17,17 @@ import SVG from "./draw.js"
 
 import style from "./style.js"
 import Style from "./style.js"
+const {
+  categoryColor,
+  defaultFontFamily,
+  makeStyle,
+  makeIcons,
+  darkRect,
+  bevelFilter,
+  darkFilter,
+  dropShadowFilter,
+  lightFilter,
+} = style
 import {
   scaleFontSize,
   splitFontSize,
