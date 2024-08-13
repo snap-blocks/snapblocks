@@ -110,8 +110,8 @@ export default class Style {
 
   static colors = {
     comment: {
-      border: Color.fromString('#bcA903'),
-      body: Color.fromString('#fef49c'),
+      border: Color.fromString("#bcA903"),
+      body: Color.fromString("#fef49c"),
     },
 
     categories: {
@@ -250,7 +250,7 @@ export default class Style {
         /* Changed to be AAA against #000000, was AA */
         tertiary: Color.fromString("#959595"),
       },
-    }
+    },
   }
 
   static categoryColor(category, isHighContrast) {
@@ -1234,23 +1234,26 @@ export default class Style {
       ),
 
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
           stroke: "none",
           fill: "#575e75",
         }),
         {
-          id: "sb3-commentArrowDown"
-        }
+          id: "sb3-commentArrowDown",
+        },
       ),
 
-      SVG.setProps(SVG.el('use', {
+      SVG.setProps(
+        SVG.el("use", {
           href: "#sb3-commentArrowDown",
-          transform: "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
+          transform:
+            "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
         }),
-      {
-        id: "sb3-commentArrowUp"
-      }),
+        {
+          id: "sb3-commentArrowUp",
+        },
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -1417,22 +1420,25 @@ export default class Style {
       ),
 
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
           stroke: "none",
           fill: "#000",
         }),
         {
-          id: "sb3-commentArrowDown-high-contrast"
-        }
+          id: "sb3-commentArrowDown-high-contrast",
+        },
       ),
-      SVG.setProps(SVG.el('use', {
+      SVG.setProps(
+        SVG.el("use", {
           href: "#sb3-commentArrowDown-high-contrast",
-          transform: "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
+          transform:
+            "translate(6.000000, 6.500000) scale(1, -1) translate(-6.000000, -6.500000)",
         }),
-      {
-        id: "sb3-commentArrowUp-high-contrast"
-      }),
+        {
+          id: "sb3-commentArrowUp-high-contrast",
+        },
+      ),
 
       SVG.setProps(
         SVG.group([

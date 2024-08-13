@@ -486,11 +486,7 @@ export default class SVG {
   }
 
   static commentLine(width, props) {
-    return SVG.move(
-      -width,
-      9,
-      SVG.rect(width, 2, props ),
-    )
+    return SVG.move(-width, 9, SVG.rect(width, 2, props))
   }
 
   static strikethroughLine(w, props) {

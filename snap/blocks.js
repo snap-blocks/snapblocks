@@ -157,12 +157,12 @@ export class LabelView {
     let fontWeight = /comment-label-multiline/.test(this.cls)
       ? "normal"
       : /comment-label/.test(this.cls)
-      ? `bold`
-      : /literal-boolean/.test(this.cls)
         ? `bold`
-        : /literal/.test(this.cls)
-          ? `normal`
-          : `bold`
+        : /literal-boolean/.test(this.cls)
+          ? `bold`
+          : /literal/.test(this.cls)
+            ? `normal`
+            : `bold`
 
     if (this.modified && fontWeight == "bold") {
       fontWeight = "normal"
@@ -1353,9 +1353,8 @@ class BlockView {
               this.commentHeight,
               child.y + child.commentHeight,
             )
-            console.log('block commentHeight', this.commentHeight)
+            console.log("block commentHeight", this.commentHeight)
           }
-
         } else if (child.isLoop) {
           if (lastCSlot) {
             let cIndex = drawLines.indexOf(lastCSlot)
@@ -1609,22 +1608,27 @@ class CommentView {
         arrow: 5,
         right: 10,
       }
-      return padding.left +
-              this.arrow.width +
-              padding.arrow +
-              this.label.width +
-              padding.right
+      return (
+        padding.left +
+        this.arrow.width +
+        padding.arrow +
+        this.label.width +
+        padding.right
+      )
     }
   }
 
   get height() {
-    return Math.max(this.titleBarHeight + (!this.isMultiline ? 0 : this.padding
-            + this.label.height
-            + this.padding))
+    return Math.max(
+      this.titleBarHeight +
+        (!this.isMultiline
+          ? 0
+          : this.padding + this.label.height + this.padding),
+    )
   }
 
   get titleBarHeight() {
-    console.log('font height', getFontHeight(this.label.fontSize))
+    console.log("font height", getFontHeight(this.label.fontSize))
     return getFontHeight(this.label.fontSize) + this.padding
   }
 
@@ -1637,7 +1641,7 @@ class CommentView {
 
   draw(options) {
     if (this.isMultiline) {
-      return this.drawExpanded(options)  
+      return this.drawExpanded(options)
     } else {
       return this.drawCollapsed(options)
     }
@@ -1645,7 +1649,7 @@ class CommentView {
 
   drawExpanded(options) {
     let x, y
-    
+
     const titleBar = SVG.commentRect(this.width, this.titleBarHeight, {
       fill: Style.colors.comment.titleBar.toHexString(),
     })
@@ -1653,19 +1657,25 @@ class CommentView {
     x = this.padding
     y = this.titleBarHeight + this.padding
 
-    const arrowEl = SVG.move(this.padding, this.padding, SVG.setProps(this.arrow.draw(options), {
-      transform: `rotate(90 ${this.arrow.width / 2} ${this.arrow.height / 2})`
-    }))
+    const arrowEl = SVG.move(
+      this.padding,
+      this.padding,
+      SVG.setProps(this.arrow.draw(options), {
+        transform: `rotate(90 ${this.arrow.width / 2} ${this.arrow.height / 2})`,
+      }),
+    )
 
     const body = SVG.commentRect(this.width, this.height, {
       fill: Style.colors.comment.body.toHexString(),
       stroke: Style.colors.comment.outline.toHexString(),
     })
-    
+
     return SVG.group([
-      this.hasBlock ? SVG.commentLine(CommentView.lineLength, this.titleBarHeight, {
-        fill: Style.colors.comment.line.toHexString(),
-      }) : null,
+      this.hasBlock
+        ? SVG.commentLine(CommentView.lineLength, this.titleBarHeight, {
+            fill: Style.colors.comment.line.toHexString(),
+          })
+        : null,
       body,
       titleBar,
       arrowEl,
@@ -1703,9 +1713,11 @@ class CommentView {
     //   this.label.width +
     //   padding.right
     return SVG.group([
-      this.hasBlock ? SVG.commentLine(CommentView.lineLength, this.height, {
-        fill: Style.colors.comment.line.toHexString(),
-      }) : null,
+      this.hasBlock
+        ? SVG.commentLine(CommentView.lineLength, this.height, {
+            fill: Style.colors.comment.line.toHexString(),
+          })
+        : null,
       SVG.commentRect(this.width, this.height, {
         fill: Style.colors.comment.titleBar.toHexString(),
       }),
@@ -1828,14 +1840,11 @@ class ScriptView {
         children.push(SVG.move(cx, cy, el))
         this.width = Math.max(this.width, cx + comment.width)
         this.commentHeight = Math.max(
-          this.commentHeight, 
+          this.commentHeight,
           cy + comment.height + 1,
         )
       }
-      this.commentHeight = Math.max(
-        this.commentHeight,
-        y + block.commentHeight,
-      )
+      this.commentHeight = Math.max(this.commentHeight, y + block.commentHeight)
       y += block.height
     }
     this.height = y + 3
@@ -1874,7 +1883,7 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
-      commentWidth: options.commentWidth || 90
+      commentWidth: options.commentWidth || 90,
     }
   }
 
@@ -1968,8 +1977,11 @@ class DocumentView {
       }
       script.y = height
       elements.push(SVG.move(0, height, script.draw(this.options)))
-      console.log('script', script)
-      height += Math.max(script.height, script.commentHeight ? script.commentHeight : 0)
+      console.log("script", script)
+      height += Math.max(
+        script.height,
+        script.commentHeight ? script.commentHeight : 0,
+      )
       width = Math.max(width, script.width + 4)
     }
     this.width = width

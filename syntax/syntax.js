@@ -1217,7 +1217,12 @@ function parseLines(code, languages) {
     if (tok === " ") {
       next()
     }
-    while (tok && ((!isMultiline && tok !== "\n") || isMultiline) && ((!isMultiline && tok !== end) || (isMultiline && !(tok === "*" && peek() === "/")))) {
+    while (
+      tok &&
+      ((!isMultiline && tok !== "\n") || isMultiline) &&
+      ((!isMultiline && tok !== end) ||
+        (isMultiline && !(tok === "*" && peek() === "/")))
+    ) {
       raw += tok
       if (tok === "\\") {
         next()
@@ -1256,7 +1261,7 @@ function parseLines(code, languages) {
     if (tok === "/" && ["/", "*"].includes(peek())) {
       const comment = pComment()
       comment.hasBlock = block && block.children.length
-      console.log('has block', comment.hasBlock)
+      console.log("has block", comment.hasBlock)
       if (!comment.hasBlock) {
         return comment
       }

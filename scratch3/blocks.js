@@ -1437,7 +1437,7 @@ export class CommentView {
 
   get width() {
     if (this.isMultiline) {
-      return Math.max(this.label.width + (this.textMargin * 2), 100)
+      return Math.max(this.label.width + this.textMargin * 2, 100)
     } else {
       return 32 + this.label.width + 16
     }
@@ -1445,7 +1445,7 @@ export class CommentView {
 
   get height() {
     if (this.isMultiline) {
-      return this.titleBarHeight + this.label.height + (this.textMargin * 2)
+      return this.titleBarHeight + this.label.height + this.textMargin * 2
     } else {
       return 32
     }
@@ -1475,13 +1475,17 @@ export class CommentView {
   }
 
   drawExpanded(options, block) {
-    let border = block ? block.color.tertiary.toHexString() : style.colors.comment.border.toHexString()
+    let border = block
+      ? block.color.tertiary.toHexString()
+      : style.colors.comment.border.toHexString()
 
     return SVG.group([
-      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
-        fill: border,
-      }) : null,
-      SVG.el('rect', {
+      this.hasBlock
+        ? SVG.commentLine(CommentView.lineLength, {
+            fill: border,
+          })
+        : null,
+      SVG.el("rect", {
         rx: 4,
         ry: 4,
         width: this.width,
@@ -1490,7 +1494,7 @@ export class CommentView {
         stroke: border,
         "stroke-width": 1,
       }),
-      SVG.el('rect', {
+      SVG.el("rect", {
         rx: 1,
         ry: 1,
         width: this.width,
@@ -1506,36 +1510,48 @@ export class CommentView {
           showSpaces: false,
         }),
       ),
-      SVG.move((32 / 2) - (10 / 2), (32 / 2) - (10 / 2), SVG.symbol(
-        options.isHighContrast
-          ? `#sb3-commentArrowDown-high-contrast-${options.id}`
-          : `#sb3-commentArrowDown-${options.id}`
-      )),
+      SVG.move(
+        32 / 2 - 10 / 2,
+        32 / 2 - 10 / 2,
+        SVG.symbol(
+          options.isHighContrast
+            ? `#sb3-commentArrowDown-high-contrast-${options.id}`
+            : `#sb3-commentArrowDown-${options.id}`,
+        ),
+      ),
     ])
   }
 
   drawCollapsed(options, block) {
-    let border = block ? block.color.tertiary.toHexString() : style.colors.comment.border.toHexString()
+    let border = block
+      ? block.color.tertiary.toHexString()
+      : style.colors.comment.border.toHexString()
     const labelEl = this.label.draw({
       ...options,
       showSpaces: false,
     })
 
     return SVG.group([
-      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
-        fill: border,
-      }) : null,
+      this.hasBlock
+        ? SVG.commentLine(CommentView.lineLength, {
+            fill: border,
+          })
+        : null,
       SVG.commentRect(this.width, this.height, {
         // class: "sb3-comment",
         fill: style.colors.comment.body.toHexString(),
         stroke: border,
       }),
       SVG.move(32, 5, labelEl),
-      SVG.move((32 / 2) - (10 / 2), (32 / 2) - (10 / 2), SVG.symbol(
-        options.isHighContrast
-          ? `#sb3-commentArrowUp-high-contrast-${options.id}`
-          : `#sb3-commentArrowUp-${options.id}`
-      )),
+      SVG.move(
+        32 / 2 - 10 / 2,
+        32 / 2 - 10 / 2,
+        SVG.symbol(
+          options.isHighContrast
+            ? `#sb3-commentArrowUp-high-contrast-${options.id}`
+            : `#sb3-commentArrowUp-${options.id}`,
+        ),
+      ),
     ])
   }
 }
@@ -1658,14 +1674,11 @@ class ScriptView {
         children.push(SVG.move(cx, cy, el))
         this.width = Math.max(this.width, cx + comment.width)
         this.commentHeight = Math.max(
-          this.commentHeight, 
+          this.commentHeight,
           cy + comment.height + 1,
         )
       }
-      this.commentHeight = Math.max(
-        this.commentHeight,
-        y + block.commentHeight,
-      )
+      this.commentHeight = Math.max(this.commentHeight, y + block.commentHeight)
       y += block.height
     }
     const lastBlock = this.blocks[this.blocks.length - 1]
