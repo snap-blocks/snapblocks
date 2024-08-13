@@ -6,13 +6,22 @@
     4) Add icon to scratch3/style.js
 */
 
-// Moved extensions: key is scratch3, value is scratch2
+/**
+ * Moved extensions: key is scratch3, value is scratch2 
+ *
+ * @type {{ pen: string; video: string; music: string; }}
+ */
 export const movedExtensions = {
   pen: "pen",
   video: "sensing",
   music: "sound",
 }
 
+/**
+ * Extensions
+ *
+ * @type {{ tts: string; translate: string; microbit: string; wedo: string; makeymakey: string; ev3: string; boost: string; gdxfor: string; pico: string; pen: string; video: string; music: string; }}
+ */
 export const extensions = {
   ...movedExtensions,
   tts: "tts",
@@ -26,8 +35,12 @@ export const extensions = {
   pico: "pico",
 }
 
-// Alias extensions: unlike movedExtensions, this is handled for both scratch2 and scratch3.
-// Key is alias, value is real extension name
+/**
+ * Alias extensions: unlike movedExtensions, this is handled for both scratch2 and scratch3.
+ * Key is alias, value is real extension name
+ *
+ * @type {{ wedo2: string; text2speech: string; pico: string; }}
+ */
 export const aliasExtensions = {
   wedo2: "wedo",
   text2speech: "tts",

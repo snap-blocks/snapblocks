@@ -1,9 +1,21 @@
+/**
+ * Check if value is true
+ *
+ * @param {*} bool
+ * @param {string} message - Message to throw
+ */
 function assert(bool, message) {
   if (!bool) {
     throw new Error(`Assertion failed! ${message || ""}`)
   }
 }
 
+/**
+ * Indent text.
+ *
+ * @param {string} text
+ * @returns {string}
+ */
 function indent(text) {
   return text
     .split("\n")
@@ -24,6 +36,15 @@ import {
 } from "./blocks.js"
 
 export class Label {
+  /**
+   * Creates an instance of Label.
+   *
+   * @constructor
+   * @param {string} value
+   * @param {string} [cls=]
+   * @param {number} [scale=1]
+   * @param {(Color | string)} [color=null]
+   */
   constructor(value, cls, scale, color) {
     this.value = value
     this.raw = value
@@ -51,19 +72,57 @@ export class Label {
           ? Color.fromString(color)
           : null
   }
+  /**
+   * This is a label
+   *
+   * @readonly
+   * @type {true}
+   */
   get isLabel() {
     return true
   }
 
+  /**
+   * Return the stringified and escaped text.
+   *
+   * @returns {string}
+   */
   stringify() {
     if (this.value === "<" || this.value === ">") {
       return this.value
     }
-    return this.value.replace(/([<>[\](){}])/g, "\\$1")
+
+    let suffix = ""
+    let prefix = ""
+    let value = this.value.replace(/([<>[\](){}])/g, "\\$1")
+
+    if (this.scale) {
+      prefix = "$"
+      suffix += `-${this.scale}`
+    }
+    if (this.color) {
+      if (prefix === "") {
+        prefix = "$"
+      }
+      if (suffix === "") {
+        suffix += "-1"
+      }
+      suffix += `-${this.color.r}-${this.color.g}-${this.color.b}`
+    }
+    
+    return `${prefix}${value}${suffix}`
   }
 }
 
 export class Icon {
+  /**
+   * Creates an instance of Icon.
+   *
+   * @constructor
+   * @param {string} name
+   * @param {number} [scale=null]
+   * @param {(Color | string)} [color=null]
+   */
   constructor(name, scale, color) {
     if (
       !Object.prototype.hasOwnProperty.call(Icon.icons, name) &&
@@ -94,10 +153,23 @@ export class Icon {
 
     // assert(Icon.icons[this.name], `no info for icon ${this.name}`)
   }
+  /**
+   * This is an icon
+   *
+   * @readonly
+   * @type {true}
+   */
   get isIcon() {
     return true
   }
 
+  /**
+   * Icon aliases.
+   *
+   * @static
+   * @readonly
+   * @type {{ "+": string; bucket: string; greenflag: string; stop: string; }}
+   */
   static get iconAliases() {
     return {
       "+": "plusSign", // I can't have + in an id.
@@ -107,6 +179,51 @@ export class Icon {
     }
   }
 
+  /**
+   * Available icons.
+   * 
+   * TODO:
+   * - fullScreen
+   * - grow
+   * - normalScreen
+   * - shrink
+   * - smallStage
+   * - normalStage
+   * - stage
+   * - turnAround
+   * - poster
+   * - tick
+   * - checkedBox
+   * - rectangle
+   * - rectangleSolid
+   * - dot
+   * - ellipse
+   * - line
+   * - cross
+   * - crosshairs
+   * - paintbucket
+   * - speechBubble
+   * - speechBubbleOutline
+   * - turnBack
+   * - turnForward
+   * - magnifyingGlass
+   * - magnifierOutline
+   * - selection
+   * - polygon
+   * - closedBrush
+   * - footprints
+   * - keyboard
+   * - keyboardFilled
+   * - listNarrow
+   * - flipVertical
+   * - flipHorizontal
+   * - trash
+   * - trashFull
+   *
+   * @static
+   * @readonly
+   * @type {{ greenFlag: boolean; flag: boolean; stopSign: boolean; octagon: boolean; turnLeft: boolean; turnRight: boolean; clockwise: boolean; counterclockwise: boolean; loop: boolean; loopArrow: boolean; ... 46 more ...; plusSign: boolean; }}
+   */
   static get icons() {
     return {
       greenFlag: true,
@@ -171,45 +288,11 @@ export class Icon {
     }
   }
 
-  /* TODO:
-  - fullScreen
-  - grow
-  - normalScreen
-  - shrink
-  - smallStage
-  - normalStage
-  - stage
-  - turnAround
-  - poster
-  - tick
-  - checkedBox
-  - rectangle
-  - rectangleSolid
-  - dot
-  - ellipse
-  - line
-  - cross
-  - crosshairs
-  - paintbucket
-  - speechBubble
-  - speechBubbleOutline
-  - turnBack
-  - turnForward
-  - magnifyingGlass
-  - magnifierOutline
-  - selection
-  - polygon
-  - closedBrush
-  - footprints
-  - keyboard
-  - keyboardFilled
-  - listNarrow
-  - flipVertical
-  - flipHorizontal
-  - trash
-  - trashFull
- */
-
+  /**
+   * Return the stringified version of this icon.
+   *
+   * @returns {string}
+   */
   stringify() {
     let start = "@"
     let suffix = ""
@@ -242,6 +325,15 @@ export class Icon {
 }
 
 export class Input {
+  /**
+   * Creates an instance of Input.
+   *
+   * @constructor
+   * @param {("string" | "dropdown" | "number" | "number-dropdown" | "color" | "stack" | "reporter" | "boolean")} shape
+   * @param {(string | Icon)} value
+   * @param {boolean} [menu=false]
+   * @param {boolean} [isReadonly=false]
+   */
   constructor(shape, value, menu, isReadonly) {
     this.shape = shape
     this.value = value
@@ -272,10 +364,21 @@ export class Input {
     this.isBig = this.isBoolean && this.value ? this.value.length > 1 : null
     this.x = 0
   }
+  /**
+   * This is an input.
+   *
+   * @readonly
+   * @type {true}
+   */
   get isInput() {
     return true
   }
 
+  /**
+   * Return the stringified version of the input.
+   *
+   * @returns {string}
+   */
   stringify() {
     if (this.isColor) {
       assert(this.value instanceof Color)
@@ -307,6 +410,11 @@ export class Input {
             : text
   }
 
+  /**
+   * Translate this input into the specified language
+   *
+   * @param {Object} _lang
+   */
   translate(_lang) {
     if (this.hasArrow) {
       const value = this.menu || this.value
@@ -317,6 +425,14 @@ export class Input {
 }
 
 export class Block {
+  /**
+   * Creates an instance of Block.
+   *
+   * @constructor
+   * @param {Object} info
+   * @param {(Label | Icon | Input | Script)[]} children
+   * @param {Comment} [comment=null]
+   */
   constructor(info, children, comment) {
     assert(info)
     this.info = { ...info }
@@ -358,6 +474,12 @@ export class Block {
     return true
   }
 
+  /**
+   * Return the block as a string.
+   *
+   * @param {string} [extras=] - Extra overrides.
+   * @returns {string}
+   */
   stringify(extras) {
     let firstInput = null
     let checkAlias = false
@@ -427,6 +549,12 @@ export class Block {
           : text
   }
 
+  /**
+   * Translate this block.
+   *
+   * @param {Object} lang - Language data
+   * @param {boolean} [isShallow=false] - Only translate this block, no children.
+   */
   translate(lang, isShallow) {
     if (!lang) {
       throw new Error("Missing language")
@@ -516,6 +644,14 @@ export class Block {
 }
 
 export class Comment {
+  /**
+   * Creates an instance of Comment.
+   *
+   * @constructor
+   * @param {string} value
+   * @param {boolean} [hasBlock=false]
+   * @param {boolean} [isMultiline=false]
+   */
   constructor(value, hasBlock, isMultiline) {
     this.label = new Label(
       value,
@@ -524,16 +660,36 @@ export class Comment {
     this.hasBlock = hasBlock
     this.isMultiline = isMultiline || value.includes("\n")
   }
+  /**
+   * This is a comment
+   *
+   * @readonly
+   * @type {true}
+   */
   get isComment() {
     return true
   }
 
+  /**
+   * Return this comment as a string.
+   *
+   * @returns {string}
+   */
   stringify() {
-    return `// ${this.label.value}`
+    if (this.isMultiline) {
+      return `/* ${this.label.raw.replace('*/', '\\*/')} */`
+    }
+    return `// ${this.label.raw}`
   }
 }
 
 export class Glow {
+  /**
+   * Creates an instance of Glow.
+   *
+   * @constructor
+   * @param {Block} child
+   */
   constructor(child) {
     assert(child)
     this.child = child
@@ -544,10 +700,21 @@ export class Glow {
       this.shape = "stack"
     }
   }
+  /**
+   * This is a Glow
+   *
+   * @readonly
+   * @type {true}
+   */
   get isGlow() {
     return true
   }
 
+  /**
+   * Return this Glow as a string.
+   *
+   * @returns {string}
+   */
   stringify() {
     if (this.child.isBlock) {
       return this.child.stringify("+")
@@ -556,12 +723,24 @@ export class Glow {
     return lines.map(line => `+ ${line}`).join("\n")
   }
 
+  /**
+   * Translate the block in this Glow.
+   *
+   * @param {Object} lang - Language data
+   */
   translate(lang) {
     this.child.translate(lang)
   }
 }
 
 export class Script {
+  /**
+   * Creates an instance of Script.
+   *
+   * @constructor
+   * @param {(Block | Comment)[]} blocks
+   * @param {string} shape
+   */
   constructor(blocks, shape) {
     this.blocks = blocks
     this.isEmpty = !blocks.length
@@ -569,10 +748,21 @@ export class Script {
     this.isCShape = false
     this.shape = shape || "stack"
   }
+  /**
+   * This is a script
+   *
+   * @readonly
+   * @type {true}
+   */
   get isScript() {
     return true
   }
 
+  /**
+   * Return this script as a string
+   *
+   * @returns {string}
+   */
   stringify() {
     return this.blocks
       .map(block => {
@@ -585,20 +775,41 @@ export class Script {
       .join("\n")
   }
 
+  /**
+   * Translate this script
+   *
+   * @param {Object} lang - Language data
+   */
   translate(lang) {
     this.blocks.forEach(block => block.translate(lang))
   }
 }
 
 export class Document {
+  /**
+   * Creates an instance of Document.
+   *
+   * @constructor
+   * @param {Script[]} scripts
+   */
   constructor(scripts) {
     this.scripts = scripts
   }
 
+  /**
+   * Return this document as a string
+   *
+   * @returns {string}
+   */
   stringify() {
     return this.scripts.map(script => script.stringify()).join("\n\n")
   }
 
+  /**
+   * Translate this document
+   *
+   * @param {Object} lang - Language data
+   */
   translate(lang) {
     this.scripts.forEach(script => script.translate(lang))
   }

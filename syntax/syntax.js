@@ -1245,7 +1245,10 @@ function parseLines(code, languages) {
       next()
     }
 
-    return new Comment(comment, true, isMultiline)
+    let com = new Comment(comment, true, isMultiline)
+    com.label.raw = raw
+
+    return com
   }
 
   function pLine() {
@@ -1703,6 +1706,23 @@ function recognizeStuff(scripts) {
   })
 }
 
+/**
+ * Parse snapblocks code.
+ *
+ * @export
+ * @param {string} code - Snapblocks code to parse
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+ * @returns {Document} - Parsed document
+ */
 export function parse(code, options) {
   options = {
     inline: false,

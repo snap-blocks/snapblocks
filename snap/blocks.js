@@ -1969,6 +1969,7 @@ class DocumentView {
     let width = 0
     let height = 0
     const elements = []
+    console.log('scripts', this.scripts)
     for (const script of this.scripts) {
       if (height) {
         height += 10

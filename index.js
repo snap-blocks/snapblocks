@@ -24,6 +24,12 @@ import * as scratch2 from "./scratch2/index.js"
 import * as scratch3 from "./scratch3/index.js"
 import * as snap from "./snap/index.js"
 
+/**
+ * Validate value
+ *
+ * @param {*} value
+ * @returns {*}
+ */
 function validate(value) {
   if (typeof value != "string") {
     return value
@@ -46,12 +52,29 @@ export default function (window) {
   scratch2.init(window)
   scratch3.init(window)
 
+  /** Add the css styles to the page head. */
   function appendStyles() {
     document.head.appendChild(snap.makeStyle())
     document.head.appendChild(scratch2.makeStyle())
     document.head.appendChild(scratch3.makeStyle())
   }
 
+  /**
+   * Create a view for the style in the options.
+   *
+   * @param {Document} doc
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @returns {(snap.Document | scratch2.Document | scratch3.Document)}
+   */
   function newView(doc, options) {
     options = {
       style: "snap",
@@ -76,6 +99,22 @@ export default function (window) {
     }
   }
 
+  /**
+   * Render the parsed document
+   *
+   * @param {Document} doc
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @returns {HTMLOrSVGElement}
+   */
   function render(doc, options) {
     if (typeof options === "function") {
       throw new Error("render() no longer takes a callback")
@@ -94,6 +133,22 @@ export default function (window) {
   /*** Render ***/
 
   // read code from a DOM element
+  /**
+   * Get the text snapblocks code from element
+   *
+   * @param {HTMLElement} el - HTML element to get text from.
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @returns {string}
+   */
   function readCode(el, options) {
     options = {
       inline: false,
@@ -107,7 +162,23 @@ export default function (window) {
     return code
   }
 
-  // insert 'svg' into 'el', with appropriate wrapper elements
+  /**
+   * insert `svg` into `el`, with appropriate wrapper elements
+   *
+   * @param {HTMLElement} el - Element to wrap
+   * @param {HTMLOrSVGElement} svg - Svg element to replace element with
+   * @param {Document} doc - Parsed document
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   */
   function replace(el, svg, doc, options) {
     let container
     if (options.inline) {
@@ -129,12 +200,27 @@ export default function (window) {
     el.appendChild(container)
   }
 
-  /* Render all matching elements in page to shiny snap blocks.
+
+  /**
+   * Render all matching elements in page to shiny snap blocks.
    * Accepts a CSS selector as an argument.
+   * 
+   * Like the old `scratchblocks2.parse()`.
+   * 
+   * @example
+   * snapblocks.renderMatching("pre.blocks");
    *
-   *  snapblocks.renderMatching("pre.blocks");
-   *
-   * Like the old 'scratchblocks2.parse().
+   * @param {string} selector - Element selector
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
    */
   const renderMatching = function (selector, options) {
     selector = selector || "pre.blocks"
@@ -169,6 +255,21 @@ export default function (window) {
     })
   }
 
+  /**
+   * Render element.
+   *
+   * @param {string} element - Element to render
+   * @param {Object} options - Snapblocks options
+   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
+   * @param {boolean} [options.inline=false] - Render inline
+   * @param {string[]} [options.languages=["en"]] - Languages
+   * @param {number} [options.scale=1] - Display scale
+   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
+   * @param {boolean} [options.wrap=false] - Wrap blocks
+   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
+   * @param {boolean} [options.showSpaces=false] - Show spaces
+   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   */
   const renderElement = function (element, options) {
     options = {
       // Default values for the options

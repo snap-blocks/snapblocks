@@ -2,6 +2,11 @@ import { extensions, aliasExtensions } from "./extensions.js"
 
 // List of classes we're allowed to override.
 
+/**
+ * List of categories
+ *
+ * @type {string[]}
+ */
 export const overrideCategories = [
   "motion",
   "looks",
@@ -21,12 +26,22 @@ export const overrideCategories = [
   ...Object.keys(aliasExtensions),
 ]
 
+/**
+ * Category aliases
+ *
+ * @type {{ grey: string; gray: string; list: string; }}
+ */
 export const aliasCategories = {
   grey: "other",
   gray: "other",
   list: "lists",
 }
 
+/**
+ * List of shapes
+ *
+ * @type {string[]}
+ */
 export const overrideShapes = [
   "hat",
   "cap",
@@ -37,31 +52,79 @@ export const overrideShapes = [
   "cat",
 ]
 
+/**
+ * Shape aliases
+ *
+ * @type {{ predicate: string; command: string; }}
+ */
 export const aliasShapes = {
   predicate: "boolean",
   command: "stack",
 }
 
-// languages that should be displayed right to left
+/**
+ * languages that should be displayed right to left
+ *
+ * @type {("ar" | "ckb" | "fa" | "he")[]}
+ */
 export const rtlLanguages = ["ar", "ckb", "fa", "he"]
 
 // List of commands taken from Scratch
 import scratchCommands from "./commands.js"
 
 import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
+import { Block } from "./model.js"
 
+/**
+ * Input number regex
+ *
+ * @constant {RegExp}
+ */
 const inputNumberPat = /%([0-9]+)/
+/**
+ * Input regex
+ *
+ * @constant {RegExp}
+ */
 export const inputPat = /(%[a-zA-Z0-9](?:\.[a-zA-Z0-9]+)?)/
+/**
+ * Global input regex
+ *
+ * @type {RegExp}
+ */
 const inputPatGlobal = new RegExp(inputPat.source, "g")
+/**
+ * Icon regex
+ *
+ * @type {RegExp}
+ */
 export const iconPat = /(@[a-zA-Z]+)/
+/**
+ * Block spec split regex
+ *
+ * @type {RegExp}
+ */
 const splitPat = new RegExp(`${inputPat.source}|${iconPat.source}| +`, "g")
 
+/**
+ * Parse input number
+ *
+ * @export
+ * @param {string} part
+ * @returns {number}
+ */
 export function parseInputNumber(part) {
   const m = inputNumberPat.exec(part)
   return m ? +m[1] : 0
 }
 
-// used for procDefs
+/**
+ * Parse spec
+ *
+ * @export
+ * @param {string} spec
+ * @returns {{ spec: string; parts: string; inputs: string; hash: string; }}
+ */
 export function parseSpec(spec) {
   const parts = spec.split(splitPat).filter(x => x)
   const inputs = parts.filter(p => inputPat.test(p))
@@ -73,10 +136,24 @@ export function parseSpec(spec) {
   }
 }
 
+/**
+ * Get the hash of the spec
+ *
+ * @export
+ * @param {string} spec
+ * @returns {string}
+ */
 export function hashSpec(spec) {
   return minifyHash(spec.replace(inputPatGlobal, " _ "))
 }
 
+/**
+ * Minify the block hash
+ *
+ * @export
+ * @param {string} hash
+ * @returns {string}
+ */
 export function minifyHash(hash) {
   return hash
     .replace(/_/g, " _ ")
@@ -91,7 +168,17 @@ export function minifyHash(hash) {
     .toLowerCase()
 }
 
+/**
+ * Block info with id as key
+ *
+ * @type {Object}
+ */
 export const blocksById = {}
+/**
+ * All the blocks
+ *
+ * @type {Object[]}
+ */
 const allBlocks = scratchCommands.map(def => {
   if (!def.id) {
     if (!def.selector && !def.snap) {
@@ -128,6 +215,11 @@ const allBlocks = scratchCommands.map(def => {
   return info
 })
 
+/**
+ * Icons as unicode characters
+ *
+ * @type {{ "@greenFlag": string; "@turnRight": string; "@turnLeft": string; "@addInput": string; "@delInput": string; "@turtle": string; "@cloud": string; "@verticalEllipsis": string; "@notes": string; }}
+ */
 export const unicodeIcons = {
   "@greenFlag": "⚑",
   "@turnRight": "↻",
@@ -140,7 +232,18 @@ export const unicodeIcons = {
   "@notes": "♫",
 }
 
+/**
+ * All the loaded languages
+ *
+ * @type {Object}
+ */
 export const allLanguages = {}
+/**
+ * Load language
+ *
+ * @param {string} code - 2-letter language code
+ * @param {Object} language - Language data
+ */
 function loadLanguage(code, language) {
   const blocksByHash = (language.blocksByHash = {})
   language.blocksById = {}
@@ -242,10 +345,21 @@ function loadLanguage(code, language) {
   language.code = code
   allLanguages[code] = language
 }
+/**
+ * Load list of languages
+ *
+ * @export
+ * @param {Object[]} languages
+ */
 export function loadLanguages(languages) {
   Object.keys(languages).forEach(code => loadLanguage(code, languages[code]))
 }
 
+/**
+ * The English language
+ *
+ * @type {Object}
+ */
 export const english = {
   aliases: {
     "turn ccw %1 degrees": "MOTION_TURNLEFT",
@@ -389,6 +503,12 @@ loadLanguages({
 
 /*****************************************************************************/
 
+/**
+ * Register block detection check
+ *
+ * @param {string} id - Block id
+ * @param {Function} func
+ */
 function registerCheck(id, func) {
   if (!blocksById[id]) {
     throw new Error(`Unknown ID: ${id}`)
@@ -396,6 +516,12 @@ function registerCheck(id, func) {
   blocksById[id].accepts = func
 }
 
+/**
+ * Add block special case
+ *
+ * @param {string} id - Block id
+ * @param {Function} func
+ */
 function specialCase(id, func) {
   if (!blocksById[id]) {
     throw new Error(`Unknown ID: ${id}`)
@@ -403,6 +529,13 @@ function specialCase(id, func) {
   blocksById[id].specialCase = func
 }
 
+/**
+ * Add disambiguation
+ *
+ * @param {string} id1 - Block id 1
+ * @param {string} id2 - Block id 2
+ * @param {Function} test
+ */
 function disambig(id1, id2, test) {
   registerCheck(id1, (_, children, lang) => {
     return test(children, lang)
@@ -734,6 +867,14 @@ specialCase("snap:reportVariadicGreaterThanOrEquals", (_, children, lang) => {
   }
 })
 
+/**
+ * Fill spec def
+ *
+ * @export
+ * @param {string} part
+ * @param {Object} defs
+ * @returns {string}
+ */
 export function fillSpecDef(part, defs) {
   if (/^{[^ {}\\]+}$/gm.test(part)) {
     let defName = part.slice(1, part.length - 1)
@@ -753,6 +894,16 @@ export function fillSpecDef(part, defs) {
   return [part]
 }
 
+/**
+ * Find block with abstract spec
+ *
+ * @export
+ * @param {string[]} partialHashParts
+ * @param {string} fullHash
+ * @param {Object[]} commands
+ * @param {boolean} [onlyCheckInputs=false] - Unused
+ * @returns {{ commands: {}; full: boolean; }}
+ */
 export function findAbstractBlocks(
   partialHashParts,
   fullHash,
@@ -840,6 +991,16 @@ export function findAbstractBlocks(
   }
 }
 
+/**
+ * Find block info with hash
+ *
+ * @export
+ * @param {string} hash
+ * @param {Object} info
+ * @param {[]} children
+ * @param {Object[]} languages
+ * @returns {{ type: Object; lang: Object }}
+ */
 export function lookupHash(hash, info, children, languages) {
   // console.log("info", structuredClone(info))
   // console.log("lookupHash hash", hash)
@@ -943,6 +1104,14 @@ export function lookupHash(hash, info, children, languages) {
   }
 }
 
+/**
+ * Get dropdown
+ *
+ * @export
+ * @param {string} name
+ * @param {Object[]} languages
+ * @returns {*}
+ */
 export function lookupDropdown(name, languages) {
   for (const lang of languages) {
     if (Object.prototype.hasOwnProperty.call(lang.nativeDropdowns, name)) {
@@ -951,6 +1120,13 @@ export function lookupDropdown(name, languages) {
   }
 }
 
+/**
+ * Apply overrides to block info
+ *
+ * @export
+ * @param {Object} info
+ * @param {string[]} overrides
+ */
 export function applyOverrides(info, overrides) {
   if (!Array.isArray(overrides)) {
     return
@@ -983,6 +1159,13 @@ export function applyOverrides(info, overrides) {
   }
 }
 
+/**
+ * Block name
+ *
+ * @export
+ * @param {Block} block
+ * @returns {string | null}
+ */
 export function blockName(block) {
   const words = []
   for (const child of block.children) {
