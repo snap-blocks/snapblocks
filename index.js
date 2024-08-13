@@ -8,6 +8,22 @@
  * @license MIT
  * http://opensource.org/licenses/MIT
  */
+
+/**
+ * Snapblocks options
+ * @typedef {Object} Options
+ * @property {Object} options - Snapblocks options
+ * @property {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [style=snap] - Block style
+ * @property {boolean} [inline=false] - Render inline
+ * @property {string[]} [languages=["en"]] - Languages
+ * @property {number} [scale=1] - Display scale
+ * @property {boolean} [zebraColoring=false] - Zebra coloring
+ * @property {boolean} [wrap=false] - Wrap blocks
+ * @property {(number|null)} [wrapSize=null] - Minimum block wrap width
+ * @property {boolean} [showSpaces=false] - Show spaces
+ * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+ */
+
 import {
   parse,
   allLanguages,
@@ -63,16 +79,7 @@ export default function (window) {
    * Create a view for the style in the options.
    *
    * @param {Document} doc
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    * @returns {(snap.Document | scratch2.Document | scratch3.Document)}
    */
   function newView(doc, options) {
@@ -103,16 +110,7 @@ export default function (window) {
    * Render the parsed document
    *
    * @param {Document} doc
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    * @returns {HTMLOrSVGElement}
    */
   function render(doc, options) {
@@ -137,16 +135,7 @@ export default function (window) {
    * Get the text snapblocks code from element
    *
    * @param {HTMLElement} el - HTML element to get text from.
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    * @returns {string}
    */
   function readCode(el, options) {
@@ -168,16 +157,7 @@ export default function (window) {
    * @param {HTMLElement} el - Element to wrap
    * @param {HTMLOrSVGElement} svg - Svg element to replace element with
    * @param {Document} doc - Parsed document
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    */
   function replace(el, svg, doc, options) {
     let container
@@ -211,16 +191,7 @@ export default function (window) {
    * snapblocks.renderMatching("pre.blocks");
    *
    * @param {string} selector - Element selector
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    */
   const renderMatching = function (selector, options) {
     selector = selector || "pre.blocks"
@@ -259,16 +230,7 @@ export default function (window) {
    * Render element.
    *
    * @param {string} element - Element to render
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+   * @param {Options} options - Snapblocks options
    */
   const renderElement = function (element, options) {
     options = {

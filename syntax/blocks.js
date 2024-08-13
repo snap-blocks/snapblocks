@@ -3,6 +3,44 @@ import { extensions, aliasExtensions } from "./extensions.js"
 // List of classes we're allowed to override.
 
 /**
+ * @typedef {Object} BlockInfo
+ * @property {string} id - Used for Scratch 3 translations
+ * @property {string} spec - Block spec
+ * @property {{[key: string]: string[]}} specDefs - Spec defs to be filled into the block spec
+ * @property {string} snap - Used for Snap! translations
+ * @property {string[]} parts - Spec split by inputs
+ * @property {string} selector - Scratch 2 id
+ * @property {string[]} inputs - Block inputs
+ * @property {string} shape - Block shape
+ * @property {string} category - Block category
+ * @property {boolean} hasLoopArrow - Has loop arrow?
+ * @property {string[]} aliases - List of block aliases
+  }
+ */
+
+/**
+ * @typedef {Object} Language
+ * @property {string} name - Language name
+ * @property {{[key: string]: string}} aliases - Block aliases
+ * @property {{[key: string]: string}} nativeAliases - Native block aliases
+ * @property {{[key: string]: string}} renamedBlocks - Blocks that were renamed in scratch 3
+ * @property {string[]} definePrefix - Scratch define block prefix
+ * @property {[string[]]} defineSuffix - Scratch define block suffix
+ * @property {string[]} ignorelt - For ignoring the lt sign in the "when distance < _" block
+ * @property {{math: string[], list: string[], text: string[]}} of - Valid arguments to "of" dropdown, for resolving ambiguous situations
+ * @property {string[]} soundEffects - Valid arguments to "sound effect" dropdown, for resolving ambiguous situations
+ * @property {string[]} microbitWhen - Valid arguments to "microbit when" dropdown
+ * @property {string[]} picoWhen - Valid arguments to "pico when" dropdown
+ * @property {string[]} osis - For detecting the "stop" cap / stack block
+ * @property {string[]} setFlag - Valid arguments to sensing "set [] to <>" block.
+ * @property {{}} dropdowns
+ * @property {{}} nativeDropdowns
+ * @property {{[type: string]: string}} commands - {block_id: block_spec}
+ * @property {BlockInfo[]} fullBlocks - Translatable block spec info.
+}
+ */
+
+/**
  * List of categories
  *
  * @type {string[]}
@@ -177,7 +215,7 @@ export const blocksById = {}
 /**
  * All the blocks
  *
- * @type {Object[]}
+ * @type {BlockInfo[]}
  */
 const allBlocks = scratchCommands.map(def => {
   if (!def.id) {
@@ -235,14 +273,14 @@ export const unicodeIcons = {
 /**
  * All the loaded languages
  *
- * @type {Object}
+ * @type {{[key: string]: Language}}
  */
 export const allLanguages = {}
 /**
  * Load language
  *
- * @param {string} code - 2-letter language code
- * @param {Object} language - Language data
+ * @param {string} code - Language code
+ * @param {Language} language - Language data
  */
 function loadLanguage(code, language) {
   const blocksByHash = (language.blocksByHash = {})
@@ -349,7 +387,7 @@ function loadLanguage(code, language) {
  * Load list of languages
  *
  * @export
- * @param {Object[]} languages
+ * @param {Language[]} languages
  */
 export function loadLanguages(languages) {
   Object.keys(languages).forEach(code => loadLanguage(code, languages[code]))
@@ -358,7 +396,7 @@ export function loadLanguages(languages) {
 /**
  * The English language
  *
- * @type {Object}
+ * @type {Language}
  */
 export const english = {
   aliases: {
@@ -1109,8 +1147,8 @@ export function lookupHash(hash, info, children, languages) {
  *
  * @export
  * @param {string} name
- * @param {Object[]} languages
- * @returns {*}
+ * @param {Language[]} languages
+ * @returns {string}
  */
 export function lookupDropdown(name, languages) {
   for (const lang of languages) {

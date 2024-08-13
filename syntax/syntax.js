@@ -34,6 +34,14 @@ import {
 
 import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
 
+/**
+ * Paint block
+ *
+ * @param {import("./blocks.js").BlockInfo} info
+ * @param {import("./model.js").Child[]} children
+ * @param {import("./blocks.js").Language[]} languages
+ * @returns {Block}
+ */
 function paintBlock(info, children, languages) {
   let overrides = []
   if (Array.isArray(children[children.length - 1])) {
@@ -381,6 +389,14 @@ function paintBlock(info, children, languages) {
   return block
 }
 
+/**
+ * Check if block is a define block
+ *
+ * @param {import("./model.js").Child[]} children
+ * @param {import("./blocks.js").Language} lang
+ * @param {boolean} [testBlock=true] - Test if defined block is a block (aka, is it using the `define {block}` syntax)
+ * @returns {boolean}
+ */
 function isDefineBlock(children, lang, testBlock = true) {
   if (children.length < lang.definePrefix.length) {
     return false
@@ -432,15 +448,34 @@ function isDefineBlock(children, lang, testBlock = true) {
   return true
 }
 
+/**
+ * Parse snapblocks code
+ *
+ * @param {string} code
+ * @param {import("./blocks.js").Language[]} languages
+ * @returns {() => (Block | Comment | "NL")}
+ */
 function parseLines(code, languages) {
   let tok = code[0]
   let index = 0
+  /** Go to the next character */
   function next() {
     tok = code[++index]
   }
+  /**
+   * Peek at next character
+   *
+   * @param {number} [amount=1]
+   * @returns {string}
+   */
   function peek(amount = 1) {
     return code[index + amount]
   }
+  /**
+   * Peak at next character, ignoring whitespace
+   *
+   * @returns {string}
+   */
   function peekNonWs() {
     for (let i = index + 1; i < code.length; i++) {
       if (code[i] !== " ") {
@@ -456,6 +491,13 @@ function parseLines(code, languages) {
     define = define.concat(lang.define)
   })
 
+  /**
+   * Create block
+   *
+   * @param {string} shape
+   * @param {import("./model.js").Child[]} children
+   * @returns {Block}
+   */
   function makeBlock(shape, children) {
     const hasInputs = children.filter(x => !x.isLabel).length
 
@@ -473,11 +515,25 @@ function parseLines(code, languages) {
     return paintBlock(info, children, languages)
   }
 
+  /**
+   * Create dropdown input
+   *
+   * @param {string} shape
+   * @param {(string | Icon)} value
+   * @param {boolean} isReadonly
+   * @returns {Input}
+   */
   function makeMenu(shape, value, isReadonly) {
     const menu = lookupDropdown(value, languages) || value
     return new Input(shape, value, menu, isReadonly)
   }
 
+  /**
+   * Parse block parts
+   *
+   * @param {string} end - End character
+   * @returns {import("./model.js").Child[]}
+   */
   function pParts(end) {
     const children = []
     let label
@@ -707,6 +763,11 @@ function parseLines(code, languages) {
     return children
   }
 
+  /**
+   * Parse string input
+   *
+   * @returns {Input}
+   */
   function pString() {
     next() // '['
     let s = ""
@@ -827,6 +888,12 @@ function parseLines(code, languages) {
     return input
   }
 
+  /**
+   * Parse block
+   *
+   * @param {string} end
+   * @returns {(Block | Comment)}
+   */
   function pBlock(end) {
     const children = pParts(end)
     if (tok && tok === "\n") {
@@ -885,6 +952,11 @@ function parseLines(code, languages) {
     return block
   }
 
+  /**
+   * parse reporter or number input
+   *
+   * @returns {(Block | Input)}
+   */
   function pReporter() {
     next() // '('
 
@@ -1074,6 +1146,11 @@ function parseLines(code, languages) {
     return block
   }
 
+  /**
+   * Parse predicate or boolean input
+   *
+   * @returns {(Block | Input)}
+   */
   function pPredicate() {
     next() // '<'
     const children = pParts(">")
@@ -1175,6 +1252,12 @@ function parseLines(code, languages) {
     }
   }
 
+  /**
+   * Parse overrides
+   *
+   * @param {string} end
+   * @returns {string[]}
+   */
   function pOverrides(end) {
     next()
     const overrides = []
@@ -1205,6 +1288,12 @@ function parseLines(code, languages) {
     return overrides
   }
 
+  /**
+   * Parse comment
+   *
+   * @param {string} end
+   * @returns {Comment}
+   */
   function pComment(end) {
     next()
     let isMultiline = tok === "*"
@@ -1251,6 +1340,11 @@ function parseLines(code, languages) {
     return com
   }
 
+  /**
+   * Parse line
+   *
+   * @returns {(Block | Comment)}
+   */
   function pLine() {
     let diff
     if (tok === "+" || tok === "-") {
@@ -1283,12 +1377,23 @@ function parseLines(code, languages) {
 
 /* * */
 
+/**
+ * Parse scripts.
+ *
+ * @param {() => (Block | Comment | "NL")} getLine - Result from `parseLines()`
+ * @returns {Script[]}
+ */
 function parseScripts(getLine) {
   let line = getLine()
   function next() {
     line = getLine()
   }
 
+  /**
+   * Parse lines
+   *
+   * @returns {Script[]}
+   */
   function pFile() {
     while (line === "NL") {
       next()
@@ -1346,6 +1451,11 @@ function parseScripts(getLine) {
     return scripts
   }
 
+  /**
+   * Parse line
+   *
+   * @returns {Script}
+   */
   function pLine() {
     const b = line
     next()
@@ -1370,6 +1480,11 @@ function parseScripts(getLine) {
     return b
   }
 
+  /**
+   * Parse mouths
+   *
+   * @returns {(Script | Glow)}
+   */
   function pMouth() {
     const blocks = []
     while (line) {
@@ -1408,6 +1523,17 @@ function parseScripts(getLine) {
 
 /* * */
 
+/**
+ * @callback eachBlock~requestCallback
+ * @param {Block} block - Block
+ */
+
+/**
+ * Iterate over each block in script
+ *
+ * @param {(Script | Block | Glow)} x
+ * @param {eachBlock~requestCallback} [cb]
+ */
 function eachBlock(x, cb) {
   if (x.isScript) {
     x.blocks = x.blocks.map(block => {
@@ -1424,6 +1550,11 @@ function eachBlock(x, cb) {
   }
 }
 
+/**
+ * Blocks that have a list inputs. The key is the block id, and the value is the input index that contains the list name.
+ *
+ * @type {{ "append:toList:": number; "deleteLine:ofList:": number; "insert:at:ofList:": number; "setLine:ofList:to:": number; "showList:": number; "hideList:": number; }}
+ */
 const listBlocks = {
   "append:toList:": 1,
   "deleteLine:ofList:": 1,
@@ -1433,6 +1564,11 @@ const listBlocks = {
   "hideList:": 0,
 }
 
+/**
+ * Recognize stuff
+ *
+ * @param {Script[]} scripts
+ */
 function recognizeStuff(scripts) {
   const customBlocksByHash = Object.create(null)
   const listNames = new Set()
@@ -1711,16 +1847,7 @@ function recognizeStuff(scripts) {
  *
  * @export
  * @param {string} code - Snapblocks code to parse
-   * @param {Object} options - Snapblocks options
-   * @param {("snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast")} [options.style=snap] - Block style
-   * @param {boolean} [options.inline=false] - Render inline
-   * @param {string[]} [options.languages=["en"]] - Languages
-   * @param {number} [options.scale=1] - Display scale
-   * @param {boolean} [options.zebraColoring=false] - Zebra coloring
-   * @param {boolean} [options.wrap=false] - Wrap blocks
-   * @param {(number|null)} [options.wrapSize=null] - Minimum block wrap width
-   * @param {boolean} [options.showSpaces=false] - Show spaces
-   * @param {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [options.elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+ * @param {import("../index.js").Options} options - Snapblocks options
  * @returns {Document} - Parsed document
  */
 export function parse(code, options) {

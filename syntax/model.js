@@ -1,4 +1,8 @@
 /**
+ * @typedef {(Label | Icon | Input | Script)} Child
+ */
+
+/**
  * Check if value is true
  *
  * @param {*} bool

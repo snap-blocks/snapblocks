@@ -22,19 +22,18 @@ import {
   splitFontSize,
   getFontHeight,
 } from "../shared/scaleFontSize.js"
-const {
-  categoryColor,
-  defaultFontFamily,
-  makeStyle,
-  makeIcons,
-  darkRect,
-  bevelFilter,
-  darkFilter,
-  dropShadowFilter,
-  lightFilter,
-} = style
 
+/**
+ * Icons that should be rendered as unicode characters
+ *
+ * @type {{}}
+ */
 const unicodeIcons = {}
+/**
+ * Category aliases
+ *
+ * @type {Object}
+ */
 const categoryAliases = {
   ...aliasExtensions,
   events: "control",
@@ -46,6 +45,13 @@ const categoryAliases = {
 }
 
 export class LabelView {
+  /**
+   * Creates an instance of LabelView.
+   *
+   * @constructor
+   * @param {Label} label
+   * @extends Label
+   */
   constructor(label) {
     this._color = new Color(255, 255, 255)
     this.defaultColor = true
@@ -72,10 +78,21 @@ export class LabelView {
     this.x = 0
   }
 
+  /**
+   * This is a label
+   *
+   * @readonly
+   * @type {true}
+   */
   get isLabel() {
     return true
   }
 
+  /**
+   * The label color
+   *
+   * @type {Color}
+   */
   get color() {
     return this._color
   }
@@ -90,6 +107,11 @@ export class LabelView {
     }
   }
 
+  /**
+   * The label font size as a css unit
+   *
+   * @type {string}
+   */
   get fontSize() {
     return this._fontSize
   }
@@ -2120,6 +2142,12 @@ class DocumentView {
   }
 }
 
+/**
+ * Description placeholder
+ *
+ * @param {*} node
+ * @returns {(typeof LabelView | typeof IconView | typeof InputView | typeof BlockView | typeof CommentView | typeof GlowView | typeof ScriptView | typeof DocumentView)}
+ */
 const viewFor = node => {
   if (node instanceof Icon && unicodeIcons[node.name]) {
     return LabelView
@@ -2147,4 +2175,11 @@ const viewFor = node => {
   }
 }
 
+/**
+ * Description placeholder
+ *
+ * @param {*} node
+ * @param {*} options
+ * @returns {*}
+ */
 export const newView = (node, options) => new (viewFor(node))(node, options)
