@@ -1478,9 +1478,9 @@ export class CommentView {
     let border = block ? block.color.tertiary.toHexString() : style.colors.comment.border.toHexString()
 
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
         fill: border,
-      }),
+      }) : null,
       SVG.el('rect', {
         rx: 4,
         ry: 4,
@@ -1522,9 +1522,9 @@ export class CommentView {
     })
 
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
         fill: border,
-      }),
+      }) : null,
       SVG.commentRect(this.width, this.height, {
         // class: "sb3-comment",
         fill: style.colors.comment.body.toHexString(),

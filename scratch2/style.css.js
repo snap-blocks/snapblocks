@@ -80,22 +80,6 @@ export default `
   fill: #8e2ec2;
 }
 
-.sb-comment {
-  fill: #ffffa5;
-  stroke: #d0d1d2;
-  stroke-width: 1;
-}
-.sb-comment-line {
-  fill: #ffff80;
-}
-.sb-comment-label {
-  font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
-  font-weight: bold;
-  fill: #5c5d5f;
-  word-spacing: 0;
-  font-size: 12px;
-}
-
 .sb-diff {
   fill: none;
   stroke: #000;

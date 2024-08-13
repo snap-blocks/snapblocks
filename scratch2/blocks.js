@@ -1276,9 +1276,9 @@ class CommentView {
         y = 20
 
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
         fill: style.colors.comment.titleBar.toHexString(),
-      }),
+      }) : null,
       SVG.el('rect', {
         width: this.width,
         height: this.height,
@@ -1319,9 +1319,9 @@ class CommentView {
     })
 
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, {
         fill: style.colors.comment.titleBar.toHexString(),
-      }),
+      }) : null,
       SVG.commentRect(this.width, this.height, {
         fill: style.colors.comment.titleBar.toHexString(),
         stroke: style.colors.comment.border.toHexString(),

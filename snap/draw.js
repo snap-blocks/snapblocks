@@ -52,7 +52,9 @@ export default class SVG {
 
   static withChildren(el, children) {
     for (const child of children) {
-      el.appendChild(child)
+      if (child) {
+        el.appendChild(child)
+      }
     }
     return el
   }

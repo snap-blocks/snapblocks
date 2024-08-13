@@ -154,7 +154,9 @@ export class LabelView {
             : `10px`
     }
 
-    let fontWeight = /comment-label/.test(this.cls)
+    let fontWeight = /comment-label-multiline/.test(this.cls)
+      ? "normal"
+      : /comment-label/.test(this.cls)
       ? `bold`
       : /literal-boolean/.test(this.cls)
         ? `bold`
@@ -1661,9 +1663,9 @@ class CommentView {
     })
     
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.titleBarHeight, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, this.titleBarHeight, {
         fill: Style.colors.comment.line.toHexString(),
-      }),
+      }) : null,
       body,
       titleBar,
       arrowEl,
@@ -1701,9 +1703,9 @@ class CommentView {
     //   this.label.width +
     //   padding.right
     return SVG.group([
-      SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, this.height, {
+      this.hasBlock ? SVG.commentLine(CommentView.lineLength, this.height, {
         fill: Style.colors.comment.line.toHexString(),
-      }),
+      }) : null,
       SVG.commentRect(this.width, this.height, {
         fill: Style.colors.comment.titleBar.toHexString(),
       }),

@@ -842,6 +842,7 @@ function parseLines(code, languages) {
     }
 
     if (children.length === 0) {
+      comment.hasBlock = false
       if (comment) {
         return comment
       }
@@ -1255,6 +1256,7 @@ function parseLines(code, languages) {
     if (tok === "/" && ["/", "*"].includes(peek())) {
       const comment = pComment()
       comment.hasBlock = block && block.children.length
+      console.log('has block', comment.hasBlock)
       if (!comment.hasBlock) {
         return comment
       }

@@ -517,7 +517,7 @@ export class Block {
 
 export class Comment {
   constructor(value, hasBlock, isMultiline) {
-    this.label = new Label(value, "comment-label")
+    this.label = new Label(value, `comment-label${isMultiline ? " comment-label-multiline" : ""}`)
     this.hasBlock = hasBlock
     this.isMultiline = isMultiline || value.includes("\n")
   }

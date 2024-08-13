@@ -85,21 +85,6 @@ export default `
   fill: none;
 }
 
-.snap-comment {
-  fill: #ffffb4;
-}
-.snap-comment-line {
-  fill: #ffffb4;
-}
-.snap-comment-label {
-  font-family: Helvetica, Arial, DejaVu Sans, sans-serif;
-  font-weight: normal;
-  fill: #000;
-  word-spacing: 0;
-  font-size: 12px;
-  filter: none;
-}
-
 .snap-diff {
   fill: none;
   stroke: #000;
