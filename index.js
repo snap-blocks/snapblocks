@@ -180,13 +180,12 @@ export default function (window) {
     el.appendChild(container)
   }
 
-
   /**
    * Render all matching elements in page to shiny snap blocks.
    * Accepts a CSS selector as an argument.
-   * 
+   *
    * Like the old `scratchblocks2.parse()`.
-   * 
+   *
    * @example
    * snapblocks.renderMatching("pre.blocks");
    *
