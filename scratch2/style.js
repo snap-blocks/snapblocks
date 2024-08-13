@@ -10,9 +10,9 @@ export default class Style {
 
   static colors = {
     comment: {
-      body: Color.fromString('#FFFFD2'),
-      titleBar: Color.fromString('#FFFFA5'),
-      border: Color.fromString('#D0D1D2'),
+      body: Color.fromString("#FFFFD2"),
+      titleBar: Color.fromString("#FFFFA5"),
+      border: Color.fromString("#D0D1D2"),
     },
 
     categories: {
@@ -46,12 +46,12 @@ export default class Style {
 
   static makeIcons() {
     return [
-      SVG.el('path', {
+      SVG.el("path", {
         d: "M 0 2 L 5.5 8 L 11 2 Z",
         id: "sb-commentArrowDown",
         fill: "#808080",
       }),
-      SVG.el('path', {
+      SVG.el("path", {
         d: "M 2 0 L 8 5.5 L 2 11 Z",
         id: "sb-commentArrowRight",
         fill: "#808080",
