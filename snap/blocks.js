@@ -1353,7 +1353,6 @@ class BlockView {
               this.commentHeight,
               child.y + child.commentHeight,
             )
-            console.log("block commentHeight", this.commentHeight)
           }
         } else if (child.isLoop) {
           if (lastCSlot) {
@@ -1628,7 +1627,6 @@ class CommentView {
   }
 
   get titleBarHeight() {
-    console.log("font height", getFontHeight(this.label.fontSize))
     return getFontHeight(this.label.fontSize) + this.padding
   }
 
@@ -1977,7 +1975,6 @@ class DocumentView {
       }
       script.y = height
       elements.push(SVG.move(0, height, script.draw(this.options)))
-      console.log("script", script)
       height += Math.max(
         script.height,
         script.commentHeight ? script.commentHeight : 0,

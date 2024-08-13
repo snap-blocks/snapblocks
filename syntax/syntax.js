@@ -836,7 +836,6 @@ function parseLines(code, languages) {
 
     let comment = null
 
-    console.log("tok", tok)
     if (tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(end)
     }
@@ -918,7 +917,6 @@ function parseLines(code, languages) {
     }
 
     const children = pParts(")")
-    console.log("pReporter tok", tok)
     if (tok && tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(")")
     }
@@ -1147,7 +1145,6 @@ function parseLines(code, languages) {
     }
     if (!isCShape) {
       for (let block of blocks) {
-        console.log("comment", block.comment)
         if (block.comment) {
           let label = block.comment.label.value
         }
@@ -1261,7 +1258,6 @@ function parseLines(code, languages) {
     if (tok === "/" && ["/", "*"].includes(peek())) {
       const comment = pComment()
       comment.hasBlock = block && block.children.length
-      console.log("has block", comment.hasBlock)
       if (!comment.hasBlock) {
         return comment
       }
