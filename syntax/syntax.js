@@ -842,8 +842,8 @@ function parseLines(code, languages) {
     }
 
     if (children.length === 0) {
-      comment.hasBlock = false
       if (comment) {
+        comment.hasBlock = false
         return comment
       }
       return
