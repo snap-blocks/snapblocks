@@ -109,7 +109,7 @@ export class Label {
       }
       suffix += `-${this.color.r}-${this.color.g}-${this.color.b}`
     }
-    
+
     return `${prefix}${value}${suffix}`
   }
 }
@@ -181,7 +181,7 @@ export class Icon {
 
   /**
    * Available icons.
-   * 
+   *
    * TODO:
    * - fullScreen
    * - grow
@@ -677,7 +677,7 @@ export class Comment {
    */
   stringify() {
     if (this.isMultiline) {
-      return `/* ${this.label.raw.replace('*/', '\\*/')} */`
+      return `/* ${this.label.raw.replace("*/", "\\*/")} */`
     }
     return `// ${this.label.raw}`
   }

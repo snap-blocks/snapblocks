@@ -7,7 +7,7 @@
 */
 
 /**
- * Moved extensions: key is scratch3, value is scratch2 
+ * Moved extensions: key is scratch3, value is scratch2
  *
  * @type {{ pen: string; video: string; music: string; }}
  */
