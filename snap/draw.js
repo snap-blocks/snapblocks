@@ -226,7 +226,6 @@ export default class SVG {
     return el
   }
 
-  
   /**
    * translatePath takes a path string such as "M 0 0 L 0 10 L 10 0 Z", fins
    * the individual X/Y components, and translates them by dx/dy, so as to
@@ -323,7 +322,7 @@ export default class SVG {
 
   /**
    * [CanvasRenderingContext2D.arc()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc) as svg path.
-   * 
+   *
    * Taken from https://github.com/gliffy/canvas2svg/blob/master/canvas2svg.js#L1008
    *
    * @static

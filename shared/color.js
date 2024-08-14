@@ -14,7 +14,7 @@ export const rgbColorPat = /^rgb\( *\d+ *(,? *\d* *){0,2}\)$/
 export default class Color {
   /**
    * Creates an instance of Color.
-   * 
+   *
    * This class is pretty much copied from [morphic.js](https://github.com/jmoenig/morphic.js). This was only converted to ES6 class syntax, and added a few methods, and added hex color support.
    *
    * @constructor

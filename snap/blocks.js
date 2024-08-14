@@ -371,7 +371,7 @@ export class LabelView {
 
 /**
  * Cached metrics
- * 
+ *
  * @type {{[type: string]: { width: number; spaceWidth: any; lines: {word: string; width: number; height: number;}[][]; }}}
  */
 LabelView.metricsCache = {}
