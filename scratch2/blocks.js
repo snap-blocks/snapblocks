@@ -421,6 +421,7 @@ class IconView {
       file: { width: 8, height: 10 },
       fullScreen: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       grow: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      normalScreen: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

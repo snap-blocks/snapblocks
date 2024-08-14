@@ -716,6 +716,20 @@ export default class Style {
           id: "sb-grow"
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 3.5 6.5 L 0.5 9.5 M 6.5 3.5 L 9.5 0.5`,
+            "stroke-width": 2,
+          }),
+          SVG.el('path', {
+            d: `M 5.5 4.5 L 10 4.5 L 5.5 0 Z M 4.5 5.5 L 0 5.5 L 4.5 10 Z`,
+            stroke: "none",
+          })
+        ]), {
+          id: "sb-normalScreen"
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
