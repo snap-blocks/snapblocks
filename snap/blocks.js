@@ -2052,6 +2052,12 @@ export class GlowView {
   }
   // TODO how can we always raise Glows above their parents?
 
+  /**
+   * Draw Glow
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   draw(options) {
     const c = this.child
     const el = c.isScript ? c.draw(options, true) : c.draw(options)
@@ -2065,6 +2071,12 @@ export class GlowView {
 }
 
 export class ScriptView {
+  /**
+   * Creates an instance of ScriptView.
+   *
+   * @constructor
+   * @param {Script} script
+   */
   constructor(script) {
     Object.assign(this, script)
     this.blocks = script.blocks.map(newView)
@@ -2075,16 +2087,34 @@ export class ScriptView {
     this.isZebra = false
   }
 
+  /**
+   * This is a script
+   *
+   * @readonly
+   * @type {true}
+   */
   get isScript() {
     return true
   }
 
+  /**
+   * Measure blocks in script
+   *
+   * @param {Options} options
+   */
   measure(options) {
     for (const block of this.blocks) {
       block.measure(options)
     }
   }
 
+  /**
+   * Draw script
+   *
+   * @param {Options} options
+   * @param {number} inside - Inside a Glow?
+   * @returns {SVGElement}
+   */
   draw(options, inside) {
     const children = []
     let y = 0
@@ -2139,6 +2169,13 @@ export class ScriptView {
 }
 
 export class DocumentView {
+  /**
+   * Creates an instance of DocumentView.
+   *
+   * @constructor
+   * @param {Document} doc
+   * @param {Options} options
+   */
   constructor(doc, options) {
     this.id = this.makeid(10)
 
@@ -2150,6 +2187,9 @@ export class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
+    /**
+     * @type {Options}
+     */
     this.options = {
       id: this.id,
       isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
@@ -2164,6 +2204,12 @@ export class DocumentView {
     }
   }
 
+  /**
+   * Create SVG id
+   *
+   * @param {number} length
+   * @returns {string}
+   */
   makeid(length) {
     let result = ""
     const characters =
@@ -2177,6 +2223,11 @@ export class DocumentView {
     return result
   }
 
+  /**
+   * Update all ids in element and it's children, to add id to the end
+   *
+   * @param {HTMLOrSVGElement} element
+   */
   updateIds(element) {
     let aroundIdRegex = /(#[a-zA-Z][\w:.\-]*)/
     let idRegex = /^#[a-zA-Z][\w:.\-]*$/
@@ -2231,10 +2282,21 @@ export class DocumentView {
     }
   }
 
+  /**
+   * Measure all scripts
+   *
+   * @param {Options} options
+   */
   measure(options) {
     this.scripts.forEach(script => script.measure(options))
   }
 
+  /**
+   * Render document
+   *
+   * @param {Function} cb - DEPRECATED
+   * @returns {SVGElement}
+   */
   render(cb) {
     if (typeof cb === "function") {
       throw new Error("render() no longer takes a callback")
@@ -2335,7 +2397,12 @@ export class DocumentView {
     return svg
   }
 
-  /* Export SVG image as XML string */
+
+  /**
+   * Export SVG image as XML string
+   *
+   * @returns {string}
+   */
   exportSVGString() {
     if (this.el == null) {
       throw new Error("call draw() first")
@@ -2350,12 +2417,22 @@ export class DocumentView {
     return xml
   }
 
-  /* Export SVG image as data URI */
+  /**
+   * Export SVG image as data URI
+   *
+   * @returns {string}
+   */
   exportSVG() {
     const xml = this.exportSVGString()
     return `data:image/svg+xml;utf8,${xml.replace(/[#]/g, encodeURIComponent)}`
   }
 
+  /**
+   * Paint on canvas
+   *
+   * @param {(canvas: HTMLCanvasElement) => any} cb
+   * @param {number} [exportScale=1]
+   */
   toCanvas(cb, exportScale) {
     exportScale = exportScale || 1.0
 
@@ -2376,6 +2453,12 @@ export class DocumentView {
     }
   }
 
+  /**
+   * Export PNG. If it can, this will return a blob url, if not, it will return a data uri.
+   *
+   * @param {(blobOrUri: string) => any} cb
+   * @param {number} scale
+   */
   exportPNG(cb, scale) {
     this.toCanvas(canvas => {
       if (URL && URL.createObjectURL && Blob && canvas.toBlob) {
@@ -2390,9 +2473,9 @@ export class DocumentView {
 }
 
 /**
- * Description placeholder
+ * New view for node
  *
- * @param {*} node
+ * @param {(Label | Icon | Input | Block | Comment | Glow | Script | Document)} node
  * @returns {(typeof LabelView | typeof IconView | typeof InputView | typeof BlockView | typeof CommentView | typeof GlowView | typeof ScriptView | typeof DocumentView)}
  */
 const viewFor = node => {
