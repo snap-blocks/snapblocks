@@ -25,7 +25,7 @@ export default class Style {
     label: new Color(255, 255, 255),
     zebraLabel: new Color(),
 
-    space: Color.fromString('#b48c8c'),
+    space: Color.fromString("#b48c8c"),
 
     literal: new Color(),
 
@@ -830,13 +830,9 @@ export default class Style {
   static dropShadowFilter(id) {
     const f = new Filter(id)
     // f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
-    let flood = f.flood('#000', 0.3, 'SourceAlpha')
-    let offset = f.offset(
-      -0.5,
-      -0.5,
-      f.blur(0, 'SourceAlpha')
-    )
-    f.comp('over', 'SourceGraphic', f.comp('in', flood, offset))
+    let flood = f.flood("#000", 0.3, "SourceAlpha")
+    let offset = f.offset(-0.5, -0.5, f.blur(0, "SourceAlpha"))
+    f.comp("over", "SourceGraphic", f.comp("in", flood, offset))
     return f.el
   }
 

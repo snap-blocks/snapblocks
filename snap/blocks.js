@@ -295,7 +295,7 @@ export class LabelView {
                 cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
                 class: "snap-space",
-                fill: Style.colors.space.toHexString()
+                fill: Style.colors.space.toHexString(),
               }),
             )
             x += this.spaceWidth / 2
@@ -833,7 +833,7 @@ export class InputView {
       )
     } else {
       SVG.setProps(el, {
-        fill: 'white',
+        fill: "white",
       })
     }
 
@@ -2383,13 +2383,13 @@ export class DocumentView {
       ])),
     )
 
-    group.querySelectorAll('.snap-drop-shadow').forEach((el) => {
+    group.querySelectorAll(".snap-drop-shadow").forEach(el => {
       el.style.filter = `url(#snapDropShadow-${this.id})`
     })
-    group.querySelectorAll('.snap-bevel').forEach((el) => {
+    group.querySelectorAll(".snap-bevel").forEach(el => {
       el.style.filter = `url(#snapBevelFilter-${this.id})`
     })
-    group.querySelectorAll('.snap-input-bevel').forEach(el => {
+    group.querySelectorAll(".snap-input-bevel").forEach(el => {
       el.style.filter = `url(#snapInputBevelFilter-${this.id})`
     })
 
