@@ -1588,13 +1588,7 @@ class GlowView {
         el = SVG.stackRect(w, h)
       }
     } else {
-      if (c.isHat) {
-        el = SVG.hatRect(w, h)
-      } else if (c.isFinal) {
-        el = SVG.capRect(w, h)
-      } else {
-        el = SVG.stackRect(w, h)
-      }
+      el = BlockView.shapes[c.info.shape](w, h)
     }
     return SVG.setProps(el, {
       class: "sb3-diff sb3-diff-ins",

@@ -920,7 +920,7 @@ function parseLines(code, languages) {
       const child = children[0]
       if (
         child.isBlock &&
-        (child.isReporter || child.isBoolean || child.isRing)
+        (child.isReporter || child.isBoolean || child.isRing) || child.isGlow
       ) {
         if (comment) {
           child.comment = comment

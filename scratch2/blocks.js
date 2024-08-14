@@ -1370,7 +1370,7 @@ class GlowView {
         el = SVG.stackRect(w, h)
       }
     } else {
-      el = c.drawSelf(options, w, h, [])
+      el = BlockView.shapes[c.info.shape](w, h)
     }
     return SVG.setProps(el, {
       class: "sb-diff sb-diff-ins",

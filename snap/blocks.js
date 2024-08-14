@@ -1991,6 +1991,9 @@ export class GlowView {
    */
   constructor(glow) {
     Object.assign(this, glow)
+    /**
+     * @type {(Block | Script)}
+     */
     this.child = newView(glow.child)
 
     this.width = null
@@ -2032,12 +2035,12 @@ export class GlowView {
       if (!c.isEmpty && c.blocks[0].isHat) {
         el = SVG.hatRect(w, h)
       } else if (c.isFinal) {
-        el = SVG.capRect(w, h)
+        el = BlockView.shapes.cap(w, h)
       } else {
-        el = SVG.stackRect(w, h)
+        el = BlockView.shapes.stack(w, h)
       }
     } else {
-      el = c.drawSelf(options, w, h, [])
+      el = BlockView.shapes[c.info.shape](w, h + 1)
     }
     return SVG.move(
       0,
@@ -2087,7 +2090,7 @@ export class ScriptView {
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
-      const x = 0 // inside ? (this.shape === "boolean" ? 6 : 8) : 0
+      const x = inside ? 0 : 2
       if (inside && !this.isZebra && this.color) {
         if (this.color.eq(block.color)) {
           block.isZebra = true
@@ -2420,10 +2423,10 @@ const viewFor = node => {
 }
 
 /**
- * Description placeholder
+ * Create new view
  *
- * @param {*} node
- * @param {*} options
- * @returns {*}
+ * @param {(Label | Icon | Input | Block | Comment | Glow | Script | Document)} node
+ * @param {Options} options
+ * @returns {LabelView | IconView | InputView | BlockView | CommentView | GlowView | ScriptView | DocumentView}
  */
 export const newView = (node, options) => new (viewFor(node))(node, options)
