@@ -364,7 +364,7 @@ export default class Style {
           }),
         ]),
         {
-          id: "sb-paintBucket",
+          id: "sb-paintbucket",
         },
       ),
       SVG.setProps(

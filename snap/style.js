@@ -486,7 +486,7 @@ export default class Style {
           }),
         ]),
         {
-          id: "snap-paintBucket",
+          id: "snap-paintbucket",
         },
       ),
       SVG.setProps(

@@ -407,7 +407,7 @@ class IconView {
         scale: 1,
         fillAttribute: ["stroke", "fill"],
       },
-      paintBucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      paintbucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       location: { width: 6, height: 10 },
       gears: { width: 10, height: 10 },

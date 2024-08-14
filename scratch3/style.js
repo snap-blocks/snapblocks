@@ -27,7 +27,7 @@ const highContrastIcons = new Set([
   "storage",
   "brush",
   "pipette",
-  "paintBucket",
+  "paintbucket",
   "eraser",
   "location",
   "gears",
@@ -73,7 +73,7 @@ const snapIcons = new Set([
   "storage",
   "brush",
   "pipette",
-  "paintBucket",
+  "paintbucket",
   "eraser",
   "location",
   "gears",
@@ -578,7 +578,7 @@ export default class Style {
           }),
         ]),
         {
-          id: "sb3-paintBucket",
+          id: "sb3-paintbucket",
         },
       ),
       SVG.setProps(

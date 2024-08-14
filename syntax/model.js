@@ -247,7 +247,7 @@ export class Icon {
   static get iconAliases() {
     return {
       "+": "plusSign", // I can't have + in an id.
-      bucket: "paintBucket",
+      bucket: "paintbucket",
       greenflag: "greenFlag", // snap greenflag icon (no capital)
       stop: "stopSign",
     }
@@ -327,7 +327,7 @@ export class Icon {
       storage: true,
       brush: true,
       pipette: true,
-      paintBucket: true,
+      paintbucket: true,
       eraser: true,
       location: true,
       gears: true,
