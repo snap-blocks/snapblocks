@@ -1356,7 +1356,7 @@ class GlowView {
     this.child.measure(options)
   }
 
-  drawSelf() {
+  drawSelf(options) {
     const c = this.child
     let el
     const w = this.width
@@ -1370,7 +1370,7 @@ class GlowView {
         el = SVG.stackRect(w, h)
       }
     } else {
-      el = c.drawSelf(w, h, [])
+      el = c.drawSelf(options, w, h, [])
     }
     return SVG.setProps(el, {
       class: "sb-diff sb-diff-ins",
@@ -1383,10 +1383,10 @@ class GlowView {
     const el = c.isScript ? c.draw(options, true) : c.draw(options)
 
     this.width = c.width
-    this.height = (c.isBlock && c.firstLine.height) || c.height
+    this.height = (c.isBlock && c.height) || c.height
 
     // encircle
-    return SVG.group([el, this.drawSelf()])
+    return SVG.group([el, this.drawSelf(options)])
   }
 }
 

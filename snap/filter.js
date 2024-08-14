@@ -1,6 +1,13 @@
 import SVG from "./draw.js"
 
 export default class Filter {
+  /**
+   * Creates an instance of Filter.
+   *
+   * @constructor
+   * @param {string} id
+   * @param {Object} props
+   */
   constructor(id, props) {
     this.el = SVG.el("filter", {
       ...props,
@@ -13,6 +20,14 @@ export default class Filter {
     this.highestId = 0
   }
 
+  /**
+   * Filter element
+   *
+   * @param {string} name
+   * @param {Object} props
+   * @param {SVGElement[]} children
+   * @returns {string} - Filter id
+   */
   fe(name, props, children) {
     const shortName = name.toLowerCase().replace(/gaussian|osite/, "")
     const id = `${shortName}-${++this.highestId}`
@@ -25,14 +40,38 @@ export default class Filter {
     return id
   }
 
+  /**
+   * Add composite filter
+   *
+   * @param {string} op
+   * @param {string} in1
+   * @param {string} in2
+   * @param {Object} props
+   * @returns {string}
+   */
   comp(op, in1, in2, props) {
     return this.fe("Composite", { ...props, operator: op, in: in1, in2: in2 })
   }
 
+  /**
+   * Subtract filter
+   *
+   * @param {string} in1
+   * @param {string} in2
+   * @returns {string}
+   */
   subtract(in1, in2) {
     return this.comp("arithmetic", in1, in2, { k2: +1, k3: -1 })
   }
 
+  /**
+   * Offset filter
+   *
+   * @param {number} dx
+   * @param {number} dy
+   * @param {string} in1
+   * @returns {string}
+   */
   offset(dx, dy, in1) {
     return this.fe("Offset", {
       in: in1,
@@ -41,6 +80,14 @@ export default class Filter {
     })
   }
 
+  /**
+   * Flood filter
+   *
+   * @param {string} color
+   * @param {number} opacity
+   * @param {string} in1
+   * @returns {string}
+   */
   flood(color, opacity, in1) {
     return this.fe("Flood", {
       in: in1,
@@ -49,6 +96,13 @@ export default class Filter {
     })
   }
 
+  /**
+   * Blur filter
+   *
+   * @param {number} dev
+   * @param {string} in1
+   * @returns {string}
+   */
   blur(dev, in1) {
     return this.fe("GaussianBlur", {
       in: in1,
@@ -56,6 +110,16 @@ export default class Filter {
     })
   }
 
+  /**
+   * Dropshadow filter
+   *
+   * @param {number} dx
+   * @param {number} dy
+   * @param {number} blur
+   * @param {string} color
+   * @param {number} opacity
+   * @returns {string}
+   */
   dropShadow(dx, dy, blur, color, opacity) {
     return this.fe("DropShadow", {
       dx: dx,
@@ -66,6 +130,13 @@ export default class Filter {
     })
   }
 
+  /**
+   * Color matrix
+   *
+   * @param {string} in1
+   * @param {string[]} values
+   * @returns {string}
+   */
   colorMatrix(in1, values) {
     return this.fe("ColorMatrix", {
       in: in1,
@@ -74,6 +145,11 @@ export default class Filter {
     })
   }
 
+  /**
+   * Merge
+   *
+   * @param {string[]} children - Filter ids
+   */
   merge(children) {
     this.fe(
       "Merge",

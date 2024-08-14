@@ -1,3 +1,13 @@
+/**
+ * @typedef {Object} Options
+ * @property {string} id
+ * @property {boolean} isFlat
+ * @property {number} wrapSize
+ * @property {boolean} zebraColoring
+ * @property {boolean} showSpaces
+ * @property {number} commentWidth
+ */
+
 import {
   Label,
   Icon,
@@ -24,9 +34,7 @@ const {
   makeIcons,
   darkRect,
   bevelFilter,
-  darkFilter,
   dropShadowFilter,
-  lightFilter,
 } = style
 import {
   scaleFontSize,
@@ -60,7 +68,7 @@ export class LabelView {
    * Creates an instance of LabelView.
    *
    * @constructor
-   * @param {Label} label
+   * @param {(Label | Icon)} label
    * @extends Label
    */
   constructor(label) {
@@ -131,6 +139,12 @@ export class LabelView {
     this.defaultFontSize = false
   }
 
+  /**
+   * Draw label
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   draw(options) {
     if (!options.isFlat) {
       this.el.classList.add("snap-drop-shadow")
@@ -138,23 +152,53 @@ export class LabelView {
     return this.el
   }
 
+  /**
+   * Text width
+   *
+   * @readonly
+   * @type {number}
+   */
   get width() {
     return this.metrics.width
   }
 
+  /**
+   * The width of a space
+   *
+   * @readonly
+   * @type {number}
+   */
   get spaceWidth() {
     return this.metrics.spaceWidth
   }
 
+  /**
+   * lines
+   *
+   * @readonly
+   * @type {{word: string; width: number; height: number;}[][]}
+   */
   get lines() {
     return this.metrics.lines
   }
 
+  /**
+   * Snap's raw height
+   *
+   * @readonly
+   * @type {number}
+   */
   get rawHeight() {
     // snap does this
     return this.height / 1.2
   }
 
+  /**
+   * Measure (and draw) text
+   *
+   * @param {Options} options
+   * @param {boolean} isZebra
+   */
   measure(options, isZebra) {
     const value = this.value
     const cls = `snap-${this.cls}`
@@ -277,7 +321,20 @@ export class LabelView {
     this.el = SVG.group(group)
   }
 
+  /**
+   * Measure text
+   *
+   * @static
+   * @param {string} value
+   * @param {string} font
+   * @returns {{ width: number; spaceWidth: any; lines: {word: string; width: number; height: number;}[][]; }}
+   */
   static measure(value, font) {
+    /**
+     * Canvas context
+     *
+     * @type {CanvasRenderingContext2D}
+     */
     const context = LabelView.measuring
     context.font = font
 
@@ -312,10 +369,31 @@ export class LabelView {
   }
 }
 
+/**
+ * Cached metrics
+ * 
+ * @type {{[type: string]: { width: number; spaceWidth: any; lines: {word: string; width: number; height: number;}[][]; }}}
+ */
 LabelView.metricsCache = {}
-LabelView.toMeasure = []
 
-class IconView {
+export class IconView {
+  /**
+   * @typedef {Object} IconInfo
+   * @property {number} width
+   * @property {number} height
+   * @property {(string | string[])} [fillAttribute]
+   * @property {number} [scale]
+   * @property {string} [alias]
+   * @property {number} [dy=0]
+   * @property {boolean} [noShadow=false]
+   */
+
+  /**
+   * Creates an instance of IconView.
+   *
+   * @constructor
+   * @param {Icon} icon
+   */
   constructor(icon) {
     this.scale = 1
     this.width = 12
@@ -348,6 +426,12 @@ class IconView {
     }
   }
 
+  /**
+   * Get icon info
+   *
+   * @param {string} name
+   * @returns {IconInfo}
+   */
   getInfo(name) {
     let info = IconView.icons[name]
     if (!info) {
@@ -364,6 +448,11 @@ class IconView {
     return info
   }
 
+  /**
+   * Get scaled width
+   *
+   * @type {number}
+   */
   get width() {
     return this._width * this.scale
   }
@@ -372,6 +461,11 @@ class IconView {
     this._width = width
   }
 
+  /**
+   * Get scaled height
+   *
+   * @type {number}
+   */
   get height() {
     return this._height * this.scale
   }
@@ -380,10 +474,23 @@ class IconView {
     this._height = height
   }
 
+  /**
+   * This is an icon
+   *
+   * @readonly
+   * @type {true}
+   * @constant
+   */
   get isIcon() {
     return true
   }
 
+  /**
+   * Draw icon
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   draw(options) {
     let props = {
       width: this.width,
@@ -407,6 +514,13 @@ class IconView {
     return symbol
   }
 
+  /**
+   * Description placeholder
+   *
+   * @static
+   * @readonly
+   * @type {{[type: string]: IconInfo}}
+   */
   static get icons() {
     return {
       greenFlag: {
@@ -528,7 +642,13 @@ class IconView {
   }
 }
 
-class InputView {
+export class InputView {
+  /**
+   * Creates an instance of InputView.
+   *
+   * @constructor
+   * @param {Input} input
+   */
   constructor(input) {
     Object.assign(this, input)
     if (input.label) {
@@ -541,16 +661,35 @@ class InputView {
     this.x = 0
   }
 
+  /**
+   * This is an icon
+   *
+   * @readonly
+   * @constant
+   * @type {true}
+   */
   get isInput() {
     return true
   }
 
+  /**
+   * Measure input label
+   *
+   * @param {Options} options
+   */
   measure(options) {
     if (this.hasLabel) {
       this.label.measure(options)
     }
   }
 
+  /**
+   * Shapes
+   *
+   * @static
+   * @readonly
+   * @type {{[type: string]: () => SVGElement}}
+   */
   static get shapes() {
     return {
       string: SVG.rect,
@@ -566,6 +705,13 @@ class InputView {
     }
   }
 
+  /**
+   * Draw input
+   *
+   * @param {Options} options
+   * @param {BlockView} parent
+   * @returns {SVGElement}
+   */
   draw(options, parent) {
     let w, h
     let label
@@ -745,7 +891,13 @@ class InputView {
   }
 }
 
-class BlockView {
+export class BlockView {
+  /**
+   * Creates an instance of BlockView.
+   *
+   * @constructor
+   * @param {Block} block
+   */
   constructor(block) {
     Object.assign(this, block)
     this.children = block.children.map(newView)
@@ -785,10 +937,22 @@ class BlockView {
     this.color = categoryColor(this.info.color || this.info.category)
   }
 
+  /**
+   * This is a block
+   *
+   * @readonly
+   * @constant
+   * @type {true}
+   */
   get isBlock() {
     return true
   }
 
+  /**
+   * Measure this block and it's children
+   *
+   * @param {Options} options
+   */
   measure(options) {
     for (const child of this.children) {
       if (child.measure) {
@@ -800,6 +964,13 @@ class BlockView {
     }
   }
 
+  /**
+   * Block shapes
+   *
+   * @static
+   * @readonly
+   * @type {{[type: string]: () => SVGElement}}
+   */
   static get shapes() {
     return {
       stack: SVG.stackRect,
@@ -819,6 +990,15 @@ class BlockView {
     }
   }
 
+  /**
+   * Draw block element
+   *
+   * @param {Options} options
+   * @param {number} w
+   * @param {number} h
+   * @param {(Line | Script)[]} lines
+   * @returns {SVGElement}
+   */
   drawSelf(options, w, h, lines) {
     let el = null
 
@@ -993,6 +1173,12 @@ class BlockView {
     return el
   }
 
+  /**
+   * Draw local block pin
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   drawLocalPin(options) {
     var ext = { x: 7.92, y: 12 },
       w = ext.x,
@@ -1039,48 +1225,22 @@ class BlockView {
     })
   }
 
-  minDistance(child) {
-    if (this.isBoolean) {
-      return child.isReporter
-        ? (4 + child.height / 4) | 0
-        : child.isLabel
-          ? (5 + child.height / 2) | 0
-          : child.isBoolean || child.shape === "boolean"
-            ? 5
-            : (2 + child.height / 2) | 0
-    }
-    if (this.isReporter) {
-      return (child.isInput && child.isRound) ||
-        ((child.isReporter || child.isBoolean) && !child.hasScript)
-        ? 3
-        : child.isLabel
-          ? (2 + child.height / 2) | 0
-          : (4 + child.height / 2) | 20
-    }
-    return 0
-  }
-
-  static get padding() {
-    return {
-      hat: [16, 3, 3, 6],
-      cat: [16, 3, 3, 6],
-      "define-hat": [13, 3, 3, 7],
-      "block-prototype": [12, 3, 3, 6],
-      reporter: [2, 3, 3, 2],
-      boolean: [2, 5, 7, 2],
-      cap: [4, 3, 3, 4],
-      "c-block": [4, 3, 3, 4],
-      "if-block": [4, 3, 3, 4],
-      ring: [2, 3, 3, 2],
-      null: [4, 3, 3, 3],
-    }
-  }
-
+  /**
+   * Draw block
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   draw(options) {
-    const isDefine = this.info.shape === "define-hat"
     let children = this.children
 
     class Line {
+      /**
+       * Creates an instance of Line.
+       *
+       * @constructor
+       * @param {number} y
+       */
       constructor(y) {
         this.y = y
         this.width = 0
@@ -1614,7 +1774,13 @@ class BlockView {
   }
 }
 
-class CommentView {
+export class CommentView {
+  /**
+   * Creates an instance of CommentView.
+   *
+   * @constructor
+   * @param {Comment} comment
+   */
   constructor(comment) {
     Object.assign(this, comment)
     this.label = newView(comment.label)
@@ -1623,14 +1789,33 @@ class CommentView {
     this.padding = 5
   }
 
+  /**
+   * This is a comment
+   *
+   * @readonly
+   * @type {boolean}
+   */
   get isComment() {
     return true
   }
 
+  /**
+   * Line length
+   *
+   * @static
+   * @readonly
+   * @type {number}
+   */
   static get lineLength() {
     return 8
   }
 
+  /**
+   * Comment width
+   *
+   * @readonly
+   * @type {number}
+   */
   get width() {
     if (this.isMultiline) {
       return Math.max(this.label.width + 2 * this.padding, 80)
@@ -1650,6 +1835,12 @@ class CommentView {
     }
   }
 
+  /**
+   * Comment height
+   *
+   * @readonly
+   * @type {number}
+   */
   get height() {
     return Math.max(
       this.titleBarHeight +
@@ -1659,10 +1850,21 @@ class CommentView {
     )
   }
 
+  /**
+   * Title bar height
+   *
+   * @readonly
+   * @type {number}
+   */
   get titleBarHeight() {
     return getFontHeight(this.label.fontSize) + this.padding
   }
 
+  /**
+   * Measure the comment label
+   *
+   * @param {Options} options
+   */
   measure(options) {
     this.label.measure({
       ...options,
@@ -1670,6 +1872,12 @@ class CommentView {
     })
   }
 
+  /**
+   * Draw comment
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   draw(options) {
     if (this.isMultiline) {
       return this.drawExpanded(options)
@@ -1678,6 +1886,12 @@ class CommentView {
     }
   }
 
+  /**
+   * Draw expanded (multiline) comment
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   drawExpanded(options) {
     let x, y
 
@@ -1722,6 +1936,12 @@ class CommentView {
     ])
   }
 
+  /**
+   * Draw collapsed (one line) comment
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
   drawCollapsed(options) {
     const padding = {
       left: 10,
@@ -1762,7 +1982,13 @@ class CommentView {
   }
 }
 
-class GlowView {
+export class GlowView {
+  /**
+   * Creates an instance of GlowView.
+   *
+   * @constructor
+   * @param {Glow} glow
+   */
   constructor(glow) {
     Object.assign(this, glow)
     this.child = newView(glow.child)
@@ -1772,15 +1998,32 @@ class GlowView {
     this.y = 0
   }
 
+  /**
+   * This is a Glow
+   *
+   * @readonly
+   * @type {boolean}
+   */
   get isGlow() {
     return true
   }
 
+  /**
+   * Measure the block
+   *
+   * @param {Options} options
+   */
   measure(options) {
     this.child.measure(options)
   }
 
-  drawSelf() {
+  /**
+   * Draw Glow
+   *
+   * @param {Options} options
+   * @returns {SVGElement}
+   */
+  drawSelf(options) {
     const c = this.child
     let el
     const w = this.width
@@ -1794,7 +2037,7 @@ class GlowView {
         el = SVG.stackRect(w, h)
       }
     } else {
-      el = c.drawSelf(w, h, [])
+      el = c.drawSelf(options, w, h, [])
     }
     return SVG.move(
       0,
@@ -1811,14 +2054,14 @@ class GlowView {
     const el = c.isScript ? c.draw(options, true) : c.draw(options)
 
     this.width = c.width
-    this.height = (c.isBlock && c.firstLine.height) || c.height
+    this.height = (c.isBlock && c.height) || c.height
 
     // encircle
-    return SVG.group([el, this.drawSelf()])
+    return SVG.group([el, this.drawSelf(options)])
   }
 }
 
-class ScriptView {
+export class ScriptView {
   constructor(script) {
     Object.assign(this, script)
     this.blocks = script.blocks.map(newView)
@@ -1892,7 +2135,7 @@ class ScriptView {
   }
 }
 
-class DocumentView {
+export class DocumentView {
   constructor(doc, options) {
     this.id = this.makeid(10)
 
@@ -2064,8 +2307,6 @@ class DocumentView {
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter(`snapBevelFilter-${this.id}`, false),
         bevelFilter(`snapInputBevelFilter-${this.id}`, true),
-        darkFilter(`snapInputDarkFilter-${this.id}`),
-        lightFilter(`snapLightFilter-${this.id}`),
         dropShadowFilter(`snapDropShadow-${this.id}`),
         ...icons,
         clipPathsGroup,
@@ -2080,14 +2321,6 @@ class DocumentView {
     group.style.setProperty(
       "--snapInputBevelFilter",
       `url(#snapInputBevelFilter-${this.id})`,
-    )
-    group.style.setProperty(
-      "--snapInputDarkFilter",
-      `url(#snapInputDarkFilter-${this.id})`,
-    )
-    group.style.setProperty(
-      "--snapLightFilter",
-      `url(#snapLightFilter-${this.id})`,
     )
     group.style.setProperty(
       "--snapDropShadow",

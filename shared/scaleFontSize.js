@@ -1,7 +1,21 @@
+/**
+ * Convert pt to px
+ *
+ * @param {number} size
+ * @returns {number}
+ */
 function pt2px(size) {
   return size * 1.3333343412075
 }
 
+/**
+ * Split css font unit. If it's a 'pt', then it will convert to 'px'.
+ *
+ * @export
+ * @param {string} fontSize
+ * @param {number} [scale=1] - Optional, scale the font size
+ * @returns {{ value: number; unit: string; }}
+ */
 export function splitFontSize(fontSize, scale) {
   if (!scale) {
     scale = 1
@@ -24,12 +38,27 @@ export function splitFontSize(fontSize, scale) {
   }
 }
 
+/**
+ * Scale font size
+ *
+ * @export
+ * @param {string} fontSize
+ * @param {number} scale
+ * @returns {string}
+ */
 export function scaleFontSize(fontSize, scale) {
   let result = splitFontSize(fontSize, scale)
 
   return `${result.value}${result.unit}`
 }
 
+/**
+ * Get the font height. This is the same as in Snap!, only it allows css font size units.
+ *
+ * @export
+ * @param {(number | string)} fontSize
+ * @returns {number}
+ */
 export function getFontHeight(fontSize) {
   fontSize = splitFontSize(fontSize).value
 

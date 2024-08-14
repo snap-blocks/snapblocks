@@ -111,7 +111,6 @@ export const rtlLanguages = ["ar", "ckb", "fa", "he"]
 import scratchCommands from "./commands.js"
 
 import Color, { hexColorPat, rgbColorPat } from "../shared/color.js"
-import { Block } from "./model.js"
 
 /**
  * Input number regex
@@ -1201,7 +1200,7 @@ export function applyOverrides(info, overrides) {
  * Block name
  *
  * @export
- * @param {Block} block
+ * @param {import("./model.js").Block} block
  * @returns {string | null}
  */
 export function blockName(block) {

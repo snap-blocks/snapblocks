@@ -1,13 +1,26 @@
 import SVG from "./draw.js"
-import Color, { hexColorPat } from "../shared/color.js"
+import Color from "../shared/color.js"
 import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
 export default class Style {
+  /**
+   * Style stuff
+   *
+   * @static
+   * @readonly
+   * @type {string}
+   */
   static get cssContent() {
     return cssContent
   }
 
+  /**
+   * colors
+   *
+   * @static
+   * @type {{ label: Color; zebraLabel: Color; literal: Color; booleanLiteral: Color; readonlyLiteral: Color; zebraReadonlyLiteral: Color; comment: { label: Color; titleBar: Color; body: Color; outline: Color; line: Color; }; categories: { ...; }; }}
+   */
   static colors = {
     label: new Color(255, 255, 255),
     zebraLabel: new Color(),
@@ -45,6 +58,13 @@ export default class Style {
     },
   }
 
+  /**
+   * Get category color
+   *
+   * @static
+   * @param {string} category
+   * @returns {Color}
+   */
   static categoryColor(category) {
     if (Style.colors.categories[category]) {
       return Style.colors.categories[category]
@@ -55,6 +75,13 @@ export default class Style {
     }
   }
 
+  /**
+   * Create icons
+   *
+   * @static
+   * @param {boolean} isFlat
+   * @returns {list[SVGElement]}
+   */
   static makeIcons(isFlat) {
     return [
       SVG.setProps(
@@ -779,18 +806,39 @@ export default class Style {
     ]
   }
 
+  /**
+   * Create css stylesheet
+   *
+   * @static
+   * @returns {SVGStyleElement}
+   */
   static makeStyle() {
     const style = SVG.el("style")
     style.appendChild(SVG.cdata(Style.cssContent))
     return style
   }
 
+  /**
+   * Create dropshadow filter
+   *
+   * @static
+   * @param {string} id
+   * @returns {SVGFilterElement}
+   */
   static dropShadowFilter(id) {
     const f = new Filter(id)
     f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
     return f.el
   }
 
+  /**
+   * Bevel effect filter
+   *
+   * @static
+   * @param {string} id
+   * @param {number} inset
+   * @returns {SVGFilterElement}
+   */
   static bevelFilter(id, inset) {
     const f = new Filter(id)
 
@@ -821,28 +869,16 @@ export default class Style {
     return f.el
   }
 
-  static darkFilter(id) {
-    const f = new Filter(id)
-
-    f.merge([
-      "SourceGraphic",
-      f.comp("in", f.flood("#000", 0.4), "SourceAlpha"),
-    ])
-
-    return f.el
-  }
-
-  static lightFilter(id) {
-    const f = new Filter(id)
-
-    f.merge([
-      "SourceGraphic",
-      f.comp("in", f.flood("#fff", 0.4), "SourceAlpha"),
-    ])
-
-    return f.el
-  }
-
+  /**
+   * Readonly input
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {(Color | string)} [color="white"]
+   * @param {SVGElement} el
+   * @returns {SVGElement}
+   */
   static darkRect(w, h, color, el) {
     return SVG.setProps(
       SVG.group([
@@ -863,6 +899,14 @@ export default class Style {
     )
   }
 
+  /**
+   * Default font family
+   *
+   * @static
+   * @readonly
+   * @type {string}
+   * @constant
+   */
   static get defaultFontFamily() {
     return "Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif"
   }

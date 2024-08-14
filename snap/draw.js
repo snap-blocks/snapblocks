@@ -7,34 +7,90 @@ function assert(bool, message) {
 }
 
 // set by SVG.init
+/**
+ * Browser document
+ *
+ * @type {Document}
+ */
 let document
+/**
+ * XML document
+ *
+ * @type {Document}
+ */
 let xml
 
+/**
+ * Direct properties
+ *
+ * @type {{ textContent: boolean; }}
+ */
 const directProps = {
   textContent: true,
 }
 
 export default class SVG {
+  /**
+   * Initialize SVG
+   *
+   * @static
+   * @param {Window} window
+   */
   static init(window) {
     document = window.document
+    /**
+     * @type {DOMParser}
+     */
     const DOMParser = window.DOMParser
     xml = new DOMParser().parseFromString("<xml></xml>", "application/xml")
+    /**
+     * @type {XMLSerializer}
+     */
     SVG.XMLSerializer = window.XMLSerializer
   }
 
+  /**
+   * Create new canvas
+   *
+   * @static
+   * @returns {HTMLCanvasElement}
+   */
   static makeCanvas() {
     return document.createElement("canvas")
   }
 
+  /**
+   * Create CDATA section
+   *
+   * @static
+   * @param {string} content
+   * @returns {CDATASection}
+   */
   static cdata(content) {
     return xml.createCDATASection(content)
   }
 
+  /**
+   * Create SVG element
+   *
+   * @static
+   * @param {string} name
+   * @param {Object} props
+   * @returns {SVGElement}
+   */
   static el(name, props) {
     const el = document.createElementNS("http://www.w3.org/2000/svg", name)
     return SVG.setProps(el, props)
   }
 
+  /**
+   * Set properties on element
+   *
+   * @static
+   * @param {SVGElement} el
+   * @param {Object} props
+   * @returns {SVGElement}
+   */
   static setProps(el, props) {
     for (const key in props) {
       const value = String(props[key])
@@ -50,6 +106,14 @@ export default class SVG {
     return el
   }
 
+  /**
+   * Add children to this element
+   *
+   * @static
+   * @param {SVGElement} el
+   * @param {SVGElement[]} children
+   * @returns {SVGElement}
+   */
   static withChildren(el, children) {
     for (const child of children) {
       if (child) {
@@ -59,10 +123,26 @@ export default class SVG {
     return el
   }
 
+  /**
+   * Create SVG group
+   *
+   * @static
+   * @param {SVGElement[]} children
+   * @returns {SVGElement}
+   */
   static group(children) {
     return SVG.withChildren(SVG.el("g"), children)
   }
 
+  /**
+   * Create a new SVG element
+   *
+   * @static
+   * @param {number} width
+   * @param {number} height
+   * @param {number} scale
+   * @returns {SVGElement}
+   */
   static newSVG(width, height, scale) {
     return SVG.el("svg", {
       width: width * scale,
@@ -71,25 +151,67 @@ export default class SVG {
     })
   }
 
+  /**
+   * Create polygon
+   *
+   * @static
+   * @param {Object} props
+   * @param {string[]} props.points - List of points
+   * @returns {SVGPolygonElement}
+   */
   static polygon(props) {
     return SVG.el("polygon", { ...props, points: props.points.join(" ") })
   }
 
+  /**
+   * Create path element.
+   *
+   * @static
+   * @param {Object} props
+   * @param {string[]} props.path - `path` is used instead of `d`.
+   * @returns {SVGPathElement}
+   */
   static path(props) {
     return SVG.el("path", { ...props, path: null, d: props.path.join(" ") })
   }
 
+  /**
+   * Create new text element
+   *
+   * @static
+   * @param {number} x
+   * @param {number} y
+   * @param {string} content
+   * @param {Object} props
+   * @returns {SVGTextElement}
+   */
   static text(x, y, content, props) {
     const text = SVG.el("text", { ...props, x: x, y: y, textContent: content })
     return text
   }
 
+  /**
+   * Create symbol
+   *
+   * @static
+   * @param {string} href
+   * @returns {SVGSymbolElement}
+   */
   static symbol(href) {
     return SVG.el("use", {
       href: href,
     })
   }
 
+  /**
+   * Move element relatively using transforms
+   *
+   * @static
+   * @param {number} dx
+   * @param {number} dy
+   * @param {SVGElement} el
+   * @returns {SVGElement}
+   */
   static move(dx, dy, el) {
     let currentValue = el.getAttributeNS(null, "transform")
     if (!currentValue) {
@@ -104,12 +226,21 @@ export default class SVG {
     return el
   }
 
-  // translatePath takes a path string such as "M 0 0 L 0 10 L 10 0 Z", fins
-  // the individual X/Y components, and translates them by dx/dy, so as to
-  // "move" the path.
-  //
-  // This is not a particularly good way of doing this, but given we control
-  // the inputs to it it works well enough I guess?
+  
+  /**
+   * translatePath takes a path string such as "M 0 0 L 0 10 L 10 0 Z", fins
+   * the individual X/Y components, and translates them by dx/dy, so as to
+   * "move" the path.
+   *
+   * This is not a particularly good way of doing this, but given we control
+   * the inputs to it it works well enough I guess?
+   *
+   * @static
+   * @param {number} dx
+   * @param {number} dy
+   * @param {string} path
+   * @returns {string}
+   */
   static translatePath(dx, dy, path) {
     let isX = true
     const parts = path.split(/\s+/)
@@ -142,10 +273,28 @@ export default class SVG {
 
   /* shapes */
 
+  /**
+   * Create rectangle
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGRectElement}
+   */
   static rect(w, h, props) {
     return SVG.el("rect", { ...props, x: 0, y: 0, width: w, height: h })
   }
 
+  /**
+   * Create ellipse element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGEllipseElement}
+   */
   static ellipse(w, h, props) {
     return SVG.el("ellipse", {
       ...props,
@@ -156,10 +305,37 @@ export default class SVG {
     })
   }
 
+  /**
+   * Create arc path
+   *
+   * @static
+   * @param {number} p1x
+   * @param {number} p1y
+   * @param {number} p2x
+   * @param {number} p2y
+   * @param {number} rx
+   * @param {number} ry
+   * @returns {string}
+   */
   static arc(p1x, p1y, p2x, p2y, rx, ry) {
     return `L ${p1x} ${p1y} A ${rx} ${ry} 0 0 1 ${p2x} ${p2y}`
   }
 
+  /**
+   * [CanvasRenderingContext2D.arc()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc) as svg path.
+   * 
+   * Taken from https://github.com/gliffy/canvas2svg/blob/master/canvas2svg.js#L1008
+   *
+   * @static
+   * @param {number} x
+   * @param {number} y
+   * @param {number} radius
+   * @param {number} startAngle
+   * @param {number} endAngle
+   * @param {number} counterClockwise
+   * @param {string} [startCommand="M"] - This starts the path
+   * @returns {string}
+   */
   static canvasArc(
     x,
     y,
@@ -169,8 +345,6 @@ export default class SVG {
     counterClockwise,
     startCommand = "M",
   ) {
-    // taken from https://github.com/gliffy/canvas2svg/blob/master/canvas2svg.js#L1008
-
     // in canvas no circle is drawn if no angle is provided.
     if (startAngle === endAngle) {
       return ""
@@ -207,18 +381,54 @@ export default class SVG {
     return command
   }
 
+  /**
+   * Convert degrees to radians
+   *
+   * @static
+   * @param {number} degrees
+   * @returns {number}
+   */
   static radians(degrees) {
     return (degrees * Math.PI) / 180
   }
 
+  /**
+   * Create arcw path
+   *
+   * @static
+   * @param {number} p1x
+   * @param {number} p1y
+   * @param {number} p2x
+   * @param {number} p2y
+   * @param {number} rx
+   * @param {number} ry
+   * @returns {string}
+   */
   static arcw(p1x, p1y, p2x, p2y, rx, ry) {
     return `L ${p1x} ${p1y} A ${rx} ${ry} 0 0 0 ${p2x} ${p2y}`
   }
 
+  /**
+   * Create reporter path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string[]}
+   */
   static roundedPath(w, h) {
     return [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)]
   }
 
+  /**
+   * Created reporter path element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static roundedRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -226,6 +436,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Create reporter top
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} [rounding=9]
+   * @returns {string}
+   */
   static getRoundedTop(w, h, rounding = 9) {
     // I'm too lazy to figure out how to recreate the snap reporter,
     // so here's almost the same code snap uses to draw it.
@@ -262,6 +481,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Create reporter bottom
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} [rounding=9]
+   * @returns {string}
+   */
   static getRoundedBottom(w, h, rounding = 9) {
     var edge = 1,
       r = Math.max(Math.min(rounding, h / 2), edge),
@@ -294,10 +522,26 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Create predicate path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string[]}
+   */
   static pointedPath(w, h) {
     return [SVG.getPointedTop(w, h), SVG.getPointedBottom(w, h, true)]
   }
 
+  /**
+   * Draw boolean input
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string[]}
+   */
   static pointedInput(w, h) {
     return [
       SVG.getPointedTop(w, h, h / 2),
@@ -305,6 +549,15 @@ export default class SVG {
     ]
   }
 
+  /**
+   * Draw predicate top
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} [r=8]
+   * @returns {string}
+   */
   static getPointedTop(w, h, r = 8) {
     var h2 = Math.floor(h / 2),
       path = ""
@@ -314,6 +567,16 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw predicate bottom
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} showRight
+   * @param {number} [r=8]
+   * @returns {string}
+   */
   static getPointedBottom(w, h, showRight, r = 8) {
     var h2 = Math.floor(h / 2),
       path = ""
@@ -324,6 +587,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw predicate element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static pointedRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -331,6 +603,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Draw boolean input element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static pointedRectInput(w, h, props) {
     return SVG.path({
       ...props,
@@ -338,18 +619,49 @@ export default class SVG {
     })
   }
 
+  /**
+   * Draw ring top path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string}
+   */
   static getRingTop(w, h) {
     return this.getRoundedTop(w, h, 4.5)
   }
 
+  /**
+   * Create ring bottom path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string}
+   */
   static getRingBottom(w, h) {
     return this.getRoundedBottom(w, h, 4.5)
   }
 
+  /**
+   * Draw ring path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {SVGPathElement}
+   */
   static getRingPath(w, h) {
     return this.roundedRect(w, h)
   }
 
+  /**
+   * Draw command block top path
+   *
+   * @static
+   * @param {number} w
+   * @returns {string}
+   */
   static getTop(w) {
     var corner = 3,
       dent = 8,
@@ -384,6 +696,16 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw right and bottom of command block path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} y
+   * @param {boolean} hasNotch
+   * @param {number} [inset=0] - Horizontal alignment for inside c-slots
+   * @returns {string}
+   */
   static getRightAndBottom(w, y, hasNotch, inset) {
     if (typeof inset === "undefined") {
       inset = 0
@@ -436,6 +758,14 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw command slot top for rings
+   *
+   * @static
+   * @param {number} w
+   * @param {boolean} [isFilled=false] - Is the input filled?
+   * @returns {string}
+   */
   static getCommandSlotTop(w, isFilled = false) {
     var corner = 3,
       ins = isFilled ? 6 : 3,
@@ -464,6 +794,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Get command slot right and bottom for rings
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false] - Is the input filled?
+   * @returns {string}
+   */
   static getCommandSlotRightAndBottom(w, h, isFilled = false) {
     var corner = 3,
       edge = (edge = isFilled ? 0 : 1),
@@ -503,6 +842,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw command slot path for rings
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string[]}
+   */
   static getCommandSlotPath(w, h, isFilled = false) {
     return [
       SVG.getCommandSlotTop(w, isFilled),
@@ -511,6 +859,16 @@ export default class SVG {
     ]
   }
 
+  /**
+   * Draw command slot element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static getCommandSlotRect(w, h, isFilled = false, props) {
     return SVG.path({
       ...props,
@@ -518,6 +876,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Draw reporter slot for rings top
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string}
+   */
   static getReporterSlotTop(w, h, isFilled = false) {
     var rounding = 9,
       r = Math.min(rounding, h / 2),
@@ -537,6 +904,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw reporter slot for rings right and bottom
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string}
+   */
   static getReporterSlotRightAndBottom(w, h, isFilled = false) {
     var rounding = 9,
       r = Math.min(rounding, h / 2),
@@ -578,6 +954,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw reporter slot for rings path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string[]}
+   */
   static getReporterSlotPath(w, h, isFilled = false) {
     return [
       SVG.getReporterSlotTop(w, h, isFilled),
@@ -586,6 +971,15 @@ export default class SVG {
     ]
   }
 
+  /**
+   * Draw reporter slot for rings element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static getReporterSlotRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -593,6 +987,13 @@ export default class SVG {
     })
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string}
+   */
   static getBooleanSlotTop(w, h, isFilled = false) {
     var edge = (edge = isFilled ? 0 : 1),
       rounding = 9,
@@ -607,6 +1008,13 @@ export default class SVG {
     return path
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string}
+   */
   static getBooleanSlotRightAndBottom(w, h, isFilled = false) {
     var edge = (edge = isFilled ? 0 : 1),
       rounding = 9,
@@ -622,6 +1030,13 @@ export default class SVG {
     return path
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {boolean} [isFilled=false]
+   * @returns {string[]}
+   */
   static getBooleanSlotPath(w, h, isFilled = false) {
     return [
       SVG.getBooleanSlotTop(w, h, isFilled),
@@ -630,6 +1045,13 @@ export default class SVG {
     ]
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static getBooleanSlotRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -637,6 +1059,12 @@ export default class SVG {
     })
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string}
+   */
   static getRoundSlotTop(w, h) {
     var edge = 1,
       shift = edge * 0.5,
@@ -660,8 +1088,19 @@ export default class SVG {
       path += ` L ${start} ${shift} `
       path += `L ${end} ${shift} `
     }
+
+    return path
   }
 
+  /**
+   * Draw c-slot arm path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} armTop
+   * @param {number} inset
+   * @returns {string}
+   */
   static getArm(w, armTop, inset) {
     if (!inset && inset !== 0) {
       inset = 10
@@ -698,6 +1137,15 @@ export default class SVG {
     return path
   }
 
+  /**
+   * Draw command block element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static stackRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -705,14 +1153,37 @@ export default class SVG {
     })
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string[]}
+   */
   static capPath(w, h) {
     return [SVG.getTop(w), SVG.getRightAndBottom(w, h, false, 0), "Z"]
   }
 
+  /**
+   * Cap block element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static capRect(w, h, props) {
     return SVG.path({ ...props, path: SVG.capPath(w, h) })
   }
 
+  /**
+   * Draw hat block top path
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @returns {string[]}
+   */
   static getHatTop(w, h) {
     return [
       "M",
@@ -733,6 +1204,15 @@ export default class SVG {
     ].join(" ")
   }
 
+  /**
+   * Hat block element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static hatRect(w, h, props) {
     return SVG.path({
       ...props,
@@ -740,6 +1220,17 @@ export default class SVG {
     })
   }
 
+  /**
+   * Draw curve path
+   *
+   * @static
+   * @param {number} p1x
+   * @param {number} p1y
+   * @param {number} p2x
+   * @param {number} p2y
+   * @param {number} roundness
+   * @returns {string}
+   */
   static curve(p1x, p1y, p2x, p2y, roundness) {
     roundness = roundness || 0.42
     const midX = (p1x + p2x) / 2.0
@@ -749,6 +1240,16 @@ export default class SVG {
     return `${cx} ${cy} ${p2x} ${p2y}`
   }
 
+  /**
+   * Draw definition hat block base
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} archRoundness
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static procHatBase(w, h, archRoundness, props) {
     // TODO use arc()
     archRoundness = Math.min(0.2, 35 / w)
@@ -777,6 +1278,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Draw hat block cap element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {number} archRoundness
+   * @returns {SVGPathElement}
+   */
   static procHatCap(w, h, archRoundness) {
     // TODO use arc()
     // TODO this doesn't look quite right
@@ -799,6 +1309,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Define block hat element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGElement}
+   */
   static procHatRect(w, h, props) {
     const q = 52
     const y = h - q
@@ -815,23 +1334,18 @@ export default class SVG {
     )
   }
 
-  static mouthRect(w, h, isFinal, lines, props) {
-    let y = lines[0].height
-    const p = [SVG.getTop(w), SVG.getRightAndBottom(w, y, true, 15)]
-    for (let i = 1; i < lines.length; i += 2) {
-      const isLast = i + 2 === lines.length
-
-      y += lines[i].height - 3
-      p.push(SVG.getArm(w, y))
-
-      const hasNotch = !(isLast && isFinal)
-      const inset = isLast ? 0 : 15
-      y += lines[i + 1].height + 3
-      p.push(SVG.getRightAndBottom(w, y, hasNotch, inset))
-    }
-    return SVG.path({ ...props, path: p })
-  }
-
+  /**
+   * Draw ring element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {import("./blocks.js").InputView | import("./blocks.js").BlockView} child
+   * @param {string} shape
+   * @param {Object} props
+   * @param {boolean} isEmpty
+   * @returns {SVGPathElement}
+   */
   static ringRect(w, h, child, shape, props, isEmpty) {
     const r = 8
     let cy = child.y,
@@ -864,6 +1378,15 @@ export default class SVG {
     })
   }
 
+  /**
+   * Comment element
+   *
+   * @static
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static commentRect(w, h, props) {
     const r = 8
     return SVG.path({
@@ -881,29 +1404,30 @@ export default class SVG {
     })
   }
 
+  /**
+   * Create comment line element
+   *
+   * @static
+   * @param {number} width
+   * @param {number} height
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static commentLine(width, height, props) {
     return SVG.move(-width, height / 2, SVG.rect(width, 1, { ...props }))
   }
 
+  /**
+   * @static
+   * @param {number} w
+   * @param {Object} props
+   * @returns {SVGPathElement}
+   */
   static strikethroughLine(w, props) {
     return SVG.path({
       ...props,
       path: ["M", 0, 0, "L", w, 0],
       class: "snap-diff snap-diff-del",
     })
-  }
-
-  static rgbToHex(r, g, b) {
-    if (r > 255) r = 255
-    else if (r < 0) r = 0
-    if (g > 255) g = 255
-    else if (g < 0) g = 0
-    if (b > 255) b = 255
-    else if (b < 0) b = 0
-    return `#${[r, g, b]
-      .map(n =>
-        n.toString(16).length === 1 ? "0" + n.toString(16) : n.toString(16),
-      )
-      .join("")}`
   }
 }

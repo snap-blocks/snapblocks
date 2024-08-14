@@ -6,7 +6,6 @@ export default `
   --snapDropShadow: url(#snapDropShadow-);
   --snapBevelFilter: url(#snapBevelFilter-);
   --snapInputBevelFilter: url(#snapInputBevelFilter-);
-  --snapLightFilter: url(#snapLightFilter-);
 }
 
 .snap-label {
@@ -68,14 +67,6 @@ export default `
 .snap-literal-number-dropdown-readonly,
 .snap-literal-dropdown-readonly {
   /* fill: #fff; */
-}
-
-.snap-darker {
-  /* filter: var(--snapInputDarkFilter); */
-}
-
-.snap-zebra {
-  filter: var(--snapLightFilter);
 }
 
 .snap-outline {

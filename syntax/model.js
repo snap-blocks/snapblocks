@@ -50,25 +50,95 @@ export class Label {
    * @param {(Color | string)} [color=null]
    */
   constructor(value, cls, scale, color) {
+    /**
+     * Label value
+     * @type {string}
+     * @public
+     */
     this.value = value
+    /**
+     * Raw unescaped value
+     * @type {string}
+     * @public
+     */
     this.raw = value
+    /**
+     * Label class
+     * @type {string}
+     * @public
+     * @default ""
+     */
     this.cls = cls || ""
+    /**
+     * Rendered HTML element
+     * @type {SVGElement}
+     * @public
+     * @default null
+     */
     this.el = null
+    /**
+     * Label height
+     * @type {number}
+     * @public
+     * @default 12
+     */
     this.height = 12
+    /**
+     * Calculated text metrics
+     * @type {{width: number, spaceWidth: number, lines: {word: string, width: number, height: number}[][]}}
+     * @public
+     * @default null
+     */
     this.metrics = null
+
+    /**
+     * X position of label
+     * @type {number}
+     * @public
+     * @default 0
+     */
     this.x = 0
+    /**
+     * Special formatting
+     * @type {{italic: boolean, monospace: boolean}}
+     * @public
+     * @default
+     */
     this.formatting = {
       italic: false,
       monospace: false,
     }
 
+    /**
+     * Is this a newline?
+     * @type {boolean}
+     * @public
+     */
     this.isNewline = value == "\n"
 
+    /**
+     * Is this label a modified label?
+     * @type {boolean}
+     * @public
+     * @default false
+     */
     this.modified = false
+    /**
+     * Text scale
+     * @type {number}
+     * @public
+     * @default null
+     */
     this.scale = scale ? parseFloat(scale) : null
     if (this.scale === NaN) {
       this.scale = null
     }
+    /**
+     * Label color
+     * @type {(Color | null)}
+     * @public
+     * @default null
+     */
     this.color =
       color instanceof Color
         ? color.copy()
