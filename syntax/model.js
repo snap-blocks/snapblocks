@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - grow
    * - normalScreen
    * - shrink
    * - smallStage
@@ -342,6 +341,7 @@ export class Icon {
       stepForward: true,
       file: true,
       fullScreen: true,
+      grow: true,
 
       arrowUp: true,
       arrowUpOutline: true,

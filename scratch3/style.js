@@ -41,6 +41,7 @@ const highContrastIcons = new Set([
   "stepForward",
   "file",
   "fullScreen",
+  "grow",
 
   "arrowUp",
   "arrowUpOutline",
@@ -85,6 +86,7 @@ const snapIcons = new Set([
   "stepForward",
   "file",
   "fullScreen",
+  "grow",
 
   "arrowUp",
   "arrowUpOutline",
@@ -896,6 +898,34 @@ export default class Style {
           }),
         ]), {
           id: "sb3-fullScreen"
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.group([
+            SVG.el('path', {
+              d: `M 3.5 6.5 L 1 9 M 6.5 3.5 L 9 1`,
+              "stroke-width": 2,
+            }),
+            SVG.el('path', {
+              d: `M 0 10 L 0 6.666666666666666 L 3.3333333333333335 10 Z M 10 0 L 6.666666666666666 0 L 10 3.3333333333333335 Z`,
+              stroke: "none",
+            })
+          ]),
+          SVG.setProps(SVG.group([
+            SVG.el('path', {
+              d: `M 3.5 6.5 L 1 9 M 6.5 3.5 L 9 1`,
+              "stroke-width": 2,
+            }),
+            SVG.el('path', {
+              d: `M 0 10 L 0 6.666666666666666 L 3.3333333333333335 10 Z M 10 0 L 6.666666666666666 0 L 10 3.3333333333333335 Z`,
+              stroke: "none",
+            })
+          ]), {
+            transform: "translate(10 0) rotate(90)"
+          }),
+        ]), {
+          id: "sb3-grow"
         }
       ),
 
