@@ -2397,7 +2397,6 @@ export class DocumentView {
     return svg
   }
 
-
   /**
    * Export SVG image as XML string
    *
