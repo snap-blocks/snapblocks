@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - fullScreen
    * - grow
    * - normalScreen
    * - shrink
@@ -296,7 +295,7 @@ export class Icon {
    *
    * @static
    * @readonly
-   * @type {{ greenFlag: boolean; flag: boolean; stopSign: boolean; octagon: boolean; turnLeft: boolean; turnRight: boolean; clockwise: boolean; counterclockwise: boolean; loop: boolean; loopArrow: boolean; ... 46 more ...; plusSign: boolean; }}
+   * @type {{[type: string]: true}}
    */
   static get icons() {
     return {
@@ -342,6 +341,7 @@ export class Icon {
       robot: true,
       stepForward: true,
       file: true,
+      fullScreen: true,
 
       arrowUp: true,
       arrowUpOutline: true,

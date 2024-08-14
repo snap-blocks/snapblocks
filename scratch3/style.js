@@ -40,6 +40,7 @@ const highContrastIcons = new Set([
   "pointRight",
   "stepForward",
   "file",
+  "fullScreen",
 
   "arrowUp",
   "arrowUpOutline",
@@ -83,6 +84,7 @@ const snapIcons = new Set([
   "pointRight",
   "stepForward",
   "file",
+  "fullScreen",
 
   "arrowUp",
   "arrowUpOutline",
@@ -881,6 +883,20 @@ export default class Style {
         {
           id: "sb3-file",
         },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 4.5 5.5 L 1 9 M 5.5 4.5 L 9 1`,
+            "stroke-width": 2,
+          }),
+          SVG.el('path', {
+            d: `M 0 10 L 0 5 L 5 10 Z M 10 0 L 5 0 L 10 5 Z`,
+            stroke: "none"
+          }),
+        ]), {
+          id: "sb3-fullScreen"
+        }
       ),
 
       SVG.setProps(

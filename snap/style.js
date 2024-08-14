@@ -796,6 +796,20 @@ export default class Style {
           id: "snap-file",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 4.5 5.5 L 1 9 M 5.5 4.5 L 9 1`,
+            "stroke-width": 2,
+          }),
+          SVG.el('path', {
+            d: `M 0 10 L 0 5 L 5 10 Z M 10 0 L 5 0 L 10 5 Z`,
+            stroke: "none"
+          }),
+        ]), {
+          id: "snap-fullScreen"
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
