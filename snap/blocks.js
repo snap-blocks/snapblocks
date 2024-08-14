@@ -2125,7 +2125,7 @@ export class ScriptView {
     let y = 0
     this.width = 0
     for (const block of this.blocks) {
-      const x = inside ? 0 : 2
+      const x = 0
       if (inside && !this.isZebra && this.color) {
         if (this.color.eq(block.color)) {
           block.isZebra = true
