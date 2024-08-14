@@ -798,59 +798,65 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 4.5 5.5 L 1 9 M 5.5 4.5 L 9 1`,
             "stroke-width": 2,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 0 10 L 0 5 L 5 10 Z M 10 0 L 5 0 L 10 5 Z`,
-            stroke: "none"
+            stroke: "none",
           }),
-        ]), {
-          id: "snap-fullScreen"
-        }
+        ]),
+        {
+          id: "snap-fullScreen",
+        },
       ),
       SVG.setProps(
         SVG.group([
           SVG.group([
-            SVG.el('path', {
+            SVG.el("path", {
               d: `M 3.5 6.5 L 1 9 M 6.5 3.5 L 9 1`,
               "stroke-width": 2,
             }),
-            SVG.el('path', {
+            SVG.el("path", {
               d: `M 0 10 L 0 6.666666666666666 L 3.3333333333333335 10 Z M 10 0 L 6.666666666666666 0 L 10 3.3333333333333335 Z`,
               stroke: "none",
-            })
+            }),
           ]),
-          SVG.setProps(SVG.group([
-            SVG.el('path', {
-              d: `M 3.5 6.5 L 1 9 M 6.5 3.5 L 9 1`,
-              "stroke-width": 2,
-            }),
-            SVG.el('path', {
-              d: `M 0 10 L 0 6.666666666666666 L 3.3333333333333335 10 Z M 10 0 L 6.666666666666666 0 L 10 3.3333333333333335 Z`,
-              stroke: "none",
-            })
-          ]), {
-            transform: "translate(10 0) rotate(90)"
-          }),
-        ]), {
-          id: "snap-grow"
-        }
+          SVG.setProps(
+            SVG.group([
+              SVG.el("path", {
+                d: `M 3.5 6.5 L 1 9 M 6.5 3.5 L 9 1`,
+                "stroke-width": 2,
+              }),
+              SVG.el("path", {
+                d: `M 0 10 L 0 6.666666666666666 L 3.3333333333333335 10 Z M 10 0 L 6.666666666666666 0 L 10 3.3333333333333335 Z`,
+                stroke: "none",
+              }),
+            ]),
+            {
+              transform: "translate(10 0) rotate(90)",
+            },
+          ),
+        ]),
+        {
+          id: "snap-grow",
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 3.5 6.5 L 0.5 9.5 M 6.5 3.5 L 9.5 0.5`,
             "stroke-width": 2,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 5.5 4.5 L 10 4.5 L 5.5 0 Z M 4.5 5.5 L 0 5.5 L 4.5 10 Z`,
             stroke: "none",
-          })
-        ]), {
-          id: "snap-normalScreen"
-        }
+          }),
+        ]),
+        {
+          id: "snap-normalScreen",
+        },
       ),
 
       SVG.setProps(
