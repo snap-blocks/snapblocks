@@ -295,6 +295,7 @@ export class LabelView {
                 cy: y + wordHeight / 2,
                 r: this.spaceWidth / 2,
                 class: "snap-space",
+                fill: Style.colors.space.toHexString()
               }),
             )
             x += this.spaceWidth / 2
@@ -830,6 +831,10 @@ export class InputView {
         this.isBoolean ? color.darker(25) : color.darker(),
         el,
       )
+    } else {
+      SVG.setProps(el, {
+        fill: 'white',
+      })
     }
 
     const result = SVG.group([
@@ -848,7 +853,7 @@ export class InputView {
           } else {
             x = w - h / 2 - 21
           }
-          y = 0.5
+          y = 0
         } else {
           // it's offset in the path
           x = 0
@@ -2378,19 +2383,15 @@ export class DocumentView {
       ])),
     )
 
-    group.style.setProperty("--id", this.id)
-    group.style.setProperty(
-      "--snapBevelFilter",
-      `url(#snapBevelFilter-${this.id})`,
-    )
-    group.style.setProperty(
-      "--snapInputBevelFilter",
-      `url(#snapInputBevelFilter-${this.id})`,
-    )
-    group.style.setProperty(
-      "--snapDropShadow",
-      `url(#snapDropShadow-${this.id})`,
-    )
+    group.querySelectorAll('.snap-drop-shadow').forEach((el) => {
+      el.style.filter = `url(#snapDropShadow-${this.id})`
+    })
+    group.querySelectorAll('.snap-bevel').forEach((el) => {
+      el.style.filter = `url(#snapBevelFilter-${this.id})`
+    })
+    group.querySelectorAll('.snap-input-bevel').forEach(el => {
+      el.style.filter = `url(#snapInputBevelFilter-${this.id})`
+    })
 
     svg.appendChild(group)
     this.el = svg
