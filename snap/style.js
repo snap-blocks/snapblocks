@@ -892,20 +892,20 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('rect', {
+          SVG.el("rect", {
             width: 12,
             height: 10,
             filter: "brightness(0.5)",
           }),
-          SVG.el('rect', {
+          SVG.el("rect", {
             x: 6,
             width: 6,
             height: 5,
-          })
+          }),
         ]),
         {
-          id: "snap-smallStage"
-        }
+          id: "snap-smallStage",
+        },
       ),
 
       SVG.setProps(
