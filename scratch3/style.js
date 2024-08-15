@@ -44,6 +44,7 @@ const highContrastIcons = new Set([
   "grow",
   "normalScreen",
   "shrink",
+  "smallStage",
 
   "arrowUp",
   "arrowUpOutline",
@@ -91,6 +92,7 @@ const snapIcons = new Set([
   "grow",
   "normalScreen",
   "shrink",
+  "smallStage",
 
   "arrowUp",
   "arrowUpOutline",
@@ -983,6 +985,23 @@ export default class Style {
         {
           id: "sb3-shrink",
         },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('rect', {
+            width: 12,
+            height: 10,
+            filter: "brightness(0.5)",
+          }),
+          SVG.el('rect', {
+            x: 6,
+            width: 6,
+            height: 5,
+          })
+        ]),
+        {
+          id: "sb3-smallStage"
+        }
       ),
 
       SVG.setProps(

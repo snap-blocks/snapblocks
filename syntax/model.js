@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - smallStage
    * - normalStage
    * - stage
    * - turnAround
@@ -341,6 +340,7 @@ export class Icon {
       grow: true,
       normalScreen: true,
       shrink: true,
+      smallStage: true,
 
       arrowUp: true,
       arrowUpOutline: true,
