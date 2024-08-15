@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - shrink
    * - smallStage
    * - normalStage
    * - stage
@@ -272,7 +271,6 @@ export class Icon {
    * - line
    * - cross
    * - crosshairs
-   * - paintbucket
    * - speechBubble
    * - speechBubbleOutline
    * - turnBack
@@ -342,6 +340,7 @@ export class Icon {
       fullScreen: true,
       grow: true,
       normalScreen: true,
+      shrink: true,
 
       arrowUp: true,
       arrowUpOutline: true,

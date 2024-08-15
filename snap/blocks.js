@@ -623,6 +623,7 @@ export class IconView {
         height: 10,
         fillAttribute: ["fill", "stroke"],
       },
+      shrink: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
