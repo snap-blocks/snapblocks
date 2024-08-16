@@ -429,6 +429,7 @@ class IconView {
       shrink: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       smallStage: { width: 12, height: 10 },
       normalStage: { width: 12, height: 10 },
+      stage: { width: 13, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

@@ -802,6 +802,15 @@ export default class Style {
           id: "sb-normalStage",
         },
       ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 13,
+          height: 10,
+        }),
+        {
+          id: "sb-stage",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

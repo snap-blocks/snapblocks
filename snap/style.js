@@ -924,6 +924,15 @@ export default class Style {
           id: "snap-normalStage",
         },
       ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 13,
+          height: 10,
+        }),
+        {
+          id: "snap-stage",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {
