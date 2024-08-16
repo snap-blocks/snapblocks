@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - tick
    * - checkedBox
    * - rectangle
    * - rectangleSolid
@@ -341,6 +340,7 @@ export class Icon {
       stage: true,
       turnAround: true,
       poster: true,
+      tick: true,
 
       arrowUp: true,
       arrowUpOutline: true,

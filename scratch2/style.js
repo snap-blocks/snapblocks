@@ -848,6 +848,14 @@ export default class Style {
           id: "sb-poster",
         }
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 2 5 L 5 10 L 8 3 L 10 0 L 6.5 2 L 5 6.5 Z",
+        }),
+        {
+          id: "sb-tick",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

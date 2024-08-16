@@ -49,6 +49,7 @@ const highContrastIcons = new Set([
   "stage",
   "turnAround",
   "poster",
+  "tick",
 
   "arrowUp",
   "arrowUpOutline",
@@ -101,6 +102,7 @@ const snapIcons = new Set([
   "stage",
   "turnAround",
   "poster",
+  "tick",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1072,6 +1074,14 @@ export default class Style {
         ]),
         {
           id: "sb3-poster",
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 2 5 L 5 10 L 8 3 L 10 0 L 6.5 2 L 5 6.5 Z",
+        }),
+        {
+          id: "sb3-tick",
         }
       ),
 

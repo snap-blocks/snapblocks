@@ -432,6 +432,7 @@ class IconView {
       stage: { width: 13, height: 10 },
       turnAround: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       poster: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      tick: { width: 10, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
