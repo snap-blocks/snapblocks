@@ -858,6 +858,20 @@ export default class Style {
       ),
 
       SVG.setProps(
+        SVG.el('rect', {
+          x: 0.5,
+          y: 0.5,
+          width: 9.5,
+          height: 9.5,
+          "stroke-width": 1,
+          fill: "none",
+        }),
+        {
+          id: "sb-rectangle",
+        }
+      ),
+
+      SVG.setProps(
         SVG.el("path", {
           d: `M 1 8.400000000000006 L 7.399999999999977 8.400000000000006 M 4.199999999999989 5.200000000000017 L 4.199999999999989 11.599999999999994`,
         }),

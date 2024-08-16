@@ -51,6 +51,8 @@ const highContrastIcons = new Set([
   "poster",
   "tick",
 
+  "rectangle",
+
   "arrowUp",
   "arrowUpOutline",
   "arrowUpThin",
@@ -103,6 +105,8 @@ const snapIcons = new Set([
   "turnAround",
   "poster",
   "tick",
+
+  "rectangle",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1082,6 +1086,20 @@ export default class Style {
         }),
         {
           id: "sb3-tick",
+        }
+      ),
+
+      SVG.setProps(
+        SVG.el('rect', {
+          x: 0.5,
+          y: 0.5,
+          width: 9.5,
+          height: 9.5,
+          "stroke-width": 1,
+          fill: "none",
+        }),
+        {
+          id: "sb3-rectangle",
         }
       ),
 
