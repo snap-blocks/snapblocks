@@ -827,6 +827,27 @@ export default class Style {
           id: "sb-turnAround",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 5 3.3333333333333335 L 1.6666666666666667 10 M 5 3.3333333333333335 L 5 10 M 5 3.3333333333333335 L 8.333333333333334 10",
+            "stroke-width": 0.6666666666666666,
+            fill: "none",
+          }),
+          SVG.el('path', {
+            d: "M 0 0 L 10 0 L 10 5.5 L 8 5.5 L 8 7.5 L 0 7.5 Z",
+            stroke: "none",
+          }),
+          SVG.el('path', {
+            d: "M 10 5.5 L 8 5.5 L 8 7.5 Z",
+            stroke: "none",
+            filter: "brightness(0.75)",
+          }),
+        ]),
+        {
+          id: "sb-poster",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

@@ -430,6 +430,7 @@ export class IconView {
       normalStage: { width: 12, height: 10 },
       stage: { width: 13, height: 10 },
       turnAround: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      poster: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
