@@ -935,32 +935,32 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 8.181980515339465 1.8180194846605362 A 4.5 4.5 0 1 1 1.8180194846605353 1.8180194846605362`,
             fill: "none",
             "stroke-width": 1,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 0 0.5 L 4 0 L 3.5 3.5 Z`,
             stroke: "none",
-          })
+          }),
         ]),
         {
           id: "snap-turnAround",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 5 3.3333333333333335 L 1.6666666666666667 10 M 5 3.3333333333333335 L 5 10 M 5 3.3333333333333335 L 8.333333333333334 10",
             "stroke-width": 0.6666666666666666,
             fill: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 0 0 L 10 0 L 10 5.5 L 8 5.5 L 8 7.5 L 0 7.5 Z",
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 10 5.5 L 8 5.5 L 8 7.5 Z",
             stroke: "none",
             filter: "brightness(0.75)",
@@ -968,32 +968,32 @@ export default class Style {
         ]),
         {
           id: "snap-poster",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 2 5 L 5 10 L 8 3 L 10 0 L 6.5 2 L 5 6.5 Z",
           stroke: "none",
         }),
         {
           id: "snap-tick",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('use', {
+          SVG.el("use", {
             href: "#snap-rectangle",
           }),
-          SVG.el('use', {
+          SVG.el("use", {
             href: "#snap-tick",
           }),
         ]),
         {
           id: "snap-checkedBox",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('rect', {
+        SVG.el("rect", {
           x: 0.5,
           y: 0.5,
           width: 9.5,
@@ -1003,7 +1003,7 @@ export default class Style {
         }),
         {
           id: "snap-rectangle",
-        }
+        },
       ),
 
       SVG.setProps(

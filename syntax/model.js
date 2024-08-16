@@ -341,7 +341,7 @@ export class Icon {
       tick: true,
       checkedBox: true,
       rectangle: true,
-      
+
       arrowUp: true,
       arrowUpOutline: true,
       arrowUpThin: true,
