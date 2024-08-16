@@ -432,6 +432,7 @@ export class IconView {
       turnAround: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       poster: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       tick: { width: 10, height: 10 },
+      checkedBox: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       rectangle: { width: 10, height: 10, fillAttribute: "stroke" },
 
       arrowUp: { width: 10, height: 10 },

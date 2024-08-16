@@ -851,12 +851,25 @@ export default class Style {
       SVG.setProps(
         SVG.el('path', {
           d: "M 2 5 L 5 10 L 8 3 L 10 0 L 6.5 2 L 5 6.5 Z",
+          stroke: "none",
         }),
         {
           id: "sb-tick",
         }
       ),
-
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#sb-rectangle",
+          }),
+          SVG.el('use', {
+            href: "#sb-tick",
+          }),
+        ]),
+        {
+          id: "sb-checkedBox",
+        }
+      ),
       SVG.setProps(
         SVG.el('rect', {
           x: 0.5,

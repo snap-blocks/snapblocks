@@ -339,8 +339,9 @@ export class Icon {
       turnAround: true,
       poster: true,
       tick: true,
+      checkedBox: true,
       rectangle: true,
-
+      
       arrowUp: true,
       arrowUpOutline: true,
       arrowUpThin: true,

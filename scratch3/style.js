@@ -50,7 +50,7 @@ const highContrastIcons = new Set([
   "turnAround",
   "poster",
   "tick",
-
+  "checkedBox",
   "rectangle",
 
   "arrowUp",
@@ -105,7 +105,7 @@ const snapIcons = new Set([
   "turnAround",
   "poster",
   "tick",
-
+  "checkedBox",
   "rectangle",
 
   "arrowUp",
@@ -1083,12 +1083,25 @@ export default class Style {
       SVG.setProps(
         SVG.el('path', {
           d: "M 2 5 L 5 10 L 8 3 L 10 0 L 6.5 2 L 5 6.5 Z",
+          stroke: "none",
         }),
         {
           id: "sb3-tick",
         }
       ),
-
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#sb3-rectangle",
+          }),
+          SVG.el('use', {
+            href: "#sb3-tick",
+          }),
+        ]),
+        {
+          id: "sb3-checkedBox",
+        }
+      ),
       SVG.setProps(
         SVG.el('rect', {
           x: 0.5,
