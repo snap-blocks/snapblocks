@@ -45,6 +45,7 @@ const highContrastIcons = new Set([
   "normalScreen",
   "shrink",
   "smallStage",
+  "normalStage",
 
   "arrowUp",
   "arrowUpOutline",
@@ -93,6 +94,7 @@ const snapIcons = new Set([
   "normalScreen",
   "shrink",
   "smallStage",
+  "normalStage",
 
   "arrowUp",
   "arrowUpOutline",

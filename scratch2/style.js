@@ -799,7 +799,7 @@ export default class Style {
           }),
         ]),
         {
-          id: "sb3-normalStage",
+          id: "sb-normalStage",
         },
       ),
 
