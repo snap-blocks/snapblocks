@@ -811,6 +811,22 @@ export default class Style {
           id: "sb-stage",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 8.181980515339465 1.8180194846605362 A 4.5 4.5 0 1 1 1.8180194846605353 1.8180194846605362`,
+            fill: "none",
+            "stroke-width": 1,
+          }),
+          SVG.el('path', {
+            d: `M 0 0.5 L 4 0 L 3.5 3.5 Z`,
+            stroke: "none",
+          })
+        ]),
+        {
+          id: "sb-turnAround",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
