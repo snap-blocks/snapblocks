@@ -65,6 +65,7 @@ const highContrastIcons = new Set([
   "magnifierOutline",
   "selection",
   "polygon",
+  "closedBrush",
 
   "arrowUp",
   "arrowUpOutline",
@@ -132,6 +133,7 @@ const snapIcons = new Set([
   "magnifyingGlass",
   "magnifierOutline",
   "selection",
+  "closedBrush",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1308,6 +1310,15 @@ export default class Style {
         ]),
         {
           id: "sb3-selection",
+        }
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 3.5 9 A 2.5 2.5 0 0 1 1 6.5 L 0.7679491924311226 5.444444444444445 A 2 2 0 0 1 3.5 2.7123936368755674 L 2.0358983848622456 2.9999999999999996 A 4 4 0 0 1 9.125231148146598 3.3095269530372002 L 6.52094453300079 3.0455767409633756 A 3 3 0 0 1 6 9 Z",
+          fill: "none",
+        }),
+        {
+          id: "sb3-closedBrush",
         }
       ),
 

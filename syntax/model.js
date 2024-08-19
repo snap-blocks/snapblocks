@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - closedBrush
    * - footprints
    * - keyboard
    * - keyboardFilled
@@ -341,6 +340,7 @@ export class Icon {
       magnifierOutline: true,
       selection: true,
       polygon: true,
+      closedBrush: true,
 
       arrowUp: true,
       arrowUpOutline: true,

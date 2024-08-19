@@ -447,6 +447,7 @@ export class IconView {
       magnifierOutline: { width: 10, height: 10, fillAttribute: "stroke" },
       selection: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       polygon: { width: 20, height: 20, fillAttribute: "stroke" },
+      closedBrush: { width: 10, height: 10, fillAttribute: "stroke" },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
