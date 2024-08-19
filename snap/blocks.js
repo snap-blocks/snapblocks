@@ -632,6 +632,7 @@ export class IconView {
       tick: { width: 10, height: 10 },
       checkedBox: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       rectangle: { width: 10, height: 10, fillAttribute: "stroke" },
+      rectangleSolid: { width: 10, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

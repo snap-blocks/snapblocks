@@ -883,6 +883,15 @@ export default class Style {
           id: "sb-rectangle",
         },
       ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 10,
+          height: 10,
+        }),
+        {
+          id: "sb-rectangleSolid",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

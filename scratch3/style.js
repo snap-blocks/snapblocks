@@ -52,6 +52,7 @@ const highContrastIcons = new Set([
   "tick",
   "checkedBox",
   "rectangle",
+  "rectangleSolid",
 
   "arrowUp",
   "arrowUpOutline",
@@ -107,6 +108,7 @@ const snapIcons = new Set([
   "tick",
   "checkedBox",
   "rectangle",
+  "rectangleSolid",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1113,6 +1115,15 @@ export default class Style {
         }),
         {
           id: "sb3-rectangle",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("rect", {
+          width: 10,
+          height: 10,
+        }),
+        {
+          id: "sb3-rectangleSolid",
         },
       ),
 

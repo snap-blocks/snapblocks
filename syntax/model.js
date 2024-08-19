@@ -257,7 +257,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - rectangleSolid
    * - dot
    * - ellipse
    * - line
@@ -341,6 +340,7 @@ export class Icon {
       tick: true,
       checkedBox: true,
       rectangle: true,
+      rectangleSolid: true,
 
       arrowUp: true,
       arrowUpOutline: true,
