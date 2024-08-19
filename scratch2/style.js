@@ -1028,6 +1028,16 @@ export default class Style {
           id: "sb-magnifyingGlass",
         }
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: `M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209
+              M 1 9 L 2.6985478815979995 7.3014521184020005`,
+          fill: "none",
+        }),
+        {
+          id: "sb-magnifierOutline",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

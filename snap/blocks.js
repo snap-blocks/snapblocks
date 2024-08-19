@@ -642,6 +642,7 @@ export class IconView {
       turnBack: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
       turnForward: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
       magnifyingGlass: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      magnifierOutline: { width: 10, height: 10, fillAttribute: "stroke" },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
