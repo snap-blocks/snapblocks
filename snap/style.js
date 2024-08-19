@@ -1078,35 +1078,35 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 0 5 L 8 0 L 8 10 Z",
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 13 10 A 5 5 0 0 0 8 5",
             fill: "none",
             "stroke-width": 2.4,
-          })
+          }),
         ]),
         {
           id: "snap-turnBack",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 16 5 L 8 0 L 8 10 Z",
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 3 10 A 5 5 0 0 1 8 5",
             fill: "none",
             "stroke-width": 2.4,
-          })
+          }),
         ]),
         {
           id: "snap-turnForward",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
@@ -1125,74 +1125,74 @@ export default class Style {
               }),
             ],
           ),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
             stroke: "none",
             filter: "invert(1)",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
             stroke: "none",
             filter: "invert(1)",
             fill: "url(#snap-magnifyingGlass-fill)",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
             fill: "none",
             "stroke-width": 1,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 1 9 L 2.6985478815979995 7.3014521184020005",
             fill: "none",
             "stroke-width": 2,
-          })
+          }),
         ]),
         {
           id: "snap-magnifyingGlass",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209
               M 1 9 L 2.6985478815979995 7.3014521184020005`,
           fill: "none",
         }),
         {
           id: "snap-magnifierOutline",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('use', {
+          SVG.el("use", {
             href: "#snap-rectangle",
             "stroke-dasharray": 3,
           }),
-          SVG.el('use', {
+          SVG.el("use", {
             href: "#snap-arrowDown",
-            transform: "translate(7, 4) scale(0.5) rotate(135)"
-          })
+            transform: "translate(7, 4) scale(0.5) rotate(135)",
+          }),
         ]),
         {
           id: "snap-selection",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 3.085 0.5 L 6.915 0.5 L 9.5 3.085 L 9.5 6.915 L 6.915 9.5 L 3.085 9.5 L 0.5 6.915 L 0.5 3.085 Z",
           fill: "none",
         }),
         {
           id: "snap-polygon",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 3.5 9 A 2.5 2.5 0 0 1 1 6.5 L 0.7679491924311226 5.444444444444445 A 2 2 0 0 1 3.5 2.7123936368755674 L 2.0358983848622456 2.9999999999999996 A 4 4 0 0 1 9.125231148146598 3.3095269530372002 L 6.52094453300079 3.0455767409633756 A 3 3 0 0 1 6 9 Z",
           fill: "none",
         }),
         {
           id: "snap-closedBrush",
-        }
+        },
       ),
 
       SVG.setProps(

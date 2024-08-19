@@ -447,7 +447,11 @@ export class IconView {
       speechBubbleOutline: { width: 10, height: 10, fillAttribute: "stroke" },
       turnBack: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
       turnForward: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
-      magnifyingGlass: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      magnifyingGlass: {
+        width: 10,
+        height: 10,
+        fillAttribute: ["fill", "stroke"],
+      },
       magnifierOutline: { width: 10, height: 10, fillAttribute: "stroke" },
       selection: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       polygon: { width: 20, height: 20, fillAttribute: "stroke" },

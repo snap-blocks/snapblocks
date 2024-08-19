@@ -1,7 +1,7 @@
 import SVG from "./draw.js"
 
 export default class Filter {
- /**
+  /**
    * Creates an instance of Filter.
    *
    * @constructor
