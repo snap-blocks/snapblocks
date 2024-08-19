@@ -250,6 +250,7 @@ export class Icon {
       bucket: "paintbucket",
       greenflag: "greenFlag", // snap greenflag icon (no capital)
       stop: "stopSign",
+      ellipse: "circle",
     }
   }
 
@@ -257,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - ellipse
    * - line
    * - cross
    * - crosshairs
