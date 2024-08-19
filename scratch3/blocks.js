@@ -50,6 +50,10 @@ export class LabelView {
     this.defaultColor = true
     this._fontSize = "10px"
     this.defaultFontSize = true
+    this.formatting = {
+      italic: false,
+      monospace: false,
+    }
 
     if (label.isIcon && unicodeIcons[label.name]) {
       Object.assign(this, { value: unicodeIcons[label.name] })
