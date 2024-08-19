@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - magnifyingGlass
    * - magnifierOutline
    * - selection
    * - polygon
@@ -341,6 +340,7 @@ export class Icon {
       speechBubbleOutline: true,
       turnBack: true,
       turnForward: true,
+      magnifyingGlass: true,
 
       arrowUp: true,
       arrowUpOutline: true,

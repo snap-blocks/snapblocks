@@ -61,6 +61,7 @@ const highContrastIcons = new Set([
   "speechBubbleOutline",
   "turnBack",
   "turnForward",
+  "magnifyingGlass",
 
   "arrowUp",
   "arrowUpOutline",
@@ -125,6 +126,7 @@ const snapIcons = new Set([
   "speechBubbleOutline",
   "turnBack",
   "turnForward",
+  "magnifyingGlass",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1233,6 +1235,49 @@ export default class Style {
         ]),
         {
           id: "sb3-turnForward",
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.withChildren(
+            SVG.el("radialGradient", {
+              id: "sb3-magnifyingGlass-fill",
+            }),
+            [
+              SVG.el("stop", {
+                offset: "0%",
+                "stop-color": "rgba(0, 0, 0, 0.5)",
+              }),
+              SVG.el("stop", {
+                offset: "100%",
+                "stop-color": "rgba(0, 0, 0, 0.25)",
+              }),
+            ],
+          ),
+          SVG.el('path', {
+            d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
+            stroke: "none",
+            filter: "invert(1)",
+          }),
+          SVG.el('path', {
+            d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
+            stroke: "none",
+            filter: "invert(1)",
+            fill: "url(#sb3-magnifyingGlass-fill)",
+          }),
+          SVG.el('path', {
+            d: "M 7.934615859097789 5.065384140902211 A 3 3 0 1 1 7.934614359097914 5.062384141402209",
+            fill: "none",
+            "stroke-width": 1,
+          }),
+          SVG.el('path', {
+            d: "M 1 9 L 2.6985478815979995 7.3014521184020005",
+            fill: "none",
+            "stroke-width": 2,
+          })
+        ]),
+        {
+          id: "sb3-magnifyingGlass",
         }
       ),
 
