@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - keyboard
    * - keyboardFilled
    * - listNarrow
    * - flipVertical
@@ -341,6 +340,7 @@ export class Icon {
       polygon: true,
       closedBrush: true,
       footprints: true,
+      keyboard: true,
 
       arrowUp: true,
       arrowUpOutline: true,

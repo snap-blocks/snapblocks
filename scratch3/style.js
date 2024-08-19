@@ -67,6 +67,7 @@ const highContrastIcons = new Set([
   "polygon",
   "closedBrush",
   "footprints",
+  "keyboard",
 
   "arrowUp",
   "arrowUpOutline",
@@ -136,6 +137,7 @@ const snapIcons = new Set([
   "selection",
   "closedBrush",
   "footprints",
+  "keyboard",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1330,6 +1332,41 @@ export default class Style {
         }),
         {
           id: "sb3-footprints",
+        }
+      ),
+      SVG.setProps(
+        SVG.group(
+          (() => { // It's much easier to generate this icon instead
+            let children = [],
+                h = 10,
+                u = h / 10,
+                k = h / 5,
+                row, col;
+
+            for (row = 0; row < 2; row += 1) {
+              for (col = 0; col < 5; col += 1) {
+                children.push(
+                  SVG.el('rect', {
+                    x: ((u + k) * col) + u,
+                    y: ((u + k) * row) + u,
+                    width: k,
+                    height: k,
+                  })
+                );
+              }
+            }
+            children.push(SVG.el('rect', {
+              x: u * 4,
+              y: u * 7,
+              width: k * 4,
+              height: k,
+            }));
+
+            return children
+          })()
+        ),
+        {
+          id: "sb3-keyboard",
         }
       ),
 
