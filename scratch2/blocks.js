@@ -441,6 +441,7 @@ class IconView {
       cross: { width: 10, height: 10, fillAttribute: "stroke" },
       crosshairs: { width: 10, height: 10, fillAttribute: "stroke" },
       speechBubble: { width: 10, height: 10 },
+      speechBubbleOutline: { width: 10, height: 10, fillAttribute: "stroke" },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

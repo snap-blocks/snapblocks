@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - speechBubbleOutline
    * - turnBack
    * - turnForward
    * - magnifyingGlass
@@ -341,6 +340,7 @@ export class Icon {
       cross: true,
       crosshairs: true,
       speechBubble: true,
+      speechBubbleOutline: true,
 
       arrowUp: true,
       arrowUpOutline: true,

@@ -1065,6 +1065,16 @@ export default class Style {
           id: "snap-speechBubble",
         }
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 3.3333333333333335 6.666666666666667 Q 0.5 6.666666666666667 0.5 3.3333333333333335 Q 0.5 0.5 3.3333333333333335 0.5 L 6.666666666666667 0.5 Q 9.5 0.5 9.5 3.3333333333333335 Q 9.5 6.666666666666667 6.666666666666667 6.666666666666667 L 1.6666666666666667 9.5 Z",
+          "stroke-width": 1,
+          fill: "none",
+        }),
+        {
+          id: "snap-speechBubbleOutline",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
