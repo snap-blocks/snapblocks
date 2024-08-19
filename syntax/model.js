@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - cross
    * - crosshairs
    * - speechBubble
    * - speechBubbleOutline
@@ -341,6 +340,7 @@ export class Icon {
       rectangleSolid: true,
       dot: true,
       line: true,
+      cross: true,
 
       arrowUp: true,
       arrowUpOutline: true,
