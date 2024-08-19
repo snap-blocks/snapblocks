@@ -634,6 +634,7 @@ export class IconView {
       rectangle: { width: 10, height: 10, fillAttribute: "stroke" },
       rectangleSolid: { width: 10, height: 10 },
       dot: { width: 4, height: 10 },
+      line: { width: 10, height: 10, fillAttribute: "stroke" },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

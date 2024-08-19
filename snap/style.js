@@ -1024,6 +1024,19 @@ export default class Style {
           id: "snap-dot",
         },
       ),
+      SVG.setProps(
+        SVG.el('line', {
+          x1: 0.5,
+          y1: 0.5,
+          x2: 9.5,
+          y2: 9.5,
+          "stroke-width": 1,
+          "stroke-linecap": "round",
+        }),
+        {
+          id: "snap-line",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

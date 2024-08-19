@@ -54,6 +54,7 @@ const highContrastIcons = new Set([
   "rectangle",
   "rectangleSolid",
   "dot",
+  "line",
 
   "arrowUp",
   "arrowUpOutline",
@@ -111,6 +112,7 @@ const snapIcons = new Set([
   "rectangle",
   "rectangleSolid",
   "dot",
+  "line",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1137,6 +1139,19 @@ export default class Style {
         {
           id: "sb3-dot",
         },
+      ),
+      SVG.setProps(
+        SVG.el('line', {
+          x1: 0.5,
+          y1: 0.5,
+          x2: 9.5,
+          y2: 9.5,
+          "stroke-width": 1,
+          "stroke-linecap": "round",
+        }),
+        {
+          id: "sb3-line",
+        }
       ),
 
       SVG.setProps(
