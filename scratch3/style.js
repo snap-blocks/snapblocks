@@ -59,6 +59,7 @@ const highContrastIcons = new Set([
   "crosshairs",
   "speechBubble",
   "speechBubbleOutline",
+  "turnBack",
 
   "arrowUp",
   "arrowUpOutline",
@@ -121,6 +122,7 @@ const snapIcons = new Set([
   "crosshairs",
   "speechBubble",
   "speechBubbleOutline",
+  "turnBack",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1198,6 +1200,22 @@ export default class Style {
         {
           id: "snap-speechBubbleOutline",
         },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 0 5 L 8 0 L 8 10 Z",
+            stroke: "none",
+          }),
+          SVG.el('path', {
+            d: "M 13 10 A 5 5 0 0 0 8 5",
+            fill: "none",
+            "stroke-width": 2.4,
+          })
+        ]),
+        {
+          id: "sb3-turnBack",
+        }
       ),
 
       SVG.setProps(
