@@ -1047,6 +1047,16 @@ export default class Style {
           id: "snap-cross",
         }
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 0.5 5 L 9.5 5 M 5 0.5 L 5 9.5 M 7.833333333333334 5 A 2.8333333333333335 2.8333333333333335 0 1 1 7.8333319166667845 4.997166667138887",
+          "stroke-width": 1,
+          fill: "none",
+        }),
+        {
+          id: "snap-crosshairs",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
