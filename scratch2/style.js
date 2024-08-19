@@ -892,6 +892,16 @@ export default class Style {
           id: "sb-rectangleSolid",
         },
       ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 2,
+          cx: 2,
+          cy: 5,
+        }),
+        {
+          id: "sb-dot",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

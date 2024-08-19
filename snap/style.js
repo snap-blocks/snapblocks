@@ -1014,6 +1014,16 @@ export default class Style {
           id: "snap-rectangleSolid",
         },
       ),
+      SVG.setProps(
+        SVG.el("circle", {
+          r: 2,
+          cx: 2,
+          cy: 5,
+        }),
+        {
+          id: "snap-dot",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {
