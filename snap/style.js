@@ -1091,6 +1091,22 @@ export default class Style {
           id: "snap-turnBack",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 16 5 L 8 0 L 8 10 Z",
+            stroke: "none",
+          }),
+          SVG.el('path', {
+            d: "M 3 10 A 5 5 0 0 1 8 5",
+            fill: "none",
+            "stroke-width": 2.4,
+          })
+        ]),
+        {
+          id: "snap-turnForward",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

@@ -442,6 +442,7 @@ export class IconView {
       speechBubble: { width: 10, height: 10 },
       speechBubbleOutline: { width: 10, height: 10, fillAttribute: "stroke" },
       turnBack: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
+      turnForward: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
