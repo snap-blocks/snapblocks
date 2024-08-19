@@ -1176,6 +1176,15 @@ export default class Style {
           id: "snap-selection",
         }
       ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: "M 3.085 0.5 L 6.915 0.5 L 9.5 3.085 L 9.5 6.915 L 6.915 9.5 L 3.085 9.5 L 0.5 6.915 L 0.5 3.085 Z",
+          fill: "none",
+        }),
+        {
+          id: "snap-polygon",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

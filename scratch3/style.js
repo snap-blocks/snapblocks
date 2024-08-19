@@ -64,6 +64,7 @@ const highContrastIcons = new Set([
   "magnifyingGlass",
   "magnifierOutline",
   "selection",
+  "polygon",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1726,6 +1727,18 @@ export default class Style {
           id: "sb3-loop",
         },
       ),
+      SVG.setProps(
+        SVG.el("polygon", {
+          points:
+            "6.6,0.5 13.12,0.5 19.5,6.6 19.5,13.12 13.12,19.5 6.6,19.5 0.5,13.12 0.5,6.6 ",
+          fill: "none",
+          "stroke-linejoin": "round",
+          "stroke-linecap": "round",
+        }),
+        {
+          id: "sb3-polygon",
+        },
+      ),
 
       SVG.setProps(
         SVG.group([
@@ -1900,6 +1913,18 @@ export default class Style {
         ]),
         {
           id: "sb3-loop-high-contrast",
+        },
+      ),
+      SVG.setProps(
+        SVG.el("polygon", {
+          points:
+            "6.6,0.5 13.12,0.5 19.5,6.6 19.5,13.12 13.12,19.5 6.6,19.5 0.5,13.12 0.5,6.6 ",
+          fill: "none",
+          "stroke-linejoin": "round",
+          "stroke-linecap": "round",
+        }),
+        {
+          id: "sb3-polygon-high-contrast",
         },
       ),
 

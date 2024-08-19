@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - polygon
    * - closedBrush
    * - footprints
    * - keyboard
@@ -341,6 +340,7 @@ export class Icon {
       magnifyingGlass: true,
       magnifierOutline: true,
       selection: true,
+      polygon: true,
 
       arrowUp: true,
       arrowUpOutline: true,
