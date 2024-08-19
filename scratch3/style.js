@@ -66,6 +66,7 @@ const highContrastIcons = new Set([
   "selection",
   "polygon",
   "closedBrush",
+  "footprints",
 
   "arrowUp",
   "arrowUpOutline",
@@ -134,6 +135,7 @@ const snapIcons = new Set([
   "magnifierOutline",
   "selection",
   "closedBrush",
+  "footprints",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1320,6 +1322,15 @@ export default class Style {
         {
           id: "sb3-closedBrush",
         },
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: `M 0.09046106882113736 2.013030214988503 A 1.5 1.5 0 1 1 3 1.5 L 3 5.5 L 1 6 Z M 3.016044443118978 6.10721239031346 A 1 1 0 1 1 1.2651922469877919 6.57635182233307 Z
+              M 7 4.5 A 1.5 1.5 0 1 1 9.909538931178863 5.013030214988503 L 9 8.5 L 7 8 Z M 8.75 9 A 1 1 0 1 1 6.883974596215562 8.5 Z`,
+        }),
+        {
+          id: "sb3-footprints",
+        }
       ),
 
       SVG.setProps(
