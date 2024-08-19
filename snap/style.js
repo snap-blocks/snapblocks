@@ -653,6 +653,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.5 5 L 5 0.5 L 9.5 5 L 6.5 5 L 6.5 9.5 L 3.5 9.5 L 3.5 5 Z",
+          fill: "none",
         }),
         {
           id: "snap-arrowUpOutline",
@@ -1158,6 +1159,21 @@ export default class Style {
         }),
         {
           id: "snap-magnifierOutline",
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#snap-rectangle",
+            "stroke-dasharray": 3,
+          }),
+          SVG.el('use', {
+            href: "#snap-arrowDown",
+            transform: "translate(7, 4) scale(0.5) rotate(135)"
+          })
+        ]),
+        {
+          id: "snap-selection",
         }
       ),
 

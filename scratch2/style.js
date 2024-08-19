@@ -1038,6 +1038,21 @@ export default class Style {
           id: "sb-magnifierOutline",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#sb-rectangle",
+            "stroke-dasharray": 3,
+          }),
+          SVG.el('use', {
+            href: "#sb-arrowDown",
+            transform: "translate(7, 4) scale(0.5) rotate(135)"
+          })
+        ]),
+        {
+          id: "sb-selection",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

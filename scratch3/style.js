@@ -63,6 +63,7 @@ const highContrastIcons = new Set([
   "turnForward",
   "magnifyingGlass",
   "magnifierOutline",
+  "selection",
 
   "arrowUp",
   "arrowUpOutline",
@@ -129,6 +130,7 @@ const snapIcons = new Set([
   "turnForward",
   "magnifyingGlass",
   "magnifierOutline",
+  "selection",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1290,6 +1292,21 @@ export default class Style {
         }),
         {
           id: "sb3-magnifierOutline",
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#sb3-rectangle",
+            "stroke-dasharray": 3,
+          }),
+          SVG.el('use', {
+            href: "#sb3-arrowDown",
+            transform: "translate(7, 4) scale(0.5) rotate(135)"
+          })
+        ]),
+        {
+          id: "sb3-selection",
         }
       ),
 
