@@ -903,7 +903,7 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('line', {
+        SVG.el("line", {
           x1: 0.5,
           y1: 0.5,
           x2: 9.5,
@@ -913,45 +913,45 @@ export default class Style {
         }),
         {
           id: "sb-line",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 0.5 5 L 9.5 5 M 5 0.5 L 5 9.5",
           "stroke-linecap": "round",
           "stroke-width": 1,
         }),
         {
           id: "sb-cross",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 0.5 5 L 9.5 5 M 5 0.5 L 5 9.5 M 7.833333333333334 5 A 2.8333333333333335 2.8333333333333335 0 1 1 7.8333319166667845 4.997166667138887",
           "stroke-width": 1,
           fill: "none",
         }),
         {
           id: "sb-crosshairs",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 3.3333333333333335 6.666666666666667 Q 0.5 6.666666666666667 0.5 3.3333333333333335 Q 0.5 0.5 3.3333333333333335 0.5 L 6.666666666666667 0.5 Q 9.5 0.5 9.5 3.3333333333333335 Q 9.5 6.666666666666667 6.666666666666667 6.666666666666667 L 1.6666666666666667 9.5 Z",
         }),
         {
           id: "sb-speechBubble",
-        }
+        },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: "M 3.3333333333333335 6.666666666666667 Q 0.5 6.666666666666667 0.5 3.3333333333333335 Q 0.5 0.5 3.3333333333333335 0.5 L 6.666666666666667 0.5 Q 9.5 0.5 9.5 3.3333333333333335 Q 9.5 6.666666666666667 6.666666666666667 6.666666666666667 L 1.6666666666666667 9.5 Z",
           "stroke-width": 1,
           fill: "none",
         }),
         {
           id: "sb-speechBubbleOutline",
-        }
+        },
       ),
 
       SVG.setProps(
