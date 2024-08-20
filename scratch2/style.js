@@ -1190,6 +1190,15 @@ export default class Style {
         },
       ),
       SVG.setProps(
+        SVG.el('use', {
+          href: "#sb-flipHorizontal",
+          transform: "translate(0 10) rotate(-90)",
+        }),
+        {
+          id: "sb-flipVertical",
+        }
+      ),
+      SVG.setProps(
         SVG.group([
           SVG.el('path', {
             d: "M 0.6666666666666666 9.666666666666666 L 4.2 9.666666666666666 L 4.2 1.3333333333333333 Z",

@@ -339,6 +339,7 @@ export class Icon {
       keyboard: true,
       keyboardFilled: true,
       listNarrow: true,
+      flipVertical: true,
       flipHorizontal: true,
 
       arrowUp: true,

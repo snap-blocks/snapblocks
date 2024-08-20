@@ -71,6 +71,7 @@ const highContrastIcons = new Set([
   "keyboardFilled",
   "listNarrow",
   "flipHorizontal",
+  "flipVertical",
 
   "arrowUp",
   "arrowUpOutline",
@@ -144,6 +145,7 @@ const snapIcons = new Set([
   "keyboardFilled",
   "listNarrow",
   "flipHorizontal",
+  "flipVertical",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1452,7 +1454,15 @@ export default class Style {
           id: "sb3-listNarrow",
         },
       ),
-      
+      SVG.setProps(
+        SVG.el('use', {
+          href: "#sb3-flipHorizontal",
+          transform: "translate(0 10) rotate(-90)",
+        }),
+        {
+          id: "sb3-flipVertical",
+        }
+      ),
       SVG.setProps(
         SVG.group([
           SVG.el('path', {
