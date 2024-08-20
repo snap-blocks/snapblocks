@@ -464,6 +464,7 @@ class IconView {
       flipHorizontal: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       flipVertical: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       trash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      trashFull: { width: 10, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

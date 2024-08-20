@@ -1238,6 +1238,26 @@ export default class Style {
           id: "sb-trash",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 1 4 L 1.5 9.5 L 2.5 10 L 7.5 10 L 8.5 9.5 L 9 4 L 1 4
+                M 2.5 5.5 A 0.5 0.5 0 0 1 3.5 5.5 L 3.5 8.5 A 0.5 0.5 0 0 1 2.5 8.5
+                M 4.5 5.5 A 0.5 0.5 0 0 1 5.5 5.5 L 5.5 8.5 A 0.5 0.5 0 0 1 4.5 8.5
+                M 6.5 5.5 A 0.5 0.5 0 0 1 7.5 5.5 L 7.5 8.5 A 0.5 0.5 0 0 1 6.5 8.5`,
+          }),
+          SVG.el('path', {
+            d: `M 2 0 L 6 0 L 8 2 L 8 3.5 L 2 3.5 Z`,
+          }),
+          SVG.el('path', {
+            d: `M 6 0 L 8 2 L 6 2 Z`,
+            filter: "brightness(0.75)",
+          }),
+        ]),
+        {
+          id: "sb-trashFull",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

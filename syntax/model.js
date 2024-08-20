@@ -257,9 +257,6 @@ export class Icon {
   /**
    * Available icons.
    *
-   * TODO:
-   * - trashFull
-   *
    * @static
    * @readonly
    * @type {{[type: string]: true}}
@@ -341,6 +338,7 @@ export class Icon {
       flipVertical: true,
       flipHorizontal: true,
       trash: true,
+      trashFull: true,
 
       arrowUp: true,
       arrowUpOutline: true,
