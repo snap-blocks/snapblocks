@@ -1195,68 +1195,72 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 0.09046106882113736 2.013030214988503 A 1.5 1.5 0 1 1 3 1.5 L 3 5.5 L 1 6 Z M 3.016044443118978 6.10721239031346 A 1 1 0 1 1 1.2651922469877919 6.57635182233307 Z
               M 7 4.5 A 1.5 1.5 0 1 1 9.909538931178863 5.013030214988503 L 9 8.5 L 7 8 Z M 8.75 9 A 1 1 0 1 1 6.883974596215562 8.5 Z`,
         }),
         {
           id: "snap-footprints",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group(
-          (() => { // It's much easier to generate this icon instead
+          (() => {
+            // It's much easier to generate this icon instead
             let children = [],
-                h = 10,
-                u = h / 10,
-                k = h / 5,
-                row, col;
+              h = 10,
+              u = h / 10,
+              k = h / 5,
+              row,
+              col
 
             for (row = 0; row < 2; row += 1) {
               for (col = 0; col < 5; col += 1) {
                 children.push(
-                  SVG.el('rect', {
-                    x: ((u + k) * col) + u,
-                    y: ((u + k) * row) + u,
+                  SVG.el("rect", {
+                    x: (u + k) * col + u,
+                    y: (u + k) * row + u,
                     width: k,
                     height: k,
-                  })
-                );
+                  }),
+                )
               }
             }
-            children.push(SVG.el('rect', {
-              x: u * 4,
-              y: u * 7,
-              width: k * 4,
-              height: k,
-            }));
+            children.push(
+              SVG.el("rect", {
+                x: u * 4,
+                y: u * 7,
+                width: k * 4,
+                height: k,
+              }),
+            )
 
             return children
-          })()
+          })(),
         ),
         {
           id: "snap-keyboard",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
           SVG.withChildren(
-            SVG.el('mask', {
-              id: "snap-keyboard-holes"
+            SVG.el("mask", {
+              id: "snap-keyboard-holes",
             }),
             [
-              SVG.el('rect', {
+              SVG.el("rect", {
                 width: 16,
                 height: 10,
                 fill: "white",
               }),
-              SVG.el('use', {
+              SVG.el("use", {
                 href: "#snap-keyboard",
                 fill: "black",
-              })
-            ]
+              }),
+            ],
           ),
-          SVG.el('rect', {
+          SVG.el("rect", {
             width: 16,
             height: 10,
             mask: "url(#snap-keyboard-holes)",
@@ -1264,7 +1268,7 @@ export default class Style {
         ]),
         {
           id: "snap-keyboardFilled",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
@@ -1316,45 +1320,45 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('use', {
+        SVG.el("use", {
           href: "#snap-flipHorizontal",
           transform: "translate(0 10) rotate(-90)",
         }),
         {
           id: "snap-flipVertical",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 0.6666666666666666 9.666666666666666 L 4.2 9.666666666666666 L 4.2 1.3333333333333333 Z",
             "stroke-width": 10 / 15,
             fill: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 9.333333333333334 9.666666666666666 L 5.8 9.666666666666666 L 5.8 1.3333333333333333 Z",
             "stroke-width": 10 / 15,
-          })
+          }),
         ]),
         {
           id: "snap-flipHorizontal",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 1 2.5 L 1.5 9.5 L 2.5 10 L 7.5 10 L 8.5 9.5 L 9 2.5 L 1 2.5
                 M 2.5 4 A 0.5 0.5 0 0 1 3.5 4 L 3.5 8.5 A 0.5 0.5 0 0 1 2.5 8.5 L 2.5 4
                 M 4.5 4 A 0.5 0.5 0 0 1 5.5 4 L 5.5 8.5 A 0.5 0.5 0 0 1 4.5 8.5 L 4.5 4
                 M 6.5 4 A 0.5 0.5 0 0 1 7.5 4 L 7.5 8.5 A 0.5 0.5 0 0 1 6.5 8.5 L 6.5 4`,
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 0.5 1.5 L 9.5 1.5`,
             "stroke-width": 1,
             fill: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 3 1.5 L 4 0.25 L 6 0.25 L 7 1.5`,
             "stroke-width": 0.5,
             fill: "none",
@@ -1362,27 +1366,27 @@ export default class Style {
         ]),
         {
           id: "snap-trash",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 1 4 L 1.5 9.5 L 2.5 10 L 7.5 10 L 8.5 9.5 L 9 4 L 1 4
                 M 2.5 5.5 A 0.5 0.5 0 0 1 3.5 5.5 L 3.5 8.5 A 0.5 0.5 0 0 1 2.5 8.5
                 M 4.5 5.5 A 0.5 0.5 0 0 1 5.5 5.5 L 5.5 8.5 A 0.5 0.5 0 0 1 4.5 8.5
                 M 6.5 5.5 A 0.5 0.5 0 0 1 7.5 5.5 L 7.5 8.5 A 0.5 0.5 0 0 1 6.5 8.5`,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 2 0 L 6 0 L 8 2 L 8 3.5 L 2 3.5 Z`,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 6 0 L 8 2 L 6 2 Z`,
             filter: "brightness(0.75)",
           }),
         ]),
         {
           id: "snap-trashFull",
-        }
+        },
       ),
 
       SVG.setProps(

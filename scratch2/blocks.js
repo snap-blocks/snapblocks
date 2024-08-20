@@ -461,8 +461,16 @@ class IconView {
       keyboard: { width: 16, height: 10 },
       keyboardFilled: { width: 16, height: 10 },
       listNarrow: { width: 5, height: 10 },
-      flipHorizontal: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
-      flipVertical: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      flipHorizontal: {
+        width: 10,
+        height: 10,
+        fillAttribute: ["fill", "stroke"],
+      },
+      flipVertical: {
+        width: 10,
+        height: 10,
+        fillAttribute: ["fill", "stroke"],
+      },
       trash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       trashFull: { width: 10, height: 10 },
 
