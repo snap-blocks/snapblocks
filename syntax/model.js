@@ -258,7 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - trash
    * - trashFull
    *
    * @static
@@ -341,6 +340,7 @@ export class Icon {
       listNarrow: true,
       flipVertical: true,
       flipHorizontal: true,
+      trash: true,
 
       arrowUp: true,
       arrowUpOutline: true,

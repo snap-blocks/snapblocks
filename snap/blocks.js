@@ -660,6 +660,7 @@ export class IconView {
       listNarrow: { width: 5, height: 10 },
       flipHorizontal: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       flipVertical: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      trash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

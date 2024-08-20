@@ -72,6 +72,7 @@ const highContrastIcons = new Set([
   "listNarrow",
   "flipHorizontal",
   "flipVertical",
+  "trash",
 
   "arrowUp",
   "arrowUpOutline",
@@ -146,6 +147,7 @@ const snapIcons = new Set([
   "listNarrow",
   "flipHorizontal",
   "flipVertical",
+  "trash",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1477,6 +1479,30 @@ export default class Style {
         ]),
         {
           id: "sb3-flipHorizontal",
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: `M 1 2.5 L 1.5 9.5 L 2.5 10 L 7.5 10 L 8.5 9.5 L 9 2.5 L 1 2.5
+                M 2.5 4 A 0.5 0.5 0 0 1 3.5 4 L 3.5 8.5 A 0.5 0.5 0 0 1 2.5 8.5 L 2.5 4
+                M 4.5 4 A 0.5 0.5 0 0 1 5.5 4 L 5.5 8.5 A 0.5 0.5 0 0 1 4.5 8.5 L 4.5 4
+                M 6.5 4 A 0.5 0.5 0 0 1 7.5 4 L 7.5 8.5 A 0.5 0.5 0 0 1 6.5 8.5 L 6.5 4`,
+            stroke: "none",
+          }),
+          SVG.el('path', {
+            d: `M 0.5 1.5 L 9.5 1.5`,
+            "stroke-width": 1,
+            fill: "none",
+          }),
+          SVG.el('path', {
+            d: `M 3 1.5 L 4 0.25 L 6 0.25 L 7 1.5`,
+            "stroke-width": 0.5,
+            fill: "none",
+          }),
+        ]),
+        {
+          id: "sb3-trash",
         }
       ),
 
