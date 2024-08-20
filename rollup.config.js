@@ -2,7 +2,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
 import babel from "@rollup/plugin-babel"
 import json from "@rollup/plugin-json"
-import pkg from "./package.json" assert { "type": "json" }
+import pkg from "./package.json" assert { type: "json" }
 import serve from "rollup-plugin-serve"
 import license from "rollup-plugin-license"
 import terser from "@rollup/plugin-terser"
