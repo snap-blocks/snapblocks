@@ -459,6 +459,7 @@ export class IconView {
       footprints: { width: 10, height: 10 },
       keyboard: { width: 16, height: 10 },
       keyboardFilled: { width: 16, height: 10 },
+      listNarrow: { width: 5, height: 10 },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
