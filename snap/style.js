@@ -1315,6 +1315,22 @@ export default class Style {
           id: "snap-listNarrow",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 0.6666666666666666 9.666666666666666 L 4.2 9.666666666666666 L 4.2 1.3333333333333333 Z",
+            "stroke-width": 10 / 15,
+            fill: "none",
+          }),
+          SVG.el('path', {
+            d: "M 9.333333333333334 9.666666666666666 L 5.8 9.666666666666666 L 5.8 1.3333333333333333 Z",
+            "stroke-width": 10 / 15,
+          })
+        ]),
+        {
+          id: "snap-flipHorizontal",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

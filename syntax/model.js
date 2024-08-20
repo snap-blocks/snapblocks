@@ -258,8 +258,6 @@ export class Icon {
    * Available icons.
    *
    * TODO:
-   * - flipVertical
-   * - flipHorizontal
    * - trash
    * - trashFull
    *
@@ -341,6 +339,7 @@ export class Icon {
       keyboard: true,
       keyboardFilled: true,
       listNarrow: true,
+      flipHorizontal: true,
 
       arrowUp: true,
       arrowUpOutline: true,
