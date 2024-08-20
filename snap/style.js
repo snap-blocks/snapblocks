@@ -1238,6 +1238,34 @@ export default class Style {
           id: "snap-keyboard",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.withChildren(
+            SVG.el('mask', {
+              id: "snap-keyboard-holes"
+            }),
+            [
+              SVG.el('rect', {
+                width: 16,
+                height: 10,
+                fill: "white",
+              }),
+              SVG.el('use', {
+                href: "#snap-keyboard",
+                fill: "black",
+              })
+            ]
+          ),
+          SVG.el('rect', {
+            width: 16,
+            height: 10,
+            mask: "url(#snap-keyboard-holes)",
+          }),
+        ]),
+        {
+          id: "snap-keyboardFilled",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {

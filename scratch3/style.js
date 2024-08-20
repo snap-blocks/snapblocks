@@ -68,6 +68,7 @@ const highContrastIcons = new Set([
   "closedBrush",
   "footprints",
   "keyboard",
+  "keyboardFilled",
 
   "arrowUp",
   "arrowUpOutline",
@@ -138,6 +139,7 @@ const snapIcons = new Set([
   "closedBrush",
   "footprints",
   "keyboard",
+  "keyboardFilled",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1367,6 +1369,34 @@ export default class Style {
         ),
         {
           id: "sb3-keyboard",
+        }
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.withChildren(
+            SVG.el('mask', {
+              id: "sb3-keyboard-holes"
+            }),
+            [
+              SVG.el('rect', {
+                width: 16,
+                height: 10,
+                fill: "white",
+              }),
+              SVG.el('use', {
+                href: "#sb3-keyboard",
+                fill: "black",
+              })
+            ]
+          ),
+          SVG.el('rect', {
+            width: 16,
+            height: 10,
+            mask: "url(#sb3-keyboard-holes)",
+          }),
+        ]),
+        {
+          id: "sb3-keyboardFilled",
         }
       ),
 

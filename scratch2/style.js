@@ -1112,6 +1112,34 @@ export default class Style {
           id: "sb-keyboard",
         }
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.withChildren(
+            SVG.el('mask', {
+              id: "sb-keyboard-holes"
+            }),
+            [
+              SVG.el('rect', {
+                width: 16,
+                height: 10,
+                fill: "white",
+              }),
+              SVG.el('use', {
+                href: "#sb-keyboard",
+                fill: "black",
+              })
+            ]
+          ),
+          SVG.el('rect', {
+            width: 16,
+            height: 10,
+            mask: "url(#sb-keyboard-holes)",
+          }),
+        ]),
+        {
+          id: "sb-keyboardFilled",
+        }
+      ),
 
       SVG.setProps(
         SVG.el("path", {
