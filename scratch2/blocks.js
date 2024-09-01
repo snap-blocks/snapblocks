@@ -1533,7 +1533,7 @@ class DocumentView {
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
-          : 460
+          : 400
         : -1,
       zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
