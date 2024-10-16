@@ -799,7 +799,10 @@ class BlockView {
   measure(options) {
     for (const child of this.children) {
       if (child.measure) {
-        child.measure(options)
+        child.measure(child.isLabel ? {
+          ...options,
+          showSpaces: false,
+        } : options)
       }
     }
     if (this.comment) {
@@ -1164,7 +1167,10 @@ class BlockView {
           child.isZebra = this.isZebra
         } else if (this.isZebra && child.isLabel) {
           child.cls = "label-dark"
-          child.measure(options)
+          child.measure({
+            ...options,
+            showSpaces: false,
+          })
         }
       }
 
