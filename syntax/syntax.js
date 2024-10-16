@@ -782,13 +782,14 @@ function parseLines(code, languages) {
         next()
         escapedLast = true
         raw += tok
-        if (tok === "v") {
+        if (tok.toLowerCase() == "v") {
           escapeV = true
         } else if (tok === "]" && brackets) {
           brackets -= 1
-        } else if (tok === ["n", "\n"].includes(peek())) {
+        } else if (["n", "\n"].includes(tok)) {
           s += "\n"
           next()
+          raw += tok
         }
         if (!tok) {
           break
@@ -1024,7 +1025,7 @@ function parseLines(code, languages) {
     // number-dropdown
     if (children.length > 1) {
       const last = children[children.length - 1]
-      let finalV = last.value
+      let finalV = last.raw
       if (finalV === "v" || finalV === "V") {
         // Yes, I know this is a very hacky solution, I just want to keep all the spaces,
         // and deal with backslashes. I wish I could come up with a much better way then backtracking.
