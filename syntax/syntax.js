@@ -896,15 +896,16 @@ function parseLines(code, languages) {
    */
   function pBlock(end) {
     const children = pParts(end)
-    if (tok && tok === "\n") {
-      sawNL = true
-      next()
-    }
 
     let comment = null
 
     if (tok === "/" && ["/", "*"].includes(peek())) {
       comment = pComment(end)
+    }
+
+    if (tok && tok === "\n") {
+      sawNL = true
+      next()
     }
 
     if (children.length === 0) {
@@ -1199,8 +1200,9 @@ function parseLines(code, languages) {
     }
     isCShape = tok === "\n"
     const f = function () {
+      let blocks = []
       while (tok && tok !== "}") {
-        const block = pBlock("}")
+        let block = pBlock("}")
         if (block && block.isComment) {
           let comment = block
           block = makeBlock("stack", [])
@@ -1329,10 +1331,6 @@ function parseLines(code, languages) {
     }
     if (comment[comment.length - 1] === " ") {
       comment = comment.slice(0, comment.length - 1)
-    }
-
-    while (end && tok && tok !== end) {
-      next()
     }
 
     let com = new Comment(comment, true, isMultiline)
