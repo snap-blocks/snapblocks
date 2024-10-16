@@ -43,7 +43,7 @@ export default class Style {
     },
 
     categories: {
-      obsolete: new Color(200, 0, 20),
+      obsolete: new Color(150, 150, 150),
       motion: new Color(74, 108, 212),
       looks: new Color(143, 86, 227),
       sound: new Color(207, 74, 217),
