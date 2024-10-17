@@ -1016,7 +1016,7 @@ export class BlockView {
     for (const child of this.children) {
       if (child.measure) {
         child.measure(options)
-        console.log('child.isLabel', child.isLabel)
+        console.log("child.isLabel", child.isLabel)
       }
     }
     if (this.comment) {
@@ -1358,10 +1358,13 @@ export class BlockView {
     children.forEach(child => {
       if (child.isLabel) {
         child.cls = "block-label"
-        child.measure({
-          ...options,
-          showSpaces: false,
-        }, this.isZebra)
+        child.measure(
+          {
+            ...options,
+            showSpaces: false,
+          },
+          this.isZebra,
+        )
       }
       if (options.zebraColoring) {
         if (child.isUpvar) {

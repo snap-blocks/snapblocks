@@ -799,10 +799,14 @@ class BlockView {
   measure(options) {
     for (const child of this.children) {
       if (child.measure) {
-        child.measure(child.isLabel ? {
-          ...options,
-          showSpaces: false,
-        } : options)
+        child.measure(
+          child.isLabel
+            ? {
+                ...options,
+                showSpaces: false,
+              }
+            : options,
+        )
       }
     }
     if (this.comment) {
