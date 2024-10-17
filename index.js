@@ -20,8 +20,9 @@
  * @property {boolean} [zebraColoring=false] - Zebra coloring
  * @property {boolean} [wrap=false] - Wrap blocks
  * @property {(number|null)} [wrapSize=null] - Minimum block wrap width
+ * @property {(number|null)} [commentWidth=null] - Maximum comment width. Set this to -1 to not wrap.
  * @property {boolean} [showSpaces=false] - Show spaces
- * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "zebracoloring" | "zebra" | "showspaces"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+ * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "commentWidth" | "zebracoloring" | "zebra" | "showspaces"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
  */
 
 import {
@@ -203,6 +204,7 @@ export default function (window) {
       zebraColoring: false,
       wrap: false,
       wrapSize: null,
+      commentWidth: null,
       showSpaces: false,
       elementOptions: false, // set options on the element
 
@@ -241,6 +243,7 @@ export default function (window) {
       zebraColoring: false,
       wrap: false,
       wrapSize: null,
+      commentWidth: null,
       showSpaces: false,
       elementOptions: false, // set options on the element
 
@@ -263,6 +266,7 @@ export default function (window) {
       "zebracoloring",
       "zebra",
       "showspaces",
+      "commentwidth",
     ]
     if (Array.isArray(options.elementOptions)) {
       acceptedOptions = []
@@ -286,6 +290,9 @@ export default function (window) {
           : null,
         wrapSize: acceptedOptions.includes("wrapsize")
           ? element.getAttribute("wrapSize")
+          : null,
+        commentWidth: acceptedOptions.includes("commentwidth")
+          ? element.getAttribute("commentwidth")
           : null,
         zebraColoring: acceptedOptions.includes("zebracoloring")
           ? element.getAttribute("zebraColoring")
