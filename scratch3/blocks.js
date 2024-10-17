@@ -159,7 +159,7 @@ export class LabelView {
       cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
-    const cacheValue = value + isComment
+    const cacheValue = value + isComment + options.commentWidth
     if (Object.hasOwnProperty.call(cache, cacheValue)) {
       this.metrics = cache[cacheValue]
     } else {
@@ -1856,7 +1856,7 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
-      commentWidth: options.commentWidth || 200,
+      commentWidth: (options.commentWidth > 0 ? Math.max(100, options.commentWidth) : options.commentWidth) || 200,
     }
   }
 
