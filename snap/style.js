@@ -1423,7 +1423,7 @@ export default class Style {
     const f = new Filter(id)
     // f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
     let flood = f.flood("#000", 0.3, "SourceAlpha")
-    let offset = f.offset(-0.5, -0.5, f.blur(0, "SourceAlpha"))
+    let offset = f.offset(-0.6, -0.6, f.blur(0, "SourceAlpha"))
     f.comp("over", "SourceGraphic", f.comp("in", flood, offset))
     return f.el
   }
