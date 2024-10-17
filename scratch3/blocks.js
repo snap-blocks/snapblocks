@@ -121,6 +121,7 @@ export class LabelView {
   measure(options) {
     const value = this.value
     const cls = `sb3-${this.cls}`
+    const isComment = /comment-label/.test(this.cls)
 
     if (this.defaultColor) {
       this._color = /comment-label|label-dark/.test(this.cls)
@@ -158,10 +159,11 @@ export class LabelView {
       cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
-    if (Object.hasOwnProperty.call(cache, value)) {
-      this.metrics = cache[value]
+    const cacheValue = value + isComment
+    if (Object.hasOwnProperty.call(cache, cacheValue)) {
+      this.metrics = cache[cacheValue]
     } else {
-      this.metrics = cache[value] = LabelView.measure(value, font)
+      this.metrics = cache[cacheValue] = LabelView.measure(value, font, isComment ? options.commentWidth : -1)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
 
@@ -213,7 +215,21 @@ export class LabelView {
     this.el = SVG.group(group)
   }
 
-  static measure(value, font) {
+  /**
+   * Measure text
+   *
+   * @static
+   * @param {string} value
+   * @param {string} font
+   * @param {number} [wrap = -1]
+   * @returns {{ width: number; spaceWidth: any; lines: {word: string; width: number; height: number;}[][]; }}
+   */
+  static measure(value, font, wrap = -1) {
+    /**
+     * Canvas context
+     *
+     * @type {CanvasRenderingContext2D}
+     */
     const context = LabelView.measuring
     context.font = font
 
@@ -221,22 +237,74 @@ export class LabelView {
     let lines = value.split("\n")
     let computedLines = []
     let width = 0
-    for (let line of lines) {
+
+    /**
+     * Measure line
+     *
+     * @param {string} line
+     */
+    function measureLine(line) {
       const textMetrics = context.measureText(line)
-      width = Math.max(width, textMetrics.width)
+      let lineWidth = 0
       let words = line.split(" ")
       let computedLine = []
-      for (let word of words) {
+      let wrappedLines = []
+
+      for (let index = 0; index < words.length; index++) {
+        const word = words[index];
         const textMetrics = context.measureText(word)
+        if (wrap > 0 &&  lineWidth + textMetrics.width + spaceWidth > wrap) {
+          if (index == 0) {
+            let computedWord = {
+              word: '',
+              width: 0,
+              height: 0,
+            }
+            for (let charIndex = 0; charIndex < word.length; charIndex++) {
+              const char = word[charIndex];
+              const textMetrics = context.measureText(char)
+              if (computedWord.width + textMetrics.width > wrap) {
+                lineWidth = computedWord.width + spaceWidth
+                computedLine.push(computedWord)
+                wrappedLines = measureLine(word.slice(charIndex) + ' ' + words.slice(index + 1).join(' '))
+                break
+              } else {
+                computedWord.word += char
+                computedWord.width += textMetrics.width
+                computedWord.height = Math.max(
+                  computedWord.height,
+                  textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent
+                )
+              }
+            }
+          } else {
+            wrappedLines = measureLine(words.slice(index).join(' '))
+          }
+          break
+        }
         computedLine.push({
           word: word,
           width: textMetrics.width,
-          // height:
-          //   textMetrics.fontBoundingBoxAscent +
-          //   textMetrics.fontBoundingBoxDescent,
+          height:
+            textMetrics.fontBoundingBoxAscent +
+            textMetrics.fontBoundingBoxDescent,
         })
+
+        lineWidth += textMetrics.width + spaceWidth
       }
-      computedLines.push(computedLine)
+
+      lineWidth -= spaceWidth
+
+      width = Math.max(width, lineWidth)
+
+      return [
+        computedLine,
+        ...wrappedLines,
+      ]
+    }
+
+    for (let line of lines) {
+      computedLines = computedLines.concat(measureLine(line))
     }
 
     width = (width + 3) | 0
@@ -1782,6 +1850,7 @@ class DocumentView {
         : -1,
       zebraColoring: options.zebraColoring || options.zebra,
       showSpaces: options.showSpaces,
+      commentWidth: options.commentWidth || 200,
     }
   }
 
