@@ -917,7 +917,7 @@ export class InputView {
         x = 2
         y = 2
       } else {
-        x = this.isRound ? Math.floor(Math.min(h, 12) / 2) + 1 : 2 + 1
+        x = this.isRound ? Math.floor(Math.min(h, 12) / 2) + 1 : 2
         y = this.isRound ? 0 : 0
       }
       result.appendChild(SVG.move(x, y, label))
