@@ -163,7 +163,11 @@ export class LabelView {
     if (Object.hasOwnProperty.call(cache, cacheValue)) {
       this.metrics = cache[cacheValue]
     } else {
-      this.metrics = cache[cacheValue] = LabelView.measure(value, font, isComment ? options.commentWidth : -1)
+      this.metrics = cache[cacheValue] = LabelView.measure(
+        value,
+        font,
+        isComment ? options.commentWidth : -1,
+      )
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
 
@@ -251,34 +255,39 @@ export class LabelView {
       let wrappedLines = []
 
       for (let index = 0; index < words.length; index++) {
-        const word = words[index];
+        const word = words[index]
         const textMetrics = context.measureText(word)
-        if (wrap > 0 &&  lineWidth + textMetrics.width + spaceWidth > wrap) {
+        if (wrap > 0 && lineWidth + textMetrics.width + spaceWidth > wrap) {
           if (index == 0) {
             let computedWord = {
-              word: '',
+              word: "",
               width: 0,
               height: 0,
             }
             for (let charIndex = 0; charIndex < word.length; charIndex++) {
-              const char = word[charIndex];
+              const char = word[charIndex]
               const textMetrics = context.measureText(char)
               if (computedWord.width + textMetrics.width > wrap) {
                 lineWidth = computedWord.width + spaceWidth
                 computedLine.push(computedWord)
-                wrappedLines = measureLine(word.slice(charIndex) + ' ' + words.slice(index + 1).join(' '))
+                wrappedLines = measureLine(
+                  word.slice(charIndex) +
+                    " " +
+                    words.slice(index + 1).join(" "),
+                )
                 break
               } else {
                 computedWord.word += char
                 computedWord.width += textMetrics.width
                 computedWord.height = Math.max(
                   computedWord.height,
-                  textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent
+                  textMetrics.fontBoundingBoxAscent +
+                    textMetrics.fontBoundingBoxDescent,
                 )
               }
             }
           } else {
-            wrappedLines = measureLine(words.slice(index).join(' '))
+            wrappedLines = measureLine(words.slice(index).join(" "))
           }
           break
         }
@@ -297,10 +306,7 @@ export class LabelView {
 
       width = Math.max(width, lineWidth)
 
-      return [
-        computedLine,
-        ...wrappedLines,
-      ]
+      return [computedLine, ...wrappedLines]
     }
 
     for (let line of lines) {
