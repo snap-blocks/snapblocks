@@ -1518,6 +1518,8 @@ export class BlockView {
               children[index + 1].name === "addInput"
             ))
         ) {
+          child.el.classList.remove("snap-drop-shadow")
+          child.el.setAttribute("opacity", 0.5)
           x += child.width
         } else {
           x += child.width + space
