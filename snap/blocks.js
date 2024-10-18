@@ -273,11 +273,7 @@ export class LabelView {
     if (Object.hasOwnProperty.call(cache, cacheValue)) {
       this.metrics = cache[cacheValue]
     } else {
-      this.metrics = cache[cacheValue] = LabelView.measure(
-        value,
-        font,
-        wrap,
-      )
+      this.metrics = cache[cacheValue] = LabelView.measure(value, font, wrap)
       // TODO: word-spacing? (fortunately it seems to have no effect!)
       // TODO: add some way of making monospaced
     }
@@ -1997,7 +1993,8 @@ export class CommentView {
    * @param {Options} options
    */
   measure(options) {
-    this.label.measure({
+    this.label.measure(
+      {
         ...options,
         showSpaces: false,
       },
