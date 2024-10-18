@@ -118,10 +118,9 @@ export class LabelView {
     return this.metrics.lines
   }
 
-  measure(options) {
+  measure(options, wrap = -1) {
     const value = this.value
     const cls = `sb3-${this.cls}`
-    const isComment = /comment-label/.test(this.cls)
 
     if (this.defaultColor) {
       this._color = /comment-label|label-dark/.test(this.cls)
@@ -159,14 +158,14 @@ export class LabelView {
       cache = LabelView.metricsCache[font] = Object.create(null)
     }
 
-    const cacheValue = value + isComment + options.commentWidth
+    const cacheValue = value + wrap
     if (Object.hasOwnProperty.call(cache, cacheValue)) {
       this.metrics = cache[cacheValue]
     } else {
       this.metrics = cache[cacheValue] = LabelView.measure(
         value,
         font,
-        isComment ? options.commentWidth : -1,
+        wrap,
       )
       // TODO: word-spacing? (fortunately it seems to have no effect!)
     }
@@ -1599,9 +1598,11 @@ export class CommentView {
 
   measure(options) {
     this.label.measure({
-      ...options,
-      showSpaces: false,
-    })
+        ...options,
+        showSpaces: false,
+      },
+      this.isMultiline ? options.commentWidth : -1,
+    )
   }
 
   draw(options, block) {
