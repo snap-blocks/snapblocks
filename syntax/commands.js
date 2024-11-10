@@ -1278,7 +1278,7 @@ export default [
     snap: "doSetSlot",
     spec: "set slot %1 to %2",
     inputs: ["%m", "%n"],
-    shape: "command",
+    shape: "stack",
     category: "events",
   },
   {
@@ -1286,8 +1286,8 @@ export default [
     snap: "doExpandSlot",
     spec: "expand %1 to %2 slots",
     inputs: ["%m", "%n"],
-    shape: "command",
-    category: "command",
+    shape: "stack",
+    category: "control",
   },
   {
     id: "snap:getLastMessage",
