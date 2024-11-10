@@ -1279,7 +1279,7 @@ export default [
     spec: "set slot %1 to %2",
     inputs: ["%m", "%n"],
     shape: "stack",
-    category: "events",
+    category: "control",
   },
   {
     id: "snap:doExpandSlot",
