@@ -1277,7 +1277,7 @@ export default [
     id: "snap:doSetSlot",
     snap: "doSetSlot",
     spec: "set slot %1 to %2",
-    inputs: ["%m", "%n"],
+    inputs: ["%m", "%s"],
     shape: "stack",
     category: "control",
   },
