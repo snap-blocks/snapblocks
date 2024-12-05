@@ -89,11 +89,11 @@ export default class Style {
       SVG.setProps(
         SVG.group([
           SVG.el("path", {
-            d: "M 0.5 0 L 0.5 10 Z",
+            d: "M 0.5 0 L 0.5 10",
             "stroke-width": 1,
           }),
           SVG.el("path", {
-            d: "M 0 3 C 9.6 3 1.2 6 12 6",
+            d: "M 0 2.5 C 8 2.5 1 5 10 5",
             "stroke-width": 5,
           }),
         ]),
