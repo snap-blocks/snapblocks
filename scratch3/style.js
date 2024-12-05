@@ -74,6 +74,7 @@ const highContrastIcons = new Set([
   "flipVertical",
   "trash",
   "trashFull",
+  "infinity",
 
   "arrowUp",
   "arrowUpOutline",
@@ -150,6 +151,7 @@ const snapIcons = new Set([
   "flipVertical",
   "trash",
   "trashFull",
+  "infinity",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1530,6 +1532,16 @@ export default class Style {
         {
           id: "sb3-trashFull",
         },
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: `M 6.875 8.247595264191645 A 3.75 3.75 0 1 1 8.75 5 M 10.625 1.752404735808355 A 3.75 3.75 0 1 1 8.75 5.000000000000001`,
+        }),
+        {
+          id: 'sb3-infinity',
+          fill: 'none',
+          'stroke-width': 2.5,
+        }
       ),
 
       SVG.setProps(
