@@ -74,6 +74,8 @@ const highContrastIcons = new Set([
   "flipVertical",
   "trash",
   "trashFull",
+  "cube",
+  "cubeSolid",
   "infinity",
 
   "arrowUp",
@@ -151,6 +153,8 @@ const snapIcons = new Set([
   "flipVertical",
   "trash",
   "trashFull",
+  "cube",
+  "cubeSolid",
   "infinity",
 
   "arrowUp",
@@ -1531,6 +1535,31 @@ export default class Style {
         ]),
         {
           id: "sb3-trashFull",
+        },
+      ),
+      SVG.setProps(
+        SVG.el('path', {
+          d: `M 0.5 2.5 L 5 0.5 L 9.5 2.5 L 9.5 7.5 L 5 9.5 L 0.5 7.5 Z
+              M 5 4.5 L 0.5 2.5 M 5 4.5L 9.5 2.5 M 5 4.5 L 5 9.5`,
+        }),
+        {
+          id: "sb3-cube",
+          fill: "none",
+          "stroke-width": 1,
+        },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('use', {
+            href: "#sb3-cube",
+          }),
+          SVG.el('path', {
+            d: "M 5 4.5 L 9.5 2.5 L 9.5 7.5 L 5 9.5 Z",
+            stroke: "none",
+          })
+        ]),
+        {
+          id: "sb3-cubeSolid",
         },
       ),
       SVG.setProps(

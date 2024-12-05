@@ -339,6 +339,8 @@ export class Icon {
       flipHorizontal: true,
       trash: true,
       trashFull: true,
+      cube: true,
+      cubeSolid: true,
       infinity: true,
 
       arrowUp: true,
