@@ -130,7 +130,9 @@ export class LabelView {
             ? new Color()
             : new Color(255, 255, 255)
           : /literal/.test(this.cls)
-            ? new Color()
+            ? options.isHighContrast
+              ? new Color()
+              : Color.fromHexString('#575e75')
             : options.isHighContrast
               ? new Color()
               : new Color(255, 255, 255)
@@ -702,7 +704,7 @@ export class InputView {
       } else {
         // Minimum padding of 11
         // Minimum width of 40, at which point we center the label
-        h = this.label.height + 19
+        h = this.label.height + 12
         const px = this.label.width >= 18 ? 11 : (40 - this.label.width) / 2
         w = Math.max(this.label.width + 2 * px, this.isBig * 70)
         label = SVG.move(px, 9, label)
@@ -774,7 +776,7 @@ export class InputView {
 
     const result = SVG.group([el])
     if (this.hasLabel || this.icon) {
-      let x
+      let x, y = 0
       if (this.isBoolean && this.isBig) {
         if (this.value == "true") {
           x = h / 2
@@ -789,8 +791,9 @@ export class InputView {
         // y = 2
       } else {
         x = 0
+        y = -3
       }
-      result.appendChild(SVG.move(x, 0, label))
+      result.appendChild(SVG.move(x, y, label))
     }
     if (this.isBoolean && this.value) {
       let y = (this.height + 1) / 2
