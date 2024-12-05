@@ -1389,7 +1389,7 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 0.5 2.5 L 5 0.5 L 9.5 2.5 L 9.5 7.5 L 5 9.5 L 0.5 7.5 Z
               M 5 4.5 L 0.5 2.5 M 5 4.5L 9.5 2.5 M 5 4.5 L 5 9.5`,
         }),
@@ -1401,26 +1401,26 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('use', {
+          SVG.el("use", {
             href: "#snap-cube",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 5 4.5 L 9.5 2.5 L 9.5 7.5 L 5 9.5 Z",
             stroke: "none",
-          })
+          }),
         ]),
         {
           id: "snap-cubeSolid",
         },
       ),
       SVG.setProps(
-        SVG.el('path', {
+        SVG.el("path", {
           d: `M 6.875 8.247595264191645 A 3.75 3.75 0 1 1 8.75 5 M 10.625 1.752404735808355 A 3.75 3.75 0 1 1 8.75 5.000000000000001`,
         }),
         {
-          id: 'snap-infinity',
-          fill: 'none',
-          'stroke-width': 2.5,
+          id: "snap-infinity",
+          fill: "none",
+          "stroke-width": 2.5,
         },
       ),
 
