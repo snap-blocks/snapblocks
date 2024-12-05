@@ -877,13 +877,16 @@ export class InputView {
         h += 1
         w = 23 + h * 1.5
       } else {
+        console.log('label width', this.label.width)
         w = Math.max(
           this.label.width + this.hasArrow * 12 + 2 + 2,
           this.label.lines.length <= 1 // single vs. multi-line contents
-            ? this.label.rawHeight + this.hasArrow * 12
-            : getFontHeight(this.label.fontSize) + this.hasArrow * 12,
+            ? (this.label.rawHeight - 2) + this.hasArrow * 12
+            : (getFontHeight(this.label.fontSize) - 4) + this.hasArrow * 12,
           this.isBig * 23.8,
         )
+        console.log('label height', this.label.rawHeight)
+        console.log('width:', w)
       }
     } else {
       h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
@@ -977,7 +980,7 @@ export class InputView {
         y = 2
       } else {
         x = this.isRound ? Math.floor(Math.min(h, 12) / 2) + 1 : 2
-        y = this.isRound ? 0 : 0
+        y = -0.5
       }
       result.appendChild(SVG.move(x, y, label))
     }

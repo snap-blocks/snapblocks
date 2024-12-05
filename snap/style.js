@@ -1475,7 +1475,6 @@ export default class Style {
     const f = new Filter(id)
 
     const alpha = "SourceAlpha"
-    const s = inset ? -0.4 : 0.2
     const blur = f.blur(0.3, alpha)
 
     f.merge([
@@ -1485,15 +1484,15 @@ export default class Style {
         f.flood("#fff", 0.4),
         f.subtract(
           alpha,
-          f.offset(inset ? -0.3 : 0.4, inset ? -0.3 : 0.4, blur),
+          f.offset(inset ? -0.4 : 0.4, inset ? -0.4 : 0.4, blur),
         ),
       ),
       f.comp(
         "in",
-        f.flood("#000", 0.8),
+        f.flood("#000", inset ? 0.9 : 0.8),
         f.subtract(
           alpha,
-          f.offset(inset ? 0.9 : -0.7, inset ? 0.9 : -0.7, blur),
+          f.offset(inset ? 0.7 : -0.7, inset ? 0.7 : -0.7, blur),
         ),
       ),
     ])
