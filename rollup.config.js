@@ -1,3 +1,5 @@
+import { nodeResolve } from "@rollup/plugin-node-resolve"
+import commonjs from "@rollup/plugin-commonjs"
 import babel from "@rollup/plugin-babel"
 import json from "@rollup/plugin-json"
 import pkg from "./package.json" with { type: "json" }
@@ -25,7 +27,8 @@ const bannerText = `
 <%= pkg.homepage %>
 <%= pkg.description %>
 
-Copyright 2013–<%= moment().format('YYYY') %>, <%= pkg.author %>
+Copyright 2013-2024, Tim Radvan
+Copyright 2024-<%= moment().format('YYYY') %>, <%= pkg.author %>
 @license <%= pkg.license %>
 `.trim()
 
@@ -58,10 +61,12 @@ export default [
     output: {
       file: pkg.main,
       format: "iife",
-      name: "scratchblocks",
+      name: "snapblocks",
       sourcemap: env.prod,
     },
     plugins: [
+      commonjs(),
+      nodeResolve(),
       ...commonPreBabelOperations(),
       babel({ babelHelpers: "bundled" }),
       ...commonPostBabelOperations(),
@@ -80,6 +85,8 @@ export default [
       sourcemap: env.prod,
     },
     plugins: [
+      commonjs(),
+      nodeResolve(),
       ...commonPreBabelOperations(),
       // ESM bundle does not need Babel
       ...commonPostBabelOperations(true),
@@ -100,6 +107,8 @@ export default [
       sourcemap: false,
     },
     plugins: [
+      commonjs(),
+      nodeResolve(),
       ...commonPreBabelOperations(true),
       babel({ babelHelpers: "bundled" }),
       ...commonPostBabelOperations(),
