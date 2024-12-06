@@ -395,6 +395,7 @@ export class IconView {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale + isSnapIcon * this.scale})`,
+      opacity: this.color.a,
     }
 
     if (!this.color) {
