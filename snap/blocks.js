@@ -1308,7 +1308,7 @@ export class BlockView {
       r = w / 2,
       x = 5,
       y = 1,
-      contrast = options.isFlat ? 25 : 65,
+      contrast = 65,
       path = ""
 
     if (this.isBoolean) {
