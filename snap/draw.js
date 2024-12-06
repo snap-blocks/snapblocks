@@ -659,9 +659,10 @@ export default class SVG {
    *
    * @static
    * @param {number} w
+   * @param {boolean} hasNotch
    * @returns {string}
    */
-  static getTop(w) {
+  static getTop(w, hasNotch = true) {
     var corner = 3,
       dent = 8,
       indent = corner * 2 + 6,
@@ -676,11 +677,15 @@ export default class SVG {
       false,
     )
 
-    path += ` L ${corner + 6} 0 `
-    path += `L ${indent} ${corner} `
-    path += `L ${indent + dent} ${corner} `
-    path += `L ${corner * 3 + 6 + dent} 0 `
-    path += `L ${w - corner} 0 `
+    if (hasNotch) {
+      path += ` L ${corner + 6} 0 `
+      path += `L ${indent} ${corner} `
+      path += `L ${indent + dent} ${corner} `
+      path += `L ${corner * 3 + 6 + dent} 0 `
+      path += `L ${w - corner} 0 `
+    } else {
+      path += ` L ${corner + 6} 0 L ${w - corner} 0`
+    }
 
     path += this.canvasArc(
       w - corner,
@@ -1216,6 +1221,13 @@ export default class SVG {
     return SVG.path({
       ...props,
       path: [SVG.getHatTop(w, h), SVG.getRightAndBottom(w, h, true), "Z"],
+    })
+  }
+
+  static hatBackgroundRect(w, h, props) {
+    return SVG.path({
+      ...props,
+      path: [SVG.getTop(w, false), SVG.getRightAndBottom(w, h, false)]
     })
   }
 

@@ -1005,6 +1005,7 @@ export class InputView {
         ),
       )
     }
+
     SVG.move(0, 0.5, result)
     return result
   }
@@ -1291,6 +1292,27 @@ export class BlockView {
     }
     if (color) {
       el.style.fill = color.toHexString()
+    }
+    if (this.isHat && this.hasScript) {
+      let background = SVG.move(0, this.hatHeight,
+        SVG.hatBackgroundRect(w, h - this.hatHeight, {
+          fill: color.toHexString(),
+          class: options.isFlat ? "snap-flat" : "snap-bevel",
+        })
+      )
+
+      
+      if (options.isFlat) {
+        SVG.setProps(background, {
+          stroke: color.darker(25).toHexString(),
+          "stroke-width": 1,
+        })
+      }
+      
+      el = SVG.group([
+        background,
+        el,
+      ])
     }
     return el
   }
@@ -2512,7 +2534,7 @@ export class DocumentView {
     // apply flat design clip-paths
     let clipPaths = []
     if (this.options.isFlat) {
-      let blocks = group.querySelectorAll("path.snap-block.snap-flat")
+      let blocks = group.querySelectorAll("path.snap-flat")
 
       for (let index = 0; index < blocks.length; index++) {
         const block = blocks[index]
