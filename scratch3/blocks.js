@@ -395,7 +395,6 @@ export class IconView {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale + isSnapIcon * this.scale})`,
-      opacity: this.color.a,
     }
 
     if (!this.color) {
@@ -403,6 +402,8 @@ export class IconView {
         ? new Color()
         : new Color(255, 255, 255)
     }
+
+    props.opacity = this.color.a
 
     let name = this.alias || this.name
     if (Array.isArray(this.fillAttribute)) {
