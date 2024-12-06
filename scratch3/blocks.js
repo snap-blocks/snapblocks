@@ -132,7 +132,7 @@ export class LabelView {
           : /literal/.test(this.cls)
             ? options.isHighContrast
               ? new Color()
-              : Color.fromHexString('#575e75')
+              : Color.fromHexString("#575e75")
             : options.isHighContrast
               ? new Color()
               : new Color(255, 255, 255)
@@ -778,7 +778,8 @@ export class InputView {
 
     const result = SVG.group([el])
     if (this.hasLabel || this.icon) {
-      let x, y = 0
+      let x,
+        y = 0
       if (this.isBoolean && this.isBig) {
         if (this.value == "true") {
           x = h / 2

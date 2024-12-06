@@ -878,16 +878,16 @@ export class InputView {
         h += 1
         w = 23 + h * 1.5
       } else {
-        console.log('label width', this.label.width)
+        console.log("label width", this.label.width)
         w = Math.max(
           this.label.width + this.hasArrow * 12 + 2 + 2,
           this.label.lines.length <= 1 // single vs. multi-line contents
-            ? (this.label.rawHeight - 2) + this.hasArrow * 12
-            : (getFontHeight(this.label.fontSize) - 4) + this.hasArrow * 12,
+            ? this.label.rawHeight - 2 + this.hasArrow * 12
+            : getFontHeight(this.label.fontSize) - 4 + this.hasArrow * 12,
           this.isBig * 23.8,
         )
-        console.log('label height', this.label.rawHeight)
-        console.log('width:', w)
+        console.log("label height", this.label.rawHeight)
+        console.log("width:", w)
       }
     } else {
       h = this.hasLabel ? this.label.height + 1 : this.isInset ? 12 : 13
@@ -1353,13 +1353,13 @@ export class BlockView {
 
   drawConditionIcon(options) {
     let path,
-        h = this.hatHeight * 0.8,
-        l = Math.max(h / 4, 1),
-        r = h / 2,
-        x = (this.hatWidth - h * 1.75) * 0.55,
-        y = h / 2,
-        contrast = 65
-    
+      h = this.hatHeight * 0.8,
+      l = Math.max(h / 4, 1),
+      r = h / 2,
+      x = (this.hatWidth - h * 1.75) * 0.55,
+      y = h / 2,
+      contrast = 65
+
     let color = this.isZebra
       ? this.color.darker(contrast)
       : this.color.lighter(contrast)
@@ -1372,13 +1372,16 @@ export class BlockView {
       SVG.radians(360),
       false,
     )
-    path += ' ' + SVG.canvasArc(
-      x + r * 3 - l,
-      y + r,
-      r - l / 2,
-      radians(-120),
-      radians(180), false,
-    )
+    path +=
+      " " +
+      SVG.canvasArc(
+        x + r * 3 - l,
+        y + r,
+        r - l / 2,
+        radians(-120),
+        radians(180),
+        false,
+      )
 
     SVG.el("path", {
       d: path,
