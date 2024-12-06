@@ -1677,7 +1677,7 @@ export class BlockView {
             if (!drawLines[drawLines.length - 1]?.isScript) {
               if (!this.hasScript) {
                 drawLines[drawLines.length - 1].height +=
-                  6 + (this.isCommand || this.isFinal) * 2
+                  6 + ((this.isCommand || this.isFinal || this.isHat) * 2) + (this.isHat * this.hatHeight)
               } else {
                 drawLines[drawLines.length - 1].height += 4
               }
