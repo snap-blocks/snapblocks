@@ -20,11 +20,11 @@ Make pictures of Snap<i>!</i> blocks from text.
 **snapblocks** is used to write Snap scripts:
 
 - in [Snap Wiki](https://snapwiki.miraheze.org/) articles
-- in [Snap Forum](https://forum.snap.berkeley.edu/) posts (eventually)
+- in [Snap Forum](https://forum.snap.berkeley.edu/) posts
 
 It's MIT licensed, so you can use it in your projects.
 
-For the full guide to the syntax, see [the wcratch wiki](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax) (hopefully when this is finished, we can make a snapblocks syntax article on the snap wiki). There is a [style guide](https://snapwiki.miraheze.org/wiki/Snapblocks_Style_Guide) on the Snap wiki.
+For the full guide to the syntax, see the [snapblocks docs](https://snap-blocks.github.io/docs/syntax).
 
 # Usage
 
@@ -52,7 +52,7 @@ There are a few ways of getting one:
 
 * Download it from the <https://github.com/snap-blocks/snapblocks/releases> page
 * If you have a fancy JS build system, you might like to include the `snapblocks` package from NPM.
-* You could clone this repository and build it yourself using Node 16.14.0+ (`npm run build`).
+* You could clone this repository and build it yourself using Node 22+ (`npm run build`).
 
 ```html
 <script src="snapblocks-min.js"></script>
@@ -80,7 +80,7 @@ Make sure this appears at the end of the page (just before the closing `</body>`
 snapblocks.renderMatching('pre.blocks', {
   style:     'snap',       // Optional, defaults to 'snap'.
   languages: ['en'], // Optional, defaults to ['en'].
-  scale: 1,                // Optional, defaults to 1
+  scale:     1,                // Optional, defaults to 1
 });
 </script>
 ```
@@ -115,13 +115,13 @@ There are more options for `renderMatching` that you can use.
 
 ```js
 snapblocks.renderMatching('pre.blocks', {
-  style:     'snap',       // Optional, defaults to 'scratch2'.
-  languages: ['en'],       // Optional, defaults to ['en'].
-  scale: 1,                // Optional, defaults to 1
-  wrap: true,              // Optional, defaults to false. This enabled block wrapping
-  wrapSize: 200,           // Optional, defaults to null. This sets the minimum width for block wrapping
+  style:         'snap',       // Optional, defaults to 'scratch2'.
+  languages:     ['en'],       // Optional, defaults to ['en'].
+  scale:         1,                // Optional, defaults to 1
+  wrap:          true,              // Optional, defaults to false. This enabled block wrapping
+  wrapSize:      200,           // Optional, defaults to null. This sets the minimum width for block wrapping
   zebraColoring: true,     // Optional, defaults to false. Enabled zebra coloring
-  showSpaces: true,        // Optional, defaults to false. Shows spaces in inputs
+  showSpaces:    true,        // Optional, defaults to false. Shows spaces in inputs
 });
 ```
 
@@ -165,11 +165,10 @@ var snapblocks = require('snapblocks');
 snapblocks.renderMatching('pre.blocks');
 ```
 
-Please note, snapblocks is a client-side library, which means that you will get errors if
-the `window` object does not exist.
+Please note, snapblocks is a client-side library, which means that you will get errors if the `window` object does not exist (e.g. when ran on the server).
 
 ## ESM Support
-Since version 3.6.0, scratchblocks (and subsequently snapblocks) can be properly loaded as an ESM module. The ESM version, instead of defining `window.snapblocks`, default-exports the `snapblocks` object. Similarly, the JavaScript translation files default-exports a function to load the translations.
+Since version 3.6.0 of scratchblocks (and subsequently snapblocks) can be properly loaded as an ESM module. The ESM version, instead of defining `window.snapblocks`, default-exports the `snapblocks` object. Similarly, the JavaScript translation files default-exports a function to load the translations.
 
 ```js
 import snapblocks from "./snapblocks.min.es.js";
@@ -183,13 +182,13 @@ loadTranslations(snapblocks);
 
 To update the translations:
 ```sh
-npm upgrade scratch-l10n
+npm upgrade scratch-l10n@latest
 npm run locales
 ```
 
 ## Adding a language
 
-Each language **requires** some [additional words](https://github.com/ego-lay-atman-bay/snapblocks/blob/master/locales-src/extra_aliases.js) which aren't in Scratch itself (mainly the words used for the flag and arrow images).
+Each language **requires** some [additional words](https://github.com/snap-blocks/snapblocks/blob/master/locales-src/extra_aliases.js) which aren't in Scratch itself (mainly the words used for the flag and arrow images).
 I'd be happy to accept pull requests for those! You'll need to rebuild the translations with `npm run locales` after editing the aliases.
 
 # Development
