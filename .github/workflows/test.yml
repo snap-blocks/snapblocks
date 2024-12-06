@@ -25,6 +25,9 @@ jobs:
       - name: Disable AppArmor restriction
         run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
 
+      - name: Build
+        run: npm run build
+      
       - name: Test
         run: npm run test
 
