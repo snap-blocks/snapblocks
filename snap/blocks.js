@@ -557,6 +557,7 @@ export class IconView {
       width: this.width,
       height: this.height,
       transform: `scale(${this.scale})`,
+      opacity: this.color.a,
     }
     let name = this.alias || this.name
     if (Array.isArray(this.fillAttribute)) {
@@ -1055,6 +1056,9 @@ export class BlockView {
     this.isSnavanced = false
     this.isZebra = false
 
+    this.hatWidth = 70
+    this.hatHeight = 12
+
     this.color = categoryColor(this.info.color || this.info.category)
   }
 
@@ -1307,7 +1311,7 @@ export class BlockView {
       h = ext.y,
       r = w / 2,
       x = 5,
-      y = 1,
+      y = (this.height - h) / 2,
       contrast = 65,
       path = ""
 
@@ -1347,6 +1351,42 @@ export class BlockView {
     })
   }
 
+  drawConditionIcon(options) {
+    let path,
+        h = this.hatHeight * 0.8,
+        l = Math.max(h / 4, 1),
+        r = h / 2,
+        x = (this.hatWidth - h * 1.75) * 0.55,
+        y = h / 2,
+        contrast = 65
+    
+    let color = this.isZebra
+      ? this.color.darker(contrast)
+      : this.color.lighter(contrast)
+
+    path = SVG.canvasArc(
+      x + r,
+      y + r,
+      r - l / 2,
+      SVG.radians(60),
+      SVG.radians(360),
+      false,
+    )
+    path += ' ' + SVG.canvasArc(
+      x + r * 3 - l,
+      y + r,
+      r - l / 2,
+      radians(-120),
+      radians(180), false,
+    )
+
+    SVG.el("path", {
+      d: path,
+      stroke: color,
+      "stroke-width": l,
+    })
+  }
+
   /**
    * Draw block
    *
@@ -1377,7 +1417,6 @@ export class BlockView {
         return this.height + this.padding.top + this.padding.bottom
       }
     }
-
     let rounding = 9,
       edge = 1,
       corner = 3,
@@ -1386,8 +1425,6 @@ export class BlockView {
       labelPadding = 4,
       fontSize = 10,
       bottomPadding = this.isRing ? 0 : 3,
-      hatWidth = 70,
-      hatHeight = 12,
       index = 0
 
     let x = 0,
@@ -1600,7 +1637,7 @@ export class BlockView {
     if (this.isCommand || this.isFinal || this.isHat) {
       y = corner + edge
       if (this.isHat) {
-        y += hatHeight
+        y += this.hatHeight
       }
     } else if (this.isReporter || this.isBoolean || this.isRing) {
       y = edge * 2
@@ -1851,7 +1888,7 @@ export class BlockView {
 
     // adjust width to hat width
     if (this.isHat) {
-      blockWidth = Math.max(blockWidth, hatWidth * 1.5)
+      blockWidth = Math.max(blockWidth, this.hatWidth * 1.5)
     }
     fullWidth = Math.max(fullWidth, blockWidth)
 
