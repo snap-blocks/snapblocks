@@ -1192,6 +1192,9 @@ export function applyOverrides(info, overrides) {
       info.diff = name
     } else if (name === "local") {
       info.local = true
+    } else if (["condition", "rule"].includes(name)) {
+      info.isConditionHat = true
+      info.shape = "hat"
     }
   }
 }

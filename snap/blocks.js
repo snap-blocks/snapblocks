@@ -1374,15 +1374,16 @@ export class BlockView {
         x + r * 3 - l,
         y + r,
         r - l / 2,
-        radians(-120),
-        radians(180),
+        SVG.radians(-120),
+        SVG.radians(180),
         false,
       )
 
-    SVG.el("path", {
+    return SVG.el("path", {
       d: path,
       stroke: color,
       "stroke-width": l,
+      fill: "none",
     })
   }
 
@@ -1728,7 +1729,7 @@ export class BlockView {
           }
         } else {
           child.y = y
-          if (this.isBlockPrototype && child.isCommand) {
+          if (this.isBlockPrototype && (child.isCommand || child.isHat)) {
             child.height += 3
           }
           SVG.move(
@@ -1928,6 +1929,10 @@ export class BlockView {
 
     if (this.info.local) {
       objects.push(this.drawLocalPin(options))
+    }
+
+    if (this.isConditionHat) {
+      objects.push(this.drawConditionIcon(options))
     }
 
     this.lines = drawLines

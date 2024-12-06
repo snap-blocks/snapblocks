@@ -543,6 +543,8 @@ export class Block {
       info.categoryIsDefault &&
       children.length == 1 &&
       children[0].isBlock
+    
+    this.isConditionHat = this.isHat && this.info.isConditionHat
   }
   get isBlock() {
     return true
