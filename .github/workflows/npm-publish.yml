@@ -15,7 +15,7 @@ jobs:
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run build
@@ -29,6 +29,8 @@ jobs:
           update_latest_release: true
           release_id: ${{ github.event.release.id }}
 
+      - name: Disable AppArmor restriction
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
