@@ -1294,25 +1294,23 @@ export class BlockView {
       el.style.fill = color.toHexString()
     }
     if (this.isHat && this.hasScript) {
-      let background = SVG.move(0, this.hatHeight,
+      let background = SVG.move(
+        0,
+        this.hatHeight,
         SVG.hatBackgroundRect(w, h - this.hatHeight, {
           fill: color.toHexString(),
           class: options.isFlat ? "snap-flat" : "snap-bevel",
-        })
+        }),
       )
 
-      
       if (options.isFlat) {
         SVG.setProps(background, {
           stroke: color.darker(25).toHexString(),
           "stroke-width": 1,
         })
       }
-      
-      el = SVG.group([
-        background,
-        el,
-      ])
+
+      el = SVG.group([background, el])
     }
     return el
   }

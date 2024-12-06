@@ -1227,7 +1227,7 @@ export default class SVG {
   static hatBackgroundRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getTop(w, false), SVG.getRightAndBottom(w, h, false)]
+      path: [SVG.getTop(w, false), SVG.getRightAndBottom(w, h, false)],
     })
   }
 
