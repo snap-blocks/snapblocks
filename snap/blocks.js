@@ -1056,6 +1056,7 @@ export class BlockView {
 
     this.hatWidth = 70
     this.hatHeight = 12
+    this.contrast = 65
 
     this.color = categoryColor(this.info.color || this.info.category)
   }
@@ -1287,7 +1288,7 @@ export class BlockView {
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     if (options.isFlat) {
       SVG.setProps(el, {
-        stroke: color.darker(25).toHexString(),
+        stroke: color.darker(this.contrast).toHexString(),
         "stroke-width": 1,
       })
     }
@@ -1306,7 +1307,7 @@ export class BlockView {
 
       if (options.isFlat) {
         SVG.setProps(background, {
-          stroke: color.darker(25).toHexString(),
+          stroke: color.darker(this.contrast).toHexString(),
           "stroke-width": 1,
         })
       }
@@ -1329,7 +1330,6 @@ export class BlockView {
       r = w / 2,
       x = 5,
       y = (this.height - h) / 2,
-      contrast = 65,
       path = ""
 
     if (this.isBoolean) {
@@ -1340,8 +1340,8 @@ export class BlockView {
     }
 
     let color = this.isZebra
-      ? this.color.darker(contrast)
-      : this.color.lighter(contrast)
+      ? this.color.darker(this.contrast)
+      : this.color.lighter(this.contrast)
 
     path += SVG.canvasArc(
       x + r,
@@ -1374,12 +1374,11 @@ export class BlockView {
       l = Math.max(h / 4, 1),
       r = h / 2,
       x = (this.hatWidth - h * 1.75) * 0.55,
-      y = h / 2,
-      contrast = 65
+      y = h / 2
 
     let color = this.isZebra
-      ? this.color.darker(contrast)
-      : this.color.lighter(contrast)
+      ? this.color.darker(this.contrast)
+      : this.color.lighter(this.contrast)
 
     path = SVG.canvasArc(
       x + r,
