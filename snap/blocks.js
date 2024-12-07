@@ -1459,7 +1459,7 @@ export class BlockView {
       noWrapLine = [],
       noWrapLines = [],
       lines = [],
-      space = this.isBlockPrototype ? 1 :  Math.floor(12 / 1.4 / 2),
+      space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
       ico = this.info.local ? 7.92 + space : 0, // for local block, if I care to add that
       bottomCorrection,
       rightCorrection = 0,
@@ -1894,7 +1894,10 @@ export class BlockView {
     } else if (this.isUpvar) {
       blockWidth = Math.max(blockWidth, maxX - (edge - 1))
     } else {
-      blockWidth = Math.max(blockWidth, maxX + labelPadding - (edge * !this.isRing))
+      blockWidth = Math.max(
+        blockWidth,
+        maxX + labelPadding - edge * !this.isRing,
+      )
       rightCorrection = space
     }
 
@@ -1965,7 +1968,7 @@ export class BlockView {
     objects.splice(0, 0, el)
 
     let result = SVG.group(objects)
-    
+
     if (this.info.hide) {
       result.style.opacity = 0
     }

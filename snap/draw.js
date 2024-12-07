@@ -1369,13 +1369,13 @@ export default class SVG {
         ? (w, h, isFilled) => {
             return SVG.getCommandSlotPath(w, h - 3, isFilled)
           }
-        : shape === 'reporter' || shape === 'ring'
+        : shape === "reporter" || shape === "ring"
           ? SVG.getReporterSlotPath
           : shape === "boolean"
             ? SVG.getBooleanSlotPath
             : SVG.getCommandSlotPath
     }
-    console.log('cw', cw)
+    console.log("cw", cw)
     return SVG.path({
       ...props,
       path: [
