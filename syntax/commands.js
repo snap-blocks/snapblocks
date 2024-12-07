@@ -1277,7 +1277,7 @@ export default [
     id: "snap:receiveSlotEvent",
     snap: "receiveSlotEvent",
     spec: "when slot %1 {signals} %2",
-    spexDefs: {
+    specDefs: {
       signals: ["gets", "signals"],
     },
     inputs: ["%m", "m"],
