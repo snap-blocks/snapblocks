@@ -193,6 +193,7 @@ test(
   when [any key V] key pressed ((key)) ◂
   when I am [clicked V]
   when <>
+  when <> :: condition
   when <[] = []>
   when (condition)
 
