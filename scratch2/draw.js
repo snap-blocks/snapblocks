@@ -442,7 +442,8 @@ export default class SVG {
 
     const r = 8
     let func
-    if (child && child.isBlock) {
+    const showInput = child && (child.isBlock || child.isInput)
+    if (showInput) {
       cy = child.y
       ch = child.height
       cw = child.width
@@ -481,7 +482,7 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        child && child.isBlock
+        showInput
           ? SVG.translatePath(4, cy || 4, func(cw, ch).join(" "))
           : "",
       ],

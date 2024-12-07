@@ -1360,7 +1360,9 @@ export default class SVG {
   static ringRect(w, h, child, shape, props, isEmpty) {
     const r = 8
     let cy, cw, ch, func
-    if (child && child.isBlock) {
+    const showInput = child && (child.isBlock || child.isInput)
+    console.log('child', showInput)
+    if (showInput) {
       cy = child.y
       cw = child.width
       ch = child.height
@@ -1386,7 +1388,7 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        child && child.isBlock
+        showInput
           ? SVG.translatePath(
               3,
               cy || 4,
