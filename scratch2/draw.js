@@ -438,33 +438,36 @@ export default class SVG {
   }
 
   static ringRect(w, h, child, shape, props) {
-    let ch = child.height,
-      cw = child.width,
-      cy = child.y
+    let ch,
+      cw,
+      cy
 
     const r = 8
-    const func = child.isScript
-      ? SVG.capPath
-      : shape === "reporter"
-        ? (w, h) => {
-            if (child.isBlock && child.lines.length > 1) {
-              return SVG.getRoundedPath(w, h)
-            }
-
-            return SVG.roundedPath(w, h)
-          }
-        : shape === "boolean"
+    let func
+    if (child && child.isBlock) {
+      func = child.isScript
+        ? SVG.capPath
+        : shape === "reporter"
           ? (w, h) => {
               if (child.isBlock && child.lines.length > 1) {
-                return [
-                  SVG.getPointedTop(w, h),
-                  SVG.getPointedBottom(w, h, true),
-                ]
+                return SVG.getRoundedPath(w, h)
               }
 
-              return SVG.pointedPath(w, h)
+              return SVG.roundedPath(w, h)
             }
-          : SVG.capPath
+          : shape === "boolean"
+            ? (w, h) => {
+                if (child.isBlock && child.lines.length > 1) {
+                  return [
+                    SVG.getPointedTop(w, h),
+                    SVG.getPointedBottom(w, h, true),
+                  ]
+                }
+
+                return SVG.pointedPath(w, h)
+              }
+            : SVG.capPath
+    }
     return SVG.path({
       ...props,
       path: [
@@ -476,7 +479,9 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        SVG.translatePath(4, cy || 4, func(cw, ch).join(" ")),
+        child && child.isBlock
+          ? SVG.translatePath(4, cy || 4, func(cw, ch).join(" "))
+          : '',
       ],
       "fill-rule": "even-odd",
     })

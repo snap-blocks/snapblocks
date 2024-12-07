@@ -1359,19 +1359,25 @@ export default class SVG {
    */
   static ringRect(w, h, child, shape, props, isEmpty) {
     const r = 8
-    let cy = child.y,
-      cw = child.width,
+    let cy,
+        cw,
+        ch,
+        func
+    if (child && child.isBlock) {
+      cy = child.y
+      cw = child.width
       ch = child.height
 
-    const func = child.isScript
-      ? (w, h, isFilled) => {
-          return SVG.getCommandSlotPath(w, h - 3, isFilled)
-        }
-      : shape === "reporter"
-        ? SVG.getReporterSlotPath
-        : shape === "boolean"
-          ? SVG.getBooleanSlotPath
-          : SVG.getCommandSlotPath
+      func = child.isScript
+        ? (w, h, isFilled) => {
+            return SVG.getCommandSlotPath(w, h - 3, isFilled)
+          }
+        : shape === "reporter"
+          ? SVG.getReporterSlotPath
+          : shape === "boolean"
+            ? SVG.getBooleanSlotPath
+            : SVG.getCommandSlotPath
+    }
     return SVG.path({
       ...props,
       path: [
@@ -1383,7 +1389,9 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        SVG.translatePath(3, cy || 4, func(cw, ch, !child.isInset).join(" ")),
+        child && child.isBlock
+          ? SVG.translatePath(3, cy || 4, func(cw, ch, !child.isInset).join(" "))
+          : '',
       ],
       "fill-rule": "evenodd",
     })

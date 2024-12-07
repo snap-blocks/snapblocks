@@ -1247,14 +1247,15 @@ export class BlockView {
       const child = this.children[0]
       // We use isStack for InputView; isBlock for BlockView; isScript for ScriptView.
       if (
-        child &&
+        true ||
+        (child &&
         (child.isStack ||
           child.isBlock ||
           child.isScript ||
           child.isRound ||
-          child.isBoolean)
+          child.isBoolean))
       ) {
-        const shape = child.shape || child.info?.shape
+        const shape = child ? child.shape || child.info?.shape : 'none'
         el = SVG.ringRect(
           w,
           h,
@@ -1263,7 +1264,7 @@ export class BlockView {
           {
             class: `snap-block`,
           },
-          !child.isBlock,
+          child && !child.isBlock,
         )
       }
     } else {
