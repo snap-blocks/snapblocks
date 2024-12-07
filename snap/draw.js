@@ -1361,7 +1361,7 @@ export default class SVG {
     const r = 8
     let cy, cw, ch, func
     const showInput = child && (child.isBlock || child.isInput)
-    console.log('child', showInput)
+    console.log("child", showInput)
     if (showInput) {
       cy = child.y
       cw = child.width

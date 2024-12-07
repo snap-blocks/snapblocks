@@ -482,9 +482,7 @@ export default class SVG {
         SVG.arcw(w - r, h, w, h - r, r, r),
         SVG.arcw(w, r, w - r, 0, r, r),
         "Z",
-        showInput
-          ? SVG.translatePath(4, cy || 4, func(cw, ch).join(" "))
-          : "",
+        showInput ? SVG.translatePath(4, cy || 4, func(cw, ch).join(" ")) : "",
       ],
       "fill-rule": "even-odd",
     })
