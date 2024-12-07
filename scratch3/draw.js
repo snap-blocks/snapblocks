@@ -243,9 +243,7 @@ export default class SVG {
         `A ${r} ${r} 0 0 0 ${w - r} 0`,
         `L ${r} 0`,
         "Z",
-        showInput
-          ? SVG.translatePath(8, cy || 4, func(cw, ch).join(" "))
-          : "",
+        showInput ? SVG.translatePath(8, cy || 4, func(cw, ch).join(" ")) : "",
       ],
       "fill-rule": "even-odd",
     })
