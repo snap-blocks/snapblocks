@@ -1195,6 +1195,8 @@ export function applyOverrides(info, overrides) {
     } else if (["condition", "rule"].includes(name)) {
       info.isConditionHat = true
       info.shape = "hat"
+    } else if (name === 'hide') {
+      info.hide = true
     }
   }
 }

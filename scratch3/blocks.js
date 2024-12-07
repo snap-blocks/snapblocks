@@ -1025,13 +1025,13 @@ class BlockView {
       if (
         true ||
         (child &&
-        (child.isStack ||
-          child.isBlock ||
-          child.isScript ||
-          child.isRound ||
-          child.isBoolean))
+          (child.isStack ||
+            child.isBlock ||
+            child.isScript ||
+            child.isRound ||
+            child.isBoolean))
       ) {
-        const shape = child ? child.shape || child.info?.shape : 'none'
+        const shape = child ? child.shape || child.info?.shape : "none"
         el = SVG.ringRect(w, h, child, shape, {
           class: `sb3-${this.info.category}`,
         })

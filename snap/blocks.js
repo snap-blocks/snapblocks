@@ -1249,13 +1249,13 @@ export class BlockView {
       if (
         true ||
         (child &&
-        (child.isStack ||
-          child.isBlock ||
-          child.isScript ||
-          child.isRound ||
-          child.isBoolean))
+          (child.isStack ||
+            child.isBlock ||
+            child.isScript ||
+            child.isRound ||
+            child.isBoolean))
       ) {
-        const shape = child ? child.shape || child.info?.shape : 'none'
+        const shape = child ? child.shape || child.info?.shape : "none"
         el = SVG.ringRect(
           w,
           h,
@@ -1459,7 +1459,7 @@ export class BlockView {
       noWrapLine = [],
       noWrapLines = [],
       lines = [],
-      space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
+      space = this.isBlockPrototype ? 1 :  Math.floor(12 / 1.4 / 2),
       ico = this.info.local ? 7.92 + space : 0, // for local block, if I care to add that
       bottomCorrection,
       rightCorrection = 0,
@@ -1892,9 +1892,9 @@ export class BlockView {
       blockWidth = Math.max(blockWidth, maxX + rounding)
       rightCorrection = space
     } else if (this.isUpvar) {
-      blockWidth = Math.max(blockWidth, maxX - (edge + 1))
+      blockWidth = Math.max(blockWidth, maxX - (edge - 1))
     } else {
-      blockWidth = Math.max(blockWidth, maxX + labelPadding - edge)
+      blockWidth = Math.max(blockWidth, maxX + labelPadding - (edge * !this.isRing))
       rightCorrection = space
     }
 
@@ -1964,7 +1964,13 @@ export class BlockView {
     const el = this.drawSelf(options, blockWidth, this.height, drawLines)
     objects.splice(0, 0, el)
 
-    return SVG.group(objects)
+    let result = SVG.group(objects)
+    
+    if (this.info.hide) {
+      result.style.opacity = 0
+    }
+
+    return result
   }
 }
 

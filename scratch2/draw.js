@@ -438,16 +438,17 @@ export default class SVG {
   }
 
   static ringRect(w, h, child, shape, props) {
-    let ch,
-      cw,
-      cy
+    let ch, cw, cy
 
     const r = 8
     let func
     if (child && child.isBlock) {
+      cy = child.y
+      ch = child.height
+      cw = child.width
       func = child.isScript
         ? SVG.capPath
-        : shape === "reporter"
+        : shape === "reporter" || shape === "ring"
           ? (w, h) => {
               if (child.isBlock && child.lines.length > 1) {
                 return SVG.getRoundedPath(w, h)
@@ -468,6 +469,7 @@ export default class SVG {
               }
             : SVG.capPath
     }
+
     return SVG.path({
       ...props,
       path: [
@@ -481,7 +483,7 @@ export default class SVG {
         "Z",
         child && child.isBlock
           ? SVG.translatePath(4, cy || 4, func(cw, ch).join(" "))
-          : '',
+          : "",
       ],
       "fill-rule": "even-odd",
     })
