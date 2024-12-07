@@ -665,7 +665,7 @@ function parseLines(code, languages) {
                         modifiers[1] ? modifiers[1] : 255,
                         modifiers[2] ? modifiers[2] : 255,
                         modifiers[3] ? modifiers[3] : 255,
-                        modifiers[4] ? modifiers[4] : 1,
+                        // modifiers[4] ? modifiers[4] : 1,
                       )
                     : null,
                 ),
