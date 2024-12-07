@@ -4,6 +4,9 @@
 ### Additions
     [ ] Santa hats
 
+## 1.7.1
+    [ ] Remove background from c-shapes hat blocks
+
 ## 1.7.0
 ### Additions
     [x] Infinity icon
