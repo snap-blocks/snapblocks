@@ -348,6 +348,11 @@ test(
   (this [script V])
   (this script)
 
+  when slot [ V] signals [ V]
+  when slot [ V] gets [ V]
+  set slot [ V] to []
+  expand [ V] to () slots
+
   // Dev mode
 
   (message)
