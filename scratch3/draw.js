@@ -227,8 +227,6 @@ export default class SVG {
             : SVG.capPath
     }
 
-    console.log("scratch3 func", func)
-
     return SVG.path({
       ...props,
       path: [

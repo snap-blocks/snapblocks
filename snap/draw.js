@@ -1375,7 +1375,6 @@ export default class SVG {
             ? SVG.getBooleanSlotPath
             : SVG.getCommandSlotPath
     }
-    console.log("cw", cw)
     return SVG.path({
       ...props,
       path: [
