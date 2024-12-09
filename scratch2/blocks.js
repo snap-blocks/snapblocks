@@ -1561,7 +1561,7 @@ class ScriptView {
     this.width = 0
     for (const block of this.blocks) {
       const x = inside ? 0 : 2
-      if (inside && !this.isZebra && this.color) {
+      if (options.zebraColoring && inside && !this.isZebra && this.color) {
         if (this.color.eq(block.color)) {
           block.isZebra = true
         }
