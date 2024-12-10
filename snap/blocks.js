@@ -1112,6 +1112,7 @@ export class BlockView {
       cat: SVG.hatRect,
       "define-hat": SVG.hatRect,
       "block-prototype": SVG.hatRect,
+      "block-prototype-santa": SVG.santaHatRect,
       ring: SVG.roundedRect,
     }
   }
@@ -1146,8 +1147,12 @@ export class BlockView {
       } else if (
         ["hat", "block-prototype", "define-hat"].includes(this.info.shape)
       ) {
-        p.push(SVG.getHatTop(w, h))
-      } else if (this.info.shape == "santa") {
+        if (this.info.santaHat) {
+          p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
+        } else {
+          p.push(SVG.getHatTop(w, h))
+        }
+      } else if (["santa", "block-prototype-santa"].includes(this.info.shape)) {
         p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
       } else {
         p.push(SVG.getTop(w))
@@ -1273,7 +1278,10 @@ export class BlockView {
         )
       }
     } else {
-      const func = BlockView.shapes[this.info.shape]
+      let func = BlockView.shapes[this.info.shape]
+      if (this.santaHat) {
+        func = SVG.santaHatRect
+      }
       if (!func) {
         throw new Error(`no shape func: ${this.info.shape}`)
       }

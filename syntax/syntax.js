@@ -145,6 +145,11 @@ function paintBlock(info, children, languages) {
         }
         info.category = "events"
         info.shape = "block-prototype"
+        if (overrides.includes("santa")) {
+          // info.shape += "-santa"
+          console.log('is santa', info.shape)
+          info.santaHat = "house"
+        }
 
         let block = children[0]
         if (block.info.categoryIsDefault) {

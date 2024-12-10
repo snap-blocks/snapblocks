@@ -88,7 +88,6 @@ export const overrideShapes = [
   "reporter",
   "ring",
   "cat",
-  "santa",
 ]
 
 /**
@@ -1233,10 +1232,21 @@ export function applyOverrides(info, overrides) {
       let hat = name.replace("santa-", "").toLowerCase()
       if (aliasSantaHats.hasOwnProperty(hat)) {
         info.santaHat = aliasSantaHats[hat]
-        info.shape = "santa"
+        if (info.shape.startsWith("block-prototype")) {
+          info.shape = "block-prototype"
+        } else {
+          info.shape = "hat"
+        }
       } else if (santaHats.includes(hat)) {
         info.santaHat = hat
-        info.shape = "santa"
+        if (info.shape != "block-prototype") {
+          info.shape = "hat"
+        }
+      }
+    } else if (name == "santa") {
+      if (info.shape != "block-prototype") {
+        info.shape = "hat"
+        info.santaHat = "hat"
       }
     }
   }

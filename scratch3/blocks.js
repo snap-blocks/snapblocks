@@ -45,7 +45,6 @@ const categoryAliases = {
 }
 
 const shapeAliases = {
-  santa: "hat",
 }
 
 export class LabelView {
