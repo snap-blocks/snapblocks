@@ -3,6 +3,15 @@
 ## 1.8.0
 ### Additions
     [ ] Santa hats
+        [x] hat
+        [x] trumpet
+        [x] star
+        [ ] candles
+        [ ] gift
+        [ ] pretzel
+        [ ] letter
+        [ ] train
+        [ ] house
 ### Fixes
     [x] Fix upvar
 
