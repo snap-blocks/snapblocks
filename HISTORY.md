@@ -8,7 +8,7 @@
         [x] star
         [x] candles
         [x] gift
-        [ ] pretzel
+        [x] pretzel
         [ ] letter
         [ ] train
         [ ] house

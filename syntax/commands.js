@@ -1158,6 +1158,7 @@ export default [
     spec: "when I start as a clone",
     inputs: [],
     shape: "hat",
+    santa: "pretzel",
     category: "control",
   },
   {
