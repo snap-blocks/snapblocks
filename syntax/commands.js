@@ -841,23 +841,27 @@ export default [
   {
     id: "EVENT_WHENBROADCASTRECEIVED",
     selector: "whenIReceive",
-    spec: "when I receive %1",
+    snap: "receiveMessage",
+    spec: "when I receive {data}",
+    specDefs: {
+      data: ["%1", "%1 @addInput", "%1 %2 @delInput"],
+    },
     inputs: ["%m.broadcast"],
     shape: "hat",
     santa: "gift",
     category: "events",
   },
-  {
-    id: "snap:receiveMessage",
-    snap: "receiveMessage",
-    spec: "when I receive %1 {data}",
-    specDefs: {
-      data: ["@addInput", "%2 @delInput"],
-    },
-    inputs: ["%m.broadcast", "%s"],
-    shape: "hat",
-    category: "events",
-  },
+  // {
+  //   id: "snap:receiveMessage",
+  //   snap: "receiveMessage",
+  //   spec: "when I receive %1 {data}",
+  //   specDefs: {
+  //     data: ["@addInput", "%2 @delInput"],
+  //   },
+  //   inputs: ["%m.broadcast", "%s"],
+  //   shape: "hat",
+  //   category: "events",
+  // },
   {
     id: "EVENT_BROADCAST",
     selector: "broadcast:",
