@@ -6,7 +6,7 @@
         [x] hat
         [x] trumpet
         [x] star
-        [ ] candles
+        [x] candles
         [ ] gift
         [ ] pretzel
         [ ] letter

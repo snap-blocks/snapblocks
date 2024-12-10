@@ -1616,6 +1616,96 @@ export default class Style {
           id: "snap-santa-star",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.withChildren(SVG.el("defs"), [
+            SVG.withChildren(
+              SVG.el("radialGradient", {
+                id: "snap-santa-candles-glow",
+              }),
+              [
+                SVG.el("stop", {
+                  offset: "0%",
+                  "stop-color": "#fff",
+                  "stop-opacity": 1,
+                }),
+                SVG.el("stop", {
+                  offset: "100%",
+                  "stop-color": "#fff",
+                  "stop-opacity": 0,
+                }),
+              ]
+            )
+          ]),
+          SVG.el("path", {
+            d: "M 2.25 13.5 L 45 13.5",
+            fill: "none",
+            stroke: new Color(0,100,0).toHexString(),
+            "stroke-width": 6,
+            "stroke-linecap": "round",
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el("path", {
+            d: "M 3 13.2 L 45 13.2",
+            fill: "none",
+            stroke: new Color(0,200,0),
+            "stroke-width": 3.9000000000000004,
+            "stroke-linecap": "round",
+            "stroke-miterlimit": 10,
+          }),
+          ...(() => {
+            function candle(x) {
+              return [
+                SVG.el("path", {
+                d: `M ${x} 12 L ${x} 3`,
+                fill: "none",
+                stroke: new Color(100,0,0).toHexString(),
+                "stroke-width": 6,
+                "stroke-miterlimit": 10,
+              }),
+              SVG.el("path", {
+                d: `M ${x} 12 L ${x} 3`,
+                fill: "none",
+                stroke: new Color(200,0,0).toHexString(),
+                "stroke-width": 3.9000000000000004,
+                "stroke-miterlimit": 10,
+              }),
+              SVG.el("circle", {
+                cx: x,
+                cy: 3,
+                r: 4,
+                fill: "url(#snap-santa-candles-glow)",
+              }),
+              SVG.el("circle", {
+                cx: x,
+                cy: 3,
+                r: 2.3,
+                fill: new Color(255,255,200).toHexString(),
+              }),
+              SVG.el("path", {
+                d: `M ${x} 3 L ${x} 0`,
+                stroke: new Color(255,255,100).toHexString(),
+                "stroke-linecap": "round",
+                "stroke-miterlimit": 10,
+                "stroke-width": 1.5,
+              })
+            ]
+            }
+
+            let c = 3,
+                result = []
+
+            for (let i = 1; i < 5; i += 1) {
+              result = [...result, ...candle(c * 3 * i)]
+            }
+
+            return result
+          })(),
+        ]),
+        {
+          id: "snap-santa-candles",
+        }
+      )
     ]
   }
 
