@@ -7,7 +7,7 @@
         [x] trumpet
         [x] star
         [x] candles
-        [ ] gift
+        [x] gift
         [ ] pretzel
         [ ] letter
         [ ] train
