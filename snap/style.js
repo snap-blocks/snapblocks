@@ -1571,6 +1571,37 @@ export default class Style {
           id: "snap-santa-trumpet",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el('path', {
+            d: "M 23.00243366097112 9.18844449083577 A 35 35 0 0 1 67.99756633902888 9.18844449083577 L 56 7.5 L 57.49756633902888 17.588444490835776 A 35 35 0 0 0 23.029294983601595 11.510758272493213 Z",
+            fill: "none",
+            stroke: new Color(100,100,100).toHexString(),
+            "stroke-width": 1,
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el('path', {
+            d: "M 23.00243366097112 9.18844449083577 A 35 35 0 0 1 67.99756633902888 9.18844449083577 L 56 7.5 L 57.49756633902888 17.588444490835776 A 35 35 0 0 0 23.029294983601595 11.510758272493213 Z",
+            fill: "#fff",
+            stroke: "none",
+          }),
+          SVG.el('path', {
+            d: "M 1 9.600000000000001 L 9 12 L 6 15 L 15 12 L 18 15 L 21 12 L 27 15 L 24 9 L 36 6 L 24 6 L 25.5 1 L 18 4.5 L 15 1 L 13.5 6 L 4.5 1.5 L 9 7.5 Z",
+            fill: "none",
+            stroke: new Color(100,100,100).toHexString(),
+            "stroke-width": 1,
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el('path', {
+            d: "M 1 9.600000000000001 L 9 12 L 6 15 L 15 12 L 18 15 L 21 12 L 27 15 L 24 9 L 36 6 L 24 6 L 25.5 1 L 18 4.5 L 15 1 L 13.5 6 L 4.5 1.5 L 9 7.5 Z",
+            fill: "#fff",
+            stroke: "none",
+          }),
+        ]),
+        {
+          id: "snap-santa-star",
+        }
+      )
     ]
   }
 
