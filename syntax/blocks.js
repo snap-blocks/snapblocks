@@ -1246,7 +1246,9 @@ export function applyOverrides(info, overrides) {
     } else if (name == "santa") {
       if (info.shape != "block-prototype") {
         info.shape = "hat"
-        info.santaHat = "hat"
+        if (!info.santaHat) {
+          info.santaHat = "hat"
+        }
       }
     }
   }
