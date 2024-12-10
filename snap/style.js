@@ -1935,7 +1935,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 12 7.5 L 6 7.5 L 12 1.5 L 36 1.5 L 42 7.5 L 36 7.5 L 36 13.5 L 12 13.5 Z",
             fill: "none",
-            stroke: new Color(220,80,0).toHexString(),
+            stroke: new Color(220, 80, 0).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
             "stroke-linejoin": "round",
@@ -1943,7 +1943,7 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M 12 7.5 L 6 7.5 L 12 1.5 L 36 1.5 L 42 7.5 L 36 7.5 L 36 13.5 L 12 13.5 Z",
-            fill: new Color(220,80,0).toHexString(),
+            fill: new Color(220, 80, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
@@ -1985,8 +1985,8 @@ export default class Style {
         ]),
         {
           id: "snap-santa-house",
-        }
-      )
+        },
+      ),
     ]
   }
 

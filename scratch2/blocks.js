@@ -43,8 +43,7 @@ const categoryAliases = {
   gray: "other",
 }
 
-const shapeAliases = {
-}
+const shapeAliases = {}
 
 export class LabelView {
   constructor(label) {

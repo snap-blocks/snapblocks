@@ -514,9 +514,8 @@ export class Block {
     this.comment = comment || null
     this.diff = null
 
-    
     const shape = this.info.shape
-    console.log('shape', shape)
+    console.log("shape", shape)
     this.isHat =
       shape === "hat" ||
       shape === "cat" ||

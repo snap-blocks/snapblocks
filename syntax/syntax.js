@@ -147,7 +147,7 @@ function paintBlock(info, children, languages) {
         info.shape = "block-prototype"
         if (overrides.includes("santa")) {
           // info.shape += "-santa"
-          console.log('is santa', info.shape)
+          console.log("is santa", info.shape)
           info.santaHat = "house"
         }
 
