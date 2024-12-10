@@ -1930,6 +1930,63 @@ export default class Style {
           id: "snap-santa-train",
         },
       ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M 12 7.5 L 6 7.5 L 12 1.5 L 36 1.5 L 42 7.5 L 36 7.5 L 36 13.5 L 12 13.5 Z",
+            fill: "none",
+            stroke: new Color(220,80,0).toHexString(),
+            "stroke-width": 3,
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el("path", {
+            d: "M 12 7.5 L 6 7.5 L 12 1.5 L 36 1.5 L 42 7.5 L 36 7.5 L 36 13.5 L 12 13.5 Z",
+            fill: new Color(220,80,0).toHexString(),
+            stroke: "none",
+          }),
+          SVG.el("path", {
+            d: "M 12 7.5 L 6 7.5 L 12 1.5 L 36 1.5 L 42 7.5 L 36 7.5 L 36 13.5 L 12 13.5 Z",
+            fill: "none",
+            stroke: "#fff",
+            "stroke-width": 0.75,
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el("path", {
+            d: "M 13.590461068821137 4.263030214988503 A 1.5 1.5 0 0 0 16.40953893117886 4.263030214988503 L 16.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 19.40953893117886 4.263030214988503 L 19.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 22.40953893117886 4.263030214988503 L 22.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 25.40953893117886 4.263030214988503 L 25.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 28.40953893117886 4.263030214988503 L 28.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 31.40953893117886 4.263030214988503 L 31.59046106882114 4.263030214988503 A 1.5 1.5 0 0 0 34.409538931178865 4.263030214988503",
+            fill: "none",
+            stroke: "#fff",
+            "stroke-width": 0.75,
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el("path", {
+            d: "M 15 13.5 L 15 10.5 L 15 10.5 A 3 3 0 0 1 21 10.5 L 21 13.5 M 18 13.5 L 18 10.5",
+            fill: "none",
+            stroke: "#fff",
+            "stroke-width": 0.75,
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            "stroke-miterlimit": 10,
+          }),
+          SVG.el("path", {
+            d: "M 25.5 8.100000000000001 L 31.5 8.100000000000001 L 31.5 11.700000000000001 L 25.5 11.700000000000001 L 25.5 8.100000000000001 Z",
+            fill: "none",
+            stroke: "#fff",
+            "stroke-width": 0.75,
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            "stroke-miterlimit": 10,
+          }),
+        ]),
+        {
+          id: "snap-santa-house",
+        }
+      )
     ]
   }
 
