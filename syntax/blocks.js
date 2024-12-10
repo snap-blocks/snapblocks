@@ -88,6 +88,7 @@ export const overrideShapes = [
   "reporter",
   "ring",
   "cat",
+  "santa",
 ]
 
 /**
@@ -98,6 +99,35 @@ export const overrideShapes = [
 export const aliasShapes = {
   predicate: "boolean",
   command: "stack",
+}
+
+/**
+ * List of santa hats
+ *
+ * @type {string[]}
+ */
+export const santaHats = [
+  "hat",
+  "trumpet",
+  "star",
+  "candles",
+  "gift",
+  "pretzel",
+  "letter",
+  "train",
+  "house",
+]
+
+/**
+ * Santa hat aliases
+ *
+ * @type {{ predicate: string; command: string; }}
+ */
+export const aliasSantaHats = {
+  advent: "candles",
+  present: "gift",
+  gingerbread: "house",
+  "gingerbread-house": "house",
 }
 
 /**
@@ -1197,6 +1227,15 @@ export function applyOverrides(info, overrides) {
       info.shape = "hat"
     } else if (name === "hide") {
       info.hide = true
+    } else if (name.startsWith('santa-')) {
+      let hat = name.replace('santa-', '').toLowerCase()
+      if (aliasSantaHats.hasOwnProperty(hat)) {
+        info.santaHat = aliasSantaHats[hat]
+        info.shape = "santa"
+      } else if (santaHats.includes(hat)) {
+        info.santaHat = hat
+        info.shape = "santa"
+      }
     }
   }
 }

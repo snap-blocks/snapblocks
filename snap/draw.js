@@ -431,7 +431,7 @@ export default class SVG {
   static roundedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h)],
+      path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h), 'Z'],
     })
   }
 
@@ -684,7 +684,7 @@ export default class SVG {
       path += `L ${corner * 3 + 6 + dent} 0 `
       path += `L ${w - corner} 0 `
     } else {
-      path += ` L ${corner + 6} 0 L ${w - corner} 0`
+      path += ` L ${corner + 6} 0 L ${w - corner} 0 `
     }
 
     path += this.canvasArc(
@@ -1221,6 +1221,21 @@ export default class SVG {
     return SVG.path({
       ...props,
       path: [SVG.getHatTop(w, h), SVG.getRightAndBottom(w, h, true), "Z"],
+    })
+  }
+
+  /**
+   * Santa hat element
+   * 
+   * @param {number} w
+   * @param {number} h
+   * @param {Object} props 
+   * @returns {SVGElement}
+   */
+  static santaHatRect(w, h, props) {
+    return SVG.path({
+      ...props,
+      path: [SVG.translatePath(0, 12, SVG.getTop(w, false)), SVG.getRightAndBottom(w, h, true), "Z"],
     })
   }
 

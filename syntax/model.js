@@ -519,7 +519,8 @@ export class Block {
       shape === "hat" ||
       shape === "cat" ||
       shape === "define-hat" ||
-      shape === "block-prototype"
+      shape === "block-prototype" ||
+      shape === "santa"
     this.hasPuzzle =
       shape === "stack" ||
       shape === "hat" ||
@@ -545,6 +546,8 @@ export class Block {
       children[0].isBlock
 
     this.isConditionHat = this.isHat && this.info.isConditionHat
+
+    this.santaHat = this.info.santaHat
   }
   get isBlock() {
     return true

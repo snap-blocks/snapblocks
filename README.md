@@ -213,6 +213,7 @@ Many, many thanks to the [contributors](https://github.com/snap-blocks/snapblock
 * This is a fork of [scratchblocks](https://github.com/scratchblocks/scratchblocks), so all the credit there still applies here.
 * Original scratchblocks library by [tjvr](https://github.com/tjvr)
 * Icons derived from [Scratch Blocks](https://github.com/scratchfoundation/scratch-blocks) (Apache License 2.0) and [Snap<i>!</i>](https://github.com/jmoenig/Snap/blob/master/src/symbols.js)
+* Snap santa hats were designed by [Jens Mönig](https://github.com/jmoenig/), I just converted them from JavaScript canvas commands to svg.
 * Scratch 2 SVG proof-of-concept, shapes & filters by [as-com](https://github.com/as-com)
 * Anna helped with a formula, and pointed out that tjvr can't read graphs
 * JSO designed the original syntax and wrote the original [Block Plugin](https://en.scratch-wiki.info/wiki/Block_Plugin_\(1.4\))

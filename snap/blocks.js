@@ -32,6 +32,7 @@ const {
   defaultFontFamily,
   makeStyle,
   makeIcons,
+  makeSantaHats,
   darkRect,
   bevelFilter,
   dropShadowFilter,
@@ -1107,6 +1108,7 @@ export class BlockView {
       reporter: SVG.roundedRect,
       boolean: SVG.pointedRect,
       hat: SVG.hatRect,
+      santa: SVG.santaHatRect,
       cat: SVG.hatRect,
       "define-hat": SVG.hatRect,
       "block-prototype": SVG.hatRect,
@@ -1145,6 +1147,8 @@ export class BlockView {
         ["hat", "block-prototype", "define-hat"].includes(this.info.shape)
       ) {
         p.push(SVG.getHatTop(w, h))
+      } else if (this.info.shape == 'santa') {
+        p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
       } else {
         p.push(SVG.getTop(w))
       }
@@ -1295,6 +1299,9 @@ export class BlockView {
     if (color) {
       el.style.fill = color.toHexString()
     }
+
+    let group = [el]
+
     //     if (this.isHat && this.hasScript) {
     //       let background = SVG.move(
     //         0,
@@ -1314,7 +1321,17 @@ export class BlockView {
     //
     //       el = SVG.group([background, el])
     //     }
-    return el
+
+    
+
+    if (this.santaHat) {
+      group.push(SVG.el('use', {
+        href: `#snap-santa-${this.santaHat}-${options.id}`,
+        x: 0,
+        y: 0,
+      }))
+    }
+    return SVG.group(group)
   }
 
   /**
@@ -1891,7 +1908,7 @@ export class BlockView {
       blockWidth = Math.max(blockWidth, maxX + rounding)
       rightCorrection = space
     } else if (this.isUpvar) {
-      blockWidth = Math.max(blockWidth, maxX - (edge - 1))
+      blockWidth = Math.max(blockWidth, maxX - (edge + 1))
     } else {
       blockWidth = Math.max(
         blockWidth,
@@ -2579,12 +2596,20 @@ export class DocumentView {
       this.updateIds(icon)
     }
 
+    let santaHats = makeSantaHats()
+
+    for (let hat of santaHats) {
+      this.updateIds(hat)
+    }
+
+
     blocksGroup.before(
       (this.defs = SVG.withChildren(SVG.el("defs"), [
         bevelFilter(`snapBevelFilter-${this.id}`, false),
         bevelFilter(`snapInputBevelFilter-${this.id}`, true),
         dropShadowFilter(`snapDropShadow-${this.id}`),
         ...icons,
+        ...santaHats,
         clipPathsGroup,
       ])),
     )

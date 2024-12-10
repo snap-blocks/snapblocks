@@ -766,6 +766,7 @@ export default [
     spec: "when @greenFlag clicked",
     inputs: [],
     shape: "hat",
+    santa: "hat",
     category: "events",
   },
   {
@@ -778,6 +779,7 @@ export default [
     },
     inputs: ["%m.key"],
     shape: "hat",
+    santa: "trumpet",
     category: "events",
   },
   {
@@ -786,6 +788,7 @@ export default [
     spec: "when I am %1",
     inputs: ["%m"],
     shape: "hat",
+    santa: "star",
     category: "events",
   },
   {
@@ -794,6 +797,7 @@ export default [
     spec: "when %1",
     inputs: ["%b"],
     shape: "hat",
+    santa: "candles",
     category: "events",
   },
   {
@@ -840,6 +844,7 @@ export default [
     spec: "when I receive %1",
     inputs: ["%m.broadcast"],
     shape: "hat",
+    santa: "gift",
     category: "events",
   },
   {
@@ -1282,6 +1287,7 @@ export default [
     },
     inputs: ["%m", "m"],
     shape: "hat",
+    santa: "train",
     category: "control",
   },
   {
@@ -3035,8 +3041,8 @@ export default [
     category: "makeymakey",
   },
   {
-    id: "makeymakey.whenKeysPressedInOrder",
     spec: "when %1 pressed in order",
+    id: "makeymakey.whenKeysPressedInOrder",
     inputs: ["%m"],
     shape: "hat",
     category: "makeymakey",

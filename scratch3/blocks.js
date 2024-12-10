@@ -44,6 +44,10 @@ const categoryAliases = {
   gray: "other",
 }
 
+const shapeAliases = {
+  santa: "hat",
+}
+
 export class LabelView {
   constructor(label) {
     this._color = new Color(255, 255, 255)
@@ -839,6 +843,9 @@ class BlockView {
       Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
     ) {
       this.info.category = categoryAliases[this.info.category]
+    }
+    if (Object.prototype.hasOwnProperty.call(shapeAliases, this.info.shape)) {
+      this.info.shape = shapeAliases[this.info.shape]
     }
     if (
       Object.prototype.hasOwnProperty.call(extensions, this.info.category) ||
