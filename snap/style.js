@@ -1817,7 +1817,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 37.125 1.5 L 40.875 1.5 L 40.875 1.5 L 40.875 1.5 A 1.125 1.125 0 0 1 42 2.625 L 42 2.625 L 42 2.625 L 42 2.625 A 1.125 1.125 0 0 1 40.875 3.75 L 37.125 3.75 L 37.125 3.75 L 37.125 3.75 A 1.125 1.125 0 0 1 36 2.625 L 36 2.625 L 36 2.625 L 36 2.625 A 1.125 1.125 0 0 1 37.125 1.5 Z M 37.5 3.75 L 40.5 3.75 L 40.5 7.5 L 37.5 7.5 L 37.5 3.75 Z",
             fill: "none",
-            stroke: new Color(200,200,200).toHexString(),
+            stroke: new Color(200, 200, 200).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
@@ -1825,7 +1825,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 15 6 L 47 6 L 47 6 L 47 6 A 3 3 0 0 1 50 9 L 50 9 L 50 9 L 50 9 A 3 3 0 0 1 47 12 L 15 12 L 15 12 L 15 6 L 15 6 Z",
             fill: "none",
-            stroke: new Color(200,200,200).toHexString(),
+            stroke: new Color(200, 200, 200).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
@@ -1833,7 +1833,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 15 1.5 L 21 1.5 L 21 6.75 L 15 6.75 L 15 1.5 Z",
             fill: "none",
-            stroke: new Color(200,200,200).toHexString(),
+            stroke: new Color(200, 200, 200).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
@@ -1841,7 +1841,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 12 1.5 L 24 1.5",
             fill: "none",
-            stroke: new Color(200,200,200).toHexString(),
+            stroke: new Color(200, 200, 200).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
@@ -1849,14 +1849,14 @@ export default class Style {
           SVG.el("path", {
             d: "M 12 12 L 47 12 L 50 15 L 12 15 Z",
             fill: "none",
-            stroke: new Color(200,200,200).toHexString(),
+            stroke: new Color(200, 200, 200).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 37.125 1.5 L 40.875 1.5 L 40.875 1.5 L 40.875 1.5 A 1.125 1.125 0 0 1 42 2.625 L 42 2.625 L 42 2.625 L 42 2.625 A 1.125 1.125 0 0 1 40.875 3.75 L 37.125 3.75 L 37.125 3.75 L 37.125 3.75 A 1.125 1.125 0 0 1 36 2.625 L 36 2.625 L 36 2.625 L 36 2.625 A 1.125 1.125 0 0 1 37.125 1.5 Z M 37.5 3.75 L 40.5 3.75 L 40.5 7.5 L 37.5 7.5 L 37.5 3.75 Z",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
@@ -1871,23 +1871,23 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M 36.9 15 A 2.4000000000000004 2.4000000000000004 0 1 1 36.8999988000001 14.997600000399999",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 44.4 15 A 2.4000000000000004 2.4000000000000004 0 1 1 44.3999988000001 14.997600000399999",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 15 6 L 47 6 L 47 6 L 47 6 A 3 3 0 0 1 50 9 L 50 9 L 50 9 L 50 9 A 3 3 0 0 1 47 12 L 15 12 L 15 12 L 15 6 L 15 6 Z",
-            fill: new Color(0,200,0).toHexString(),
+            fill: new Color(0, 200, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 15 1.5 L 21 1.5 L 21 6.75 L 15 6.75 L 15 1.5 Z",
             fill: "none",
-            stroke: new Color(200,0,0).toHexString(),
+            stroke: new Color(200, 0, 0).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
@@ -1895,14 +1895,14 @@ export default class Style {
           SVG.el("path", {
             d: "M 12 1.5 L 24 1.5",
             fill: "none",
-            stroke: new Color(200,0,0).toHexString(),
+            stroke: new Color(200, 0, 0).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 12 12 L 47 12 L 50 15 L 12 15 Z",
-            fill: new Color(0,100,0).toHexString(),
+            fill: new Color(0, 100, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
@@ -1917,14 +1917,14 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M 21.9 15 A 2.4000000000000004 2.4000000000000004 0 1 1 21.899998800000102 14.997600000399999",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 29.4 15 A 2.4000000000000004 2.4000000000000004 0 1 1 29.399998800000102 14.997600000399999",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
-          })
+          }),
         ]),
         {
           id: "snap-santa-train",
