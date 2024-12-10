@@ -1449,12 +1449,14 @@ export default class Style {
             fill: "none",
             stroke: new Color(255, 0, 0).toHexString(),
             "stroke-width": 0.75,
+            "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 70.98047001093227 8.073838848328808 A 23.333333333333332 23.333333333333332 0 0 0 45.12562966055718 15.001622440647413",
             fill: "none",
             stroke: new Color(100, 0, 0).toHexString(),
             "stroke-width": 0.75,
+            "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 2.25 13.5 L 45 13.5",
@@ -1462,6 +1464,7 @@ export default class Style {
             stroke: new Color(150, 150, 150).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
+            "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 3 13.2 L 45 13.2",
@@ -1469,6 +1472,7 @@ export default class Style {
             stroke: "#fff",
             "stroke-linecap": "round",
             "stroke-width": 3.9000000000000004,
+            "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 76 7.199999999999999 A 6 6 0 1 1 75.99999700000025 7.194000000999996 Z",
