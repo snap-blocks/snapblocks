@@ -1710,52 +1710,52 @@ export default class Style {
         SVG.group([
           SVG.el("path", {
             d: "M 6 3 L 27 3 L 27 15 L 6 15 L 6 3 Z",
-            fill: new Color(0,0,255).toHexString(),
+            fill: new Color(0, 0, 255).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 6 3 L 9 0 L 30 0 L 27 3 Z",
-            fill: new Color(100,100,255).toHexString(),
+            fill: new Color(100, 100, 255).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 30 0 L 27 3 L 27 15 L 30 12 Z",
-            fill: new Color(0,0,100).toHexString(),
+            fill: new Color(0, 0, 100).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 6 9 L 27 9",
             fill: "none",
-            stroke: new Color(200,0,0).toHexString(),
+            stroke: new Color(200, 0, 0).toHexString(),
             "stroke-width": 3,
             "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 16.5 3 L 16.5 15",
             fill: "none",
-            stroke: new Color(200,0,0).toHexString(),
+            stroke: new Color(200, 0, 0).toHexString(),
             "stroke-width": 3,
             "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 20.25 3.3990381056766577 A 1.5 2.4000000000000004 59.99999999999999 1 1 20.252078085622706 3.3978374563576583",
             fill: "none",
-            stroke: new Color(250,0,0),
+            stroke: new Color(250, 0, 0),
             "stroke-width": 1.5,
             "stroke-miterlimit": 10,
           }),
           SVG.el("path", {
             d: "M 13.760472266500395 0.6227883704816877 A 1.5 3 -80 1 1 13.757517713497638 0.6222681646412639",
             fill: "none",
-            stroke: new Color(250,0,0).toHexString(),
+            stroke: new Color(250, 0, 0).toHexString(),
             "stroke-width": 1.5,
             "stroke-miterlimit": 10,
-          })
+          }),
         ]),
         {
           id: "snap-santa-gift",
-        }
-      )
+        },
+      ),
     ]
   }
 
