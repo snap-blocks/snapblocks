@@ -1322,7 +1322,7 @@ export class BlockView {
     //       el = SVG.group([background, el])
     //     }
 
-    console.log('santa', this.info.santaHat)
+    console.log("santa", this.info.santaHat)
     if (this.santaHat) {
       group.push(
         SVG.el("use", {

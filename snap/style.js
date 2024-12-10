@@ -1483,94 +1483,94 @@ export default class Style {
         ]),
         {
           id: "snap-santa-hat",
-        }
+        },
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 15 6 L 36 6 L 36 6 L 36 8.399999999999999 L 36 8.399999999999999 L 36 8.399999999999999 A 6 6 0 0 1 30 14.399999999999999 L 21 14.399999999999999 L 21 14.399999999999999 L 21 14.399999999999999 A 6 6 0 0 1 15 8.399999999999999 L 15 6 L 15 6 Z",
             fill: "none",
-            stroke: new Color(150,150,50).toHexString(),
+            stroke: new Color(150, 150, 50).toHexString(),
             "stroke-width": 6,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 6 6 L 15 6",
             fill: "none",
-            stroke: new Color(150,150,50).toHexString(),
+            stroke: new Color(150, 150, 50).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 36 4.5 L 49 0 L 49 12 L 36 7.5 Z",
-            fill: new Color(150,150,50).toHexString(),
+            fill: new Color(150, 150, 50).toHexString(),
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 18 6 L 18 3",
             fill: "none",
-            stroke: new Color(150,150,50).toHexString(),
+            stroke: new Color(150, 150, 50).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 24 6 L 24 3",
             fill: "none",
-            stroke: new Color(150,150,50).toHexString(),
+            stroke: new Color(150, 150, 50).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 30 6 L 30 3",
             fill: "none",
-            stroke: new Color(150,150,50).toHexString(),
+            stroke: new Color(150, 150, 50).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 15 6 L 36 6 L 36 6 L 36 8.399999999999999 L 36 8.399999999999999 L 36 8.399999999999999 A 6 6 0 0 1 30 14.399999999999999 L 21 14.399999999999999 L 21 14.399999999999999 L 21 14.399999999999999 A 6 6 0 0 1 15 8.399999999999999 L 15 6 L 15 6 Z",
             fill: "none",
-            stroke: new Color(255,255,100).toHexString(),
+            stroke: new Color(255, 255, 100).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 6 6 L 15 6",
             fill: "none",
-            stroke: new Color(255,255,100).toHexString(),
+            stroke: new Color(255, 255, 100).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 36 4.5 L 49 3 L 49 9 L 36 7.5 Z",
-            fill: new Color(255,255,100).toHexString(),
+            fill: new Color(255, 255, 100).toHexString(),
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 18 6 L 18 3",
             fill: "none",
-            stroke: new Color(255,255,100).toHexString(),
+            stroke: new Color(255, 255, 100).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 24 6 L 24 3",
             fill: "none",
-            stroke: new Color(255,255,100).toHexString(),
+            stroke: new Color(255, 255, 100).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 30 6 L 30 3",
             fill: "none",
-            stroke: new Color(255,255,100).toHexString(),
+            stroke: new Color(255, 255, 100).toHexString(),
             "stroke-width": 3,
             "stroke-linecap": "round",
           }),
         ]),
         {
           id: "snap-santa-trumpet",
-        }
-      )
+        },
+      ),
     ]
   }
 
