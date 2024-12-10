@@ -271,6 +271,7 @@ const allBlocks = scratchCommands.map(def => {
     selector: def.selector || `sb3:${def.id}`, // Used for JSON marshalling
     inputs: def.inputs == null ? [] : def.inputs,
     shape: def.shape,
+    santa: def.santa,
     category: def.category,
     hasLoopArrow: !!def.hasLoopArrow,
     aliases: def.aliases == null ? [] : def.aliases,
@@ -1128,6 +1129,7 @@ export function lookupHash(hash, info, children, languages) {
         block.snap = blockById.snap
         block.spec = block.spec.replace(/((?<=^| )_(?= |$))/gm, "%s")
         block.shape = blockById.shape
+        block.santa = blockById.santa
 
         if (blockById.specialCase) {
           block = blockById.specialCase(info, children, lang) || block

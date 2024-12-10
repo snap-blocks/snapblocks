@@ -100,9 +100,10 @@ function paintBlock(info, children, languages) {
     }
     info.hasLoopArrow = type.hasLoopArrow
 
-    if (info.overrides.includes("santa")) {
-      if (o.santa) {
-        info.santaHat = o.santa
+    console.log('santa', type.santa)
+    if (overrides.includes("santa")) {
+      if (type.santa) {
+        info.santaHat = type.santa
       } else {
         info.santaHat = "hat"
       }

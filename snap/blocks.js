@@ -1322,6 +1322,7 @@ export class BlockView {
     //       el = SVG.group([background, el])
     //     }
 
+    console.log('santa', this.info.santaHat)
     if (this.santaHat) {
       group.push(
         SVG.el("use", {
@@ -2607,8 +2608,8 @@ export class DocumentView {
         bevelFilter(`snapBevelFilter-${this.id}`, false),
         bevelFilter(`snapInputBevelFilter-${this.id}`, true),
         dropShadowFilter(`snapDropShadow-${this.id}`),
-        ...icons,
-        ...santaHats,
+        SVG.group(icons),
+        SVG.group(santaHats),
         clipPathsGroup,
       ])),
     )
