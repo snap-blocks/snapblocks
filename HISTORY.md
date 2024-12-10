@@ -9,7 +9,7 @@
         [x] candles
         [x] gift
         [x] pretzel
-        [ ] letter
+        [x] letter
         [ ] train
         [ ] house
 ### Fixes

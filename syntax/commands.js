@@ -1222,6 +1222,7 @@ export default [
     },
     inputs: ["%m", "%s"],
     shape: "hat",
+    santa: "letter",
     category: "events",
   },
   {
