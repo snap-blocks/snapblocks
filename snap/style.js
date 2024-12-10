@@ -1783,7 +1783,7 @@ export default class Style {
           SVG.el("path", {
             d: "M 12 6 L 42 0.75 L 44.25 12 L 14.25 18.75 Z",
             fill: "none",
-            stroke: new Color(150,150,150).toHexString(),
+            stroke: new Color(150, 150, 150).toHexString(),
             "stroke-width": 1.5,
             "stroke-miterlimit": 10,
             "stroke-linejoin": "round",
@@ -1795,13 +1795,13 @@ export default class Style {
           }),
           SVG.el("path", {
             d: "M 36 3.75 L 40.5 3 L 41.25 6 L 36.75 7.050000000000001 Z",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
           SVG.el("path", {
             d: "M 18 10.8 L 27 9 M 18.9 14.100000000000001 L 27.900000000000002 12",
             fill: "none",
-            stroke: new Color(0,0,180).toHexString(),
+            stroke: new Color(0, 0, 180).toHexString(),
             "stroke-width": 1.5,
             "stroke-linecap": "round",
             "stroke-dasharray": "1.5 1.5 3.6 1.5",
@@ -1810,8 +1810,8 @@ export default class Style {
         ]),
         {
           id: "snap-santa-letter",
-        }
-      )
+        },
+      ),
     ]
   }
 
