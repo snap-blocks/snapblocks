@@ -3,9 +3,11 @@
 ## 1.8.0
 ### Additions
     [ ] Santa hats
+### Fixes
+    [x] Fix upvar
 
 ## 1.7.1
-    [ ] Remove background from c-shapes hat blocks
+    [x] Remove background from c-shapes hat blocks
 
 ## 1.7.0
 ### Additions
