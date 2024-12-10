@@ -1147,7 +1147,7 @@ export class BlockView {
         ["hat", "block-prototype", "define-hat"].includes(this.info.shape)
       ) {
         p.push(SVG.getHatTop(w, h))
-      } else if (this.info.shape == 'santa') {
+      } else if (this.info.shape == "santa") {
         p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
       } else {
         p.push(SVG.getTop(w))
@@ -1322,14 +1322,14 @@ export class BlockView {
     //       el = SVG.group([background, el])
     //     }
 
-    
-
     if (this.santaHat) {
-      group.push(SVG.el('use', {
-        href: `#snap-santa-${this.santaHat}-${options.id}`,
-        x: 0,
-        y: 0,
-      }))
+      group.push(
+        SVG.el("use", {
+          href: `#snap-santa-${this.santaHat}-${options.id}`,
+          x: 0,
+          y: 0,
+        }),
+      )
     }
     return SVG.group(group)
   }
@@ -2601,7 +2601,6 @@ export class DocumentView {
     for (let hat of santaHats) {
       this.updateIds(hat)
     }
-
 
     blocksGroup.before(
       (this.defs = SVG.withChildren(SVG.el("defs"), [

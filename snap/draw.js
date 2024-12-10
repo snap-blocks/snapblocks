@@ -431,7 +431,7 @@ export default class SVG {
   static roundedRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h), 'Z'],
+      path: [SVG.getRoundedTop(w, h), SVG.getRoundedBottom(w, h), "Z"],
     })
   }
 
@@ -1226,16 +1226,20 @@ export default class SVG {
 
   /**
    * Santa hat element
-   * 
+   *
    * @param {number} w
    * @param {number} h
-   * @param {Object} props 
+   * @param {Object} props
    * @returns {SVGElement}
    */
   static santaHatRect(w, h, props) {
     return SVG.path({
       ...props,
-      path: [SVG.translatePath(0, 12, SVG.getTop(w, false)), SVG.getRightAndBottom(w, h, true), "Z"],
+      path: [
+        SVG.translatePath(0, 12, SVG.getTop(w, false)),
+        SVG.getRightAndBottom(w, h, true),
+        "Z",
+      ],
     })
   }
 

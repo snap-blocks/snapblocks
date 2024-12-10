@@ -1227,8 +1227,8 @@ export function applyOverrides(info, overrides) {
       info.shape = "hat"
     } else if (name === "hide") {
       info.hide = true
-    } else if (name.startsWith('santa-')) {
-      let hat = name.replace('santa-', '').toLowerCase()
+    } else if (name.startsWith("santa-")) {
+      let hat = name.replace("santa-", "").toLowerCase()
       if (aliasSantaHats.hasOwnProperty(hat)) {
         info.santaHat = aliasSantaHats[hat]
         info.shape = "santa"

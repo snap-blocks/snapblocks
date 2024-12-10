@@ -1441,41 +1441,41 @@ export default class Style {
         SVG.group([
           SVG.el("path", {
             d: "M 0 15 L -7.105427357601002e-15 12.000000000000007 A 57.041666666666664 57.041666666666664 0 0 1 49.763469697722954 1.9436476587610585 L 70.98047001093227 8.073838848328808 A 23.333333333333332 23.333333333333332 0 0 0 45.12562966055718 15.001622440647413 Z",
-            fill: new Color(200,0,0).toHexString(),
+            fill: new Color(200, 0, 0).toHexString(),
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 0 15 L -7.105427357601002e-15 12.000000000000007 A 57.041666666666664 57.041666666666664 0 0 1 49.763469697722954 1.9436476587610585 L 70.98047001093227 8.073838848328808 A 23.333333333333332 23.333333333333332 0 0 0 45.12562966055718 15.001622440647413",
             fill: "none",
-            stroke: new Color(255,0,0).toHexString(),
+            stroke: new Color(255, 0, 0).toHexString(),
             "stroke-width": 0.75,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 70.98047001093227 8.073838848328808 A 23.333333333333332 23.333333333333332 0 0 0 45.12562966055718 15.001622440647413",
             fill: "none",
-            stroke: new Color(100,0,0).toHexString(),
+            stroke: new Color(100, 0, 0).toHexString(),
             "stroke-width": 0.75,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 2.25 13.5 L 45 13.5",
             fill: "none",
-            stroke: new Color(150,150,150).toHexString(),
+            stroke: new Color(150, 150, 150).toHexString(),
             "stroke-width": 6,
             "stroke-linecap": "round",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 3 13.2 L 45 13.2",
             fill: "none",
             stroke: "#fff",
             "stroke-linecap": "round",
-            "stroke-width": 3.9000000000000004
+            "stroke-width": 3.9000000000000004,
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 76 7.199999999999999 A 6 6 0 1 1 75.99999700000025 7.194000000999996 Z",
-            fill: new Color(150,150,150).toHexString(),
+            fill: new Color(150, 150, 150).toHexString(),
             stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: "M 73.6 6 A 3.5999999999999996 3.5999999999999996 0 1 1 73.59999820000014 5.996400000599998 Z",
             fill: "#fff",
             stroke: "none",
@@ -1483,8 +1483,8 @@ export default class Style {
         ]),
         {
           id: "snap-santa-hat",
-        }
-      )
+        },
+      ),
     ]
   }
 
