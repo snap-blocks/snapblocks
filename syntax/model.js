@@ -546,7 +546,9 @@ export class Block {
 
     this.isConditionHat = this.isHat && this.info.isConditionHat
 
-    this.santaHat = this.info.santaHat
+    this.santaHat = this.info.santaHat || "hat"
+    // So I can store the santa hat without having to make it a santa hat
+    this.isSanta = this.info.isSanta
   }
   get isBlock() {
     return true

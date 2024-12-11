@@ -1108,11 +1108,9 @@ export class BlockView {
       reporter: SVG.roundedRect,
       boolean: SVG.pointedRect,
       hat: SVG.hatRect,
-      santa: SVG.santaHatRect,
       cat: SVG.hatRect,
       "define-hat": SVG.hatRect,
       "block-prototype": SVG.hatRect,
-      "block-prototype-santa": SVG.santaHatRect,
       ring: SVG.roundedRect,
     }
   }
@@ -1147,13 +1145,11 @@ export class BlockView {
       } else if (
         ["hat", "block-prototype", "define-hat"].includes(this.info.shape)
       ) {
-        if (this.info.santaHat) {
+        if (this.santaHat && (options.santa || this.isSanta)) {
           p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
         } else {
           p.push(SVG.getHatTop(w, h))
         }
-      } else if (["santa", "block-prototype-santa"].includes(this.info.shape)) {
-        p.push(SVG.translatePath(0, this.hatHeight, SVG.getTop(w, false)))
       } else {
         p.push(SVG.getTop(w))
       }
@@ -1279,7 +1275,7 @@ export class BlockView {
       }
     } else {
       let func = BlockView.shapes[this.info.shape]
-      if (this.santaHat) {
+      if ((this.isSanta || (this.isHat && options.santa)) && this.santaHat) {
         func = SVG.santaHatRect
       }
       if (!func) {
@@ -1330,7 +1326,8 @@ export class BlockView {
     //       el = SVG.group([background, el])
     //     }
 
-    if (this.santaHat) {
+    console.log('santa enabled', options.santa)
+    if (this.isSanta || options.santa) {
       group.push(
         SVG.el("use", {
           href: `#snap-santa-${this.santaHat}-${options.id}`,
@@ -2438,6 +2435,7 @@ export class DocumentView {
         (options.commentWidth > 0
           ? Math.max(80, options.commentWidth)
           : options.commentWidth) || 130,
+      santa: options.santa,
     }
   }
 

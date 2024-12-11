@@ -100,13 +100,10 @@ function paintBlock(info, children, languages) {
     }
     info.hasLoopArrow = type.hasLoopArrow
 
-    console.log("santa", type.santa)
-    if (overrides.includes("santa")) {
-      if (type.santa) {
-        info.santaHat = type.santa
-      } else {
-        info.santaHat = "hat"
-      }
+    if (type.santa) {
+      info.santaHat = type.santa
+    } else {
+      info.santaHat = "hat"
     }
 
     // ellipsis block
@@ -145,9 +142,7 @@ function paintBlock(info, children, languages) {
         }
         info.category = "events"
         info.shape = "block-prototype"
-        if (overrides.includes("santa")) {
-          info.santaHat = "house"
-        }
+        info.santaHat = "house"
 
         let block = children[0]
         if (block.info.categoryIsDefault) {

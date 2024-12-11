@@ -22,7 +22,8 @@
  * @property {(number|null)} [wrapSize=null] - Minimum block wrap width
  * @property {(number|null)} [commentWidth=null] - Maximum comment width. Set this to -1 to not wrap.
  * @property {boolean} [showSpaces=false] - Show spaces
- * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "commentWidth" | "zebracoloring" | "zebra" | "showspaces"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
+ * @property {boolean} [santa=false] - Use Santa Hats
+ * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "commentWidth" | "zebracoloring" | "zebra" | "showspaces" | "santa"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
  */
 
 import {
@@ -206,6 +207,7 @@ export default function (window) {
       wrapSize: null,
       commentWidth: null,
       showSpaces: false,
+      santa: false,
       elementOptions: false, // set options on the element
 
       read: readCode, // function(el, options) => code
@@ -245,6 +247,7 @@ export default function (window) {
       wrapSize: null,
       commentWidth: null,
       showSpaces: false,
+      santa: false,
       elementOptions: false, // set options on the element
 
       read: readCode, // function(el, options) => code
@@ -267,6 +270,7 @@ export default function (window) {
       "zebra",
       "showspaces",
       "commentwidth",
+      "santa",
     ]
     if (Array.isArray(options.elementOptions)) {
       acceptedOptions = []
@@ -302,6 +306,9 @@ export default function (window) {
           : null,
         showSpaces: acceptedOptions.includes("showspaces")
           ? element.getAttribute("showSpaces")
+          : null,
+        santa: acceptedOptions.includes("santa")
+          ? element.getAttribute("santa")
           : null,
       }
     }

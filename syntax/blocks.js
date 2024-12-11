@@ -1231,25 +1231,25 @@ export function applyOverrides(info, overrides) {
     } else if (name.startsWith("santa-")) {
       let hat = name.replace("santa-", "").toLowerCase()
       if (aliasSantaHats.hasOwnProperty(hat)) {
-        info.santaHat = aliasSantaHats[hat]
-        if (info.shape.startsWith("block-prototype")) {
-          info.shape = "block-prototype"
-        } else {
-          info.shape = "hat"
-        }
-      } else if (santaHats.includes(hat)) {
+        hat = aliasSantaHats[hat]
+      }
+      if (santaHats.includes(hat)) {
         info.santaHat = hat
         if (info.shape != "block-prototype") {
           info.shape = "hat"
         }
       }
+      info.isSanta = true
     } else if (name == "santa") {
-      if (info.shape != "block-prototype") {
-        info.shape = "hat"
-        if (!info.santaHat) {
+      if (!info.santaHat) {
+        if (info.shape == "block-prototype") {
+          info.santaHat = "house"
+        } else {
+          info.shape = "hat"
           info.santaHat = "hat"
         }
       }
+      info.isSanta = true
     }
   }
 }
