@@ -12,6 +12,7 @@
         [x] letter
         [x] train
         [x] house
+    [x] Add `santa` option
 ### Fixes
     [x] Fix upvar
 
