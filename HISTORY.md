@@ -11,7 +11,7 @@
         [x] pretzel
         [x] letter
         [x] train
-        [ ] house
+        [x] house
 ### Fixes
     [x] Fix upvar
 
