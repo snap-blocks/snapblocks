@@ -62,7 +62,7 @@ function validate(value) {
 }
 
 export default function (window) {
-  const version = "1.7.1"
+  const version = "1.8.0"
 
   const document = window.document
 
