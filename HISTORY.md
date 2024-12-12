@@ -15,6 +15,7 @@
     [x] Add `santa` option
 ### Fixes
     [x] Fix upvar
+    [x] Fix snap spacing
 
 ## 1.7.1
     [x] Remove background from c-shapes hat blocks
