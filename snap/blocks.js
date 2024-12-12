@@ -1327,7 +1327,7 @@ export class BlockView {
     //     }
 
     console.log("santa enabled", options.santa)
-    if (this.isSanta || options.santa) {
+    if ((this.isSanta || (this.isHat && options.santa)) && this.santaHat) {
       group.push(
         SVG.el("use", {
           href: `#snap-santa-${this.santaHat}-${options.id}`,
