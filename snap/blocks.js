@@ -1917,7 +1917,7 @@ export class BlockView {
     } else {
       blockWidth = Math.max(
         blockWidth,
-        maxX + labelPadding - (edge * !this.isRing),
+        maxX + labelPadding - edge * !this.isRing,
       )
       rightCorrection = space
     }
