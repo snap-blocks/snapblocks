@@ -1480,7 +1480,7 @@ export class BlockView {
       noWrapLine = [],
       noWrapLines = [],
       lines = [],
-      space = this.isBlockPrototype ? 1 : Math.floor(12 / 1.4 / 2),
+      space = this.isBlockPrototype ? 1 : Math.floor(getFontHeight(10) / 3) + 1,
       ico = this.info.local ? 7.92 + space : 0, // for local block, if I care to add that
       bottomCorrection,
       rightCorrection = 0,
@@ -1917,7 +1917,7 @@ export class BlockView {
     } else {
       blockWidth = Math.max(
         blockWidth,
-        maxX + labelPadding - edge * !this.isRing,
+        maxX + labelPadding - (edge * !this.isRing),
       )
       rightCorrection = space
     }
