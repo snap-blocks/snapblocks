@@ -1821,7 +1821,7 @@ function recognizeStuff(scripts) {
         block.info.category === "obsolete" &&
         block.info.shape === "ring"
       ) {
-        block.info.category = "grey"
+        block.info.category = "other"
       }
 
       // upvars
