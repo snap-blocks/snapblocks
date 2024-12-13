@@ -837,25 +837,18 @@ class BlockView {
 
     // Avoid accidental mutation
     this.info = { ...block.info }
-    if (
-      categoryAliases.hasOwnProperty(this.info.category)
-    ) {
+    if (categoryAliases.hasOwnProperty(this.info.category)) {
       this.info.category = categoryAliases[this.info.category]
     }
     if (shapeAliases.hasOwnProperty(this.info.shape)) {
       this.info.shape = shapeAliases[this.info.shape]
     }
-    console.log('upvar', this.info.category)
-    if (
-      extensions.hasOwnProperty(this.info.category) ||
-      this.info.local
-    ) {
+    console.log("upvar", this.info.category)
+    if (extensions.hasOwnProperty(this.info.category) || this.info.local) {
       if (!this.isUpvar) {
         this.children.unshift(new LineView())
       }
-      if (
-        extensions.hasOwnProperty(this.info.category)
-      ) {
+      if (extensions.hasOwnProperty(this.info.category)) {
         if (!this.isUpvar) {
           this.children.unshift(
             new IconView({ name: this.info.category + "Block" }),
