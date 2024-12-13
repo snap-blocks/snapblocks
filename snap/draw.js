@@ -1408,7 +1408,7 @@ export default class SVG {
         "Z",
         showInput
           ? SVG.translatePath(
-              3,
+              4,
               cy || 4,
               func(cw, ch, !child.isInset).join(" "),
             )
