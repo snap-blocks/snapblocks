@@ -506,7 +506,7 @@ function parseLines(code, languages) {
    * @returns {Block}
    */
   function makeBlock(shape, children) {
-    const hasInputs = children.filter(x => !x.isLabel).length
+    const hasInputs = children.filter(x => !(x.isLabel || x.isIcon)).length
 
     const info = {
       shape: shape,
