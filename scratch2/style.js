@@ -531,6 +531,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.5 5 L 5 0.5 L 9.5 5 L 6.5 5 L 6.5 9.5 L 3.5 9.5 L 3.5 5 Z",
+          fill: "none",
         }),
         {
           id: "sb-arrowUpOutline",
@@ -548,7 +549,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUp",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "sb-arrowDown",
@@ -557,7 +558,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpOutline",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "sb-arrowDownOutline",
@@ -566,7 +567,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpThin",
-          transform: "rotate(180 6 6)",
+          transform: "rotate(180 5 5)",
         }),
         {
           id: "sb-arrowDownThin",
@@ -575,7 +576,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUp",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "sb-arrowLeft",
@@ -584,7 +585,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpOutline",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "sb-arrowLeftOutline",
@@ -593,7 +594,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpThin",
-          transform: "rotate(-90 6 6)",
+          transform: "rotate(-90 5 5)",
         }),
         {
           id: "sb-arrowLeftThin",
@@ -602,7 +603,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUp",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "sb-arrowRight",
@@ -611,7 +612,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpOutline",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "sb-arrowRightOutline",
@@ -620,7 +621,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpThin",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "sb-arrowRightThin",
@@ -638,7 +639,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb-arrowUpDownThin",
-          transform: "rotate(90 6 6)",
+          transform: "rotate(90 5 5)",
         }),
         {
           id: "sb-arrowLeftRightThin",
