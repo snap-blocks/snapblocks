@@ -2,7 +2,7 @@
 
 ## 1.8.0
 ### Additions
-    [ ] Santa hats
+    [x] Santa hats
         [x] hat
         [x] trumpet
         [x] star
@@ -19,6 +19,7 @@
     [x] Fix scratch2 rings
     [x] Make snap rings look better
     [x] Allow icons to be in variable names
+    [x] Fix arrow icons in scratch2 and scratch3 styles
 
 ## 1.7.1
     [x] Remove background from c-shapes hat blocks
@@ -37,7 +38,7 @@
     [x] Fix snap input width
     [x] Fix empty rings
     [x] Fix rings in rings
-    [x] Fix reporter x position in upvars and rings in scatch2
+    [x] Fix reporter x position in upvars and rings in scratch2
     [x] C-slots in hat blocks
     [x] Update snap local pin position
     [x] Set flat design contrast to new contrast in snap 10.3.0
