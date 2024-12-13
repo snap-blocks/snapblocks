@@ -1379,13 +1379,15 @@ export default class SVG {
   static ringRect(w, h, child, shape, props, isEmpty) {
     const r = 8
     let cy, cw, ch, func
-    const showInput = child && (child.isBlock || child.isScript || child.isInput)
+    const showInput =
+      child && (child.isBlock || child.isScript || child.isInput)
     if (showInput) {
       cy = child.y
       cw = child.width
       ch = child.height
 
-      func = shape === "reporter" || shape === "ring"
+      func =
+        shape === "reporter" || shape === "ring"
           ? SVG.getReporterSlotPath
           : shape === "boolean"
             ? SVG.getBooleanSlotPath

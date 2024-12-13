@@ -1855,7 +1855,11 @@ export class BlockView {
         if (child.isLoop) {
           return
         }
-        SVG.move(0, Math.floor((lineHeight - child.height) / 2) + this.isRing, child.el)
+        SVG.move(
+          0,
+          Math.floor((lineHeight - child.height) / 2) + this.isRing,
+          child.el,
+        )
       })
 
       drawLine.width = x
