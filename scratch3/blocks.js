@@ -838,24 +838,29 @@ class BlockView {
     // Avoid accidental mutation
     this.info = { ...block.info }
     if (
-      Object.prototype.hasOwnProperty.call(categoryAliases, this.info.category)
+      categoryAliases.hasOwnProperty(this.info.category)
     ) {
       this.info.category = categoryAliases[this.info.category]
     }
-    if (Object.prototype.hasOwnProperty.call(shapeAliases, this.info.shape)) {
+    if (shapeAliases.hasOwnProperty(this.info.shape)) {
       this.info.shape = shapeAliases[this.info.shape]
     }
+    console.log('upvar', this.info.category)
     if (
-      Object.prototype.hasOwnProperty.call(extensions, this.info.category) ||
+      extensions.hasOwnProperty(this.info.category) ||
       this.info.local
     ) {
-      this.children.unshift(new LineView())
+      if (!this.isUpvar) {
+        this.children.unshift(new LineView())
+      }
       if (
-        Object.prototype.hasOwnProperty.call(extensions, this.info.category)
+        extensions.hasOwnProperty(this.info.category)
       ) {
-        this.children.unshift(
-          new IconView({ name: this.info.category + "Block" }),
-        )
+        if (!this.isUpvar) {
+          this.children.unshift(
+            new IconView({ name: this.info.category + "Block" }),
+          )
+        }
         this.info.category = "extension"
       }
       if (this.info.local) {
