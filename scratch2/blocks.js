@@ -1219,9 +1219,8 @@ class BlockView {
         }
 
         if (line.width < px) {
-          line.width = px
-          if (this.isUpvar || this.isRing) {
-            line.width -= 5 - this.isRing
+          if (!this.isUpvar) {
+            line.width = px
           }
         }
         if (line.children.length !== 0) {
@@ -1344,7 +1343,7 @@ class BlockView {
         }
         if (this.isRing) {
           child.y = (line.y + y) | 0
-          if (child.isCommand) {
+          if (child.isBlock) {
             child.x -= px
           }
           if (child.isInset) {
