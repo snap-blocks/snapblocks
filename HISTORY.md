@@ -16,6 +16,9 @@
 ### Fixes
     [x] Fix upvar
     [x] Fix snap spacing
+    [x] Fix scratch2 rings
+    [x] Make snap rings look better
+    [x] Allow icons to be in variable names
 
 ## 1.7.1
     [x] Remove background from c-shapes hat blocks
