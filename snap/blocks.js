@@ -1850,12 +1850,12 @@ export class BlockView {
       // center parts vertically on each line:
       line.forEach(child => {
         if (this.isRing) {
-          child.y += Math.floor((lineHeight - child.height) / 2)
+          child.y += Math.floor((lineHeight - child.height) / 2) + 1
         }
         if (child.isLoop) {
           return
         }
-        SVG.move(0, Math.floor((lineHeight - child.height) / 2), child.el)
+        SVG.move(0, Math.floor((lineHeight - child.height) / 2) + this.isRing, child.el)
       })
 
       drawLine.width = x
@@ -1905,7 +1905,7 @@ export class BlockView {
     } else if (this.isReporter || this.isBoolean) {
       blockHeight = y + corner * 1.7
     } else if (this.isRing) {
-      blockHeight = y + corner * 1.7
+      blockHeight = y + corner * 2.3
     }
 
     // determine my width:
@@ -2385,7 +2385,10 @@ export class ScriptView {
       this.commentHeight = Math.max(this.commentHeight, y + block.commentHeight)
       y += block.height
     }
-    this.height = y + 3
+    this.height = y
+    if (this.isCShape) {
+      this.height += 3
+    }
     if (!inside && !this.isFinal) {
       this.height += 3
     }
