@@ -1326,7 +1326,6 @@ export class BlockView {
     //       el = SVG.group([background, el])
     //     }
 
-    console.log("santa enabled", options.santa)
     if ((this.isSanta || (this.isHat && options.santa)) && this.santaHat) {
       group.push(
         SVG.el("use", {

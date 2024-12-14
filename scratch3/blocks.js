@@ -843,7 +843,6 @@ class BlockView {
     if (shapeAliases.hasOwnProperty(this.info.shape)) {
       this.info.shape = shapeAliases[this.info.shape]
     }
-    console.log("upvar", this.info.category)
     if (extensions.hasOwnProperty(this.info.category) || this.info.local) {
       if (!this.isUpvar) {
         this.children.unshift(new LineView())
