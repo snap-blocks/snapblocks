@@ -1546,6 +1546,9 @@ export class BlockView {
         ) {
           loop.isLoop = true
           loop.scale = IconView.icons.loopArrow.scale || 1
+          if (options.zebraColoring && this.isZebra) {
+            loop.color = new Color()
+          }
           loop.el = loop.draw(options, this)
         }
         if (l.length > 0) {
@@ -1643,6 +1646,9 @@ export class BlockView {
           ) {
             loop.isLoop = true
             loop.scale = IconView.icons.loopArrow.scale || 1
+            if (options.zebraColoring && this.isZebra) {
+              loop.color = new Color()
+            }
             loop.el = loop.draw(options, this)
           }
 
@@ -1670,6 +1676,9 @@ export class BlockView {
       ) {
         loop.isLoop = true
         loop.scale = IconView.icons.loopArrow.scale || 1
+        if (options.zebraColoring && this.isZebra) {
+          loop.color = new Color()
+        }
         loop.el = loop.draw(options, this)
       }
       noWrapLines.push(noWrapLine)

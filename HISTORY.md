@@ -20,6 +20,7 @@
     [x] Make snap rings look better
     [x] Allow icons to be in variable names
     [x] Fix arrow icons in scratch2 and scratch3 styles
+    [x] Make loop icon respect zebra coloring
 
 ## 1.7.1
     [x] Remove background from c-shapes hat blocks
