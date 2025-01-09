@@ -885,6 +885,12 @@ export default [
   {
     id: "EVENT_BROADCASTANDWAIT",
     selector: "doBroadcastAndWait",
+    spec: "broadcast %1 and wait",
+    inputs: ["%m.broadcast"],
+    shape: "stack",
+    category: "events",
+  },
+  {
     snap: "doBroadcastAndWait",
     spec: "broadcast %1 {receiver} and wait",
     specDefs: {

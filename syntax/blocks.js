@@ -158,7 +158,7 @@ export const inputPat = /(%[a-zA-Z0-9](?:\.[a-zA-Z0-9]+)?)/
  *
  * @type {RegExp}
  */
-const inputPatGlobal = new RegExp(inputPat.source, "g")
+export const inputPatGlobal = new RegExp(inputPat.source, "g")
 /**
  * Icon regex
  *
@@ -170,7 +170,7 @@ export const iconPat = /(@[a-zA-Z]+)/
  *
  * @type {RegExp}
  */
-const splitPat = new RegExp(`${inputPat.source}|${iconPat.source}| +`, "g")
+export const splitPat = new RegExp(`${inputPat.source}|${iconPat.source}| +`, "g")
 
 /**
  * Parse input number
@@ -1099,11 +1099,12 @@ export function lookupHash(hash, info, children, languages) {
       }
     }
 
-    // console.log('allCommands', allCommands)
     if (full && allCommands.length > 0) {
       for (let block of allCommands) {
         let blockById = blocksById[block.id]
-        // console.log('blocksById', lang.blocksById[block.id])
+        if (!block.shape) {
+          block.shape = blockById.shape
+        }
         if (
           info.shape === "reporter" &&
           block.shape !== "reporter" &&

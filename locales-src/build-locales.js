@@ -3,6 +3,7 @@ import path from "path"
 
 import scratchCommands from "../syntax/commands.js"
 import extraAliases from "./extra_aliases.js"
+import { inputPat, inputPatGlobal } from "../syntax/blocks.js"
 
 import scratch_l10n from "scratch-l10n"
 // We can't `import {default}` since it's a reserved word.
@@ -160,6 +161,10 @@ const buildLocale = (code, rawLocale) => {
     if (!command.id) {
       continue
     }
+    
+    if (/^snap:/.test(command.id)) {
+      continue
+    }
     if (/^sb2:/.test(command.id)) {
       continue
     }
@@ -171,9 +176,18 @@ const buildLocale = (code, rawLocale) => {
       fullBlock.id = command.id
       locale.fullBlocks.push(fullBlock)
     }
-    const result = translateKey(rawLocale, command.id)
+    let result = translateKey(rawLocale, command.id)
     if (!result) {
       continue
+    }
+    let inputs = result.split(inputPatGlobal).filter(p => inputPat.test(p))
+    if (command.id == 'CONTROL_IF') {
+      console.log('input length:', inputs)
+      console.log('original input length:', command.inputs.length)
+    }
+    if (command.inputs?.length > inputs.length) {
+      console.log(command.id)
+      result += ' %' + (inputs.length + 1)
     }
     locale.commands[command.id] = result
   }
