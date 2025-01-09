@@ -70,17 +70,17 @@
     "EVENT_BROADCASTANDWAIT": "sende %1 an alle und warte",
     "EVENT_WHENTOUCHINGOBJECT": "Wenn diese Figur %1 berührt",
     "CONTROL_WAIT": "warte %1 Sekunden",
-    "CONTROL_REPEAT": "wiederhole %1 mal",
-    "CONTROL_FOREVER": "wiederhole fortlaufend",
-    "CONTROL_IF": "falls %1, dann",
-    "CONTROL_ELSE": "sonst",
+    "CONTROL_REPEAT": "wiederhole %1 mal %2",
+    "CONTROL_FOREVER": "wiederhole fortlaufend %1",
+    "CONTROL_IF": "falls %1, dann %2",
+    "CONTROL_ELSE": "sonst %1",
     "CONTROL_WAITUNTIL": "warte bis %1",
-    "CONTROL_REPEATUNTIL": "wiederhole bis %1",
+    "CONTROL_REPEATUNTIL": "wiederhole bis %1 %2",
     "CONTROL_STOP": "stoppe %1",
     "CONTROL_STARTASCLONE": "Wenn ich als Klon entstehe",
     "CONTROL_CREATECLONEOF": "erzeuge Klon von %1",
     "CONTROL_DELETETHISCLONE": "lösche diesen Klon",
-    "CONTROL_WHILE": "wiederhole solange %1",
+    "CONTROL_WHILE": "wiederhole solange %1 %2",
     "SENSING_ASKANDWAIT": "frage %1 und warte",
     "videoSensing.videoToggle": "schalte Video %1",
     "videoSensing.setVideoTransparency": "setze Video-Transparenz auf %1",
@@ -212,23 +212,7 @@
     "boost.getTiltAngle": "Neigungswinkel %1",
     "boost.setLightHue": "setze Lichtfarbe auf %1"
   },
-  "fullBlocks": [
-    {
-      "spec": "{if}",
-      "specDefs": {
-        "if": [
-          "falls %1 %2",
-          "falls %1 %2 {else}"
-        ],
-        "else": [
-          "@addInput",
-          "@delInput @addInput",
-          "sonst {if}"
-        ]
-      },
-      "id": "snap:doIf"
-    }
-  ],
+  "fullBlocks": [],
   "dropdowns": {},
   "ignorelt": [],
   "soundEffects": [
