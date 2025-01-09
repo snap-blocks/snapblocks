@@ -170,7 +170,10 @@ export const iconPat = /(@[a-zA-Z]+)/
  *
  * @type {RegExp}
  */
-export const splitPat = new RegExp(`${inputPat.source}|${iconPat.source}| +`, "g")
+export const splitPat = new RegExp(
+  `${inputPat.source}|${iconPat.source}| +`,
+  "g",
+)
 
 /**
  * Parse input number
