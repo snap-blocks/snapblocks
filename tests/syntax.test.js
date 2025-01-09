@@ -756,7 +756,9 @@ describe("translate", () => {
   test("escapes brackets in labels: en -> ko", () => {
     const b = parseBlock("if <mouse down?> then {\n}")
     b.translate(allLanguages.ko)
-    expect(b.stringify()).toEqual("만약 <마우스를 클릭했는가?> \\(이\\)라면 {\n  \n}")
+    expect(b.stringify()).toEqual(
+      "만약 <마우스를 클릭했는가?> \\(이\\)라면 {\n  \n}",
+    )
   })
 
   test("translates stop block: en -> ja", () => {
