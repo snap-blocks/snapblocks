@@ -895,8 +895,8 @@ setze Leistung von Motor [A V] auf (100)%
 
 (Position von Motor [A V])
 Wenn der Knopf [a V] gedrückt wird
-Wenn Abstand \\\\< (5)
-Wenn Helligkeit \\\\< (50)
+Wenn Abstand \\< (5)
+Wenn Helligkeit \\< (50)
 <Knopf [1 V] gedrückt?>
 (Helligkeit)
 piepse Note (60) für (0.5) Sek.
