@@ -161,7 +161,7 @@ const buildLocale = (code, rawLocale) => {
     if (!command.id) {
       continue
     }
-    
+
     if (/^snap:/.test(command.id)) {
       continue
     }
@@ -182,7 +182,7 @@ const buildLocale = (code, rawLocale) => {
     }
     let inputs = result.split(inputPatGlobal).filter(p => inputPat.test(p))
     if (command.inputs?.length > inputs.length) {
-      result += ' %' + (inputs.length + 1)
+      result += " %" + (inputs.length + 1)
     }
     locale.commands[command.id] = result
   }
