@@ -181,12 +181,7 @@ const buildLocale = (code, rawLocale) => {
       continue
     }
     let inputs = result.split(inputPatGlobal).filter(p => inputPat.test(p))
-    if (command.id == 'CONTROL_IF') {
-      console.log('input length:', inputs)
-      console.log('original input length:', command.inputs.length)
-    }
     if (command.inputs?.length > inputs.length) {
-      console.log(command.id)
       result += ' %' + (inputs.length + 1)
     }
     locale.commands[command.id] = result
