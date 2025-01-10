@@ -95,6 +95,9 @@ const highContrastIcons = new Set([
 ])
 
 const snapIcons = new Set([
+  "addInput",
+  "verticalEllipsis",
+  "delInput",
   "list",
   "cloud",
   "cloudGradient",
