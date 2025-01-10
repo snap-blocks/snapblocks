@@ -871,7 +871,7 @@ export class InputView {
       if (this.shape === "number" || this.shape === "number-dropdown") {
         w =
           this.label.width +
-          2 +
+          1 +
           Math.floor(this.hasArrow * 12 * 0.5) +
           Math.min(h, 12) +
           2
