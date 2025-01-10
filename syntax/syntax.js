@@ -670,7 +670,7 @@ function parseLines(code, languages) {
                 next()
               }
             }
-            
+
             for (let iconName of icons) {
               console.log(iconName)
               if (
