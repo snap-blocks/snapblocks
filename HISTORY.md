@@ -1,5 +1,14 @@
 # History (and todo list)
 
+# 1.8.1
+## Additions
+- Allow the use of `@<:>` (each can be used in any order) as a shortcut for `@delInput @verticalEllipsis @addInput`
+## Changes
+- Make scratch3 `@delInput`, `@verticalEllipsis` and `@addInput` bigger.
+## Fixes
+- Fixed Scratch translations (I haven't gotten to adding snap translations yet)
+- Fix snap round input padding
+
 ## 1.8.0
 ### Additions
     [x] Santa hats
