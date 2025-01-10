@@ -302,6 +302,12 @@ export const unicodeIcons = {
   "@notes": "♫",
 }
 
+export const iconShortcuts = {
+  ">": "addInput",
+  "<": "delInput",
+  ":": "verticalEllipsis",
+}
+
 /**
  * All the loaded languages
  *

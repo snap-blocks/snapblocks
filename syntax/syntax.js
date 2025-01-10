@@ -29,6 +29,7 @@ import {
   blockName,
   parseSpec,
   unicodeIcons,
+  iconShortcuts,
   aliasCategories,
 } from "./blocks.js"
 
@@ -612,25 +613,36 @@ function parseLines(code, languages) {
           case "@": {
             let start = tok
             next()
-            let name = ""
             let value = ""
             let raw = ""
+            let icons = []
             label = new Label("")
             let modifiers = []
-            while (tok && /[a-zA-Z+\\]/.test(tok)) {
-              if (tok === "\\") {
-                if (peek() === "\n") {
-                  break
-                }
-                label.raw += tok
-                raw += tok
+            console.log(tok)
+            if (iconShortcuts.hasOwnProperty(tok)) {
+              while (iconShortcuts.hasOwnProperty(tok)) {
+                raw = iconShortcuts[tok]
+                icons.push(raw)
                 next()
               }
-              raw += tok
-              name += tok
-              label.value += tok
-              label.raw += tok
-              next()
+              label = null
+            } else {
+              while (tok && /[a-zA-Z+\\]/.test(tok)) {
+                if (tok === "\\") {
+                  if (peek() === "\n") {
+                    break
+                  }
+                  label.raw += tok
+                  raw += tok
+                  next()
+                }
+                raw += tok
+                value += tok
+                label.value += tok
+                label.raw += tok
+                next()
+              }
+              icons.push(raw)
             }
             if (tok === "-") {
               label.value += tok
@@ -658,47 +670,50 @@ function parseLines(code, languages) {
                 next()
               }
             }
-
-            if (
-              Object.prototype.hasOwnProperty.call(Icon.icons, raw) ||
-              Object.prototype.hasOwnProperty.call(Icon.iconAliases, raw)
-            ) {
-              children.push(
-                new Icon(
-                  raw,
-                  modifiers[0],
-                  modifiers.length > 1
-                    ? new Color(
-                        modifiers[1] ? modifiers[1] : 255,
-                        modifiers[2] ? modifiers[2] : 255,
-                        modifiers[3] ? modifiers[3] : 255,
-                        // modifiers[4] ? modifiers[4] : 1,
-                      )
-                    : null,
-                ),
-              )
-              break
+            
+            for (let iconName of icons) {
+              console.log(iconName)
+              if (
+                Object.prototype.hasOwnProperty.call(Icon.icons, iconName) ||
+                Object.prototype.hasOwnProperty.call(Icon.iconAliases, iconName)
+              ) {
+                children.push(
+                  new Icon(
+                    iconName,
+                    modifiers[0],
+                    modifiers.length > 1
+                      ? new Color(
+                          modifiers[1] ? modifiers[1] : 255,
+                          modifiers[2] ? modifiers[2] : 255,
+                          modifiers[3] ? modifiers[3] : 255,
+                          // modifiers[4] ? modifiers[4] : 1,
+                        )
+                      : null,
+                  ),
+                )
+              } else {
+                if (start == "$" && modifiers) {
+                  label = new Label(
+                    value,
+                    null,
+                    modifiers[0] ? modifiers[0] : null,
+                    modifiers[1]
+                      ? new Color(
+                          modifiers[1] ? modifiers[1] : 255,
+                          modifiers[2] ? modifiers[2] : 255,
+                          modifiers[3] ? modifiers[3] : 255,
+                        )
+                      : null,
+                  )
+                  label.raw = raw
+                  label.modified = true
+                } else {
+                  label.value = start + label.value
+                  label.raw = start + label.raw
+                }
+                children.push(label)
+              }
             }
-            if (start == "$" && modifiers) {
-              label = new Label(
-                name,
-                null,
-                modifiers[0] ? modifiers[0] : null,
-                modifiers[1]
-                  ? new Color(
-                      modifiers[1] ? modifiers[1] : 255,
-                      modifiers[2] ? modifiers[2] : 255,
-                      modifiers[3] ? modifiers[3] : 255,
-                    )
-                  : null,
-              )
-              label.raw = raw
-              label.modified = true
-            } else {
-              label.value = start + label.value
-              label.raw = start + label.raw
-            }
-            children.push(label)
             break
           }
           case "\n":
