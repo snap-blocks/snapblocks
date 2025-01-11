@@ -8,6 +8,8 @@
 ## Fixes
 - Fixed Scratch translations (I haven't gotten to adding snap translations yet)
 - Fix snap round input padding
+- Fix unknown santa hats
+- Add "compiled" `(@blitz find first item (() @>) in @list)
 
 ## 1.8.0
 ### Additions
