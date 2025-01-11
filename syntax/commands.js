@@ -2735,7 +2735,7 @@ export default [
     id: "snap:reportFindFirst",
     snap: "reportFindFirst",
     spec: "{blitz} find first item %1 in {list}",
-    specDefs: {blitz: ["", "@blitz"],  list: ["@list", "%2"] },
+    specDefs: { blitz: ["", "@blitz"], list: ["@list", "%2"] },
     inputs: ["%s", "%m.list"],
     shape: "reporter",
     category: "lists",
