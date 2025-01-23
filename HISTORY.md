@@ -1,5 +1,9 @@
 # History (and todo list)
 
+# 1.8.2
+## Fixed
+- [x] Block prototypes in Japanese translation
+
 # 1.8.1
 ## Additions
 - Allow the use of `@<:>` (each can be used in any order) as a shortcut for `@delInput @verticalEllipsis @addInput`
