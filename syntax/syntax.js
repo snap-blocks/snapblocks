@@ -72,7 +72,7 @@ function paintBlock(info, children, languages) {
   let lang
   let type
 
-  if (o && !(overrides.includes('define') || overrides.includes('define+'))) {
+  if (o && !(overrides.includes("define") || overrides.includes("define+"))) {
     lang = o.lang
     type = o.type
     info.language = lang
