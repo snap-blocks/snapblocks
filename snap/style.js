@@ -2094,6 +2094,6 @@ export default class Style {
    * @constant
    */
   static get defaultFontFamily() {
-    return "Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif"
+    return "Verdana, sans-serif"
   }
 }
