@@ -1341,25 +1341,31 @@ export default class Style {
   }
 
   static darkFilter(id) {
-    const f = new Filter(id)
-
-    f.merge([
-      "SourceGraphic",
-      f.comp("in", f.flood("#000", 0.2), "SourceAlpha"),
-    ])
-
-    return f.el
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "1", height: "1" }),
+      [
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          .8 0 0 0 0
+          0 .8 0 0 0
+          0 0 .8 0 0
+          0 0 0 1 0
+        ` }),
+      ],
+    )
   }
 
   static lightFilter(id) {
-    const f = new Filter(id)
-
-    f.merge([
-      "SourceGraphic",
-      f.comp("in", f.flood("#fff", 0.4), "SourceAlpha"),
-    ])
-
-    return f.el
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "1", height: "1" }),
+      [
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          .6 0 0 0 .4
+          0 .6 0 0 .4
+          0 0 .6 0 .4
+          0 0 0 1 0
+        ` }),
+      ],
+    )
   }
 
   static darkRect(w, h, color, el) {
