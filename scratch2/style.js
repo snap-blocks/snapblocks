@@ -1,6 +1,5 @@
 import SVG from "./draw.js"
 import Color from "../shared/color.js"
-import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
 export default class Style {
@@ -1317,27 +1316,31 @@ export default class Style {
   }
 
   static bevelFilter(id, inset) {
-    const f = new Filter(id)
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "1", height: "1" }),
+      [
+        SVG.el("feOffset", { dx: inset ? "1" : "-1", dy: inset ? "1" : "-1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: "1", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 -.7 .7
+        `, result: "shadow" }),
 
-    const alpha = "SourceAlpha"
-    const s = inset ? -1 : 1
-    const blur = f.blur(1, alpha)
+        SVG.el("feOffset", { dx: inset ? "-1" : "1", dy: inset ? "-1" : "1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: "1", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 -.15 .15
+        ` }),
 
-    f.merge([
-      "SourceGraphic",
-      f.comp(
-        "in",
-        f.flood("#fff", 0.15),
-        f.subtract(alpha, f.offset(+s, +s, blur)),
-      ),
-      f.comp(
-        "in",
-        f.flood("#000", 0.7),
-        f.subtract(alpha, f.offset(-s, -s, blur)),
-      ),
-    ])
-
-    return f.el
+        SVG.el("feComposite", { operator: "atop", in2: "SourceGraphic" }),
+        SVG.el("feComposite", { operator: "atop", in: "shadow" }),
+      ],
+    )
   }
 
   static darkFilter(id) {
