@@ -1,6 +1,5 @@
 import SVG from "./draw.js"
 import Color from "../shared/color.js"
-import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
 export default class Style {
@@ -2027,36 +2026,43 @@ export default class Style {
    *
    * @static
    * @param {string} id
-   * @param {number} inset
+   * @param {boolean} inset
    * @returns {SVGFilterElement}
    */
   static bevelFilter(id, inset) {
-    const f = new Filter(id)
+    return SVG.withChildren(
+      SVG.el("filter", { id }),
+      [
+        SVG.el("feOffset", { dx: inset ? "1" : "-1", dy: inset ? "1" : "-1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: ".6", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 -1.1 .9
+        `, result: "shadow" }),
 
-    const alpha = "SourceAlpha"
-    const blur = f.blur(0.3, alpha)
+        SVG.el("feOffset", { dx: inset ? "-1" : "1", dy: inset ? "-1" : "1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: ".6", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 -.7 .5
+        `, result: "highlight" }),
 
-    f.merge([
-      "SourceGraphic",
-      f.comp(
-        "in",
-        f.flood("#fff", 0.4),
-        f.subtract(
-          alpha,
-          f.offset(inset ? -0.4 : 0.4, inset ? -0.4 : 0.4, blur),
-        ),
-      ),
-      f.comp(
-        "in",
-        f.flood("#000", inset ? 0.9 : 0.8),
-        f.subtract(
-          alpha,
-          f.offset(inset ? 0.7 : -0.7, inset ? 0.7 : -0.7, blur),
-        ),
-      ),
-    ])
-
-    return f.el
+        // offset .4px, .2px
+        SVG.el("feConvolveMatrix", {
+          order: "2",
+          divisor: "100",
+          kernelMatrix: inset ? "100 0 0 0" : "48 32 12 8",
+          edgeMode: "none",
+          in: "SourceGraphic"
+        }),
+        SVG.el("feComposite", { operator: "atop", in: "highlight" }),
+        SVG.el("feComposite", { operator: "atop", in: "shadow" }),
+      ],
+    )
   }
 
   /**
