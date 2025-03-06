@@ -2279,7 +2279,7 @@ export class GlowView {
     let el
     const w = this.width
     const h = this.height - 1
-    console.log('info', c)
+    console.log("info", c)
     if (c.isScript && c.blocks.length === 1) {
       c = c.blocks[0]
     }
