@@ -1,7 +1,6 @@
 import SVG from "./draw.js"
 import Color from "../shared/color.js"
 import cssContent from "./style.css.js"
-import Filter from "./filter.js"
 
 // Need to define here, as we cannot reference Style#makeNewIcons
 // during JS loading phase.
@@ -2339,13 +2338,16 @@ export default class Style {
   }
 
   static zebraFilter(id, isDark) {
-    const f = new Filter(id)
-
-    f.merge([
-      "SourceGraphic",
-      f.comp("in", f.flood(isDark ? "#000" : "#fff", 0.3), "SourceAlpha"),
-    ])
-
-    return f.el
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "1", height: "1" }),
+      [
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          .7 0 0 0 ${isDark ? 0 : .3}
+          0 .7 0 0 ${isDark ? 0 : .3}
+          0 0 .7 0 ${isDark ? 0 : .3}
+          0 0 0 1 0
+        ` }),
+      ],
+    )
   }
 }
