@@ -23,6 +23,7 @@
  * @property {(number|null)} [commentWidth=null] - Maximum comment width. Set this to -1 to not wrap.
  * @property {boolean} [showSpaces=false] - Show spaces
  * @property {boolean} [santa=false] - Use Santa Hats
+ * @property {(number|null)} [contrast=null] - snap-flat outline contrast
  * @property {(boolean | string["blockstyle" | "inline" | "scale" | "wrap" | "wrapsize" | "commentWidth" | "zebracoloring" | "zebra" | "showspaces" | "santa"])} [elementOptions=false] - Allow elements to specify options. If this is a list, the list contains the allowed options.
  */
 

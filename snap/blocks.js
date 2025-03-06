@@ -1057,7 +1057,6 @@ export class BlockView {
 
     this.hatWidth = 70
     this.hatHeight = 12
-    this.contrast = 65
 
     this.color = categoryColor(this.info.color || this.info.category)
   }
@@ -1296,7 +1295,7 @@ export class BlockView {
     el.classList.add(options.isFlat ? "snap-flat" : "snap-bevel")
     if (options.isFlat) {
       SVG.setProps(el, {
-        stroke: color.darker(this.contrast).toHexString(),
+        stroke: color.darker(options.contrast).toHexString(),
         "stroke-width": 1,
       })
     }
@@ -1318,7 +1317,7 @@ export class BlockView {
     //
     //       if (options.isFlat) {
     //         SVG.setProps(background, {
-    //           stroke: color.darker(this.contrast).toHexString(),
+    //           stroke: color.darker(options.contrast).toHexString(),
     //           "stroke-width": 1,
     //         })
     //       }
@@ -1361,8 +1360,8 @@ export class BlockView {
     }
 
     let color = this.isZebra
-      ? this.color.darker(this.contrast)
-      : this.color.lighter(this.contrast)
+      ? this.color.darker(options.contrast)
+      : this.color.lighter(options.contrast)
 
     path += SVG.canvasArc(
       x + r,
@@ -1398,8 +1397,8 @@ export class BlockView {
       y = h / 2
 
     let color = this.isZebra
-      ? this.color.darker(this.contrast)
-      : this.color.lighter(this.contrast)
+      ? this.color.darker(options.contrast)
+      : this.color.lighter(options.contrast)
 
     path = SVG.canvasArc(
       x + r,
@@ -1999,6 +1998,12 @@ export class BlockView {
 
     const el = this.drawSelf(options, blockWidth, this.height, drawLines)
     objects.splice(0, 0, el)
+    if (this.info.diff === "-") {
+      const dw = this.width
+      const dh = this.height
+      objects.push(SVG.move(0, dh / 2, SVG.strikethroughLine(dw)))
+      this.width = Math.max(this.width, this.width)
+    }
 
     let result = SVG.group(objects)
 
@@ -2270,10 +2275,14 @@ export class GlowView {
    * @returns {SVGElement}
    */
   drawSelf(options) {
-    const c = this.child
+    let c = this.child
     let el
     const w = this.width
     const h = this.height - 1
+    console.log('info', c)
+    if (c.isScript && c.blocks.length === 1) {
+      c = c.blocks[0]
+    }
     if (c.isScript) {
       if (!c.isEmpty && c.blocks[0].isHat) {
         el = SVG.hatRect(w, h)
@@ -2287,7 +2296,7 @@ export class GlowView {
     }
     return SVG.move(
       0,
-      -1,
+      0,
       SVG.setProps(el, {
         class: "snap-diff snap-diff-ins",
       }),
@@ -2376,8 +2385,8 @@ export class ScriptView {
       const diff = block.diff
       if (diff === "-") {
         const dw = block.width
-        const dh = block.lines[0]?.height || block.height
-        children.push(SVG.move(x, y + dh / 2 + 1, SVG.strikethroughLine(dw)))
+        const dh = block.height
+        children.push(SVG.move(x, y + dh / 2, SVG.strikethroughLine(dw)))
         this.width = Math.max(this.width, block.width)
       }
 
@@ -2451,6 +2460,7 @@ export class DocumentView {
           ? Math.max(80, options.commentWidth)
           : options.commentWidth) || 130,
       santa: options.santa,
+      contrast: options.contrast || 20,
     }
   }
 

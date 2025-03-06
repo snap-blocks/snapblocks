@@ -3,6 +3,7 @@
 # 1.8.2
 ## Fixed
 - [x] Block prototypes in Japanese translation
+- [x] Block highlighting
 
 # 1.8.1
 ## Additions
