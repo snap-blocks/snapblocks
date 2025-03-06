@@ -2636,6 +2636,7 @@ export class DocumentView {
 
     group.querySelectorAll(".snap-drop-shadow").forEach(el => {
       el.style.filter = `url(#snapDropShadow-${this.id})`
+      el.setAttribute("transform", `${el.getAttribute("transform") || ""} translate(-1 -1)`)
     })
     group.querySelectorAll(".snap-bevel").forEach(el => {
       el.style.filter = `url(#snapBevelFilter-${this.id})`

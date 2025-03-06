@@ -2004,18 +2004,22 @@ export default class Style {
 
   /**
    * Create dropshadow filter
+   * make sure to also use `transform:translate(-1px,-1px);` on the element
+   * the movement can't be done in the filter due to issues in firefox
    *
    * @static
    * @param {string} id
    * @returns {SVGFilterElement}
    */
   static dropShadowFilter(id) {
-    const f = new Filter(id)
-    // f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
-    let flood = f.flood("#000", 0.3, "SourceAlpha")
-    let offset = f.offset(-0.6, -0.6, f.blur(0, "SourceAlpha"))
-    f.comp("over", "SourceGraphic", f.comp("in", flood, offset))
-    return f.el
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "2", height: "2" }),
+      [
+        SVG.el("feOffset", { dx: "1", dy: "1", result: "o" }),
+        SVG.el("feComposite", { operator: "arithmetic", k2: ".3", in: "SourceAlpha" }),
+        SVG.el("feComposite", { in: "o" }),
+      ],
+    )
   }
 
   /**
