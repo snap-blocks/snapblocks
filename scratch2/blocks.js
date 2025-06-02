@@ -358,7 +358,7 @@ class IconView {
     }
 
     if (!this.color) {
-      this.color = info.color || new Color(255, 255, 255)
+      this.color = info.color || null
     }
 
     if (!this.fillAttribute) {
@@ -401,7 +401,11 @@ class IconView {
     return true
   }
 
-  draw(options) {
+  draw(options, parent) {
+    if (!this.color) {
+      this.color = parent.isZebra ? new Color() : new Color(255,255,255)
+    }
+
     let props = {
       width: this.width,
       height: this.height,

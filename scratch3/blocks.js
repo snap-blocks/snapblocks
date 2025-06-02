@@ -391,7 +391,7 @@ export class IconView {
     return true
   }
 
-  draw(options) {
+  draw(options, parent) {
     let isSnapIcon = snapIcons.has(this.name)
     let props = {
       width: this.width,
@@ -400,7 +400,7 @@ export class IconView {
     }
 
     if (!this.color) {
-      this.color = options.isHighContrast
+      this.color = (!parent.isZebra && options.isHighContrast) || (parent.isZebra && !options.isHighContrast)
         ? new Color()
         : new Color(255, 255, 255)
     }
