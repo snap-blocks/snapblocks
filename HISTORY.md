@@ -4,6 +4,7 @@
 ## Fixed
 - [x] Block prototypes in Japanese translation
 - [x] Block highlighting
+- [x] Fix viewport height on single scratch 3 define block (pulled from scratchblocks).
 
 # 1.8.1
 ## Additions
