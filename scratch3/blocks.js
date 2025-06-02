@@ -1366,6 +1366,7 @@ class BlockView {
 
         // block wrapping
         if (
+          line.children.length > 0 &&
           options.wrapSize > 0 &&
           line.width + child.width > options.wrapSize
         ) {
