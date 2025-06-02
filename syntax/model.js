@@ -525,6 +525,7 @@ export class Block {
       shape === "hat" ||
       shape === "cat" ||
       shape === "c-block" ||
+      shape === "define-hat" ||
       shape === "block-prototype"
     this.isFinal = /cap/.test(shape)
     this.isCommand = /stack/.test(shape) || shape === /cap/.test(shape)
