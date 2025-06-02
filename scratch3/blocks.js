@@ -400,9 +400,11 @@ export class IconView {
     }
 
     if (!this.color) {
-      this.color = (!parent.isZebra && options.isHighContrast) || (parent.isZebra && !options.isHighContrast)
-        ? new Color()
-        : new Color(255, 255, 255)
+      this.color =
+        (!parent.isZebra && options.isHighContrast) ||
+        (parent.isZebra && !options.isHighContrast)
+          ? new Color()
+          : new Color(255, 255, 255)
     }
 
     props.opacity = this.color.a
