@@ -7,6 +7,8 @@
 - [x] Fix viewport height on single scratch 3 define block (pulled from scratchblocks).
 - [x] Default icon color is not affected by zebra coloring
 - [x] Block wrapping in scratch 3 block prototype
+- [ ] Stacked comments breaking
+- [ ] Multiline comment with // is bolded
 
 # 1.8.1
 ## Additions
