@@ -1339,9 +1339,9 @@ function parseLines(code, languages) {
       raw += tok
       if (tok === "\\") {
         next()
-        raw += tok ? tok : ''
+        raw += tok ? tok : ""
       }
-      comment += tok ? tok : ''
+      comment += tok ? tok : ""
       next()
     }
     if (isMultiline && tok && tok === "*") {
