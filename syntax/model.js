@@ -734,12 +734,12 @@ export class Comment {
    * @param {boolean} [isMultiline=false]
    */
   constructor(value, hasBlock, isMultiline) {
-    this.label = new Label(
-      value,
-      `comment-label${isMultiline ? " comment-label-multiline" : ""}`,
-    )
     this.hasBlock = hasBlock
     this.isMultiline = isMultiline || value.includes("\n")
+    this.label = new Label(
+      value,
+      `comment-label${this.isMultiline ? " comment-label-multiline" : ""}`,
+    )
   }
   /**
    * This is a comment

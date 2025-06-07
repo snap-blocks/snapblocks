@@ -8,7 +8,7 @@
 - [x] Default icon color is not affected by zebra coloring
 - [x] Block wrapping in scratch 3 block prototype
 - [x] Stacked comments breaking
-- [ ] Multiline comment with // is bolded
+- [x] Multiline comment with // is bolded
 
 # 1.8.1
 ## Additions
