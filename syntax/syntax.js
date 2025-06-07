@@ -1377,7 +1377,7 @@ function parseLines(code, languages) {
     const block = pBlock()
     if (tok === "/" && ["/", "*"].includes(peek())) {
       const comment = pComment()
-      comment.hasBlock = block && block.children.length
+      comment.hasBlock = block && block.isBlock && block.children.length
       if (!comment.hasBlock) {
         return comment
       }
