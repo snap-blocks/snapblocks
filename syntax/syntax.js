@@ -618,7 +618,6 @@ function parseLines(code, languages) {
             let icons = []
             label = new Label("")
             let modifiers = []
-            console.log(tok)
             if (iconShortcuts.hasOwnProperty(tok)) {
               while (iconShortcuts.hasOwnProperty(tok)) {
                 raw = iconShortcuts[tok]
@@ -672,7 +671,6 @@ function parseLines(code, languages) {
             }
 
             for (let iconName of icons) {
-              console.log(iconName)
               if (
                 Object.prototype.hasOwnProperty.call(Icon.icons, iconName) ||
                 Object.prototype.hasOwnProperty.call(Icon.iconAliases, iconName)
