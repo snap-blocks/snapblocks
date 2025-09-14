@@ -1845,7 +1845,7 @@ function recognizeStuff(scripts) {
             child.info.color = block.info.color
             const upvar = child.children[0]
             if (upvar.info.categoryIsDefault) {
-              upvar.info.category = 'variables'
+              upvar.info.category = "variables"
             }
           }
         }

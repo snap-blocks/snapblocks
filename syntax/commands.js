@@ -788,18 +788,12 @@ export default [
         "hue %1 {variadic}",
         "hue %1 {saturation}",
       ],
-      saturation: [
-        "saturation %2 {variadic}",
-        "saturation %2 {brightness}",
-      ],
-      brightness: [
-        "brightness %3 {variadic}",
-        "brightness %3 {transparency}",
-      ],
+      saturation: ["saturation %2 {variadic}", "saturation %2 {brightness}"],
+      brightness: ["brightness %3 {variadic}", "brightness %3 {transparency}"],
       transparency: [
         "transparency %4 @delInput @verticalEllipsis",
         "transparency %4 @delInput",
-      ]
+      ],
     },
     inputs: ["%n", "%n", "%n"],
     shape: "reporter",
