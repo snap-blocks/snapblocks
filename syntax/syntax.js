@@ -1843,6 +1843,10 @@ function recognizeStuff(scripts) {
           if (child.isUpvar) {
             child.info.category = block.info.category
             child.info.color = block.info.color
+            const upvar = child.children[0]
+            if (upvar.info.categoryIsDefault) {
+              upvar.info.category = 'variables'
+            }
           }
         }
       }
