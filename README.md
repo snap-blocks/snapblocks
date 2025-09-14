@@ -9,7 +9,7 @@ Make pictures of Snap<i>!</i> blocks from text.
 
 [Documentation](https://snap-blocks.github.io/docs) (needs work)
 
-[Style guide](https://snapwiki.miraheze.org/wiki/Snapblocks_Style_Guide)
+[Style guide](https://snap-blocks.github.io/docs/style-guide)
 
 ---
 
@@ -24,7 +24,7 @@ Make pictures of Snap<i>!</i> blocks from text.
 
 It's MIT licensed, so you can use it in your projects.
 
-For the full guide to the syntax, see the [snapblocks docs](https://snap-blocks.github.io/docs/syntax).
+For the full guide to the syntax, see the [snapblocks docs](https://snap-blocks.github.io/docs/writing-snapblocks).
 
 # Usage
 
@@ -188,7 +188,7 @@ npm run locales
 
 ## Adding a language
 
-Each language **requires** some [additional words](https://github.com/snap-blocks/snapblocks/blob/master/locales-src/extra_aliases.js) which aren't in Scratch itself (mainly the words used for the flag and arrow images).
+Each language **requires** some [additional words](https://github.com/snap-blocks/snapblocks/blob/main/locales-src/extra_aliases.js) which aren't in Scratch itself (mainly the words used for the flag and arrow images).
 I'd be happy to accept pull requests for those! You'll need to rebuild the translations with `npm run locales` after editing the aliases.
 
 # Development
@@ -202,7 +202,7 @@ npm start
 
 Then open <http://localhost:8000/> :-)
 
-For more details, see [`CONTRIBUTING.md`](https://github.com/snap-blocks/snapblocks/blob/master/.github/CONTRIBUTING.md).
+For more details, see [`CONTRIBUTING.md`](https://github.com/snap-blocks/snapblocks/blob/main/.github/CONTRIBUTING.md).
 
 
 # Credits
