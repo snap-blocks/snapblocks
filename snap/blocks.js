@@ -1823,8 +1823,8 @@ export class BlockView {
                   line[index + 1].name === "addInput"
                 ))
             ) {
-              x += child.width
-              SVG.move(-5, 0, child.el)
+              x += child.width + space
+              // SVG.move(-5, 0, child.el)
             } else if (
               child.isIcon &&
               child.name === "delInput" &&
