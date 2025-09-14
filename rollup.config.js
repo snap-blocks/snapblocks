@@ -7,6 +7,7 @@ import serve from "rollup-plugin-serve"
 import license from "rollup-plugin-license"
 import terser from "@rollup/plugin-terser"
 import csso from "./locales-src/rollup-optimized-css-text.js"
+import versionInjector from 'rollup-plugin-version-injector';
 
 let { buildTarget } = process.env
 
@@ -65,6 +66,9 @@ export default [
       sourcemap: env.prod,
     },
     plugins: [
+      versionInjector({
+        injectInComments: false,
+      }),
       commonjs(),
       nodeResolve(),
       ...commonPreBabelOperations(),
@@ -85,6 +89,9 @@ export default [
       sourcemap: env.prod,
     },
     plugins: [
+      versionInjector({
+        injectInComments: false,
+      }),
       commonjs(),
       nodeResolve(),
       ...commonPreBabelOperations(),

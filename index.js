@@ -63,7 +63,7 @@ function validate(value) {
 }
 
 export default function (window) {
-  const version = "1.8.1"
+  const version = "[VI]{version}[/VI]"
 
   const document = window.document
 
