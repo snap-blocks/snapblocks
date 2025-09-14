@@ -761,6 +761,51 @@ export default [
     category: "pen",
   },
   {
+    snap: "reportColor",
+    spec: "color %1",
+    inputs: ["%clr"],
+    shape: "reporter",
+    category: "pen",
+  },
+  {
+    snap: "reportColorAttribute",
+    spec: "%1 of color %2",
+    inputs: ["%m", "%clr"],
+    shape: "reporter",
+    category: "pen",
+  },
+  {
+    snap: "reportNewColor",
+    spec: "new color {color}",
+    specDefs: {
+      variadic: [
+        "@delInput @verticalEllipsis @addInput",
+        "@delInput @addInput",
+      ],
+      color: [
+        "@addInput",
+        "@verticalEllipsis @addInput",
+        "hue %1 {variadic}",
+        "hue %1 {saturation}",
+      ],
+      saturation: [
+        "saturation %2 {variadic}",
+        "saturation %2 {brightness}",
+      ],
+      brightness: [
+        "brightness %3 {variadic}",
+        "brightness %3 {transparency}",
+      ],
+      transparency: [
+        "transparency %4 @delInput @verticalEllipsis",
+        "transparency %4 @delInput",
+      ]
+    },
+    inputs: ["%n", "%n", "%n"],
+    shape: "reporter",
+    category: "pen",
+  },
+  {
     id: "EVENT_WHENFLAGCLICKED",
     selector: "whenGreenFlag",
     spec: "when @greenFlag clicked",
@@ -900,6 +945,17 @@ export default [
     inputs: ["%m.broadcast", "%m.sprite", "%s"],
     shape: "stack",
     category: "events",
+  },
+  {
+    snap: "reportPoll",
+    spec: "request %1 {receiver}",
+    specDefs: {
+      receiver: ["@addInput", "from %2 {data}"],
+      data: ["@delInput @addInput", "with data %3 @delInput"],
+    },
+    inputs: ["%m.broadcast", "%m.sprite", "%s"],
+    shape: "reporter",
+    category: "control",
   },
   {
     snap: "doSend",

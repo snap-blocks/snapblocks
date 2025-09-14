@@ -175,6 +175,15 @@ test(
 
   paste on [ V]
   cut from [ V]
+
+  (color [#911a44])
+  ([hue V] of color [#911a44])
+
+  (new color @:>)
+  (new color hue (0) @<:>)
+  (new color hue (0) saturation (100) @<:>)
+  (new color hue (0) saturation (100) brightness (100) @<:>)
+  (new color hue (0) saturation (100) brightness (100) transparency (0) @<:)
   `,
 )
 
@@ -210,6 +219,9 @@ test(
   broadcast [ V] ▸ and wait
   broadcast [ V] to [all V] ◂▸ and wait
   broadcast [ V] to [all V] with data [] ◂ and wait
+  (request [ V] @>)
+  (request [ V] from [all V] @<>)
+  (request [ V] from [all V] with data [] @<)
 
   warp {
       
@@ -376,7 +388,7 @@ test(
 
   <touching [[mouse-pointer] V] ?>
   <touching color [#911a44] ?>
-  <color [#911a44] is touching [#911a44] ?>
+  <color [#911a44] is touching [#ffe600] ?>
 
   ask [What's your name?] and wait
   (answer)
@@ -519,6 +531,7 @@ test(
   ([10^ V] of (10))
   ([2 ^ V] of (10))
   ([2^ V] of (10))
+  ([sigmoid V] of (10))
   ([id V] of (10))
 
 

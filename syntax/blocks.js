@@ -486,6 +486,7 @@ export const english = {
       "10^",
       "2 ^",
       "2^",
+      "sigmoid",
       "id",
     ],
     list: [
