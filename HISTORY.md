@@ -1,5 +1,13 @@
 # History (and todo list)
 
+# 1.9.0
+## Added
+- [x] Add new Snap<i>!</i> v11 blocks
+## Fixed
+- [x]Fix `@verticalEllipsis` position in `@delInput @verticalEllipsis` pattern
+- [x] Automatic version injection so I can just edit the version in `package.json`
+- [ ] Reporters in upvars not always being in the variables category
+
 # 1.8.2
 ## Fixed
 - [x] Block prototypes in Japanese translation
