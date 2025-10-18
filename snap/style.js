@@ -1,6 +1,5 @@
 import SVG from "./draw.js"
 import Color from "../shared/color.js"
-import Filter from "./filter.js"
 import cssContent from "./style.css.js"
 
 export default class Style {
@@ -2004,18 +2003,22 @@ export default class Style {
 
   /**
    * Create dropshadow filter
+   * make sure to also use `transform:translate(-1px,-1px);` on the element
+   * the movement can't be done in the filter due to issues in firefox
    *
    * @static
    * @param {string} id
    * @returns {SVGFilterElement}
    */
   static dropShadowFilter(id) {
-    const f = new Filter(id)
-    // f.dropShadow(-0.5, -0.5, 0, "black", 0.3)
-    let flood = f.flood("#000", 0.3, "SourceAlpha")
-    let offset = f.offset(-0.6, -0.6, f.blur(0, "SourceAlpha"))
-    f.comp("over", "SourceGraphic", f.comp("in", flood, offset))
-    return f.el
+    return SVG.withChildren(
+      SVG.el("filter", { id, x: "0", y: "0", width: "2", height: "2" }),
+      [
+        SVG.el("feOffset", { dx: "1", dy: "1", result: "o" }),
+        SVG.el("feComposite", { operator: "arithmetic", k2: ".3", in: "SourceAlpha" }),
+        SVG.el("feComposite", { in: "o" }),
+      ],
+    )
   }
 
   /**
@@ -2023,36 +2026,43 @@ export default class Style {
    *
    * @static
    * @param {string} id
-   * @param {number} inset
+   * @param {boolean} inset
    * @returns {SVGFilterElement}
    */
   static bevelFilter(id, inset) {
-    const f = new Filter(id)
+    return SVG.withChildren(
+      SVG.el("filter", { id }),
+      [
+        SVG.el("feOffset", { dx: inset ? "1" : "-1", dy: inset ? "1" : "-1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: ".6", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 -1.1 .9
+        `, result: "shadow" }),
 
-    const alpha = "SourceAlpha"
-    const blur = f.blur(0.3, alpha)
+        SVG.el("feOffset", { dx: inset ? "-1" : "1", dy: inset ? "-1" : "1", in: "SourceAlpha" }),
+        SVG.el("feGaussianBlur", { stdDeviation: ".6", edgeMode: "none" }),
+        SVG.el("feColorMatrix", { type: "matrix", values: `
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 -.7 .5
+        `, result: "highlight" }),
 
-    f.merge([
-      "SourceGraphic",
-      f.comp(
-        "in",
-        f.flood("#fff", 0.4),
-        f.subtract(
-          alpha,
-          f.offset(inset ? -0.4 : 0.4, inset ? -0.4 : 0.4, blur),
-        ),
-      ),
-      f.comp(
-        "in",
-        f.flood("#000", inset ? 0.9 : 0.8),
-        f.subtract(
-          alpha,
-          f.offset(inset ? 0.7 : -0.7, inset ? 0.7 : -0.7, blur),
-        ),
-      ),
-    ])
-
-    return f.el
+        // offset .4px, .2px
+        SVG.el("feConvolveMatrix", {
+          order: "2",
+          divisor: "100",
+          kernelMatrix: inset ? "100 0 0 0" : "48 32 12 8",
+          edgeMode: "none",
+          in: "SourceGraphic"
+        }),
+        SVG.el("feComposite", { operator: "atop", in: "highlight" }),
+        SVG.el("feComposite", { operator: "atop", in: "shadow" }),
+      ],
+    )
   }
 
   /**
@@ -2094,6 +2104,6 @@ export default class Style {
    * @constant
    */
   static get defaultFontFamily() {
-    return "Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif"
+    return "Verdana, sans-serif"
   }
 }
