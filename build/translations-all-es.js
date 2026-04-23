@@ -1,10 +1,10 @@
 /**
- * snapblocks v1.9.0
+ * snapblocks v1.9.1
  * https://snap-blocks.github.io/
  * Make pictures of Snap blocks from text. This is a fork of Scratchblocks.
  *
  * Copyright 2013-2024, Tim Radvan
- * Copyright 2024-2025, ego-lay-atman-bay
+ * Copyright 2024-2026, ego-lay-atman-bay
  * @license MIT
  */
 
