@@ -783,6 +783,8 @@ export default [
         "@delInput @addInput",
       ],
       color: [
+        "%1",
+        "input list: %1",
         "@addInput",
         "@verticalEllipsis @addInput",
         "hue %1 {variadic}",
