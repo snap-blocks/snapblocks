@@ -634,6 +634,13 @@ export default [
     category: "pen",
   },
   {
+    snap: "doDrawOn",
+    spec: "%1 on %2",
+    inputs: ["%m", "%m.sprite"],
+    shape: "stack",
+    category: "pen"
+  },
+  {
     id: "pen.penDown",
     selector: "putPenDown",
     spec: "pen down",
