@@ -8,7 +8,14 @@ const common = `
 
 .sb3-label {
   font: 500 12pt Helvetica Neue, Helvetica, sans-serif;
-  word-spacing: +1pt;
+    word-spacing: +1pt;
+}
+
+.sb3-hide-spaces .sb3-space {
+  display: none;
+}
+.sb3-space {
+  fill: #b48c8c
 }
 
 .sb3-hide-spaces .sb3-space {
@@ -77,6 +84,10 @@ ${name} .sb3-literal-string {
 ${name} .sb3-custom-arg {
   fill: ${style.customPrimary};
   stroke: ${style.customTertiary};
+}
+
+svg${name} .sb3-extension-line {
+  stroke: ${style.extensionSecondary};
 }
 `
 

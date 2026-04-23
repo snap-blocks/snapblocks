@@ -78,7 +78,7 @@ function paintBlock(info, children, languages) {
     info.language = lang
     info.isRTL = rtlLanguages.includes(lang.code)
 
-    if (
+      if (
       type.shape === "ring" ? info.shape === "reporter" : info.shape === "stack"
     ) {
       info.shape = type.shape
@@ -335,24 +335,24 @@ function paintBlock(info, children, languages) {
           ) {
             // Convert string inputs to string arguments, number inputs to number arguments.
             const labels = child.value.split(/ +/g).map(word => new Label(word))
-            child = paintBlock(
-              {
-                shape: "reporter",
-                argument: child.shape === "string" ? "string" : "number",
-                category: "custom-arg",
-              },
-              labels,
-              languages,
-            )
-          } else if (child.isReporter || child.isBoolean) {
-            // Convert variables to number arguments, predicates to boolean arguments.
-            if (child.info.categoryIsDefault) {
-              child.info.category = "custom-arg"
+              child = paintBlock(
+                {
+                  shape: "reporter",
+                  argument: child.shape === "string" ? "string" : "number",
+                  category: "custom-arg",
+                },
+                labels,
+                languages,
+              )
+            } else if (child.isReporter || child.isBoolean) {
+              // Convert variables to number arguments, predicates to boolean arguments.
+              if (child.info.categoryIsDefault) {
+                child.info.category = "custom-arg"
+              }
               child.info.argument = child.isBoolean ? "boolean" : "number"
             }
-          }
-          return child
-        })
+            return child
+          })
 
       const outlineInfo = {
         shape: `outline-${outlineShape}`,

@@ -571,6 +571,7 @@ export class IconView {
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
       videoBlock: { width: 40, height: 40, dy: 10 },
+      facesensingBlock: { width: 40, height: 40, dy: 3.9932885906 }, // 40 - 21.46 * (40 / 23.84), expcept this is still slightly off?
       ttsBlock: { width: 40, height: 40 },
       translateBlock: { width: 40, height: 40 },
       wedoBlock: { width: 40, height: 40 },
@@ -618,7 +619,7 @@ export class LineView {
   draw(options, parent) {
     const category = parent.info.category
     return SVG.el("line", {
-      class: `sb3-${category}`,
+      class: `sb3-extension-line`,
       "stroke-linecap": "round",
       x1: 0,
       y1: 0,
@@ -716,8 +717,7 @@ export class InputView {
         label = SVG.move(px, 9, label)
       }
     } else {
-      h = 32
-      w = !this.isStack ? 40 : 60
+      w = this.isInset ? 30 : null
     }
     if (this.hasArrow) {
       w += 20
@@ -1135,9 +1135,9 @@ class BlockView {
 
   marginBetween(a, b) {
     // Consecutive labels should be rendered as a single text element.
-    // For now, approximate the size of one space
+    // For now, manually offset by the size of one space
     if (a.isLabel && b.isLabel) {
-      return 5
+      return 4.447998046875
     }
 
     return 8 // default: 2 units
