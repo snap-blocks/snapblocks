@@ -79,8 +79,8 @@ export default function (window) {
   }
 
   /**
-   * 
-   * @param {string} style 
+   *
+   * @param {string} style
    * @returns {typeof snap | typeof scratch2 | typeof scratch3}
    */
   function getBlockStyle(style) {
@@ -193,7 +193,7 @@ export default function (window) {
     const shadow = container.attachShadow({ mode: "open" })
 
     shadow.appendChild(getBlockStyle(options.style).makeStyle())
-    
+
     shadow.appendChild(svg)
 
     el.innerHTML = ""
@@ -299,10 +299,12 @@ export default function (window) {
     if (options.elementOptions) {
       overrideOptions = {
         style: acceptedOptions.includes("blockstyle")
-          ? element.getAttribute("blockStyle") || element.getAttribute("data-blockStyle")
+          ? element.getAttribute("blockStyle") ||
+            element.getAttribute("data-blockStyle")
           : null,
         inline: acceptedOptions.includes("inline")
-          ? element.getAttribute("inline") || element.getAttribute("data-inline")
+          ? element.getAttribute("inline") ||
+            element.getAttribute("data-inline")
           : null,
         scale: acceptedOptions.includes("scale")
           ? element.getAttribute("scale") || element.getAttribute("data-scale")
@@ -311,19 +313,23 @@ export default function (window) {
           ? element.getAttribute("wrap") || element.getAttribute("data-wrap")
           : null,
         wrapSize: acceptedOptions.includes("wrapsize")
-          ? element.getAttribute("wrapSize") || element.getAttribute("data-wrapSize")
+          ? element.getAttribute("wrapSize") ||
+            element.getAttribute("data-wrapSize")
           : null,
         commentWidth: acceptedOptions.includes("commentwidth")
-          ? element.getAttribute("commentWidth") || element.getAttribute("data-commentWidth")
+          ? element.getAttribute("commentWidth") ||
+            element.getAttribute("data-commentWidth")
           : null,
         zebraColoring: acceptedOptions.includes("zebracoloring")
-          ? element.getAttribute("zebraColoring") || element.getAttribute("data-zebraColoring")
+          ? element.getAttribute("zebraColoring") ||
+            element.getAttribute("data-zebraColoring")
           : null,
         zebra: acceptedOptions.includes("zebra")
           ? element.getAttribute("zebra") || element.getAttribute("data-zebra")
           : null,
         showSpaces: acceptedOptions.includes("showspaces")
-          ? element.getAttribute("showSpaces") || element.getAttribute("data-showSpaces")
+          ? element.getAttribute("showSpaces") ||
+            element.getAttribute("data-showSpaces")
           : null,
         santa: acceptedOptions.includes("santa")
           ? element.getAttribute("santa") || element.getAttribute("data-santa")

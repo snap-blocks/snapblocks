@@ -108,7 +108,6 @@ describe("blocks with symbols", () => {
       turnRight,
     )
   })
-
   test("turn right: de", () => {
     expect(
       parseBlock("drehe dich nach rechts um (15) Grad", optionsFor("de")).info,

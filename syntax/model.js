@@ -579,6 +579,7 @@ export class Block {
             : child.stringify().replace(/^\x20+|\x20+$/g, "") + " " // keep newlines, while also trimming spaces
       })
       .join("")
+      .trim()
       .replace(/^\x20+|\x20+$/g, "")
 
     const lang = this.info.language
@@ -658,6 +659,13 @@ export class Block {
       for (const word of lang.defineSuffix) {
         this.children.push(new Label(word))
       }
+      return
+    } else if (id === "PROCEDURES_CALL") {
+      this.children.forEach(child => {
+        if (!child.isLabel && !child.isIcon) {
+          child.translate(lang)
+        }
+      })
       return
     }
 
@@ -849,7 +857,21 @@ export class Script {
       .map(block => {
         let line = block.stringify()
         if (block.comment) {
-          line += ` ${block.comment.stringify()}`
+          // If this block contains a script (multi-line), insert the
+          // comment on the first line (the opening line) instead of
+          // appending it after the whole multi-line block (which would
+          // place it after the trailing "end").
+          if (block.isBlock && block.hasScript) {
+            const commentText = ` ${block.comment.stringify()}`
+            const nl = line.indexOf("\n")
+            if (nl !== -1) {
+              line = line.slice(0, nl) + commentText + line.slice(nl)
+            } else {
+              line += commentText
+            }
+          } else {
+            line += ` ${block.comment.stringify()}`
+          }
         }
         return line
       })
@@ -862,7 +884,7 @@ export class Script {
    * @param {Object} lang - Language data
    */
   translate(lang) {
-    this.blocks.forEach(block => block.translate(lang))
+    this.blocks.forEach(block => block.translate && block.translate(lang))
   }
 }
 

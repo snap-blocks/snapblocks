@@ -73,7 +73,7 @@ export default class Style {
     } else if (category instanceof Color) {
       return category
     } else {
-      return Style.colors.obsolete
+      return Style.colors.categories.obsolete
     }
   }
 
