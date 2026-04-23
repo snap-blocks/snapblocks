@@ -79,6 +79,28 @@ export default function (window) {
   }
 
   /**
+   * 
+   * @param {string} style 
+   * @returns {typeof snap | typeof scratch2 | typeof scratch3}
+   */
+  function getBlockStyle(style) {
+    if (typeof style != "string") {
+      style = "snap"
+    }
+
+    if (/^snap($|-)/.test(style)) {
+      return snap
+    } else if (style === "scratch2") {
+      return scratch2
+    } else if (/^scratch3($|-)/.test(style)) {
+      return scratch3
+    } else {
+      console.error(`unknown style: ${style}`)
+      return snap // I don't want it to throw an error
+    }
+  }
+
+  /**
    * Create a view for the style in the options.
    *
    * @param {Document} doc
@@ -97,16 +119,7 @@ export default function (window) {
       options.style = "snap"
     }
 
-    if (/^snap($|-)/.test(options.style)) {
-      return snap.newView(doc, options)
-    } else if (options.style === "scratch2") {
-      return scratch2.newView(doc, options)
-    } else if (/^scratch3($|-)/.test(options.style)) {
-      return scratch3.newView(doc, options)
-    } else {
-      console.error(`unknown style: ${options.style}`)
-      return snap.newView(doc, options) // I don't want it to throw an error
-    }
+    return getBlockStyle(options.style).newView(doc, options)
   }
 
   /**
@@ -177,7 +190,11 @@ export default function (window) {
       container = document.createElement("div")
       container.className = "snapblocks"
     }
-    container.appendChild(svg)
+    const shadow = container.attachShadow({ mode: "open" })
+
+    shadow.appendChild(getBlockStyle(options.style).makeStyle())
+    
+    shadow.appendChild(svg)
 
     el.innerHTML = ""
     el.appendChild(container)
@@ -282,34 +299,34 @@ export default function (window) {
     if (options.elementOptions) {
       overrideOptions = {
         style: acceptedOptions.includes("blockstyle")
-          ? element.getAttribute("blockStyle")
+          ? element.getAttribute("blockStyle") || element.getAttribute("data-blockStyle")
           : null,
         inline: acceptedOptions.includes("inline")
-          ? element.getAttribute("inline")
+          ? element.getAttribute("inline") || element.getAttribute("data-inline")
           : null,
         scale: acceptedOptions.includes("scale")
-          ? element.getAttribute("scale")
+          ? element.getAttribute("scale") || element.getAttribute("data-scale")
           : null,
         wrap: acceptedOptions.includes("wrap")
-          ? element.getAttribute("wrap")
+          ? element.getAttribute("wrap") || element.getAttribute("data-wrap")
           : null,
         wrapSize: acceptedOptions.includes("wrapsize")
-          ? element.getAttribute("wrapSize")
+          ? element.getAttribute("wrapSize") || element.getAttribute("data-wrapSize")
           : null,
         commentWidth: acceptedOptions.includes("commentwidth")
-          ? element.getAttribute("commentwidth")
+          ? element.getAttribute("commentWidth") || element.getAttribute("data-commentWidth")
           : null,
         zebraColoring: acceptedOptions.includes("zebracoloring")
-          ? element.getAttribute("zebraColoring")
+          ? element.getAttribute("zebraColoring") || element.getAttribute("data-zebraColoring")
           : null,
         zebra: acceptedOptions.includes("zebra")
-          ? element.getAttribute("zebra")
+          ? element.getAttribute("zebra") || element.getAttribute("data-zebra")
           : null,
         showSpaces: acceptedOptions.includes("showspaces")
-          ? element.getAttribute("showSpaces")
+          ? element.getAttribute("showSpaces") || element.getAttribute("data-showSpaces")
           : null,
         santa: acceptedOptions.includes("santa")
-          ? element.getAttribute("santa")
+          ? element.getAttribute("santa") || element.getAttribute("data-santa")
           : null,
       }
     }
