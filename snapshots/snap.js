@@ -175,6 +175,7 @@ test(
 
   paste on [ V]
   cut from [ V]
+  [paint V] on [Stage V]
 
   (color [#911a44])
   ([hue V] of color [#911a44])
@@ -184,6 +185,8 @@ test(
   (new color hue (0) saturation (100) @<:>)
   (new color hue (0) saturation (100) brightness (100) @<:>)
   (new color hue (0) saturation (100) brightness (100) transparency (0) @<:)
+  (new color (list @>))
+  (new color input list: (list @>))
   `,
 )
 
