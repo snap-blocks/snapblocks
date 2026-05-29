@@ -1611,21 +1611,21 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.group([
-          SVG.el('use', {
-            href: '#sb3-turtle',
+          SVG.el("use", {
+            href: "#sb3-turtle",
             width: 13,
             height: 10,
-            transform: 'scale(0.8) translate(0, 1.9999999999999996)',
-            stroke: 'none',
+            transform: "scale(0.8) translate(0, 1.9999999999999996)",
+            stroke: "none",
           }),
-          SVG.el('path', {
+          SVG.el("path", {
             d: `M 10.791666666666668 0.5416666666666666 L 10.791666666666668 3.875 M 9.125 2.2083333333333335 L 12.458333333333334 2.2083333333333335`,
-            'stroke-width': 1.0833333333333333,
-          })
+            "stroke-width": 1.0833333333333333,
+          }),
         ]),
         {
-          id: 'sb3-turtlePlus',
-        }
+          id: "sb3-turtlePlus",
+        },
       ),
 
       SVG.setProps(
