@@ -39,6 +39,7 @@
       <div class="preview">
         <div id="export-options"></div>
         <pre id="preview" class="blocks"></pre>
+        <pre class="snapblocks-blocks" data-blockStyle="scratch3">go to [nose V]</pre>
         <textarea id="xml"></textarea>
       </div>
 
@@ -64,6 +65,10 @@
     <script src="build/translations-all.js"></script>
   
     <script>
+      snapblocks.renderMatching('.snapblocks-blocks', {
+        elementOptions: true
+      })
+      
       var editor = document.getElementById('editor');
       var exportDropdown;
       var exportSVGLink;
