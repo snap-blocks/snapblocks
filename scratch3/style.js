@@ -78,6 +78,7 @@ const highContrastIcons = new Set([
   "cube",
   "cubeSolid",
   "infinity",
+  "speaker",
 
   "arrowUp",
   "arrowUpOutline",
@@ -160,6 +161,7 @@ const snapIcons = new Set([
   "cube",
   "cubeSolid",
   "infinity",
+  "speaker",
 
   "arrowUp",
   "arrowUpOutline",
@@ -1575,6 +1577,23 @@ export default class Style {
           id: "sb3-infinity",
           fill: "none",
           "stroke-width": 2.5,
+        },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: `M 0 3.3333333333333335 L 3.3333333333333335 3.3333333333333335 L 6.666666666666667 0 L 6.666666666666667 10 L 3.3333333333333335 6.666666666666667 L 0 6.666666666666667 Z`,
+            stroke: 'none',
+          }),
+          SVG.el('path', {
+            d: `M 8.299831645537221 8.299831645537221 A 4.666666666666667 4.666666666666667 0 0 0 8.299831645537221 1.7001683544627784
+                M 7.29809703885628 7.298097038856279 A 3.25 3.25 0 0 0 7.29809703885628 2.7019029611437206`,
+            fill: 'none',
+            'stroke-width': 0.6666666666666666,
+          })
+        ]),
+        {
+          id: "sb3-speaker",
         },
       ),
 

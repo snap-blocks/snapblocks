@@ -567,6 +567,7 @@ export class IconView {
       arrowRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
+      speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
