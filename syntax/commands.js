@@ -638,7 +638,7 @@ export default [
     spec: "%1 on %2",
     inputs: ["%m", "%m.sprite"],
     shape: "stack",
-    category: "pen"
+    category: "pen",
   },
   {
     id: "pen.penDown",
