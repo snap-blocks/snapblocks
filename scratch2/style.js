@@ -1315,6 +1315,15 @@ export default class Style {
           id: "sb-speaker",
         },
       ),
+      SVG.setProps(
+        SVG.el("path", {
+          d: `M 0 0 L 2 0 L 3 1 L 5 1 L 6 0 L 9 0 L 9 4 L 6 4 L 5 5 L 3 5 L 2 4 L 0 4 Z
+              M 0 5 L 2 5 L 3 6 L 5 6 L 6 5 L 10 5 L 10 9 L 6 9 L 5 10 L 3 10 L 2 9 L 0 9 Z`,
+        }),
+        {
+          id: "sb-blocks",
+        },
+      ),
 
       SVG.setProps(
         SVG.el("path", {

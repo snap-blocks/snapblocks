@@ -735,6 +735,7 @@ export class IconView {
       cubeSolid: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       infinity: { width: 17.5, height: 10, fillAttribute: "stroke" },
       speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      blocks: { width: 10, height: 10, fillAttribute: ["fill"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

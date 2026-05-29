@@ -568,6 +568,7 @@ class IconView {
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      blocks: { width: 10, height: 10, fillAttribute: ["fill"] },
 
       plusSign: {
         width: 8.399999999999977,

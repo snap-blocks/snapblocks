@@ -343,6 +343,7 @@ export class Icon {
       cubeSolid: true,
       infinity: true,
       speaker: true,
+      blocks: true,
 
       arrowUp: true,
       arrowUpOutline: true,
