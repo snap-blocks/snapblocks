@@ -736,6 +736,7 @@ export class IconView {
       infinity: { width: 17.5, height: 10, fillAttribute: "stroke" },
       speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       blocks: { width: 10, height: 10, fillAttribute: ["fill"] },
+      turtlePlus: { width: 13, height: 10, fillAttribute: ["fill", "stroke"] },
 
       arrowUp: { width: 10, height: 10 },
       arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },

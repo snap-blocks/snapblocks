@@ -344,6 +344,7 @@ export class Icon {
       infinity: true,
       speaker: true,
       blocks: true,
+      turtlePlus: true,
 
       arrowUp: true,
       arrowUpOutline: true,

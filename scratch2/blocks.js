@@ -569,6 +569,7 @@ class IconView {
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       blocks: { width: 10, height: 10, fillAttribute: ["fill"] },
+      turtlePlus: { width: 13, height: 10, fillAttribute: ["fill", "stroke"] },
 
       plusSign: {
         width: 8.399999999999977,
