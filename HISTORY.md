@@ -10,7 +10,7 @@
 - [x] Fix `(new color input list: (list @>))`
 - [x] Render svgs inside shadow dom to force isolation (or at least prevent basic css breaking snapblocks, like what discourse was doing)
 - [x] Fix broken scratch3 empty ring
-- [ ] Fix explicit boolean in ring (such as `(<t> @>)`)
+- [x] Fix explicit boolean in ring (such as `(<t> @>)`)
 ## Updates
 - [x] Merge changes from upstream scratchblocks
 

@@ -1353,7 +1353,7 @@ class BlockView {
           if (child.isBlock) {
             child.x -= px
           }
-          if (child.isInset) {
+          if (child.isInset && !child.value) {
             continue
           }
         }

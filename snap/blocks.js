@@ -1983,7 +1983,7 @@ export class BlockView {
     lines.forEach(line => {
       line.forEach(child => {
         if (this.isRing) {
-          if (child.isInset) {
+          if (child.isInset && !child.value) {
             return
           }
         }

@@ -1551,7 +1551,7 @@ class BlockView {
 
         if (this.isRing) {
           child.y = (line.y + y) | 0
-          if (child.isInset) {
+          if (child.isInset && !child.value) {
             continue
           }
         }
