@@ -740,7 +740,6 @@ export class InputView {
       color = color.makeZebra(options.isHighContrast)
     }
 
-    console.log("height", h)
     const el = InputView.shapes[this.shape](w, h)
     SVG.setProps(el, {
       class: `sb3-input sb3-input-${this.shape}`,
