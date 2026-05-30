@@ -5,20 +5,22 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write  # Required for OIDC
   contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - run: npm ci
-      - run: npm run build
+      - run: npm run build --if-present
       
       - name: Upload Release Asset
         uses: xresloader/upload-to-github-release@v1
@@ -29,9 +31,7 @@ jobs:
           update_latest_release: true
           release_id: ${{ github.event.release.id }}
 
-      - name: Disable AppArmor restriction
-        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      # - name: Disable AppArmor restriction
+      #   run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           
