@@ -1,5 +1,18 @@
 # History (and todo list)
 
+# 1.10.0
+## Added
+- [x] Added new snap v12 blocks
+- [x] Added new snap v12 `speaker`, `blocks`, and `turtlePlus` icons
+## Fixed
+- [x] Fixed contrast in default design
+- [x] Fix snap obsolete color
+- [x] Fix `(new color input list: (list @>))`
+- [x] Render svgs inside shadow dom to force isolation (or at least prevent basic css breaking snapblocks, like what discourse was doing)
+- [ ] Fix broken scratch3 empty ring
+## Updates
+- [x] Merge changes from upstream scratchblocks
+
 # 1.9.0
 ## Added
 - [x] Add new Snap<i>!</i> v11 blocks
