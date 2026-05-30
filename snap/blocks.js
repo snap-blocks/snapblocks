@@ -2447,12 +2447,13 @@ export class DocumentView {
     this.el = null
     this.defs = null
     this.scale = options.scale
+    let isFlat = options.style.replace("snap-", "").toLowerCase() === "flat"
     /**
      * @type {Options}
      */
     this.options = {
       id: this.id,
-      isFlat: options.style.replace("snap-", "").toLowerCase() === "flat",
+      isFlat: isFlat,
       wrapSize: options.wrap
         ? options.wrapSize != undefined && options.wrapSize > 0
           ? options.wrapSize
@@ -2465,7 +2466,7 @@ export class DocumentView {
           ? Math.max(80, options.commentWidth)
           : options.commentWidth) || 130,
       santa: options.santa,
-      contrast: options.contrast || 20,
+      contrast: options.contrast || isFlat ? 20 : 65,
     }
   }
 
