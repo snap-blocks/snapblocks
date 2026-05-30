@@ -9,7 +9,8 @@
 - [x] Fix snap obsolete color
 - [x] Fix `(new color input list: (list @>))`
 - [x] Render svgs inside shadow dom to force isolation (or at least prevent basic css breaking snapblocks, like what discourse was doing)
-- [ ] Fix broken scratch3 empty ring
+- [x] Fix broken scratch3 empty ring
+- [ ] Fix explicit boolean in ring (such as `(<t> @>)`)
 ## Updates
 - [x] Merge changes from upstream scratchblocks
 

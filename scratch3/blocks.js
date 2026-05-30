@@ -720,7 +720,8 @@ export class InputView {
         label = SVG.move(px, 9, label)
       }
     } else {
-      w = this.isInset ? 30 : null
+      h = this.hasLabel ? this.label.height : 32
+      w = this.isInset ? (this.shape == 'stack' ? 60 : 40) : null
     }
     if (this.hasArrow) {
       w += 20
@@ -739,6 +740,7 @@ export class InputView {
       color = color.makeZebra(options.isHighContrast)
     }
 
+    console.log('height', h)
     const el = InputView.shapes[this.shape](w, h)
     SVG.setProps(el, {
       class: `sb3-input sb3-input-${this.shape}`,
