@@ -82,26 +82,15 @@ const highContrastIcons = new Set([
   "blocks",
   "turtlePlus",
 
-  "arrowUp",
-  "arrowUpOutline",
   "arrowUpThin",
-  "arrowDown",
-  "arrowDownOutline",
   "arrowDownThin",
-  "arrowLeft",
-  "arrowLeftOutline",
   "arrowLeftThin",
-  "arrowRight",
-  "arrowRightOutline",
   "arrowRightThin",
   "arrowUpDownThin",
   "arrowLeftRightThin",
 ])
 
 const snapIcons = new Set([
-  "addInput",
-  "verticalEllipsis",
-  "delInput",
   "list",
   "cloud",
   "cloudGradient",
@@ -167,16 +156,12 @@ const snapIcons = new Set([
   "blocks",
   "turtlePlus",
 
-  "arrowUp",
   "arrowUpOutline",
   "arrowUpThin",
-  "arrowDown",
   "arrowDownOutline",
   "arrowDownThin",
-  "arrowLeft",
   "arrowLeftOutline",
   "arrowLeftThin",
-  "arrowRight",
   "arrowRightOutline",
   "arrowRightThin",
   "arrowUpDownThin",
@@ -375,6 +360,7 @@ export default class Style {
   }
 
   static makeCommonIcons() {
+    let arrow;
     return [
       SVG.setProps(
         SVG.group([
@@ -403,23 +389,51 @@ export default class Style {
           id: "sb3-octagon",
         },
       ),
-
-      SVG.el("path", {
-        d: "M 1 1 L 5 5 L 1 9 Z",
-        id: "sb3-addInput",
-      }),
-      SVG.el("path", {
-        d: "M 1 5 L 5 1 L 5 9 Z",
-        id: "sb3-delInput",
-      }),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
+            fill: "#231f20",
+            opacity: 0.1,
+          }),
+          SVG.el("path", {
+            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
+          }),
+        ]),
+        {
+          id: "sb3-delInput",
+          transform: 
+            "translate(8.79, 0), rotate(90), translate(-1, 0)"
+        },
+      ),
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
+            fill: "#231f20",
+            opacity: 0.1,
+          }),
+          SVG.el("path", {
+            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
+          }),
+        ]),
+        {
+          id: "sb3-addInput",
+          transform: 
+            "translate(0, 12.71), rotate(-90), translate(1, 0)"
+        },
+      ),
       SVG.setProps(
         SVG.el("path", {
-          d: `M 2 1 A 1 1 0 1 1 1.9999995000000417 0.9990000001666661
-              M 2 5 A 1 1 0 1 1 1.9999995000000417 4.999000000166666
-              M 2 9 A 1 1 0 1 1 1.9999995000000417 8.999000000166665`,
+          //  M x y,  r r x,l,s x y
+          d: `M 0 1 A 1 1 0 1 0 1 1
+              M 0 5 A 1 1 0 1 0 1 5
+              M 0 9 A 1 1 0 1 0 1 9`,
         }),
         {
           id: "sb3-verticalEllipsis",
+          transform: 
+            "translate(-1, -1)",
         },
       ),
       SVG.setProps(
@@ -811,14 +825,19 @@ export default class Style {
         },
       ),
 
-      SVG.setProps(
-        SVG.el("path", {
-          d: "M 0.5 5 L 5 0.5 L 9.5 5 L 6.5 5 L 6.5 9.5 L 3.5 9.5 L 3.5 5 Z",
-        }),
+      (
+        (arrow = SVG.el("path", {
+          d: "M23 16.7 18.7 21c-.4.3-.9.4-1.3.2s-.7-.6-.7-1.1v-1.6l-6-.8c-1-.1-1.7-.9-1.7-1.9v-.2c.1-.9.8-1.5 1.6-1.6l6-.9v-1.6c0-.5.3-.9.7-1.1.4-.2.9-.1 1.3.3L23 15c.2.2.3.5.3.8l-.3.9z",
+          stroke: "#000",
+          "stroke-opacity": 0.1,
+          "stroke-width": 2,
+        })), (arrow.style.paintOrder = "stroke"), (arrow.style.transformOrigin = "16px 16px"), SVG.setProps(
+        arrow,
         {
           id: "sb3-arrowUp",
+          transform: "matrix(0, -1, 1, 0, -10, -5)",
         },
-      ),
+      )),
       SVG.setProps(
         SVG.el("path", {
           d: "M 0.5 5 L 5 0.5 L 9.5 5 L 6.5 5 L 6.5 9.5 L 3.5 9.5 L 3.5 5 Z",
@@ -840,7 +859,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb3-arrowUp",
-          transform: "rotate(180 5 5)",
+          transform: "rotate(180 9 9)",
         }),
         {
           id: "sb3-arrowDown",
@@ -867,7 +886,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb3-arrowUp",
-          transform: "rotate(-90 5 5)",
+          transform: "rotate(-90 9 9)",
         }),
         {
           id: "sb3-arrowLeft",
@@ -894,7 +913,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb3-arrowUp",
-          transform: "rotate(90 5 5)",
+          transform: "rotate(90 9 9)",
         }),
         {
           id: "sb3-arrowRight",
@@ -1977,7 +1996,6 @@ export default class Style {
           id: "sb3-dropdownArrow",
         },
       ),
-
       SVG.setProps(
         SVG.el("path", {
           d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
@@ -2216,6 +2234,14 @@ export default class Style {
           id: "sb3-dropdownArrow-high-contrast",
         },
       ),
+      SVG.el("path", {
+        d: "M 1 1 L 5 5 L 1 9 Z",
+        id: "sb3-addInput",
+      }),
+      SVG.el("path", {
+        d: "M 1 5 L 5 1 L 5 9 Z",
+        id: "sb3-delInput",
+      }),
 
       SVG.setProps(
         SVG.el("path", {

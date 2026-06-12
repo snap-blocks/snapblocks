@@ -200,7 +200,7 @@ export default class SVG {
               if (child.isBlock && child.lines.length > 1) {
                 r =
                   Math.max(
-                    child.lines[0].totalHeight,
+                    Math.min(child.lines[0].totalHeight, Infinity ),
                     child.lines[child.lines.length - 1].totalHeight,
                   ) / 2
               }
