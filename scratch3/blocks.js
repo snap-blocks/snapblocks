@@ -491,7 +491,7 @@ export class IconView {
       pipette: {
         width: 16,
         height: 14,
-        scale: 1.4
+        scale: 1.4,
       },
       paintbucket: { width: 14, height: 14, scale: 1.4 },
       eraser: { width: 14, height: 14, scale: 1.4 },

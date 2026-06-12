@@ -133,7 +133,7 @@ const snapIcons = new Set([
   "listNarrow",
   "flipHorizontal",
   "flipVertical",
-  
+
   "trashFull",
   "cube",
   "cubeSolid",
@@ -629,7 +629,7 @@ export default class Style {
         }),
         {
           id: "sb3-brush",
-          transform: "translate(-2, -3)"
+          transform: "translate(-2, -3)",
         },
       ),
       SVG.setProps(
@@ -638,7 +638,7 @@ export default class Style {
         }),
         {
           id: "sb3-pipette",
-          transform: "translate(-2, -3)"
+          transform: "translate(-2, -3)",
         },
       ),
       SVG.setProps(
@@ -647,7 +647,7 @@ export default class Style {
         }),
         {
           id: "sb3-paintbucket",
-          transform: "translate(-2, -3)"
+          transform: "translate(-2, -3)",
         },
       ),
       SVG.setProps(
@@ -656,7 +656,7 @@ export default class Style {
         }),
         {
           id: "sb3-eraser",
-          transform: "translate(-2, -3)"
+          transform: "translate(-2, -3)",
         },
       ),
       SVG.setProps(
@@ -1487,7 +1487,7 @@ export default class Style {
         }),
         {
           id: "sb3-trash",
-          transform: "scale(1.1, 1.1), translate(0, -1.5)"
+          transform: "scale(1.1, 1.1), translate(0, -1.5)",
         },
       ),
       SVG.setProps(
