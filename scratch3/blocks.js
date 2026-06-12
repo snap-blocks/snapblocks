@@ -130,7 +130,7 @@ export class LabelView {
         : /(boolean|dropdown)/.test(this.cls)
           ? options.isHighContrast
             ? new Color()
-            : new Color(255, 255, 255)
+            : /(readonly)/.test(this.cls) ? new Color(255, 255, 255) : Color.fromHexString("#575e75") 
           : /literal/.test(this.cls)
             ? options.isHighContrast
               ? new Color()
@@ -204,8 +204,13 @@ export class LabelView {
             class: `sb3-label ${cls}`,
             style: `font: ${font}`,
           }),
-        )
-        lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
+        );
+        let lastLineGroupItem = lineGroup[lineGroup.length - 1]
+        if (lastLineGroupItem.getAttribute("--stroke")) {
+          lastLineGroupItem.style.stroke = this.color.toHexString()
+        } else {
+          lastLineGroupItem.style.fill = this.color.toHexString()
+        }
         x += wordInfo.width
         height = Math.max(height, wordHeight)
         first = false
@@ -490,7 +495,7 @@ export class IconView {
       paintbucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
       location: { width: 6, height: 10 },
-      gears: { width: 10, height: 10 },
+      gears: { width: 14, height: 10 },
       gearPartial: { width: 10, height: 10 },
       gearBig: { width: 10, height: 10 },
       globe: { width: 10, height: 10, fillAttribute: "stroke" },
@@ -780,7 +785,7 @@ export class InputView {
       })
     } else if (this.shape === "number-dropdown") {
       SVG.setProps(el, {
-        fill: color.secondary.toHexString(),
+        fill: this.isDarker ? color.secondary.toHexString() : "#FFF",
       })
     }
 
@@ -822,7 +827,7 @@ export class InputView {
           w - 24,
           Math.min(h - 20, 13),
           SVG.symbol(
-            options.isHighContrast
+            options.isHighContrast || (!options.isHighContrast && !this.isDarker)
               ? `#sb3-dropdownArrow-high-contrast-${options.id}`
               : `#sb3-dropdownArrow-${options.id}`,
             {},

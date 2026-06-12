@@ -30,9 +30,13 @@ export default class SVG {
     return xml.createCDATASection(content)
   }
 
-  static el(name, props) {
-    const el = document.createElementNS("http://www.w3.org/2000/svg", name)
-    return SVG.setProps(el, props)
+  static el(name, props, styles) {
+    const el = document.createElementNS("http://www.w3.org/2000/svg", name),
+    withProps = SVG.setProps(el, props)
+    Object.keys(styles || {}).forEach((key) => {
+      withProps.style[key] = styles[key];
+    })
+    return withProps;
   }
 
   static setProps(el, props) {
