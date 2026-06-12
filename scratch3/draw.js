@@ -203,10 +203,12 @@ export default class SVG {
               let r = h / 2
               if (child.isBlock && child.lines.length > 1) {
                 r =
-                  child.lines.length > 1 ? 22.5 : Math.max(
-                    Math.min(child.lines[0].totalHeight, Infinity),
-                    child.lines[child.lines.length - 1].totalHeight,
-                  ) / 2
+                  child.lines.length > 1
+                    ? 22.5
+                    : Math.max(
+                        Math.min(child.lines[0].totalHeight, Infinity),
+                        child.lines[child.lines.length - 1].totalHeight,
+                      ) / 2
               }
 
               return [SVG.getRoundedTop(w, h, r), SVG.getRoundedBottom(w, h, r)]

@@ -939,10 +939,12 @@ class BlockView {
           SVG.getRoundedTop(
             w,
             h,
-            lines.length > 1 ? 22.5 : Math.max(
-              lines[0].totalHeight,
-              lines[lines.length - 1].totalHeight,
-            ) / 2,
+            lines.length > 1
+              ? 22.5
+              : Math.max(
+                  lines[0].totalHeight,
+                  lines[lines.length - 1].totalHeight,
+                ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
@@ -1000,10 +1002,12 @@ class BlockView {
           SVG.getRoundedBottom(
             w,
             y,
-            lines.length > 1 ? 22.5 : Math.max(
-              lines[0].totalHeight,
-              lines[lines.length - 1].totalHeight,
-            ) / 2,
+            lines.length > 1
+              ? 22.5
+              : Math.max(
+                  lines[0].totalHeight,
+                  lines[lines.length - 1].totalHeight,
+                ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
