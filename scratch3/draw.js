@@ -32,11 +32,11 @@ export default class SVG {
 
   static el(name, props, styles) {
     const el = document.createElementNS("http://www.w3.org/2000/svg", name),
-    withProps = SVG.setProps(el, props)
-    Object.keys(styles || {}).forEach((key) => {
-      withProps.style[key] = styles[key];
+      withProps = SVG.setProps(el, props)
+    Object.keys(styles || {}).forEach(key => {
+      withProps.style[key] = styles[key]
     })
-    return withProps;
+    return withProps
   }
 
   static setProps(el, props) {
@@ -204,7 +204,7 @@ export default class SVG {
               if (child.isBlock && child.lines.length > 1) {
                 r =
                   Math.max(
-                    Math.min(child.lines[0].totalHeight, Infinity ),
+                    Math.min(child.lines[0].totalHeight, Infinity),
                     child.lines[child.lines.length - 1].totalHeight,
                   ) / 2
               }

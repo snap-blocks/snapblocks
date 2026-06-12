@@ -130,7 +130,9 @@ export class LabelView {
         : /(boolean|dropdown)/.test(this.cls)
           ? options.isHighContrast
             ? new Color()
-            : /(readonly)/.test(this.cls) ? new Color(255, 255, 255) : Color.fromHexString("#575e75") 
+            : /(readonly)/.test(this.cls)
+              ? new Color(255, 255, 255)
+              : Color.fromHexString("#575e75")
           : /literal/.test(this.cls)
             ? options.isHighContrast
               ? new Color()
@@ -204,7 +206,7 @@ export class LabelView {
             class: `sb3-label ${cls}`,
             style: `font: ${font}`,
           }),
-        );
+        )
         let lastLineGroupItem = lineGroup[lineGroup.length - 1]
         if (lastLineGroupItem.getAttribute("--stroke")) {
           lastLineGroupItem.style.stroke = this.color.toHexString()
@@ -564,7 +566,7 @@ export class IconView {
       arrowDown: {},
       arrowDownOutline: { fillAttribute: "stroke" },
       arrowDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowLeft: { },
+      arrowLeft: {},
       arrowLeftOutline: { fillAttribute: "stroke" },
       arrowLeftThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowRight: {},
@@ -827,7 +829,8 @@ export class InputView {
           w - 24,
           Math.min(h - 20, 13),
           SVG.symbol(
-            options.isHighContrast || (!options.isHighContrast && !this.isDarker)
+            options.isHighContrast ||
+              (!options.isHighContrast && !this.isDarker)
               ? `#sb3-dropdownArrow-high-contrast-${options.id}`
               : `#sb3-dropdownArrow-${options.id}`,
             {},

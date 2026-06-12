@@ -354,7 +354,7 @@ export default class Style {
   }
 
   static makeCommonIcons() {
-    let arrow;
+    let arrow
     return [
       SVG.setProps(
         SVG.group([
@@ -429,8 +429,7 @@ export default class Style {
         ]),
         {
           id: "sb3-delInput",
-          transform: 
-            "translate(8.79, 0), rotate(90), translate(-1, 0)"
+          transform: "translate(8.79, 0), rotate(90), translate(-1, 0)",
         },
       ),
       SVG.setProps(
@@ -446,8 +445,7 @@ export default class Style {
         ]),
         {
           id: "sb3-addInput",
-          transform: 
-            "translate(0, 12.71), rotate(-90), translate(1, 0)"
+          transform: "translate(0, 12.71), rotate(-90), translate(1, 0)",
         },
       ),
       SVG.setProps(
@@ -459,8 +457,7 @@ export default class Style {
         }),
         {
           id: "sb3-verticalEllipsis",
-          transform: 
-            "translate(-1, -1)",
+          transform: "translate(-1, -1)",
         },
       ),
       SVG.setProps(
@@ -731,7 +728,7 @@ export default class Style {
         }),
         {
           id: "sb3-gears",
-          transform: "translate(-2, -4)"
+          transform: "translate(-2, -4)",
         },
       ),
       SVG.setProps(
@@ -827,33 +824,41 @@ export default class Style {
         },
       ),
       SVG.setProps(
-        SVG.el("path", {
-          d: "M23 16.7 18.7 21c-.4.3-.9.4-1.3.2s-.7-.6-.7-1.1v-1.6l-6-.8c-1-.1-1.7-.9-1.7-1.9v-.2c.1-.9.8-1.5 1.6-1.6l6-.9v-1.6c0-.5.3-.9.7-1.1.4-.2.9-.1 1.3.3L23 15c.2.2.3.5.3.8l-.3.9z",
-          stroke: "#000",
-          "stroke-opacity": 0.1,
-          "stroke-width": 2,
-        }, {
-          paintOrder: "stroke",
-          transformOrigin: "13px 13px"
-        }),
+        SVG.el(
+          "path",
+          {
+            d: "M23 16.7 18.7 21c-.4.3-.9.4-1.3.2s-.7-.6-.7-1.1v-1.6l-6-.8c-1-.1-1.7-.9-1.7-1.9v-.2c.1-.9.8-1.5 1.6-1.6l6-.9v-1.6c0-.5.3-.9.7-1.1.4-.2.9-.1 1.3.3L23 15c.2.2.3.5.3.8l-.3.9z",
+            stroke: "#000",
+            "stroke-opacity": 0.1,
+            "stroke-width": 2,
+          },
+          {
+            paintOrder: "stroke",
+            transformOrigin: "13px 13px",
+          },
+        ),
         {
           id: "sb3-arrowUp",
           transform: "matrix(0, -1, 1, 0, -10, -5)",
         },
       ),
       SVG.setProps(
-        SVG.el("path", {
-          d: "M22.6 16.3zM16.2 19l-5.6-.8a2.5 2.5 0 0 1-2.1-2.4v-.3c.2-1.1 1-1.9 2-2l5.6-.8v-1.1c0-.7.4-1.3 1-1.6.6-.3 1.3-.1 1.8.4l4.3 4.3c.3.3.5.7.5 1.2 0 .4-.2.9-.5 1.2L19 21.4c-.5.5-1.2.6-1.8.3-.6-.3-1-.9-1-1.5V19z",
-          fill: "none",
-          "stroke-width": 1,
-        }, {
-          paintOrder: "stroke",
-          transformOrigin: "13px 13px"
-        }),
+        SVG.el(
+          "path",
+          {
+            d: "M22.6 16.3zM16.2 19l-5.6-.8a2.5 2.5 0 0 1-2.1-2.4v-.3c.2-1.1 1-1.9 2-2l5.6-.8v-1.1c0-.7.4-1.3 1-1.6.6-.3 1.3-.1 1.8.4l4.3 4.3c.3.3.5.7.5 1.2 0 .4-.2.9-.5 1.2L19 21.4c-.5.5-1.2.6-1.8.3-.6-.3-1-.9-1-1.5V19z",
+            fill: "none",
+            "stroke-width": 1,
+          },
+          {
+            paintOrder: "stroke",
+            transformOrigin: "13px 13px",
+          },
+        ),
         {
           id: "sb3-arrowUpOutline",
           transform: "matrix(0, -1, 1, 0, -10, -5)",
-          "--stroke": true
+          "--stroke": true,
         },
       ),
       SVG.setProps(
