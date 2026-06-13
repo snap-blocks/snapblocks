@@ -146,7 +146,11 @@ export class LabelView {
       this._fontSize = "12pt"
     }
 
-    let fontWeight = this.modified ? "700" : /comment-label/.test(this.cls) ? "500" : "400"
+    let fontWeight = this.modified
+      ? "700"
+      : /comment-label/.test(this.cls)
+        ? "500"
+        : "400"
 
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
