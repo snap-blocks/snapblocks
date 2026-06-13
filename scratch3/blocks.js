@@ -521,7 +521,7 @@ export class IconView {
       smallStage: { width: 12, height: 10 },
       normalStage: { width: 12, height: 10 },
       stage: { width: 13, height: 10 },
-      turnAround: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      turnAround: { width: 24, height: 24 },
       poster: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       tick: { width: 10, height: 10 },
       checkedBox: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
