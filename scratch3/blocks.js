@@ -502,7 +502,12 @@ export class IconView {
       globe: { width: 10, height: 10, fillAttribute: "stroke" },
       globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
       square: { width: 10, height: 10 },
-      robot: { width: 13, height: 17, fillAttribute: ["fill", "stroke"], scale: 1.2 },
+      robot: {
+        width: 13,
+        height: 17,
+        fillAttribute: ["fill", "stroke"],
+        scale: 1.2,
+      },
       stepForward: { width: 10, height: 10 },
       file: { width: 18, height: 18, scale: 1.2 },
       fullScreen: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
