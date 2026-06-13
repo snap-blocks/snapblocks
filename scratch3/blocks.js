@@ -212,11 +212,7 @@ export class LabelView {
           }),
         )
         let lastLineGroupItem = lineGroup[lineGroup.length - 1]
-        if (lastLineGroupItem.getAttribute("--stroke")) {
-          lastLineGroupItem.style.stroke = this.color.toHexString()
-        } else {
-          lastLineGroupItem.style.fill = this.color.toHexString()
-        }
+        lastLineGroupItem.style.fill = this.color.toHexString()
         x += wordInfo.width
         height = Math.max(height, wordHeight)
         first = false

@@ -843,6 +843,8 @@ export default class Style {
       SVG.setProps(
         SVG.el("path", {
           d: "M 6.666666666666666 3.3333333333333335 L 5 1 L 3.3333333333333335 3.3333333333333335 M 5 1 L 5 9.5",
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
           fill: "none",
         }),
         {
@@ -934,6 +936,8 @@ export default class Style {
         SVG.el("path", {
           d: "M 6.666666666666666 3.3333333333333335 L 5 1 L 3.3333333333333335 3.3333333333333335 M 6.666666666666666 6.666666666666666 L 5 9 L 3.3333333333333335 6.666666666666666 M 5 1 L 5 9",
           fill: "none",
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
         }),
         {
           id: "sb3-arrowUpDownThin",
@@ -2011,7 +2015,7 @@ export default class Style {
           id: "sb3-commentArrowUp",
         },
       ),
-
+      // TODO: Make the outlines match the block outlines
       SVG.setProps(
         SVG.group([
           SVG.el("path", {
