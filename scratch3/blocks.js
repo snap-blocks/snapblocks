@@ -546,12 +546,12 @@ export class IconView {
       flipHorizontal: {
         width: 20,
         height: 14,
-        scale: 1.2
+        scale: 1.2,
       },
       flipVertical: {
         width: 20,
         height: 14,
-        scale: 1.2
+        scale: 1.2,
       },
       trash: { width: 15, height: 15 },
       trashFull: { width: 10, height: 10 },
@@ -559,22 +559,22 @@ export class IconView {
       cubeSolid: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       infinity: { width: 17.5, height: 10, fillAttribute: "stroke" },
 
-      arrowUp: { width: 18, height: 18, },
+      arrowUp: { width: 18, height: 18 },
       arrowUpOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowUpThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowDown: { width: 18, height: 18, },
+      arrowDown: { width: 18, height: 18 },
       arrowDownOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeft: { width: 18, height: 18 },
       arrowLeftOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowLeftThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowRight: { width: 18, height: 18, },
+      arrowRight: { width: 18, height: 18 },
       arrowRightOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       speaker: { width: 14, height: 11, scale: 1.3 },
-      blocks: { width: 14, height: 10, scale: 1  },
+      blocks: { width: 14, height: 10, scale: 1 },
       turtlePlus: { width: 13, height: 10, fillAttribute: ["fill", "stroke"] },
 
       musicBlock: { width: 40, height: 40 },
