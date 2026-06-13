@@ -146,7 +146,7 @@ export class LabelView {
       this._fontSize = "12pt"
     }
 
-    let fontWeight = /comment-label/.test(this.cls) ? "500" : "400"
+    let fontWeight = this.modified ? "700" : /comment-label/.test(this.cls) ? "500" : "400"
 
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
@@ -480,7 +480,7 @@ export class IconView {
       cloud: { width: 16, height: 10 },
       cloudGradient: { width: 16, height: 10 },
       cloudOutline: { width: 16, height: 10, fillAttribute: "stroke" },
-      flash: { width: 8, height: 10 },
+      flash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       blitz: { alias: "flash", scale: 1 },
       camera: { width: 15, height: 15, scale: 1.3 },
       circleSolid: { width: 10, height: 10 },
