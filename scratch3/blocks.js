@@ -481,7 +481,7 @@ export class IconView {
       cloudOutline: { width: 16, height: 10, fillAttribute: "stroke" },
       flash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       blitz: { alias: "flash", scale: 1 },
-      camera: { width: 15, height: 15, scale: 1.3 },
+      camera: { width: 17, height: 15, scale: 1.3 },
       circleSolid: { width: 10, height: 10 },
       circle: { width: 10, height: 10, fillAttribute: "stroke" },
       notes: { alias: "musicBlock" },
