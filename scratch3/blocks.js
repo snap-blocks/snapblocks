@@ -495,7 +495,7 @@ export class IconView {
       paintbucket: { width: 16, height: 15, scale: 1.4 },
       eraser: { width: 16, height: 15, scale: 1.4 },
       location: { width: 6, height: 10 },
-      gears: { width: 18, height: 10, scale: 1.2 },
+      gears: { width: 18, height: 18, scale: 1.2 },
       gearPartial: { width: 10, height: 10 },
       gearBig: { width: 10, height: 10 },
       globe: { width: 10, height: 10, fillAttribute: "stroke" },
