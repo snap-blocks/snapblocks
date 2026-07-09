@@ -489,7 +489,7 @@ export class IconView {
       brush: { width: 16, height: 14, scale: 1.4 },
       pipette: {
         width: 16,
-        height: 14,
+        height: 16,
         scale: 1.4,
       },
       paintbucket: { width: 14, height: 14, scale: 1.4 },
