@@ -486,7 +486,7 @@ export class IconView {
       circle: { width: 10, height: 10, fillAttribute: "stroke" },
       notes: { alias: "musicBlock" },
       storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      brush: { width: 14, height: 14, scale: 1.4 },
+      brush: { width: 16, height: 14, scale: 1.4 },
       pipette: {
         width: 16,
         height: 14,
