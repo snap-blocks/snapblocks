@@ -502,8 +502,8 @@ export class IconView {
       globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
       square: { width: 10, height: 10 },
       robot: {
-        width: 13,
-        height: 17,
+        width: 14,
+        height: 19,
         fillAttribute: ["fill", "stroke"],
         scale: 1.2,
       },
