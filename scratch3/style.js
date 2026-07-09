@@ -421,14 +421,13 @@ export default class Style {
       ),
       SVG.setProps(
         SVG.el("path", {
-          //  M x y,  r r x,l,s x y
-          d: `M 0 1 A 1 1 0 1 0 1 1
-              M 0 5 A 1 1 0 1 0 1 5
-              M 0 9 A 1 1 0 1 0 1 9`,
+          //  M x y,  r r x,l,s x                  y
+          d: `M 2 1 A 1 1 0 1 1 1.9999995000000417 0.9990000001666661
+              M 2 5 A 1 1 0 1 1 1.9999995000000417 4.999000000166666
+              M 2 9 A 1 1 0 1 1 1.9999995000000417 8.999000000166665`,
         }),
         {
           id: "sb3-verticalEllipsis",
-          transform: "translate(-1, -1)",
         },
       ),
       SVG.setProps(

@@ -467,8 +467,7 @@ export class IconView {
       },
       verticalEllipsis: {
         width: 0,
-        height: 20,
-        dy: 10,
+        height: 10,
         scale: 10 / 6,
         color: new Color(0, 0, 0),
       },
