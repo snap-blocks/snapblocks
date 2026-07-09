@@ -492,7 +492,7 @@ export class IconView {
         height: 16,
         scale: 1.4,
       },
-      paintbucket: { width: 14, height: 14, scale: 1.4 },
+      paintbucket: { width: 16, height: 15, scale: 1.4 },
       eraser: { width: 14, height: 14, scale: 1.4 },
       location: { width: 6, height: 10 },
       gears: { width: 18, height: 10, scale: 1.2 },
