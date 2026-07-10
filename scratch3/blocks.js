@@ -557,7 +557,7 @@ export class IconView {
         height: 18,
         scale: 1.2,
       },
-      trash: { width: 15, height: 15 },
+      trash: { width: 16, height: 17 },
       trashFull: { width: 10, height: 10 },
       cube: { width: 10, height: 10, fillAttribute: "stroke" },
       cubeSolid: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },

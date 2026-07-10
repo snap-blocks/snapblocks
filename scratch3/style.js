@@ -1500,7 +1500,6 @@ export default class Style {
         }),
         {
           id: "sb3-trash",
-          transform: "scale(1.1, 1.1), translate(0, -1.5)",
         },
       ),
       SVG.setProps(
