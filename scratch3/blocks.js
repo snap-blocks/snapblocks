@@ -130,7 +130,9 @@ export class LabelView {
         : /(boolean|dropdown)/.test(this.cls)
           ? options.isHighContrast
             ? new Color()
-            : new Color(255, 255, 255)
+            : /(readonly)/.test(this.cls)
+              ? new Color(255, 255, 255)
+              : Color.fromHexString("#575e75")
           : /literal/.test(this.cls)
             ? options.isHighContrast
               ? new Color()
@@ -144,7 +146,11 @@ export class LabelView {
       this._fontSize = "12pt"
     }
 
-    let fontWeight = /comment-label/.test(this.cls) ? "500" : "400"
+    let fontWeight = this.modified
+      ? "700"
+      : /comment-label/.test(this.cls)
+        ? "500"
+        : "400"
 
     let scaledFontSize = scaleFontSize(this.fontSize, this.scale)
     let fontSizeData = splitFontSize(this.fontSize, this.scale)
@@ -205,7 +211,8 @@ export class LabelView {
             style: `font: ${font}`,
           }),
         )
-        lineGroup[lineGroup.length - 1].style.fill = this.color.toHexString()
+        let lastLineGroupItem = lineGroup[lineGroup.length - 1]
+        lastLineGroupItem.style.fill = this.color.toHexString()
         x += wordInfo.width
         height = Math.max(height, wordHeight)
         first = false
@@ -447,22 +454,21 @@ export class IconView {
       loop: { width: 24, height: 24, scale: 1 },
       loopArrow: { alias: "loop" },
       addInput: {
-        width: 5,
+        width: 10,
         height: 10,
         color: new Color(0, 0, 0),
         noShadow: true,
       },
       delInput: {
-        width: 5,
+        width: 10,
         height: 10,
         color: new Color(0, 0, 0),
         noShadow: true,
       },
       verticalEllipsis: {
-        width: 2,
+        width: 0,
         height: 10,
-        dy: 0,
-        scale: 10 / 12,
+        scale: 10 / 6,
         color: new Color(0, 0, 0),
       },
       list: { width: 8, height: 10 },
@@ -473,32 +479,36 @@ export class IconView {
       cloud: { width: 16, height: 10 },
       cloudGradient: { width: 16, height: 10 },
       cloudOutline: { width: 16, height: 10, fillAttribute: "stroke" },
-      flash: { width: 8, height: 10 },
+      flash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       blitz: { alias: "flash", scale: 1 },
-      camera: { width: 10, height: 10 },
+      camera: { width: 17, height: 15, scale: 1.3 },
       circleSolid: { width: 10, height: 10 },
       circle: { width: 10, height: 10, fillAttribute: "stroke" },
       notes: { alias: "musicBlock" },
       storage: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      brush: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      brush: { width: 16, height: 14, scale: 1.4 },
       pipette: {
-        width: 10,
-        height: 10,
-        scale: 1,
-        fillAttribute: ["stroke", "fill"],
+        width: 16,
+        height: 16,
+        scale: 1.4,
       },
-      paintbucket: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
-      eraser: { width: 10, height: 10, fillAttribute: ["stroke", "fill"] },
+      paintbucket: { width: 16, height: 15, scale: 1.4 },
+      eraser: { width: 16, height: 15, scale: 1.4 },
       location: { width: 6, height: 10 },
-      gears: { width: 10, height: 10 },
+      gears: { width: 18, height: 18, scale: 1.2 },
       gearPartial: { width: 10, height: 10 },
       gearBig: { width: 10, height: 10 },
       globe: { width: 10, height: 10, fillAttribute: "stroke" },
       globeBig: { width: 10, height: 10, fillAttribute: "stroke" },
       square: { width: 10, height: 10 },
-      robot: { width: 10, height: 10 },
+      robot: {
+        width: 14,
+        height: 19,
+        fillAttribute: ["fill", "stroke"],
+        scale: 1.2,
+      },
       stepForward: { width: 10, height: 10 },
-      file: { width: 8, height: 10 },
+      file: { width: 18, height: 19, scale: 1.2 },
       fullScreen: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       grow: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       normalScreen: {
@@ -510,7 +520,7 @@ export class IconView {
       smallStage: { width: 12, height: 10 },
       normalStage: { width: 12, height: 10 },
       stage: { width: 13, height: 10 },
-      turnAround: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      turnAround: { width: 24, height: 24 },
       poster: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       tick: { width: 10, height: 10 },
       checkedBox: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
@@ -522,8 +532,8 @@ export class IconView {
       crosshairs: { width: 10, height: 10, fillAttribute: "stroke" },
       speechBubble: { width: 10, height: 10 },
       speechBubbleOutline: { width: 10, height: 10, fillAttribute: "stroke" },
-      turnBack: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
-      turnForward: { width: 16, height: 10, fillAttribute: ["fill", "stroke"] },
+      turnBack: { width: 20, height: 10, scale: 1.2 },
+      turnForward: { width: 20, height: 10, scale: 1.2 },
       magnifyingGlass: {
         width: 10,
         height: 10,
@@ -538,43 +548,43 @@ export class IconView {
       keyboardFilled: { width: 16, height: 10 },
       listNarrow: { width: 5, height: 10 },
       flipHorizontal: {
-        width: 10,
-        height: 10,
-        fillAttribute: ["fill", "stroke"],
+        width: 18,
+        height: 16,
+        scale: 1.2,
       },
       flipVertical: {
-        width: 10,
-        height: 10,
-        fillAttribute: ["fill", "stroke"],
+        width: 16,
+        height: 18,
+        scale: 1.2,
       },
-      trash: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
+      trash: { width: 16, height: 17 },
       trashFull: { width: 10, height: 10 },
       cube: { width: 10, height: 10, fillAttribute: "stroke" },
       cubeSolid: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       infinity: { width: 17.5, height: 10, fillAttribute: "stroke" },
 
-      arrowUp: { width: 10, height: 10 },
-      arrowUpOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowUp: { width: 16, height: 16 },
+      arrowUpOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowUpThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowDown: { width: 10, height: 10 },
-      arrowDownOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowDown: { width: 16, height: 16 },
+      arrowDownOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowLeft: { width: 10, height: 10 },
-      arrowLeftOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowLeft: { width: 16, height: 16 },
+      arrowLeftOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowLeftThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      arrowRight: { width: 10, height: 10 },
-      arrowRightOutline: { width: 10, height: 10, fillAttribute: "stroke" },
+      arrowRight: { width: 16, height: 16 },
+      arrowRightOutline: { width: 18, height: 18, fillAttribute: "stroke" },
       arrowRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
-      speaker: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
-      blocks: { width: 10, height: 10, fillAttribute: ["fill"] },
+      speaker: { width: 16, height: 13, scale: 1.3 },
+      blocks: { width: 16, height: 13, scale: 1 },
       turtlePlus: { width: 13, height: 10, fillAttribute: ["fill", "stroke"] },
 
       musicBlock: { width: 40, height: 40 },
       penBlock: { width: 40, height: 40 },
       videoBlock: { width: 40, height: 40, dy: 10 },
-      facesensingBlock: { width: 40, height: 40, dy: 3.9932885906 }, // 40 - 21.46 * (40 / 23.84), expcept this is still slightly off?
+      facesensingBlock: { width: 40, height: 40, dy: 1.9932885906 },
       ttsBlock: { width: 40, height: 40 },
       translateBlock: { width: 40, height: 40 },
       wedoBlock: { width: 40, height: 40 },
@@ -780,7 +790,7 @@ export class InputView {
       })
     } else if (this.shape === "number-dropdown") {
       SVG.setProps(el, {
-        fill: color.secondary.toHexString(),
+        fill: this.isDarker ? color.secondary.toHexString() : "#FFF",
       })
     }
 
@@ -822,7 +832,8 @@ export class InputView {
           w - 24,
           Math.min(h - 20, 13),
           SVG.symbol(
-            options.isHighContrast
+            options.isHighContrast ||
+              (!options.isHighContrast && !this.isDarker)
               ? `#sb3-dropdownArrow-high-contrast-${options.id}`
               : `#sb3-dropdownArrow-${options.id}`,
             {},
@@ -932,10 +943,12 @@ class BlockView {
           SVG.getRoundedTop(
             w,
             h,
-            Math.max(
-              lines[0].totalHeight,
-              lines[lines.length - 1].totalHeight,
-            ) / 2,
+            lines.length > 1
+              ? 22.5
+              : Math.max(
+                  lines[0].totalHeight,
+                  lines[lines.length - 1].totalHeight,
+                ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
@@ -993,10 +1006,12 @@ class BlockView {
           SVG.getRoundedBottom(
             w,
             y,
-            Math.max(
-              lines[0].totalHeight,
-              lines[lines.length - 1].totalHeight,
-            ) / 2,
+            lines.length > 1
+              ? 22.5
+              : Math.max(
+                  lines[0].totalHeight,
+                  lines[lines.length - 1].totalHeight,
+                ) / 2,
           ),
         )
       } else if (this.info.shape === "boolean") {
