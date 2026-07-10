@@ -578,7 +578,7 @@ export class IconView {
       arrowUpDownThin: { width: 10, height: 10, fillAttribute: "stroke" },
       arrowLeftRightThin: { width: 10, height: 10, fillAttribute: "stroke" },
       speaker: { width: 16, height: 13, scale: 1.3 },
-      blocks: { width: 14, height: 10, scale: 1 },
+      blocks: { width: 16, height: 13, scale: 1 },
       turtlePlus: { width: 13, height: 10, fillAttribute: ["fill", "stroke"] },
 
       musicBlock: { width: 40, height: 40 },
