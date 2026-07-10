@@ -508,7 +508,7 @@ export class IconView {
         scale: 1.2,
       },
       stepForward: { width: 10, height: 10 },
-      file: { width: 18, height: 18, scale: 1.2 },
+      file: { width: 18, height: 19, scale: 1.2 },
       fullScreen: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       grow: { width: 10, height: 10, fillAttribute: ["fill", "stroke"] },
       normalScreen: {
