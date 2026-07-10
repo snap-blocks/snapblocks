@@ -1437,7 +1437,7 @@ export default class Style {
       SVG.setProps(
         SVG.el("use", {
           href: "#sb3-flipHorizontal",
-          transform: "translate(1 15) rotate(-90)",
+          transform: "rotate(-90 9 9)",
         }),
         {
           id: "sb3-flipVertical",
@@ -1491,7 +1491,7 @@ export default class Style {
         ]),
         {
           id: "sb3-flipHorizontal",
-          transform: "translate(1, 0)",
+          transform: "translate(1, 1)",
         },
       ),
       SVG.setProps(

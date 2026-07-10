@@ -548,13 +548,13 @@ export class IconView {
       keyboardFilled: { width: 16, height: 10 },
       listNarrow: { width: 5, height: 10 },
       flipHorizontal: {
-        width: 20,
-        height: 14,
+        width: 18,
+        height: 16,
         scale: 1.2,
       },
       flipVertical: {
-        width: 20,
-        height: 14,
+        width: 16,
+        height: 18,
         scale: 1.2,
       },
       trash: { width: 15, height: 15 },
