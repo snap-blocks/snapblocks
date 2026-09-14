@@ -326,6 +326,42 @@ export default class Style {
 
   static makeCommonIcons() {
     return [
+      // It's important to have the regular and high contrast dropdown arrows in the same spot
+      // because the Scratch 3 theme now supports read-write dropdowns
+      // which require high contrast arrows in the original theme
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
+            fill: "#231f20",
+            opacity: ".1",
+          }),
+          SVG.el("path", {
+            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
+            fill: "#fff",
+          }),
+        ]),
+        {
+          id: "sb3-dropdownArrow",
+        },
+      ),
+      // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/blocks-media
+      SVG.setProps(
+        SVG.group([
+          SVG.el("path", {
+            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
+            fill: "#231f20",
+            opacity: ".1",
+          }),
+          SVG.el("path", {
+            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
+            fill: "#000",
+          }),
+        ]),
+        {
+          id: "sb3-dropdownArrow-high-contrast",
+        },
+      ),
       SVG.setProps(
         SVG.group([
           SVG.el("path", {
@@ -1888,23 +1924,6 @@ export default class Style {
     return [
       ...Style.makeCommonIcons(),
       SVG.setProps(
-        SVG.group([
-          SVG.el("path", {
-            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
-            fill: "#231f20",
-            opacity: ".1",
-          }),
-          SVG.el("path", {
-            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
-            fill: "#fff",
-          }),
-        ]),
-        {
-          id: "sb3-dropdownArrow",
-        },
-      ),
-
-      SVG.setProps(
         SVG.el("path", {
           d: "M6,9 C5.72520708,9 5.45163006,8.89695045 5.24127973,8.68965311 L2.31461357,5.80666227 C1.89512881,5.39326583 1.89512881,4.72464202 2.31461357,4.31004733 C2.73288244,3.89665089 9.26711756,3.89665089 9.68538643,4.31004733 C10.1048712,4.72344377 10.1048712,5.39326583 9.68538643,5.80666227 L6.75993617,8.68965311 C6.54958583,8.89695045 6.27600882,9 6,9",
           stroke: "none",
@@ -2146,23 +2165,6 @@ export default class Style {
     // Make sure to update the highContrastIcons set above!
     return [
       ...Style.makeCommonIcons(),
-      // https://github.com/scratchfoundation/scratch-gui/tree/beta/src/lib/themes/high-contrast/blocks-media
-      SVG.setProps(
-        SVG.group([
-          SVG.el("path", {
-            d: "M12.71,2.44A2.41,2.41,0,0,1,12,4.16L8.08,8.08a2.45,2.45,0,0,1-3.45,0L0.72,4.16A2.42,2.42,0,0,1,0,2.44,2.48,2.48,0,0,1,.71.71C1,0.47,1.43,0,6.36,0S11.75,0.46,12,.71A2.44,2.44,0,0,1,12.71,2.44Z",
-            fill: "#231f20",
-            opacity: ".1",
-          }),
-          SVG.el("path", {
-            d: "M6.36,7.79a1.43,1.43,0,0,1-1-.42L1.42,3.45a1.44,1.44,0,0,1,0-2c0.56-.56,9.31-0.56,9.87,0a1.44,1.44,0,0,1,0,2L7.37,7.37A1.43,1.43,0,0,1,6.36,7.79Z",
-            fill: "#000",
-          }),
-        ]),
-        {
-          id: "sb3-dropdownArrow-high-contrast",
-        },
-      ),
       SVG.el("path", {
         d: "M 1 1 L 5 5 L 1 9 Z",
         id: "sb3-addInput",
