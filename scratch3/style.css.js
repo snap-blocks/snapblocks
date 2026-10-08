@@ -77,8 +77,9 @@ ${name} .sb3-input-string {
   fill: ${style.inputFill};
 }
 ${name} .sb3-literal-number,
-${name} .sb3-literal-string {
-  fill: ${style.literal};
+${name} .sb3-literal-string,
+${name} .sb3-literal-number-dropdown, {
+  fill: ${style.literal} !important;
 }
 
 ${name} .sb3-custom-arg {
